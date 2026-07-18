@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>LogiCola (web edition)</title>
+<title>LogiCola — For Instructors</title>
 <style>
   :root{
     --bg:#0f2b46; --panel:#12395c; --panel2:#0b2438; --ink:#eef6ff; --muted:#9fc0dc;
@@ -206,7 +206,7 @@
 <body>
 <div id="app">
   <header class="bar">
-    <div class="brand" role="button" tabindex="0" title="Back to the welcome page" onclick="goHome()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}"><svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LC"><defs><linearGradient id="lncg" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#63ecdc"/><stop offset="1" stop-color="#15b3a0"/></linearGradient></defs><rect x="5" y="5" width="90" height="90" rx="24" fill="url(#lncg)" stroke="#0b2338" stroke-opacity="0.2" stroke-width="3"/><g fill="#0b2338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-weight="800" font-size="53" text-anchor="middle"><text x="32" y="49">L</text><text x="69" y="88">C</text></g></svg> LogiCola</div>
+    <div class="brand" role="button" tabindex="0" title="Back to the welcome page" onclick="goHome()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goHome()}"><svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LC"><defs><linearGradient id="lncg" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#63ecdc"/><stop offset="1" stop-color="#15b3a0"/></linearGradient></defs><rect x="5" y="5" width="90" height="90" rx="24" fill="url(#lncg)" stroke="#0b2338" stroke-opacity="0.2" stroke-width="3"/><g fill="#0b2338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-weight="800" font-size="53" text-anchor="middle"><text x="32" y="49">L</text><text x="69" y="88">C</text></g></svg> LogiCola — For Instructors</div>
     <div class="menu">
       <button class="mbtn small" id="btnFile">Exercise Sets</button>
       <button class="mbtn small" id="btnScores">Scores</button>
@@ -234,18 +234,23 @@
     </div>
     <div class="card">
       <div class="setline">Areas of logic in this book</div>
-      <ul style="margin:8px 0 0;padding-left:20px;line-height:1.7">
-        <li><b>Categorical logic</b> — reasoning with "all," "no," and "some" about classes of things. <span class="muted">Sets A, B</span></li>
-        <li><b>Propositional logic</b> — reasoning with whole statements joined by "and," "or," "if-then," and "not." <span class="muted">Sets C–G</span></li>
-        <li><b>Quantificational (predicate) logic</b> — reasoning with properties, relations, and identity using quantifiers. <span class="muted">Sets H, I</span></li>
-        <li><b>Modal logic</b> — reasoning about what's necessary or possible. <span class="muted">Sets J, K</span></li>
-        <li><b>Deontic logic</b> — reasoning about what's obligatory, permitted, or forbidden. <span class="muted">Sets L, M</span></li>
-        <li><b>Belief logic</b> — reasoning about what people believe, and what rational belief requires. <span class="muted">Sets N, O</span></li>
-        <li><b>Probability</b> — working out odds, probabilities, and expected value. <span class="muted">Set P</span></li>
-        <li><b>Definitions</b> — spotting what's wrong with a proposed definition. <span class="muted">Set Q</span></li>
-        <li><b>Fallacies</b> — naming the common mistakes that make bad arguments look convincing. <span class="muted">Set R</span></li>
-      </ul>
-      <p class="muted" style="margin-top:10px">Master a proof set — <b>G</b>, <b>I</b>, or <b>K</b> — at level 9 to unlock its ungraded <b>Proof Builder</b>, a free-form practice workspace. Mastering <b>Set I</b> at level 9 also unlocks the <b>Non-Classical Predicate Logic</b> explorer (free logic, intuitionistic logic, and more).</p>
+      <details class="optsub" style="margin-top:8px">
+        <summary><span class="chev">▶</span> Show the topics and their exercise sets</summary>
+        <div class="inner">
+        <ul style="margin:8px 0 0;padding-left:20px;line-height:1.7">
+          <li><b>Categorical logic</b> — reasoning with "all," "no," and "some" about classes of things. <span class="muted">Sets A, B</span></li>
+          <li><b>Propositional logic</b> — reasoning with whole statements joined by "and," "or," "if-then," and "not." <span class="muted">Sets C–G</span></li>
+          <li><b>Quantificational (predicate) logic</b> — reasoning with properties, relations, and identity using quantifiers. <span class="muted">Sets H, I</span></li>
+          <li><b>Modal logic</b> — reasoning about what's necessary or possible. <span class="muted">Sets J, K</span></li>
+          <li><b>Deontic logic</b> — reasoning about what's obligatory, permitted, or forbidden. <span class="muted">Sets L, M</span></li>
+          <li><b>Belief logic</b> — reasoning about what people believe, and what rational belief requires. <span class="muted">Sets N, O</span></li>
+          <li><b>Probability</b> — working out odds, probabilities, and expected value. <span class="muted">Set P</span></li>
+          <li><b>Definitions</b> — spotting what's wrong with a proposed definition. <span class="muted">Set Q</span></li>
+          <li><b>Fallacies</b> — naming the common mistakes that make bad arguments look convincing. <span class="muted">Set R</span></li>
+        </ul>
+        <p class="muted" style="margin-top:10px">Master a proof set — <b>G</b>, <b>I</b>, or <b>K</b> — at level 9 to unlock its ungraded <b>Proof Builder</b>, a free-form practice workspace. Mastering <b>Set I</b> at level 9 also unlocks the <b>Non-Classical Predicate Logic</b> explorer (free logic, intuitionistic logic, and more).</p>
+        </div>
+      </details>
     </div>
   </main>
 </div>
@@ -256,7 +261,7 @@
 <script>
 "use strict";
 /* ============================================================================
-   LogiCola — web edition
+   LogiCola — For Instructors
    A faithful re-creation of the behavior described in Harry J. Gensler's
    LogiCola help file (for Introduction to Logic, 3rd ed.). Problems are
    randomly generated; the logic engine (star test, truth tables, inference
@@ -2778,7 +2783,7 @@ function mountCopi(root, premAsts, conclAst, opts){
   inp.focus();
 }
 function launchCopiChecker(){
-  if((state.completed.G||0)<9){
+  if(false){
     openModal(`<button class="close" onclick="closeModal()">×</button>
       <h2>🔒 Proof Builder Tool</h2>
       <p>The Proof Builder unlocks once you master <b>Set G</b> at scoring level <b>9</b> — finish the set at level 9 and it's yours.</p>
@@ -3785,7 +3790,7 @@ function mountQCopi(root, premAsts, conclAst, opts){
 /* ---- Predicate Proof Builder: ungraded tool, twin of the propositional one.
    Unlocks once Set I is mastered at level 9. ---- */
 function launchQuantChecker(){
-  if((state.completed.I||0)<9){
+  if(false){
     openModal(`<button class="close" onclick="closeModal()">×</button>
       <h2>🔒 Predicate Proof Builder</h2>
       <p>The Predicate Proof Builder unlocks once you master <b>Set I</b> at scoring level <b>9</b> — finish the set at level 9 and it's yours.</p>
@@ -3960,7 +3965,7 @@ function mountMCopi(root, premAsts, conclAst, opts){
   inp.focus();
 }
 function launchModalChecker(){
-  if((state.completed.K||0)<9){
+  if(false){
     openModal(`<button class="close" onclick="closeModal()">×</button>
       <h2>🔒 Modal Proof Builder</h2>
       <p>The Modal Proof Builder unlocks once you master <b>Set K</b> at scoring level <b>9</b> — finish the set at level 9 and it's yours.</p>
@@ -5890,7 +5895,7 @@ function kStaticProof(premR, conclR, steps){
 
 /* ---- tool entry: engine picker ---- */
 function launchDeviant(){
-  if((state.completed.I||0)<9){
+  if(false){
     openModal(`<button class="close" onclick="closeModal()">×</button>
       <h2>🔒 Non-Classical Predicate Logic</h2>
       <p>This explorer unlocks once you master <b>Set I</b> (Quantificational Proofs) at scoring level <b>9</b>.</p>
@@ -6333,7 +6338,7 @@ function fileMenu(){
       <span class="id">Set ${id}</span><span class="nm">${s.name}</span>
       <span class="ch">${s.chapter}${done?` · <span class="badge">✓ Mastered · level ${done}</span>`:''}</span></button>`;
   };
-  const toolUnlocked=(state.completed.G||0)>=9;
+  const toolUnlocked=true;
   const toolBtn= toolUnlocked
     ? `<button class="setbtn tool" style="border-color:#2dd4bf;background:linear-gradient(160deg,rgba(45,212,191,0.16),rgba(45,212,191,0.05))" onclick="closeModal();launchCopiChecker()">
       <span class="id" style="color:#2dd4bf">🛠 Tool</span><span class="nm">Proof Builder Tool</span>
@@ -6341,7 +6346,7 @@ function fileMenu(){
     : `<button class="setbtn tool" style="border-color:#2dd4bf;opacity:.45;cursor:not-allowed" title="Master Set G at level 9 to unlock" onclick="event.preventDefault()">
       <span class="id" style="color:#2dd4bf">🔒 Tool</span><span class="nm">Proof Builder Tool</span>
       <span class="ch">Unlocks when you master Set G at level 9</span></button>`;
-  const ktoolUnlocked=(state.completed.K||0)>=9;
+  const ktoolUnlocked=true;
   const ktoolBtn= ktoolUnlocked
     ? `<button class="setbtn tool" style="border-color:#2dd4bf;background:linear-gradient(160deg,rgba(45,212,191,0.16),rgba(45,212,191,0.05))" onclick="closeModal();launchModalChecker()">
       <span class="id" style="color:#2dd4bf">🛠 Tool</span><span class="nm">Modal Proof Builder</span>
@@ -6349,7 +6354,7 @@ function fileMenu(){
     : `<button class="setbtn tool" style="border-color:#2dd4bf;opacity:.45;cursor:not-allowed" title="Master Set K at level 9 to unlock" onclick="event.preventDefault()">
       <span class="id" style="color:#2dd4bf">🔒 Tool</span><span class="nm">Modal Proof Builder</span>
       <span class="ch">Unlocks when you master Set K at level 9</span></button>`;
-  const qtoolUnlocked=(state.completed.I||0)>=9;
+  const qtoolUnlocked=true;
   const qtoolBtn= qtoolUnlocked
     ? `<button class="setbtn tool" style="border-color:#2dd4bf;background:linear-gradient(160deg,rgba(45,212,191,0.16),rgba(45,212,191,0.05))" onclick="closeModal();launchQuantChecker()">
       <span class="id" style="color:#2dd4bf">🛠 Tool</span><span class="nm">Predicate Proof Builder</span>
@@ -6360,7 +6365,7 @@ function fileMenu(){
   const groups=SET_GROUPS.map(([title,ch,ids])=>
     `<h3 style="margin:18px 0 2px">${title} <span class="muted" style="font-weight:400;font-size:13px">· ${ch}</span></h3>
      <div class="grid">${ids.map(btn).join('')}${ids.includes('G')?toolBtn:''}${ids.includes('I')?qtoolBtn:''}${ids.includes('K')?ktoolBtn:''}</div>`).join('');
-  const dUnlocked=(state.completed.I||0)>=9;
+  const dUnlocked=true;
   const deviantBtn = `<h3 style="margin:22px 0 2px">Explore · Non-Classical Logic</h3><div class="grid">`+ (dUnlocked
     ? `<button class="setbtn tool" style="border-color:#a78bfa;background:linear-gradient(160deg,rgba(167,139,250,0.16),rgba(167,139,250,0.05))" onclick="closeModal();launchDeviant()"><span class="id" style="color:#a78bfa">◆ Tool</span><span class="nm">Non-Classical Predicate Logic</span><span class="ch">Free, intuitionistic &amp; subject-predicate — prove or refute · ungraded</span></button>`
     : `<button class="setbtn tool" style="border-color:#a78bfa;opacity:.45;cursor:not-allowed" title="Master Set I at level 9 to unlock" onclick="event.preventDefault()"><span class="id" style="color:#a78bfa">🔒 Tool</span><span class="nm">Non-Classical Predicate Logic</span><span class="ch">Unlocks when you master Set I at level 9</span></button>`)
