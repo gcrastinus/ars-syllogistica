@@ -56,12 +56,27 @@ body{
     radial-gradient(1200px 600px at 50% -100px, var(--glow) 0%, transparent 60%),
     linear-gradient(180deg, var(--paper) 0%, var(--paper2) 100%);
 }
+/* Top-right control pair: dark mode inward, audio at the outer corner */
 #dark-toggle{
-  position:fixed; top:14px; right:16px; width:44px; height:44px; border-radius:50%;
+  position:fixed; top:14px; right:68px; width:44px; height:44px; border-radius:50%;
   border:1px solid var(--line); background:var(--card); color:var(--gold); font-size:20px;
   cursor:pointer; box-shadow:var(--shadow); z-index:50; transition:transform .15s;
 }
 #dark-toggle:hover{transform:scale(1.08)}
+#speak-toggle{
+  position:fixed; top:14px; right:16px; width:44px; height:44px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); color:var(--gold); font-size:18px;
+  cursor:pointer; box-shadow:var(--shadow); z-index:50; transition:transform .15s, background .15s, color .15s;
+  line-height:1; display:flex; align-items:center; justify-content:center;
+}
+#speak-toggle:hover{transform:scale(1.08)}
+#speak-toggle.speaking{
+  background:var(--gold); color:#fff; border-color:var(--gold);
+}
+@media (max-width:420px){
+  #dark-toggle{right:58px; width:40px; height:40px; font-size:18px}
+  #speak-toggle{right:12px; width:40px; height:40px; font-size:16px}
+}
 .wrap{max-width:880px; margin:0 auto; padding:34px 22px 70px}
 .screen{display:none}
 .screen.active{display:block; animation:fade .4s ease}
@@ -469,6 +484,7 @@ h1{
 </head>
 <body>
 <button id="dark-toggle" title="Toggle dark mode">☾</button>
+<button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">🔊</button>
 <div class="wrap">
 
   <!-- ============ HOME ============ -->
@@ -510,9 +526,10 @@ h1{
 
     <details class="help" style="max-width:700px">
       <summary>How to Proceed</summary>
-      <p><strong>What to do:</strong> choose a difficulty, then select an exercise. Each correct answer earns points and each error costs them; a set is complete at <strong>100 points</strong>. All moods and figures of the scholastic account are in play — including the fourth figure and the weakened (subaltern) moods.</p>
+      <p><strong>Where to begin.</strong> You may start with the <strong>Preliminary</strong> first step — <em>The Art of Grammar</em> — if you want a foundation in the parts of speech before logic. Or you may begin with the introduction to logic, <em>What Is Logic · An Orientation</em>. Or you may start with the two <strong>Study</strong> sections below, which teach without keeping score. Or you may go straight into the exercises: choose a difficulty, then select an exercise.</p>
+      <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All moods and figures of the scholastic account are possible here — including the fourth figure and the weakened (subaltern) moods.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms — capital letters stand for general terms, lower-case letters and proper names for singular. Letters are the easier dress: finish a set in letters, and it will invite you to attempt the same in English.</p>
-      <p>You may well begin with the two <strong>Study</strong> sections, which teach without keeping score. <em>The Diagram Workshop</em> lets you mark Venn diagrams freely — shade regions, place ×s — while the program reads back what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays any immediate inference — converse, obverse, contrapositive, contradictory — drawn from whichever corner you choose.</p>
+      <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely — shade regions, place ×s — while the program reads back what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays any immediate inference — converse, obverse, contrapositive, contradictory — drawn from whichever corner you choose.</p>
     </details>
 
     <details class="help" id="guided-help" style="max-width:700px; display:none; text-align:left">
@@ -3193,7 +3210,7 @@ function genDefRuleQ(d){
       options: [culprit[key]].concat(others.map(o=>o.sound)),
       correct: culprit[key],
       why: `“${culprit[key]}” ${meta.w} The other three are sound: each gives the kind and the difference, and fits exactly what it defines.`,
-      rules: DEF_RULES, mcInstr: d>=5 ? 'One of these four breaks a rule of definition. Which?' : 'One of these four breaks the rule shown. Which?'});
+      rules: DEF_RULES, mcInstr: d>=5 ? 'One of these four breaks a rule of definition. Which one?' : 'One of these four breaks the rule shown. Which one?'});
   }
   const keeper = recentPick(pool, it=>it.name);
   const breakers = sample(withFlaw.filter(it=>it!==keeper), 3);
@@ -3201,7 +3218,7 @@ function genDefRuleQ(d){
     options: [keeper.sound].concat(breakers.map(b=>b[key])),
     correct: keeper.sound,
     why: `“${keeper.sound}” holds — it fits exactly, and is clear, positive, and brief. Each of the other three ${meta.w}`,
-    rules: DEF_RULES, mcInstr: d>=5 ? 'Three of these break a rule of definition; one keeps it. Which keeps it?' : 'Three of these break the rule shown; one keeps it. Which keeps it?'});
+    rules: DEF_RULES, mcInstr: d>=5 ? 'Three of these break a rule of definition; one keeps it. Which one keeps it?' : 'Three of these break the rule shown; one keeps it. Which one keeps it?'});
 }
 const DEF_KIND_DOCTRINE = {
   nom:'A NOMINAL definition gives what the name means. It must come first, says John of St Thomas: we cannot ask what a thing is until we know what its name refers to.',
@@ -3510,7 +3527,7 @@ function genDivRuleQ(d){
       options: [culprit.t].concat(others.map(o=>o.t)),
       correct: culprit.t,
       why: `“${culprit.t}” breaks the rule: ${culprit.w}. The other three hold: their members cover the whole, do not overlap, and are sorted on one basis.`,
-      rules: DIV_RULES, mcInstr: d>=5 ? 'One of these four divisions breaks a rule of division. Which?' : 'One of these four divisions breaks the rule shown. Which?'});
+      rules: DIV_RULES, mcInstr: d>=5 ? 'One of these four divisions breaks a rule of division. Which one?' : 'One of these four divisions breaks the rule shown. Which one?'});
   }
   const keeper = recentPick(soundPool, x=>x.t);
   const breakers = divPickDistinct(flawPool, 3, [keeper.g]);
@@ -3518,7 +3535,7 @@ function genDivRuleQ(d){
     options: [keeper.t].concat(breakers.map(b=>b.t)),
     correct: keeper.t,
     why: `“${keeper.t}” keeps the rule. The others each break it: ${breakers.map(b=>b.w).join('; ')}.`,
-    rules: DIV_RULES, mcInstr: d>=5 ? 'Three of these break a rule of division; one is sound. Which is sound?' : 'Three of these break the rule shown; one keeps it. Which keeps it?'});
+    rules: DIV_RULES, mcInstr: d>=5 ? 'Three of these break a rule of division; one is sound. Which one is sound?' : 'Three of these break the rule shown; one keeps it. Which one keeps it?'});
 }
 const DIVKIND_DOCTRINE = {
   ess:'An ESSENTIAL division divides a general kind (a genus) into the kinds beneath it, marked off by opposed differences.',
@@ -5189,6 +5206,7 @@ if(typeof document!=='undefined'){
   $('lp-back').onclick = ()=>show('scr-home');
 
   function show(id){
+    if(typeof window.__arsStopSpeak==='function') window.__arsStopSpeak();
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     $(id).classList.add('active');
     if(id==='scr-home') refreshCards();
@@ -5776,6 +5794,7 @@ if(typeof document!=='undefined'){
     });
   }
   function renderOrient(){
+    if(typeof window.__arsStopSpeak==='function') window.__arsStopSpeak();
     const f = orientDeck[orientIdx], body = $('orient-body'), nav = $('orient-nav');
     let h = `<div class="orient-prog">Step ${orientIdx+1} of ${orientDeck.length}</div>`;
     if(f.h) h += `<div class="orient-text">${f.h}</div>`;
@@ -6179,6 +6198,7 @@ if(typeof document!=='undefined'){
     return genOrdinaryQ(d);
   }
   function nextQuestion(){
+    if(typeof window.__arsStopSpeak==='function') window.__arsStopSpeak();
     state.q = genQ(); state.locked = false;
     state.pendingComplete = false;
     $('btn-next').textContent = 'Next Question ⟶';
@@ -6952,6 +6972,393 @@ if(typeof document!=='undefined'){
   }
   darkBtn.onclick = ()=>setDark(!document.body.classList.contains('dark'));
   try{ if(localStorage.getItem('arsDark')==='1') setDark(true); }catch(err){}
+
+  /* ---- text-to-speech (browser voice) ----
+     Reads the study card / intro / current question — not chrome (back, level,
+     points, badges). On the home screen, reads the full page of exercise info. */
+  (function speechReader(){
+    const btn = $('speak-toggle');
+    if(!btn) return;
+    const supported = !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    if(!supported){
+      btn.title = 'Speech is not available in this browser';
+      btn.setAttribute('aria-disabled','true');
+      btn.style.opacity = '.45';
+      btn.style.cursor = 'default';
+      return;
+    }
+
+    let speaking = false;
+    let queue = [];
+
+    function setSpeakingUI(on){
+      speaking = on;
+      btn.classList.toggle('speaking', on);
+      btn.textContent = on ? '⏹' : '🔊';
+      btn.title = on ? 'Stop reading' : 'Read this screen aloud';
+      btn.setAttribute('aria-label', btn.title);
+    }
+
+    function stopSpeak(){
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+      queue = [];
+      setSpeakingUI(false);
+    }
+    window.__arsStopSpeak = stopSpeak;
+
+    function normalizeText(s){
+      return String(s||'')
+        .replace(/\u00a0/g, ' ')
+        .replace(/[❧❦⟶⟵]/g, ' ')
+        .replace(/[·•]/g, ', ')
+        .replace(/\s+/g, ' ')
+        .replace(/\s+([,.;:!?])/g, '$1')
+        .trim();
+    }
+
+    /* Walk an element for readable text; skip pure chrome. */
+    function shouldSkip(el){
+      if(!el || el.nodeType!==1) return true;
+      const tag = el.tagName;
+      if(tag==='SCRIPT' || tag==='STYLE' || tag==='NOSCRIPT') return true;
+      if(el.getAttribute && el.getAttribute('aria-hidden')==='true') return true;
+      if(el.classList){
+        if(el.classList.contains('back-btn') ||
+           el.classList.contains('badge') ||
+           el.classList.contains('quiz-title') ||
+           el.classList.contains('progress-wrap') ||
+           el.classList.contains('kbd-hint') ||
+           el.classList.contains('mode-mini') ||
+           el.classList.contains('next-row') ||
+           el.classList.contains('feedback') ||
+           el.classList.contains('venn-submit-row') ||
+           el.classList.contains('type-row') ||
+           el.classList.contains('input-hint') ||
+           el.classList.contains('orient-prog')) return true;
+        /* path / lab mode switchers are chrome; lab presets are handled separately */
+        if(el.classList.contains('mode-row') && el.id!=='lab1-program' && el.id!=='path-row') return true;
+      }
+      if(el.id==='orient-nav' || el.id==='lab1-box' || el.id==='venn-box' || el.id==='sq-wrap') return true;
+      if(tag==='BUTTON' && el.closest && el.closest('.venn-submit-row')) return true;
+      if(tag==='BUTTON' && el.classList && el.classList.contains('submit-btn') &&
+         /begin|return home|continue|finish|try another|back to the first|next question/i.test(el.textContent||''))
+        return true;
+      return false;
+    }
+
+    function pushText(parts, t){
+      t = normalizeText(t);
+      if(t) parts.push(t);
+    }
+
+    function walk(el, parts, opts){
+      if(!el) return;
+      if(el.nodeType===3){
+        pushText(parts, el.nodeValue);
+        return;
+      }
+      if(el.nodeType!==1) return;
+      if(shouldSkip(el)) return;
+      /* Prefer expanded details content; still read closed ones */
+      if(el.tagName==='DETAILS'){
+        const sum = el.querySelector(':scope > summary');
+        if(sum) pushText(parts, sum.textContent);
+        Array.from(el.childNodes).forEach(ch=>{
+          if(ch===sum) return;
+          walk(ch, parts, opts);
+        });
+        return;
+      }
+      if(el.tagName==='SUMMARY') return; /* handled via DETAILS */
+      /* Buttons that are answer options: read their labels */
+      if(el.tagName==='BUTTON'){
+        if(opts && opts.skipButtons) return;
+        const lab = normalizeText(el.textContent);
+        const visible = el.offsetParent!==null || (el.getClientRects && el.getClientRects().length>0);
+        if(lab && (visible || (opts && opts.forceButtons)))
+          pushText(parts, lab);
+        return;
+      }
+      if(el.tagName==='INPUT' || el.tagName==='TEXTAREA'){
+        const ph = el.getAttribute('placeholder');
+        if(ph) pushText(parts, ph);
+        return;
+      }
+      /* Recurse */
+      Array.from(el.childNodes).forEach(ch=>walk(ch, parts, opts));
+    }
+
+    function textFrom(el, opts){
+      const parts = [];
+      walk(el, parts, opts||{});
+      /* de-dupe consecutive identical fragments */
+      const out = [];
+      parts.forEach(p=>{ if(out[out.length-1]!==p) out.push(p); });
+      return out.join('. ').replace(/\.\s*\./g, '.').replace(/\s+/g, ' ').trim();
+    }
+
+    function visibleAnswerRows(){
+      const rows = ['vi-row','tf-row','quad-row','snd-row'];
+      const parts = [];
+      rows.forEach(id=>{
+        const row = $(id);
+        if(!row || row.style.display==='none') return;
+        row.querySelectorAll('button').forEach(b=>{
+          if(!b.disabled) pushText(parts, b.textContent);
+        });
+      });
+      return parts;
+    }
+
+    function homeHowToProceed(){
+      const home = $('scr-home');
+      if(!home) return null;
+      return Array.from(home.querySelectorAll('details.help')).find(d=>{
+        const s = d.querySelector('summary');
+        return s && /how to proceed/i.test(s.textContent||'') && d.id!=='guided-help';
+      }) || null;
+    }
+    function guidedPathActive(){
+      const btn = $('path-guided');
+      if(btn && btn.classList.contains('sel')) return true;
+      const gh = $('guided-help');
+      if(gh && gh.style.display!=='none' && gh.offsetParent!==null) return true;
+      try{ if(typeof gpPath==='string' && gpPath==='guided') return true; }catch(e){}
+      return false;
+    }
+    function addDetailsText(detailsEl, add){
+      if(!detailsEl) return;
+      detailsEl.open = true;   /* leave open while reading */
+      const sum = detailsEl.querySelector('summary');
+      if(sum) add(sum.textContent);
+      detailsEl.querySelectorAll(':scope > p').forEach(p=>add(p.textContent));
+    }
+    /** Open every collapsible that will be read on this screen; leave them open. */
+    function openSpeakCollapsibles(scr){
+      if(!scr) return;
+      if(scr.id==='scr-home'){
+        const how = homeHowToProceed();
+        if(how) how.open = true;
+        const gh = $('guided-help');
+        if(gh && guidedPathActive()){
+          gh.style.display = 'block';
+          gh.open = true;
+        }
+        return;
+      }
+      scr.querySelectorAll('details').forEach(d=>{ d.open = true; });
+    }
+
+    function collectHomeText(){
+      /* Home reading order (skips streak/skill, difficulty, instructor note, colophon):
+         0) App title + subtitle
+         1) How to Proceed (always expanded)
+         1b) How the Guided Path Works — only if Guided Path is selected
+         2) Grammar / Preliminary section (title, gloss, card)
+         3) Feedback, Study, then each act — section titles + card titles & descriptions */
+      const home = $('scr-home');
+      if(!home) return '';
+      const parts = [];
+
+      function add(t){ pushText(parts, t); }
+      function addCards(container){
+        if(!container) return;
+        container.querySelectorAll('.set-card').forEach(card=>{
+          const num = card.querySelector('.set-num');
+          const h3 = card.querySelector('h3');
+          const p = card.querySelector('p');
+          const bits = [];
+          if(num) bits.push(normalizeText(num.textContent));
+          if(h3) bits.push(normalizeText(h3.textContent));
+          if(p) bits.push(normalizeText(p.textContent));
+          if(bits.length) add(bits.join('. '));
+        });
+      }
+      function addSectionBlock(block){
+        if(!block || block.style.display==='none') return;
+        /* act title, any sub-label (e.g. Ratiocinatio), then the gloss */
+        block.querySelectorAll('.act-label, .section-label').forEach(sl=>add(sl.textContent));
+        const gloss = block.querySelector('.section-gloss');
+        if(gloss) add(gloss.textContent);
+        addCards(block.querySelector('.sets') || block);
+      }
+
+      /* 0. App title and subtitle */
+      const hdr = home.querySelector('header');
+      if(hdr){
+        const h1 = hdr.querySelector('h1');
+        const sub = hdr.querySelector('.subtitle');
+        if(h1) add(h1.textContent);
+        if(sub) add(sub.textContent);
+      }
+
+      /* 1. How to Proceed — expand and read fully */
+      addDetailsText(homeHowToProceed(), add);
+
+      /* 1b. Guided Path help — only when that path is active */
+      if(guidedPathActive()){
+        const gh = $('guided-help');
+        if(gh){
+          gh.style.display = 'block';
+          addDetailsText(gh, add);
+        }
+      }
+
+      /* 2. Grammar / Preliminary (before difficulty) */
+      addSectionBlock($('actblk-a0'));
+
+      /* 3. Feedback (no cards — the short note) */
+      const fbLabel = Array.from(home.querySelectorAll(':scope > .section-label'))
+        .find(el=>/feedback/i.test(el.textContent||''));
+      if(fbLabel){
+        add(fbLabel.textContent);
+        let n = fbLabel.nextElementSibling;
+        while(n && !n.classList.contains('section-label') && !n.classList.contains('act-block') && n.id!=='labs'){
+          if(n.classList.contains('mode-note')) add(n.textContent);
+          n = n.nextElementSibling;
+        }
+      }
+
+      /* 4. Study + exercise acts through the bottom (stop before teacher/colophon) */
+      const studyLabel = Array.from(home.querySelectorAll(':scope > .section-label'))
+        .find(el=>/^study$/i.test((el.textContent||'').trim()));
+      if(studyLabel) add(studyLabel.textContent);
+      addCards($('labs'));
+
+      ['actblk-a1','actblk-a2','actblk-a3','actblk-a4','actblk-a6','actblk-a5','actblk-a7']
+        .forEach(id=>addSectionBlock($(id)));
+
+      return parts.join('. ').replace(/\.\s*\./g, '.').replace(/\s+/g, ' ').trim();
+    }
+
+    function collectQuizText(){
+      const parts = [];
+      const instr = $('q-instr');
+      if(instr && instr.style.display!=='none') pushText(parts, instr.textContent);
+      const body = $('q-body');
+      if(body){
+        /* Read rules, glosses, propositions; skip live venn canvas chrome */
+        body.querySelectorAll('.rule-view, .gloss, .mc-question, .disp-block, .syllogism, .prose-arg, .q-instr, .chain-wrap')
+          .forEach(el=>pushText(parts, el.innerText || el.textContent));
+        /* If nothing structured matched, fall back to body text without buttons */
+        if(!parts.length) pushText(parts, textFrom(body, {skipButtons:true}));
+      }
+      visibleAnswerRows().forEach(t=>parts.push(t));
+      return parts.join('. ').replace(/\.\s*\./g, '.').replace(/\s+/g, ' ').trim();
+    }
+
+    function collectCardText(scr){
+      const card = scr.querySelector('.q-card');
+      if(!card) return textFrom(scr, {skipButtons:true});
+      /* Collapsibles already opened by openSpeakCollapsibles — leave them open */
+      let t;
+      if(scr.id==='scr-orient'){
+        const body = $('orient-body');
+        t = body ? textFrom(body, {forceButtons:true}) : textFrom(card, {forceButtons:true});
+        const ex = $('orient-explain');
+        if(ex && ex.style.display!=='none'){
+          const et = normalizeText(ex.innerText || ex.textContent);
+          if(et) t = (t ? t+'. ' : '') + et;
+        }
+      } else if(scr.id==='scr-levelpick'){
+        t = textFrom(card, {forceButtons:true});
+      } else {
+        /* Intro screens, labs, done, progress cards: read the card, skip Begin buttons */
+        t = textFrom(card, {skipButtons:true});
+        /* But include option-like buttons on labs (presets) as labels of forms */
+        if(scr.id==='scr-lab1' || scr.id==='scr-lab2'){
+          const extra = [];
+          card.querySelectorAll('.preset-row button, #lab2-ops button, .lab-read')
+            .forEach(el=>{ if(el.offsetParent!==null) pushText(extra, el.innerText||el.textContent); });
+          if(extra.length) t = (t?t+'. ':'') + extra.join('. ');
+        }
+      }
+      return t;
+    }
+
+    function collectSpeakText(){
+      const scr = document.querySelector('.screen.active');
+      if(!scr) return '';
+      openSpeakCollapsibles(scr);
+      if(scr.id==='scr-home') return collectHomeText();
+      if(scr.id==='scr-quiz') return collectQuizText();
+      if(scr.id==='scr-done' || scr.id==='scr-progress'){
+        const card = scr.querySelector('.q-card') || scr;
+        return textFrom(card, {skipButtons:true});
+      }
+      return collectCardText(scr);
+    }
+
+    function pickVoice(){
+      try{
+        const voices = window.speechSynthesis.getVoices() || [];
+        const en = voices.find(v=>/^en(-|_)/i.test(v.lang) && /english/i.test(v.name))
+                || voices.find(v=>/^en(-|_)/i.test(v.lang))
+                || voices[0];
+        return en || null;
+      }catch(e){ return null; }
+    }
+
+    function chunkText(text){
+      /* Split into speakable pieces so long home/intro pages do not stall engines */
+      const max = 280;
+      const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+      const chunks = [];
+      let buf = '';
+      sentences.forEach(s=>{
+        s = s.trim();
+        if(!s) return;
+        if((buf+' '+s).length > max && buf){
+          chunks.push(buf.trim());
+          buf = s;
+        } else buf = buf ? buf+' '+s : s;
+      });
+      if(buf.trim()) chunks.push(buf.trim());
+      return chunks.length ? chunks : [text];
+    }
+
+    function speakChunks(chunks){
+      queue = chunks.slice();
+      setSpeakingUI(true);
+      const voice = pickVoice();
+      function next(){
+        if(!speaking) return;
+        if(!queue.length){ setSpeakingUI(false); return; }
+        const u = new SpeechSynthesisUtterance(queue.shift());
+        if(voice) u.voice = voice;
+        u.rate = 0.95;
+        u.pitch = 1;
+        u.onend = next;
+        u.onerror = ()=>{ setSpeakingUI(false); };
+        try{ window.speechSynthesis.speak(u); }
+        catch(e){ setSpeakingUI(false); }
+      }
+      /* Some browsers need a kick after cancel() */
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+      setTimeout(next, 40);
+    }
+
+    function startSpeak(){
+      const text = collectSpeakText();
+      if(!text){
+        /* brief spoken notice */
+        speakChunks(['There is nothing to read on this screen.']);
+        return;
+      }
+      speakChunks(chunkText(text));
+    }
+
+    btn.onclick = ()=>{
+      if(speaking) stopSpeak();
+      else startSpeak();
+    };
+
+    /* Chrome loads voices asynchronously */
+    try{
+      window.speechSynthesis.onvoiceschanged = function(){};
+      window.speechSynthesis.getVoices();
+    }catch(e){}
+  })();
 
   /* ===== Daily return-streak + calendar reminder ===== */
   (function dailyPractice(){
