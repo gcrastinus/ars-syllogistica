@@ -1699,7 +1699,8 @@ function diagram3(fig, t1, t2){
   for(const p of prems){
     if(p.t==='I'||p.t==='O'){
       const cand = zone3(p.X,p.Y, p.t==='I'?'int':'diff').filter(r=>!shaded.has(r));
-      if(cand.length) xs.push({regions:cand, kind:cand.length===1?'def':'border'});
+      /* one open cell → definite ×; several open cells → ambiguous (×? in each) */
+      if(cand.length) xs.push({regions:cand, kind:cand.length===1?'def':'ambig'});
     }
   }
   return {shaded, xs, importTerm:null};
@@ -1760,22 +1761,26 @@ function svgVenn(layout, labels, shaded, xs, opts){
     const fs = txt.length>18 ? 12 : txt.length>13 ? 14 : 16;
     return `<text x="${p[0]}" y="${p[1]}" font-size="${fs}" font-style="italic" text-anchor="middle" fill="var(--ink-soft)" font-family="inherit">${txt}</text>`;
   }).join('');
+  /* Existence marks: one definite cell → × (or ⊗ for import).
+     Several open cells for the same “some” → ×? (or ⊗?) in the centre of
+     each candidate cell, so the mark never sits on a circle’s edge. */
   const xEls = (xs||[]).map(x=>{
-    let px,py;
-    if(x.regions.length===1){ px=layout.cent[x.regions[0]][0]; py=layout.cent[x.regions[0]][1]; }
-    else{
-      const a=layout.cent[x.regions[0]], b=layout.cent[x.regions[1]];
-      let mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2;
-      // place the border × on the arc of the circle that separates the two cells
-      const dk = keys.find(k=>x.regions[0].includes(k)!==x.regions[1].includes(k));
-      if(dk){
-        const c = cs[dk], dx=mx-c.x, dy=my-c.y, len=Math.hypot(dx,dy)||1;
-        mx = c.x + c.r*dx/len; my = c.y + c.r*dy/len;
+    const regs = (x.regions||[]).filter(r=>layout.cent[r]);
+    if(!regs.length) return '';
+    const ambig = regs.length>1 || x.kind==='ambig' || x.kind==='border';
+    const isImp = x.kind==='import';
+    const base = isImp ? '⊗' : '×';
+    const fs = ambig ? (isImp?17:19) : (isImp?24:28);
+    const dy = ambig ? 6 : 9;
+    return regs.map(r=>{
+      const px = layout.cent[r][0], py = layout.cent[r][1];
+      if(ambig){
+        return `<text x="${px}" y="${py+dy}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="Georgia,serif">`+
+          `<tspan font-size="${fs}">${base}</tspan>`+
+          `<tspan font-size="${Math.round(fs*0.72)}" dx="1" dy="${-Math.round(fs*0.28)}">?</tspan></text>`;
       }
-      px=Math.round(mx); py=Math.round(my);
-    }
-    const sym = x.kind==='import' ? '⊗' : '×';
-    return `<text x="${px}" y="${py+9}" font-size="${x.kind==='import'?24:28}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="Georgia,serif">${sym}</text>`;
+      return `<text x="${px}" y="${py+dy}" font-size="${fs}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="Georgia,serif">${base}</text>`;
+    }).join('');
   }).join('');
   return `<svg viewBox="0 0 ${layout.W} ${layout.H}" class="venn ${opts.cls||''}" xmlns="http://www.w3.org/2000/svg"><defs>${defs}</defs>${fills}${strokes}${labEls}${xEls}</svg>`;
 }
@@ -1848,14 +1853,14 @@ function diagToState(diag){
   diag.xs.forEach(x=>{ st[x.regions[0]] = 'x'; });
   return st;
 }
-/* two premises together (set V after 50 points) — always determinate, no border ×s */
+/* two premises together (set V after 50 points) — always determinate (no ambiguous ×?) */
 function genVenn2Q(d, mode){
   const cfg = DIFF[d];
   for(let i=0;i<500;i++){
     const fig = rand(cfg.figs), t1 = rand(TYPES), t2 = rand(TYPES);
     if(isPart(t1) && isPart(t2)) continue;
     const diag = diagram3(fig, t1, t2);
-    if(diag.xs.some(x=>x.regions.length>1)) continue;
+    if(diag.xs.some(x=>x.regions.length>1 || x.kind==='ambig' || x.kind==='border')) continue;
     const roles = makeTerms(mode, null);
     const lines = [0,1].map(j=>{const tp=premiseTerms(fig,j,roles); return propText(j?t2:t1, tp[0], tp[1]);});
     return {kind:'venn3', sub:'pair', fig, t1, t2, roles, lines, diag, expect:diagToState(diag)};
@@ -6534,9 +6539,12 @@ if(typeof document!=='undefined'){
       const where = (tc==='E'||tc==='I')
         ? `the region shared by <em>${labels.S}</em> and <em>${labels.P}</em>`
         : `the part of <em>${labels.S}</em> outside <em>${labels.P}</em>`;
+      const ambig = diag.xs.some(x=>x.regions && x.regions.length>1);
       cap = (tc==='A'||tc==='E')
         ? `“${concl}” would require ${where} to be wholly shaded — the premises leave it open.`
         : `“${concl}” would require an × in ${where} — the premises force none there.`;
+      if(ambig)
+        cap += ` Where a “some” could sit in more than one open cell, each candidate is marked <strong>×?</strong> — one of those cells holds the witness, but the premises do not say which.`;
     }
     return `<div class="fb-venn">${svgVenn(V3, labels, diag.shaded, diag.xs)}<div class="venn-cap">${cap}</div></div>`;
   }
