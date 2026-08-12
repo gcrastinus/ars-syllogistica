@@ -543,7 +543,7 @@ h1{
 
     <div class="act-block" id="actblk-a0">
       <div class="section-label">Preliminary · Before Logic</div>
-      <div class="section-gloss">The first road of the <strong>trivium</strong>, and the one the other two are built on. Logic works upon statements, and a statement is made of words — so before reasoning can be judged, the parts of a sentence must be known. Begin here if you have had little grammar, or return to it for the medieval question of what grammar is <em>for</em>.</div>
+      <div class="section-gloss">Grammar is the first road of the <strong>trivium</strong>, and the one the other two are built on. Logic works upon statements, and a statement is made of words — so before reasoning can be judged, the parts of a sentence must be known. Begin here if you have had little grammar, or return to it for the medieval question of what grammar is <em>for</em>.</div>
       <div class="sets" id="sets-a0"></div>
     </div>
 
@@ -5255,7 +5255,7 @@ if(typeof document!=='undefined'){
     gc.className = 'set-card';
     gc.style.gridColumn = '1 / -1';
     gc.innerHTML = `<div class="set-num">THE FIRST ART</div><h3>The Art of Grammar</h3>`
-      + `<p>The first road of the trivium, from the beginning and assuming none of it: what a noun and a verb are, how they make a sentence that can be true or false, and where grammar stops and logic starts. Then the medieval question — why the parts of speech are what they are — and the modists’ answer, that grammar follows the shape of things. Not scored.</p>`
+      + `<p>Study the outline of the first part of the trivium. From the beginning and assuming none of it: what a noun and a verb are, how they make a sentence that can be true or false, and where grammar stops and logic starts. Then the medieval question — why the parts of speech are what they are — and the modists’ answer, that grammar follows the shape of things. Not scored.</p>`
       + `<span class="begin">BEGIN ⟶</span>`;
     gc.onclick = openGrammar;
     const pre = $('sets-a0');
@@ -5271,105 +5271,65 @@ if(typeof document!=='undefined'){
      TAKES it some way, and a word SIGNIFIES it some way. Latin terms are given
      beside the English, never instead of it. Not scored or tracked. */
   const GRAMMAR = [
-    { h:`<p><strong>THE ART OF GRAMMAR.</strong> Before logic, grammar. The old course of study put three arts together and called them the <em>trivium</em>, the three roads: <strong>grammar</strong>, which is putting words together rightly; <strong>logic</strong>, which is reasoning rightly; and <strong>rhetoric</strong>, which is persuading well. They come in that order for a reason. Logic works on statements, and a statement is made of words. If you do not know what a word is doing in a sentence, you cannot say what a proposition asserts — and the whole of this course of study turns on propositions.</p>`
-      + `<p>What follows assumes no prior grammar. It builds from the beginning, in ordinary language, and gives the traditional names as they come. At the end it shows something most grammars leave out: what the medieval logicians thought grammar was actually <em>for</em>. Nothing here is scored.</p>` },
+    { h:`<p><strong>THE ART OF GRAMMAR.</strong> Before logic we must study grammar. The old course of study put three arts together and called them the <em>trivium</em>, the three roads: <strong>grammar</strong>, which is putting words together rightly; <strong>logic</strong>, which is reasoning rightly; and <strong>rhetoric</strong>, which is persuading well. They come in that order for a reason. Logic works on statements, and a statement is made of words. If you do not know what a word is doing in a sentence, you cannot say what a proposition asserts — and the centre of this whole course of study is the proposition.</p>`
+      + `<p>What follows assumes no prior grammar. It builds from the beginning, in ordinary language, and gives the traditional names as they come. At the end we consider fundamental questions such as the universality of grammar, and why nouns and verbs are what they are. Nothing here is scored.</p>` },
 
-    { h:`<p><strong>Words have jobs.</strong> Start with a sentence: <em>The old dog sleeps quietly by the fire.</em> Every word in it is doing a different kind of work. <em>Dog</em> names something. <em>Sleeps</em> says what it is doing. <em>Old</em> tells you what the dog is like. <em>Quietly</em> tells you how the sleeping goes. <em>By</em> ties the sleeping to the fire. <em>The</em> points at a particular dog.</p>`
-      + `<p>Those different jobs — the grammarian’s word is <strong>function</strong>, the work a word performs in the sentence — are what the <strong>parts of speech</strong> are. The list is not a list of words, because the very same word can perform different functions in different sentences. It is a list of functions. From here on that is the word we shall use.</p>`,
-      q:{ prompt:`In “The old dog sleeps quietly by the fire,” which word names the thing the sentence is about?`,
-          options:['old','dog','sleeps','quietly'], correct:1,
-          explain:`<em>Dog</em> names it. The others tell you what it is like, what it does, and how — but only <em>dog</em> puts the thing itself before you.` } },
+    { h:`<p><strong>The functions that words have.</strong> Start with a sentence: <em>The old dog sleeps quietly by the fire.</em> Every word in it is doing a different kind of work. <em>Dog</em> names something. <em>Sleeps</em> says what it is doing. <em>Old</em> tells you what the dog is like. <em>Quietly</em> tells you how the sleeping goes. <em>By</em> ties the sleeping to the fire. The article <em>the</em> points at a particular dog.</p>`
+      + `<p>The functions of these different words are the <strong>parts of speech</strong> — the different kinds of work, divided up by what they do in the sentence. The list of parts of speech is not a list of words, since the very same word can have different functions in different sentences: <em>paint</em> as the thing, and <em>paint</em> as the action of painting. It is a list of functions.</p>` },
 
-    { h:`<p><strong>The noun — a word that names.</strong> A <strong>noun</strong> (Latin <em>nomen</em>, a name) names something: a person, a place, a thing, or even something you cannot touch — <em>courage</em>, <em>Tuesday</em>, <em>justice</em>. The test is simple: can you put <em>the</em> or <em>a</em> in front of it and have it still sound like English? <em>The dog. A hope. The weather.</em></p>`
-      + `<p>Nouns come in two sorts worth naming now. A <strong>common noun</strong> names a kind — <em>dog</em>, <em>city</em>, <em>river</em>. A <strong>proper noun</strong> names one particular thing and takes a capital letter — <em>Rex</em>, <em>Rome</em>, <em>the Thames</em>. Hold on to that distinction: logic uses it constantly, because a common noun can be said of many things and a proper noun of only one.</p>`,
-      q:{ prompt:`Which of these is a noun?`,
-          options:['quickly','courage','sleeps','under'], correct:1,
-          explain:`<em>Courage</em> names something, even though you cannot see or touch it. You can say <em>the courage of the men</em>. The others tell how, do something, or join things.` } },
+    { h:`<p><strong>The noun — a word that names.</strong> A <strong>noun</strong> (Latin <em>nomen</em>, a name) names something: a person, a place, a thing, or even something you cannot sense, like an idea or a property. To determine whether something is a noun, one simple rule is this: can you put <em>the</em> or <em>a</em> in front of it and have it still sound like English? <em>The dog. A hope. The weather.</em></p>`
+      + `<p>There are two kinds of nouns. A <strong>common noun</strong> names a kind — <em>dog</em>, <em>city</em>, <em>river</em>. A <strong>proper noun</strong> names one particular thing and usually begins with a capital letter — <em>Rex</em>, <em>Rome</em>, <em>the Thames</em>. Hold on to that distinction: logic uses it constantly, because a common noun can be said of many things and a proper noun of only one.</p>` },
 
-    { h:`<p><strong>The verb — a word that says something is going on.</strong> A <strong>verb</strong> (Latin <em>verbum</em>, a word — the word, as though it were the important one) says what is done or what is going on: <em>runs</em>, <em>sleeps</em>, <em>builds</em>, <em>is</em>. It is the only part of speech that carries <strong>time</strong> in itself. <em>He builds</em>, <em>he built</em>, <em>he will build</em> — the naming has not changed, only the when.</p>`
-      + `<p>That is the deepest difference between the two. A noun holds its thing still; a verb has it happening. Hold this: it is the seed of the medieval account treated at the end of this introduction.</p>`,
-      q:{ prompt:`What can a verb do that a noun cannot?`,
-          options:['Name something','Carry time — past, present, future','Take the word “the” in front of it','Describe another word'], correct:1,
-          explain:`Only the verb carries time in itself. <em>Runs, ran, will run</em> — the same doing, placed at three different times.` } },
+    { h:`<p><strong>The verb — a word that says something is going on.</strong> A <strong>verb</strong> (Latin <em>verbum</em>, a word — as though the primary word were really the word for action, the verb) says what is done or what is going on: <em>runs</em>, <em>sleeps</em>, <em>builds</em>, <em>is</em>. It is the only part of speech that carries <strong>time</strong> in itself. <em>He builds</em>, <em>he built</em>, <em>he will build</em> — the naming has not changed, only the when.</p>`
+      + `<p>That is the deepest difference between the two. A noun refers to a thing, a stable entity under consideration; a verb is a doing, or a being done, or a becoming, or a being in a certain way. This distinction between nouns and verbs is the seed of the medieval account treated at the end of this introduction.</p>` },
 
-    { h:`<p><strong>Put one of each together and you have said something.</strong> This is the hinge of the whole art. <em>Dog</em> says nothing — I am left waiting. <em>Sleeps</em> says nothing either. But <em>The dog sleeps</em> is a complete thought, and — here is the point — it can be <strong>true or false</strong>. Single words are neither. Only when a naming word and a verb are joined does truth or falsity appear.</p>`
-      + `<p>That is exactly the second act of the mind, treated in the orientation and throughout these exercises: <em>judgment</em>, the joining of two concepts into a proposition that affirms or denies. Grammar and logic meet precisely here.</p>`,
-      q:{ prompt:`Which of these can be true or false?`,
-          options:['the old dog','sleeps quietly','the dog sleeps','by the fire'], correct:2,
-          explain:`Only <em>the dog sleeps</em>. The others are pieces — you can neither agree nor disagree with them. Truth first appears when something is said <em>of</em> something.` } },
+    { h:`<p><strong>Combine one noun and one verb and you have said something.</strong> This is the principle of the whole art. <em>Dog</em> says nothing — I am left waiting for something about the dog, such as what it is doing. <em>Sleeps</em> says nothing either; I am left wondering who or what is sleeping. But <em>the dog sleeps</em> is a complete thought, and only a complete thought can be <strong>true or false</strong>. Single words are not true or false. Only when a naming word and a verb are joined does truth or falsity appear.</p>`
+      + `<p>This joining together of the name and the verb into a sentence is the <strong>second act of the mind</strong>, treated in the logic orientation and throughout these exercises in <em>Ars Syllogistica</em>: the second act of the mind is <em>judgment</em>, the joining of two concepts into a proposition that affirms or denies.</p>`
+      + `<p>Grammar considers the judgment in so far as we have correctly combined the words in a meaningful way. Logic considers the judgment in so far as it signifies the truth or falsity of the relation between the two terms that the words of the sentence assert or deny.</p>` },
 
-    { h:`<p><strong>Subject and predicate.</strong> In every complete sentence something is talked about, and something is said about it. The part talked about is the <strong>subject</strong> (Latin <em>subiectum</em>, what is laid underneath). What is said about it is the <strong>predicate</strong> (Latin <em>praedicatum</em>, what is asserted of it).</p>`
-      + `<p><em>The old dog</em> | <em>sleeps quietly by the fire.</em> Everything to the left of the bar is the subject; everything to the right is the predicate. These two words are borrowed straight into logic and never leave it: every proposition has a subject and a predicate.</p>`,
-      q:{ prompt:`In “The tall soldier carried the standard,” what is the subject?`,
-          options:['carried the standard','the tall soldier','the standard','carried'], correct:1,
-          explain:`<em>The tall soldier</em> is what the sentence is about. <em>Carried the standard</em> is what is said about him — the predicate.` } },
+    { h:`<p><strong>Subject and predicate.</strong> In every complete sentence something is talked about, and something is said about it. The part talked about is the <strong>subject</strong> (Latin <em>subiectum</em>, what is laid underneath). What is said about the subject is the <strong>predicate</strong> (Latin <em>praedicatum</em>, what is said of it).</p>`
+      + `<p><em>The old dog</em> | <em>sleeps quietly by the fire.</em> Everything to the left of the bar is the subject; everything to the right is the predicate. These two words are used in logic as well: every proposition has a subject and a predicate.</p>` },
 
-    { h:`<p><strong>Words that lean on other words.</strong> Two parts of speech do not stand on their own — they modify, which means they narrow or colour something else.</p>`
-      + `<p>An <strong>adjective</strong> (Latin <em>adiectivum</em>, thrown-toward) leans on a noun and tells what sort: <em>the <u>old</u> dog</em>, <em>a <u>brave</u> soldier</em>. An <strong>adverb</strong> leans on a verb — or on an adjective — and tells how, when, or where: <em>sleeps <u>quietly</u></em>, <em>came <u>yesterday</u></em>, <em><u>very</u> brave</em>.</p>`
-      + `<p>Notice that an adjective cannot be thrown at nothing. <em>Old</em> by itself names no thing; it waits for a noun to attach to. The schools said the adjective signifies a quality <em>as belonging to something else</em> — which is why it cannot stand alone.</p>`,
-      q:{ prompt:`In “The very brave soldier fought fiercely,” which word is an adverb leaning on an adjective?`,
-          options:['brave','very','fiercely','soldier'], correct:1,
-          explain:`<em>Very</em> modifies <em>brave</em>, which is itself an adjective modifying <em>soldier</em>. <em>Fiercely</em> is also an adverb, but it leans on the verb <em>fought</em>.` } },
+    { h:`<p><strong>Some words depend on other words.</strong> Two parts of speech do not stand on their own — they <em>modify</em>, which means that they narrow or qualify the word or expression they are used on.</p>`
+      + `<p>An <strong>adjective</strong> (Latin <em>adiectivum</em>, thrown-toward) depends on a noun and tells what sort of thing the noun refers to, among what it could refer to: <em>the <u>old</u> dog</em>, <em>a <u>brave</u> soldier</em>. An <strong>adverb</strong> depends on a verb or on an adjective, and says how, when, or where the verb takes place, or how the adjective applies to a noun: <em>sleeps <u>quietly</u></em>, <em>came <u>yesterday</u></em>, <em>a <u>very</u> brave man</em>.</p>`
+      + `<p>Notice that an adjective cannot function without a noun to qualify. <em>Old</em> by itself names nothing; it needs a noun to be combined with. The medieval schools said that the adjective signifies a quality <em>as belonging to something else</em> — namely, as belonging to the noun modified; and this is why the adjective cannot stand alone.</p>` },
 
-    { h:`<p><strong>The joiners and the pointers.</strong> Four more functions, quickly.</p>`
-      + `<p>A <strong>preposition</strong> stands before a noun and ties it into the sentence: <em>by the fire</em>, <em>under the table</em>, <em>after the battle</em>. A <strong>conjunction</strong> joins: <em>and</em>, <em>but</em>, <em>or</em>, <em>if</em>. A <strong>pronoun</strong> stands in for a noun already named: <em>he</em>, <em>she</em>, <em>it</em>, <em>they</em>, <em>who</em>. An <strong>article</strong> points: <em>the</em> points at a particular one, <em>a</em> at any one.</p>`
-      + `<p>The conjunctions are worth a second look, because logic takes some of them over entirely. <em>And</em>, <em>or</em>, and <em>if</em> are the joints of whole arguments — three later exercises treat them in full.</p>`,
-      q:{ prompt:`Which of these words does logic borrow to join whole statements together?`,
-          options:['quietly','if','soldier','the'], correct:1,
-          explain:`<em>If</em> joins two whole statements: <em>if it has rained, the ground is wet</em>. So do <em>and</em> and <em>or</em>. The conditional, the conjunctive, and the disjunctive syllogism are all built on them.` } },
+    { h:`<p><strong>Four more functions, in a simple outline.</strong> A <strong>preposition</strong> stands before a noun and subordinates that noun to something else in the sentence. With the noun alone: <em>by the fire</em>, <em>under the table</em>, <em>after the battle</em>. In whole sentences: <em>the pot is by the fire</em>; <em>the cat ran under the table</em>; <em>the day after the battle, we returned home</em>.</p>`
+      + `<p>A <strong>conjunction</strong> joins two words or phrases together: <em>and</em>, <em>but</em>, <em>or</em>, <em>if</em>. We may join nouns, adjectives, adverbs, and verbs most simply. A <strong>pronoun</strong> stands in for a noun that has already been named: <em>he</em>, <em>she</em>, <em>it</em>, <em>they</em>, <em>who</em>. An <strong>article</strong> points to one thing among many: <em>the</em> points at a particular one, <em>a</em> at any one.</p>`
+      + `<p>The conjunctions are also studied in logic, because conjunctions can join terms and propositions, and the conjunction helps to determine the truth or falsity of the new compound proposition. <em>And</em>, <em>or</em>, and <em>if</em> are the primary conjunctions used in logic.</p>` },
 
-    { h:`<p><strong>Words change their shape.</strong> A word does not just sit there; it bends to fit its function. <em>Dog</em> becomes <em>dogs</em>; <em>walk</em> becomes <em>walked</em>. The tradition calls these changes the <strong>accidents</strong> of a word — not accidents in the sense of mishaps, but features a word can take on or lose while remaining the same word.</p>`
-      + `<p><strong>Number</strong>: one or more than one — <em>dog</em>, <em>dogs</em>. <strong>Person</strong>: who is speaking — <em>I walk</em>, <em>you walk</em>, <em>he walks</em>. <strong>Tense</strong>: when — <em>walk</em>, <em>walked</em>, <em>will walk</em>. <strong>Gender</strong>, in languages that have it.</p>`,
-      q:{ prompt:`“He walks” and “they walk” differ in which accident?`,
-          options:['Tense','Number','Gender','Case'], correct:1,
-          explain:`Number: one walker or several. The time is the same in both, so tense has not changed.` } },
+    { h:`<p><strong>Changes in words.</strong> A word typically undergoes changes depending on how it is used — on its function in the sentence. <em>Dog</em> becomes <em>dogs</em>; <em>walk</em> becomes <em>walked</em>. The tradition calls these changes the <strong>accidents</strong> of a word — not accidents in the sense of mishaps, but things a word can take on or lose while remaining the same word.</p>`
+      + `<p><strong>Number</strong>: singular or plural, one or more than one — <em>dog</em>, <em>dogs</em>. Verbs and some pronouns also have <strong>Person</strong>: who is speaking — <em>I walk</em>, <em>you walk</em>, <em>he walks</em>. Verbs alone have <strong>Tense</strong>: when — <em>walk</em>, <em>walked</em>, <em>will walk</em>.</p>` },
 
-    { h:`<p><strong>Case — the thing English mostly lost.</strong> In English, word order does the work: <em>the dog bit the man</em> and <em>the man bit the dog</em> use identical words and mean opposite things. Latin does it differently. The <em>ending</em> of the noun tells you its function, so the order can change without changing the sense. This change of ending is called <strong>case</strong> (Latin <em>casus</em>, a falling).</p>`
-      + `<p>English keeps three scraps of it. <em>He</em> is the subject form and <em>him</em> the object form — you say <em>he saw him</em>, never <em>him saw he</em>. And <em>the dog's bone</em> keeps a possessive ending. That is nearly all that survives, but it is enough to show what case does: it marks the function of a word by its shape rather than by its place.</p>`,
-      q:{ prompt:`Why can Latin move its words around more freely than English can?`,
-          options:['Latin has fewer words','The endings show each word’s function, so the order need not','Latin has no verbs','Latin sentences are shorter'], correct:1,
-          explain:`Case endings carry the information that English carries by word order. Change the ending and you change the function; change the order and you have only changed the emphasis.` } },
+    { h:`<p><strong>Word inflections — case.</strong> In English, the order of the words is what determines the function each word has: <em>the dog bit the man</em> and <em>the man bit the dog</em> use identical words and mean very different things. Latin and Greek determine the function of words in a sentence not by word order but by the endings of the words themselves. The ending of the noun tells you its function, so the order can change without changing the sense. This change of ending is called <strong>case</strong> (Latin <em>casus</em>, a falling).</p>`
+      + `<p>English keeps case in a few places (Old English had the full set). <em>He</em> is the subject form, the <em>nominative</em>, and <em>him</em> the object form, the <em>accusative</em> and <em>dative</em> — you say <em>he saw him</em>, never <em>him saw he</em>. And <em>the dog’s bone</em> keeps a possessive ending. That is about all that survives in English, but it is enough to show what case does: it marks the function of a word by its shape rather than by its place.</p>`
+      + `<p>Consider the English relative pronoun <em>who</em>, <em>whose</em>, <em>whom</em>. <strong>Who</strong> refers to the subject of the clause: <em>the man who stands behind me</em>. <strong>Whose</strong> refers to the possession of a thing: <em>the man whose book this is</em>. <strong>Whom</strong> refers to the object: <em>the man to whom I threw the ball</em>.</p>` },
 
-    { h:`<p><strong>Where grammar stops and logic begins.</strong> Students often confuse the two; the distinction must be kept exact.</p>`
-      + `<p>Grammar asks whether a sentence is <em>well formed</em>. Logic asks whether it is <em>true</em>, and whether it follows from something else. The two questions are wholly separate, and you can have either without the other. <em>The moon is made of green cheese</em> is faultless grammar and false. <em>Him go store yesterday</em> is broken grammar and might well be true.</p>`
-      + `<p>So grammar cannot tell you what is so. But logic cannot get started without it — because until the sentence is well formed, there is nothing definite for logic to judge.</p>`,
-      q:{ prompt:`“Colourless green ideas sleep furiously.” What is wrong with it?`,
-          options:['The grammar is broken','The grammar is perfect; the trouble is that it says nothing that could be so','It is a valid argument','It has no verb'], correct:1,
-          explain:`Every word is in its right place — noun, adjectives, verb, adverb. The famous example shows exactly how far grammar goes and where it stops: it can guarantee the form and nothing else.` } },
+    { h:`<p><strong>The difference between grammar and logic.</strong> It is easy to confuse the two. Grammar considers to what extent a sentence is well formed. Logic considers whether the proposition that the sentence expresses is true, and how that proposition relates to the truth or falsity of other propositions.</p>`
+      + `<p>These two considerations are wholly separate, and you can have either without the other. <em>The moon is made of green cheese</em> is perfectly grammatical and false. <em>Him go store yesterday</em> is ungrammatical and might well be true.</p>`
+      + `<p>So grammar cannot tell you what is true or false. But logic cannot begin without grammar — because until the sentence is well formed, there is nothing definite for logic to judge.</p>` },
 
-    { h:`<p><strong>Now the medieval question: what is grammar for?</strong> In the thirteenth century a group of masters at Paris — we call them the <strong>modists</strong>, from the Latin <em>modi</em>, modes or ways — asked a question no ordinary grammar book asks. Not <em>what are the rules?</em> but <em>why are these the rules?</em> Why should every language have something like a noun and something like a verb?</p>`
-      + `<p>Their answer, in one sentence: <strong>because grammar follows the shape of reality.</strong> The parts of speech are not a convention somebody settled on. They exist because things really are various ways, and a word has to signify them as they are.</p>`,
-      q:{ prompt:`The modists asked which question about grammar?`,
-          options:['What are the rules of Latin?','Why are the rules what they are?','How can grammar be taught to children?','Which language is oldest?'], correct:1,
-          explain:`They took the rules as given and asked what accounts for them. The name for the study is <em>speculative grammar</em> — speculative not meaning guesswork, but from <em>speculum</em>, a mirror: grammar as a mirror of how things are.` } },
+    { h:`<p><strong>Universal grammar.</strong> In the thirteenth century a group of masters at Paris — we call them the <strong>modists</strong>, from the Latin <em>modi</em>, modes or ways — went beyond the usual questions about what the rules of grammar are for different languages, and asked what all languages have in common, and why the rules of grammar are what they are and not something different. Why should every language have something like a noun and something like a verb?</p>`
+      + `<p>The answer is this: <strong>because grammar follows the shape of reality.</strong> The parts of speech are not conventions — even if it is a convention whether <em>this</em> word-sound is a noun or a verb. The parts of speech, and the general rules of universal grammar, exist because things really are various ways, and words and sentences have to signify them as they are.</p>` },
 
-    { h:`<p><strong>The three modes.</strong> Their doctrine may be put in three steps. Take a thing — say, a running horse.</p>`
-      + `<p><strong>1. The way it is</strong> — <em>modus essendi</em>, the mode of being. The horse really is a settled, standing thing; the running really is something going on, unfolding in time. That is not our doing. It is how the world is.</p>`
-      + `<p><strong>2. The way the mind takes it</strong> — <em>modus intelligendi</em>, the mode of understanding. Your mind grasps the horse as something standing there, and the running as something happening.</p>`
+    { h:`<p><strong>The three modes.</strong> There are three ways of considering anything that we may wish to speak of. Take a thing — say, a running horse.</p>`
+      + `<p><strong>1. The way it is</strong> — <em>modus essendi</em>, the mode of being. The horse really is a settled, stable thing; and its running really is something going on, unfolding in time. These facts are due not to us but to the world.</p>`
+      + `<p><strong>2. The way the mind takes it</strong> — <em>modus intelligendi</em>, the mode of understanding. The mind grasps the horse as something stable, with an essence, and the running as something happening with respect to the horse.</p>`
       + `<p><strong>3. The way the word signifies it</strong> — <em>modus significandi</em>, the mode of signifying. The word <em>horse</em> signifies it as something at rest; the word <em>runs</em> signifies it as something in flow.</p>`
-      + `<p>Being, then understanding, then signifying. Each takes its shape from the one before.</p>`,
-      q:{ prompt:`Put the three modes in the order the modists give them.`,
-          options:['Signifying → understanding → being','Being → understanding → signifying','Understanding → being → signifying','Being → signifying → understanding'], correct:1,
-          explain:`The thing is some way first; the mind takes it as it is; the word signifies it as the mind has taken it. Reverse the order and you would be saying that words decide how things are.` } },
+      + `<p>Being is first; then understanding is drawn from how things are; then signifying brings this to the mind, for oneself and for others. Each mode is based on the one before.</p>` },
 
-    { h:`<p><strong>Why a noun is a noun.</strong> Why does every language have a noun and a verb? Because everything we meet is either <em>settled</em> or <em>going on</em> — and words must signify accordingly.</p>`
-      + `<p>A <strong>noun</strong> signifies its thing <em>in the manner of something standing still</em> — Thomas of Erfurt says <em>per modum habitus et quietis</em>, in the manner of a state and of rest. A <strong>verb</strong> signifies <em>in the manner of becoming and flowing</em> — <em>per modum fieri et fluxus</em>. That is why the verb carries time and the noun does not. Time belongs to what flows.</p>`
-      + `<p>The same activity may be signified both ways. <em>Running</em> and <em>runs</em> pick out one and the same doing. But <em>running</em> presents it as a settled thing one may talk about — <em>running is good exercise</em> — while <em>runs</em> presents it as something under way. Same reality, two modes of signifying.</p>`,
-      q:{ prompt:`Why does the verb carry time and the noun not?`,
-          options:['Because verbs are longer words','Because a verb signifies its thing as going on, and only what goes on takes time','Because Latin verbs have more endings','Because nouns come first in the sentence'], correct:1,
-          explain:`Time belongs to what unfolds. A word that signifies its thing as standing has no use for tense; a word that signifies it as flowing must say when the flowing is.` } },
+    { h:`<p><strong>On the noun and the verb.</strong> Why does every language have a noun and a verb? Because everything we meet is either stable or going on — and words must signify it accordingly.</p>`
+      + `<p>A <strong>noun</strong> signifies its thing in the manner of something standing still, or stable — Thomas of Erfurt says that the noun signifies <em>per modum habitus et quietis</em>, in the manner of a state and of rest. A <strong>verb</strong> signifies in the manner of becoming and flowing — <em>per modum fieri et fluxus</em>. That is why the verb carries time and the noun does not: time belongs to what becomes and is in motion.</p>`
+      + `<p><strong>Verbal nouns.</strong> The same activity may be signified both ways. <em>Running</em> and <em>runs</em> pick out one and the same doing. But <em>running</em> presents it as a settled thing one may talk about — <em>running is good exercise</em> — while <em>runs</em> presents it as something under way. The same thing is under consideration, but through two modes of signifying.</p>` },
 
-    { h:`<p><strong>What this enables you to see.</strong> Three things that serve the rest of this course of study.</p>`
-      + `<p><strong>First</strong>, the parts of speech are not an arbitrary list to memorise. They answer to real differences in things.</p>`
-      + `<p><strong>Second</strong>, logic can be done across languages. If grammar answered only to custom, a Greek argument could not be translated into English without loss. It can be, because underneath the different words the modes of signifying are the same.</p>`
-      + `<p><strong>Third</strong>, a caution the schools themselves gave. Grammar mirrors reality, but the mirror is not perfect, and you must never argue straight from a word’s shape to the way things are. That mistake has a name among the fallacies: <em>figure of speech</em>, where two words of the same shape are taken to work the same way. The modists gave grammar its dignity; the study of fallacy keeps it honest.</p>`,
-      q:{ prompt:`What mistake does the fallacy of figure of speech make?`,
-          options:['It uses a word nobody knows','It argues from the shape of a word to the nature of the thing','It leaves out a premise','It asks two questions at once'], correct:1,
-          explain:`Grammar follows reality, but loosely, and the fit is not exact. Two expressions can be built the same way and name utterly different sorts of thing. Reading the world straight off the grammar is precisely the trap.` } },
+    { h:`<p><strong>Grammar, words, and logic.</strong> There are three things from this that serve the rest of our course of study.</p>`
+      + `<p><strong>First</strong>, the parts of speech are not an arbitrary list to memorise. They answer to real differences in things, or in how we understand, or in how we signify.</p>`
+      + `<p><strong>Second</strong>, logic is more general than any given language. If grammar were determined purely by custom, a Greek argument could not be translated into English without loss. But it can be, because underneath the different words the modes of signifying are the same.</p>`
+      + `<p><strong>Third</strong>, grammar mirrors reality, but the mirror is imperfect, and you must never argue directly from a word as a word to the way things are. That error is the fallacy of <em>figure of speech</em>, where two words that have the same form and grammar as words are taken to draw their meaning from things in the same way.</p>` },
 
-    { h:`<p><strong>The three roads.</strong> You now have the first of them. <strong>Grammar</strong> makes the sentence well formed. <strong>Logic</strong> asks whether it is true and what follows from it. <strong>Rhetoric</strong> asks how to bring another person to see it.</p>`
-      + `<p>They build on each other in that order, and each is useless without the one before. There is no arguing without sentences, and no persuading without arguments.</p>`
-      + `<p>Two things return throughout this course. The <strong>subject and predicate</strong> are the two terms of every proposition. And the joining of a naming word with a verb — the moment where truth first becomes possible — is the second act of the mind, which occupies the middle of these exercises. Proceed to the orientation, or begin the exercises.</p>` }
+    { h:`<p><strong>The three ways (trivium).</strong> We have now seen the first. <strong>Grammar</strong> makes the sentence well formed. <strong>Logic</strong> asks whether the proposition expressed by the sentence is true, and what follows from it. <strong>Rhetoric</strong> asks how to bring another person to see the truth. (As an aside, <em>interpretation</em> or <em>hermeneutics</em> is the art of coming to understand someone else’s words — their truth, their form, and how they relate to the speaker’s goals.)</p>`
+      + `<p>These three ways build on each other in that order. There is no arguing without sentences, and no persuading without arguments.</p>`
+      + `<p>Two things are worth noting here that come back throughout this course. The <strong>subject and predicate</strong> are the two terms of every proposition. And the joining together of a word that names with a verb — which is where truth first becomes possible — is the <strong>second act of the mind</strong>, which occupies the middle of these exercises. The final part of the exercises focuses on reasoning from one proposition to another, which is not primarily determined by grammar.</p>` }
   ];
 
   const ORIENT = [
@@ -5466,136 +5426,380 @@ if(typeof document!=='undefined'){
           explain:`Traditional logic presumes every term non-empty — there <em>are</em> dogs — which is why a universal carries existential import, and “All S are P” yields “Some S are P.” Modern set theory allows empty classes and drops that inference.` } },
     { h:`<p><strong>Only an instrument.</strong> Useful as they are, these diagrams prove nothing by themselves; they only display what a proposition already says, so that the eye may help the mind keep track of what is included, what is excluded, and whether a thing exists. The diagram is a servant, never a master. And the greatest instrument of the mind is not the circle but the <em>word</em>: language is the first and highest tool of reason, and it is language one wields in every exercise. Begin when you are ready.</p>` }
   ];
-  /* Two further fixed questions for every grammar panel that has one, and a
-     note on why each wrong option fails. Held apart from the deck so the
-     teaching text stays readable; merged in below. */
+  /* Five questions for every grammar panel. One of the five is drawn at random
+     when the panel is entered; answer it rightly and you go on. Answer wrongly
+     and you are told the answer, and why each of the others fails, and then
+     another of the five is drawn — and so on until the five are exhausted, at
+     which point the panel starts again with a fresh shuffle. Held apart from
+     the deck so the teaching text stays readable; merged in below. */
   const GRAMMAR_EXTRA = {
-    1:{ w:`<em>Old</em> tells you what the dog is like; <em>sleeps</em> says what it does; <em>quietly</em> tells how the sleeping goes. None of them puts a thing before you.`,
-      a:{ prompt:`In the same sentence, which word tells you how the sleeping goes?`,
-          options:['fire','quietly','old','dog'], correct:1,
-          explain:`<em>Quietly</em> answers “how?” about the sleeping. That is a different kind of work from naming.`,
-          wrong:`<em>Fire</em> and <em>dog</em> name things; <em>old</em> tells what the dog is like, not how it sleeps.`},
-      b:{ prompt:`Can the same word do different work in different sentences?`,
-          options:['No — each word has one fixed job for ever','Yes — “water the plants” and “drink the water” use one word two ways','Only in Latin','Only if it is a long word'], correct:1,
-          explain:`This is why the parts of speech are a list of functions and not a list of words. <em>Water</em> names a thing in one sentence and says what is done in the other.`,
-          wrong:`Words are not fixed to one function; the point holds in English as much as in Latin; and length has nothing to do with it.`} },
-    2:{ w:`<em>Quickly</em> tells how; <em>sleeps</em> says what is going on; <em>under</em> ties one thing to another. Only a noun puts a thing before you to be talked about.`,
-      a:{ prompt:`Which of these is a proper noun?`,
-          options:['city','river','Rome','soldier'], correct:2,
-          explain:`<em>Rome</em> names one particular city and takes a capital letter. The others name kinds, and can be said of many.`,
-          wrong:`<em>City</em>, <em>river</em> and <em>soldier</em> are common nouns: each names a kind, and there are many of each.`},
-      b:{ prompt:`Why does logic care about the difference between common and proper nouns?`,
-          options:['Because proper nouns are longer','Because a common noun can be said of many things and a proper noun of only one','Because proper nouns come first in a sentence','Because only proper nouns can be subjects'], correct:1,
-          explain:`A term said of many is universal; a term said of one is singular. Nearly every rule of the syllogism turns on that difference.`,
-          wrong:`Length and position are accidents of no logical weight, and either sort of noun may be the subject of a sentence.`} },
-    3:{ w:`Naming, taking <em>the</em> in front, and describing are all things a noun or an adjective can do. Only the verb has time built into it.`,
-      a:{ prompt:`Which word is the verb in “The soldier carried the standard”?`,
-          options:['soldier','carried','standard','the'], correct:1,
-          explain:`<em>Carried</em> says what was going on, and its shape tells you it was going on in the past.`,
-          wrong:`<em>Soldier</em> and <em>standard</em> name things; <em>the</em> only points at one of them.`},
-      b:{ prompt:`“He builds,” “he built,” “he will build.” What has changed?`,
-          options:['The thing named','The time at which it is placed','The number of builders','Nothing at all'], correct:1,
-          explain:`The doing is the same doing; only its place in time has moved. Carrying time is the verb’s own work.`,
-          wrong:`The building is the same in all three, one builder throughout, and something plainly has changed.`} },
-    4:{ w:`<em>The old dog</em> names something but says nothing about it; <em>sleeps quietly</em> and <em>by the fire</em> are pieces waiting for something to attach to. You can neither agree nor disagree with any of them.`,
-      a:{ prompt:`What has to be joined before truth or falsity can appear?`,
-          options:['Two nouns','A naming word and a verb','Two adjectives','A preposition and a noun'], correct:1,
-          explain:`Something must be said <em>of</em> something. A naming word gives you what is spoken about; the verb says what is said of it.`,
-          wrong:`Two nouns side by side assert nothing, nor do two adjectives; and a preposition with a noun gives only a phrase, not a claim.`},
-      b:{ prompt:`Which act of the mind does this correspond to?`,
-          options:['The first — grasping what a thing is','The second — judgment, joining two concepts into a statement','The third — reasoning from one statement to another','None: this belongs only to grammar'], correct:1,
-          explain:`Judgment is the joining or separating of two concepts so as to affirm or deny. Grammar calls it subject and predicate; logic calls it a proposition. The same act, named twice.`,
-          wrong:`The first act grasps a single thing and asserts nothing; the third moves between statements already made; and this is exactly where grammar and logic meet, not a matter for grammar alone.`} },
-    5:{ w:`<em>Carried the standard</em> and <em>carried</em> are what is said about the soldier, not what is spoken about; <em>the standard</em> sits inside the predicate.`,
-      a:{ prompt:`In “The tall soldier carried the standard,” what is the predicate?`,
-          options:['the tall soldier','carried the standard','tall','the standard'], correct:1,
-          explain:`Everything said about the subject is the predicate — here the whole of <em>carried the standard</em>.`,
-          wrong:`<em>The tall soldier</em> is what is spoken about; <em>tall</em> is only part of that; <em>the standard</em> is only part of the predicate.`},
-      b:{ prompt:`Where else will you meet the words subject and predicate?`,
-          options:['Only in grammar lessons','In every proposition in logic — they are its two terms','Only in Latin','Only in rhetoric'], correct:1,
-          explain:`Logic borrows them from grammar and never gives them back. <em>All S are P</em>: S is the subject term, P the predicate term.`,
-          wrong:`They are not confined to grammar, nor to Latin, and rhetoric uses them only because logic does first.`} },
-    6:{ w:`<em>Brave</em> is an adjective leaning on a noun; <em>fiercely</em> is an adverb, but it leans on the verb; <em>soldier</em> is a noun and leans on nothing.`,
-      a:{ prompt:`What does an adjective lean on?`,
-          options:['A verb','A noun','An adverb','A preposition'], correct:1,
-          explain:`An adjective tells what sort a thing is, so it must have a naming word to attach to. <em>Old</em> on its own names nothing.`,
-          wrong:`Adverbs lean on verbs and on adjectives; and a preposition is itself a joiner, not something to be described.`},
-      b:{ prompt:`Why can an adjective not stand on its own as a subject?`,
-          options:['Because it is too short','Because it signifies a quality as belonging to something else, so it waits for that something','Because it has no ending','Because it always comes after the noun'], correct:1,
-          explain:`This is the schools’ own account: the adjective signifies its quality <em>as in another</em>. Hence it is left hanging until a noun is supplied.`,
-          wrong:`Length and endings are beside the point, and in English the adjective usually comes before the noun, not after.`} },
-    7:{ w:`<em>Quietly</em> tells how; <em>soldier</em> names; <em>the</em> points. None of them joins one whole statement to another.`,
-      a:{ prompt:`What does a pronoun do?`,
-          options:['Joins two statements','Stands in for a noun already named','Tells how something is done','Points at a particular one'], correct:1,
-          explain:`<em>He</em>, <em>she</em>, <em>it</em>, <em>they</em> save you repeating the noun. Once <em>the soldier</em> has been named, <em>he</em> will serve.`,
-          wrong:`Joining is the conjunction’s work, telling how is the adverb’s, and pointing is the article’s.`},
-      b:{ prompt:`Which three conjunctions does logic build whole exercises on?`,
-          options:['the, a, an','and, or, if','very, quite, rather','he, she, it'], correct:1,
-          explain:`<em>And</em> gives the conjunctive syllogism, <em>or</em> the disjunctive, <em>if</em> the conditional. Three exercises in this course rest on those three words.`,
-          wrong:`The first are articles, the second adverbs of degree, the third pronouns — none of them joins statements.`} },
-    8:{ w:`The time is the same in both, so tense has not moved; English marks no gender here; and case belongs to nouns, not to this change.`,
-      a:{ prompt:`“I walk,” “you walk,” “he walks” differ in which accident?`,
-          options:['Tense','Person','Number','Gender'], correct:1,
-          explain:`Person: who is doing the walking — the one speaking, the one spoken to, or the one spoken about.`,
-          wrong:`All three are in the present, so tense is unchanged; all are singular, so number is unchanged; and none marks gender.`},
-      b:{ prompt:`Why does the tradition call these features “accidents” of a word?`,
-          options:['Because they are mistakes','Because a word can take them on or lose them and still be the same word','Because they happen only in Latin','Because they are unimportant'], correct:1,
-          explain:`It is the same sense of the word among the predicables: an accident may come or go while the thing remains what it is. <em>Dog</em> and <em>dogs</em> are one word in two dresses.`,
-          wrong:`They are not errors, they are not confined to Latin, and they matter a great deal — they are simply not what makes the word the word it is.`} },
-    9:{ w:`Latin has no fewer words than English and certainly has verbs; and its sentences are often longer, not shorter.`,
-      a:{ prompt:`Which pair shows English keeping a scrap of case?`,
-          options:['dog / dogs','he / him','walk / walked','old / older'], correct:1,
-          explain:`<em>He</em> is the subject form and <em>him</em> the object form. You say <em>he saw him</em> and never the reverse — the shape marks the function.`,
-          wrong:`<em>Dog/dogs</em> is number; <em>walk/walked</em> is tense; <em>old/older</em> is degree. None of them marks the word’s function in the sentence.`},
-      b:{ prompt:`In English, what usually does the work that case endings do in Latin?`,
-          options:['The order of the words','The length of the words','The tone of voice','The spelling'], correct:0,
-          explain:`<em>The dog bit the man</em> and <em>the man bit the dog</em> have the very same words. Only their order tells you which is which.`,
-          wrong:`Length and spelling are unchanged between the two sentences, and the difference survives perfectly well in writing, where there is no tone.`} },
-    10:{ w:`The grammar of the famous example is faultless — noun, adjectives, verb, adverb, each in its right place. It is not an argument at all, and it has a verb.`,
-      a:{ prompt:`“The moon is made of green cheese.” What can grammar tell you about it?`,
-          options:['That it is false','That it is well formed, and nothing more','That it is a valid argument','That it is meaningless'], correct:1,
-          explain:`Grammar guarantees the form and stops there. Whether the moon is in fact made of cheese is not a grammatical question.`,
-          wrong:`Grammar cannot reach truth or falsity, a single statement is not an argument, and the sentence means something perfectly clear — something untrue.`},
-      b:{ prompt:`“Him go store yesterday.” Which is right?`,
-          options:['Bad grammar, and therefore false','Bad grammar, and it might still be true','Good grammar, and false','It cannot be judged at all'], correct:1,
-          explain:`The man may very well have gone to the store. Broken grammar makes a sentence hard to work with; it does not make it untrue.`,
-          wrong:`Bad grammar never entails falsity, the grammar here is plainly broken, and the sense is clear enough to judge.`} },
-    11:{ w:`They did not set out to teach children, to catalogue Latin afresh, or to settle which language came first. They took the rules as given and asked what accounts for them.`,
-      a:{ prompt:`Why is their study called <em>speculative</em> grammar?`,
-          options:['Because it is guesswork','From <em>speculum</em>, a mirror — grammar as a mirror of how things are','Because it speculates about lost languages','Because it was never finished'], correct:1,
-          explain:`Nothing to do with guessing. The claim is that grammar reflects reality, as a mirror reflects what stands before it.`,
-          wrong:`The modern sense of “speculative” as guesswork is a later drift; they were not concerned with lost languages, and the work was carried a long way.`},
-      b:{ prompt:`What did the modists say the parts of speech answer to?`,
-          options:['The customs of each nation','Real differences in the things spoken about','The convenience of teachers','The number of letters available'], correct:1,
-          explain:`If they answered only to custom, every language might have had wholly different parts of speech. That they do not is the fact the modists set out to explain.`,
-          wrong:`Custom and convenience would make grammar arbitrary, which is the view they were arguing against; the alphabet has nothing to do with it.`} },
-    12:{ w:`Put signifying first and you would be saying that words decide how things are. The mind cannot come before the thing it grasps, nor the word before the thought.`,
-      a:{ prompt:`Which mode belongs to the thing itself, before any mind or word touches it?`,
-          options:['The mode of being (<em>modus essendi</em>)','The mode of understanding (<em>modus intelligendi</em>)','The mode of signifying (<em>modus significandi</em>)','None: all three belong to the word'], correct:0,
-          explain:`The horse really is a settled thing and the running really is going on, whether or not anybody notices or names it.`,
-          wrong:`Understanding belongs to the mind and signifying to the word; and if all three belonged to the word, grammar would answer to nothing outside itself.`},
-      b:{ prompt:`Which mode does the word itself have?`,
-          options:['The mode of being','The mode of understanding','The mode of signifying','All three equally'], correct:2,
-          explain:`The word’s own manner of presenting the thing — as standing, or as going on — is its mode of signifying, and it takes its shape from the two modes before it.`,
-          wrong:`Being belongs to the thing and understanding to the mind. The three are ordered, not held all at once by the word.`} },
-    13:{ w:`Verbs are not longer than nouns, endings are a feature of the language rather than the reason, and word order settles nothing about time.`,
-      a:{ prompt:`How does a noun signify its thing, on the modist account?`,
-          options:['In the manner of something standing still','In the manner of something flowing','In the manner of a question','It does not signify at all'], correct:0,
-          explain:`<em>Per modum habitus et quietis</em> — in the manner of a state and of rest. That is why it needs no tense.`,
-          wrong:`Flowing is the verb’s manner; nouns ask nothing; and a noun signifies as plainly as any word does.`},
-      b:{ prompt:`<em>Running</em> and <em>runs</em> pick out the same activity. What differs?`,
-          options:['The activity itself','The way it is signified — one as settled, the other as going on','The number of runners','Nothing at all'], correct:1,
-          explain:`Same reality, two modes of signifying. <em>Running is good exercise</em> presents it as a thing to talk about; <em>he runs</em> presents it under way.`,
-          wrong:`The running is one and the same, the runners are not in question, and something has plainly changed between the two forms.`} },
-    14:{ w:`It is not a matter of vocabulary, of missing premises, or of hidden questions — those are other faults with other names.`,
-      a:{ prompt:`Why can you not argue straight from a word’s shape to the nature of the thing?`,
-          options:['Because words change over time','Because grammar mirrors reality only loosely, and the fit is not exact','Because grammar has no rules','Because the thing has no nature'], correct:1,
-          explain:`The mirror is a real mirror, but not a perfect one. Two expressions built alike can name utterly different sorts of thing.`,
-          wrong:`Change over time is beside the point, grammar plainly has rules, and denying that things have natures would undo the modist claim altogether.`},
-      b:{ prompt:`What did the modists give grammar, and what does the study of fallacy add?`,
-          options:['Dignity; and a check on reading too much off the words','Rules; and more rules','Latin; and Greek','Nothing; and everything'], correct:0,
-          explain:`The modists showed that grammar answers to how things are. The fallacies remind you that it answers loosely, and that the shape of a word is not proof of anything.`,
-          wrong:`Neither supplies bare rules or particular languages, and each contributes something real.`} }
+    0:{ qs:[
+      { prompt:`Which three arts make up the <em>trivium</em>?`,
+        options:['Arithmetic, geometry, music','Grammar, logic, rhetoric','Grammar, poetry, law','Logic, physics, ethics'], correct:1,
+        explain:`Grammar puts words together rightly, logic reasons rightly, and rhetoric persuades well. The other three of the seven liberal arts — arithmetic, geometry, music, astronomy — make up the <em>quadrivium</em>.`,
+        wrong:`Arithmetic, geometry and music belong to the quadrivium; poetry, law, physics and ethics are not arts of the trivium at all.`},
+      { prompt:`Why must grammar come before logic?`,
+        options:['Because it is easier','Because logic works on statements, and a statement is made of words','Because it was invented first','Because logic has no rules of its own'], correct:1,
+        explain:`If you do not know what a word is doing in a sentence, you cannot say what a proposition asserts — and the proposition is the centre of the whole course of study.`,
+        wrong:`The order is not one of difficulty or of history, and logic has rules in abundance; the order follows from what logic works upon.`},
+      { prompt:`What does the Latin word <em>trivium</em> mean?`,
+        options:['The three roads','The three books','The three masters','The three sciences'], correct:0,
+        explain:`<em>Tri-</em> three, <em>via</em> road: the three roads, taken together as one course of study.`,
+        wrong:`It names neither books nor masters nor sciences, but ways — roads by which the mind travels.`},
+      { prompt:`Which art of the trivium is the art of persuading well?`,
+        options:['Grammar','Logic','Rhetoric','None of them'], correct:2,
+        explain:`Rhetoric is the art of bringing another person to see what is so. It comes third because there is no persuading without arguments.`,
+        wrong:`Grammar forms the sentence and logic tests the argument; neither of them is aimed at moving another person.`},
+      { prompt:`What stands at the centre of this whole course of study?`,
+        options:['The single word','The proposition','The letter','The paragraph'], correct:1,
+        explain:`Everything in these exercises is ordered to the proposition — what it asserts, whether it is true, and what follows from it.`,
+        wrong:`Words, letters and paragraphs are the concern of grammar and of style; logic fastens on what is asserted.`}
+    ]},
+
+    1:{ qs:[
+      { prompt:`In “The old dog sleeps quietly by the fire,” which word names the thing the sentence is about?`,
+        options:['old','dog','sleeps','quietly'], correct:1,
+        explain:`<em>Dog</em> names it. The others tell you what it is like, what it does, and how — but only <em>dog</em> puts the thing itself before you.`,
+        wrong:`<em>Old</em> tells you what the dog is like; <em>sleeps</em> says what it does; <em>quietly</em> tells how the sleeping goes. None of them puts a thing before you.`},
+      { prompt:`In the same sentence, which word tells you how the sleeping goes?`,
+        options:['fire','quietly','old','dog'], correct:1,
+        explain:`<em>Quietly</em> answers “how?” about the sleeping. That is a different kind of work from naming.`,
+        wrong:`<em>Fire</em> and <em>dog</em> name things; <em>old</em> tells what the dog is like, not how it sleeps.`},
+      { prompt:`Can the same word do different work in different sentences?`,
+        options:['No — each word has one fixed function for ever','Yes — “paint the wall” and “buy the paint” use one word two ways','Only in Latin','Only if it is a long word'], correct:1,
+        explain:`This is why the parts of speech are a list of functions and not a list of words. <em>Paint</em> is the action in one sentence and the thing in the other.`,
+        wrong:`Words are not fixed to one function; the point holds in English as much as in Latin; and length has nothing to do with it.`},
+      { prompt:`The parts of speech are best described as a list of what?`,
+        options:['Words','Functions — the kinds of work a word may do in a sentence','Latin endings','Sentences'], correct:1,
+        explain:`The same word can perform different functions in different sentences, so the list cannot be a list of words. It divides up the work, not the vocabulary.`,
+        wrong:`A list of words would break down at once, since one word may serve twice; endings and sentences are other matters altogether.`},
+      { prompt:`In “The old dog sleeps quietly by the fire,” what work does <em>by</em> do?`,
+        options:['It names the fire','It ties the sleeping to the fire','It tells what the dog is like','It points at a particular dog'], correct:1,
+        explain:`<em>By</em> subordinates <em>the fire</em> to the sleeping, placing the one with respect to the other. That is the work of a preposition.`,
+        wrong:`<em>Fire</em> does the naming, <em>old</em> tells what the dog is like, and <em>the</em> does the pointing.`}
+    ]},
+
+    2:{ qs:[
+      { prompt:`Which of these is a noun?`,
+        options:['quickly','courage','sleeps','under'], correct:1,
+        explain:`<em>Courage</em> names something, even though you cannot see or touch it. You can say <em>the courage of the men</em>.`,
+        wrong:`<em>Quickly</em> tells how; <em>sleeps</em> says what is going on; <em>under</em> subordinates one thing to another. Only a noun puts a thing before you to be talked about.`},
+      { prompt:`Which of these is a proper noun?`,
+        options:['city','river','Rome','soldier'], correct:2,
+        explain:`<em>Rome</em> names one particular city and takes a capital letter. The others name kinds, and can be said of many.`,
+        wrong:`<em>City</em>, <em>river</em> and <em>soldier</em> are common nouns: each names a kind, and there are many of each.`},
+      { prompt:`Why does logic care about the difference between common and proper nouns?`,
+        options:['Because proper nouns are longer','Because a common noun can be said of many things and a proper noun of only one','Because proper nouns come first in a sentence','Because only proper nouns can be subjects'], correct:1,
+        explain:`A term said of many is universal; a term said of one is singular. Nearly every rule of the syllogism turns on that difference.`,
+        wrong:`Length and position are accidents of no logical weight, and either sort of noun may be the subject of a sentence.`},
+      { prompt:`What simple test does this panel give for a noun?`,
+        options:['Whether it can take a past tense','Whether <em>the</em> or <em>a</em> can go in front of it and still sound like English','Whether it has more than one syllable','Whether it comes before the verb'], correct:1,
+        explain:`<em>The dog. A hope. The weather.</em> The article will sit in front of a noun and nowhere else.`,
+        wrong:`A past tense belongs to the verb; syllables are irrelevant; and a noun may stand on either side of the verb.`},
+      { prompt:`The Latin <em>nomen</em>, from which “noun” comes, means what?`,
+        options:['A name','A doing','A place','A joining'], correct:0,
+        explain:`A noun is a naming word — of a person, a place, a thing, or something you cannot sense, such as an idea or a property.`,
+        wrong:`Doing belongs to the verb, and joining to the conjunction; a place is only one of the many things a noun may name.`}
+    ]},
+
+    3:{ qs:[
+      { prompt:`What can a verb do that a noun cannot?`,
+        options:['Name something','Carry time — past, present, future','Take the word “the” in front of it','Describe another word'], correct:1,
+        explain:`Only the verb carries time in itself. <em>Runs, ran, will run</em> — the same doing, placed at three different times.`,
+        wrong:`Naming, taking <em>the</em> in front, and describing are all things a noun or an adjective can do. Only the verb has time built into it.`},
+      { prompt:`Which word is the verb in “The soldier carried the standard”?`,
+        options:['soldier','carried','standard','the'], correct:1,
+        explain:`<em>Carried</em> says what was going on, and its shape tells you it was going on in the past.`,
+        wrong:`<em>Soldier</em> and <em>standard</em> name things; <em>the</em> only points at one of them.`},
+      { prompt:`“He builds,” “he built,” “he will build.” What has changed?`,
+        options:['The thing named','The time at which it is placed','The number of builders','Nothing at all'], correct:1,
+        explain:`The doing is the same doing; only its place in time has moved. Carrying time is the verb’s own work.`,
+        wrong:`The building is the same in all three, one builder throughout, and something plainly has changed.`},
+      { prompt:`How does this panel describe the difference between what a noun and a verb signify?`,
+        options:['A noun refers to a stable thing; a verb is a doing, a becoming, or a being in a certain way','A noun is short and a verb is long','A noun comes first and a verb second','There is no real difference'], correct:0,
+        explain:`The noun holds its thing still as an entity under consideration; the verb has it happening. This is the seed of the medieval account given at the end of this introduction.`,
+        wrong:`Length and position are accidents of the sentence, not of what the words signify — and the difference is the deepest one in the art.`},
+      { prompt:`The Latin <em>verbum</em>, from which “verb” comes, means what?`,
+        options:['A motion','A word — as though the verb were the primary word','A time','A person'], correct:1,
+        explain:`The name was given as though the word for action were the word above all others. It is at least the only part of speech that carries time in itself.`,
+        wrong:`Motion, time and person are all bound up with the verb, but none of them is what the Latin word means.`}
+    ]},
+
+    4:{ qs:[
+      { prompt:`Which of these can be true or false?`,
+        options:['the old dog','sleeps quietly','the dog sleeps','by the fire'], correct:2,
+        explain:`Only <em>the dog sleeps</em>. The others are pieces — you can neither agree nor disagree with them. Truth first appears when something is said <em>of</em> something.`,
+        wrong:`<em>The old dog</em> names something but says nothing about it; <em>sleeps quietly</em> and <em>by the fire</em> are pieces waiting for something to attach to.`},
+      { prompt:`What has to be joined before truth or falsity can appear?`,
+        options:['Two nouns','A naming word and a verb','Two adjectives','A preposition and a noun'], correct:1,
+        explain:`Something must be said <em>of</em> something. A naming word gives you what is spoken about; the verb says what is said of it.`,
+        wrong:`Two nouns side by side assert nothing, nor do two adjectives; and a preposition with a noun gives only a phrase, not a claim.`},
+      { prompt:`Which act of the mind does this joining correspond to?`,
+        options:['The first — grasping what a thing is','The second — judgment, joining two concepts into a statement','The third — reasoning from one statement to another','None: this belongs only to grammar'], correct:1,
+        explain:`Judgment is the joining or separating of two concepts so as to affirm or deny. Grammar calls it subject and predicate; logic calls it a proposition. The same act, named twice.`,
+        wrong:`The first act grasps a single thing and asserts nothing; the third moves between statements already made; and this is exactly where grammar and logic meet, not a matter for grammar alone.`},
+      { prompt:`What does grammar consider about the joining of a noun and a verb, as against what logic considers?`,
+        options:['Whether the words are correctly and meaningfully combined','Whether the statement is true','What follows from the statement','Whether the statement will persuade'], correct:0,
+        explain:`Grammar takes the judgment in so far as the words have been rightly put together. Logic takes it in so far as it signifies the truth or falsity of the relation between the two terms.`,
+        wrong:`Truth and consequence are logic’s business; persuasion is rhetoric’s. Grammar goes only as far as the well-made sentence.`},
+      { prompt:`Why does <em>sleeps</em>, standing alone, say nothing?`,
+        options:['Because it is too short','Because you are left wondering who or what is sleeping','Because it has no tense','Because it is not a real word'], correct:1,
+        explain:`A verb alone leaves the thing unnamed, just as a noun alone leaves you waiting for what is done. Neither is a complete thought, and neither can be true or false.`,
+        wrong:`It is a perfectly good word with a perfectly good tense; what it lacks is something to be said of.`}
+    ]},
+
+    5:{ qs:[
+      { prompt:`In “The tall soldier carried the standard,” what is the subject?`,
+        options:['carried the standard','the tall soldier','the standard','carried'], correct:1,
+        explain:`<em>The tall soldier</em> is what the sentence is about. <em>Carried the standard</em> is what is said about him — the predicate.`,
+        wrong:`<em>Carried the standard</em> and <em>carried</em> are what is said about the soldier, not what is spoken about; <em>the standard</em> sits inside the predicate.`},
+      { prompt:`In “The tall soldier carried the standard,” what is the predicate?`,
+        options:['the tall soldier','carried the standard','tall','the standard'], correct:1,
+        explain:`Everything said about the subject is the predicate — here the whole of <em>carried the standard</em>.`,
+        wrong:`<em>The tall soldier</em> is what is spoken about; <em>tall</em> is only part of that; <em>the standard</em> is only part of the predicate.`},
+      { prompt:`Where else will you meet the words subject and predicate?`,
+        options:['Only in grammar lessons','In every proposition in logic — they are its two terms','Only in Latin','Only in rhetoric'], correct:1,
+        explain:`Logic borrows them from grammar and never gives them back. <em>All S are P</em>: S is the subject term, P the predicate term.`,
+        wrong:`They are not confined to grammar, nor to Latin, and rhetoric uses them only because logic does first.`},
+      { prompt:`The Latin <em>subiectum</em> means what?`,
+        options:['What is laid underneath','What is said of another','What is thrown toward','What is joined'], correct:0,
+        explain:`The subject is what is laid under the statement — the thing talked about, on which everything else in the sentence rests.`,
+        wrong:`What is said of another is the <em>praedicatum</em>; what is thrown toward is the <em>adiectivum</em>; joining belongs to the conjunction.`},
+      { prompt:`The Latin <em>praedicatum</em> means what?`,
+        options:['What is laid underneath','What is said of it','What points at a thing','What stands in for a noun'], correct:1,
+        explain:`The predicate is what is asserted of the subject — everything to the right of the bar in <em>the old dog | sleeps quietly by the fire.</em>`,
+        wrong:`What is laid underneath is the subject; pointing is the article’s work; standing in for a noun is the pronoun’s.`}
+    ]},
+
+    6:{ qs:[
+      { prompt:`In “The very brave soldier fought fiercely,” which word is an adverb depending on an adjective?`,
+        options:['brave','very','fiercely','soldier'], correct:1,
+        explain:`<em>Very</em> modifies <em>brave</em>, which is itself an adjective modifying <em>soldier</em>. <em>Fiercely</em> is also an adverb, but it depends on the verb <em>fought</em>.`,
+        wrong:`<em>Brave</em> is an adjective depending on a noun; <em>fiercely</em> is an adverb, but it depends on the verb; <em>soldier</em> is a noun and depends on nothing.`},
+      { prompt:`What does an adjective depend on?`,
+        options:['A verb','A noun','An adverb','A preposition'], correct:1,
+        explain:`An adjective tells what sort of thing the noun refers to, so it must have a naming word to attach to. <em>Old</em> on its own names nothing.`,
+        wrong:`Adverbs depend on verbs and on adjectives; and a preposition is itself a subordinating word, not something to be qualified.`},
+      { prompt:`Why can an adjective not stand on its own as a subject?`,
+        options:['Because it is too short','Because it signifies a quality as belonging to something else, so it waits for that something','Because it has no ending','Because it always comes after the noun'], correct:1,
+        explain:`This is the medieval schools’ own account: the adjective signifies its quality <em>as in another</em>. Hence it is left hanging until a noun is supplied.`,
+        wrong:`Length and endings are beside the point, and in English the adjective usually comes before the noun, not after.`},
+      { prompt:`When we say that an adjective or adverb <em>modifies</em> a word, what do we mean?`,
+        options:['That it replaces the word','That it narrows or qualifies the word it is used on','That it moves the word in the sentence','That it changes the word’s ending'], correct:1,
+        explain:`To modify is to cut down the range: <em>the old dog</em> picks out fewer things than <em>the dog</em>, and <em>sleeps quietly</em> fewer sorts of sleeping than <em>sleeps</em>.`,
+        wrong:`Modifying neither replaces nor moves the word, and the change of ending is a matter of the accidents, not of modification.`},
+      { prompt:`In “The messenger came yesterday,” what is <em>yesterday</em> doing?`,
+        options:['Naming a day as the subject','Serving as an adverb, telling when the coming took place','Qualifying the noun <em>messenger</em>','Joining two statements'], correct:1,
+        explain:`An adverb may say how, when, or where the verb takes place. Here it says when.`,
+        wrong:`The subject is <em>the messenger</em>; nothing here qualifies him; and no two statements are being joined.`}
+    ]},
+
+    7:{ qs:[
+      { prompt:`Which of these words does logic borrow to join whole statements together?`,
+        options:['quietly','if','soldier','the'], correct:1,
+        explain:`<em>If</em> joins two whole statements: <em>if it has rained, the ground is wet</em>. So do <em>and</em> and <em>or</em>. The conditional, the conjunctive, and the disjunctive syllogism are all built on them.`,
+        wrong:`<em>Quietly</em> tells how; <em>soldier</em> names; <em>the</em> points. None of them joins one whole statement to another.`},
+      { prompt:`What does a pronoun do?`,
+        options:['Joins two statements','Stands in for a noun that has already been named','Tells how something is done','Points at a particular one'], correct:1,
+        explain:`<em>He</em>, <em>she</em>, <em>it</em>, <em>they</em> save you repeating the noun. Once <em>the soldier</em> has been named, <em>he</em> will serve.`,
+        wrong:`Joining is the conjunction’s work, telling how is the adverb’s, and pointing is the article’s.`},
+      { prompt:`Which three conjunctions are the primary ones used in logic?`,
+        options:['the, a, an','and, or, if','very, quite, rather','he, she, it'], correct:1,
+        explain:`<em>And</em> gives the conjunctive syllogism, <em>or</em> the disjunctive, <em>if</em> the conditional. The conjunction helps to determine the truth or falsity of the compound proposition it forms.`,
+        wrong:`The first are articles, the second adverbs of degree, the third pronouns — none of them joins statements.`},
+      { prompt:`What does a preposition do?`,
+        options:['It stands before a noun and subordinates that noun to something else in the sentence','It replaces a noun already named','It joins two equal statements','It tells you which one is meant'], correct:0,
+        explain:`<em>The cat ran under the table</em>: <em>under</em> places <em>the table</em> with respect to the running.`,
+        wrong:`Replacing is the pronoun’s work, joining equals is the conjunction’s, and telling which one is meant is the article’s.`},
+      { prompt:`What is the difference between the articles <em>the</em> and <em>a</em>?`,
+        options:['<em>The</em> points at a particular one; <em>a</em> at any one','<em>The</em> is used with verbs and <em>a</em> with nouns','<em>The</em> is plural and <em>a</em> singular','There is no difference'], correct:0,
+        explain:`An article points to one thing among many. <em>The dog</em> singles out this one; <em>a dog</em> leaves it open which.`,
+        wrong:`Neither article goes with a verb, both go with singular nouns here, and the difference is real and constant.`}
+    ]},
+
+    8:{ qs:[
+      { prompt:`“He walks” and “they walk” differ in which accident?`,
+        options:['Tense','Number','Gender','Case'], correct:1,
+        explain:`Number: one walker or several. The time is the same in both, so tense has not changed.`,
+        wrong:`The time is the same in both, so tense has not moved; English marks no gender here; and case belongs to nouns and pronouns, not to this change.`},
+      { prompt:`“I walk,” “you walk,” “he walks” differ in which accident?`,
+        options:['Tense','Person','Number','Gender'], correct:1,
+        explain:`Person: who is doing the walking — the one speaking, the one spoken to, or the one spoken about.`,
+        wrong:`All three are in the present, so tense is unchanged; all are singular, so number is unchanged; and none marks gender.`},
+      { prompt:`Why does the tradition call these features the “accidents” of a word?`,
+        options:['Because they are mistakes','Because a word can take them on or lose them and still be the same word','Because they happen only in Latin','Because they are unimportant'], correct:1,
+        explain:`It is the same sense of the word as among the predicables: an accident may come or go while the thing remains what it is. <em>Dog</em> and <em>dogs</em> are one word in two dresses.`,
+        wrong:`They are not errors, they are not confined to Latin, and they matter a great deal — they are simply not what makes the word the word it is.`},
+      { prompt:`Which accident belongs to verbs alone?`,
+        options:['Number','Person','Tense','Gender'], correct:2,
+        explain:`Only the verb places what it signifies in time — <em>walk</em>, <em>walked</em>, <em>will walk</em>. Number belongs to nouns as well, and person to some pronouns.`,
+        wrong:`Nouns have number; pronouns as well as verbs have person; and gender, where a language has it, belongs to nouns.`},
+      { prompt:`<em>Dog</em> becomes <em>dogs</em>. Which accident has changed?`,
+        options:['Number','Tense','Person','Case'], correct:0,
+        explain:`Number is singular or plural — one or more than one. The word is the same word throughout.`,
+        wrong:`Tense and person belong to the verb; case would mark the word’s function in the sentence, which is unchanged here.`}
+    ]},
+
+    9:{ qs:[
+      { prompt:`Why can Latin move its words around more freely than English can?`,
+        options:['Latin has fewer words','The endings show each word’s function, so the order need not','Latin has no verbs','Latin sentences are shorter'], correct:1,
+        explain:`Case endings carry the information that English carries by word order. Change the ending and you change the function; change the order and you have only changed the emphasis.`,
+        wrong:`Latin has no fewer words than English and certainly has verbs; and its sentences are often longer, not shorter.`},
+      { prompt:`Which pair shows English keeping a scrap of case?`,
+        options:['dog / dogs','he / him','walk / walked','old / older'], correct:1,
+        explain:`<em>He</em> is the nominative or subject form and <em>him</em> the accusative and dative or object form. You say <em>he saw him</em> and never the reverse — the shape marks the function.`,
+        wrong:`<em>Dog/dogs</em> is number; <em>walk/walked</em> is tense; <em>old/older</em> is degree. None of them marks the word’s function in the sentence.`},
+      { prompt:`In English, what usually does the work that case endings do in Latin?`,
+        options:['The order of the words','The length of the words','The tone of voice','The spelling'], correct:0,
+        explain:`<em>The dog bit the man</em> and <em>the man bit the dog</em> have the very same words. Only their order tells you which is which.`,
+        wrong:`Length and spelling are unchanged between the two sentences, and the difference survives perfectly well in writing, where there is no tone.`},
+      { prompt:`The Latin <em>casus</em>, from which “case” comes, means what?`,
+        options:['A box','A falling','A rule','A place'], correct:1,
+        explain:`The forms were pictured as falling away from the upright or nominative form — whence also the word <em>declension</em>, a leaning down.`,
+        wrong:`The modern senses of “case” as a box or a matter in hand are later; a rule and a place are other things entirely.`},
+      { prompt:`Which form of the English relative pronoun marks the object?`,
+        options:['who','whose','whom','which'], correct:2,
+        explain:`<em>The man to whom I threw the ball.</em> <em>Who</em> refers to the subject of the clause and <em>whose</em> to possession.`,
+        wrong:`<em>Who</em> is the subject form, <em>whose</em> the possessive; <em>which</em> marks no case but only that the thing is not a person.`}
+    ]},
+
+    10:{ qs:[
+      { prompt:`“Colourless green ideas sleep furiously.” What is wrong with it?`,
+        options:['The grammar is broken','The grammar is perfect; the trouble is that it says nothing that could be so','It is a valid argument','It has no verb'], correct:1,
+        explain:`Every word is in its right place — noun, adjectives, verb, adverb. The famous example shows exactly how far grammar goes and where it stops: it can guarantee the form and nothing else.`,
+        wrong:`The grammar of the famous example is faultless, each word in its right place. It is not an argument at all, and it has a verb.`},
+      { prompt:`“The moon is made of green cheese.” What can grammar tell you about it?`,
+        options:['That it is false','That it is well formed, and nothing more','That it is a valid argument','That it is meaningless'], correct:1,
+        explain:`Grammar guarantees the form and stops there. Whether the moon is in fact made of cheese is not a grammatical question.`,
+        wrong:`Grammar cannot reach truth or falsity, a single statement is not an argument, and the sentence means something perfectly clear — something untrue.`},
+      { prompt:`“Him go store yesterday.” Which is right?`,
+        options:['Bad grammar, and therefore false','Bad grammar, and it might still be true','Good grammar, and false','It cannot be judged at all'], correct:1,
+        explain:`The man may very well have gone to the store. Broken grammar makes a sentence hard to work with; it does not make it untrue.`,
+        wrong:`Bad grammar never entails falsity, the grammar here is plainly broken, and the sense is clear enough to judge.`},
+      { prompt:`Can logic begin without grammar?`,
+        options:['Yes — logic has no need of sentences','No — until the sentence is well formed, there is nothing definite for logic to judge','Yes, but only in Latin','Only in rhetoric'], correct:1,
+        explain:`Grammar cannot tell you what is true; but it supplies the well-formed sentence, without which there is no determinate proposition to test.`,
+        wrong:`Logic works upon statements and so needs them well made; the point holds in every language, and rhetoric depends on both of the arts before it.`},
+      { prompt:`What does logic consider that grammar does not?`,
+        options:['Whether the words are in the right order','Whether the proposition is true, and how it relates to the truth of other propositions','How to spell the words','Which words are nouns'], correct:1,
+        explain:`Grammar considers to what extent a sentence is well formed. Logic takes the proposition the sentence expresses and asks after its truth and its consequences.`,
+        wrong:`Order, spelling and the parts of speech are all grammar’s own concerns.`}
+    ]},
+
+    11:{ qs:[
+      { prompt:`The modists went beyond the usual grammatical questions to ask which question?`,
+        options:['What are the rules of Latin?','Why are the rules of grammar what they are, and what do all languages have in common?','How can grammar be taught to children?','Which language is oldest?'], correct:1,
+        explain:`They took the rules as given and asked what accounts for them — and why every language should have something like a noun and something like a verb.`,
+        wrong:`They did not set out to teach children, to catalogue Latin afresh, or to settle which language came first.`},
+      { prompt:`Where does the name <em>modists</em> come from?`,
+        options:['From the Latin <em>modi</em>, modes or ways','From a master named Modus','From the city of Modena','From a book called <em>De Modis</em> by Aristotle'], correct:0,
+        explain:`Their doctrine turns on three modes — of being, of understanding, and of signifying — and the name follows from it.`,
+        wrong:`No master, city, or Aristotelian book gives them their name; the Latin word for mode does.`},
+      { prompt:`What did the modists say the parts of speech answer to?`,
+        options:['The customs of each nation','Real differences in the things spoken about','The convenience of teachers','The number of letters available'], correct:1,
+        explain:`If they answered only to custom, every language might have had wholly different parts of speech. That they do not is the fact the modists set out to explain.`,
+        wrong:`Custom and convenience would make grammar arbitrary, which is the view they were arguing against; the alphabet has nothing to do with it.`},
+      { prompt:`Are the parts of speech mere conventions?`,
+        options:['Yes, entirely','No — though it is a convention whether this particular word-sound is a noun or a verb','Yes, except in Latin','The modists did not say'], correct:1,
+        explain:`Which noise means <em>dog</em> is settled by custom. That there should be naming words at all is not: things really are various ways, and words must signify them as they are.`,
+        wrong:`To call them wholly conventional is just the view the modists opposed; and the point is not confined to any one language.`},
+      { prompt:`In one sentence, what is the modists’ answer to why the rules of grammar are what they are?`,
+        options:['Because grammar follows the shape of reality','Because the Romans decided so','Because grammar is easier that way','Because logic requires it'], correct:0,
+        explain:`Words and sentences have to signify things as they are; and since things really are various ways, the general rules of universal grammar follow.`,
+        wrong:`Roman decision and convenience are versions of the conventionalism they rejected; and logic follows grammar here rather than dictating it.`}
+    ]},
+
+    12:{ qs:[
+      { prompt:`Put the three modes in the order the modists give them.`,
+        options:['Signifying → understanding → being','Being → understanding → signifying','Understanding → being → signifying','Being → signifying → understanding'], correct:1,
+        explain:`The thing is some way first; the mind takes it as it is; the word signifies it as the mind has taken it. Reverse the order and you would be saying that words decide how things are.`,
+        wrong:`Put signifying first and you would be saying that words decide how things are. The mind cannot come before the thing it grasps, nor the word before the thought.`},
+      { prompt:`Which mode belongs to the thing itself, before any mind or word touches it?`,
+        options:['The mode of being (<em>modus essendi</em>)','The mode of understanding (<em>modus intelligendi</em>)','The mode of signifying (<em>modus significandi</em>)','None: all three belong to the word'], correct:0,
+        explain:`The horse really is a stable thing and its running really is going on, whether or not anybody notices or names it. These facts are due not to us but to the world.`,
+        wrong:`Understanding belongs to the mind and signifying to the word; and if all three belonged to the word, grammar would answer to nothing outside itself.`},
+      { prompt:`Which mode does the word itself have?`,
+        options:['The mode of being','The mode of understanding','The mode of signifying','All three equally'], correct:2,
+        explain:`The word’s own manner of presenting the thing — as at rest, or as in flow — is its mode of signifying, and it takes its shape from the two modes before it.`,
+        wrong:`Being belongs to the thing and understanding to the mind. The three are ordered, not held all at once by the word.`},
+      { prompt:`What is the <em>modus intelligendi</em>?`,
+        options:['The way the thing is','The way the mind takes the thing','The way the word signifies the thing','The way the sentence is arranged'], correct:1,
+        explain:`The mind grasps the horse as something stable, with an essence, and the running as something happening with respect to the horse.`,
+        wrong:`The way the thing is is the mode of being; the way the word signifies is the mode of signifying; the arrangement of the sentence is not a mode at all.`},
+      { prompt:`On what does the mode of signifying rest?`,
+        options:['On nothing — it is free','On the mode of understanding, which in turn rests on the mode of being','On the mode of being alone, bypassing the mind','On the customs of the speakers'], correct:1,
+        explain:`Being is first; understanding is drawn from how things are; and signifying brings this to the mind, for oneself and for others. Each mode is based on the one before.`,
+        wrong:`A free mode of signifying would make grammar arbitrary; and the mind is not bypassed, since the word signifies the thing as the mind has taken it.`}
+    ]},
+
+    13:{ qs:[
+      { prompt:`Why does the verb carry time and the noun not?`,
+        options:['Because verbs are longer words','Because a verb signifies its thing as becoming and flowing, and only what becomes takes time','Because Latin verbs have more endings','Because nouns come first in the sentence'], correct:1,
+        explain:`Time belongs to what becomes and is in motion. A word that signifies its thing as at rest has no use for tense; a word that signifies it as flowing must say when the flowing is.`,
+        wrong:`Verbs are not longer than nouns, endings are a feature of the language rather than the reason, and word order settles nothing about time.`},
+      { prompt:`How does a noun signify its thing, on the modist account?`,
+        options:['In the manner of something standing still — <em>per modum habitus et quietis</em>','In the manner of something flowing','In the manner of a question','It does not signify at all'], correct:0,
+        explain:`Thomas of Erfurt’s phrase is <em>per modum habitus et quietis</em>, in the manner of a state and of rest. That is why the noun needs no tense.`,
+        wrong:`Flowing is the verb’s manner; nouns ask nothing; and a noun signifies as plainly as any word does.`},
+      { prompt:`<em>Running</em> and <em>runs</em> pick out the same activity. What differs?`,
+        options:['The activity itself','The way it is signified — one as settled, the other as going on','The number of runners','Nothing at all'], correct:1,
+        explain:`The same thing is under consideration, but through two modes of signifying. <em>Running is good exercise</em> presents it as a thing to talk about; <em>he runs</em> presents it under way.`,
+        wrong:`The running is one and the same, the runners are not in question, and something has plainly changed between the two forms.`},
+      { prompt:`<em>Per modum fieri et fluxus</em> — in the manner of becoming and flowing — describes which part of speech?`,
+        options:['The noun','The verb','The adjective','The article'], correct:1,
+        explain:`This is why the verb carries time: what becomes and is in motion is measured by time, and the verb must say when.`,
+        wrong:`The noun signifies <em>per modum habitus et quietis</em>; the adjective signifies a quality as in another; the article merely points.`},
+      { prompt:`Why should every language have a noun and a verb?`,
+        options:['Because the Greeks did it first','Because everything we meet is either stable or going on, and words must signify it accordingly','Because sentences would be too long otherwise','Because children learn nouns first'], correct:1,
+        explain:`The two great modes of signifying answer to the two great ways things present themselves — at rest and in flow.`,
+        wrong:`Greek precedent, sentence length, and the order in which children learn are all beside the point: the reason lies in the things.`}
+    ]},
+
+    14:{ qs:[
+      { prompt:`What mistake does the fallacy of figure of speech make?`,
+        options:['It uses a word nobody knows','It argues from the form of a word to the nature of the thing','It leaves out a premise','It asks two questions at once'], correct:1,
+        explain:`Grammar mirrors reality, but the mirror is imperfect. Two words that have the same form and grammar may draw their meaning from things in quite different ways.`,
+        wrong:`It is not a matter of vocabulary, of missing premises, or of hidden questions — those are other faults with other names.`},
+      { prompt:`Why can you not argue directly from a word as a word to the way things are?`,
+        options:['Because words change over time','Because grammar mirrors reality only imperfectly, and the fit is not exact','Because grammar has no rules','Because things have no natures'], correct:1,
+        explain:`The mirror is a real mirror, but not a perfect one. Two expressions built alike can name utterly different sorts of thing.`,
+        wrong:`Change over time is beside the point, grammar plainly has rules, and denying that things have natures would undo the modist claim altogether.`},
+      { prompt:`What did the modists give grammar, and what does the study of fallacy add?`,
+        options:['Dignity; and a check on reading too much off the words','Rules; and more rules','Latin; and Greek','Nothing; and everything'], correct:0,
+        explain:`The modists showed that grammar answers to how things are. The fallacies remind you that it answers imperfectly, and that the form of a word is not proof of anything.`,
+        wrong:`Neither supplies bare rules or particular languages, and each contributes something real.`},
+      { prompt:`Why can a Greek argument be turned into English without loss?`,
+        options:['Because the words are the same','Because underneath the different words the modes of signifying are the same','Because Greek and English share an alphabet','It cannot be'], correct:1,
+        explain:`This is why logic is more general than any given language. If grammar were determined purely by custom, the translation would lose something essential.`,
+        wrong:`The words plainly differ and the alphabets differ; and translation of arguments manifestly succeeds.`},
+      { prompt:`Are the parts of speech an arbitrary list to be memorised?`,
+        options:['Yes — there is no reason behind them','No — they answer to real differences in things, or in how we understand, or in how we signify','Only the noun and the verb are real','Only in modern languages'], correct:1,
+        explain:`This is the first of the three things that serve the rest of the course of study, and it is what makes grammar worth the trouble of learning well.`,
+        wrong:`To call them arbitrary is the conventionalism the modists opposed; and the account is meant to hold of language as such.`}
+    ]},
+
+    15:{ qs:[
+      { prompt:`Which art of the trivium asks how to bring another person to see the truth?`,
+        options:['Grammar','Logic','Rhetoric','Hermeneutics'], correct:2,
+        explain:`Grammar makes the sentence well formed; logic asks whether the proposition is true and what follows from it; rhetoric brings another person to see it.`,
+        wrong:`Grammar and logic stop short of the other person; hermeneutics runs the other way, from another’s words toward understanding them.`},
+      { prompt:`What is interpretation, or hermeneutics?`,
+        options:['The art of coming to understand someone else’s words — their truth, their form, and how they relate to the speaker’s goals','The art of forming sentences','The art of drawing conclusions','The art of memorising'], correct:0,
+        explain:`It is the reverse motion to rhetoric: rhetoric goes out from the speaker, hermeneutics comes back from the words of another.`,
+        wrong:`Forming sentences is grammar, drawing conclusions is logic, and memorising is no art of the trivium at all.`},
+      { prompt:`Why do the three arts build on each other in that order?`,
+        options:['Because that is the order they were invented in','Because there is no arguing without sentences, and no persuading without arguments','Because grammar is the easiest','Because rhetoric is the most important'], correct:1,
+        explain:`Each art supplies the matter the next one works upon. Logic works on statements; rhetoric works on arguments.`,
+        wrong:`The order is neither historical nor a ranking of difficulty or importance; it follows from what each art works upon.`},
+      { prompt:`What are the two terms of every proposition?`,
+        options:['The noun and the verb','The subject and the predicate','The premise and the conclusion','The article and the adjective'], correct:1,
+        explain:`Logic takes the pair straight from grammar. <em>All S are P</em>: S is the subject term, P the predicate term.`,
+        wrong:`Noun and verb are parts of speech, not terms of a proposition; premise and conclusion are whole propositions; the last pair are modifiers.`},
+      { prompt:`The joining together of a word that names with a verb — where truth first becomes possible — is which act of the mind?`,
+        options:['The first','The second','The third','None of them'], correct:1,
+        explain:`The second act is judgment, and it occupies the middle of these exercises. The final part turns to reasoning from one proposition to another, which is not primarily determined by grammar.`,
+        wrong:`The first act grasps a single thing and asserts nothing; the third moves between propositions already made.`}
+    ]}
   };
 
   /* The same for the orientation: two more fixed questions per panel, and a
@@ -5762,10 +5966,18 @@ if(typeof document!=='undefined'){
   (function(){
     function apply(deck, extra){
       for(const k in extra){
-        const p = deck[k|0]; if(!p || !p.q) continue;
-        if(extra[k].w) p.q.wrong = extra[k].w;
-        if(extra[k].a) p.q2 = extra[k].a;
-        if(extra[k].b) p.q3 = extra[k].b;
+        const p = deck[k|0]; if(!p) continue;
+        const e = extra[k];
+        if(e.qs){                       /* a whole set of questions for the panel */
+          const qs = e.qs.filter(Boolean);
+          if(!qs.length) continue;
+          p.q = qs[0]; p.q2 = qs[1]; p.q3 = qs[2]; p.q4 = qs[3]; p.q5 = qs[4];
+          continue;
+        }
+        if(!p.q) continue;              /* the older shape: one question plus two follow-ups */
+        if(e.w) p.q.wrong = e.w;
+        if(e.a) p.q2 = e.a;
+        if(e.b) p.q3 = e.b;
       }
     }
     apply(GRAMMAR, GRAMMAR_EXTRA);
@@ -5774,19 +5986,37 @@ if(typeof document!=='undefined'){
 
   let orientIdx = 0, orientTry = 0;
   let orientDeck = null, orientTitle = '';
+  let orientOrder = null, orientOrderFor = -1;   /* the draw for the panel now on screen */
+  function orientResetOrder(){ orientOrder = null; orientOrderFor = -1; }
   function openOrient(){ orientDeck = ORIENT; orientTitle = 'What Is Logic · An Orientation';
-    orientIdx = 0; orientTry = 0; $('orient-title').textContent = orientTitle; show('scr-orient'); renderOrient(); }
+    orientIdx = 0; orientTry = 0; orientResetOrder(); $('orient-title').textContent = orientTitle; show('scr-orient'); renderOrient(); }
   function openGrammar(){ orientDeck = GRAMMAR; orientTitle = 'The Art of Grammar';
-    orientIdx = 0; orientTry = 0; $('orient-title').textContent = orientTitle; show('scr-orient'); renderOrient(); }
+    orientIdx = 0; orientTry = 0; orientResetOrder(); $('orient-title').textContent = orientTitle; show('scr-orient'); renderOrient(); }
   function orientContBtn(){
     return `<button class="submit-btn" id="orient-cont">${orientIdx===orientDeck.length-1 ? 'Finish · Return home ⟶' : 'Continue ⟶'}</button>`;
   }
-  /* Each panel carries three fixed questions. The first is always asked. Get it
-     right and you go on. Get it wrong and you are told the answer, and why each
-     of the others fails, and then asked the second — and if need be the third.
-     Miss the third and the two follow-ups fold away and the first is asked
-     again. The questions never vary: the same panel always asks the same three. */
-  function orientQs(f){ return [f.q, f.q2, f.q3].filter(Boolean); }
+  /* Each panel carries a set of questions — three in the orientation, five in
+     the grammar. One is asked. Get it right and you go on. Get it wrong and you
+     are told the answer, and why each of the others fails, and then another of
+     the set is asked, and so on. Exhaust the set and the panel begins again.
+     The orientation keeps its questions in their fixed order; the grammar,
+     having five to draw on, shuffles them afresh each time a panel is entered,
+     so that returning to a card need not bring the same question back. */
+  function orientAllQs(f){ return [f.q, f.q2, f.q3, f.q4, f.q5].filter(Boolean); }
+  function orientQs(f){
+    const all = orientAllQs(f);
+    if(orientOrderFor !== orientIdx || !orientOrder || orientOrder.length !== all.length){
+      const idx = all.map((_,i)=>i);
+      if(orientDeck === GRAMMAR){       /* draw at random from the five */
+        for(let i=idx.length-1; i>0; i--){
+          const j = Math.floor(Math.random()*(i+1));
+          const t = idx[i]; idx[i] = idx[j]; idx[j] = t;
+        }
+      }
+      orientOrder = idx; orientOrderFor = orientIdx;
+    }
+    return orientOrder.map(i=>all[i]);
+  }
   function orientCurQ(){ const qs = orientQs(orientDeck[orientIdx]); return qs[Math.min(orientTry, qs.length-1)]; }
   function orientQuestionHTML(q){
     let h = `<div class="orient-q">${q.prompt}</div><div class="orient-opts" id="orient-opts">`;
@@ -5805,7 +6035,9 @@ if(typeof document!=='undefined'){
     if(f.h) h += `<div class="orient-text">${f.h}</div>`;
     const q = f.q ? orientCurQ() : null;
     if(q){
-      if(orientTry>0) h += `<div class="orient-again">Another question on the same point — ${orientTry===1?'the second':'the third'} of three.</div>`;
+      const n = orientQs(f).length;
+      const ord = ['the first','the second','the third','the fourth','the fifth'][orientTry] || 'another';
+      if(orientTry>0) h += `<div class="orient-again">Another question on the same point — ${ord} of ${n===5?'five':'three'}.</div>`;
       h += orientQuestionHTML(q);
     }
     body.innerHTML = h;
@@ -5842,7 +6074,7 @@ if(typeof document!=='undefined'){
       nav.innerHTML = `<button class="submit-btn" id="orient-retry">Try another question ⟶</button>`;
       $('orient-retry').onclick = orientNextTry;
     } else {
-      orientTry = 0;                          /* missed the third: begin the three again */
+      orientTry = 0; orientResetOrder();      /* the set is exhausted: begin it again, freshly drawn */
       nav.innerHTML = `<button class="submit-btn" id="orient-retry">Back to the first question ⟶</button>`;
       $('orient-retry').onclick = orientNextTry;
     }
@@ -5852,7 +6084,7 @@ if(typeof document!=='undefined'){
     const el = $('orient-body'); if(el && el.scrollIntoView) el.scrollIntoView({behavior:'smooth', block:'start'});
   }
   function advanceOrient(){
-    orientTry = 0;
+    orientTry = 0; orientResetOrder();
     if(orientIdx >= orientDeck.length-1){ show('scr-home'); return; }
     orientIdx++; renderOrient();
     const top = $('scr-orient'); if(top && top.scrollIntoView) top.scrollIntoView({behavior:'smooth', block:'start'});
