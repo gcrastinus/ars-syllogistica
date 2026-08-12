@@ -5436,7 +5436,7 @@ if(typeof document!=='undefined'){
     0:{ qs:[
       { prompt:`Which three arts make up the <em>trivium</em>?`,
         options:['Arithmetic, geometry, music','Grammar, logic, rhetoric','Grammar, poetry, law','Logic, physics, ethics'], correct:1,
-        explain:`Grammar puts words together rightly, logic reasons rightly, and rhetoric persuades well. The other three of the seven liberal arts — arithmetic, geometry, music, astronomy — make up the <em>quadrivium</em>.`,
+        explain:`Grammar puts words together rightly, logic reasons rightly, and rhetoric persuades well. The remaining four of the seven liberal arts — arithmetic, geometry, music, astronomy — make up the <em>quadrivium</em>.`,
         wrong:`Arithmetic, geometry and music belong to the quadrivium; poetry, law, physics and ethics are not arts of the trivium at all.`},
       { prompt:`Why must grammar come before logic?`,
         options:['Because it is easier','Because logic works on statements, and a statement is made of words','Because it was invented first','Because logic has no rules of its own'], correct:1,
@@ -5606,7 +5606,7 @@ if(typeof document!=='undefined'){
       { prompt:`Which three conjunctions are the primary ones used in logic?`,
         options:['the, a, an','and, or, if','very, quite, rather','he, she, it'], correct:1,
         explain:`<em>And</em> gives the conjunctive syllogism, <em>or</em> the disjunctive, <em>if</em> the conditional. The conjunction helps to determine the truth or falsity of the compound proposition it forms.`,
-        wrong:`The first are articles, the second adverbs of degree, the third pronouns — none of them joins statements.`},
+        wrong:`<em>The</em>, <em>a</em> and <em>an</em> are articles; <em>very</em>, <em>quite</em> and <em>rather</em> are adverbs of degree; <em>he</em>, <em>she</em> and <em>it</em> are pronouns. None of them joins one statement to another.`},
       { prompt:`What does a preposition do?`,
         options:['It stands before a noun and subordinates that noun to something else in the sentence','It replaces a noun already named','It joins two equal statements','It tells you which one is meant'], correct:0,
         explain:`<em>The cat ran under the table</em>: <em>under</em> places <em>the table</em> with respect to the running.`,
@@ -5794,7 +5794,7 @@ if(typeof document!=='undefined'){
       { prompt:`What are the two terms of every proposition?`,
         options:['The noun and the verb','The subject and the predicate','The premise and the conclusion','The article and the adjective'], correct:1,
         explain:`Logic takes the pair straight from grammar. <em>All S are P</em>: S is the subject term, P the predicate term.`,
-        wrong:`Noun and verb are parts of speech, not terms of a proposition; premise and conclusion are whole propositions; the last pair are modifiers.`},
+        wrong:`Noun and verb are parts of speech, not terms of a proposition; premise and conclusion are whole propositions; and article and adjective are modifiers, not terms.`},
       { prompt:`The joining together of a word that names with a verb — where truth first becomes possible — is which act of the mind?`,
         options:['The first','The second','The third','None of them'], correct:1,
         explain:`The second act is judgment, and it occupies the middle of these exercises. The final part turns to reasoning from one proposition to another, which is not primarily determined by grammar.`,
@@ -5987,7 +5987,12 @@ if(typeof document!=='undefined'){
   let orientIdx = 0, orientTry = 0;
   let orientDeck = null, orientTitle = '';
   let orientOrder = null, orientOrderFor = -1;   /* the draw for the panel now on screen */
-  function orientResetOrder(){ orientOrder = null; orientOrderFor = -1; }
+  let orientEpoch = 0;                           /* bumped whenever a fresh draw is wanted */
+  let orientShown = null, orientShownKey = '';   /* the question as it now stands on screen */
+  function orientResetOrder(){
+    orientOrder = null; orientOrderFor = -1;
+    orientShown = null; orientShownKey = ''; orientEpoch++;
+  }
   function openOrient(){ orientDeck = ORIENT; orientTitle = 'What Is Logic · An Orientation';
     orientIdx = 0; orientTry = 0; orientResetOrder(); $('orient-title').textContent = orientTitle; show('scr-orient'); renderOrient(); }
   function openGrammar(){ orientDeck = GRAMMAR; orientTitle = 'The Art of Grammar';
@@ -6017,7 +6022,30 @@ if(typeof document!=='undefined'){
     }
     return orientOrder.map(i=>all[i]);
   }
-  function orientCurQ(){ const qs = orientQs(orientDeck[orientIdx]); return qs[Math.min(orientTry, qs.length-1)]; }
+  /* The options themselves are put in a fresh order each time a question is
+     asked, so that the answer can never be found by its position on the list.
+     Two exceptions are kept: a pair such as True/False stays as it stands, and
+     a “None of…” option is held back to the end, where it belongs. */
+  function orientHeldLast(o){ return /^none\b/i.test(String(o).replace(/<[^>]+>/g,'').trim()); }
+  function orientShuffleOpts(q){
+    if(!q || !q.options || q.options.length < 3) return q;
+    const free = [], held = [];
+    q.options.forEach((o,i)=>{ (orientHeldLast(o) ? held : free).push(i); });
+    for(let i=free.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      const t = free[i]; free[i] = free[j]; free[j] = t;
+    }
+    const idx = free.concat(held);
+    return { prompt:q.prompt, options:idx.map(i=>q.options[i]), correct:idx.indexOf(q.correct),
+             explain:q.explain, wrong:q.wrong };
+  }
+  function orientCurQ(){
+    const qs = orientQs(orientDeck[orientIdx]);
+    const q = qs[Math.min(orientTry, qs.length-1)];
+    const key = orientEpoch + '/' + orientIdx + '/' + orientTry;
+    if(!orientShown || orientShownKey !== key){ orientShown = orientShuffleOpts(q); orientShownKey = key; }
+    return orientShown;
+  }
   function orientQuestionHTML(q){
     let h = `<div class="orient-q">${q.prompt}</div><div class="orient-opts" id="orient-opts">`;
     q.options.forEach((o,i)=>{ h += `<button class="orient-opt" data-i="${i}">${o}</button>`; });
