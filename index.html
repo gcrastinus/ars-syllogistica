@@ -29,14 +29,14 @@ body.dark{
 html{
   min-height:100%;
   /* Fills the root/overscroll area so viewers (e.g. Dropbox) never flash bright white */
-  background:#efe6cf;
+  background:#f6f0e1;
   color-scheme:light;
   /* Firefox scrollbar */
   scrollbar-color:#c9a45c #e6dcc2;
   scrollbar-width:thin;
 }
 html:has(body.dark){
-  background:#120f0c;
+  background:#1a1611;
   color-scheme:dark;
   scrollbar-color:#8a7a55 #231d15;
 }
@@ -52,9 +52,7 @@ body{
   font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
   color:var(--ink); min-height:100vh; font-size:19px; line-height:1.5;
   transition:color .25s;
-  background:
-    radial-gradient(1200px 600px at 50% -100px, var(--glow) 0%, transparent 60%),
-    linear-gradient(180deg, var(--paper) 0%, var(--paper2) 100%);
+  background:var(--paper);
 }
 /* Top-right control pair: dark mode inward, audio at the outer corner */
 #dark-toggle{
