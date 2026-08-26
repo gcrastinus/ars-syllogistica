@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ars Syllogistica — Quiz Maker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f0e1; --paper2:#efe6cf; --card:#fffdf4; --ink:#2b2118; --ink-soft:#5a4a38;
+  --gold:#a67c2e; --gold-soft:#c9a45c; --line:#d9c9a3; --sage:#48664c; --wine:#7b2d26;
+  --panel:#f4ecd8; --panel2:#fbf6e8; --sel-text:#f3e9cf; --shadow:0 2px 14px rgba(74,58,32,.10);
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{font-family:'EB Garamond', Georgia, serif; color:var(--ink); min-height:100vh; font-size:18px; line-height:1.5;
+  background:linear-gradient(180deg, var(--paper) 0%, var(--paper2) 100%)}
+#maker{max-width:880px; margin:0 auto; padding:28px 20px 100px}
+header{text-align:center; margin-bottom:18px}
+.ornament{color:var(--gold); font-size:20px; letter-spacing:.4em; margin:4px 0}
+h1{font-family:'Cinzel',serif; font-size:34px; font-weight:600; letter-spacing:.05em}
+.sub{font-style:italic; color:var(--ink-soft); font-size:18px; margin-top:2px}
+.rule{display:flex; align-items:center; gap:12px; margin:16px auto; max-width:480px; color:var(--gold)}
+.rule::before,.rule::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold-soft))}
+.rule::after{background:linear-gradient(90deg,var(--gold-soft),transparent)}
+details.help{max-width:720px; margin:0 auto 18px; background:var(--card); border:1px solid var(--line);
+  border-left:4px solid var(--gold-soft); border-radius:10px; padding:12px 16px; box-shadow:var(--shadow)}
+details.help summary{cursor:pointer; font-weight:600; color:var(--gold); font-family:'Cinzel',serif; font-size:14px; letter-spacing:.06em}
+details.help p{margin-top:10px; font-size:15.5px; color:var(--ink-soft)}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;
+  margin:14px 0; box-shadow:var(--shadow)}
+.card h2{font-family:'Cinzel',serif; font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px}
+.fields{display:flex; gap:14px; flex-wrap:wrap}
+.field{flex:1 1 180px}
+.field label{display:block; font-size:13px; color:var(--ink-soft); margin-bottom:4px}
+input[type=text],input[type=number],select{font:inherit; width:100%; padding:8px 10px; border:1px solid var(--line);
+  border-radius:8px; background:var(--panel2); color:var(--ink)}
+.setlist{max-height:340px; overflow:auto; border:1px solid var(--line); border-radius:10px; background:var(--panel2); padding:6px 8px}
+.setrow{display:flex; align-items:flex-start; gap:10px; padding:7px 8px; border-bottom:1px dashed var(--line); cursor:pointer}
+.setrow:last-child{border-bottom:none}
+.setrow input{margin-top:4px; accent-color:var(--gold)}
+.setrow .id{font-family:'Cinzel',serif; color:var(--gold); min-width:28px; font-size:14px}
+.setrow .nm{font-size:16px}
+.setrow .nm .meta{display:block; font-size:13px; color:var(--ink-soft); font-style:italic}
+.minibtns{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 0}
+.minibtns button,.mbtn{font:inherit; cursor:pointer; background:var(--panel); border:1px solid var(--line);
+  border-radius:18px; padding:5px 12px; color:var(--ink-soft); font-size:14px}
+.minibtns button:hover,.mbtn:hover{border-color:var(--gold); color:var(--ink)}
+.toggle-row{display:flex; gap:8px; flex-wrap:wrap}
+.toggle{background:var(--panel2); border:1px solid var(--line); border-radius:18px; padding:6px 14px;
+  color:var(--ink-soft); cursor:pointer; font:inherit; font-size:14.5px}
+.toggle.on{background:var(--ink); color:var(--sel-text); border-color:var(--ink)}
+.makebar{position:sticky; bottom:0; background:linear-gradient(0deg, var(--paper2) 55%, transparent);
+  padding:14px 0 18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:18px}
+.primary{font-family:'Cinzel',serif; letter-spacing:.06em; background:var(--gold); color:var(--sel-text);
+  border:none; border-radius:24px; padding:12px 22px; cursor:pointer; font-size:15px}
+.primary:hover{filter:brightness(1.05)}
+.primary:disabled{opacity:.45; cursor:not-allowed}
+.status{margin:12px 0; padding:10px 14px; border-radius:10px; font-size:15px; color:var(--ink-soft);
+  border:1px solid var(--line); background:var(--panel)}
+.status.ok{border-color:var(--sage); color:var(--sage)}
+.status.err{border-color:var(--wine); color:var(--wine)}
+.backlink{display:inline-block; margin-bottom:8px; font-size:14.5px; color:var(--ink-soft); text-decoration:none}
+.backlink:hover{color:var(--gold)}
+
+/* ===== printable paper ===== */
+#paper{display:none; background:#fff; color:#111; border-radius:12px; margin:22px 0 0;
+  font-family:Georgia,"Times New Roman",serif; box-shadow:0 8px 36px rgba(74,58,32,.25)}
+#paper.show{display:block}
+.sheet{padding:32px 38px 40px}
+.sheet + .sheet{border-top:6px double #ccc}
+.qhead{border-bottom:2px solid #111; padding-bottom:8px; margin-bottom:12px}
+.qhead h1{font-family:'Cinzel',serif; font-size:20px; margin:0 0 3px; letter-spacing:.04em; font-weight:600}
+.qhead .meta{font-size:12.5px; color:#444; font-family:Helvetica,Arial,sans-serif}
+.namerow{display:flex; gap:24px; font-size:13px; margin:0 0 12px; font-family:Helvetica,Arial,sans-serif}
+.namerow span{flex:1; border-bottom:1px solid #444; padding-bottom:2px}
+.namerow span.sm{flex:0 0 140px}
+.rubric{font-size:12.5px; color:#333; font-family:Helvetica,Arial,sans-serif; line-height:1.5;
+  border:1px solid #bbb; border-left:4px solid #a67c2e; border-radius:4px; padding:8px 11px; margin:0 0 14px; background:#faf7f0}
+.covers{font-size:12.5px; color:#333; font-family:Helvetica,Arial,sans-serif; margin:0 0 14px; line-height:1.5}
+ol.qs{margin:0; padding:0; list-style:none; counter-reset:qn}
+li.qitem{counter-increment:qn; margin:0 0 16px; padding:0 0 0 30px; position:relative;
+  break-inside:avoid; page-break-inside:avoid}
+li.qitem::before{content:counter(qn) "."; position:absolute; left:0; top:0; font-weight:700; font-size:15px}
+.qsetline{font-size:11px; font-family:Helvetica,Arial,sans-serif; color:#777; letter-spacing:.04em;
+  text-transform:uppercase; margin-bottom:2px}
+.qinstr{font-size:13px; font-style:italic; color:#444; margin-bottom:4px}
+.qprompt,.argblock{font-size:14.5px; line-height:1.55; margin-bottom:5px}
+.argblock{padding-left:12px; border-left:3px solid #bbb}
+.therefore{color:#a67c2e; margin-right:4px}
+.qrule{font-size:12.5px; color:#555; font-family:Helvetica,Arial,sans-serif; margin-bottom:6px;
+  padding:6px 10px; background:#f7f4ea; border-radius:4px}
+ol.ch{margin:4px 0 0; padding:0; list-style:none; counter-reset:cn}
+ol.ch li{counter-increment:cn; font-size:14px; line-height:1.5; padding-left:26px; position:relative}
+ol.ch li::before{content:"(" counter(cn, lower-alpha) ")"; position:absolute; left:0; color:#333;
+  font-family:Helvetica,Arial,sans-serif; font-size:12.5px; top:1px}
+.ansline{border-bottom:1px solid #555; height:20px; margin:9px 40px 2px 0}
+.work{border:1px dashed #bbb; border-radius:5px; margin:8px 0 0; background:
+  repeating-linear-gradient(180deg,transparent,transparent 25px,#e0e0e0 25px,#e0e0e0 26px);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.work.s1{height:72px} .work.s2{height:120px} .work.s3{height:180px}
+.blank-venn{display:block; max-width:220px; width:100%; margin:8px 0; border:1px solid #ddd; border-radius:6px}
+.keyitem{break-inside:avoid; page-break-inside:avoid; margin:0 0 11px; padding:0 0 0 30px; position:relative;
+  font-size:13.5px; line-height:1.5; counter-increment:qn}
+.keyitem::before{content:counter(qn) "."; position:absolute; left:0; top:0; font-weight:700}
+.keyitem .ka{font-family:Helvetica,Arial,sans-serif}
+.keyitem .kset{font-size:11px; color:#888; font-family:Helvetica,Arial,sans-serif; text-transform:uppercase; letter-spacing:.04em}
+.keyitem .kx{margin-top:4px; font-size:13px; color:#444}
+.keyitem .venn{max-width:240px; display:block; margin-top:6px}
+ol.keys{margin:0; padding:0; list-style:none; counter-reset:qn}
+.keynote{font-size:12.5px; color:#444; font-family:Helvetica,Arial,sans-serif; margin:0 0 14px;
+  border:1px solid #ccc; padding:8px 11px; border-radius:4px; background:#f9f9f9}
+
+@media print{
+  body{background:#fff}
+  #maker{display:none !important}
+  #paper{display:block !important; box-shadow:none; border-radius:0; margin:0}
+  .sheet{padding:18px 22px}
+  .sheet.key-sheet{page-break-before:always}
+  a{text-decoration:none; color:inherit}
+}
+</style>
+</head>
+<body>
+<div id="maker">
+  <a class="backlink" href="index.html">⟵ Return to Ars Syllogistica</a>
+  <header>
+    <div class="ornament">❦</div>
+    <h1>Quiz Maker</h1>
+    <div class="sub">Printable quizzes with a complete answer key — for instructors</div>
+    <div class="rule">❧</div>
+  </header>
+
+  <details class="help">
+    <summary>How to use</summary>
+    <p>Select one or more exercise sets from the course of study, choose the level and how many questions you want from each, then generate. Every question is freshly drawn from the same generators the students use. The answer key prints on its own page(s) at the end — <b>separate those pages before handing the quiz out.</b> Use your browser’s <b>Print → Save as PDF</b>.</p>
+    <p>Study sections (Grammar, Orientation, Diagram Workshop, Square of Opposition) are not included here.</p>
+  </details>
+
+  <div class="card">
+    <h2>1 · Header (optional)</h2>
+    <div class="fields">
+      <div class="field"><label>Course / class name</label><input type="text" id="courseName" placeholder="e.g. Logic I"></div>
+      <div class="field"><label>Instructor</label><input type="text" id="teacherName" placeholder="Optional"></div>
+      <div class="field"><label>Date on quiz</label><input type="text" id="quizDate" placeholder="Leave blank for today"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2 · Exercise sets</h2>
+    <div class="minibtns">
+      <button type="button" id="selAll">Select all</button>
+      <button type="button" id="selNone">Clear</button>
+    </div>
+    <div class="setlist" id="setList"></div>
+  </div>
+
+  <div class="card">
+    <h2>3 · Level, dress, and count</h2>
+    <div class="fields">
+      <div class="field"><label>Level</label>
+        <select id="diffSel">
+          <option value="1">I — Beginner</option>
+          <option value="2">II — Apprentice</option>
+          <option value="3" selected>III — Journeyman</option>
+          <option value="4">IV — Adept</option>
+          <option value="5">V — Master</option>
+        </select>
+      </div>
+      <div class="field"><label>Questions per selected set</label>
+        <input type="number" id="countBox" min="1" max="40" value="10">
+      </div>
+      <div class="field"><label>Term dress (where applicable)</label>
+        <div class="toggle-row" style="margin-top:4px">
+          <button type="button" class="toggle on" id="modeLet">Letters</button>
+          <button type="button" class="toggle" id="modeEng">English</button>
+        </div>
+      </div>
+    </div>
+    <p class="status" id="diffHint" style="margin-top:12px;margin-bottom:0"></p>
+  </div>
+
+  <div class="makebar">
+    <button class="primary" id="genBtn">Generate quiz</button>
+    <button class="mbtn" id="printBtn" style="display:none">Print / Save as PDF</button>
+    <span class="status" id="status" style="margin:0; flex:1">Choose sets, then generate.</span>
+  </div>
+</div>
+
+<div id="paper"></div>
+
+<script src="ars-engine.js"></script>
+<script>
+const ROMAN = {1:'I',2:'II',3:'III',4:'IV',5:'V',6:'VI',7:'VII',8:'VIII',9:'IX',10:'X',11:'XI',12:'XII',13:'XIII',14:'XIV',15:'XV',16:'XVI',17:'XVII',18:'XVIII',19:'XIX',20:'XX',21:'XXI'};
+const QUIZ_SETS = [
+  {id:1, title:'The Predicables'},
+  {id:2, title:'The Categories'},
+  {id:3, title:'Division'},
+  {id:4, title:'Definition'},
+  {id:5, title:'Diagramming Propositions'},
+  {id:6, title:'Immediate Inference'},
+  {id:7, title:'The Modal Propositions'},
+  {id:8, title:'Diagramming Syllogisms'},
+  {id:9, title:'Syllogistic Form in the Abstract'},
+  {id:10, title:'Syllogistic Form in the Concrete'},
+  {id:11, title:'Drawing the Conclusion'},
+  {id:12, title:'The Conjunctive and Disjunctive Syllogism'},
+  {id:13, title:'The Hypothetical Syllogism'},
+  {id:14, title:'The Mixed Consequence'},
+  {id:15, title:'Arguments in Ordinary Speech'},
+  {id:16, title:'The Modal Syllogism'},
+  {id:17, title:'The Chain of Syllogisms'},
+  {id:18, title:'The Matter and the Form'},
+  {id:19, title:'The Enthymeme'},
+  {id:20, title:'Dialectic'},
+  {id:21, title:'The Fallacies'}
+];
+
+const $ = id => document.getElementById(id);
+let mode = 'letters';
+let lastItems = [];
+
+function todayStr(){
+  const d = new Date();
+  return d.toLocaleDateString(undefined, {year:'numeric', month:'long', day:'numeric'});
+}
+
+function buildSetList(){
+  const box = $('setList');
+  box.innerHTML = QUIZ_SETS.map(s=>{
+    const modeNote = (typeof QUIZ_MODE_SETS!=='undefined' && QUIZ_MODE_SETS.has(s.id))
+      ? ' · letters/English' : '';
+    return `<label class="setrow"><input type="checkbox" data-id="${s.id}">
+      <span class="id">${ROMAN[s.id]}</span>
+      <span class="nm">${s.title}<span class="meta">Set ${ROMAN[s.id]}${modeNote}</span></span></label>`;
+  }).join('');
+}
+
+function selectedIds(){
+  return [...$('setList').querySelectorAll('input[type=checkbox]:checked')].map(x=>+x.dataset.id);
+}
+
+function setStatus(msg, cls){
+  const s = $('status');
+  s.className = 'status' + (cls ? ' '+cls : '');
+  s.innerHTML = msg;
+}
+
+function syncDiffHint(){
+  const d = +$('diffSel').value;
+  $('diffHint').textContent = (DIFF && DIFF[d] && DIFF[d].label) || ('Level '+ROMAN[d]);
+}
+
+$('modeLet').onclick = ()=>{ mode='letters'; $('modeLet').classList.add('on'); $('modeEng').classList.remove('on'); };
+$('modeEng').onclick = ()=>{ mode='english'; $('modeEng').classList.add('on'); $('modeLet').classList.remove('on'); };
+$('diffSel').onchange = syncDiffHint;
+$('selAll').onclick = ()=>$('setList').querySelectorAll('input').forEach(i=>i.checked=true);
+$('selNone').onclick = ()=>$('setList').querySelectorAll('input').forEach(i=>i.checked=false);
+
+function generateItems(){
+  const ids = selectedIds();
+  if(!ids.length) throw new Error('Select at least one exercise set.');
+  const n = Math.max(1, Math.min(40, +$('countBox').value || 10));
+  const diff = +$('diffSel').value || 3;
+  if(typeof resetSessionOneShots==='function') resetSessionOneShots();
+  const items = [];
+  const seen = new Set();
+  for(const id of ids){
+    const title = (QUIZ_SETS.find(s=>s.id===id)||{}).title || ('Set '+id);
+    let made = 0, tries = 0;
+    while(made < n && tries < n*30){
+      tries++;
+      let q;
+      try{ q = generateQuizQuestion(id, diff, mode); }
+      catch(e){ console.warn(e); continue; }
+      if(!q) continue;
+      const fp = quizFingerprint(q);
+      if(seen.has(fp)) continue;
+      seen.add(fp);
+      const formatted = formatQuizItem(q);
+      items.push({setId:id, setTitle:title, roman:ROMAN[id], q, formatted});
+      made++;
+    }
+    if(made < n) console.warn('Only generated', made, 'for set', id);
+  }
+  if(!items.length) throw new Error('No questions could be generated. Try another level or set.');
+  return {items, diff, n};
+}
+
+function renderPaper(bundle){
+  const {items, diff} = bundle;
+  const course = $('courseName').value.trim();
+  const teacher = $('teacherName').value.trim();
+  const date = $('quizDate').value.trim() || todayStr();
+  const covers = [...new Set(items.map(it => ROMAN[it.setId]+' · '+it.setTitle))];
+  const levelLabel = (DIFF && DIFF[diff] && DIFF[diff].label) || ('Level '+ROMAN[diff]);
+
+  let head = `<div class="qhead"><div class="ttl"><h1>Ars Syllogistica · Quiz</h1>
+    <div class="meta">${course ? course+' · ' : ''}${teacher ? teacher+' · ' : ''}${date}<br>${levelLabel}</div></div></div>
+    <div class="namerow"><span>Name</span><span class="sm">Score</span></div>
+    <div class="covers"><b>Covers:</b> ${covers.join('; ')}</div>
+    <div class="rubric"><b>Directions.</b> Answer every question. For multiple choice, circle the letter.
+      For “valid / invalid” and similar, circle the correct option. Where a blank is given, write the answer in standard form
+      (or <i>none</i>, when nothing follows). Diagram questions: mark the blank circles — shade empty regions; place × where something exists.</div>`;
+
+  let qs = '<ol class="qs">';
+  items.forEach(it=>{
+    const f = it.formatted;
+    qs += `<li class="qitem"><div class="qsetline">Set ${it.roman} · ${it.setTitle}</div>`;
+    if(f.instr) qs += `<div class="qinstr">${f.instr}</div>`;
+    qs += `<div class="qbody">${f.stemHtml||''}</div>`;
+    if(f.choices && f.choices.length){
+      qs += '<ol class="ch">'+f.choices.map(c=>'<li>'+c.text+'</li>').join('')+'</ol>';
+    } else if(f.workClass){
+      qs += '<div class="ansline"></div>';
+      qs += `<div class="work ${f.workClass}"></div>`;
+    } else if(!f.stemHtml || !f.stemHtml.includes('blank-venn')){
+      qs += '<div class="ansline"></div>';
+    }
+    qs += '</li>';
+  });
+  qs += '</ol>';
+
+  let key = `<div class="qhead"><div class="ttl"><h1>Answer Key</h1>
+    <div class="meta">${date} · ${levelLabel}</div></div></div>
+    <div class="keynote"><b>For the instructor.</b> Detach these pages before distributing the quiz.
+      Answers are numbered to match the quiz. Each printing is freshly generated.</div>
+    <ol class="keys">`;
+  items.forEach(it=>{
+    const f = it.formatted;
+    key += `<li class="keyitem"><div class="kset">Set ${it.roman} · ${it.setTitle}</div>
+      <div class="ka"><b>${f.answerText||'—'}</b></div>`;
+    if(f.explainHtml) key += `<div class="kx">${f.explainHtml}</div>`;
+    if(f.diagramHtml) key += f.diagramHtml;
+    key += '</li>';
+  });
+  key += '</ol>';
+
+  $('paper').innerHTML = `<div class="sheet">${head}${qs}</div><div class="sheet key-sheet">${key}</div>`;
+  $('paper').classList.add('show');
+}
+
+$('genBtn').onclick = ()=>{
+  try{
+    const bundle = generateItems();
+    lastItems = bundle.items;
+    renderPaper(bundle);
+    $('printBtn').style.display = '';
+    setStatus('<b>'+bundle.items.length+' questions</b> ready. Scroll down to review, then Print / Save as PDF.', 'ok');
+    $('paper').scrollIntoView({behavior:'smooth', block:'start'});
+  }catch(e){
+    setStatus(e.message || String(e), 'err');
+  }
+};
+$('printBtn').onclick = ()=>window.print();
+
+buildSetList();
+syncDiffHint();
+</script>
+</body>
+</html>
