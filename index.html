@@ -71,9 +71,17 @@ body{
 #speak-toggle.speaking{
   background:var(--gold); color:#fff; border-color:var(--gold);
 }
+#speak-rate{
+  position:fixed; top:20px; right:120px; height:32px; min-width:58px;
+  border:1px solid var(--line); background:var(--card); color:var(--ink);
+  font-family:'Cinzel',serif; font-size:12px; letter-spacing:.08em;
+  border-radius:8px; padding:0 8px; z-index:50; box-shadow:var(--shadow);
+  cursor:pointer;
+}
 @media (max-width:420px){
   #dark-toggle{right:12px; width:40px; height:40px; font-size:18px}
   #speak-toggle{right:56px; width:40px; height:40px; font-size:16px}
+  #speak-rate{right:100px; top:16px; height:28px; min-width:52px; font-size:11px; padding:0 4px}
 }
 .wrap{max-width:880px; margin:0 auto; padding:34px 22px 70px}
 .screen{display:none}
@@ -485,6 +493,13 @@ h1{
 </head>
 <body>
 <button id="dark-toggle" title="Toggle dark mode">☾</button>
+<select id="speak-rate" title="Reading speed" aria-label="Reading speed">
+  <option value="1">1×</option>
+  <option value="1.5">1.5×</option>
+  <option value="2">2×</option>
+  <option value="2.5">2.5×</option>
+  <option value="3">3×</option>
+</select>
 <button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">🔊</button>
 <div class="wrap">
 
@@ -1265,7 +1280,7 @@ if(typeof document!=='undefined'){
   ];
   const state = {diff:1, mode:'letters', set:null, score:0,
                  answered:0, correct:0, streak:0, bestStreak:0, q:null, locked:false,
-                 mistakes:[]};
+                 mistakes:[], speakRate:1};
 
   /* ---- home ---- */
   const diffRow = $('diff-row');
@@ -3384,7 +3399,8 @@ if(typeof document!=='undefined'){
     try{ localStorage.setItem('arsDark', on?'1':'0'); }catch(err){}
   }
   darkBtn.onclick = ()=>setDark(!document.body.classList.contains('dark'));
-  try{ if(localStorage.getItem('arsDark')==='1') setDark(true); }catch(err){}
+  try{ if(localStorage.getItem('arsDark')==='1') setDark(true);
+  try{ const sr=parseFloat(localStorage.getItem('arsSpeakRate')); if(sr) state.speakRate=sr; }catch(e){} }catch(err){}
 
   /* ---- text-to-speech (browser voice) ----
      Reads the study card / intro / current question — not chrome (back, level,
@@ -3432,6 +3448,7 @@ if(typeof document!=='undefined'){
     /* Walk an element for readable text; skip pure chrome. */
     function shouldSkip(el){
       if(!el || el.nodeType!==1) return true;
+      if(el.id==='dark-toggle'||el.id==='speak-toggle'||el.id==='speak-rate') return true;
       const tag = el.tagName;
       if(tag==='SCRIPT' || tag==='STYLE' || tag==='NOSCRIPT') return true;
       if(el.getAttribute && el.getAttribute('aria-hidden')==='true') return true;
@@ -3739,7 +3756,7 @@ if(typeof document!=='undefined'){
         if(!queue.length){ setSpeakingUI(false); return; }
         const u = new SpeechSynthesisUtterance(queue.shift());
         if(voice) u.voice = voice;
-        u.rate = 0.95;
+        u.rate = state.speakRate || 1;
         u.pitch = 1;
         u.onend = next;
         u.onerror = ()=>{ setSpeakingUI(false); };
@@ -3759,6 +3776,18 @@ if(typeof document!=='undefined'){
         return;
       }
       speakChunks(chunkText(text));
+    }
+
+
+    const rateEl = $('speak-rate');
+    if(rateEl){
+      const allowed = [1, 1.5, 2, 2.5, 3];
+      if(allowed.indexOf(state.speakRate) < 0) state.speakRate = 1;
+      rateEl.value = String(state.speakRate);
+      rateEl.onchange = () => {
+        state.speakRate = parseFloat(rateEl.value) || 1;
+        try{ localStorage.setItem('arsSpeakRate', String(state.speakRate)); }catch(e){}
+      };
     }
 
     btn.onclick = ()=>{
