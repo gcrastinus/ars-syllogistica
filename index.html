@@ -54,35 +54,75 @@ body{
   transition:color .25s;
   background:var(--paper);
 }
-/* Top-right control pair: dark mode inward, audio at the outer corner */
+/* Top-right: play+speed unit, then dark alone at far right */
+.top-right-controls{
+  position:fixed; top:14px; right:16px;
+  display:flex; align-items:center; gap:8px; z-index:50;
+}
+.top-right-controls #dark-toggle{
+  position:static; top:auto; right:auto;
+}
 #dark-toggle{
-  position:fixed; top:14px; right:16px; width:44px; height:44px; border-radius:50%;
+  width:44px; height:44px; border-radius:50%;
   border:1px solid var(--line); background:var(--card); color:var(--gold); font-size:20px;
-  cursor:pointer; box-shadow:var(--shadow); z-index:50; transition:transform .15s;
+  cursor:pointer; box-shadow:var(--shadow); transition:transform .15s;
 }
 #dark-toggle:hover{transform:scale(1.08)}
+.speak-unit{
+  display:inline-flex; align-items:stretch; position:relative;
+  height:44px; border:1px solid var(--line); background:var(--card);
+  border-radius:22px; box-shadow:var(--shadow); z-index:51;
+}
 #speak-toggle{
-  position:fixed; top:14px; right:68px; width:44px; height:44px; border-radius:50%;
-  border:1px solid var(--line); background:var(--card); color:var(--gold); font-size:18px;
-  cursor:pointer; box-shadow:var(--shadow); z-index:50; transition:transform .15s, background .15s, color .15s;
-  line-height:1; display:flex; align-items:center; justify-content:center;
+  width:44px; border:none; background:transparent; color:var(--gold);
+  font-size:15px; cursor:pointer; box-shadow:none;
+  border-radius:22px 0 0 22px;
+  display:flex; align-items:center; justify-content:center; line-height:1;
+  flex-shrink:0; transition:background .15s, color .15s;
 }
-#speak-toggle:hover{transform:scale(1.08)}
 #speak-toggle.speaking{
-  background:var(--gold); color:#fff; border-color:var(--gold);
+  background:var(--gold); color:#fff;
 }
-#speak-rate{
-  position:fixed; top:20px; right:120px; height:32px; min-width:58px;
-  border:1px solid var(--line); background:var(--card); color:var(--ink);
+#speak-toggle:hover, .speak-rate-btn:hover, .speak-rate.open .speak-rate-btn{
+  background:var(--panel); color:var(--ink);
+}
+#speak-toggle.speaking:hover{
+  background:var(--gold); color:#fff;
+}
+.speak-rate{display:flex; position:relative;}
+.speak-rate-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:100%; min-width:28px; border:none; border-left:1px solid var(--line);
+  background:transparent; color:var(--gold);
+  font-size:11px; border-radius:0 22px 22px 0; padding:0 10px;
+  box-shadow:none; cursor:pointer; appearance:none; -webkit-appearance:none;
+  transition:background .15s, color .15s;
+}
+.speak-rate-menu{
+  position:absolute; top:calc(100% + 6px); right:0; margin:0; padding:6px;
+  list-style:none; min-width:4.5em; background:var(--card);
+  border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); z-index:60;
+}
+.speak-rate-menu[hidden]{display:none}
+.speak-rate-menu li{
   font-family:'Cinzel',serif; font-size:12px; letter-spacing:.08em;
-  border-radius:8px; padding:0 8px; z-index:50; box-shadow:var(--shadow);
-  cursor:pointer;
+  padding:7px 12px; border-radius:6px; cursor:pointer; color:var(--ink-soft); white-space:nowrap;
+}
+.speak-rate-menu li:hover, .speak-rate-menu li:focus{
+  background:var(--panel); color:var(--gold);
+}
+.speak-rate-menu li[aria-selected="true"]{
+  color:var(--gold); background:var(--paper2, var(--panel));
 }
 @media (max-width:420px){
-  #dark-toggle{right:12px; width:40px; height:40px; font-size:18px}
-  #speak-toggle{right:56px; width:40px; height:40px; font-size:16px}
-  #speak-rate{right:100px; top:16px; height:28px; min-width:52px; font-size:11px; padding:0 4px}
+  .top-right-controls{top:12px; right:12px; gap:6px}
+  #dark-toggle{width:40px; height:40px; font-size:18px}
+  .speak-unit{height:40px; border-radius:20px}
+  #speak-toggle{width:40px; font-size:14px; border-radius:20px 0 0 20px}
+  .speak-rate-btn{min-width:26px; font-size:10px; padding:0 8px; border-radius:0 20px 20px 0}
 }
+
+
 .wrap{max-width:880px; margin:0 auto; padding:34px 22px 70px}
 .screen{display:none}
 .screen.active{display:block; animation:fade .4s ease}
@@ -494,15 +534,22 @@ h1{
 </style>
 </head>
 <body>
-<button id="dark-toggle" title="Toggle dark mode">☾</button>
-<select id="speak-rate" title="Reading speed" aria-label="Reading speed">
-  <option value="1">1×</option>
-  <option value="1.5">1.5×</option>
-  <option value="2">2×</option>
-  <option value="2.5">2.5×</option>
-  <option value="3">3×</option>
-</select>
-<button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">🔊</button>
+<div id="top-right-controls" class="top-right-controls">
+<div id="speak-unit" class="speak-unit">
+<button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">▶</button>
+<div id="speak-rate" class="speak-rate">
+  <button type="button" class="speak-rate-btn" aria-haspopup="listbox" aria-expanded="false" title="Reading speed" aria-label="Reading speed">▾</button>
+  <ul class="speak-rate-menu" role="listbox" hidden>
+    <li role="option" data-rate="1" aria-selected="true">1×</li>
+    <li role="option" data-rate="1.5" aria-selected="false">1.5×</li>
+    <li role="option" data-rate="2" aria-selected="false">2×</li>
+    <li role="option" data-rate="2.5" aria-selected="false">2.5×</li>
+    <li role="option" data-rate="3" aria-selected="false">3×</li>
+  </ul>
+</div>
+</div>
+<button id="dark-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+</div>
 <div class="wrap">
 
   <!-- ============ HOME ============ -->
@@ -3425,7 +3472,7 @@ if(typeof document!=='undefined'){
     function setSpeakingUI(on){
       speaking = on;
       btn.classList.toggle('speaking', on);
-      btn.textContent = on ? '⏹' : '🔊';
+      btn.textContent = on ? '❚❚' : '▶';
       btn.title = on ? 'Stop reading' : 'Read this screen aloud';
       btn.setAttribute('aria-label', btn.title);
     }
@@ -3450,7 +3497,7 @@ if(typeof document!=='undefined'){
     /* Walk an element for readable text; skip pure chrome. */
     function shouldSkip(el){
       if(!el || el.nodeType!==1) return true;
-      if(el.id==='dark-toggle'||el.id==='speak-toggle'||el.id==='speak-rate') return true;
+      if(el.id==='dark-toggle'||el.id==='speak-toggle'||el.id==='speak-rate'||el.id==='speak-unit'||el.id==='top-right-controls'||(el.classList&&(el.classList.contains('speak-unit')||el.classList.contains('speak-rate')||el.classList.contains('top-right-controls')))) return true;
       const tag = el.tagName;
       if(tag==='SCRIPT' || tag==='STYLE' || tag==='NOSCRIPT') return true;
       if(el.getAttribute && el.getAttribute('aria-hidden')==='true') return true;
@@ -3782,15 +3829,55 @@ if(typeof document!=='undefined'){
 
 
     const rateEl = $('speak-rate');
-    if(rateEl){
-      const allowed = [1, 1.5, 2, 2.5, 3];
-      if(allowed.indexOf(state.speakRate) < 0) state.speakRate = 1;
-      rateEl.value = String(state.speakRate);
-      rateEl.onchange = () => {
-        state.speakRate = parseFloat(rateEl.value) || 1;
-        try{ localStorage.setItem('arsSpeakRate', String(state.speakRate)); }catch(e){}
-      };
+  if(rateEl){
+    const allowed = [1, 1.5, 2, 2.5, 3];
+    if(allowed.indexOf(state.speakRate) < 0) state.speakRate = 1;
+    const rateBtn = rateEl.querySelector('.speak-rate-btn');
+    const rateMenu = rateEl.querySelector('.speak-rate-menu');
+    function applyRateUI(r){
+      if(allowed.indexOf(r) < 0) r = 1;
+      state.speakRate = r;
+      if(rateMenu){
+        rateMenu.querySelectorAll('[data-rate]').forEach(li => {
+          li.setAttribute('aria-selected', parseFloat(li.getAttribute('data-rate')) === r ? 'true' : 'false');
+        });
+      }
     }
+    applyRateUI(state.speakRate);
+    function closeRateMenu(){
+      rateEl.classList.remove('open');
+      if(rateBtn) rateBtn.setAttribute('aria-expanded', 'false');
+      if(rateMenu) rateMenu.hidden = true;
+    }
+    function openRateMenu(){
+      rateEl.classList.add('open');
+      if(rateBtn) rateBtn.setAttribute('aria-expanded', 'true');
+      if(rateMenu) rateMenu.hidden = false;
+    }
+    if(rateBtn){
+      rateBtn.addEventListener('click', ev => {
+        ev.stopPropagation();
+        if(rateMenu && rateMenu.hidden) openRateMenu();
+        else closeRateMenu();
+      });
+    }
+    if(rateMenu){
+      rateMenu.addEventListener('click', ev => {
+        const li = ev.target.closest('[data-rate]');
+        if(!li) return;
+        applyRateUI(parseFloat(li.getAttribute('data-rate')) || 1);
+        try{ localStorage.setItem('arsSpeakRate', String(state.speakRate)); }catch(e){}
+        closeRateMenu();
+      });
+    }
+    document.addEventListener('click', ev => {
+      if(!rateEl.contains(ev.target)) closeRateMenu();
+    });
+    document.addEventListener('keydown', ev => {
+      if(ev.key === 'Escape') closeRateMenu();
+    });
+  }
+
 
     btn.onclick = ()=>{
       if(speaking) stopSpeak();
