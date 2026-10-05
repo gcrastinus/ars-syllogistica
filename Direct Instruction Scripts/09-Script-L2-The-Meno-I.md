@@ -2,7 +2,7 @@
 
 MATERIALS: whiteboard and marker; table clear for the signal tap. Leave room to write ANSWER / SWARM as column headers. No app device today.
 
-Teacher words in **bold**. (Stage directions in parentheses.) Expected response after →. **Signal** = tap the table. Every choral question: ask, pause for think-time, then signal. Individual turns are marked (9) and (12). Do not paraphrase a canonical wording until this script marks it FIRM. Today's new wording is not FIRM. Yesterday's "Logic is the art of reasoning well" may be treated as nearly firm — still require the exact sentence.
+Teacher words in **bold**. (Stage directions in parentheses.) Expected response after →. **Signal** = tap the table. Every choral question: ask, pause for think-time, then signal. Individual turns are marked (9) and (12). Do not paraphrase a canonical wording until this script marks it FIRM. Today's new wording is not FIRM. Yesterday's "Logic is the art of reasoning well" may be treated as nearly firm — still require the exact sentence. Yesterday's "Logic studies what belongs to things only because we know them" is reviewed today and is not yet FIRM.
 
 This is a review-and-draw-out lesson. The children retell the opening of the Meno; they do not memorize the dialogue. The drilled lesson is the One-Over-Many check.
 
@@ -23,6 +23,9 @@ ACT THREE — reasoning from what we know to what we don't yet know
 
 **What is logic about?** (pause; Signal)
 → Logic is about words insofar as they signify things through our thoughts.
+
+**What does logic study?** (pause; Signal)
+→ Logic studies what belongs to things only because we know them.
 
 **Why does the mind need logic?** (pause; Signal)
 → The mind makes tools so it can work well.
@@ -78,6 +81,7 @@ ACT THREE — reasoning from what we know to what we don't yet know
 ### CORRECTION — Review
 Wording slip on "What is logic?": **Listen. Logic is the art of reasoning well. What is logic?** (pause; Signal) → Logic is the art of reasoning well.
 Wording slip on "What is logic about?": model the full sentence, then retest. Do not accept a shortened form.
+Wording slip on "What does logic study?": **Listen. Logic studies what belongs to things only because we know them. What does logic study?** (pause; Signal) → full sentence. Do not accept "logic studies things."
 Called a question ACT TWO: **A question asks. It does not say what is. Is the dog outside?** (pause; Signal) → NOT A STATEMENT ABOUT WHAT IS. Then: **Dogs bark.** (pause; Signal) → ACT TWO
 Called a single word ACT TWO: **One word names. Dog.** (pause; Signal) → ACT ONE
 Called an act-three item ACT TWO: **Hear so. We go from what we know to something further.** Repeat the item. (pause; Signal) → ACT THREE
@@ -437,6 +441,7 @@ Use these to replace a weak item or to firm tomorrow. Same constraints.
 **T1 review**
 - What is logic? → Logic is the art of reasoning well.
 - What is logic about? → Logic is about words insofar as they signify things through our thoughts.
+- What does logic study? → Logic studies what belongs to things only because we know them.
 - *knife* → ACT ONE
 - *the knife is sharp* → ACT TWO
 - *Is the knife sharp?* → NOT A STATEMENT ABOUT WHAT IS

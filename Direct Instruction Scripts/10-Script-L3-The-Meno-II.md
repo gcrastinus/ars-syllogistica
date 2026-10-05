@@ -2,7 +2,7 @@
 
 MATERIALS: whiteboard and marker; table clear for the signal tap. Write the two Definition Rules and leave them up. No app device today.
 
-Teacher words in **bold**. (Stage directions in parentheses.) Expected response after →. **Signal** = tap the table. Every choral question: ask, pause for think-time, then signal. Individual turns are marked (9) and (12). Do not paraphrase a canonical wording until this script marks it FIRM. The two Definition Rules are not FIRM today. "Logic is the art of reasoning well" and the three act names are FIRM enough to require exact wording without chunking.
+Teacher words in **bold**. (Stage directions in parentheses.) Expected response after →. **Signal** = tap the table. Every choral question: ask, pause for think-time, then signal. Individual turns are marked (9) and (12). Do not paraphrase a canonical wording until this script marks it FIRM. The two Definition Rules are not FIRM today. "Logic is the art of reasoning well" and the three act names are FIRM enough to require exact wording without chunking. "Logic studies what belongs to things only because we know them" is reviewed and is not yet FIRM.
 
 Track T6 (definition testing by counterexample) starts today and reviews in every remaining lesson of Units 0–1.
 
@@ -26,6 +26,9 @@ SWARM  = a list of X's
 
 **What is logic about?** (pause; Signal)
 → Logic is about words insofar as they signify things through our thoughts.
+
+**What does logic study?** (pause; Signal)
+→ Logic studies what belongs to things only because we know them.
 
 **Act one —** (pause; Signal)
 → grasping what a thing is
@@ -400,6 +403,7 @@ Use these to replace a weak item or to firm tomorrow. Same constraints. Every ju
 
 **T1 / SWARM review**
 - What is logic? → Logic is the art of reasoning well.
+- What does logic study? → Logic studies what belongs to things only because we know them.
 - *knife* → ACT ONE
 - *the knife is sharp* → ACT TWO
 - What is a tree? Oaks, pines, and maples. → SWARM

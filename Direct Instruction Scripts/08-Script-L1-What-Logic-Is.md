@@ -134,6 +134,8 @@ WORDS  →  THOUGHTS  →  THINGS
 
 **Words signify thoughts. Thoughts are likenesses of things.**
 
+**"Signify" means "make known to the mind." The word dog makes my thought of a dog known.**
+
 **Logic is not about ink or noise. Logic is about words insofar as they signify things through our thoughts.**
 
 **Say that with me in parts.**
@@ -190,6 +192,41 @@ WORDS  →  THOUGHTS  →  THINGS
 Dropped words ("Logic is about words and things"): **The whole wording. Logic is about words insofar as they signify things through our thoughts. What is logic about?** (pause; Signal) → (full sentence)
 If a student says logic is about thoughts only, or things only: **Logic is about words — insofar as they signify things through our thoughts.** Point along the board as they retry.
 If WORD/THOUGHT/THING order is reversed: point and rebuild: **Word first. Then thought. Then thing.** Retest with *bread* or *horse*.
+If a student says the word "stands for" the thought: **"Stand for" is a later word. Today: "signify" means "make known to the mind." The word dog makes my thought known.**
+Retest in section 4.
+
+---
+
+### 2B2. What logic studies
+
+**MODEL**
+
+**Logic is about words. It also studies something those words name. A genus, a species, a subject, a predicate — these belong to a thing only because we know it.**
+
+**Listen. Logic studies what belongs to things only because we know them.**
+
+**LEAD**
+
+**Say it with me. Logic studies what belongs to things only because we know them.** (pause; Signal)
+→ Logic studies what belongs to things only because we know them.
+
+**Again.** (pause; Signal)
+→ Logic studies what belongs to things only because we know them.
+
+**TEST**
+
+**What does logic study?** (pause; Signal)
+→ Logic studies what belongs to things only because we know them.
+
+**(12), what does logic study?**
+→ Logic studies what belongs to things only because we know them.
+
+**(9), what does logic study?**
+→ Logic studies what belongs to things only because we know them.
+
+#### CORRECTION — 2B2
+Wording slip: **Listen. Logic studies what belongs to things only because we know them. What does logic study?** (pause; Signal) → Logic studies what belongs to things only because we know them.
+Do not accept "logic studies things" or "logic studies thoughts" as the whole answer. The words "only because we know them" have to be there.
 Retest in section 4.
 
 ---
@@ -352,6 +389,9 @@ Retest every corrected item in section 4.
 **What is logic about?** (pause; Signal)
 → Logic is about words insofar as they signify things through our thoughts.
 
+**What does logic study?** (pause; Signal)
+→ Logic studies what belongs to things only because we know them.
+
 **Soccer is a sport.** (pause; Signal)
 → ACT TWO
 
@@ -403,6 +443,9 @@ Same procedures as 2A–2C. If two errors of one type, model that type once, the
 
 **(12), what is logic about?**
 → Logic is about words insofar as they signify things through our thoughts.
+
+**(9), what does logic study?**
+→ Logic studies what belongs to things only because we know them.
 
 **(9), act one —**
 → grasping what a thing is
@@ -469,7 +512,7 @@ None today. Ars Syllogistica begins in Lesson 7.
 
 ## 7. MASTERY NOTE
 
-Both students can, with no help: say "Logic is the art of reasoning well"; say "Logic is about words insofar as they signify things through our thoughts"; name the three acts in order in the simplified wording; sort "dog" as act one and "dogs bark" as act two.
+Both students can, with no help: say "Logic is the art of reasoning well"; say "Logic is about words insofar as they signify things through our thoughts"; say "Logic studies what belongs to things only because we know them"; name the three acts in order in the simplified wording; sort "dog" as act one and "dogs bark" as act two.
 
 If not: tomorrow open with section 4 of this lesson, then the 2A/2B/2C test items that failed, before any Lesson 2 story.
 
@@ -491,7 +534,9 @@ Use these to replace a weak item or to firm tomorrow. Same constraints.
 
 **2B wording and order**
 - What is logic about? → Logic is about words insofar as they signify things through our thoughts.
+- What does "signify" mean? → make known to the mind
 - I say *sun*. Point: word, then thought, then thing.
+- What does logic study? → Logic studies what belongs to things only because we know them.
 
 **2C extra positives (vary the matter)**
 - *knife* → ACT ONE

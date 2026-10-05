@@ -31,7 +31,7 @@ These bind every script. They are restated in 01-Script-Format-and-Standing-Prom
 ### Unit 0 — Orientation and the Meno (Lessons 1–3)
 The Meno is reviewed, not memorized: its key lessons are drawn out and *those lessons* are drilled, not the dialogue.
 
-- **L1. What Logic Is.** Logic as the art of reasoning well; words–thoughts–things; the mind-and-hand tool analogy; the three acts of the mind (apprehension, judgment/composing-and-dividing, reasoning). Sources: Andres Prologue; ECT article.
+- **L1. What Logic Is.** Logic as the art of reasoning well; words–thoughts–things; what logic studies (what belongs to things only because we know them); the mind-and-hand tool analogy; the three acts of the mind (apprehension, judgment/composing-and-dividing, reasoning). Sources: Andres Prologue; ECT article.
 - **L2. The Meno I — What Is Virtue?** Socrates's question; Meno's swarm of virtues; the one-over-many (all bees are alike as bees). Lesson drawn: an answer to "What is X?" must be one, and must fit every X.
 - **L3. The Meno II — Testing Answers.** Counterexample method; a definition must include every instance and exclude everything else; from known to unknown (slave-boy scene, previewed lightly — it returns in L28). Lessons drawn become the two Definition Rules used all program long.
 
@@ -39,9 +39,9 @@ The Meno is reviewed, not memorized: its key lessons are drawn out and *those le
 
 - **L4. Subject and Predicate; the Universal.** Andres Lesson 2. The universal: a word that can be predicated of more than one subject. Singular vs universal terms (feeds the app's letters convention: capitals for general terms, lower-case/proper names for singulars).
 - **L5. Genus and Species.** Andres Lesson 3. Tree diagrams (living thing → animal → dog).
-- **L6. Difference, Property, Accident.** Andres Lesson 3 completed. The five predicables assembled.
+- **L6. Difference, Property, Accident.** Andres Lesson 3 completed. The five predicables assembled, and named as second intentions.
 - **L7. Predicables Firming + Mastery Test 1.** App onboarding: tracking on; begin **Predicables** set (non-gating; ongoing).
-- **L8. Division.** Kinds and rules of division (enrichment from John of St. Thomas / Poinsot on the conditions of good division). App: begin **Division** set (gates Act II in the app).
+- **L8. Division.** Kinds and rules of division (enrichment from John of St. Thomas (Poinsot) on the conditions of good division). App: begin **Division** set (gates Act II in the app).
 - **L9. Definition.** Genus + specific difference; the two Meno rules formalized; rules of good definition (Poinsot enrichment: not wider, not narrower, clearer than the defined, no defining by negation without need). App: begin **Definition** set (gates Act II).
 - **L10. Using Names; the Ante-Predicaments.** Andres Lesson 4: equivocal, univocal, denominative naming; why a list of highest genera (categories) is needed.
 - **L11. Substance.** Andres Lesson 5. First and second substance; substance vs accident.
@@ -78,6 +78,7 @@ Scripts must use these exact formulations once introduced; models write around t
 - Logic is the art of reasoning well.
 - There is a twofold operation of the intellect... one is the understanding of simple objects... the other is the operation of composing and dividing. There is also a third operation, that of reasoning, by which reason proceeds from what is known to the investigation of things that are unknown.
 - Logic is about words insofar as they signify things through our thoughts.
+- Logic studies what belongs to things only because we know them.
 - The subject is that of which something is affirmed or denied; the predicate is what is affirmed or denied of the subject.
 - A universal is a word that can be predicated of more than one subject.
 - A genus is a kind of thing that has other kinds underneath it.

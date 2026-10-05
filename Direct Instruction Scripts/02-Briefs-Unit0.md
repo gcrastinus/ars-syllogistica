@@ -8,14 +8,15 @@ Paste one brief at a time under the standing prompt (file 01).
 
 **Objective.** Students can say what logic is, what it is about, why we need it, and name the three acts of the mind in order, with one example of each.
 
-**New concepts.** (1) Logic is the art of reasoning well. (2) Logic is about words insofar as they signify things through our thoughts. (3) The three acts of the mind.
+**New concepts.** (1) Logic is the art of reasoning well. (2) Logic is about words insofar as they signify things through our thoughts. (3) Logic studies what belongs to things only because we know them. (4) The three acts of the mind.
 
 **Canonical wordings.**
 - Logic is the art of reasoning well.
 - There is a twofold operation of the intellect... one is the understanding of simple objects, that is, the operation by which the intellect apprehends just the essence of a thing alone; the other is the operation of composing and dividing. There is also a third operation, that of reasoning, by which reason proceeds from what is known to the investigation of things that are unknown. (Simplify in speech to: Act one — grasping what a thing is. Act two — putting thoughts together to say true or false. Act three — reasoning from what we know to what we don't yet know.)
 - Logic is about words insofar as they signify things through our thoughts.
+- Logic studies what belongs to things only because we know them.
 
-**Doctrinal material for the script (use freely, no citation needed).** The mind is like the hand: the hand is a universal tool that can do almost anything but few things well, so it makes tools — knife, shovel — to work well; the mind likewise makes tools for itself — precise words, statements, arguments — and logic studies how to make these tools well. Words signify thoughts, thoughts are likenesses of things: the triple order words–thoughts–things.
+**Doctrinal material for the script (use freely, no citation needed).** The mind is like the hand: the hand is a universal tool that can do almost anything but few things well, so it makes tools — knife, shovel — to work well; the mind likewise makes tools for itself — precise words, statements, arguments — and logic studies how to make these tools well. Words signify thoughts, thoughts are likenesses of things: the triple order words–thoughts–things. "Signify" means "make known to the mind." The word makes the thought known. Logic studies what belongs to things only because we know them — genus and species are of that kind. Do not use the name "second intention" today; Lesson 6 names it.
 
 **Example sequences.** Sort utterances into the three acts: "dog" (act 1) / "dogs are animals" (act 2) / "all animals move themselves, so dogs move themselves" (act 3). At least 6 sorted items varying wildly (single words, statements, little arguments); negatives: a question ("Is the dog outside?") and a command ("Sit!") — neither is any act's finished product yet; hold these for L17 payoff, today just "not a statement about what is."
 
@@ -23,7 +24,7 @@ Paste one brief at a time under the standing prompt (file 01).
 
 **Deeper (12yo).** Greek *logos* = word/reason; why one word covers both.
 
-**Mastery note.** Both can answer: What is logic? What are the three acts, in order? Which act is "dog"? Which is "dogs bark"?
+**Mastery note.** Both can answer: What is logic? What is logic about? What does logic study? What are the three acts, in order? Which act is "dog"? Which is "dogs bark"?
 
 ---
 

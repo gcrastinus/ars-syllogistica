@@ -2495,15 +2495,15 @@ function genDivQ(d){
    SET I — THE FIVE PREDICABLES (Porphyry, Isagoge)
    The five ways a general term may be said of a subject: genus,
    species, differentia, property (proprium), accident. The core
-   account follows the author's article (the predicables treat of
-   secondary substance and are second intentions founded in
-   reality); the examples are Porphyry's and Aristotle's own —
+   account follows the author's article (the predicables are
+   second intentions — relations things have only because they
+   are known — founded in what the things are); the examples are Porphyry's and Aristotle's own —
    animal/man, rational, risibility, the black raven — supplemented
    from the wider corpus but kept to their teaching.
    Tiers as in Definition/Division: 1 homely, 2 classical but plain,
    3 subtle, 5 reserved for the Master level.
    ================================================================ */
-const PRED_RULES = 'The five predicables (Porphyry): genus, species, difference, property, and accident — the five ways a general term can be said of a subject. The genus is the wider kind; the species the narrower kind under it; the difference is the mark that divides the genus and makes the species; the property follows from what the thing is and belongs to that species alone, always; the accident may come or go while the subject stays the same thing.';
+const PRED_RULES = 'The five predicables (Porphyry): genus, species, difference, property, and accident — the five ways a general term can be said of a subject. The genus is the wider kind; the species the narrower kind under it; the difference is the mark that divides the genus and makes the species; the property follows from what the thing is and belongs to that species alone, always; the accident may be present or absent while the subject stays the same thing.';
 const PRED_NAME = {gen:'genus', spec:'species', diff:'difference', prop:'property', acc:'accident'};
 const PRED_DOCTRINE = {
   gen:'A GENUS is said of many things of different kinds, naming the broader class they share; it answers “what is it?” with the wider nature. Animal is the genus of man.',
@@ -2537,30 +2537,26 @@ const PRED_ITEMS = {
     {tier:2, subj:'daisy', t:'This flower is a daisy', w:'the species daisy, said of the single flower that falls under it.'},
     {tier:2, subj:'oak', t:'This tree is an oak', w:'the species oak, said of the single tree that falls under it.'},
     {tier:3, subj:'Plato', t:'Plato is a man', w:'the species man, said of the individual Plato.'},
-    {tier:5, subj:'lamb', t:'This young sheep is a lamb', w:'the lowest species, said of the individual that falls under it.'}
+    {tier:5, subj:'sheep', t:'This animal is a sheep', w:'the lowest species, said of the individual that falls under it.'}
   ],
   diff: [
-    {tier:1, subj:'man', t:'Man is rational', w:'being able to reason — the difference that divides animal and makes man (Porphyry; the tree).'},
+    {tier:1, subj:'man', t:'Man is rational', nosort:true, w:'being able to reason — the difference that divides animal and makes man (Porphyry; the tree).'},
     {tier:1, subj:'triangle', t:'A triangle is three-sided', w:'having three sides — the difference that marks the triangle off from every other figure.'},
-    {tier:2, subj:'angel', t:'An angel has no body', w:'having no body — the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
-    {tier:2, subj:'lamb', t:'A lamb is young', w:'youth — the difference that marks the lamb off from the rest of the sheep.'},
+    {tier:2, subj:'angel', t:'An angel has no body', nosort:true, w:'having no body — the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
     {tier:2, subj:'body', t:'A body takes up space', w:'taking up space — the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
     {tier:3, subj:'animal', t:'An animal can sense', w:'the power of sense — the difference that divides living things and makes the animal (the tree of Porphyry).'},
-    {tier:3, subj:'plant', t:'A plant cannot sense', w:'lacking the power of sense — the difference that marks the plant off from the animal (the tree of Porphyry).'},
-    {tier:5, subj:'number', t:'This number is even', w:'even — the difference that divides the genus number into the kinds beneath it.'}
+    {tier:3, subj:'plant', t:'A plant cannot sense', nosort:true, w:'lacking the power of sense — the difference that marks the plant off from the animal (the tree of Porphyry).'},
+    {tier:5, subj:'number', t:'This number is even', nosort:true, w:'even — the difference that divides the genus number into the kinds beneath it.'}
   ],
   prop: [
     {tier:1, subj:'man', t:'Man is able to laugh', w:'the power to laugh belongs to man alone, to every man, and always; it follows from reason yet is no part of what a man is (the classic property).'},
-    {tier:1, subj:'magnet', t:'A magnet draws iron', w:'drawing iron belongs to magnets alone, to every magnet, and always — it follows from what a magnet is, yet is not what a magnet is.'},
-    {tier:2, subj:'man12', t:'Man is able to speak', w:'speech belongs to man alone, to every man, and always — it follows from his reason, yet is not what a man is (Porphyry).'},
-    {tier:2, subj:'bee', t:'A bee makes honey', w:'making honey belongs to bees alone, to every bee, and always — it follows from what a bee is, yet is not what a bee is.'},
+    {tier:2, subj:'man13', t:'Man is able to learn grammar', w:'Aristotle’s own example of a property (Topics I.5): it belongs to man alone, to every man, and always, and it swaps, for whatever can learn grammar is a man.'},
     {tier:2, subj:'triangle', t:'A triangle has its angles equal to two right angles', w:'a property — it follows from what a triangle is and always goes with it, yet is not what a triangle is (Aristotle’s model of a per se accident).'},
-    {tier:3, subj:'ice', t:'Ice floats on water', w:'floating belongs to ice alone among the forms of water, to all ice, and always — it follows from what ice is, yet is not what ice is.'},
-    {tier:3, subj:'square', t:'A square’s diagonals cross at right angles', w:'it follows from what a square is and holds of every square, yet it is not what a square is.'},
-    {tier:5, subj:'oak', t:'An oak bears acorns', w:'bearing acorns belongs to oaks alone, to every oak, and always — it follows from what an oak is, yet is not what an oak is.'}
+    {tier:3, subj:'square', t:'A square’s diagonals are equal and cut each other in half at right angles', w:'it follows from what a square is, holds of every square and of no other four-sided figure, yet it is not what a square is.'},
+    {tier:5, subj:'oak', t:'An oak is able to bear acorns', w:'the power to bear acorns belongs to oaks alone and to every oak, always. A sapling bears none yet, but it has the power. It follows from what an oak is, yet is not what an oak is.'}
   ],
   acc: [
-    {tier:1, subj:'Socrates', t:'Socrates is white', w:'whiteness is present in him but is no part of what he is; he might be dark and still be Socrates (a separable accident).'},
+    {tier:1, subj:'Socrates', t:'Socrates is pale', w:'paleness is present in him but is no part of what he is. He can tan, and he is still Socrates (a separable accident).'},
     {tier:1, subj:'apple', t:'This apple is ripe', w:'ripeness comes and goes; the apple is no less an apple unripe.'},
     {tier:1, subj:'peter', t:'Peter is seated', w:'sitting — a posture the man takes up and puts off again, changing nothing of what he is.'},
     {tier:1, subj:'door', t:'The door is open', w:'being open is a passing state of the door, no part of what a door is.'},
@@ -2573,7 +2569,9 @@ const PRED_ITEMS = {
     {tier:2, subj:'raven', t:'A raven is black', w:'an inseparable accident: blackness never leaves the raven, yet being a raven does not consist in being black (Porphyry).'},
     {tier:2, subj:'man9', t:'This man is sitting', w:'sitting — a separable accident that comes and goes while the man stays the same (Porphyry).'},
     {tier:2, subj:'man10', t:'This man is musical', w:'Aristotle’s stock accident: the same man may be musical or not, and be the same man either way.'},
-    {tier:2, subj:'swan', t:'This swan is white', w:'whiteness never leaves the swan, yet being a swan does not consist in being white — an inseparable accident.'},
+    {tier:2, subj:'swan', t:'This swan is white', w:'whiteness is in this swan but is no part of what a swan is. Not every swan is white, and white is said of many other things.'},
+    {tier:2, subj:'man14', t:'This man is laughing', w:'laughing comes and goes; the power to laugh is the property, the act is an accident (Porphyry).'},
+    {tier:2, subj:'boy2', t:'This boy knows grammar', w:'knowing grammar is gained and can be lost; being able to learn it is the property (Topics I.5).'},
     {tier:2, subj:'wine', t:'This wine is warm', w:'warmth is an accident the wine takes on and readily loses.'},
     {tier:2, subj:'soldier', t:'The soldier is weary', w:'weariness — a passing state, no part of what a soldier is.'},
     {tier:2, subj:'mary', t:'Mary is cheerful', w:'cheerfulness comes and goes; the person stays the same person through the change.'},
@@ -2637,14 +2635,18 @@ const PRED_PRINCIPLES = [
    correct:'Substance',
    ds:['Animal','Man','Socrates'],
    why:'Substance is the highest genus of all (genus generalissimum) — said of everything beneath it, but falling under no wider kind (the tree of Porphyry).'},
+  {tier:2, q:'In “Man is a species,” what does man stand for?',
+   correct:'The nature as known, not for any man — simple supposition',
+   ds:['The particular men there are','The written letters only','Nothing, because no man is a species'],
+   why:'No particular man is a species. The term stands for the nature as known. Signification has not changed; supposition has. Supposition is a property of terms in logic, and this art is its home.'},
   {tier:2, q:'Which of these is an individual — neither a genus nor a species, but only something things are said about?',
    correct:'Socrates',
    ds:['Animal','Man','Substance'],
    why:'An individual such as Socrates is never said of anything else; things are only ever said of him. Man is the lowest species, animal a middle genus, substance the highest genus.'},
   {tier:2, q:'How do genus and species stand in relation to the ten categories?',
-   correct:'They are second intentions — the mind’s ways of saying one thing of another, grounded in reality',
+   correct:'They are second intentions — relations those things have only because they are known — though grounded in what the things are',
    ds:['They are individual substances existing outside the mind','They are the ten highest kinds of real being','They are mere names, with no basis in things'],
-   why:'Aristotle and St Thomas: the predicables come from the mind’s way of knowing, yet they are grounded in the real natures of things. The categories, by contrast, divide real being itself.'},
+   why:'The categories sort what things are, as we first know them (first intentions). Genus and species are relations a nature has as known. They are grounded in what the things are, and they are not mere names.'},
   {tier:3, q:'Porphyry gives several senses of “property.” In the strict sense, a property belongs…',
    correct:'To the whole species, to it alone, and always',
    ds:['To one species, but not to all its members','To the whole species, but to other species as well','To the whole species and it alone, but only at times'],
@@ -2658,30 +2660,78 @@ const PRED_PRINCIPLES = [
    review): their key is banked here and reset when a session begins. */
 const SESSION_ONESHOT = new Set();
 function oneShotFree(x){ return !(x.once && SESSION_ONESHOT.has(x.once)); }
-function genPredPrincipleQ(d){
+function genPredPrincipleQ(d, list=PRED_PRINCIPLES){
   /* favour the weightier doctrine at the higher levels: at Levels IV–V the
      easy tier-1 principles drop away, leaving the subtler points. */
   const tiers = defTiers(d);
-  let pool = PRED_PRINCIPLES.filter(x=> tiers.indexOf(x.tier)>=0 && oneShotFree(x));
-  if(!pool.length) pool = PRED_PRINCIPLES.filter(x=> (d>=2 || x.tier===1) && oneShotFree(x));
-  if(!pool.length) pool = PRED_PRINCIPLES.filter(oneShotFree);
-  if(!pool.length) pool = PRED_PRINCIPLES;
+  let pool = list.filter(x=> tiers.indexOf(x.tier)>=0 && oneShotFree(x));
+  if(!pool.length) pool = list.filter(x=> (d>=2 || x.tier===1) && oneShotFree(x));
+  if(!pool.length) pool = list.filter(oneShotFree);
+  if(!pool.length) pool = list;
   const it = recentPick(pool, x=>x.q);
   if(it.once) SESSION_ONESHOT.add(it.once);
   return mc4Make({ruleShow:'', prompt:'',
     options:[it.correct].concat(it.ds), correct:it.correct,
     why: it.why, rules: PRED_RULES, mcInstr: it.q});
 }
+/* Two questions sort genus, difference, property, and accident.
+   The sentence is the prompt; the renderer supplies the quotation marks.
+   Items marked nosort do not answer the two questions cleanly. */
+const PRED_SORT_OPTS = {
+  gen:'Part of what the subject is, and said of more than it',
+  diff:'Part of what the subject is, and said of it alone',
+  prop:'Not part of what the subject is, yet said of it alone, of all, always',
+  acc:'Not part of what the subject is, and not said of it alone'
+};
+function genPredSortQ(d){
+  const tiers = defTiers(d), kinds = ['gen','diff','prop','acc'];
+  const k = rand(kinds);
+  let pool = PRED_ITEMS[k].filter(x=>!x.nosort && tiers.indexOf(x.tier)>=0);
+  if(!pool.length) pool = PRED_ITEMS[k].filter(x=>!x.nosort);
+  const it = recentPick(pool, x=>x.t);
+  return mc4Make({ruleShow:'', prompt: it.t,
+    options: kinds.map(j=>PRED_SORT_OPTS[j]), correct: PRED_SORT_OPTS[k],
+    why: `So it gives the ${PRED_NAME[k]}: ${it.w}`, rules: PRED_RULES,
+    mcInstr: 'Two questions about the predicate. Is it part of what the subject is? Is it said of that subject alone?'});
+}
+const PRED_SWAP = [
+  {tier:1, q:'Does it swap? Every man is able to laugh. Is everything able to laugh a man?',
+   correct:'Yes; so it goes with man alone and always: a property',
+   ds:['No; it is said of more than man, as a genus is','No; it comes and goes, as an accident does','Yes; so it is part of what a man is'],
+   why:'A property swaps with its species, yet is not part of what the thing is (Topics I.5).'},
+  {tier:1, q:'Does it swap? Every man is an animal. Is every animal a man?',
+   correct:'No; animal is said of more than man: a genus',
+   ds:['Yes; so animal is a property of man','No; animal is an accident of man','Yes; so animal is the difference of man'],
+   why:'A genus is said of more than any one species under it.'},
+  {tier:2, q:'Does it swap? Every raven is black. Is everything black a raven?',
+   correct:'No; much is black that is not a raven: an inseparable accident',
+   ds:['Yes; so black is a property of the raven','No; black is the genus of raven','Yes; so black is part of what a raven is'],
+   why:'Even an accident that never leaves its subject is said of other things too (Porphyry).'},
+  {tier:2, q:'Does it swap? Every triangle has its angles equal to two right angles. Is every figure with that angle sum a triangle?',
+   correct:'Yes; so it goes with the triangle alone: a property',
+   ds:['No; squares have it too','Yes; so it is the difference of the triangle','No; it is an accident of some triangles'],
+   why:'Aristotle’s model property: it follows from what a triangle is and swaps with it.'}
+];
+const PRED_PAIRS = [
+  {tier:1, q:'“Man is able to laugh.” “This man is laughing.” Which gives the property?',
+   correct:'“Man is able to laugh”: the power is always there; the laughing comes and goes',
+   ds:['“This man is laughing”: it is what we see','Both: they say the same thing','Neither: laughing is part of what a man is'],
+   why:'Porphyry: a man is always able to laugh, though not always laughing. The power is the property; the act is an accident.'},
+  {tier:2, q:'“Man is able to learn grammar.” “This boy knows grammar.” Which gives an accident?',
+   correct:'“This boy knows grammar”: knowledge is gained and can be lost',
+   ds:['“Man is able to learn grammar”: not every man learns it','Both: grammar is an art, and arts are accidents','Neither: both are properties of man'],
+   why:'Being able to learn grammar is Aristotle’s example of a property (Topics I.5); actually knowing it is an accident of this boy.'}
+];
 /* The kinds of question this exercise can ask. Each is drilled with a
    short-term cooldown: once a kind is asked it is barred from the next TWO
    questions, returning to the pool on the third — so no run of, say, four
    “which is the property?” questions in a row. Within the available kinds the
    subtler ones (differentia, property, and the doctrine questions) are
    favoured, the more so as the level rises. */
-const PRED_QTYPES = ['principle','id-gen','id-spec','id-diff','id-prop','id-acc'];
+const PRED_QTYPES = ['principle','sort','swap','pair','id-gen','id-spec','id-diff','id-prop','id-acc'];
 let PRED_RECENT_QTYPES = [];
 function predQTypeWeight(t, d){
-  const bump = {'id-diff':1, 'id-prop':1, 'principle':1, 'id-spec':0.5};   /* the harder kinds */
+  const bump = {'id-diff':1, 'id-prop':1, 'principle':1, 'id-spec':0.5, 'sort':0.5};   /* the harder kinds */
   return 2 + (bump[t]||0) * Math.max(0, d-1);   /* uniform at Level I; tilts higher by Level V */
 }
 function genPredicableQ(d){
@@ -2693,7 +2743,11 @@ function genPredicableQ(d){
   for(let i=0;i<pool.length;i++){ r -= weights[i]; if(r<=0){ pick = pool[i]; break; } }
   PRED_RECENT_QTYPES.push(pick);
   while(PRED_RECENT_QTYPES.length>2) PRED_RECENT_QTYPES.shift();   /* barred for the next two */
-  return pick==='principle' ? genPredPrincipleQ(d) : genPredIdentifyQ(d, pick.slice(3));
+  if(pick==='principle') return genPredPrincipleQ(d);
+  if(pick==='sort') return genPredSortQ(d);
+  if(pick==='swap') return genPredPrincipleQ(d, PRED_SWAP);
+  if(pick==='pair') return genPredPrincipleQ(d, PRED_PAIRS);
+  return genPredIdentifyQ(d, pick.slice(3));
 }
 /* Generic short-term cooldown: keep a question KIND from recurring within the
    next two questions of a set. `sigFn` maps a generated question to a signature
@@ -2848,9 +2902,9 @@ const CAT_PRINCIPLES = [
    ds:['The place in which a thing is','What a thing has on it','The time at which a thing acts'],
    why:'Posture (situs) differs from where (the place itself) and from habit: it is the arrangement of the parts — lying, sitting, standing (Metaphysics V, lect. 9).'},
   {tier:3, q:'How do the ten categories differ from the five predicables?',
-   correct:'The categories are about real things themselves (first intentions); the predicables are about the mind’s ways of saying one thing of another (second intentions)',
-   ds:['The categories are in the mind, the predicables in things','They are two names for the same ten kinds','The predicables concern bodies, the categories spirits'],
-   why:'The categories divide real being. The predicables (genus, species, and the rest) are second intentions — ways the mind relates one term to another — though grounded in how things really are.'},
+   correct:'The categories sort what things are, as we first know them (first intentions); the predicables are relations those things have only because they are known (second intentions)',
+   ds:['The categories are in the mind alone, the predicables in things apart from knowledge','They are two names for the same ten kinds','The predicables concern bodies, the categories spirits'],
+   why:'A first intention is a reality as known, not a thing apart from knowledge. A second intention is a relation things have only because they are known, though grounded in what the things are.'},
   {tier:3, q:'To which category does “knowledge,” taken as a stable state of the soul, belong?',
    correct:'Quality',
    ds:['Substance','Relation','Action'],
@@ -2987,7 +3041,7 @@ const ENTH_POOL = [
   {tier:1, txt:'She has given birth, for she has milk.',
    correct:'Whoever has milk has given birth',
    traps:['Whoever has given birth has milk','Some mothers have milk','Milk is nourishing'],
-   why:'Aristotle’s own example (Rhetoric II.27) of the necessary sign — the one kind of sign-argument that concludes of necessity. Note it needs the premise in this direction, not its converse.'},
+   why:'Aristotle’s own example (Rhetoric I.2; Prior Analytics II.27) of the necessary sign — the one kind of sign-argument that concludes of necessity. Note it needs the premise in this direction, not its converse.'},
   {tier:1, txt:'He cannot be trusted — he is a politician.',
    correct:'No politicians can be trusted',
    traps:['Some politicians cannot be trusted','No trustworthy man is in politics by choice','Politicians seek power'],
@@ -4095,7 +4149,7 @@ if(typeof module!=='undefined' && module.exports){
     genDefQ, genDivQ, genDivComputedQ, divVerdict, DIV_SOUND_LIST, DIV_OPTS, DIV_OPT_OF,
     mc4Make, divText, DEF_ITEMS, DEF_RULE_META, DEF_KIND_STOCK, genDefRuleQ, genDefKindQ,
     DIV_STOCK, DIV_RULE_META, DIVKIND_STOCK, genDivRuleQ, genDivKindQ,
-    genPredicableQ, genPredIdentifyQ, genPredPrincipleQ, PRED_ITEMS, PRED_DOCTRINE, PRED_NAME, PRED_PRINCIPLES,
+    genPredicableQ, genPredIdentifyQ, genPredPrincipleQ, genPredSortQ, PRED_ITEMS, PRED_DOCTRINE, PRED_NAME, PRED_PRINCIPLES, PRED_SWAP, PRED_PAIRS, PRED_SORT_OPTS,
     genCategoryQ, genCatNameQ, genCatWhichWordQ, genCatPrincipleQ, CAT_WORDS, CAT_KEYS, CAT_NAME, CAT_DOCTRINE, CAT_PRINCIPLES,
     resetSessionOneShots, genChainQ,
     genFallacyQ, genFalNameQ, genFalSideQ, genFalAppearQ, genFalDefectQ, genFalAnswerQ,

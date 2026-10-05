@@ -19,7 +19,7 @@
 
 > **Never ask a counting question in a lesson that sorts the acts.** "How many legs does a dog have?" → *Four* collides with ONE / TWO / THREE. Lesson 1's warm-up was rewritten to remove every number answer for exactly this reason. Keep it that way in later units.
 
-**Canonical wordings** are printed in full and must be said exactly as printed. Do not paraphrase them, shorten them, or improve them until a script marks them FIRM. Nothing is FIRM in Lesson 1. By Lesson 3, *Logic is the art of reasoning well* and the three act names may be required whole, without chunking.
+**Canonical wordings** are printed in full and must be said exactly as printed. Do not paraphrase them, shorten them, or improve them until a script marks them FIRM. Nothing is FIRM in Lesson 1. By Lesson 3, *Logic is the art of reasoning well* and the three act names may be required whole, without chunking. *Logic studies what belongs to things only because we know them* is introduced in Lesson 1 and reviewed in Lessons 2 and 3. It is not yet FIRM. The name "second intention" waits until Lesson 6.
 
 **Counterexamples are not scripted answers.** From Lesson 3 on, the sample after each arrow is one correct answer, not the only one. A child who says *brown dogs* where the page says *white dogs* is right. Accept any true instance left out, or any true outsider let in.
 
@@ -177,7 +177,7 @@ WORDS  →  THOUGHTS  →  THINGS
 
 **Logic is about three things in a row.** (Point along the board.) **I say the word "apple."** (point to WORDS) **The word puts a thought of an apple in your mind.** (point to THOUGHTS) **And your thought is a likeness of the real apple.** (point to THINGS)
 
-**Words signify thoughts. Thoughts are likenesses of things. "Signify" means "stand for."**
+**Words signify thoughts. Thoughts are likenesses of things. "Signify" means "make known to the mind." The word makes my thought known.**
 
 **Logic is not about ink, and not about noise. Here is the sentence. Logic is about words insofar as they signify things through our thoughts.**
 
@@ -195,7 +195,7 @@ WORDS  →  THOUGHTS  →  THINGS
 
 **TEST.**
 
-**Everybody. What do words stand for?** (pause, signal) → *Thoughts.*
+**Everybody. What do words make known?** (pause, signal) → *Thoughts.*
 
 **Everybody. What are thoughts likenesses of?** (pause, signal) → *Things.*
 
@@ -214,7 +214,37 @@ WORDS  →  THOUGHTS  →  THINGS
 >
 > **CORRECTION — student reverses the order (says "things, thoughts, words").**
 > **Stop. Look at the board. Which one is first?** → *Words.* **My turn: words, thoughts, things. Your turn.** → *Words, thoughts, things.* **Again.** → *Words, thoughts, things.* **Words come first because words are the ones we can hear.**
+>
+> **CORRECTION — student says the word "stands for" the thought.**
+> **"Stand for" is a later word. Today: "signify" means "make known to the mind." The word makes my thought known.**
 > Retest in step 4.
+
+---
+
+### Concept B2 — What logic studies
+
+**MODEL.**
+
+**Logic is about words. It also studies something those words name. A genus, a species, a subject, a predicate — these belong to a thing only because we know it.**
+
+**Listen. Logic studies what belongs to things only because we know them.**
+
+**LEAD.**
+
+**Say it with me. Logic studies what belongs to things only because we know them.** (signal) → *Logic studies what belongs to things only because we know them.*
+
+**Again.** (signal) → repeated.
+
+**TEST.**
+
+**Everybody. What does logic study?** (pause, signal) → *Logic studies what belongs to things only because we know them.*
+
+**(12). What does logic study?** → *Logic studies what belongs to things only because we know them.*
+
+**(9). What does logic study?** → *Logic studies what belongs to things only because we know them.*
+
+> **CORRECTION — student says "Logic studies things" or "Logic studies thoughts."**
+> **The whole wording. Logic studies what belongs to things only because we know them.** **What does logic study?** (pause, signal) → full sentence. The words "only because we know them" have to be there.
 
 ---
 
@@ -338,7 +368,7 @@ THREE — reasoning from what we know to what we don't yet know
 
 **Everybody. Cat.** (pause, signal) → *One.*
 
-**Everybody. Words stand for what?** (pause, signal) → *Thoughts.*
+**Everybody. What do words make known?** (pause, signal) → *Thoughts.*
 
 **Everybody. Cats have whiskers.** (pause, signal) → *Two.*
 
@@ -429,7 +459,7 @@ THREE — reasoning from what we know to what we don't yet know
 
 ## 7. MASTERY NOTE
 
-At the end of this lesson you should be able to say: **"Both students can say what logic is and what logic is about in the exact words, name the three acts in order, and sort a word, a statement, an argument, and a question as ONE, TWO, THREE, NONE with no help."**
+At the end of this lesson you should be able to say: **"Both students can say what logic is, what logic is about, and what logic studies, in the exact words, name the three acts in order, and sort a word, a statement, an argument, and a question as ONE, TWO, THREE, NONE with no help."**
 
 If not, re-run tomorrow before anything new:
 
@@ -446,13 +476,13 @@ If not, re-run tomorrow before anything new:
 
 **For 2A (wording).** **What is logic?** → canonical. / **The hand makes a shovel. The mind makes —** → *words, statements, and arguments.*
 
-**For 2B (wording and order).** **What is logic about?** → canonical. / **I say "sun." Point: word, then thought, then thing.**
+**For 2B (wording and order).** **What is logic about?** → canonical. / **What does logic study?** → canonical. / **I say "sun." Point: word, then thought, then thing.**
 
 **For 2C (positives).** **Fish.** → *One.* / **Fish swim.** → *Two.* / **River.** → *One.* / **The river is cold.** → *Two.* / **Knife.** → *One.* / **The knife is sharp.** → *Two.* / **Sunday.** → *One.* / **Sunday is a day of rest.** → *Two.* / **Saint Peter.** → *One.* / **Saint Peter was a fisherman.** → *Two.* / **Every fish lives in water, so this fish lives in water.** → *Three.* / **All fishermen use boats, so Saint Peter used a boat.** → *Three.* / **All sharp things can cut, a knife is sharp, so a knife can cut.** → *Three.*
 
 **For 2C (negatives — each paired to a positive above).** **Do fish swim?** → *None.* / **Swim!** → *None.* / **Is the river cold?** → *None.* / **Is the knife sharp?** → *None.* / **Was Saint Peter a fisherman?** → *None.* / **Catch a fish!** → *None.* / **Who is your sister?** → *None.* / **Be kind!** → *None.*
 
-**For 3 (guided practice).** **What is logic?** → canonical. / **Ball.** → *One.* / **The ball is red.** → *Two.* / **Throw the ball!** → *None.* / **Every ball here is round, so this ball is round.** → *Three.* / **Words signify things through what?** → *Our thoughts.*
+**For 3 (guided practice).** **What is logic?** → canonical. / **What does logic study?** → canonical. / **Ball.** → *One.* / **The ball is red.** → *Two.* / **Throw the ball!** → *None.* / **Every ball here is round, so this ball is round.** → *Three.* / **Words signify things through what?** → *Our thoughts.*
 
 **For 5 (deeper).** Ask **(12)**: **The mind makes tools out of what?** → *Words, statements, arguments.* / **Which of the mind's tools is the biggest — a word, a statement, or an argument?** → *An argument.* (Arguments are made of statements; statements are made of words.)
 
@@ -515,11 +545,13 @@ THREE — reasoning from what we know to what we don't yet know
 
 **(9). What is logic?** → *Logic is the art of reasoning well.*
 
-**Everybody. Words stand for what?** (pause, signal) → *Thoughts.*
+**Everybody. What do words make known?** (pause, signal) → *Thoughts.*
 
 **Everybody. Thoughts are likenesses of what?** (pause, signal) → *Things.*
 
 **(12). What is logic about?** → *Logic is about words insofar as they signify things through our thoughts.*
+
+**Everybody. What does logic study?** (pause, signal) → *Logic studies what belongs to things only because we know them.*
 
 **Everybody. Say the three acts in order with me.** → all three, together.
 
@@ -890,6 +922,8 @@ If not, re-run tomorrow before anything new:
 **(12). Every wheel turns, so this wheel turns.** → *Three.*
 
 **(12). What is logic about?** → *Logic is about words insofar as they signify things through our thoughts.*
+
+**Everybody. What does logic study?** (pause, signal) → *Logic studies what belongs to things only because we know them.*
 
 **Everybody. Say it with me. An answer to "What is X?" must be one answer that fits every X.** → said together.
 

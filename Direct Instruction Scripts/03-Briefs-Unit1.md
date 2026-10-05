@@ -18,7 +18,7 @@
 
 **Tracks.** T1, T6 review. Start T2 (parsing).
 
-**Deeper.** "Man is a species" — is 'man' here said of many men? First taste of second intention (do not name it).
+**Deeper.** "Man is a species" — is 'man' here said of many men? No. *Man* stands for the nature as known, not for any man. For the twelve-year-old, name it: that is a second intention. Both students meet the name in L6. The sentence from L1 — "Logic studies what belongs to things only because we know them" — is what this example is about.
 
 **Mastery note.** Both split sentences and sort terms without hesitation.
 
@@ -46,7 +46,7 @@
 
 **Objective.** Students can name all five predicables and sort predicates into the five.
 
-**Doctrinal material.** There are five predicables: genus, species, difference, property, and accident. The difference is what marks a species off within its genus (rational marks man off within animal). A property is not the essence but flows from it and belongs to every member always (able to laugh, for man). An accident may come and go without the thing ceasing to be what it is (tan, sitting). Enrichment for the drafter: Porphyry's ordering; John of St. Thomas, Material Logic, on the predicables, for precise phrasings if wanted.
+**Doctrinal material.** There are five predicables: genus, species, difference, property, and accident. The difference is what marks a species off within its genus (rational marks man off within animal). A property is not the essence but flows from it and belongs to every member always (able to laugh, for man). An accident may come and go without the thing ceasing to be what it is (tan, sitting). These five belong to things only because we know them. Name them: they are second intentions. Say the L1 sentence with the name attached: "Logic studies what belongs to things only because we know them. Those are called second intentions." Enrichment for the drafter: Porphyry's ordering; John of St. Thomas, Material Logic, on the predicables, for precise phrasings if wanted. That *dog* is a species is a relation the nature has as known. How the nature itself exists in the dogs and in the mind is a deeper question, and it is not this lesson.
 
 **Example sequences.** Sort predicate-of-'man' items: animal (genus), rational (difference), able-to-laugh (property), tan (accident), man-of-Socrates (species said of the individual). Then a second subject (dog or triangle) to show the sort generalizes. ≥12 items; minimally different pairs: rational vs able-to-laugh (essence-mark vs flows-from-essence); tan vs able-to-laugh (can be lost vs cannot).
 
@@ -74,7 +74,7 @@
 
 **Objective.** Students can divide a whole into its kinds and judge divisions by the rules.
 
-**New concepts.** Division = cutting a whole into its parts/kinds. Rules of good division (phrase for children; enrichment from Poinsot and John of St. Thomas on conditions of good division): (1) the parts together take in the whole; (2) the parts exclude one another; (3) each cut uses one basis at a time.
+**New concepts.** Division = cutting a whole into its parts/kinds. Rules of good division (phrase for children; enrichment from John of St. Thomas (Poinsot) on conditions of good division): (1) the parts together take in the whole; (2) the parts exclude one another; (3) each cut uses one basis at a time.
 
 **Example sequences.** GOOD/BAD division sort with the rule named and the counterexample shown: "Animals: wild and tame" (good); "Animals: wild, tame, and dogs" (bad — dogs overlaps); "Shoes: leather shoes and red shoes" (bad — two bases); "Numbers: even and odd" (good). ≥8 items. Practice performing divisions on child-familiar wholes.
 
