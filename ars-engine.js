@@ -650,20 +650,20 @@ function vennMistake(q, user){
   for(const r of regs){
     if(q.correct[r]!=='none' && user[r]!=='none' && user[r]!==q.correct[r])
       return q.correct[r]==='shade'
-        ? 'Right region, wrong mark. A universal proposition declares a region <em>empty</em> — that is shading. Students often feel a universal must “put something” into the diagram, but a universal only takes away; it asserts no existence.'
-        : 'Right region, wrong mark. “Some” asserts that something <em>exists</em> — that is the ×. Shading would declare the region empty, the very opposite of what is said. The urge to shade comes from treating every proposition as a claim about a whole region.';
+        ? 'The region is right but the mark is wrong. A universal proposition declares a region <em>empty</em>, and that is shown by shading. Students often feel that a universal must “put something” into the diagram, but a universal only takes away; it asserts no existence.'
+        : 'The region is right but the mark is wrong. “Some” asserts that something <em>exists</em>, and that is shown by the ×. Shading would declare the region empty, the very opposite of what is said. The urge to shade comes from treating every proposition as a claim about a whole region.';
   }
   if(regs.some(r=>user[r]!=='none') && regs.every(r=>user[r]===q.correct[mirror[r]]))
-    return 'You diagrammed the converse — subject and predicate changed places. “All S are P” empties S <em>outside</em> P (not P outside S), and “Some S are not P” marks S outside P. A and O propositions do not convert, so direction matters; this is the most common slip.';
+    return 'This diagram shows the converse, in which subject and predicate have changed places. “All S are P” empties the part of S <em>outside</em> P (not the part of P outside S), and “Some S are not P” marks S outside P. A and O propositions do not convert, so the direction matters; this is the most common slip.';
   const uMarks = regs.filter(r=>user[r]!=='none').length;
   const cMarks = regs.filter(r=>q.correct[r]!=='none').length;
   if(uMarks>cMarks)
-    return 'Too many marks. Each categorical proposition makes exactly one claim — one shaded region or one ×. Students often add what they take to be implied (e.g. shading elsewhere after an ×); diagram only what the proposition itself asserts.';
+    return 'There are too many marks. Each categorical proposition makes exactly one claim, and so has one shaded region or one ×. Students often add what they take to be implied (e.g. shading elsewhere after an ×), but the diagram should show only what the proposition itself asserts.';
   if(q.type==='I' && user.AB==='none')
-    return 'The × for “Some S are P” belongs in the <em>overlap</em>: the proposition asserts a common member. It is tempting to mark the subject’s own crescent because the sentence begins with S, but the claim concerns what S and P share.';
+    return 'The × for “Some S are P” belongs in the <em>overlap</em>, since the proposition asserts a common member. It is tempting to mark the subject’s own crescent because the sentence begins with S, but the claim concerns what S and P share.';
   if(q.type==='O' && user.AB!=='none')
-    return '“Some S are not P” locates its witness in S <em>outside</em> P. Students often mark the overlap because both terms are mentioned — but the proposition asserts distance from P, not fellowship with it.';
-  return 'Ask first: does the proposition <em>empty</em> a region (shade it) or <em>populate</em> one (place an ×)? Then ask which region: the subject’s crescent, or the overlap.';
+    return '“Some S are not P” locates its witness in S <em>outside</em> P. Students often mark the overlap because both terms are mentioned, but the proposition asserts distance from P, not fellowship with it.';
+  return 'The first question is whether the proposition <em>empties</em> a region (shading it) or <em>populates</em> one (placing an ×). The second is which region it concerns: the subject’s crescent, or the overlap.';
 }
 
 /* ---- Sets V (phase 2) & VI: diagramming premise pairs and whole syllogisms ---- */
@@ -703,20 +703,20 @@ function vennMistake3(q, user){
   for(const r of REGIONS3)
     if(q.expect[r]!=='none' && user[r]!=='none' && user[r]!==q.expect[r])
       return q.expect[r]==='shade'
-        ? 'Right region, wrong mark: a universal proposition <em>empties</em> its region — shade it. The × asserts existence, which no universal claims.'
-        : 'Right region, wrong mark: “some” asserts existence — an ×. Shading would declare that very region empty, the opposite of what is said.';
+        ? 'The region is right but the mark is wrong: a universal proposition <em>empties</em> its region, and so the region is shaded. The × asserts existence, which no universal claims.'
+        : 'The region is right but the mark is wrong: “some” asserts existence, and so calls for an ×. Shading would declare that very region empty, the opposite of what is said.';
   const imp = q.diag.xs.find(x=>x.kind==='import');
   if(imp && user[imp.regions[0]]!=='x')
-    return `The conclusion asserts existence that the universal premises do not yet witness. The traditional account grants existential import: place the × in the sole unshaded region of “${termLabel(q.roles[imp.term])}”. Missing this is the commonest slip here — on the modern reading the weakened moods fail for exactly this reason.`;
+    return `The conclusion asserts existence that the universal premises do not yet witness. The traditional account grants existential import: place the × in the sole unshaded region of “${termLabel(q.roles[imp.term])}”. Missing this is the commonest slip here; on the modern reading the weakened moods fail for exactly this reason.`;
   const expX = REGIONS3.filter(r=>q.expect[r]==='x'), usrX = REGIONS3.filter(r=>user[r]==='x');
   if(expX.length && usrX.join()!==expX.join())
-    return 'Mind where the × lands. Shade the universal premises first — the shading then decides which cell of the “some”-zone can still hold a witness. An × in a shaded cell asserts what was declared empty; an × on the wrong side of a circle asserts a membership never claimed.';
+    return 'The placing of the × matters. The universal premises are shaded first, and the shading then decides which cell of the “some”-zone can still hold a witness. An × in a shaded cell asserts what was declared empty; an × on the wrong side of a circle asserts a membership never claimed.';
   const expS = REGIONS3.filter(r=>q.expect[r]==='shade').length, usrS = REGIONS3.filter(r=>user[r]==='shade').length;
   if(usrS>expS)
-    return 'Too much shading. Shade only what the universal premises declare empty — a lens of two cells each. Students often shade the conclusion as well, but its content should appear of itself once the premises are pictured.';
+    return 'There is too much shading. Only what the universal premises declare empty should be shaded, which is a lens of two cells for each. Students often shade the conclusion as well, but its content should appear of itself once the premises are pictured.';
   if(usrS<expS)
-    return 'Each universal premise empties a full lens of <em>two</em> cells — one inside the third circle and one outside it. Half-shading usually comes from forgetting that the zone continues into the third circle.';
-  return 'Take the universals first and shade what they empty; then let the shading force each × into its one possible cell.';
+    return 'Each universal premise empties a full lens of <em>two</em> cells, one inside the third circle and one outside it. Half-shading usually comes from forgetting that the zone continues into the third circle.';
+  return 'The universals come first: shading what they empty leaves each × only one possible cell.';
 }
 
 /* ================================================================
@@ -941,34 +941,34 @@ function counterexample(type, xName, yName, dom){
 }
 /* small-print helps for terms a student may not yet know */
 const KB_GLOSS = {
-  'magnitude':'continuous quantity — lines, surfaces, figures — as opposed to discrete number',
+  'magnitude':'continuous quantity (lines, surfaces, figures), as opposed to discrete number',
   'prime number':'a number measured only by the unit: 2, 3, 5, 7…',
   'composite number':'a non-prime number, measured by a smaller number besides the unit',
   'square number':'a number multiplied by itself: 4, 9, 16, 25…',
-  'figure':'a bounded plane surface — triangles, quadrilaterals, circles',
+  'figure':'a bounded plane surface, such as a triangle, a quadrilateral, or a circle',
   'habit':'a stable quality disposing one to act well or ill, formed by repeated acts',
   'virtue':'a good habit, disposing its possessor and his work to the good',
   'vice':'a bad habit, the corruption of good action',
-  'passion':'a movement of the sensitive appetite — fear, anger, joy — neither good nor evil of itself',
+  'passion':'a movement of the sensitive appetite (fear, anger, joy), neither good nor evil of itself',
   'moral virtue':'a virtue perfecting appetite and conduct: justice, courage, temperance and their kin',
   'intellectual virtue':'a virtue perfecting the intellect: understanding, science, wisdom, art, and prudence',
-  'theological virtue':'faith, hope, or charity — bearing on God directly, infused rather than acquired',
+  'theological virtue':'faith, hope, or charity, which bear on God directly and are infused rather than acquired',
   'cardinal virtue':'one of the four hinges of the moral life: prudence, justice, fortitude, temperance',
   'mean':'the middle course that virtue holds between excess and defect',
   'extreme':'a vice of excess or of defect, flanking the mean of a virtue',
   'vital power':'any power of the soul, by which a living thing lives and acts',
   'vegetative power':'the lowest powers of life: nutrition, growth, generation',
   'sensitive power':'the powers of sensation, outward and inward',
-  'external sense':'sight, hearing, smell, taste, touch — sensing through bodily organs',
-  'internal sense':'imagination, memory, the common sense — the senses working within',
+  'external sense':'sight, hearing, smell, taste, touch: the senses that work through bodily organs',
+  'internal sense':'imagination, memory, the common sense: the senses that work within',
   'rational power':'intellect and will, the powers proper to man',
-  'sentient being':'a being endowed with sensation — every animal',
-  'thing that has vegetative powers':'whatever nourishes itself and grows — every living thing',
-  'thing that has sensitive powers':'whatever has sensation — every animal',
-  'living thing':'whatever nourishes itself, grows, and reproduces — plant, animal, or man',
+  'sentient being':'a being endowed with sensation, that is, every animal',
+  'thing that has vegetative powers':'whatever nourishes itself and grows, that is, every living thing',
+  'thing that has sensitive powers':'whatever has sensation, that is, every animal',
+  'living thing':'whatever nourishes itself, grows, and reproduces, whether plant, animal, or man',
   'animal':'a living thing that also has sensation and moves itself',
   'plant':'a living thing that grows and reproduces but has no sensation',
-  'human being':'the rational animal — an animal that also understands and chooses',
+  'human being':'the rational animal, that is, an animal that also understands and chooses',
   'sighted animal':'an animal having the power of sight',
   'number':'a multitude composed of units: 2, 3, 4, 5…',
   'even number':'a number that divides into two equal whole numbers: 2, 4, 6…',
@@ -982,15 +982,15 @@ const KB_GLOSS = {
   'scalene triangle':'a triangle whose three sides are all unequal',
   'right triangle':'a triangle having one right angle',
   'straight line':'a line lying evenly between its ends',
-  'point':'that which has no part — position without size',
-  'tree':'a plant with a woody trunk — the oak, the pine',
-  'flower':'a plant grown for its blossom — the rose, the daisy',
+  'point':'that which has no part; position without size',
+  'tree':'a plant with a woody trunk, such as the oak or the pine',
+  'flower':'a plant grown for its blossom, such as the rose or the daisy',
   'bird':'a feathered animal; not every one of them flies',
   'fish':'an animal that lives in water and breathes through gills',
-  'insect':'a small animal with six legs — the bee, the ant',
+  'insect':'a small animal with six legs, such as the bee or the ant',
   'thing that can fly':'whatever moves through the air under its own power',
   'thing that can swim':'whatever moves through water under its own power',
-  'thing made by man':'an artefact — made, not grown',
+  'thing made by man':'an artefact, made rather than grown',
   'tool':'a thing made to be used in doing work'
 };
 function glossFor(names){
@@ -1036,12 +1036,12 @@ function mistakeNoteSound(q, choice){
   if(q.answer!=='invalid' && choice==='invalid')
     return mistakeNoteValidity(q, 'english');
   if(q.answer==='invalid' && choice!=='invalid')
-    return (q.premisesTrue ? 'Every premise here is true, and true matter makes a form feel trustworthy — but no truth of matter can repair a broken form. ' : '') + mistakeNoteValidity(q, 'english');
+    return (q.premisesTrue ? 'Every premise here is true, and true matter makes a form feel trustworthy; but no truth of matter can repair a broken form. ' : '') + mistakeNoteValidity(q, 'english');
   if(q.answer==='unsound' && choice==='sound')
-    return 'The deduction is flawless, but an argument is only as strong as its matter: a false premise hides easily inside a valid form. Students often stop once the form checks out — always try each premise against the definitions.';
+    return 'The deduction is flawless, but an argument is only as strong as its matter, and a false premise hides easily inside a valid form. Students often stop once the form checks out, but each premise should also be tried against the definitions.';
   if(q.answer==='sound' && choice==='unsound')
-    return 'Each premise here is true by the classical definitions, though one may have sounded doubtful (remember: Euclid’s isosceles has two sides <em>alone</em> equal; no passion is a habit; the theological virtues observe no mean; and the oyster is an animal without sight). Test surprising premises against the definitions, not against first impressions.';
-  return 'Judge the form first, then the matter: validity concerns what would follow; soundness adds that the premises are in fact true.';
+    return 'Each premise here is true by the classical definitions, though one may have sounded doubtful (Euclid’s isosceles has two sides <em>alone</em> equal; no passion is a habit; the theological virtues observe no mean; and the oyster is an animal without sight). Surprising premises are tested against the definitions, not against first impressions.';
+  return 'The form is judged first and then the matter: validity concerns what would follow, and soundness adds that the premises are in fact true.';
 }
 
 /* ---- typical-mistake notes ---- */
@@ -1049,41 +1049,41 @@ function mistakeNoteValidity(q, mode){
   if(!q.valid){ // student called it valid
     const v = q.viols[0]||'';
     if(v.indexOf('Exclusive')===0) return 'Two negatives feel as though they position the terms against one another; in truth two denials sever every link and establish nothing at all.';
-    if(v.indexOf('Undistributed middle')===0) return 'The classic trap: both extremes are related to the middle term, so they seem related to each other. But unless the middle is taken in its whole extension at least once, each premise may speak of a different part of it — and the extremes never meet.';
-    if(v.indexOf('Illicit major')===0) return 'The conclusion speaks of the major term in its whole extension, though the premise engaged only part of it. The sweeping sound of the premise hides the gap — check what the premise actually distributes.';
+    if(v.indexOf('Undistributed middle')===0) return 'This is the classic trap. Both extremes are related to the middle term, so they seem related to each other; but unless the middle is taken in its whole extension at least once, each premise may speak of a different part of it, and the extremes never meet.';
+    if(v.indexOf('Illicit major')===0) return 'The conclusion speaks of the major term in its whole extension, though the premise engaged only part of it. The sweeping sound of the premise hides the gap, so what the premise actually distributes needs checking.';
     if(v.indexOf('Illicit minor')===0) return 'The conclusion generalizes over the whole minor term, though the premise covered only part of it. This slips by easily when the premise sounds universal.';
     if(v.indexOf('A negative premise')===0) return 'A denial in the premises can never yield a joining in the conclusion. Students often let the affirmative-sounding terms carry them past the negative sign.';
     if(v.indexOf('A negative conclusion')===0) return 'Two affirmations can only join terms. The separation asserted in the conclusion must come from somewhere, and no premise supplies it.';
     if(v.indexOf('Two particular')===0) return 'Each “some” may pick out a different portion of the middle term, so the premises need never meet.';
-    return 'Trace the distribution of each term: some rule of the syllogism is broken here.';
+    return 'Tracing the distribution of each term shows that some rule of the syllogism is broken here.';
   }
   // student called a valid syllogism invalid
   if(isPart(q.mood[2]) && !isPart(q.mood[0]) && !isPart(q.mood[1]))
-    return 'A very common hesitation: on the modern reading this fails, since “some” asserts an existence that universal premises do not supply. The scholastic account grants every term existential import, so the weakened conclusion follows.';
+    return 'This is a very common hesitation. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply; but the scholastic account grants every term existential import, so the weakened conclusion follows.';
   if(q.fig===4)
-    return 'Fourth-figure syllogisms run against the natural flow of predication, so even valid ones feel wrong. Recite the premises slowly and test the rules — none is broken.';
+    return 'Fourth-figure syllogisms run against the natural flow of predication, so even valid ones feel wrong. Read slowly and tested against the rules, these premises break none of them.';
   if(mode!=='letters')
-    return 'The likeliest culprit: the premises are implausible, and falsity feels like fallacy. But validity concerns form alone — grant the premises, however absurd, and see what must follow.';
+    return 'The likeliest cause of the error is that the premises are implausible, and falsity feels like fallacy. But validity concerns form alone: if the premises are granted, however absurd, the question is what must follow.';
   return 'This form keeps every rule: the middle is distributed once, no term is distributed in the conclusion alone, and negatives and particulars are balanced.';
 }
 function mistakeNoteConclusion(q, parsed){
   if(parsed.none)
-    return 'Something does follow here — a connection easy to overlook, especially outside the first figure. Diagram the premises and read off what the shading forces.';
+    return 'Something does follow here, and the connection is easy to overlook, especially outside the first figure. Diagramming the premises and reading off what the shading forces will show it.';
   if(q.none)
-    return 'A natural instinct: two statements sharing a middle term feel as if they must connect the extremes. But here the middle never does its work — no valid mood fits these premises in any arrangement.';
+    return 'It is natural to feel that two statements sharing a middle term must connect the extremes. But here the middle never does its work, and no valid mood fits these premises in any arrangement.';
   const su = normTerm(parsed.s), pu = normTerm(parsed.p);
   const mid = termKey(q.roles.M);
   if(su===mid || pu===mid)
-    return 'The middle term never appears in the conclusion: its whole office is to join the extremes and then withdraw.';
+    return 'The middle term never appears in the conclusion, since its whole office is to join the extremes and then withdraw.';
   if(q.accepted.some(a=>termKey(a.S)===su && termKey(a.P)===pu &&
       ((parsed.c==='A'&&a.c==='I')||(parsed.c==='E'&&a.c==='O'))))
-    return 'You concluded universally where only a particular follows. The premises secure a part of the subject term, not the whole of it — overclaiming the quantity is the most common slip in this exercise.';
+    return 'This answer concludes universally where only a particular follows. The premises secure a part of the subject term, not the whole of it; overclaiming the quantity is the most common slip in this exercise.';
   if(q.accepted.some(a=>termKey(a.S)===pu && termKey(a.P)===su) &&
      !q.accepted.some(a=>termKey(a.S)===su && termKey(a.P)===pu && a.c===parsed.c))
-    return 'Mind the order of terms: A and O propositions do not convert simply, so a conclusion cannot merely be turned around. Only E and I convert term for term.';
+    return 'The order of the terms matters: A and O propositions do not convert simply, so a conclusion cannot merely be turned around. Only E and I convert term for term.';
   if(q.accepted.some(a=>termKey(a.S)===su && termKey(a.P)===pu && isNeg(a.c)!==isNeg(parsed.c)))
-    return 'Mind the quality: a negative premise demands a negative conclusion, and purely affirmative premises can only affirm. Count the negative signs before concluding.';
-  return 'Work from the diagram: shade the universal premises, mark the particulars, and assert only what the premises force.';
+    return 'The quality matters: a negative premise demands a negative conclusion, and purely affirmative premises can only affirm. The negative signs should be counted before concluding.';
+  return 'The diagram settles it: once the universal premises are shaded and the particulars marked, we assert only what the premises force.';
 }
 
 /* ================================================================
@@ -1206,8 +1206,8 @@ function immMarks(pr){
 function immMistakeOp(q, parsed){
   if(!q.expected)
     return q.op==='converse'
-      ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S — yet the habit of converting E and I carries many students along.'
-      : 'An I proposition has no contrapositive: contraposition obverts, then converts, then obverts — but the obverse of I is an O, and an O will not convert, so the process stalls.';
+      ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S; yet the habit of converting E and I carries many students along.'
+      : 'An I proposition has no contrapositive. Contraposition obverts, then converts, then obverts; but the obverse of I is an O, and an O will not convert, so the process stalls.';
   if(parsed && parsed.none)
     return `This proposition does have a ${q.op}. Only O lacks a converse, and only I lacks a contrapositive.`;
   const e = q.expected;
@@ -1215,43 +1215,43 @@ function immMistakeOp(q, parsed){
     const plainSwap = parsed.s.key===termKey(q.pr.p.term) && parsed.p.key===termKey(q.pr.s.term)
                       && !parsed.s.neg && !parsed.p.neg;
     if(q.op==='converse' && q.pr.t==='A' && parsed.c==='A' && plainSwap)
-      return 'Illicit conversion — the classic slip. “All S are P” distributes its subject only, so it converts merely <em>per accidens</em>: “Some P are S.”';
+      return 'This is illicit conversion, the classic slip. “All S are P” distributes its subject only, so it converts merely <em>per accidens</em>, to “Some P are S.”';
     if(q.op==='obverse'){
       if(parsed.c===e.t && !parsed.p.neg)
-        return 'Obversion has two steps: change the quality <em>and</em> replace the predicate with its complement. You changed the quality only.';
+        return 'Obversion has two steps: changing the quality <em>and</em> replacing the predicate with its complement. This answer changes the quality only.';
       if(parsed.c===q.pr.t && parsed.p.neg)
-        return 'Obversion has two steps: change the quality <em>and</em> replace the predicate with its complement. You negated the predicate only.';
+        return 'Obversion has two steps: changing the quality <em>and</em> replacing the predicate with its complement. This answer negates the predicate only.';
     }
     if(q.op==='contrapositive'){
       if(plainSwap)
-        return 'That is the converse. Contraposition is not one move but three — <em>obvert, then convert, then obvert</em>: “All S are P” → “No S are non-P” → “No non-P are S” → “All non-P are non-S.”';
+        return 'That is the converse. Contraposition is not one move but three (<em>obvert, then convert, then obvert</em>): “All S are P” → “No S are non-P” → “No non-P are S” → “All non-P are non-S.”';
       if(parsed.s.key===termKey(q.pr.s.term) && parsed.s.neg)
         return 'The complements are right, but the terms must also change places: the contrapositive of “All S are P” is “All non-P are non-S.”';
     }
     if(q.op==='contradictory' && ((q.pr.t==='A'&&parsed.c==='E')||(q.pr.t==='E'&&parsed.c==='A')))
-      return 'That is the contrary, not the contradictory. Contradictories differ in both quantity and quality — A pairs with O, E with I. Contraries can both be false; contradictories never agree.';
+      return 'That is the contrary, not the contradictory. Contradictories differ in both quantity and quality, so that A pairs with O, and E with I. Contraries can both be false; contradictories never agree.';
     if(q.op==='contradictory' && ((q.pr.t==='I'&&parsed.c==='O')||(q.pr.t==='O'&&parsed.c==='I')))
       return 'That is the subcontrary. The contradictory of a particular is the universal of opposite quality: I pairs with E, O with A.';
   }
-  return 'Recall the four operations: conversion exchanges the terms; obversion changes the quality and negates the predicate; contraposition does both at once; the contradictory reverses quantity and quality together.';
+  return 'The four operations are these: conversion exchanges the terms; obversion changes the quality and negates the predicate; contraposition does both at once; and the contradictory reverses quantity and quality together.';
 }
 const REL_TEXT = {
-  contradictory:'contradictories — they always take opposite truth-values',
-  contrary:'contraries — never both true, though both may be false',
-  subcontrary:'subcontraries — never both false, though both may be true',
-  subalternDown:'superaltern and subaltern — truth descends from universal to particular, existential import supplying the witness',
-  subalternUp:'subaltern and superaltern — falsity ascends from particular to universal, but truth does not'
+  contradictory:'contradictories, which always take opposite truth-values',
+  contrary:'contraries, which are never both true, though both may be false',
+  subcontrary:'subcontraries, which are never both false, though both may be true',
+  subalternDown:'superaltern and subaltern, so that truth descends from universal to particular, existential import supplying the witness',
+  subalternUp:'subaltern and superaltern, so that falsity ascends from particular to universal, but truth does not'
 };
 function immMistakeTruth(q, choice){
   if(q.rel==='contrary' && q.given==='F')
-    return 'Contraries may both be false — the falsity of one settles nothing about the other. Treating contraries like contradictories is the classic slip on the square.';
+    return 'Contraries may both be false, so the falsity of one settles nothing about the other. Treating contraries like contradictories is the classic slip on the square.';
   if(q.rel==='subcontrary' && q.given==='T')
-    return 'Subcontraries may both be true — the truth of one settles nothing. Only their joint falsehood is excluded.';
+    return 'Subcontraries may both be true, so the truth of one settles nothing. Only their joint falsehood is excluded.';
   if(q.rel==='subalternDown' && q.given==='F')
-    return 'Falsity does not descend. A false universal leaves its particular entirely open: truth descends, falsity ascends.';
+    return 'Falsity does not descend. A false universal leaves its particular entirely open, since truth descends and falsity ascends.';
   if(q.rel==='subalternUp' && q.given==='T')
-    return 'Truth does not ascend. A true particular leaves its universal entirely open: falsity ascends, truth descends.';
-  return 'Contradictories always disagree — that much is fixed. For the other relations, ask what the square forbids; whatever it does not forbid remains undetermined.';
+    return 'Truth does not ascend. A true particular leaves its universal entirely open, since falsity ascends and truth descends.';
+  return 'Contradictories always disagree; that much is fixed. For the other relations, the question is what the square forbids, and whatever it does not forbid remains undetermined.';
 }
 
 /* ================================================================
@@ -1294,23 +1294,23 @@ const HYP_MOODS = {
 };
 const HYP_INFO = {
   PP:{name:'ponendo ponens (modus ponens)',
-      why:'To posit the antecedent is to posit the consequent: the conditional binds them.'},
+      why:'To posit the antecedent is to posit the consequent, because the conditional binds them.'},
   TT:{name:'tollendo tollens (modus tollens)',
-      why:'To destroy the consequent is to destroy the antecedent: no room remains for it.'},
+      why:'To destroy the consequent is to destroy the antecedent, because no room remains for it.'},
   AC:{name:'the fallacy of affirming the consequent',
       why:'The consequent may hold on other grounds; positing it does not posit the antecedent.'},
   DA:{name:'the fallacy of denying the antecedent',
       why:'The consequent was never made to depend on the antecedent alone; removing the antecedent leaves it free.'},
   PT:{name:'ponendo tollens',
-      why:'The conjunctive forbids the two together: to posit one member is to remove the other.'},
+      why:'The conjunctive forbids the two together, so to posit one member is to remove the other.'},
   TP:{name:'the fallacy of tollendo ponens',
-      why:'A conjunctive promises neither member: both may be absent together, so denying one posits nothing.'},
+      why:'A conjunctive promises neither member; both may be absent together, so denying one posits nothing.'},
   PTS:{name:'ponendo tollens (strict disjunction)',
       why:'Marked “but not both”, the disjunction is strict: exactly one member holds, so to posit one is to remove the other.'},
   TPS:{name:'tollendo ponens (strict disjunction)',
-      why:'Exactly one member must hold: remove one and the other stands.'},
+      why:'Exactly one member must hold, so if one is removed the other stands.'},
   TPI:{name:'tollendo ponens',
-      why:'The disjunction pledges at least one member: remove one and the other cannot be refused.'},
+      why:'The disjunction pledges at least one member, so if one is removed the other cannot be refused.'},
   PTI:{name:'the fallacy of ponendo tollens (broad disjunction)',
       why:'A broad disjunction permits both members together; positing one removes nothing.'}
 };
@@ -1460,16 +1460,16 @@ function checkHypAnswer(q, input){
 function hypMistake(q, saidValid){
   const k = hypMoodKey(q);
   if(!q.valid){
-    if(k==='AC') return 'Perhaps the conditional was read backwards — as though “if B, then C” also said “if C, then B”. The consequent can be true from other causes; the diagram leaves the subject two possible regions.';
-    if(k==='DA') return '“If B, then C” does not say “only if B, C”. Removing the antecedent leaves the consequent standing free — the classic mirror-image of modus tollens.';
-    if(k==='PTI') return 'Watch the marker: this “or” is the broad one — the members may stand together, so positing one removes nothing. Only the strict “either–or, but not both” licenses ponendo tollens.';
-    return 'It is tempting to hear the conjunctive as a disjunctive — as though one of the two must hold. But “not both” promises neither: both members may fail together.';
+    if(k==='AC') return 'Perhaps the conditional was read backwards, as though “if B, then C” also said “if C, then B”. The consequent can be true from other causes, and so the diagram leaves the subject two possible regions.';
+    if(k==='DA') return '“If B, then C” does not say “only if B, C”. Removing the antecedent leaves the consequent standing free; this is the classic mirror-image of modus tollens.';
+    if(k==='PTI') return 'The marker matters: this “or” is the broad one, so the members may stand together and positing one removes nothing. Only the strict “either–or, but not both” licenses ponendo tollens.';
+    return 'It is tempting to hear the conjunctive as a disjunctive, as though one of the two must hold. But “not both” promises neither, and both members may fail together.';
   }
-  if(k==='PP') return 'The bond of the conditional is exactly this: grant the antecedent, and the consequent cannot be refused.';
-  if(k==='TT') return 'Tollendo tollens runs backwards and so feels suspect — but deny the consequent and every region where the antecedent could live is closed.';
-  if(k==='TPS'||k==='TPI') return 'The disjunction pledges at least one member: deny one, and the other cannot be refused. Tollendo ponens is the disjunctive’s native mood.';
+  if(k==='PP') return 'The bond of the conditional is exactly this: if the antecedent is granted, the consequent cannot be refused.';
+  if(k==='TT') return 'Tollendo tollens runs backwards and so feels suspect; but once the consequent is denied, every region where the antecedent could lie is closed.';
+  if(k==='TPS'||k==='TPI') return 'The disjunction pledges at least one member, so if one is denied the other cannot be refused. Tollendo ponens is the disjunctive’s native mood.';
   if(k==='PTS') return 'Marked “but not both”, this disjunction is strict: its members exclude each other, so ponendo tollens holds here as it does for the conjunctive.';
-  return 'The conjunctive is a prohibition of company: where one member stands, the other must fall. Ponendo tollens is its one lawful mood.';
+  return 'The conjunctive forbids its members to stand together: where one member stands, the other must fall. Ponendo tollens is its one lawful mood.';
 }
 function hypcMistake(q, ans){
   const k = hypMoodKey(q);
@@ -1478,12 +1478,12 @@ function hypcMistake(q, ans){
   if(!hcNothing(q) && ans && ans.none)
     return `Something does follow: this is ${HYP_INFO[k].name}. ${HYP_INFO[k].why}`;
   if(q.style==='prop')
-    return 'The mood posits and removes whole propositions. Ask which component the minor posits or denies (to deny is to assert the contradictory), then posit or remove the other accordingly.';
+    return 'The mood posits and removes whole propositions. The question is which component the minor posits or denies (to deny is to assert the contradictory); the other is then posited or removed accordingly.';
   if(ans && !ans.subjOk)
-    return `The conclusion concerns ${termLabel(q.subj)} — the syllogism posits or removes a predicate of that one subject.`;
+    return `The conclusion concerns ${termLabel(q.subj)} (the syllogism posits or removes a predicate of that one subject).`;
   if(q.expected && ans && ans.neg!==q.expected.neg)
-    return 'Mind the quality: ask whether the premises place the subject inside the other predicate or shut it out.';
-  return 'Locate the subject: shade what the major forbids, place the subject where the minor puts it, and read off what region remains.';
+    return 'The quality matters: the question is whether the premises place the subject inside the other predicate or shut it out.';
+  return 'To locate the subject, we shade what the major forbids, place the subject where the minor puts it, and read off what region remains.';
 }
 
 /* ================================================================
@@ -1498,9 +1498,9 @@ function readout2(marks, la, lb){
   if(marks.A==='x')      props.push(`Some ${la} are not ${lb}`);
   if(marks.B==='x')      props.push(`Some ${lb} are not ${la}`);
   if(marks.A==='shade' && marks.AB==='shade')
-    warns.push(`the whole of “${la}” is declared empty — traditional logic presumes every term non-empty`);
+    warns.push(`the whole of “${la}” is declared empty, though traditional logic presumes every term non-empty`);
   if(marks.B==='shade' && marks.AB==='shade')
-    warns.push(`the whole of “${lb}” is declared empty — traditional logic presumes every term non-empty`);
+    warns.push(`the whole of “${lb}” is declared empty, though traditional logic presumes every term non-empty`);
   return {props, warns};
 }
 function cellDesc3(r, labs){
@@ -1531,7 +1531,7 @@ function readout3(marks, labs){
   const frags = [];
   for(const r of REGIONS3)
     if(shaded.has(r) && !used.has(r))
-      frags.push(`the region of ${cellDesc3(r, labs)} is declared empty — narrower than any single categorical proposition among these terms`);
+      frags.push(`the region of ${cellDesc3(r, labs)} is declared empty, a claim narrower than any single categorical proposition among these terms`);
   const xset = new Set();
   for(const r of REGIONS3) if(marks[r]==='x'){
     for(const pr of pairs){
@@ -1543,7 +1543,7 @@ function readout3(marks, labs){
   }
   for(const T of ['S','M','P'])
     if(REGIONS3.filter(r=>inRg(r,T)).every(r=>shaded.has(r)))
-      warns.push(`the whole of “${labs[T]}” is declared empty — traditional logic presumes every term non-empty`);
+      warns.push(`the whole of “${labs[T]}” is declared empty, though traditional logic presumes every term non-empty`);
   return {props, frags, xreads:Array.from(xset), warns};
 }
 /* What the marks force about S and P (syllogism mode).
@@ -1588,7 +1588,7 @@ function spConsequences(marks, labs){
       if(satF[c] || (c==='I' && (satF.A || iDone)) || (c==='O' && satF.E)) continue;
       const clone = {shaded:prem, xs:xs.slice(), importTerm:null};
       if(tryImport(clone, c, s, p)){
-        withImport.push(`${T[c]} — granting the existential import of “${labs[clone.importTerm]}”`);
+        withImport.push(`${T[c]}, granting the existential import of “${labs[clone.importTerm]}”`);
         if(c==='I') iDone = true;
       }
     }
@@ -1652,14 +1652,14 @@ function genModalEquipQ(d, mode){
 }
 function modalEquipMistake(q){
   if(q.valid)
-    return 'Fold the negations step by step: “impossible” is “necessary not”; a negation <em>before</em> the mode turns “necessary” into “possible not” and “possible” into “necessary not”; a negation <em>after</em> the mode changes only the dictum. Both expressions come to the same corner.';
+    return 'The negations are folded step by step: “impossible” is “necessary not”; a negation <em>before</em> the mode turns “necessary” into “possible not” and “possible” into “necessary not”; a negation <em>after</em> the mode changes only the dictum (what is said). Both expressions come to the same corner.';
   const pair = [q.c1, q.c2].sort().join('');
   if(pair==='NnPn') return '“Not necessary” is not “impossible”: denying the stronger mode grants only the weaker denial, possible-not. This is the commonest modal slip.';
   if(pair==='NpPp') return '“Possible” does not rise to “necessary”: a posse ad necesse non valet consequentia.';
-  if(pair==='NnPp' || pair==='NpPn') return 'These are contradictories, not equipollents: they always take opposite truth-values.';
-  if(pair==='NpNn') return 'These are contraries — both false of whatever is contingent — not equipollents.';
-  if(pair==='PpPn') return 'These are subcontraries — both true of whatever is contingent — not equipollents.';
-  return 'Reduce each expression to its corner of the modal square and compare.';
+  if(pair==='NnPp' || pair==='NpPn') return 'These are contradictories, not equipollents (equal in force), since they always take opposite truth-values.';
+  if(pair==='NpNn') return 'These are contraries, both false of whatever is contingent, and not equipollents.';
+  if(pair==='PpPn') return 'These are subcontraries, both true of whatever is contingent, and not equipollents.';
+  return 'Each expression is reduced to its corner of the modal square, and the corners are compared.';
 }
 const MSQ_PAIR = {
   contradictory: [['Np','Pn'],['Pn','Np'],['Nn','Pp'],['Pp','Nn']],
@@ -1669,11 +1669,11 @@ const MSQ_PAIR = {
   subalternUp:   [['Pp','Np'],['Pn','Nn']]
 };
 const MREL_TEXT = {
-  contradictory:'contradictories on the modal square — always of opposite truth-value',
-  contrary:'contraries — never both true, though both fail of the contingent',
-  subcontrary:'subcontraries — never both false, though both hold of the contingent',
-  subalternDown:'in subalternation — ab necesse ad posse valet consequentia: truth descends from the stronger mode',
-  subalternUp:'in subalternation — falsity ascends from the weaker mode to the stronger; truth does not ascend'
+  contradictory:'contradictories on the modal square, and so always of opposite truth-value',
+  contrary:'contraries, which are never both true, though both fail of the contingent',
+  subcontrary:'subcontraries, which are never both false, though both hold of the contingent',
+  subalternDown:'in subalternation, since ab necesse ad posse valet consequentia, and truth descends from the stronger mode',
+  subalternUp:'in subalternation, so that falsity ascends from the weaker mode to the stronger, but truth does not ascend'
 };
 function genModalSquareQ(d, mode){
   const roles = makeTerms(mode, null);
@@ -1685,57 +1685,57 @@ function genModalSquareQ(d, mode){
 }
 function modalSquareMistake(q){
   if(q.rel==='contrary' && q.given==='F')
-    return '“Necessary” and “impossible” may both fail — precisely of whatever is contingent either way. The true contradictory of “necessary” is “possible not”, not “impossible”.';
+    return '“Necessary” and “impossible” may both fail, precisely of whatever is contingent either way. The true contradictory of “necessary” is “possible not”, not “impossible”.';
   if(q.rel==='subcontrary' && q.given==='T')
-    return '“Possible” and “possible not” may both be true — of everything contingent. Only their joint falsehood is excluded.';
+    return '“Possible” and “possible not” may both be true, namely of everything contingent. Only their joint falsehood is excluded.';
   if(q.rel==='subalternDown' && q.given==='F')
     return 'Falsity does not descend: that a thing is not necessary leaves it possibly so and possibly not.';
   if(q.rel==='subalternUp' && q.given==='T')
     return 'Truth does not ascend: a posse ad necesse non valet consequentia. Only falsity climbs from the weaker mode to the stronger.';
-  return 'Contradictories on the modal square always disagree; for the rest, ask what the square forbids — what it does not forbid remains undetermined.';
+  return 'Contradictories on the modal square always disagree; for the rest, the question is what the square forbids, and what it does not forbid remains undetermined.';
 }
 /* the composite and the divided sense — sensus compositus / divisus */
 const SENSE_POOL = [
   {sent:'The man who is seated can walk', comp:false, div:true,
-   why:'Compounded, it claims sitting-and-walking at once — impossible. Divided, it claims of the seated man the power to walk — true, for sitting does not destroy the power.'},
+   why:'Taken in the composite sense, it claims sitting and walking at once, which is impossible. Taken in the divided sense, it claims of the seated man the power to walk, which is true, for sitting does not destroy the power.'},
   {sent:'The white thing can be black', comp:false, div:true,
-   why:'Nothing can be white-and-black at once in the same respect; but the white thing can come to be black.'},
+   why:'Nothing can be white and black at once in the same respect; but the white thing can come to be black.'},
   {sent:'The runner can rest', comp:false, div:true,
-   why:'Not while running — the compound is impossible; but the power to rest belongs to him.'},
+   why:'He cannot rest while running, so the compound is impossible; but the power to rest belongs to him.'},
   {sent:'The sleeping man can be awake', comp:false, div:true,
-   why:'Sleeping-and-waking at once is nothing; but waking is in his power.'},
+   why:'Sleeping and waking at once is impossible; but waking is in his power.'},
   {sent:'The young man can be old', comp:false, div:true,
-   why:'Young-and-old together is excluded; but age will come to him.'},
+   why:'Being young and old together is excluded; but age will come to him.'},
   {sent:'The sighted man can be blind', comp:false, div:true,
-   why:'Not sighted-and-blind at once; but sight can be lost — privation is possible for the possessor.'},
+   why:'He cannot be sighted and blind at once; but sight can be lost, so privation is possible for the one who possesses sight.'},
   {sent:'A man is necessarily an animal', comp:true, div:true,
-   why:'The predicate belongs by essence: the dictum is necessary, and of each man the predicate holds of necessity.'},
+   why:'The predicate belongs by essence, so the dictum is necessary, and of each man the predicate holds of necessity.'},
   {sent:'A triangle necessarily has three sides', comp:true, div:true,
-   why:'Essential in both senses: the dictum cannot be false, and of each triangle the property holds necessarily.'},
+   why:'The predicate is essential in both senses: the dictum cannot be false, and of each triangle the property holds necessarily.'},
   {sent:'The musician can build', comp:true, div:true,
-   why:'The two are compossible — nothing hinders the musician building while a musician — and the power belongs to him.'},
+   why:'The two are compossible (nothing hinders the musician from building while he is a musician), and the power belongs to him.'},
   {sent:'The one who is seated is necessarily seated', comp:true, div:false,
-   why:'Compounded — “necessarily: the seated is seated” — the dictum cannot be false, so it is true. Divided, it would make sitting essential to the man — false, for he sits contingently. The famous sophism trades on this.'},
+   why:'In the composite sense (“necessarily: the seated is seated”) the dictum cannot be false, so it is true. In the divided sense it would make sitting essential to the man, which is false, for he sits contingently. The famous sophism trades on this.'},
   {sent:'The white thing is necessarily white', comp:true, div:false,
-   why:'True compounded — whatever is white, is white; false divided — whiteness does not belong to the thing of necessity.'},
+   why:'It is true in the composite sense, since whatever is white, is white; it is false in the divided sense, since whiteness does not belong to the thing of necessity.'},
   {sent:'A man can be a stone', comp:false, div:false,
-   why:'In neither sense: the essence of man excludes it, so no power reaches it and the compound is impossible.'},
+   why:'It is true in neither sense: the essence of man excludes it, so no power reaches it and the compound is impossible.'},
   {sent:'A horse can be a man', comp:false, div:false,
-   why:'In neither sense: natures do not migrate; the compound is impossible and the subject has no such power.'},
+   why:'It is true in neither sense: natures do not pass from one kind to another, so the compound is impossible and the subject has no such power.'},
   {sent:'A bachelor can be married', comp:false, div:true,
-   why:'Composite — “possibly: a bachelor is married” — is contradictory, for no one is married while unmarried. Divided is true: the man who is a bachelor has it in him to marry.'},
+   why:'In the composite sense (“possibly: a bachelor is married”) it is contradictory, for no one is married while unmarried. In the divided sense it is true, since the man who is a bachelor has it in him to marry.'},
   {sent:'The silent man can speak', comp:false, div:true,
-   why:'Not while silent — speaking-in-silence is nothing. But the power of speech remains his.'},
+   why:'He cannot speak while silent, since speaking in silence is impossible. But the power of speech remains his.'},
   {sent:'The winner of the race could have lost', comp:false, div:true,
-   why:'Composite — “possibly: the winner loses” — contradicts itself. Divided is true: the man who in fact won might have lost.'},
+   why:'In the composite sense (“possibly: the winner loses”) it contradicts itself. In the divided sense it is true, since the man who in fact won might have lost.'},
   {sent:'The blind man can see', comp:false, div:false,
-   why:'False in both senses: seeing-while-blind is contradictory, and blindness is a privation — the power itself is gone, not merely unexercised.'},
+   why:'It is false in both senses: seeing while blind is contradictory, and blindness is a privation, so the power itself is gone, not merely unexercised.'},
   {sent:'Fire can be cold', comp:false, div:false,
-   why:'On the classical account heat belongs to fire’s nature: the compound is impossible, and no power in fire reaches coldness.'},
+   why:'On the classical account heat belongs to fire’s nature, so the compound is impossible, and no power in fire reaches coldness.'},
   {sent:'The literate man is necessarily literate', comp:true, div:false,
-   why:'Composite — “necessarily: the literate is literate” — cannot be false. Divided it fails: literacy is acquired, and belongs to no one by necessity.'},
+   why:'In the composite sense (“necessarily: the literate is literate”) it cannot be false. In the divided sense it fails, because literacy is acquired and belongs to no one by necessity.'},
   {sent:'Two and three are necessarily five', comp:true, div:false,
-   why:'True only composed: “necessarily: two and three are five” — taken together as one sum the dictum cannot fail. Divided, the parts are split: two is five and three is five — false. Aristotle’s own case of composition and division (Soph. El. 166a).'}
+   why:'It is true only in the composite sense (“necessarily: two and three are five”), where two and three are taken together as one sum and the dictum cannot fail. In the divided sense the parts are split, so that two is five and three is five, which is false. This is Aristotle’s own case of composition and division (Soph. El. 166a).'}
 ];
 function genModalSenseQ(){
   const item = recentPick(SENSE_POOL, x=>x.sent);
@@ -1745,13 +1745,13 @@ function genModalSenseQ(){
 const SENSE_LABELS = ['In the composite sense only','In the divided sense only','In both senses','In neither sense'];
 const SENSE_VALUES = ['comp','div','both','neither'];
 function modalSenseNote(){
-  return 'Two readings, two verdicts — the difference is one of <em>scope</em>. <strong>Composite</strong> (in sensu composito): the mode governs the whole proposition <em>composed</em> of its parts, taken together as one package — ask, <em>is the whole package (subject with predicate, both at once) possible or necessary?</em> <strong>Divided</strong> (in sensu diviso): the mode’s scope is <em>divided off</em> and narrowed to the subject alone — ask, <em>does this subject, as it actually is, have the power (or the necessity) claimed</em>, even if it cannot exercise it just now? So “the seated man can walk” is false composed (seated-and-walking together is impossible) but true divided (the man himself keeps the power to walk).';
+  return 'The two readings give two verdicts, and the difference is one of <em>scope</em>. In the <strong>composite</strong> sense (in sensu composito) the mode governs the whole proposition <em>composed</em> of its parts, taken together as one; the question is <em>whether the whole (subject with predicate, both at once) is possible or necessary</em>. In the <strong>divided</strong> sense (in sensu diviso) the mode’s scope is <em>divided off</em> and narrowed to the subject alone; the question is <em>whether this subject, as it actually is, has the power (or the necessity) claimed</em>, even if it cannot exercise it just now. So “the seated man can walk” is false in the composite sense (seated and walking together is impossible) but true in the divided sense (the man himself keeps the power to walk).';
 }
 /* small-print helps shown above each modal question */
 const MODAL_GLOSS = {
-  sense: '<em>composite sense</em> — the mode governs the whole proposition <em>composed</em> of its parts, taken together at once: is that whole package possible/necessary? &ensp;·&ensp; <em>divided sense</em> — the mode’s scope is narrowed to the subject alone: has the thing itself the power (or necessity), even if not while it is as it now is?',
-  equip: '<em>equipollent</em> = equal in force: same meaning and truth-value, same corner of the square (though the words differ) &ensp;·&ensp; <em>laws</em>: “impossible” = “necessary not” · a NOT <em>before</em> the mode flips the corner (“not possible” = “impossible”; “not necessary” = only “possible not”) · a NOT <em>after</em> the mode negates the content alone',
-  msq: '<em>the modal square</em>: necessary / impossible are contraries — never both true &ensp;·&ensp; possible / possible-not are subcontraries — never both false &ensp;·&ensp; necessary↔possible-not and impossible↔possible are contradictories &ensp;·&ensp; truth descends: necessary ⇒ possible'
+  sense: 'In the <em>composite sense</em> the mode governs the whole proposition <em>composed</em> of its parts, taken together at once, and asks whether that whole is possible or necessary. &ensp;·&ensp; In the <em>divided sense</em> the mode’s scope is narrowed to the subject alone, and asks whether the thing itself has the power (or necessity), even if not while it is as it now is.',
+  equip: '<em>Equipollent</em> means equal in force: the same meaning and truth-value, and the same corner of the square (though the words differ). &ensp;·&ensp; The <em>laws</em> are these: “impossible” = “necessary not” · a NOT <em>before</em> the mode changes the corner (“not possible” = “impossible”; “not necessary” = only “possible not”) · a NOT <em>after</em> the mode negates the content alone.',
+  msq: 'On <em>the modal square</em>, necessary and impossible are contraries, never both true &ensp;·&ensp; possible and possible-not are subcontraries, never both false &ensp;·&ensp; necessary↔possible-not and impossible↔possible are contradictories &ensp;·&ensp; truth descends: necessary ⇒ possible'
 };
 /* the modal syllogism — conclusion follows the weaker part */
 const MOD_RANK = {nec:3, assert:2, cont:1};
@@ -1773,7 +1773,7 @@ function modalSyllMistake(q, choice){
   if(choice==='none') return mistakeNoteValidity(q, 'english');
   if(MOD_RANK[choice] > MOD_RANK[q.answer])
     return 'Peiorem sequitur semper conclusio partem: as the conclusion follows the negative and the particular premise, so it follows the weaker mode. A necessary conclusion needs necessity in both premises.';
-  return 'You have weakened further than the premises require: the conclusion may take the mode of the weaker premise itself — here, the '+MOD_NAME[q.answer]+'.';
+  return 'This answer weakens further than the premises require: the conclusion may take the mode of the weaker premise itself, here the '+MOD_NAME[q.answer]+'.';
 }
 /* small SVG of the modal square for feedback */
 function modalSquareSvg(hl){
@@ -1854,7 +1854,7 @@ function mc4Make(spec){
           options:opts, correctIdx:opts.indexOf(spec.correct),
           why:spec.why, rules:spec.rules, mcInstr:spec.mcInstr};
 }
-const DEF_RULES = 'The rules of definition: it must fit exactly the thing defined — no more, no less — and be clearer than it; it must not contain the term being defined; it should say what a thing is rather than what it is not, wherever it can; and it should be brief — the nearest kind (genus) and the difference that marks the thing off, with no wasted words.';
+const DEF_RULES = 'The rules of definition: it must fit exactly the thing defined (no more, no less) and be clearer than it; it must not contain the term being defined; it should say what a thing is rather than what it is not, wherever it can; and it should be brief, giving the nearest kind (genus) and the difference that marks the thing off, with no wasted words.';
 const DIV_RULES = 'The rules of division: the members together must cover the whole, leaving nothing out; they must not overlap, so that nothing falls under two of them at once; every member must actually belong to the whole being divided; and the whole division must be made on a single basis.';
 /* Rule-in-view: the rule is displayed with every question, so nothing is
    presupposed; the candidates are everyday definitions whose soundness or
@@ -2007,18 +2007,18 @@ function recentPick(pool, keyFn){
   return it;
 }
 const DEF_RULE_META = {
-  broad:{rule:'A definition must fit exactly what it defines: it must not be TOO BROAD, covering more than the thing defined.',
+  broad:{rule:'A definition must fit exactly what it defines, so it must not be TOO BROAD, covering more than the thing defined.',
     w:'gives little more than the general kind, and so covers far more than the thing defined.'},
-  narrow:{rule:'A definition must fit exactly what it defines: it must not be TOO NARROW, leaving out part of what it should cover.',
+  narrow:{rule:'A definition must fit exactly what it defines, so it must not be TOO NARROW, leaving out part of what it should cover.',
     w:'adds a restriction that need not hold, and so leaves out part of what it should cover.'},
-  circ:{rule:'The term being defined must not appear inside its own definition: nothing is made clearer by itself.',
-    w:'puts the defined term back into the definition; a circle teaches nothing.'},
-  neg:{rule:'A definition should say what a thing IS, not what it is not — wherever a positive account is available.',
+  circ:{rule:'The term being defined must not appear inside its own definition, since nothing is made clearer by itself.',
+    w:'puts the defined term back into the definition, and a circular definition teaches nothing.'},
+  neg:{rule:'A definition should say what a thing IS, not what it is not, wherever a positive account is available.',
     w:'says only what the thing is not, though a positive account is available.'},
-  met:{rule:'A definition must be clearer than what it defines: a metaphor decorates, but does not define.',
-    w:'is a figure of speech — it pleases, but explains nothing.'},
-  extra:{rule:'A definition should be brief: the nearest kind (genus) and the difference, with no wasted words.',
-    w:'carries words beyond the kind and the difference; the extra spoils it.'}
+  met:{rule:'A definition must be clearer than what it defines; a metaphor decorates, but does not define.',
+    w:'is a figure of speech, which pleases but explains nothing.'},
+  extra:{rule:'A definition should be brief, giving the nearest kind (genus) and the difference, with no wasted words.',
+    w:'carries words beyond the kind and the difference, and the extra words spoil it.'}
 };
 function genDefRuleQ(d){
   const keys = d<2 ? ['broad','narrow','circ'] : d<3 ? ['broad','narrow','circ','met','neg']
@@ -2034,7 +2034,7 @@ function genDefRuleQ(d){
     return mc4Make({ruleShow: rShow,
       options: [culprit[key]].concat(others.map(o=>o.sound)),
       correct: culprit[key],
-      why: `“${culprit[key]}” ${meta.w} The other three are sound: each gives the kind and the difference, and fits exactly what it defines.`,
+      why: `“${culprit[key]}” ${meta.w} The other three are sound, since each gives the kind and the difference and fits exactly what it defines.`,
       rules: DEF_RULES, mcInstr: d>=5 ? 'One of these four breaks a rule of definition. Which one?' : 'One of these four breaks the rule shown. Which one?'});
   }
   const keeper = recentPick(pool, it=>it.name);
@@ -2042,63 +2042,63 @@ function genDefRuleQ(d){
   return mc4Make({ruleShow: rShow,
     options: [keeper.sound].concat(breakers.map(b=>b[key])),
     correct: keeper.sound,
-    why: `“${keeper.sound}” holds — it fits exactly, and is clear, positive, and brief. Each of the other three ${meta.w}`,
+    why: `“${keeper.sound}” holds, since it fits exactly and is clear, positive, and brief. Each of the other three ${meta.w}`,
     rules: DEF_RULES, mcInstr: d>=5 ? 'Three of these break a rule of definition; one keeps it. Which one keeps it?' : 'Three of these break the rule shown; one keeps it. Which one keeps it?'});
 }
 const DEF_KIND_DOCTRINE = {
   nom:'A NOMINAL definition gives what the name means. It must come first, says John of St Thomas: we cannot ask what a thing is until we know what its name refers to.',
   ess:'An ESSENTIAL definition says what the thing is, by giving its nearest kind (genus) and the difference that marks it off from everything else of that kind.',
-  desc:'A DESCRIPTIVE definition identifies the thing by a property, or by a telltale feature — marks that point it out without saying what it is.',
+  desc:'A DESCRIPTIVE definition identifies the thing by a property, or by a telltale feature, that is, by marks that point it out without saying what it is.',
   caus:'A CAUSAL definition identifies the thing through one of its causes: what made it, what it is made of, its form, or what it is for.'
 };
 const DEF_KIND_NAME = {nom:'nominal', ess:'essential', desc:'descriptive', caus:'causal'};
 const DEF_KIND_STOCK = {
   nom: [
-    {tier:1, t:'‘Widow’ names a woman whose husband has died', w:'it explains what the word means, not what the thing is.'},
-    {tier:1, t:'‘Geometry’ means the measuring of the earth', w:'the word’s signification, nothing more.'},
-    {tier:1, t:'‘Island’ is the word for land standing in water', w:'what the name refers to, before any account of the thing itself.'},
-    {tier:2, t:'‘Philosopher’ means a lover of wisdom', w:'the name explained — which must come first, since we cannot ask what a thing is until we know what its name refers to.'},
-    {tier:2, t:'‘Manuscript’ means a thing written by hand', w:'the word’s own story, not the nature of any writing.'},
-    {tier:2, t:'‘Hippopotamus’ means river-horse', w:'the word explained — hippos (horse) and potamos (river).'},
-    {tier:3, t:'‘Eclipse’ means a forsaking — the light’s abandonment of its luminary', w:'the word’s origin, before any account of the cause.'},
-    {tier:5, t:'‘Geography’ means a description of the earth', w:'the word’s signification — gē (earth) and graphē (description).'},
-    {tier:5, t:'‘Monarch’ means one who rules alone', w:'the name explained — monos (alone) and archē (rule).'}
+    {tier:1, t:'‘Widow’ names a woman whose husband has died', w:'It explains what the word means, not what the thing is.'},
+    {tier:1, t:'‘Geometry’ means the measuring of the earth', w:'It gives the word’s signification and nothing more.'},
+    {tier:1, t:'‘Island’ is the word for land standing in water', w:'It says what the name refers to, before any account of the thing itself.'},
+    {tier:2, t:'‘Philosopher’ means a lover of wisdom', w:'It explains the name, which must come first, since we cannot ask what a thing is until we know what its name refers to.'},
+    {tier:2, t:'‘Manuscript’ means a thing written by hand', w:'It tells the word’s own story, not the nature of any writing.'},
+    {tier:2, t:'‘Hippopotamus’ means river-horse', w:'It explains the word from hippos (horse) and potamos (river).'},
+    {tier:3, t:'‘Eclipse’ means a forsaking — the light’s abandonment of its luminary', w:'It gives the word’s origin, before any account of the cause.'},
+    {tier:5, t:'‘Geography’ means a description of the earth', w:'It gives the word’s signification, from gē (earth) and graphē (description).'},
+    {tier:5, t:'‘Monarch’ means one who rules alone', w:'It explains the name from monos (alone) and archē (rule).'}
   ],
   ess: [
-    {tier:1, t:'A triangle is a three-sided figure', w:'the nearest kind plus the difference: what the thing actually is.'},
-    {tier:1, t:'A square is a quadrilateral with equal sides and right angles', w:'the nearest kind, with the differences that fit it exactly.'},
-    {tier:1, t:'A bachelor is an unmarried man', w:'the whole of what the thing is, briefly said.'},
-    {tier:1, t:'A lamb is a young sheep', w:'the nearest kind (a sheep) with a single difference (young) — as brief as a definition can be.'},
-    {tier:2, t:'A number is a multitude composed of units', w:'Euclid’s account: the nearest kind (a multitude) with the difference (composed of units).'},
-    {tier:2, t:'Ice is water solidified by cold', w:'it says what the thing is, naming the very stuff it is made of.'},
-    {tier:3, t:'A nest is a shelter a bird builds to hold its eggs and its young', w:'the nearest kind (a shelter a bird builds) with the difference that marks it off.'},
-    {tier:3, t:'A well is a shaft dug in the ground to reach water', w:'the nearest kind (a shaft dug in the ground) narrowed by what it is dug for.'},
-    {tier:5, t:'A father is a male parent', w:'proximate genus (parent) narrowed by the difference (male).'},
-    {tier:5, t:'A line is length without breadth', w:'genus (length) and difference (without breadth): the nature itself.'}
+    {tier:1, t:'A triangle is a three-sided figure', w:'It gives the nearest kind plus the difference, and so says what the thing actually is.'},
+    {tier:1, t:'A square is a quadrilateral with equal sides and right angles', w:'It gives the nearest kind, with the differences that fit it exactly.'},
+    {tier:1, t:'A bachelor is an unmarried man', w:'It says briefly the whole of what the thing is.'},
+    {tier:1, t:'A lamb is a young sheep', w:'It gives the nearest kind (a sheep) with a single difference (young), and is as brief as a definition can be.'},
+    {tier:2, t:'A number is a multitude composed of units', w:'It is Euclid’s account, giving the nearest kind (a multitude) with the difference (composed of units).'},
+    {tier:2, t:'Ice is water solidified by cold', w:'It says what the thing is, naming the very stuff it is made of.'},
+    {tier:3, t:'A nest is a shelter a bird builds to hold its eggs and its young', w:'It gives the nearest kind (a shelter a bird builds) with the difference that marks it off.'},
+    {tier:3, t:'A well is a shaft dug in the ground to reach water', w:'It gives the nearest kind (a shaft dug in the ground), narrowed by what it is dug for.'},
+    {tier:5, t:'A father is a male parent', w:'It gives the proximate genus (parent), narrowed by the difference (male).'},
+    {tier:5, t:'A line is length without breadth', w:'It gives the genus (length) and the difference (without breadth), and so the nature itself.'}
   ],
   desc: [
-    {tier:1, t:'The cat is the animal that purrs', w:'a telltale feature points the thing out.'},
-    {tier:1, t:'The bee is the insect that makes honey', w:'a characteristic work points the thing out without saying what it is.'},
-    {tier:1, t:'The magnet is the stone that draws iron', w:'an effect peculiar to it points the thing out without saying what it is.'},
-    {tier:1, t:'Gold is the metal that never rusts', w:'a characteristic mark, not the nature itself.'},
-    {tier:2, t:'A triangle is the figure whose angles sum to two right angles', w:'a property — it follows from the thing’s nature and always goes with it, but it is not that nature.'},
-    {tier:2, t:'Man is the animal that laughs', w:'the classic property: the power to laugh picks out man alone, without saying what he is.'},
-    {tier:3, t:'Fire is the burning that gives off heat and light', w:'by its characteristic effects — the heat and light it gives off — which point the thing out without saying what it is.'},
-    {tier:3, t:'Wine is the drink that gladdens the heart', w:'a characteristic effect, dear to the Psalmist — but not what wine is.'},
-    {tier:5, t:'The camel is the beast that crosses the desert', w:'a telltale feature points the thing out, without saying what it is.'},
-    {tier:5, t:'The nightingale is the bird that sings by night', w:'a characteristic mark picks the thing out without saying what it is.'}
+    {tier:1, t:'The cat is the animal that purrs', w:'A telltale feature points the thing out.'},
+    {tier:1, t:'The bee is the insect that makes honey', w:'A characteristic work points the thing out without saying what it is.'},
+    {tier:1, t:'The magnet is the stone that draws iron', w:'An effect peculiar to it points the thing out without saying what it is.'},
+    {tier:1, t:'Gold is the metal that never rusts', w:'It gives a characteristic mark, not the nature itself.'},
+    {tier:2, t:'A triangle is the figure whose angles sum to two right angles', w:'It gives a property, which follows from the thing’s nature and always goes with it, but is not that nature.'},
+    {tier:2, t:'Man is the animal that laughs', w:'It gives the classic property: the power to laugh picks out man alone, without saying what he is.'},
+    {tier:3, t:'Fire is the burning that gives off heat and light', w:'It names the thing by its characteristic effects (the heat and light it gives off), which point it out without saying what it is.'},
+    {tier:3, t:'Wine is the drink that gladdens the heart', w:'It names a characteristic effect, dear to the Psalmist, but not what wine is.'},
+    {tier:5, t:'The camel is the beast that crosses the desert', w:'A telltale feature points the thing out, without saying what it is.'},
+    {tier:5, t:'The nightingale is the bird that sings by night', w:'A characteristic mark picks the thing out without saying what it is.'}
   ],
   caus: [
-    {tier:1, t:'A clock is an instrument made to measure time', w:'through the final cause — the end for which it is made.'},
-    {tier:1, t:'A scar is the mark left by a healed wound', w:'through the efficient cause that produced it.'},
-    {tier:1, t:'A footprint is the mark left by a foot pressed into soft ground', w:'through what brings it about — the foot that pressed it.'},
-    {tier:1, t:'A house is a building raised to shelter its dwellers', w:'through the end for which it is built.'},
-    {tier:2, t:'Thunder is the noise in the clouds made by a stroke of lightning', w:'through the efficient cause — the lightning-discharge whose report the thunder is.'},
-    {tier:2, t:'A saw is a toothed blade made for the cutting of wood', w:'the end enters the definition of every tool (Physics II).'},
-    {tier:2, t:'Ash is what remains when fire has consumed its fuel', w:'through the efficient cause and its matter.'},
-    {tier:3, t:'Rust is what iron becomes when it is long left in damp air', w:'through what brings it about — the damp air working on the iron.'},
-    {tier:5, t:'A loaf is bread baked from kneaded dough', w:'through the matter and the making — the efficient cause.'},
-    {tier:5, t:'A statue is bronze shaped by the sculptor into a likeness', w:'through its matter (bronze) and its maker (the efficient cause).'}
+    {tier:1, t:'A clock is an instrument made to measure time', w:'It defines through the final cause, that is, the end for which the thing is made.'},
+    {tier:1, t:'A scar is the mark left by a healed wound', w:'It defines through the efficient cause that produced it.'},
+    {tier:1, t:'A footprint is the mark left by a foot pressed into soft ground', w:'It defines through what brings it about, namely the foot that pressed it.'},
+    {tier:1, t:'A house is a building raised to shelter its dwellers', w:'It defines through the end for which it is built.'},
+    {tier:2, t:'Thunder is the noise in the clouds made by a stroke of lightning', w:'It defines through the efficient cause, the lightning-discharge whose report the thunder is.'},
+    {tier:2, t:'A saw is a toothed blade made for the cutting of wood', w:'It defines through the end, which enters the definition of every tool (Physics II).'},
+    {tier:2, t:'Ash is what remains when fire has consumed its fuel', w:'It defines through the efficient cause and its matter.'},
+    {tier:3, t:'Rust is what iron becomes when it is long left in damp air', w:'It defines through what brings it about, namely the damp air working on the iron.'},
+    {tier:5, t:'A loaf is bread baked from kneaded dough', w:'It defines through the matter and the making, that is, the efficient cause.'},
+    {tier:5, t:'A statue is bronze shaped by the sculptor into a likeness', w:'It defines through its matter (bronze) and its maker (the efficient cause).'}
   ]
 };
 function genDefKindQ(d){
@@ -2115,7 +2115,7 @@ function genDefKindQ(d){
   return mc4Make({ruleShow: d>=5 ? '' : DEF_KIND_DOCTRINE[target],
     options: kinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `“${chosen[target].t}” — ${chosen[target].w} Of the rest: ${others}.`,
+    why: `“${chosen[target].t}”. ${chosen[target].w} Of the others, ${others}.`,
     rules: 'The four kinds: nominal (what the name means), essential (nearest kind and difference), descriptive (a property or telltale feature), causal (through one of its causes).',
     mcInstr: `Which of these is ${art(DEF_KIND_NAME[target])} ${DEF_KIND_NAME[target].toUpperCase()} definition?`});
 }
@@ -2126,31 +2126,31 @@ const DEF_PRINCIPLES = [
   {tier:1, q:'By what is a thing properly (essentially) defined?',
    correct:'By its nearest kind (genus) and the difference that marks it off',
    ds:['By listing several of its familiar examples','By naming what it is most often confused with','By a vivid metaphor that brings it to mind'],
-   why:'An essential definition gives the nearest kind and the difference that marks the thing off from everything else of that kind — no more and no less.'},
+   why:'An essential definition gives the nearest kind and the difference that marks the thing off from everything else of that kind, no more and no less.'},
   {tier:1, q:'For a definition to “fit exactly” (be convertible with) what it defines means that…',
-   correct:'It is true of exactly the things the term is true of — no more, no fewer',
+   correct:'It is true of exactly the things the term is true of, no more and no fewer',
    ds:['It can be recast as a valid categorical syllogism','It reads sensibly both forwards and backwards','It shares at least one word with the defined term'],
-   why:'The definition and the term must cover exactly the same things — neither too broad nor too narrow.'},
+   why:'The definition and the term must cover exactly the same things, so that it is neither too broad nor too narrow.'},
   {tier:1, q:'Why may the defined term not appear within its own definition?',
    correct:'Because nothing is made clearer by itself',
    ds:['Because a definition must be a single word','Because only a division may repeat a term','Because it would make the definition too brief'],
-   why:'The circular definition teaches nothing: a definition must be clearer than the defined, and a thing is not clarified by itself.'},
+   why:'The circular definition teaches nothing, because a definition must be clearer than the defined, and a thing is not clarified by itself.'},
   {tier:2, q:'The rule that a definition be positive forbids…',
    correct:'Defining a thing only by what it is not',
    ds:['Naming the proximate genus of the thing','Stating the specific difference of the thing','Giving the end or purpose the thing serves'],
-   why:'Say what the thing IS. A purely negative account fails to explain the thing whenever a positive one is available.'},
+   why:'A definition should say what the thing IS. A purely negative account fails to explain the thing whenever a positive one is available.'},
   {tier:2, q:'The rule of brevity in defining requires…',
    correct:'Just the nearest kind (genus) and the difference',
    ds:['Using the fewest possible words and letters','At least three distinguishing marks in all','An example to accompany each of its parts'],
-   why:'Give the nearest kind and the difference, and nothing extra; wasted words spoil the definition.'},
+   why:'A definition gives the nearest kind and the difference, and nothing extra, since wasted words spoil it.'},
   {tier:2, q:'Which kind of definition must come first, since we cannot ask what a thing is until we know what its name means?',
-   correct:'The nominal definition — what the name means',
-   ds:['The essential definition — nearest kind and difference','The descriptive definition — a telltale feature','The causal definition — through one of its causes'],
-   why:'John of St Thomas: the nominal definition (the meaning of the name) comes first, since the question “what is it?” already assumes we know what the name refers to.'},
+   correct:'The nominal definition (what the name means)',
+   ds:['The essential definition (nearest kind and difference)','The descriptive definition (a telltale feature)','The causal definition (through one of its causes)'],
+   why:'John of St Thomas holds that the nominal definition (the meaning of the name) comes first, since the question “what is it?” already assumes we know what the name refers to.'},
   {tier:2, q:'A metaphor such as calling a window “the eye of the house” fails as a definition because…',
    correct:'A definition must be clearer than the defined',
    ds:['It is far too short to be a real definition','It names the very same genus twice over','It is stated wholly in the negative voice'],
-   why:'Figures of speech please but explain nothing; a definition must be clearer than the term it defines.'}
+   why:'Figures of speech please but explain nothing, and a definition must be clearer than the term it defines.'}
 ];
 function genDefPrincipleQ(d){
   const pool = DEF_PRINCIPLES.filter(x=> d>=2 || x.tier===1);
@@ -2192,8 +2192,8 @@ function divVerdict(dom, whole, members){
   if(miss) return {v:'deficient', witness:miss};
   return {v:'sound'};
 }
-const DIV_OPTS = ['A sound division','Incomplete — part of the whole is left out',
-  'The members overlap — something falls under two of them','One member does not belong to the whole being divided'];
+const DIV_OPTS = ['A sound division','Incomplete, since part of the whole is left out',
+  'The members overlap, since something falls under two of them','One member does not belong to the whole being divided'];
 const DIV_OPT_OF = {sound:DIV_OPTS[0], deficient:DIV_OPTS[1], overlap:DIV_OPTS[2], exceeds:DIV_OPTS[3]};
 function divText(whole, members){
   const ms = members.map(plural);
@@ -2228,7 +2228,7 @@ function genDivComputedQ(d){
   else if(verdict.v==='deficient')
     why = `The members leave part of the whole out: ${verdict.witness.name} is ${art(pick.whole)} ${pick.whole} that belongs to none of the members.`;
   else if(verdict.v==='overlap')
-    why = `The members overlap: ${verdict.witness.name} falls under both “${verdict.pair[0]}” and “${verdict.pair[1]}”.`;
+    why = `The members overlap, since ${verdict.witness.name} falls under both “${verdict.pair[0]}” and “${verdict.pair[1]}”.`;
   else
     why = `The member “${verdict.member}” does not belong to the whole being divided: ${verdict.witness.name} is ${art(verdict.member)} ${verdict.member} but not ${art(pick.whole)} ${pick.whole}.`;
   return mc4Make({prompt: divText(pick.whole, pick.members), options: DIV_OPTS,
@@ -2266,22 +2266,22 @@ const DIV_STOCK = {
     {tier:5, g:'human', t:'Human beings into men and women'}
   ],
   deficient: [
-    {tier:1, g:'angle', t:'Angles into the acute and the obtuse', w:'the right angle is neither acute nor obtuse — it is left out of both members'},
+    {tier:1, g:'angle', t:'Angles into the acute and the obtuse', w:'the right angle is neither acute nor obtuse, and so is left out of both members'},
     {tier:1, g:'year', t:'The year into spring and summer', w:'autumn and winter are left out'},
-    {tier:1, g:'fruit', t:'Fruit into apples, pears, and plums', w:'the orange and the grape are fruit too — they fall under none of the members'},
+    {tier:1, g:'fruit', t:'Fruit into apples, pears, and plums', w:'the orange and the grape are fruit too, and they fall under none of the members'},
     {tier:2, g:'plant part', t:'The parts of a plant into the root, the stem, and the leaves', w:'the flower and the fruit are left out'},
     {tier:1, g:'men', t:'Men into the married and the widowed', w:'the never-married are left out of both members'},
     {tier:1, g:'polygon', t:'Polygons into triangles and quadrilaterals', w:'the pentagon is left out of both members'},
     {tier:2, g:'card', t:'Playing cards into the hearts, the diamonds, and the clubs', w:'the spades are left out'},
-    {tier:2, g:'metal', t:'Metals into gold, silver, and iron', w:'copper, tin, and lead are metals too — they are left out of every member'},
-    {tier:2, g:'living thing', t:'Living things into plants and animals', w:'the fungi belong to neither member — they are left out'},
-    {tier:2, g:'bird', t:'Birds into those that swim and those that fly', w:'the ostrich neither swims nor flies — it is left out of both members'},
-    {tier:3, g:'colour', t:'Colours into the white and the black', w:'all the colours between — red, green, and the rest — are left out'},
+    {tier:2, g:'metal', t:'Metals into gold, silver, and iron', w:'copper, tin, and lead are metals too, and they are left out of every member'},
+    {tier:2, g:'living thing', t:'Living things into plants and animals', w:'the fungi belong to neither member, and so are left out'},
+    {tier:2, g:'bird', t:'Birds into those that swim and those that fly', w:'the ostrich neither swims nor flies, and so is left out of both members'},
+    {tier:3, g:'colour', t:'Colours into the white and the black', w:'all the colours in between (red, green, and the rest) are left out'},
     {tier:5, g:'time', t:'Time into the past and the future', w:'the present is left out'},
     {tier:5, g:'year', t:'The four seasons into spring, summer, and autumn', w:'winter is left out'}
   ],
   overlap: [
-    {tier:1, g:'number', t:'Numbers into the even and the multiples of three', w:'six is both even and a multiple of three — the members are not exclusive'},
+    {tier:1, g:'number', t:'Numbers into the even and the multiples of three', w:'six is both even and a multiple of three, so the members are not exclusive'},
     {tier:1, g:'men', t:'Men into the married and the tall', w:'a tall husband falls under both members'},
     {tier:1, g:'bird', t:'Birds into those that swim and those that are white', w:'the swan falls under both members'},
     {tier:1, g:'book', t:'Books into the old and the Latin', w:'an old Latin book falls under both members'},
@@ -2289,30 +2289,30 @@ const DIV_STOCK = {
     {tier:1, g:'flower', t:'Flowers into the red and the sweet-smelling', w:'a red rose falls under both members'},
     {tier:2, g:'card', t:'Playing cards into the red and the face cards', w:'the king of hearts is both red and a face card'},
     {tier:2, g:'animal', t:'Animals into the swift and the striped', w:'a running tiger is both swift and striped'},
-    {tier:3, g:'quadrilateral', t:'Quadrilaterals into the square and the rectangle', w:'every square is a rectangle — the members are not exclusive'},
+    {tier:3, g:'quadrilateral', t:'Quadrilaterals into the square and the rectangle', w:'every square is a rectangle, so the members are not exclusive'},
     {tier:3, g:'letter', t:'Letters into the vowels and the capitals', w:'the capital A is both a vowel and a capital'},
-    {tier:3, g:'plant', t:'Plants into trees and evergreens', w:'the pine is both a tree and an evergreen — the members are not exclusive'},
-    {tier:5, g:'men', t:'Men into the fathers and the sons', w:'one man may be both a father and a son — the members are not exclusive'}
+    {tier:3, g:'plant', t:'Plants into trees and evergreens', w:'the pine is both a tree and an evergreen, so the members are not exclusive'},
+    {tier:5, g:'men', t:'Men into the fathers and the sons', w:'one man may be both a father and a son, so the members are not exclusive'}
   ],
   exceeds: [
-    {tier:1, g:'living thing', t:'Living things into plants, animals, and stones', w:'a stone is not a living thing at all — it does not belong to the whole being divided'},
+    {tier:1, g:'living thing', t:'Living things into plants, animals, and stones', w:'a stone is not a living thing at all, and so does not belong to the whole being divided'},
     {tier:1, g:'triangle', t:'Triangles into equilateral, isosceles, and squares', w:'the square is no triangle at all'},
     {tier:1, g:'week', t:'The week into its seven days and the months', w:'months are no parts of a week'},
-    {tier:1, g:'ship', t:'The parts of a ship into the hull, the mast, the sail, and the passengers', w:'the passengers are no part of the ship — they do not belong to the whole being divided'},
+    {tier:1, g:'ship', t:'The parts of a ship into the hull, the mast, the sail, and the passengers', w:'the passengers are no part of the ship, and so do not belong to the whole being divided'},
     {tier:1, g:'hand', t:'The fingers into thumb, forefinger, and the palm', w:'the palm is not a finger'},
-    {tier:2, g:'letter', t:'Letters into the vowels, the consonants, and the syllables', w:'a syllable is built out of letters but is not itself a letter — it does not belong among them'},
-    {tier:2, g:'tree', t:'Trees into oaks, pines, and ferns', w:'a fern is not a tree at all — it does not belong to the whole being divided'},
-    {tier:2, g:'sense', t:'The five senses into sight, hearing, touch, taste, smell, and speech', w:'speech is not a sense at all — it does not belong among the five'},
-    {tier:3, g:'direction', t:'The four directions into north, south, east, west, and the centre', w:'the centre is not a direction at all — it does not belong among the four'},
-    {tier:5, g:'meal', t:'The meals of the day into breakfast, dinner, supper, and the kitchen', w:'the kitchen is not a meal at all — it does not belong among them'}
+    {tier:2, g:'letter', t:'Letters into the vowels, the consonants, and the syllables', w:'a syllable is built out of letters but is not itself a letter, and so does not belong among them'},
+    {tier:2, g:'tree', t:'Trees into oaks, pines, and ferns', w:'a fern is not a tree at all, and so does not belong to the whole being divided'},
+    {tier:2, g:'sense', t:'The five senses into sight, hearing, touch, taste, smell, and speech', w:'speech is not a sense at all, and so does not belong among the five'},
+    {tier:3, g:'direction', t:'The four directions into north, south, east, west, and the centre', w:'the centre is not a direction at all, and so does not belong among the four'},
+    {tier:5, g:'meal', t:'The meals of the day into breakfast, dinner, supper, and the kitchen', w:'the kitchen is not a meal at all, and so does not belong among them'}
   ],
   mixed: [
-    {tier:1, g:'shoe', t:'Shoes into leather shoes, sandals, and children’s shoes', w:'material, style, and wearer are three different bases — the cuts cross'},
-    {tier:1, g:'book', t:'Books into the old, the Latin, and the heavy', w:'age, language, and weight are three bases — the members cross-cut'},
+    {tier:1, g:'shoe', t:'Shoes into leather shoes, sandals, and children’s shoes', w:'material, style, and wearer are three different bases, so the members cut across one another'},
+    {tier:1, g:'book', t:'Books into the old, the Latin, and the heavy', w:'age, language, and weight are three bases, so the members cut across one another'},
     {tier:1, g:'house', t:'Houses into the stone-built, the tall, and the rented', w:'material, size, and ownership cross one another'},
     {tier:1, g:'dog', t:'Dogs into hounds, black dogs, and puppies', w:'breed, colour, and age are three bases at once'},
     {tier:1, g:'cup', t:'Cups into the clay, the cracked, and the child’s', w:'material, condition, and owner are three different bases at once'},
-    {tier:2, g:'horse', t:'Horses into the swift, the white, and the young', w:'speed, colour, and age are three different bases — the cuts cross'},
+    {tier:2, g:'horse', t:'Horses into the swift, the white, and the young', w:'speed, colour, and age are three different bases, so the members cut across one another'},
     {tier:2, g:'student', t:'Students into the beginners, the tall, and the diligent', w:'stage, height, and character are three bases at once'},
     {tier:3, g:'poem', t:'Poems into the epic, the ancient, and the Greek', w:'genre, age, and language are three different bases'},
     {tier:3, g:'ship', t:'Ships into the swift, the wooden, and the foreign', w:'speed, material, and origin are three different bases'},
@@ -2320,10 +2320,10 @@ const DIV_STOCK = {
   ]
 };
 const DIV_RULE_META = {
-  deficient:{rule:'The members together must cover the whole: nothing that belongs to the whole may be left out.'},
-  overlap:{rule:'The members must not overlap: nothing may fall under two of them at once.'},
-  exceeds:{rule:'Every member must actually belong to the whole being divided: a division may not list something that falls outside it.'},
-  mixed:{rule:'A division must sort on a single basis at a time: members sorted on different bases cut across one another.'}
+  deficient:{rule:'The members together must cover the whole, so that nothing belonging to the whole is left out.'},
+  overlap:{rule:'The members must not overlap, so that nothing falls under two of them at once.'},
+  exceeds:{rule:'Every member must actually belong to the whole being divided, so a division may not list something that falls outside it.'},
+  mixed:{rule:'A division must sort on a single basis at a time, since members sorted on different bases cut across one another.'}
 };
 /* Pick up to n items from pool whose genus differs from one another and from
    any genus in `exclude`. If distinct genera run short, fall back to filling
@@ -2351,7 +2351,7 @@ function genDivRuleQ(d){
     return mc4Make({ruleShow: rShow,
       options: [culprit.t].concat(others.map(o=>o.t)),
       correct: culprit.t,
-      why: `“${culprit.t}” breaks the rule: ${culprit.w}. The other three hold: their members cover the whole, do not overlap, and are sorted on one basis.`,
+      why: `“${culprit.t}” breaks the rule, since ${culprit.w}. The other three hold, since their members cover the whole, do not overlap, and are sorted on one basis.`,
       rules: DIV_RULES, mcInstr: d>=5 ? 'One of these four divisions breaks a rule of division. Which one?' : 'One of these four divisions breaks the rule shown. Which one?'});
   }
   const keeper = recentPick(soundPool, x=>x.t);
@@ -2364,8 +2364,8 @@ function genDivRuleQ(d){
 }
 const DIVKIND_DOCTRINE = {
   ess:'An ESSENTIAL division divides a general kind (a genus) into the kinds beneath it, marked off by opposed differences.',
-  int:'An INTEGRAL division divides a whole into the parts that make it up — and no part is called by the name of the whole.',
-  pot:'A DIVISION BY POWERS divides one thing according to what it is able to do — as a person into the powers of body and of mind.',
+  int:'An INTEGRAL division divides a whole into the parts that make it up, and no part is called by the name of the whole.',
+  pot:'A DIVISION BY POWERS divides one thing according to what it is able to do, as a person is divided into the powers of body and of mind.',
   acc:'An ACCIDENTAL division sorts a subject by features it can gain or lose without becoming a different thing.'
 };
 /* two simple examples of each kind — none of them used as exercise items —
@@ -2382,45 +2382,45 @@ const DIVKIND_IS = {ess:'essential', int:'integral', pot:'a division by powers',
 const DIVKIND_LABEL = {ess:'an ESSENTIAL division', int:'an INTEGRAL division', pot:'a DIVISION BY POWERS', acc:'an ACCIDENTAL division'};
 const DIVKIND_STOCK = {
   ess: [
-    {tier:1, g:'letter', t:'Letters into the vowels and the consonants', w:'a general kind divided into the kinds beneath it by opposed differences.'},
-    {tier:1, g:'number', t:'Number into the even and the odd', w:'every number falls into one kind or the other, by an opposed difference.'},
-    {tier:1, g:'triangle', t:'Triangle into equilateral, isosceles, and scalene', w:'Euclid’s trichotomy of species.'},
-    {tier:2, g:'backbone', t:'Animals into those with backbones and those without', w:'a general kind divided into the kinds beneath it by opposed differences.'},
-    {tier:2, g:'angle', t:'Angles into the acute, the right, and the obtuse', w:'a general kind divided into the kinds beneath it by opposed differences.'},
-    {tier:2, g:'living thing', t:'Living things into plants, animals, and fungi', w:'a general kind divided into the kinds beneath it by opposed differences.'},
-    {tier:3, g:'plant', t:'Plants into trees, shrubs, and grasses', w:'a general kind divided into the kinds beneath it, by how each one grows.'},
-    {tier:5, g:'line', t:'Line into the straight and the curved', w:'a general kind divided into its two kinds by an opposed difference.'},
-    {tier:5, g:'bee', t:'The bees of a hive into the queen, the workers, and the drones', w:'a general kind divided into the kinds beneath it, each with its own work.'}
+    {tier:1, g:'letter', t:'Letters into the vowels and the consonants', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
+    {tier:1, g:'number', t:'Number into the even and the odd', w:'Every number falls into one kind or the other, by an opposed difference.'},
+    {tier:1, g:'triangle', t:'Triangle into equilateral, isosceles, and scalene', w:'It is Euclid’s threefold division of the species of triangle.'},
+    {tier:2, g:'backbone', t:'Animals into those with backbones and those without', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
+    {tier:2, g:'angle', t:'Angles into the acute, the right, and the obtuse', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
+    {tier:2, g:'living thing', t:'Living things into plants, animals, and fungi', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
+    {tier:3, g:'plant', t:'Plants into trees, shrubs, and grasses', w:'It divides a general kind into the kinds beneath it, by how each one grows.'},
+    {tier:5, g:'line', t:'Line into the straight and the curved', w:'It divides a general kind into its two kinds by an opposed difference.'},
+    {tier:5, g:'bee', t:'The bees of a hive into the queen, the workers, and the drones', w:'It divides a general kind into the kinds beneath it, each with its own work.'}
   ],
   int: [
-    {tier:1, g:'house', t:'A house into foundation, walls, and roof', w:'parts that make up the whole; none of them is called a house.'},
-    {tier:1, g:'week', t:'The week into its seven days', w:'the days make up the week; no single day is a week.'},
-    {tier:1, g:'body', t:'The body into head, trunk, and limbs', w:'the parts that make up one whole body.'},
-    {tier:1, g:'wheel', t:'A wheel into its hub, its spokes, and its rim', w:'the parts that make up the whole; no one of them is a wheel.'},
-    {tier:2, g:'river', t:'A river into its source, its course, and its mouth', w:'the parts that make up the whole river; no one of them is a river.'},
-    {tier:3, g:'song', t:'A song into its words and its tune', w:'the two parts that make up the whole; neither on its own is the song.'},
-    {tier:5, g:'ship', t:'A ship into hull, mast, and sail', w:'the parts that make up the whole; no part is itself the ship.'},
-    {tier:5, g:'sentence', t:'A sentence into its subject and its predicate', w:'the parts that make up the whole; neither on its own is the sentence.'}
+    {tier:1, g:'house', t:'A house into foundation, walls, and roof', w:'It names the parts that make up the whole, and none of them is called a house.'},
+    {tier:1, g:'week', t:'The week into its seven days', w:'The days make up the week, and no single day is a week.'},
+    {tier:1, g:'body', t:'The body into head, trunk, and limbs', w:'It names the parts that make up one whole body.'},
+    {tier:1, g:'wheel', t:'A wheel into its hub, its spokes, and its rim', w:'It names the parts that make up the whole, and no one of them is a wheel.'},
+    {tier:2, g:'river', t:'A river into its source, its course, and its mouth', w:'It names the parts that make up the whole river, and no one of them is a river.'},
+    {tier:3, g:'song', t:'A song into its words and its tune', w:'It names the two parts that make up the whole, and neither on its own is the song.'},
+    {tier:5, g:'ship', t:'A ship into hull, mast, and sail', w:'It names the parts that make up the whole, and no part is itself the ship.'},
+    {tier:5, g:'sentence', t:'A sentence into its subject and its predicate', w:'It names the parts that make up the whole, and neither on its own is the sentence.'}
   ],
   pot: [
-    {tier:1, g:'animal power', t:'An animal into its power to be nourished, to move, and to sense', w:'one animal, divided not into pieces but into what it is able to do.'},
-    {tier:1, g:'hand', t:'The hand into its power to grasp and its power to strike', w:'one part of the body divided by what it is able to do.'},
-    {tier:1, g:'mind', t:'The mind into its power to remember, to understand, and to choose', w:'one mind, divided into what it is able to do.'},
-    {tier:2, g:'sense', t:'The senses of an animal into sight, hearing, touch, taste, and smell', w:'one power of sensing divided into the five powers under it.'},
-    {tier:2, g:'horse', t:'A horse into its power to run, to pull, and to carry', w:'one animal divided by what it is able to do, not into parts.'},
-    {tier:3, g:'seed', t:'A seed into its power to sprout, to grow, and to bear fruit', w:'one seed divided by what it is able to do in its turn.'},
-    {tier:5, g:'tongue', t:'The tongue into its power to taste and its power to speak', w:'one organ divided into its two powers.'},
-    {tier:5, g:'dog', t:'A dog into its power to run, to smell, and to bark', w:'one animal divided by what it is able to do.'}
+    {tier:1, g:'animal power', t:'An animal into its power to be nourished, to move, and to sense', w:'It divides one animal, not into pieces, but into what it is able to do.'},
+    {tier:1, g:'hand', t:'The hand into its power to grasp and its power to strike', w:'It divides one part of the body by what it is able to do.'},
+    {tier:1, g:'mind', t:'The mind into its power to remember, to understand, and to choose', w:'It divides one mind into what it is able to do.'},
+    {tier:2, g:'sense', t:'The senses of an animal into sight, hearing, touch, taste, and smell', w:'It divides one power of sensing into the five powers under it.'},
+    {tier:2, g:'horse', t:'A horse into its power to run, to pull, and to carry', w:'It divides one animal by what it is able to do, not into parts.'},
+    {tier:3, g:'seed', t:'A seed into its power to sprout, to grow, and to bear fruit', w:'It divides one seed by what it is able to do in its turn.'},
+    {tier:5, g:'tongue', t:'The tongue into its power to taste and its power to speak', w:'It divides one organ into its two powers.'},
+    {tier:5, g:'dog', t:'A dog into its power to run, to smell, and to bark', w:'It divides one animal by what it is able to do.'}
   ],
   acc: [
-    {tier:1, g:'musical', t:'People into the musical and the unmusical', w:'a subject sorted by a feature it can gain or lose — nothing of what a person is.'},
-    {tier:1, g:'shoe', t:'Shoes into the new and the worn', w:'sorted by a state they pass into with use — no part of what a shoe is.'},
-    {tier:1, g:'book', t:'Books into the read and the unread', w:'a feature of the reader, not of what the book is.'},
-    {tier:2, g:'sleeper', t:'Men into the sleeping and the waking', w:'a subject divided by a passing state — no part of what a man is.'},
-    {tier:2, g:'coin', t:'Coins into the newly struck and the worn', w:'sorted by what handling has done to them — no part of what a coin is.'},
-    {tier:3, g:'road', t:'Roads into the dry and the muddy', w:'a subject sorted by what the weather has done to it — no part of what a road is.'},
-    {tier:5, g:'traveller', t:'Travellers into those on foot and those on horseback', w:'a subject divided by a passing feature — the manner of travel.'},
-    {tier:5, g:'field', t:'Fields into the sown and the fallow', w:'a subject sorted by a passing state — no part of what a field is.'}
+    {tier:1, g:'musical', t:'People into the musical and the unmusical', w:'It sorts a subject by a feature it can gain or lose, which is no part of what a person is.'},
+    {tier:1, g:'shoe', t:'Shoes into the new and the worn', w:'It sorts by a state they pass into with use, which is no part of what a shoe is.'},
+    {tier:1, g:'book', t:'Books into the read and the unread', w:'It sorts by a feature of the reader, not of what the book is.'},
+    {tier:2, g:'sleeper', t:'Men into the sleeping and the waking', w:'It divides a subject by a passing state, which is no part of what a man is.'},
+    {tier:2, g:'coin', t:'Coins into the newly struck and the worn', w:'It sorts by what handling has done to them, which is no part of what a coin is.'},
+    {tier:3, g:'road', t:'Roads into the dry and the muddy', w:'It sorts a subject by what the weather has done to it, which is no part of what a road is.'},
+    {tier:5, g:'traveller', t:'Travellers into those on foot and those on horseback', w:'It divides a subject by a passing feature, the manner of travel.'},
+    {tier:5, g:'field', t:'Fields into the sown and the fallow', w:'It sorts a subject by a passing state, which is no part of what a field is.'}
   ]
 };
 function genDivKindQ(d){
@@ -2444,7 +2444,7 @@ function genDivKindQ(d){
   return mc4Make({ruleShow: rShow,
     options: kinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `“${chosen[target].t}” — ${chosen[target].w} Of the rest: ${others}.`,
+    why: `“${chosen[target].t}”. ${chosen[target].w} Of the others, ${others}.`,
     rules: 'The kinds of division: essential (a general kind into the kinds beneath it), integral (a whole into the parts that make it up), by powers (one thing according to what it can do), accidental (a subject sorted by features it can gain or lose).',
     mcInstr: `Which of these is ${DIVKIND_LABEL[target]}?`});
 }
@@ -2457,24 +2457,24 @@ const DIV_PRINCIPLES = [
    why:'The members taken together must cover the whole. If anything belonging to the whole falls under none of them, the division is incomplete.'},
   {tier:1, q:'That nothing fall under two members at once is the rule that the members…',
    correct:'Must not overlap (they are mutually exclusive)',
-   ds:['Must be few in number','Must each fit the whole exactly','Must be stated positively'],
+   ds:['Must be few in number (no more than needed)','Must each fit the whole exactly (as a definition does)','Must be stated positively (not by denial)'],
    why:'The members must be opposed, so that nothing belongs to two of them at once; overlapping members spoil the division.'},
   {tier:1, q:'A sound division must sort on one basis at a time. Which division breaks this rule?',
    correct:'Shoes into leather, canvas, and left-footed',
    ds:['Number into even and odd','Letters into the vowels and the consonants','Lines into the straight and the curved'],
-   why:'One basis at a time: “leather/canvas” sorts by material, “left-footed” by something else entirely — mixing bases is the classic fault.'},
+   why:'A division sorts on one basis at a time, but “leather/canvas” sorts by material and “left-footed” by something else entirely; mixing bases is the classic fault.'},
   {tier:2, q:'The rule that every member must belong to the whole forbids…',
    correct:'Listing a member that the whole does not actually contain',
    ds:['Dividing the whole into just two members','Dividing a general kind into the kinds beneath it','Naming the whole before naming its parts'],
-   why:'Every member must be something the whole really includes. A member that lies outside it does not divide that whole at all — as “stones” does nothing to divide living things.'},
+   why:'Every member must be something the whole really includes. A member that lies outside it does not divide that whole at all, as “stones” does nothing to divide living things.'},
   {tier:2, q:'Dividing “living thing” into plant, animal, and fungus is sound because the three members are…',
    correct:'Complete, non-overlapping, and sorted on one basis',
    ds:['Arranged in strict alphabetical order','All three of them fixed by pure metaphor','Named after their efficient causes'],
-   why:'They cover every living thing — plants and animals alone would leave the fungi out — nothing falls under two of them, and they are sorted on a single basis.'},
+   why:'They cover every living thing (plants and animals alone would leave the fungi out); nothing falls under two of them; and they are sorted on a single basis.'},
   {tier:2, q:'An essential division divides a general kind into the kinds beneath it. What does an integral division divide, and into what?',
    correct:'A whole into the parts that make it up',
    ds:['A subject into the features it can gain or lose','A general kind into its opposed differences','A name into the syllables that spell it'],
-   why:'Integral division takes a whole (a house) into the parts that make it up (foundation, walls, roof) — and no part is called a house.'}
+   why:'Integral division takes a whole (a house) into the parts that make it up (foundation, walls, roof), and no part is called a house.'}
 ];
 function genDivPrincipleQ(d){
   const pool = DIV_PRINCIPLES.filter(x=> d>=2 || x.tier===1);
@@ -2503,85 +2503,85 @@ function genDivQ(d){
    Tiers as in Definition/Division: 1 homely, 2 classical but plain,
    3 subtle, 5 reserved for the Master level.
    ================================================================ */
-const PRED_RULES = 'The five predicables (Porphyry): genus, species, difference, property, and accident — the five ways a general term can be said of a subject. The genus is the wider kind; the species the narrower kind under it; the difference is the mark that divides the genus and makes the species; the property follows from what the thing is and belongs to that species alone, always; the accident may be present or absent while the subject stays the same thing.';
+const PRED_RULES = 'The five predicables (Porphyry) are genus, species, difference, property, and accident, the five ways a general term can be said of a subject. The genus is the wider kind; the species the narrower kind under it; the difference is the mark that divides the genus and makes the species; the property follows from what the thing is and belongs to that species alone, always; the accident may be present or absent while the subject stays the same thing.';
 const PRED_NAME = {gen:'genus', spec:'species', diff:'difference', prop:'property', acc:'accident'};
 const PRED_DOCTRINE = {
   gen:'A GENUS is said of many things of different kinds, naming the broader class they share; it answers “what is it?” with the wider nature. Animal is the genus of man.',
   spec:'A SPECIES is the narrower kind under a genus, said of the individuals that share that nature. Man is a species of animal; Socrates falls under the species man.',
-  diff:'A DIFFERENCE (differentia) is the mark that divides a genus and makes a species — it answers “what sort of thing, in its very nature?” Rational divides animal and makes man.',
-  prop:'A PROPERTY (proprium) is no part of what a thing is, yet follows from it, and belongs to every member of the species, to that species alone, and always — so the two always go together. The power to laugh is the property of man.',
-  acc:'An ACCIDENT is what a subject may have or lack while remaining the very same thing — present in it, but no part of what it is. White is an accident of man.'
+  diff:'A DIFFERENCE (differentia) is the mark that divides a genus and makes a species; it answers “what sort of thing, in its very nature?” Rational divides animal and makes man.',
+  prop:'A PROPERTY (proprium) is no part of what a thing is, yet follows from it, and belongs to every member of the species, to that species alone, and always, so that the two always go together. The power to laugh is the property of man.',
+  acc:'An ACCIDENT is what a subject may have or lack while remaining the very same thing; it is present in the subject, but no part of what it is. White is an accident of man.'
 };
 /* Each item is a predication “subject — predicate”, tagged with the predicable
    the predicate bears to the subject. `subj` groups items so a single question
    need not put two options about the same subject side by side. */
 const PRED_ITEMS = {
   gen: [
-    {tier:1, subj:'man', t:'Man is an animal', w:'animal is the genus of man — the wider kind, said of many species at once (Porphyry).'},
-    {tier:1, subj:'oak', t:'An oak is a tree', w:'tree, the genus, said of the oak as its wider kind.'},
-    {tier:1, subj:'dog', t:'A dog is an animal', w:'animal, the genus, said of the dog as its common kind.'},
-    {tier:1, subj:'rose2', t:'A rose is a plant', w:'plant, the wider kind under which the rose falls.'},
-    {tier:2, subj:'copper', t:'Copper is a metal', w:'metal, the genus, said of copper as its wider kind.'},
-    {tier:2, subj:'horse', t:'A horse is an animal', w:'animal, the genus, said of the horse as its common kind.'},
-    {tier:2, subj:'triangle', t:'A triangle is a figure', w:'figure is the genus, the wider kind under which the triangle falls.'},
-    {tier:2, subj:'hammer', t:'A hammer is a tool', w:'tool, the genus — the wider kind under which the hammer falls.'},
-    {tier:3, subj:'bee', t:'A bee is an insect', w:'insect, the genus, said of the bee as its wider kind.'},
-    {tier:3, subj:'oak', t:'An oak is a living thing', w:'a remote genus — an oak is a tree, a tree a plant, a plant a living thing. The genus need not be the nearest one (the tree of Porphyry).'},
-    {tier:5, subj:'white', t:'White is a colour', w:'colour, the genus, said of white as its wider kind.'}
+    {tier:1, subj:'man', t:'Man is an animal', w:'Animal is the genus of man, the wider kind, said of many species at once (Porphyry).'},
+    {tier:1, subj:'oak', t:'An oak is a tree', w:'Tree is the genus, said of the oak as its wider kind.'},
+    {tier:1, subj:'dog', t:'A dog is an animal', w:'Animal is the genus, said of the dog as its common kind.'},
+    {tier:1, subj:'rose2', t:'A rose is a plant', w:'Plant is the wider kind under which the rose falls.'},
+    {tier:2, subj:'copper', t:'Copper is a metal', w:'Metal is the genus, said of copper as its wider kind.'},
+    {tier:2, subj:'horse', t:'A horse is an animal', w:'Animal is the genus, said of the horse as its common kind.'},
+    {tier:2, subj:'triangle', t:'A triangle is a figure', w:'Figure is the genus, the wider kind under which the triangle falls.'},
+    {tier:2, subj:'hammer', t:'A hammer is a tool', w:'Tool is the genus, the wider kind under which the hammer falls.'},
+    {tier:3, subj:'bee', t:'A bee is an insect', w:'Insect is the genus, said of the bee as its wider kind.'},
+    {tier:3, subj:'oak', t:'An oak is a living thing', w:'This is a remote genus: an oak is a tree, a tree a plant, a plant a living thing. The genus need not be the nearest one (the tree of Porphyry).'},
+    {tier:5, subj:'white', t:'White is a colour', w:'Colour is the genus, said of white as its wider kind.'}
   ],
   spec: [
-    {tier:1, subj:'Socrates', t:'Socrates is a man', w:'man, the species, said of the individual who falls under it (Porphyry).'},
-    {tier:1, subj:'fido', t:'Fido is a dog', w:'the species dog, said of the individual Fido.'},
-    {tier:1, subj:'man', t:'Man is a species of animal', w:'man is the lowest species under the genus animal — beneath it lie only individual men.'},
-    {tier:2, subj:'rex', t:'Rex is a horse', w:'the species horse, said of the single animal Rex.'},
-    {tier:2, subj:'daisy', t:'This flower is a daisy', w:'the species daisy, said of the single flower that falls under it.'},
-    {tier:2, subj:'oak', t:'This tree is an oak', w:'the species oak, said of the single tree that falls under it.'},
-    {tier:3, subj:'Plato', t:'Plato is a man', w:'the species man, said of the individual Plato.'},
-    {tier:5, subj:'sheep', t:'This animal is a sheep', w:'the lowest species, said of the individual that falls under it.'}
+    {tier:1, subj:'Socrates', t:'Socrates is a man', w:'Man is the species, said of the individual who falls under it (Porphyry).'},
+    {tier:1, subj:'fido', t:'Fido is a dog', w:'Dog is the species, said of the individual Fido.'},
+    {tier:1, subj:'man', t:'Man is a species of animal', w:'Man is the lowest species under the genus animal, and beneath it lie only individual men.'},
+    {tier:2, subj:'rex', t:'Rex is a horse', w:'Horse is the species, said of the single animal Rex.'},
+    {tier:2, subj:'daisy', t:'This flower is a daisy', w:'Daisy is the species, said of the single flower that falls under it.'},
+    {tier:2, subj:'oak', t:'This tree is an oak', w:'Oak is the species, said of the single tree that falls under it.'},
+    {tier:3, subj:'Plato', t:'Plato is a man', w:'Man is the species, said of the individual Plato.'},
+    {tier:5, subj:'sheep', t:'This animal is a sheep', w:'It is the lowest species, said of the individual that falls under it.'}
   ],
   diff: [
-    {tier:1, subj:'man', t:'Man is rational', nosort:true, w:'being able to reason — the difference that divides animal and makes man (Porphyry; the tree).'},
-    {tier:1, subj:'triangle', t:'A triangle is three-sided', w:'having three sides — the difference that marks the triangle off from every other figure.'},
-    {tier:2, subj:'angel', t:'An angel has no body', nosort:true, w:'having no body — the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
-    {tier:2, subj:'body', t:'A body takes up space', w:'taking up space — the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
-    {tier:3, subj:'animal', t:'An animal can sense', w:'the power of sense — the difference that divides living things and makes the animal (the tree of Porphyry).'},
-    {tier:3, subj:'plant', t:'A plant cannot sense', nosort:true, w:'lacking the power of sense — the difference that marks the plant off from the animal (the tree of Porphyry).'},
-    {tier:5, subj:'number', t:'This number is even', nosort:true, w:'even — the difference that divides the genus number into the kinds beneath it.'}
+    {tier:1, subj:'man', t:'Man is rational', nosort:true, w:'Being able to reason is the difference that divides animal and makes man (Porphyry; the tree).'},
+    {tier:1, subj:'triangle', t:'A triangle is three-sided', w:'Having three sides is the difference that marks the triangle off from every other figure.'},
+    {tier:2, subj:'angel', t:'An angel has no body', nosort:true, w:'Having no body is the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
+    {tier:2, subj:'body', t:'A body takes up space', w:'Taking up space is the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
+    {tier:3, subj:'animal', t:'An animal can sense', w:'The power of sense is the difference that divides living things and makes the animal (the tree of Porphyry).'},
+    {tier:3, subj:'plant', t:'A plant cannot sense', nosort:true, w:'Lacking the power of sense is the difference that marks the plant off from the animal (the tree of Porphyry).'},
+    {tier:5, subj:'number', t:'This number is even', nosort:true, w:'Even is the difference that divides the genus number into the kinds beneath it.'}
   ],
   prop: [
-    {tier:1, subj:'man', t:'Man is able to laugh', w:'the power to laugh belongs to man alone, to every man, and always; it follows from reason yet is no part of what a man is (the classic property).'},
-    {tier:2, subj:'man13', t:'Man is able to learn grammar', w:'Aristotle’s own example of a property (Topics I.5): it belongs to man alone, to every man, and always, and it swaps, for whatever can learn grammar is a man.'},
-    {tier:2, subj:'triangle', t:'A triangle has its angles equal to two right angles', w:'a property — it follows from what a triangle is and always goes with it, yet is not what a triangle is (Aristotle’s model of a per se accident).'},
-    {tier:3, subj:'square', t:'A square’s diagonals are equal and cut each other in half at right angles', w:'it follows from what a square is, holds of every square and of no other four-sided figure, yet it is not what a square is.'},
-    {tier:5, subj:'oak', t:'An oak is able to bear acorns', w:'the power to bear acorns belongs to oaks alone and to every oak, always. A sapling bears none yet, but it has the power. It follows from what an oak is, yet is not what an oak is.'}
+    {tier:1, subj:'man', t:'Man is able to laugh', w:'The power to laugh belongs to man alone, to every man, and always; it follows from reason yet is no part of what a man is (the classic property).'},
+    {tier:2, subj:'man13', t:'Man is able to learn grammar', w:'This is Aristotle’s own example of a property (Topics I.5): it belongs to man alone, to every man, and always, and it swaps, for whatever can learn grammar is a man.'},
+    {tier:2, subj:'triangle', t:'A triangle has its angles equal to two right angles', w:'It is a property, since it follows from what a triangle is and always goes with it, yet is not what a triangle is (Aristotle’s model of a per se accident).'},
+    {tier:3, subj:'square', t:'A square’s diagonals are equal and cut each other in half at right angles', w:'It follows from what a square is, holds of every square and of no other four-sided figure, yet it is not what a square is.'},
+    {tier:5, subj:'oak', t:'An oak is able to bear acorns', w:'The power to bear acorns belongs to oaks alone and to every oak, always. A sapling bears none yet, but it has the power. It follows from what an oak is, yet is not what an oak is.'}
   ],
   acc: [
-    {tier:1, subj:'Socrates', t:'Socrates is pale', w:'paleness is present in him but is no part of what he is. He can tan, and he is still Socrates (a separable accident).'},
-    {tier:1, subj:'apple', t:'This apple is ripe', w:'ripeness comes and goes; the apple is no less an apple unripe.'},
-    {tier:1, subj:'peter', t:'Peter is seated', w:'sitting — a posture the man takes up and puts off again, changing nothing of what he is.'},
-    {tier:1, subj:'door', t:'The door is open', w:'being open is a passing state of the door, no part of what a door is.'},
-    {tier:1, subj:'lamp', t:'The lamp is lit', w:'being lit comes and goes; the lamp is a lamp whether lit or dark.'},
-    {tier:1, subj:'boy', t:'The boy is asleep', w:'sleep — a separable accident: here now, gone when he wakes.'},
-    {tier:1, subj:'road', t:'The road is muddy', w:'mud comes with the weather; it is no part of what a road is.'},
-    {tier:1, subj:'coin', t:'This coin is old', w:'the coin has grown old with use, yet a new coin and an old one are equally coins.'},
-    {tier:1, subj:'sky', t:'The sky is cloudy', w:'cloudiness is a passing accident of the sky today.'},
-    {tier:1, subj:'field', t:'The field lies fallow', w:'lying fallow is a passing state of the field, no part of what a field is.'},
-    {tier:2, subj:'raven', t:'A raven is black', w:'an inseparable accident: blackness never leaves the raven, yet being a raven does not consist in being black (Porphyry).'},
-    {tier:2, subj:'man9', t:'This man is sitting', w:'sitting — a separable accident that comes and goes while the man stays the same (Porphyry).'},
-    {tier:2, subj:'man10', t:'This man is musical', w:'Aristotle’s stock accident: the same man may be musical or not, and be the same man either way.'},
-    {tier:2, subj:'swan', t:'This swan is white', w:'whiteness is in this swan but is no part of what a swan is. Not every swan is white, and white is said of many other things.'},
-    {tier:2, subj:'man14', t:'This man is laughing', w:'laughing comes and goes; the power to laugh is the property, the act is an accident (Porphyry).'},
-    {tier:2, subj:'boy2', t:'This boy knows grammar', w:'knowing grammar is gained and can be lost; being able to learn it is the property (Topics I.5).'},
-    {tier:2, subj:'wine', t:'This wine is warm', w:'warmth is an accident the wine takes on and readily loses.'},
-    {tier:2, subj:'soldier', t:'The soldier is weary', w:'weariness — a passing state, no part of what a soldier is.'},
-    {tier:2, subj:'mary', t:'Mary is cheerful', w:'cheerfulness comes and goes; the person stays the same person through the change.'},
-    {tier:3, subj:'Socrates2', t:'Socrates is in the marketplace', w:'being in a place — an accident that changes while the man stays the same man.'},
-    {tier:3, subj:'iron', t:'This iron is rusty', w:'rust comes on the iron in time; iron is iron, bright or rusty.'},
-    {tier:3, subj:'scholar', t:'The scholar is standing', w:'standing — a posture taken up and left again, changing nothing of what he is.'},
-    {tier:5, subj:'wall', t:'The wall is white', w:'the whiteness is in the wall but is no part of what a wall is (Aristotle’s “present in a subject”).'},
-    {tier:5, subj:'stone', t:'This stone is wet', w:'wetness — a separable accident; the stone dries and is the same stone.'},
-    {tier:5, subj:'ship', t:'The ship is laden', w:'being laden is a passing accident of the ship, gone when it is unloaded.'},
-    {tier:5, subj:'tree2', t:'This tree is in bloom', w:'blossom comes with the season; it is no part of what a tree is.'}
+    {tier:1, subj:'Socrates', t:'Socrates is pale', w:'Paleness is present in him but is no part of what he is. He can tan, and he is still Socrates (a separable accident).'},
+    {tier:1, subj:'apple', t:'This apple is ripe', w:'Ripeness comes and goes; the apple is no less an apple when unripe.'},
+    {tier:1, subj:'peter', t:'Peter is seated', w:'Sitting is a posture the man takes up and puts off again, changing nothing of what he is.'},
+    {tier:1, subj:'door', t:'The door is open', w:'Being open is a passing state of the door, no part of what a door is.'},
+    {tier:1, subj:'lamp', t:'The lamp is lit', w:'Being lit comes and goes; the lamp is a lamp whether lit or dark.'},
+    {tier:1, subj:'boy', t:'The boy is asleep', w:'Sleep is a separable accident, present now and gone when he wakes.'},
+    {tier:1, subj:'road', t:'The road is muddy', w:'Mud comes with the weather; it is no part of what a road is.'},
+    {tier:1, subj:'coin', t:'This coin is old', w:'The coin has grown old with use, yet a new coin and an old one are equally coins.'},
+    {tier:1, subj:'sky', t:'The sky is cloudy', w:'Cloudiness is a passing accident of the sky today.'},
+    {tier:1, subj:'field', t:'The field lies fallow', w:'Lying fallow is a passing state of the field, no part of what a field is.'},
+    {tier:2, subj:'raven', t:'A raven is black', w:'This is an inseparable accident: blackness never leaves the raven, yet being a raven does not consist in being black (Porphyry).'},
+    {tier:2, subj:'man9', t:'This man is sitting', w:'Sitting is a separable accident that comes and goes while the man stays the same (Porphyry).'},
+    {tier:2, subj:'man10', t:'This man is musical', w:'This is Aristotle’s stock accident: the same man may be musical or not, and be the same man either way.'},
+    {tier:2, subj:'swan', t:'This swan is white', w:'Whiteness is in this swan but is no part of what a swan is. Not every swan is white, and white is said of many other things.'},
+    {tier:2, subj:'man14', t:'This man is laughing', w:'Laughing comes and goes; the power to laugh is the property, and the act is an accident (Porphyry).'},
+    {tier:2, subj:'boy2', t:'This boy knows grammar', w:'Knowing grammar is gained and can be lost; being able to learn it is the property (Topics I.5).'},
+    {tier:2, subj:'wine', t:'This wine is warm', w:'Warmth is an accident the wine takes on and readily loses.'},
+    {tier:2, subj:'soldier', t:'The soldier is weary', w:'Weariness is a passing state, no part of what a soldier is.'},
+    {tier:2, subj:'mary', t:'Mary is cheerful', w:'Cheerfulness comes and goes; the person stays the same person through the change.'},
+    {tier:3, subj:'Socrates2', t:'Socrates is in the marketplace', w:'Being in a place is an accident that changes while the man stays the same man.'},
+    {tier:3, subj:'iron', t:'This iron is rusty', w:'Rust comes on the iron in time; iron is iron, bright or rusty.'},
+    {tier:3, subj:'scholar', t:'The scholar is standing', w:'Standing is a posture taken up and left again, changing nothing of what he is.'},
+    {tier:5, subj:'wall', t:'The wall is white', w:'The whiteness is in the wall but is no part of what a wall is (Aristotle’s “present in a subject”).'},
+    {tier:5, subj:'stone', t:'This stone is wet', w:'Wetness is a separable accident; the stone dries and is the same stone.'},
+    {tier:5, subj:'ship', t:'The ship is laden', w:'Being laden is a passing accident of the ship, gone when it is unloaded.'},
+    {tier:5, subj:'tree2', t:'This tree is in bloom', w:'Blossom comes with the season; it is no part of what a tree is.'}
   ]
 };
 function genPredIdentifyQ(d, forcedTarget){
@@ -2604,7 +2604,7 @@ function genPredIdentifyQ(d, forcedTarget){
   return mc4Make({ruleShow: d>=5 ? '' : PRED_DOCTRINE[target],
     options: optKinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `“${chosen[target].t}” — ${chosen[target].w} Of the rest: ${glossOthers}.`,
+    why: `“${chosen[target].t}”. ${chosen[target].w} Of the others, ${glossOthers}.`,
     rules: PRED_RULES,
     mcInstr: `In which of these does the predicate give the ${PRED_NAME[target].toUpperCase()} of the subject?`});
 }
@@ -2614,47 +2614,47 @@ const PRED_PRINCIPLES = [
   {tier:1, q:'What turns a genus into one of the species under it?',
    correct:'A difference (differentia) added to the genus',
    ds:['By an accident that belongs to it alone','By a property that follows from what it is','By listing the individuals under it'],
-   why:'A species is the genus narrowed by the difference that constitutes it: rational added to animal gives man.'},
+   why:'A species is the genus narrowed by the difference that constitutes it, as rational added to animal gives man.'},
   {tier:1, q:'What sets a PROPERTY (proprium) apart from an accident?',
    correct:'It follows from what the thing is, and belongs to the whole species, to it alone, and always',
    ds:['The subject may have it or lack it and stay the same thing','It answers the bare question “what is it?”','It is the widest kind said of the subject'],
    why:'A property (the power to laugh) always goes together with the species, even though it is not part of what the thing is; an accident (white) may come and go.'},
   {tier:1, q:'“Animal” — is it a genus or a species?',
-   correct:'Both — a genus in relation to man, a species in relation to living body; the terms are relative',
+   correct:'Both, since it is a genus in relation to man and a species in relation to living body; the terms are relative',
    ds:['A genus only, never a species','A species only, never a genus','Neither: it is an individual'],
    why:'In the tree of Porphyry a middle term is a genus to whatever lies below it and a species to whatever lies above it; only the topmost is always a genus, only the lowest always a species.'},
   {tier:1, once:'pred-count', q:'How many are the predicables, and who fixed their number for the tradition?',
-   correct:'Five — Porphyry, in the Isagoge: genus, species, difference, property, accident',
-   ds:['Ten — Aristotle, in the Categories','Four — the causes','Three — the acts of the mind'],
+   correct:'Five, fixed by Porphyry in the Isagoge: genus, species, difference, property, accident',
+   ds:['Ten, fixed by Aristotle in the Categories','Four, fixed by the four causes','Three, fixed by the acts of the mind'],
    why:'Porphyry’s Isagoge, the classic introduction to Aristotle’s Categories, sets out the five predicables.'},
   {tier:2, q:'The difference (differentia) answers which question about a thing?',
-   correct:'“What sort of thing is it?” — in its very nature (quale quid)',
-   ds:['“What is it?” — the bare kind','“How much of it is there?”','“What merely happens to be true of it?”'],
-   why:'Porphyry: the genus answers “what is it?”, the difference “what sort of thing, in its nature?” — rational tells us what sort of animal a man is.'},
+   correct:'“What sort of thing is it?” in its very nature (quale quid)',
+   ds:['“What is it?” as to the bare kind','“How much of it is there?”','“What merely happens to be true of it?”'],
+   why:'Porphyry says the genus answers “what is it?” and the difference “what sort of thing, in its nature?”; rational tells us what sort of animal a man is.'},
   {tier:2, q:'Which is the SUPREME genus — said of everything below it, but itself under no higher kind?',
    correct:'Substance',
    ds:['Animal','Man','Socrates'],
-   why:'Substance is the highest genus of all (genus generalissimum) — said of everything beneath it, but falling under no wider kind (the tree of Porphyry).'},
+   why:'Substance is the highest genus of all (genus generalissimum), said of everything beneath it but falling under no wider kind (the tree of Porphyry).'},
   {tier:2, q:'In “Man is a species,” what does man stand for?',
-   correct:'The nature as known, not for any man — simple supposition',
+   correct:'The nature as known, not any man; this is simple supposition',
    ds:['The particular men there are','The written letters only','Nothing, because no man is a species'],
-   why:'No particular man is a species. The term stands for the nature as known. Signification has not changed; supposition has. Supposition is a property of terms in logic, and this art is its home.'},
+   why:'No particular man is a species, so the term stands for the nature as known. Its signification has not changed, but its supposition (what the term stands for in this proposition) has. Supposition is a property of terms in logic, and this art is its home.'},
   {tier:2, q:'Which of these is an individual — neither a genus nor a species, but only something things are said about?',
    correct:'Socrates',
    ds:['Animal','Man','Substance'],
    why:'An individual such as Socrates is never said of anything else; things are only ever said of him. Man is the lowest species, animal a middle genus, substance the highest genus.'},
   {tier:2, q:'How do genus and species stand in relation to the ten categories?',
-   correct:'They are second intentions — relations those things have only because they are known — though grounded in what the things are',
+   correct:'They are second intentions, relations those things have only because they are known, though grounded in what the things are',
    ds:['They are individual substances existing outside the mind','They are the ten highest kinds of real being','They are mere names, with no basis in things'],
    why:'The categories sort what things are, as we first know them (first intentions). Genus and species are relations a nature has as known. They are grounded in what the things are, and they are not mere names.'},
   {tier:3, q:'Porphyry gives several senses of “property.” In the strict sense, a property belongs…',
    correct:'To the whole species, to it alone, and always',
    ds:['To one species, but not to all its members','To the whole species, but to other species as well','To the whole species and it alone, but only at times'],
-   why:'Only the fourth sense — the power to laugh — always goes together with the species. Being a geometer, being two-footed, and growing grey each fail on one of the three marks.'},
+   why:'Only the fourth sense (the power to laugh) always goes together with the species. Being a geometer, being two-footed, and growing grey each fail on one of the three marks.'},
   {tier:3, q:'An INSEPARABLE accident, such as the blackness of a raven…',
    correct:'Never leaves the subject, yet is still no part of what the subject is',
    ds:['Is part of what the subject is','Belongs to the subject alone and always, and so defines it','Can be gained and lost, as sitting or standing'],
-   why:'Porphyry: blackness never leaves the raven, yet being a raven does not consist in being black — the accident is inseparable, but still not part of the nature. Sitting, by contrast, is a separable accident.'}
+   why:'Porphyry says that blackness never leaves the raven, yet being a raven does not consist in being black; the accident is inseparable, but still not part of the nature. Sitting, by contrast, is a separable accident.'}
 ];
 /* Questions marked `once` are asked at most a single time per set-run (or
    review): their key is banked here and reset when a session begins. */
@@ -2691,35 +2691,35 @@ function genPredSortQ(d){
   const it = recentPick(pool, x=>x.t);
   return mc4Make({ruleShow:'', prompt: it.t,
     options: kinds.map(j=>PRED_SORT_OPTS[j]), correct: PRED_SORT_OPTS[k],
-    why: `So it gives the ${PRED_NAME[k]}: ${it.w}`, rules: PRED_RULES,
+    why: `So it gives the ${PRED_NAME[k]}. ${it.w}`, rules: PRED_RULES,
     mcInstr: 'Two questions about the predicate. Is it part of what the subject is? Is it said of that subject alone?'});
 }
 const PRED_SWAP = [
   {tier:1, q:'Does it swap? Every man is able to laugh. Is everything able to laugh a man?',
-   correct:'Yes; so it goes with man alone and always: a property',
+   correct:'Yes; so it goes with man alone and always, and is a property',
    ds:['No; it is said of more than man, as a genus is','No; it comes and goes, as an accident does','Yes; so it is part of what a man is'],
    why:'A property swaps with its species, yet is not part of what the thing is (Topics I.5).'},
   {tier:1, q:'Does it swap? Every man is an animal. Is every animal a man?',
-   correct:'No; animal is said of more than man: a genus',
+   correct:'No; animal is said of more than man, and so is a genus',
    ds:['Yes; so animal is a property of man','No; animal is an accident of man','Yes; so animal is the difference of man'],
    why:'A genus is said of more than any one species under it.'},
   {tier:2, q:'Does it swap? Every raven is black. Is everything black a raven?',
-   correct:'No; much is black that is not a raven: an inseparable accident',
-   ds:['Yes; so black is a property of the raven','No; black is the genus of raven','Yes; so black is part of what a raven is'],
+   correct:'No; much is black that is not a raven, so it is an inseparable accident',
+   ds:['Yes; so black is a property of the raven','No; black is the genus under which raven falls','Yes; so black is part of what a raven is'],
    why:'Even an accident that never leaves its subject is said of other things too (Porphyry).'},
   {tier:2, q:'Does it swap? Every triangle has its angles equal to two right angles. Is every figure with that angle sum a triangle?',
-   correct:'Yes; so it goes with the triangle alone: a property',
-   ds:['No; squares have it too','Yes; so it is the difference of the triangle','No; it is an accident of some triangles'],
-   why:'Aristotle’s model property: it follows from what a triangle is and swaps with it.'}
+   correct:'Yes; so it goes with the triangle alone, and is a property',
+   ds:['No; squares have the same angle sum too','Yes; so it is the difference of the triangle','No; it is an accident of some triangles'],
+   why:'This is Aristotle’s model property: it follows from what a triangle is and swaps with it.'}
 ];
 const PRED_PAIRS = [
   {tier:1, q:'“Man is able to laugh.” “This man is laughing.” Which gives the property?',
-   correct:'“Man is able to laugh”: the power is always there; the laughing comes and goes',
-   ds:['“This man is laughing”: it is what we see','Both: they say the same thing','Neither: laughing is part of what a man is'],
-   why:'Porphyry: a man is always able to laugh, though not always laughing. The power is the property; the act is an accident.'},
+   correct:'“Man is able to laugh”, since the power stays while the laughing comes and goes',
+   ds:['“This man is laughing”, since it is what we see happening','Both, since they say the same thing in different words','Neither, since laughing is part of what a man is'],
+   why:'Porphyry says a man is always able to laugh, though not always laughing. The power is the property; the act is an accident.'},
   {tier:2, q:'“Man is able to learn grammar.” “This boy knows grammar.” Which gives an accident?',
-   correct:'“This boy knows grammar”: knowledge is gained and can be lost',
-   ds:['“Man is able to learn grammar”: not every man learns it','Both: grammar is an art, and arts are accidents','Neither: both are properties of man'],
+   correct:'“This boy knows grammar”, since knowledge is gained and can be lost',
+   ds:['“Man is able to learn grammar”, since not every man learns it','Both, since grammar is an art, and arts are accidents','Neither, since both are properties of man'],
    why:'Being able to learn grammar is Aristotle’s example of a property (Topics I.5); actually knowing it is an accident of this boy.'}
 ];
 /* The kinds of question this exercise can ask. Each is drilled with a
@@ -2780,33 +2780,33 @@ function resetSessionOneShots(){
    sits, lies; is shod, is armed; cuts, burns; is cut, is burnt),
    drawn out from the wider corpus but kept to their teaching.
    ================================================================ */
-const CAT_RULES = 'The ten categories (Aristotle): substance, quantity, quality, relation, action, passion, when (time), where (place), posture, and habit. Substance exists in its own right; the other nine are accidents, which exist only in a substance or affect it. St Thomas derives them (Metaphysics V, lect. 9): what belongs to the substance itself follows from its matter (quantity), from its form (quality), or from a bearing toward something else (relation); what affects the substance does so from within (action, passion) or from outside — either measuring it (when, where, posture) or merely attached to it (habit).';
+const CAT_RULES = 'The ten categories (Aristotle) are substance, quantity, quality, relation, action, passion, when (time), where (place), posture, and habit. Substance exists in its own right; the other nine are accidents, which exist only in a substance or affect it. St Thomas derives them (Metaphysics V, lect. 9): what belongs to the substance itself follows from its matter (quantity), from its form (quality), or from a bearing toward something else (relation); what affects the substance does so from within (action, passion) or from outside, either measuring it (when, where, posture) or merely attached to it (habit).';
 const CAT_NAME = {sub:'substance', qnt:'quantity', qual:'quality', rel:'relation', act:'action', pas:'passion', whn:'when (time)', whr:'where (place)', pos:'posture', hab:'habit (having)'};
 const CAT_KEYS = ['sub','qnt','qual','rel','act','pas','whn','whr','pos','hab'];
 const CAT_DOCTRINE = {
-  sub:'SUBSTANCE exists in itself, neither said of a subject nor present in one as in a subject: this man, this horse (primary substance); or the species and genera in which they fall — man, animal (secondary substance).',
+  sub:'SUBSTANCE exists in itself, neither said of a subject nor present in one as in a subject. It is either this man or this horse (primary substance), or the species and genera in which they fall, such as man and animal (secondary substance).',
   qnt:'QUANTITY belongs to a substance by reason of its matter and answers “how much?”: two feet long, a number, a line, a surface.',
   qual:'QUALITY belongs to a substance by reason of its form and answers “of what sort?”: white, hot, healthy, just, strong, triangular.',
-  rel:'RELATION is said toward another (ad aliquid) — its whole being consists in a bearing toward something else: double, half, greater, a master, a neighbour.',
+  rel:'RELATION is said toward another (ad aliquid), since its whole being consists in a bearing toward something else: double, half, greater, a master, a neighbour.',
   act:'ACTION is what a substance does as a principle of change passing into another: cutting, burning, heating, building.',
   pas:'PASSION (being-acted-upon) is the receiving of that change: being cut, being burnt, being heated.',
   whn:'WHEN (time) measures the substance by time: yesterday, last year, now, an hour ago.',
   whr:'WHERE (place) sets the substance in a place: in the school, in the marketplace, at home.',
   pos:'POSTURE (situs) is how a thing’s parts are arranged in the place it occupies: he lies, he sits, he stands, he reclines.',
-  hab:'HABIT (having) is what a substance has on it — attached to it, but not measuring it: he is shod, he is armed, he is clothed.'
+  hab:'HABIT (having) is what a substance has on it, attached to it but not measuring it: he is shod, he is armed, he is clothed.'
 };
 /* short, example-free glosses — safe to show beside word-options */
 const CAT_GLOSS = {
-  sub:'exists in its own right — not present in anything else, nor said of anything else.',
-  qnt:'belongs to a thing by reason of its matter — answers “how much?”',
-  qual:'belongs to a thing by reason of its form — answers “of what sort?”',
-  rel:'said toward another — its whole being is a reference to something else.',
-  act:'the doing of something — a change the thing brings about in another.',
-  pas:'the undergoing of a change — the receiving end of an action.',
+  sub:'exists in its own right, neither present in anything else nor said of anything else.',
+  qnt:'belongs to a thing by reason of its matter, and answers “how much?”',
+  qual:'belongs to a thing by reason of its form, and answers “of what sort?”',
+  rel:'is said toward another, since its whole being is a reference to something else.',
+  act:'is the doing of something, a change the thing brings about in another.',
+  pas:'is the undergoing of a change, the receiving end of an action.',
   whn:'places the thing in time.',
   whr:'places the thing somewhere.',
-  pos:'how a thing’s parts are arranged in the place it occupies.',
-  hab:'what a thing has on it — attached, but not measuring it.'
+  pos:'is how a thing’s parts are arranged in the place it occupies.',
+  hab:'is what a thing has on it, attached to it but not measuring it.'
 };
 const CAT_WORDS = {
   sub: [{tier:1,t:'a man'},{tier:1,t:'a horse'},{tier:2,t:'an ox'},{tier:2,t:'a stone'},{tier:3,t:'a tree'},{tier:5,t:'this individual man'}],
@@ -2835,7 +2835,7 @@ function genCatNameQ(d){
   return mc4Make({ruleShow:'', prompt: cap(word.t),
     options: [CAT_NAME[target]].concat(distract.map(k=>CAT_NAME[k])),
     correct: CAT_NAME[target],
-    why: `“${cap(word.t)}” falls under ${CAT_NAME[target]}: ${CAT_GLOSS[target]} (Not ${others}.)`,
+    why: `“${cap(word.t)}” falls under ${CAT_NAME[target]}, which ${CAT_GLOSS[target]} It is none of these: ${others}.`,
     rules: CAT_RULES,
     mcInstr: `To which category does “${word.t}” belong?`});
 }
@@ -2849,10 +2849,10 @@ function genCatWhichWordQ(d){
   const chosen = {};
   distract.forEach(k=>{ chosen[k] = rand(catWordPick(k, tiers)); });
   const others = distract.map(k=>`“${chosen[k].t}” is ${CAT_NAME[k]}`).join('; ');
-  return mc4Make({ruleShow: d>=5 ? '' : `<strong>${cap(CAT_NAME[target])}</strong> — ${CAT_GLOSS[target]}`,
+  return mc4Make({ruleShow: d>=5 ? '' : `<strong>${cap(CAT_NAME[target])}</strong> ${CAT_GLOSS[target]}`,
     options: [tgt.t].concat(distract.map(k=>chosen[k].t)).map(cap),
     correct: cap(tgt.t),
-    why: `“${cap(tgt.t)}” falls under ${CAT_NAME[target]}. Of the rest: ${others}.`,
+    why: `“${cap(tgt.t)}” falls under ${CAT_NAME[target]}. Of the others, ${others}.`,
     rules: CAT_RULES,
     mcInstr: `Which of these falls under the category of ${CAT_NAME[target].toUpperCase()}?`});
 }
@@ -2862,53 +2862,53 @@ const CAT_PRINCIPLES = [
    ds:['Quality','Quantity','Relation'],
    why:'Substance alone exists in its own right; the nine other categories are accidents, which exist only in a substance (Categories 5; Metaphysics VII).'},
   {tier:1, once:'cat-count', q:'How many are the categories, and who set them out?',
-   correct:'Ten — Aristotle, in the Categories',
-   ds:['Five — Porphyry, in the Isagoge','Four — the causes','Three — the acts of the mind'],
+   correct:'Ten, set out by Aristotle in the Categories',
+   ds:['Five, set out by Porphyry in the Isagoge','Four, set out as the four causes','Three, set out as the acts of the mind'],
    why:'Aristotle’s Categories names ten: substance, quantity, quality, relation, action, passion, when, where, position, and habit.'},
   {tier:1, q:'Which of these does NOT signify a substance?',
    correct:'white',
    ds:['man','horse','stone'],
    why:'“White” signifies a quality present in a subject; man, horse, and stone signify substances existing in themselves.'},
-  {tier:1, q:'“He is shod” and “he is armed” fall under which category — what a man has on him, attached but not measuring him?',
+  {tier:1, q:'“He is shod” and “he is armed” fall under which category, that of what a man has on him, attached but not measuring him?',
    correct:'Habit (having)',
-   ds:['Posture','Where','Passion'],
-   why:'Habit (echein / habitus) is Aristotle’s tenth category — having shoes or arms on the body (Categories 4).'},
+   ds:['Posture (situs)','Where (place)','Passion (undergoing)'],
+   why:'Habit (echein / habitus) is Aristotle’s tenth category, the having of shoes or arms on the body (Categories 4).'},
   {tier:2, q:'St Thomas derives quantity and quality thus: quantity belongs to a substance by reason of its ___, quality by reason of its ___.',
    correct:'matter; form',
    ds:['form; matter','end; agent','place; time'],
-   why:'Commentary on the Metaphysics V, lect. 9: what belongs to a substance in its own right follows either from the matter (quantity) or from the form (quality).'},
-  {tier:2, q:'Into which two categories does St Thomas divide what affects a substance from within — the doing and the being-done-to?',
+   why:'In his Commentary on the Metaphysics (V, lect. 9) St Thomas says that what belongs to a substance in its own right follows either from the matter (quantity) or from the form (quality).'},
+  {tier:2, q:'Into which two categories does St Thomas divide what affects a substance from within, namely the doing and the being-done-to?',
    correct:'Action and passion',
    ds:['Quantity and quality','Place and time','Relation and habit'],
-   why:'What affects the subject from within is action (in the doer) and passion (in the thing done to) — Metaphysics V, lect. 9.'},
+   why:'What affects the subject from within is action (in the doer) and passion (in the thing done to), as St Thomas says (Metaphysics V, lect. 9).'},
   {tier:2, q:'Primary substance (this man) differs from secondary substance (man, animal) in that…',
    correct:'Primary substance is the individual thing; secondary substance is the species or genus it belongs to',
-   ds:['Primary substance is the species; secondary the individual','Primary substance is an accident; secondary a nature','They differ in name only'],
-   why:'Categories 5: an individual is a substance in the fullest sense (primary); the species and genera it falls under are substances in a secondary way.'},
+   ds:['Primary substance is the species; secondary substance is the individual','Primary substance is an accident; secondary substance is a nature','They differ in name only, and not in what they signify'],
+   why:'Aristotle says (Categories 5) that an individual is a substance in the fullest sense (primary), while the species and genera it falls under are substances in a secondary way.'},
   {tier:2, q:'Under which category do a “number” and a “line two feet long” fall?',
    correct:'Quantity',
    ds:['Quality','Relation','Substance'],
-   why:'Number (discrete) and magnitude — line, surface, body (continuous) — are the species of quantity (Categories 6).'},
+   why:'Number (discrete) and magnitude (line, surface, body, which are continuous) are the species of quantity (Categories 6).'},
   {tier:3, q:'The most distinctive mark of substance, Aristotle says, is that…',
-   correct:'One and the same substance can receive contraries — being at one time pale, at another dark',
-   ds:['It has a contrary','It admits of more and less','It is always present in a subject'],
-   why:'Categories 5: substance has no contrary and no degrees; its peculiar mark is that numerically one and the same substance receives contrary qualities through its own change.'},
+   correct:'One and the same substance can receive contraries, being at one time pale, at another dark',
+   ds:['It has a contrary, as hot has cold','It admits of more and less, as white does','It is always present in a subject, as colour is'],
+   why:'Aristotle says (Categories 5) that substance has no contrary and no degrees; its peculiar mark is that numerically one and the same substance receives contrary qualities through its own change.'},
   {tier:3, q:'Which category has for its whole being a “bearing toward another,” so that one term cannot be understood without the other?',
    correct:'Relation',
    ds:['Quality','Substance','Where'],
-   why:'A relative term — double and half, master and slave, knowledge and the knowable — is defined entirely by its reference to something else (Categories 7).'},
+   why:'A relative term (double and half, master and slave, knowledge and the knowable) is defined entirely by its reference to something else (Categories 7).'},
   {tier:3, q:'The category of “posture” (situs), as in “he lies” or “he sits,” signifies…',
    correct:'How a thing’s parts are arranged in the place it occupies',
-   ds:['The place in which a thing is','What a thing has on it','The time at which a thing acts'],
-   why:'Posture (situs) differs from where (the place itself) and from habit: it is the arrangement of the parts — lying, sitting, standing (Metaphysics V, lect. 9).'},
+   ds:['The place in which a thing is found','What a thing has on it, such as shoes or armour','The time at which a thing acts or is acted on'],
+   why:'Posture (situs) differs from where (the place itself) and from habit, since it is the arrangement of the parts, as in lying, sitting, or standing (Metaphysics V, lect. 9).'},
   {tier:3, q:'How do the ten categories differ from the five predicables?',
-   correct:'The categories sort what things are, as we first know them (first intentions); the predicables are relations those things have only because they are known (second intentions)',
-   ds:['The categories are in the mind alone, the predicables in things apart from knowledge','They are two names for the same ten kinds','The predicables concern bodies, the categories spirits'],
+   correct:'The categories sort things as we first know them (first intentions); the predicables are relations they have only because they are known (second intentions)',
+   ds:['The categories are in the mind alone, the predicables in things apart from knowledge','They are two names for the same ten kinds, sorted the same way','The predicables concern bodies, the categories spirits, so the two never meet'],
    why:'A first intention is a reality as known, not a thing apart from knowledge. A second intention is a relation things have only because they are known, though grounded in what the things are.'},
   {tier:3, q:'To which category does “knowledge,” taken as a stable state of the soul, belong?',
    correct:'Quality',
    ds:['Substance','Relation','Action'],
-   why:'Knowledge and virtue are habits — the first species of quality, a lasting state (Categories 8). (Spoken of as “knowledge of the knowable,” it is also relative.)'}
+   why:'Knowledge and virtue are habits, the first species of quality, which is a lasting state (Categories 8). (Spoken of as “knowledge of the knowable,” knowledge is also relative.)'}
 ];
 function genCatPrincipleQ(d){
   let pool = CAT_PRINCIPLES.filter(x=> (d>=2 || x.tier===1) && oneShotFree(x));
@@ -3015,125 +3015,125 @@ function checkEnthAnswer(q, input){
 }
 function enthMistake(q, res){
   if(q.none && res && !res.none)
-    return 'Nothing can complete this one: no arrangement of the remaining term yields a valid mood with that conclusion. The strength of a conclusion can outrun any possible help — a particular or negative premise sets limits no addition overcomes.';
+    return 'Nothing can complete this one, since no arrangement of the remaining term yields a valid mood with that conclusion. The strength of a conclusion can outrun any possible help, because a particular or negative premise sets limits that no addition overcomes.';
   if(!q.none && res && res.none)
-    return `A premise does complete it: for instance, “${q.accepted[0].text}”. Join the middle term to the ${q.missingRole==='major'?'predicate':'subject'} of the conclusion and test the mood.`;
+    return `A premise does complete it, for instance “${q.accepted[0].text}”. The middle term is joined to the ${q.missingRole==='major'?'predicate':'subject'} of the conclusion, and the mood is then tested.`;
   if(res && res.parsedAns){
     const su = normTerm(res.parsedAns.s), pu = normTerm(res.parsedAns.p);
     const mKey = termKey(q.roles.M), xKey = termKey(q.missingRole==='major' ? q.roles.P : q.roles.S);
     const usedRight = (su===mKey&&pu===xKey)||(su===xKey&&pu===mKey);
     if(!usedRight)
-      return `The tacit premise must join the middle term (“${termLabel(q.roles.M)}”) with the conclusion’s orphaned term (“${termLabel(q.missingRole==='major'?q.roles.P:q.roles.S)}”) — nothing else can bridge the gap.`;
-    return 'The terms are right, but that premise makes no valid mood with the given premise and conclusion — check quantity and quality: the conclusion follows the weaker part, and the middle must be distributed once.';
+      return `The tacit premise must join the middle term (“${termLabel(q.roles.M)}”) with the conclusion’s orphaned term (“${termLabel(q.missingRole==='major'?q.roles.P:q.roles.S)}”), since nothing else can bridge the gap.`;
+    return 'The terms are right, but that premise makes no valid mood with the given premise and conclusion. Quantity and quality need checking: the conclusion follows the weaker part, and the middle must be distributed once.';
   }
-  return 'Ask: which term of the conclusion is left unsupported? The tacit premise must join it to the middle term, in a mood the rules allow.';
+  return 'The first question is which term of the conclusion is left unsupported. The tacit premise must join it to the middle term, in a mood the rules allow.';
 }
-const ENTH_RULE_LINE = 'An enthymeme is a syllogism with a premise left unsaid — first-order when the major is hidden, second-order when the minor. The suppressed premise is where an argument hides its weakness: supply it, and look it in the face.';
+const ENTH_RULE_LINE = 'An enthymeme is a syllogism with a premise left unsaid; it is first-order when the major is hidden, and second-order when the minor is. The suppressed premise is where an argument hides its weakness, so it should be supplied and examined.';
 const ENTH_POOL = [
   {tier:1, txt:'Socrates is mortal, for he is a man.',
    correct:'All men are mortal',
    traps:['All mortals are men','Some men are mortal','Socrates is a mortal man'],
-   why:'A first-order enthymeme — the major lay hidden. Supplied, the argument is Barbara. “All mortals are men” is the illicit converse; “some men are mortal” is too weak to conclude.'},
+   why:'This is a first-order enthymeme, in which the major lay hidden. When it is supplied, the argument is Barbara. “All mortals are men” is the illicit converse, and “some men are mortal” is too weak to conclude.'},
   {tier:1, txt:'It must have rained — the streets are wet.',
    correct:'Whenever the streets are wet, it has rained',
    traps:['Whenever it rains, the streets are wet','The streets are usually dry','Rain always wets something'],
-   why:'To conclude validly you need the suspicious premise, not the familiar one: “rain wets streets” is true but yields only the fallacy of affirming the consequent. The valid completion — “wet streets mean rain” — is refuted by every street-sweeper. Aristotle’s refutable sign.'},
+   why:'To conclude validly we need the suspicious premise, not the familiar one. The familiar premise, “rain wets streets”, is true but yields only the fallacy of affirming the consequent. The valid completion, “wet streets mean rain”, is refuted by every street-sweeper. This is Aristotle’s refutable sign.'},
   {tier:1, txt:'She has given birth, for she has milk.',
    correct:'Whoever has milk has given birth',
    traps:['Whoever has given birth has milk','Some mothers have milk','Milk is nourishing'],
-   why:'Aristotle’s own example (Rhetoric I.2; Prior Analytics II.27) of the necessary sign — the one kind of sign-argument that concludes of necessity. Note it needs the premise in this direction, not its converse.'},
+   why:'This is Aristotle’s own example (Rhetoric I.2; Prior Analytics II.27) of the necessary sign, the one kind of sign-argument that concludes of necessity. It needs the premise in this direction, not its converse.'},
   {tier:1, txt:'He cannot be trusted — he is a politician.',
    correct:'No politicians can be trusted',
    traps:['Some politicians cannot be trusted','No trustworthy man is in politics by choice','Politicians seek power'],
-   why:'Valid only with the universal — and the universal is false, which is exactly why it stays unspoken. The particular “some politicians…” is true but concludes nothing about this one. The enthymeme’s cloak: tacit premises escape inspection.'},
+   why:'The argument is valid only with the universal, and the universal is false, which is exactly why it stays unspoken. The particular “some politicians…” is true but concludes nothing about this one. So the enthymeme conceals its premises, and tacit premises escape inspection.'},
   {tier:2, txt:'I think, therefore I am.',
    correct:'Whatever thinks, is',
    traps:['Whatever is, thinks','I think that I am','Whatever doubts, exists'],
-   why:'Descartes’s cogito, completed as the schools would: the tacit major “whatever thinks, is.” The converse — “whatever is, thinks” — would people the world with minds.'},
+   why:'This is Descartes’s cogito, completed as the schools would complete it, with the tacit major “whatever thinks, is.” The converse, “whatever is, thinks”, would fill the world with minds.'},
   {tier:2, txt:'Dorieus has won a crown, for he has won at Olympia.',
    correct:'The prize at Olympia is a crown',
    traps:['Dorieus is a great athlete','Crowns are given for victories','Whoever wins a crown has won at Olympia'],
-   why:'Aristotle’s example in Rhetoric I.2: the premise is dropped precisely because every hearer knows it — brevity, not concealment, is the honest enthymeme’s motive.'},
+   why:'This is Aristotle’s example in Rhetoric I.2. The premise is dropped precisely because every hearer knows it, so brevity, not concealment, is the motive of the honest enthymeme.'},
   {tier:2, txt:'He must be guilty — he fled the city.',
    correct:'Whoever flees is guilty',
    traps:['The guilty often flee','Some who flee are guilty','He had reason to flee'],
-   why:'Valid only with the universal, and the universal is false: fear also makes the innocent run. “The guilty often flee” is the true premise — and it concludes nothing. The refutable sign again.'},
+   why:'The argument is valid only with the universal, and the universal is false, since fear also makes the innocent run. “The guilty often flee” is the true premise, and it concludes nothing. This is the refutable sign again.'},
   {tier:2, txt:'The law is good, for it protects the poor.',
    correct:'Whatever protects the poor is good',
    traps:['All good laws protect the poor','The poor deserve protection','Some laws protect the poor'],
-   why:'The needed premise runs from the mark to the goodness — its converse (“good laws protect the poor”) would leave the argument affirming the consequent.'},
+   why:'The needed premise runs from the mark to the goodness. Its converse (“good laws protect the poor”) would leave the argument affirming the consequent.'},
   {tier:3, txt:'Whatever is moved is moved by another; so there must be a first mover.',
    correct:'There cannot be an infinite series of movers',
    traps:['Everything moves something else','Some mover is itself unmoved','Whatever moves another is itself moved'],
-   why:'St Thomas’s first way, with its weight-bearing premise tacit: deny the impossibility of an infinite regress, and the stated premise concludes nothing. “Some mover is unmoved” merely restates the conclusion.'},
+   why:'This is St Thomas’s first way, with its most important premise left tacit. If the impossibility of an infinite regress is denied, the stated premise concludes nothing. “Some mover is unmoved” merely restates the conclusion.'},
   {tier:3, txt:'Virtue is teachable, for it is knowledge.',
    correct:'All knowledge is teachable',
    traps:['All that is teachable is knowledge','Virtue is a kind of skill','Some knowledge is teachable'],
-   why:'Socrates’s argument in the Meno. The tacit major is the battlefield: grant it, and Barbara concludes; the dialogue itself ends by doubting the stated minor instead.'},
+   why:'This is Socrates’s argument in the Meno. The tacit major is where the dispute lies: if it is granted, Barbara concludes; but the dialogue itself ends by doubting the stated minor instead.'},
   {tier:3, txt:'The soul is immortal, for it is ever in motion.',
    correct:'Whatever is ever in motion is immortal',
    traps:['Whatever is immortal is ever in motion','The soul moves the body','Some moving things are immortal'],
-   why:'Plato’s proof in the Phaedrus (245c). The whole dispute lives in the suppressed premise — as so often, the argument’s visible part is the least contestable.'},
+   why:'This is Plato’s proof in the Phaedrus (245c). The whole dispute lies in the suppressed premise; as often happens, the visible part of the argument is the least contestable.'},
   {tier:3, txt:'Pleasure is not the good, for even fools attain it.',
    correct:'What even fools attain is not the good',
    traps:['Fools attain nothing good','The good is hard to attain','Some pleasures are foolish'],
-   why:'An Aristotelian commonplace against hedonism. Supplied, the argument is valid — and the fight moves, where it belongs, to whether the tacit premise is true.'},
+   why:'This is an Aristotelian commonplace against hedonism. When the premise is supplied the argument is valid, and the dispute moves, as it should, to whether the tacit premise is true.'},
   {tier:1, txt:'The gods must be angry — the harvest has failed.',
    correct:'Whenever the harvest fails, the gods are angry',
    traps:['Whenever the gods are angry, the harvest fails','The gods send every misfortune upon men','Some failed harvests are sent by the gods'],
-   why:'The refutable sign in an older dress. The familiar thought — that angry gods blight the fields — runs the wrong way and merely affirms the consequent; the premise that actually concludes, that every failed harvest bespeaks divine anger, is the suspicious one, and drought, blight, and pest refute it every season.'},
+   why:'This is the refutable sign in an older form. The familiar thought, that angry gods blight the fields, runs the wrong way and merely affirms the consequent. The premise that actually concludes, that every failed harvest shows divine anger, is the suspicious one, and drought, blight, and pests refute it every season.'},
   {tier:1, txt:'The mushroom is safe to eat — the squirrels eat it.',
    correct:'Whatever the squirrels eat is safe for a man to eat',
    traps:['Whatever is safe for a man, the squirrels will eat','Squirrels know which mushrooms are poisonous','Some things the squirrels eat are safe for a man'],
-   why:'Valid only through the universal — and the universal kills: squirrels stomach amanitas that fell a grown man. Nature keeps separate tables; the tacit premise merges them, and stays tacit for good reason.'},
+   why:'The argument is valid only through the universal, and the universal is deadly: squirrels can eat amanitas that would kill a grown man. What is safe for one animal is not safe for another, and the tacit premise ignores the difference; it stays tacit for good reason.'},
   {tier:1, txt:'She must love the sea — she grew up on the coast.',
    correct:'Whoever grows up on the coast loves the sea',
    traps:['Whoever loves the sea grew up on the coast','She has lived within sight of the water all her life','Some who grow up on the coast love the sea'],
-   why:'Only the universal concludes, and every fishing town that ever bred a landsman refutes it. The particular is true and powerless; the converse would conclude nothing of her at all.'},
+   why:'Only the universal concludes, and every fishing town that ever produced a man who disliked the sea refutes it. The particular is true but concludes nothing; the converse would conclude nothing of her at all.'},
   {tier:1, txt:'She will make a fine doctor — she took the top marks in her class.',
    correct:'Whoever takes the top marks will make a fine doctor',
    traps:['All fine doctors took the top marks in their class','Medicine demands years of hard study','Some who take the top marks make fine doctors'],
-   why:'The argument stands only on the universal, and the universal is doubtful: examinations weigh the memory, not the bedside. Doubtful premises travel best unspoken — the enthymeme’s oldest service.'},
+   why:'The argument stands only on the universal, and the universal is doubtful, since examinations test memory, not skill at the bedside. Doubtful premises are most persuasive when left unspoken, and this has long been a use of the enthymeme.'},
   {tier:2, txt:'A storm is coming — the swallows are flying low.',
    correct:'When the swallows fly low, a storm is coming',
    traps:['When a storm is coming, the swallows fly low','The swallows fly low to chase their food','Sometimes a storm follows when the swallows fly low'],
-   why:'The countryman’s proverb supplies the major, dropped because every hearer owns it already — brevity, not concealment. And it holds often enough: before rain the heavy air keeps the insects low, and the swallows follow their dinner down.'},
+   why:'The countryman’s proverb supplies the major, which is dropped because every hearer knows it already; the motive is brevity, not concealment. And it holds often enough, since before rain the heavy air keeps the insects low, and the swallows follow their food down.'},
   {tier:2, txt:'The old house must be soundly built — it has stood a hundred years.',
    correct:'Whatever has stood a hundred years was soundly built',
    traps:['Whatever is soundly built will stand a hundred years','They built better in the old days','Some houses that stand a hundred years were soundly built'],
-   why:'The moderns call the trap survivorship: we walk past the houses that stood and never past those that fell. The familiar converse is idle here; the work is done by the hidden universal, and the fallen houses vote against it.'},
+   why:'The moderns call this error survivorship bias: we see the houses that stood and never those that fell. The familiar converse does no work here; the work is done by the hidden universal, and the houses that fell are evidence against it.'},
   {tier:2, txt:'The remedy cannot hurt you — it is all natural.',
    correct:'Nothing natural is harmful',
    traps:['Whatever is artificial is harmful','Nature heals more gently than art','Some natural things are harmless'],
-   why:'Supply the major and the syllogism is Celarent — whereupon hemlock, nightshade, and the viper’s venom answer it at once. The appeal to nature persuades only while its premise stays out of sight.'},
+   why:'When the major is supplied the syllogism is Celarent, and hemlock, nightshade, and the viper’s venom refute it at once. The appeal to nature persuades only while its premise stays out of sight.'},
   {tier:2, txt:'The book must be good — everyone is reading it.',
    correct:'Whatever everyone reads is good',
    traps:['Whatever is good, everyone reads','People read what pleases them','Some books that everyone reads are good'],
-   why:'The argumentum ad populum in the enthymeme’s cloak. Spoken aloud, the major shrinks to its true size: the crowd’s custom is a fact about the crowd, not about the book.'},
+   why:'This is the argumentum ad populum concealed in an enthymeme. When the major is spoken aloud, its weakness is plain: what the crowd reads is a fact about the crowd, not about the book.'},
   {tier:2, txt:'There was a frost overnight — the birdbath is iced over.',
    correct:'Whenever the birdbath is iced over, there has been a frost',
    traps:['Whenever there is a frost, the birdbath ices over','Ice is nothing but frozen water','Some frosts leave the birdbath iced over'],
-   why:'The necessary sign, cousin to Aristotle’s milk: water takes ice only in freezing air, so the tacit premise holds of necessity and the enthymeme concludes as firmly as any syllogism. Note that the converse, true as it is, would conclude nothing — validity asks the direction, not merely the truth.'},
+   why:'This is a necessary sign, like Aristotle’s example of milk. Water turns to ice only in freezing air, so the tacit premise holds of necessity, and the enthymeme concludes as firmly as any syllogism. The converse, true as it is, would conclude nothing, since validity depends on the direction of the premise, not merely on its truth.'},
   {tier:2, txt:'The harvest will fail — the bees are vanishing from the orchard.',
    correct:'Where the bees fail, the harvest fails',
    traps:['Where the harvest fails, the bees have failed','The bees serve the blossom, and the blossom the fruit','Some harvests fail when the bees vanish'],
-   why:'An honest enthymeme: the major is dropped because every orchardman knows it, and for orchards it is near enough true. Yet even here the universal quietly rides over its exceptions — wheat and the wind-wed grasses ask no bee’s leave.'},
+   why:'This is an honest enthymeme: the major is dropped because every orchardman knows it, and for orchards it is nearly true. Yet even here the universal passes over its exceptions, since wheat and the wind-pollinated grasses do not depend on bees.'},
   {tier:3, txt:'Running must strengthen the heart — the runners all have strong hearts.',
    correct:'What the runners have, their running gave them',
    traps:['Whoever runs has a strong heart','A strong heart makes a strong runner','Some runners strengthened their hearts by running'],
-   why:'The tacit premise assigns the cause — and there lies the whole dispute, for perhaps strong hearts choose the sport rather than the sport make the heart. Correlation’s oldest ambush hides, as usual, in what is not said.'},
+   why:'The tacit premise assigns the cause, and that is the whole dispute, for perhaps strong hearts choose the sport rather than the sport making the heart strong. The confusion of correlation with cause usually lies, as here, in what is not said.'},
   {tier:3, txt:'The new remedy works — I took it, and the cold was gone within the week.',
    correct:'What the recovery followed, the recovery came from',
    traps:['What causes a recovery must come before it','Remedies are made and sold to cure','Some who take the remedy recover'],
-   why:'Post hoc ergo propter hoc, stated at last as the missing major — and it refutes itself in the speaking, for colds die of themselves within the week. The premise persuades only so long as no one pronounces it.'},
+   why:'This is post hoc ergo propter hoc, stated at last as the missing major, and once stated it refutes itself, for colds pass of themselves within the week. The premise persuades only so long as no one states it.'},
   {tier:3, txt:'The machine cannot be creative — it only does what it is programmed to do.',
    correct:'Nothing that only does what it is programmed to do is creative',
    traps:['No machine has a soul','Men too only follow their given nature','Some things that only follow their programming are not creative'],
-   why:'Lady Lovelace’s objection, completed. The entire question — whether following rules excludes creation — sits inside the tacit major, assumed rather than argued: the enthymeme as a hiding place for the very point at issue.'},
+   why:'This is Lady Lovelace’s objection, completed. The entire question, whether following rules excludes creation, lies inside the tacit major, which is assumed rather than argued; so the enthymeme hides the very point at issue.'},
   {tier:3, txt:'Life must be common in the universe — the stars are without number.',
    correct:'What can happen among numberless stars happens often',
    traps:['Most stars are suns much like our own','The universe is far older than the earth','Some of the numberless stars may bear life'],
-   why:'All the argument’s force hides in the tacit premise, and the premise begs a number no one holds: numberless chances multiplied by an unknown chance conclude nothing. Infinity times ignorance is ignorance.'}
+   why:'All the force of the argument lies in the tacit premise, and the premise assumes a number no one knows: numberless chances multiplied by an unknown chance conclude nothing. If the chance is unknown, the number of stars does not make it known.'}
 ];
 function genEnthCuratedQ(d){
   const tiers = defTiers(d);
@@ -3154,14 +3154,14 @@ function genEnthCuratedQ(d){
    (causa defectus). Technical terms are kept, always with their sense
    attached, so a young student meets the real vocabulary and can use it.
    ================================================================ */
-const FAL_RULES = 'A fallacy is an argument that looks sound and is not. St Thomas: every fallacy has two causes — the cause of the appearance, which makes it look good, and the cause of the failure, which makes it break. Six fallacies come from the words (the language is ambiguous); seven come from outside the words (the language is fine, the thinking is not).';
+const FAL_RULES = 'A fallacy is an argument that looks sound and is not. St Thomas teaches that every fallacy has two causes: the cause of the appearance, which makes it look good, and the cause of the failure, which makes it break. Six fallacies come from the words (the language is ambiguous); seven come from outside the words (the language is fine, but the thinking is not).';
 
 /* ---- the four kinds of disputation (De fallaciis, c. 2) ---- */
 const DISP_KINDS = {
-  dem:{name:'Demonstrative (teaching)', gloss:'aimed at certain knowledge, from premises that are true and known in themselves — between a teacher and a learner.'},
-  dial:{name:'Dialectical (weighing)',  gloss:'aimed at a reasoned opinion, from what is probable — what seems so to everyone, or to most, or to the wise.'},
+  dem:{name:'Demonstrative (teaching)', gloss:'aimed at certain knowledge, from premises that are true and known in themselves, between a teacher and a learner.'},
+  dial:{name:'Dialectical (weighing)',  gloss:'aimed at a reasoned opinion, from what is probable, that is, what seems so to everyone, or to most, or to the wise.'},
   tent:{name:'Testing',                  gloss:'aimed at finding out whether someone really knows, by working from what seems true to him.'},
-  soph:{name:'Sophistical (for show)',   gloss:'aimed at seeming wise and winning — from what looks true or probable but is not.'}
+  soph:{name:'Sophistical (for show)',   gloss:'aimed at seeming wise and winning, from what looks true or probable but is not.'}
 };
 const DISP_ITEMS = [
   {tier:1, k:'dem',  t:'A teacher shows the class that the angles of a triangle add to two right angles, proving it step by step from what they already grant.'},
@@ -3187,30 +3187,30 @@ function genFalDisputationQ(d){
   const others = keys.filter(k=>k!==it.k).map(k=>DISP_KINDS[k].name);
   return mc4Make({prompt:it.t, options:[DISP_KINDS[it.k].name].concat(others),
     correct: DISP_KINDS[it.k].name,
-    ruleShow: d>=5 ? '' : 'The four kinds of disputation: DEMONSTRATIVE, which teaches from what is certain; DIALECTICAL, which weighs what is probable — what seems so to all, or to most, or to the wise; TESTING, which finds out whether a man knows; and SOPHISTICAL, which argues for show, from what only looks true.',
-    why: `${DISP_KINDS[it.k].name} — ${DISP_KINDS[it.k].gloss}`,
+    ruleShow: d>=5 ? '' : 'There are four kinds of disputation: DEMONSTRATIVE, which teaches from what is certain; DIALECTICAL, which weighs what is probable, that is, what seems so to all, or to most, or to the wise; TESTING, which finds out whether a man knows; and SOPHISTICAL, which argues for show, from what only looks true.',
+    why: `${DISP_KINDS[it.k].name} disputation is ${DISP_KINDS[it.k].gloss}`,
     rules: FAL_RULES, mcInstr:'What kind of disputation is this?'});
 }
 
 /* ---- the five awkward places a sophist drives you to (De fallaciis, c. 3) ---- */
 const META_KINDS = {
-  red:{name:'To contradict yourself',      gloss:'you are made to take back, in the same argument, something you had just said — the fault St Thomas calls redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
-  fal:{name:'To grant something plainly false', gloss:'you are forced into a statement anyone can see is untrue. It offends against natural science and mathematics, where we can check.'},
-  ino:{name:'To grant something absurd',   gloss:'you are driven against what nearly everyone believes — which need not be false, but is hard to swallow. It offends against dialectic, which works from what people grant.'},
-  sol:{name:'To say something ungrammatical', gloss:'you are manoeuvred into speaking badly. It offends against grammar.'},
-  nug:{name:'To babble',                   gloss:'you are made to repeat the same thing uselessly — what St Thomas calls nugatio. It offends against rhetoric, whose business is to speak well.'}
+  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; St Thomas calls this fault redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
+  fal:{name:'To grant something plainly false', gloss:'the respondent is forced into a statement anyone can see is untrue. It offends against natural science and mathematics, where we can check.'},
+  ino:{name:'To grant something absurd',   gloss:'the respondent is driven against what nearly everyone believes, which need not be false, but is hard to accept. It offends against dialectic, which works from what people grant.'},
+  sol:{name:'To say something ungrammatical', gloss:'the respondent is manoeuvred into speaking badly. It offends against grammar.'},
+  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which St Thomas calls nugatio. It offends against rhetoric, whose business is to speak well.'}
 };
 const META_ITEMS = [
-  {tier:1, k:'red', t:'You denied that you ate the raw meat. He argues: whatever you bought, you ate; you bought raw meat; so you ate raw meat.', w:'De fallaciis gives this one: the aim is to make you take back what you just denied.'},
-  {tier:1, k:'fal', t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.', w:'De fallaciis gives this one: the aim is to force you into something plainly untrue.'},
-  {tier:1, k:'ino', t:'Whoever can be beaten by someone is unhappy. A king can be beaten by an enemy. So the king is unhappy.', w:'De fallaciis gives this one: the aim is a conclusion nobody would accept, though it is not exactly false.'},
-  {tier:1, k:'nug', t:'This nose is a snub nose. But snub means snub nose. So this is a nose nose snub.', w:'De fallaciis gives this one: the aim is to reduce you to useless repetition.'},
-  {tier:2, k:'sol', t:'You know this. This is a stone. Therefore you know stone — which is not how the words go.', w:'De fallaciis gives this one: the aim is to trip you into bad grammar.'},
-  {tier:2, k:'red', t:'You said the tax was too high. But you pay it every year without complaint. So you think it is about right after all.', w:'the aim is to make you retract what you asserted a moment ago.'},
+  {tier:1, k:'red', t:'You denied that you ate the raw meat. He argues: whatever you bought, you ate; you bought raw meat; so you ate raw meat.', w:'the example comes from De fallaciis, and the aim is to make the respondent take back what he has just denied.'},
+  {tier:1, k:'fal', t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.', w:'the example comes from De fallaciis, and the aim is to force the respondent into something plainly untrue.'},
+  {tier:1, k:'ino', t:'Whoever can be beaten by someone is unhappy. A king can be beaten by an enemy. So the king is unhappy.', w:'the example comes from De fallaciis, and the aim is a conclusion nobody would accept, though it is not exactly false.'},
+  {tier:1, k:'nug', t:'This nose is a snub nose. But snub means snub nose. So this is a nose nose snub.', w:'the example comes from De fallaciis, and the aim is to reduce the respondent to useless repetition.'},
+  {tier:2, k:'sol', t:'You know this. This is a stone. Therefore you know stone — which is not how the words go.', w:'the example comes from De fallaciis, and the aim is to trip the respondent into bad grammar.'},
+  {tier:2, k:'red', t:'You said the tax was too high. But you pay it every year without complaint. So you think it is about right after all.', w:'the aim is to make the respondent retract what he asserted a moment ago.'},
   {tier:2, k:'fal', t:'Everything that shines is gold. The wet road shines. So the wet road is gold.', w:'the aim is a conclusion anyone can see is false.'},
   {tier:3, k:'ino', t:'Whoever gives away what he owns becomes poor. The generous man gives away what he owns. So the generous man is to be pitied.', w:'the aim is a conclusion that offends what everyone believes about generosity.'},
-  {tier:3, k:'nug', t:'A wise man is a man who is wise. So a wise man is a man who is a man who is wise. So a wise man is a man who is a man who is a man who is wise.', w:'the aim is to set you repeating without adding anything.'},
-  {tier:5, k:'red', t:'You granted that all promises must be kept. Now you say this one need not be. Which is it?', w:'the aim is to catch you conceding and denying the same thing in one argument.'}
+  {tier:3, k:'nug', t:'A wise man is a man who is wise. So a wise man is a man who is a man who is wise. So a wise man is a man who is a man who is a man who is wise.', w:'the aim is to set the respondent repeating without adding anything.'},
+  {tier:5, k:'red', t:'You granted that all promises must be kept. Now you say this one need not be. Which is it?', w:'the aim is to catch the respondent conceding and denying the same thing in one argument.'}
 ];
 function genFalMetaQ(d){
   const tiers = defTiers(d);
@@ -3221,9 +3221,9 @@ function genFalMetaQ(d){
   const others = sample(keys,3).map(k=>META_KINDS[k].name);
   return mc4Make({prompt:it.t, options:[META_KINDS[it.k].name].concat(others),
     correct: META_KINDS[it.k].name,
-    ruleShow: d>=5 ? '' : 'A sophist wins by driving you somewhere awkward. St Thomas names five such places: to contradict yourself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
-    why: `${META_KINDS[it.k].name}: ${META_KINDS[it.k].gloss} Here, ${it.w}`,
-    rules: FAL_RULES, mcInstr:'Where is the sophist trying to drive you?'});
+    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. St Thomas names five such positions: to contradict yourself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
+    why: `${META_KINDS[it.k].name} means that ${META_KINDS[it.k].gloss} Here, ${it.w}`,
+    rules: FAL_RULES, mcInstr:'Where is the sophist trying to drive the respondent?'});
 }
 
 /* ---- the thirteen, each with its two causes ----
@@ -3233,70 +3233,70 @@ function genFalMetaQ(d){
    `def`  = cause of the failure — why it breaks
    `ans`  = the move that answers it                                        */
 const FAL_KINDS = {
-  equiv:{side:'dict', mod:'equivocation — the name has not changed', name:'Equivocation — one word, two meanings',
+  equiv:{side:'dict', mod:'equivocation; the name has not changed', name:'Equivocation — one word, two meanings',
     app:'One word is used, so it seems to name one thing.',
     def:'The one word is naming two different things.',
-    ans:'Make him say the word twice, once for each premise, in different words.',
-    doc:'EQUIVOCATION uses a single word in two senses. St Thomas’s own case: “dog” means the barking animal, the star, and a fish of the sea.'},
+    ans:'By having him state the word twice, once for each premise, in different words.',
+    doc:'EQUIVOCATION uses a single word in two senses. St Thomas’s own case is “dog”, which means the barking animal, the star, and a fish of the sea.'},
   amphi:{side:'dict', mod:'amphiboly, or syntactic ambiguity', name:'Amphiboly — one phrase, two readings',
     app:'One sentence is used, so it seems to make one claim.',
     def:'The grammar allows two readings, and the argument takes each in turn.',
-    ans:'Rewrite the sentence so only one reading survives, then see if it still works.',
-    doc:'AMPHIBOLY is ambiguity not in a word but in a whole phrase. St Thomas’s case: “the book of Aristotle” — the one he wrote, or the one he owned?'},
+    ans:'By rewriting the sentence so that only one reading survives, and seeing whether it still works.',
+    doc:'AMPHIBOLY is ambiguity not in a word but in a whole phrase. St Thomas’s case is “the book of Aristotle”: is it the one he wrote, or the one he owned?'},
   accent:{side:'dict', mod:'the fallacy of accent, or of emphasis; quoting out of context is its near relation', name:'Accent — how the word is said',
     app:'The word looks the same on the page, so it seems to be one word.',
     def:'Said with a different stress it is a different word, or a different claim.',
-    ans:'Put the stress back where the speaker put it, and read it again.',
-    doc:'ACCENT turns on how a word is stressed or pronounced. Shift the stress and you have changed the claim without changing a letter.'},
+    ans:'By putting the stress back where the speaker put it, and reading it again.',
+    doc:'ACCENT turns on how a word is stressed or pronounced. Shifting the stress changes the claim without changing a letter.'},
   comp:{side:'dict', mod:'the fallacy of composition', name:'Composition — true of them one by one, claimed of them together',
     app:'It holds of each of them, so it looks as though it must hold of them all together.',
-    def:'What holds of them one by one need not hold of them taken together: the joining itself can change the case.',
-    ans:'Ask whether the claim is being made of them one by one, or of them all together.',
+    def:'What holds of them one by one need not hold of them taken together, since the joining itself can change the case.',
+    ans:'By asking whether the claim is being made of them one by one, or of them all together.',
     doc:'COMPOSITION moves from what is true of things taken singly to what is claimed of them taken together. Each brick is light; the wall made of them is not. A seated man can walk, but he cannot walk while seated.'},
   divis:{side:'dict', mod:'the fallacy of division', name:'Division — true of them together, claimed of them one by one',
     app:'It holds of them taken together, so it looks as though it must hold of each of them.',
-    def:'What holds of them together need not hold of each: it may belong to them precisely as joined.',
-    ans:'Ask whether the claim was made of them together, or of each one by itself.',
-    doc:'DIVISION is composition run backwards: from what is true of things taken together to what is claimed of each singly. Two and three are five taken together; two by itself is not five. The choir sings beautifully; not every singer in it does.'},
+    def:'What holds of them together need not hold of each, since it may belong to them precisely as joined.',
+    ans:'By asking whether the claim was made of them together, or of each one by itself.',
+    doc:'DIVISION is composition run backwards, from what is true of things taken together to what is claimed of each singly. Two and three are five taken together, but two by itself is not five. The choir sings beautifully, but not every singer in it does.'},
   figura:{side:'dict', mod:'the fallacy of grammatical analogy; where the words name different sorts of thing altogether it is what is now called a category mistake', name:'Figure of speech — words that look alike but work differently',
     app:'Two words share a shape, so they seem to work the same way.',
     def:'The likeness is only in the shape; the things named are of different sorts.',
-    ans:'Ask what each word is actually naming. If the grammar runs parallel and the things do not, the grammar is doing the arguing.',
-    doc:'FIGURE OF SPEECH — St Thomas calls it the likeness of a word — is when two expressions of the same shape are treated as of the same sort.'},
-  accid:{side:'extra', mod:'the fallacy of accident — also called <em>a dicto simpliciter</em>, destroying the exception, or applying a general rule to a special case', name:'Accident — taking a passing feature for the thing itself',
+    ans:'By asking what each word is actually naming; if the grammar runs parallel and the things do not, the argument rests on the grammar alone.',
+    doc:'FIGURE OF SPEECH (St Thomas calls it the likeness of a word) is when two expressions of the same shape are treated as of the same sort.'},
+  accid:{side:'extra', mod:'the fallacy of accident, also called <em>a dicto simpliciter</em>, destroying the exception, or applying a general rule to a special case', name:'Accident — taking a passing feature for the thing itself',
     app:'The passing feature and the thing really do go together here.',
     def:'The passing feature and the thing are nevertheless not the same.',
-    ans:'Ask whether the thing is taken as what it is, or under some feature it happens to wear.',
-    doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St Thomas’s case: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
-  secquid:{side:'extra', mod:'converse accident, or <em>secundum quid</em> — modern books usually call it hasty generalisation, or ignoring the qualification', name:'In a certain respect, taken flatly',
+    ans:'By asking whether the thing is taken as what it is, or under some feature it happens to have.',
+    doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St Thomas’s case is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
+  secquid:{side:'extra', mod:'converse accident, or <em>secundum quid</em>; modern books usually call it hasty generalisation, or ignoring the qualification', name:'In a certain respect, taken flatly',
     app:'What is true in some respect looks like what is true without qualification.',
     def:'The qualification was doing real work, and it has been quietly dropped.',
-    ans:'Put the qualification back in, out loud, and read the argument again.',
-    doc:'IN A CERTAIN RESPECT, TAKEN FLATLY: something true in one way, or at one time, or for one person, is asserted without any limit at all.'},
+    ans:'By putting the qualification back in, aloud, and reading the argument again.',
+    doc:'IN A CERTAIN RESPECT, TAKEN FLATLY, asserts something true in one way, or at one time, or for one person, without any limit at all.'},
   ignel:{side:'extra', mod:'ignoratio elenchi, the irrelevant conclusion, or missing the point; the straw man and the red herring are species of it', name:'Missing the point — proving something else',
     app:'A conclusion really has been proved.',
     def:'It is not the conclusion that was in dispute. A real refutation must contradict the very thing said, in the same respect, at the same time.',
-    ans:'Say your own claim again, in the same words, and ask whether it has been touched.',
-    doc:'MISSING THE POINT — the schools call it ignorance of the refutation — proves something, but not the thing that was denied.'},
-  petitio:{side:'extra', mod:'begging the question, or circular reasoning — arguing in a circle', name:'Begging the question — assuming what you set out to prove',
+    ans:'By restating the original claim in the same words, and asking whether it has been touched.',
+    doc:'MISSING THE POINT (the schools call it ignorance of the refutation) proves something, but not the thing that was denied.'},
+  petitio:{side:'extra', mod:'begging the question, or circular reasoning, that is, arguing in a circle', name:'Begging the question — assuming what you set out to prove',
     app:'The premise is granted and the conclusion follows from it perfectly well.',
     def:'Nobody who doubted the conclusion could have granted that premise. The argument has helped itself to the point.',
-    ans:'Ask whether someone who doubted the conclusion could accept the premise.',
+    ans:'By asking whether someone who doubted the conclusion could accept the premise.',
     doc:'BEGGING THE QUESTION puts the conclusion into the premises, usually in different words, so that the argument goes in a circle.'},
-  noncausa:{side:'extra', mod:'false cause; where the mistake is that one thing merely came after another, <em>post hoc ergo propter hoc</em> — “correlation is not causation”', name:'Treating what is not the cause as the cause',
+  noncausa:{side:'extra', mod:'false cause; where the mistake is that one thing merely came after another, <em>post hoc ergo propter hoc</em>, or, as is now said, “correlation is not causation”', name:'Treating what is not the cause as the cause',
     app:'The two things really do go together.',
     def:'Going together is not the same as one producing the other.',
-    ans:'Ask what else the two have in common, and whether the supposed cause can be removed while the effect stays.',
+    ans:'By asking what else the two have in common, and whether the supposed cause can be removed while the effect stays.',
     doc:'NOT THE CAUSE AS CAUSE takes something that merely accompanies a thing for what produced it.'},
-  conseq:{side:'extra', mod:'affirming the consequent when it wears an “if”; in the categorical form, the undistributed middle — modern logic counts them the same fault', name:'The consequent — arguing backwards along a one-way link',
+  conseq:{side:'extra', mod:'affirming the consequent when it takes the form of an “if”; in the categorical form, the undistributed middle (modern logic counts them the same fault)', name:'The consequent — arguing backwards along a one-way link',
     app:'The link really does hold one way, so it looks as though it must hold the other way too.',
-    def:'The link runs one way only: the mark belongs to more things than the one named, so finding the mark does not find the thing.',
-    ans:'Ask what else carries the same mark. If anything else does, the argument proves nothing.',
-    doc:'THE CONSEQUENT supposes that a one-way link works both ways. Aristotle’s own cases: a man is called an adulterer because he dresses finely and walks abroad at night — but many men do that who are not adulterers; and a man in a fever is hot, yet a man who is hot need not have a fever. In “if” form it is the same fault: the ground is wet, so it must have rained.'},
+    def:'The link runs one way only, since the mark belongs to more things than the one named, so finding the mark does not find the thing.',
+    ans:'By asking what else carries the same mark; if anything else does, the argument proves nothing.',
+    doc:'THE CONSEQUENT supposes that a one-way link works both ways. Aristotle’s own cases are these: a man is called an adulterer because he dresses finely and walks abroad at night, but many men do that who are not adulterers; and a man in a fever is hot, yet a man who is hot need not have a fever. In “if” form it is the same fault: the ground is wet, so it must have rained.'},
   plures:{side:'extra', mod:'the loaded question, or the complex question', name:'Many questions asked as one',
     app:'One question is asked, so one answer seems to be called for.',
     def:'A second question is hidden inside it, and either answer concedes it.',
-    ans:'Take the question apart and answer the hidden one first.',
+    ans:'By taking the question apart and answering the hidden one first.',
     doc:'MANY QUESTIONS AS ONE hides a second question inside the first, so that yes and no both grant it.'}
 };
 const FAL_KEYS = Object.keys(FAL_KINDS);
@@ -3373,42 +3373,42 @@ function falPick(d){
   if(!pool.length) pool = FAL_ITEMS;
   return recentPick(pool, x=>x.t);
 }
-const SIDE_WORD = {dict:'in the words — the language itself is slippery',
+const SIDE_WORD = {dict:'in the words, since the language itself is ambiguous',
                    extra:'outside the words — the language is fine; the thinking is not'};
 function genFalNameQ(d){
   const it = falPick(d), K = FAL_KINDS[it.k];
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].name);
   return mc4Make({prompt:it.t, options:[K.name].concat(others), correct:K.name,
     ruleShow: d>=5 ? '' : 'Six fallacies come from the words: equivocation, amphiboly, accent, composition, division, figure of speech. Seven come from outside the words: accident; in a certain respect taken flatly; missing the point; begging the question; not the cause as cause; the consequent; many questions as one.',
-    why: `${falDoc(K)} It is a fallacy ${SIDE_WORD[K.side]}. It looks sound because: ${K.app} It fails because: ${K.def}`,
+    why: `${falDoc(K)} It is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app} The cause of the failure is this: ${K.def}`,
     rules: FAL_RULES, mcInstr:'Which fallacy is this?'});
 }
 function genFalSideQ(d){
   const it = falPick(d), K = FAL_KINDS[it.k];
-  const inW = 'In the words — the fault is in the language itself';
-  const outW = 'Outside the words — the language is fine; the thinking is not';
+  const inW = 'In the words, since the fault is in the language itself';
+  const outW = 'Outside the words, since the language is fine but the thinking is not';
   const opts = [inW, outW,
-    'Neither — the argument is sound',
-    'Both at once — the words and the thinking fail together'];
+    'Neither, since the argument is sound',
+    'Both at once, since the words and the thinking fail together'];
   return mc4Make({prompt:it.t, options:opts, correct: K.side==='dict' ? inW : outW,
-    ruleShow: d>=5 ? '' : 'St Thomas divides every fallacy in two. If what makes the argument look good comes from the WORD — one sound taken for one thing — the fallacy is in the words. If it comes from the THING — two things that agree somehow taken as simply one — it is outside the words.',
-    why: `${K.name.split(' — ')[0]} — and that is a fallacy ${SIDE_WORD[K.side]}. What makes it look sound: ${K.app}`,
+    ruleShow: d>=5 ? '' : 'St Thomas divides every fallacy in two. If what makes the argument look good comes from the WORD (one sound taken for one thing), the fallacy is in the words. If it comes from the THING (two things that agree in some way taken as simply one), it is outside the words.',
+    why: `${K.name.split(' — ')[0]} is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app}`,
     rules: FAL_RULES, mcInstr:'Does this fallacy come from the words, or from outside them?'});
 }
 function genFalAppearQ(d){
   const it = falPick(d), K = FAL_KINDS[it.k];
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].app);
   return mc4Make({prompt:it.t, options:[K.app].concat(others), correct:K.app,
-    ruleShow: d>=5 ? '' : 'Every fallacy has a CAUSE OF THE APPEARANCE — what makes it look sound, and moves a person to accept it. Name that, and you understand why the trick works.',
-    why: `${falDoc(K)} And what makes it fail is something else again: ${K.def}`,
+    ruleShow: d>=5 ? '' : 'Every fallacy has a CAUSE OF THE APPEARANCE, which makes it look sound and moves a person to accept it. Once that is named, we understand why the deception works.',
+    why: `${falDoc(K)} The cause of the failure is something else: ${K.def}`,
     rules: FAL_RULES, mcInstr:'What makes this argument LOOK sound?'});
 }
 function genFalDefectQ(d){
   const it = falPick(d), K = FAL_KINDS[it.k];
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].def);
   return mc4Make({prompt:it.t, options:[K.def].concat(others), correct:K.def,
-    ruleShow: d>=5 ? '' : 'Every fallacy also has a CAUSE OF THE FAILURE — what actually destroys the argument. It is never the same as what made it look good; that is exactly why a man is deceived.',
-    why: `${falDoc(K)} What made it look sound in the first place was something else: ${K.app}`,
+    ruleShow: d>=5 ? '' : 'Every fallacy also has a CAUSE OF THE FAILURE, which actually destroys the argument. It is never the same as what made it look good, and that is exactly why a man is deceived.',
+    why: `${falDoc(K)} The cause of the appearance was something else: ${K.app}`,
     rules: FAL_RULES, mcInstr:'What makes this argument FAIL?'});
 }
 function genFalAnswerQ(d){
@@ -3416,8 +3416,8 @@ function genFalAnswerQ(d){
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].ans);
   return mc4Make({prompt:it.t, options:[K.ans].concat(others), correct:K.ans,
     ruleShow: d>=5 ? '' : '',
-    why: `${falDoc(K)} It fails because: ${K.def}`,
-    rules: FAL_RULES, mcInstr:'How do you answer this argument?'});
+    why: `${falDoc(K)} The cause of the failure is this: ${K.def}`,
+    rules: FAL_RULES, mcInstr:'How is this argument to be answered?'});
 }
 
 /* ---- the hidden principle an argument rides on (De fallaciis, c. 2 and c. 4) ---- */
@@ -3427,7 +3427,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever the narrower kind is said of, the wider kind is said of too',
        'Whatever is true of a part is true of the whole',
        'Whatever is true at one time is true at every time'],
-   why:'St Thomas’s own pair. The good argument — Socrates is a man, therefore an animal — depends on a true rule: whatever the species is said of, the genus is said of. Reverse it and you get a false rule, and this argument depends on it.'},
+   why:'This is St Thomas’s own pair. The good argument (Socrates is a man, therefore an animal) depends on a true rule: whatever the species is said of, the genus is said of. Reversed, it becomes a false rule, and this argument depends on it.'},
   {tier:1, t:'Socrates is a man, therefore Socrates is an animal.',
    correct:'Whatever the narrower kind is said of, the wider kind is said of too',
    ds:['Whatever the wider kind is said of, the narrower kind is said of too',
@@ -3439,7 +3439,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever is true of the thing is true of its passing features',
        'Whatever the wider kind is said of, the narrower kind is said of too',
        'Whatever is said of many things is said of each'],
-   why:'St Thomas’s worked case. The rule is false, because a thing and a feature it happens to wear are not the same. It looks true because here they do go together.'},
+   why:'This is St Thomas’s worked case. The rule is false, because a thing and a feature it happens to have are not the same. It looks true because here they do go together.'},
   {tier:2, t:'The wall is white. So every part of the wall is white.',
    correct:'Whatever is true of the whole is true of each part',
    ds:['Whatever is true of each part is true of the whole',
@@ -3451,13 +3451,13 @@ const FAL_PRINCIPLES = [
    ds:['Whatever is true of the whole is true of each part',
        'Whatever follows from a thing belongs to the thing',
        'Whatever two things go together, one causes the other'],
-   why:'Weight adds up; lightness does not survive the addition. The rule looks true because many properties do carry from parts to whole — colour often does.'},
+   why:'Weight adds up, but lightness does not survive the addition. The rule looks true because many properties do carry from parts to whole, as colour often does.'},
   {tier:3, t:'The ground is wet, so it has rained.',
    correct:'Whatever produces an effect is the only thing that could have produced it',
    ds:['Whatever follows from a cause must have had that cause',
        'Whatever is true of the whole is true of each part',
        'Whatever is granted once is granted always'],
-   why:'The rule is false: many causes can produce one effect. It looks true because rain is the usual cause, and the usual cause is easy to mistake for the only one.'},
+   why:'The rule is false, since many causes can produce one effect. It looks true because rain is the usual cause, and the usual cause is easy to mistake for the only one.'},
   {tier:5, t:'They always go together, so one of them makes the other.',
    correct:'Whatever two things go together, one of them causes the other',
    ds:['Whatever causes a thing goes with it',
@@ -3471,7 +3471,7 @@ function genFalPrincipleQ(d){
   if(!pool.length) pool = FAL_PRINCIPLES;
   const it = recentPick(pool, x=>x.t);
   return mc4Make({prompt:it.t, options:[it.correct].concat(it.ds), correct:it.correct,
-    ruleShow: d>=5 ? '' : 'Every argument depends on a rule, usually unspoken. A good argument depends on a true one; a sophistical argument depends on one that is false but looks true. Find the rule and you have found the fault.',
+    ruleShow: d>=5 ? '' : 'Every argument depends on a rule, usually unspoken. A good argument depends on a true one; a sophistical argument depends on one that is false but looks true. To find the rule is to find the fault.',
     why: it.why, rules: FAL_RULES,
     mcInstr:'What unspoken rule does this argument depend on?'});
 }
@@ -3479,53 +3479,53 @@ function genFalPrincipleQ(d){
 /* ---- the doctrine itself ---- */
 const FAL_DOCTRINE = [
   {tier:1, q:'What does St Thomas say a fallacy always has two of?',
-   correct:'Two causes — one that makes it look sound, one that makes it fail',
+   correct:'Two causes, one that makes it look sound and one that makes it fail',
    ds:['Two premises, both of them false','Two conclusions that contradict each other','Two words that mean the same thing'],
-   why:'The cause of the appearance makes the argument look good; the cause of the failure breaks it. A man is deceived by the two together — something appears, and is not.'},
+   why:'The cause of the appearance makes the argument look good; the cause of the failure breaks it. A man is deceived by the two together, since something appears to be so and is not.'},
   {tier:1, q:'“Sophistical” comes from a word meaning what?',
-   correct:'Apparent wisdom — wisdom that only looks like wisdom',
+   correct:'Apparent wisdom, that is, wisdom that only looks like wisdom',
    ds:['Careful reasoning','A short argument','Speech before a crowd'],
-   why:'St Thomas: sophistica quasi apparens sapientia. The sophist argues for glory, wanting to seem wise.'},
-  {tier:1, q:'A disputation, says St Thomas, is an act of one person toward another — for what purpose?',
+   why:'St Thomas says, sophistica quasi apparens sapientia. The sophist argues for glory, wanting to seem wise.'},
+  {tier:1, q:'A disputation, says St Thomas, is an act of one person toward another. For what purpose?',
    correct:'To show something proposed',
    ds:['To display a form of argument as an example','To pass the time agreeably','To discover a new science'],
-   why:'That last part marks a real disputation off from an argument given merely to illustrate a pattern. A disputation is going somewhere.'},
+   why:'That last part marks a real disputation off from an argument given merely to illustrate a pattern, since a disputation aims at showing something.'},
   {tier:2, q:'What does the tradition mean by calling a premise “probable”?',
    correct:'It seems so to everyone, or to most people, or to the wise',
    ds:['It is more likely than not to be true','It has been proved, but only roughly','It is what one particular expert happens to think'],
-   why:'St Thomas gives the definition exactly: probabilia are what seem so to all, or to most, or to the wise — and among the wise, to all of them or the most eminent. It is what a reasonable person may be asked to grant, not a guess about odds.'},
+   why:'St Thomas gives the definition exactly: probabilia are what seem so to all, or to most, or to the wise, and among the wise, to all of them or to the most eminent. The probable is what a reasonable person may be asked to grant, not a guess about odds.'},
   {tier:2, q:'Why are there exactly six fallacies in the words?',
    correct:'Because ambiguity is threefold, and two of the three divide again into word and phrase',
    ds:['Because Aristotle happened to find six of them','Because there are six parts of speech','Because six is the number of the true loci'],
-   why:'Actual ambiguity gives equivocation (in a word) and amphiboly (in a phrase); potential ambiguity gives accent (in a word) and composition and division (in a phrase); apparent ambiguity gives figure of speech. Two, plus three, plus one — six, and not by accident.'},
-  {tier:2, q:'A real refutation must contradict the very thing said — and in what further way?',
+   why:'Actual ambiguity gives equivocation (in a word) and amphiboly (in a phrase); potential ambiguity gives accent (in a word) and composition and division (in a phrase); apparent ambiguity gives figure of speech. Two, plus three, plus one makes six, and the number follows from the kinds of ambiguity.'},
+  {tier:2, q:'A real refutation must contradict the very thing said. In what further way must it contradict it?',
    correct:'In the same respect and at the same time',
    ds:['In the same words the speaker used','Before the speaker has finished','In front of the same audience'],
-   why:'Miss any of that and you have refuted something nobody claimed. This is the fault called missing the point, or ignorance of the refutation.'},
+   why:'If either condition is missing, what is refuted is something nobody claimed. This is the fault called missing the point, or ignorance of the refutation.'},
   {tier:3, q:'When a man reasons badly by himself, St Thomas says it always happens how?',
-   correct:'Beside his intention — nobody sets out to deceive himself',
+   correct:'Beside his intention, since nobody sets out to deceive himself',
    ds:['On purpose, for the pleasure of it','Because he has not read Aristotle','Because his memory has failed him'],
-   why:'It is the reason the study of fallacies is aimed first at your own arguments. Reasoning badly to someone else may be deliberate; reasoning badly to yourself never is.'},
+   why:'This is why the study of fallacies is aimed first at our own arguments. Reasoning badly to someone else may be deliberate; reasoning badly to oneself never is.'},
   {tier:2, q:'A modern book calls an argument “affirming the consequent.” Which of the thirteen is that?',
-   correct:'The consequent — arguing backwards along a one-way link',
+   correct:'The consequent, which argues backwards along a one-way link',
    ds:['Not the cause as cause','Begging the question','Accident'],
-   why:'The same fault under two names. Where the argument has no “if” in it — every thief wants money, this man wants money, so he is a thief — modern books call it the undistributed middle instead, but it is the one fallacy: a link that runs one way is read as running both.'},
+   why:'It is the same fault under two names. Where the argument has no “if” in it (every thief wants money, this man wants money, so he is a thief), modern books call it the undistributed middle instead; but it is the one fallacy, in which a link that runs one way is read as running both ways.'},
   {tier:2, q:'A modern book calls an argument a “straw man.” Which of the thirteen is it a species of?',
-   correct:'Missing the point — proving something else',
+   correct:'Missing the point, which proves something else',
    ds:['Equivocation','Many questions asked as one','Composition'],
    why:'Ignoratio elenchi covers every case of proving something other than what was in dispute. The straw man distorts the claim first and then refutes the distortion; the red herring simply changes the subject. Both are the same fault underneath.'},
   {tier:3, q:'What makes an argument sophistical, if both its premises may be true?',
    correct:'It depends on a hidden rule that is false but looks true',
    ds:['It is stated too quickly to follow','Its conclusion is false','It uses technical words'],
-   why:'St Thomas’s example: “Socrates is an animal, therefore a man” has a true premise and a false conclusion — because the rule it rides on, that whatever the genus is said of the species is said of, is false.'},
-  {tier:3, q:'The sophist drives you into five different awkward places. Why five, and why those?',
+   why:'St Thomas’s example, “Socrates is an animal, therefore a man”, has a true premise and a false conclusion, because the rule it depends on (that whatever the genus is said of, the species is said of) is false.'},
+  {tier:3, q:'The sophist drives the respondent into five different awkward positions. Why five, and why those?',
    correct:'Each offends a different science, so that he appears to know them all',
    ds:['They are the five parts of a syllogism','They are the five predicables applied to argument','They are the five ways a premise can be false'],
-   why:'Contradiction offends metaphysics; plain falsehood offends natural science and mathematics; the absurd offends dialectic; bad grammar offends grammar; babbling offends rhetoric. Dragging you through all five, the sophist looks universally wise.'},
+   why:'Contradiction offends metaphysics; plain falsehood offends natural science and mathematics; the absurd offends dialectic; bad grammar offends grammar; babbling offends rhetoric. By driving the respondent through all five, the sophist appears universally wise.'},
   {tier:5, q:'What is the difference between something false and something merely unbelievable?',
    correct:'Everything false is unbelievable, but some unbelievable things are true',
    ds:['They are two names for the same thing','Everything unbelievable is false, but not the reverse','The false offends grammar; the unbelievable offends rhetoric'],
-   why:'St Thomas’s own distinction, with his own example: that a star is bigger than the earth is against common opinion, and true. The sophist can win by driving you to the merely unbelievable.'}
+   why:'This is St Thomas’s own distinction, with his own example: that a star is bigger than the earth is against common opinion, and true. So the sophist can win by driving the respondent to what is merely unbelievable.'}
 ];
 function genFalDoctrineQ(d){
   const tiers = defTiers(d);
@@ -3565,7 +3565,7 @@ function genFallacyQ(d){
    on, the STANDING of a premise offered, and the RESPONSE an objection
    calls for — the distinguo of the disputed question.
    ================================================================ */
-const DIAL_RULES = 'Dialectic reasons from what is probable — what seems so to everyone, or to most, or to the wise — and reaches a reasoned opinion, not a proof. Its instrument is the topic (locus): a standing relation, such as genus to species or whole to part, from which an argument may be drawn. Its practice is the disputation, where one puts a case and another answers.';
+const DIAL_RULES = 'Dialectic reasons from what is probable (what seems so to everyone, or to most, or to the wise) and reaches a reasoned opinion, not a proof. Its instrument is the topic (locus), a standing relation, such as genus to species or whole to part, from which an argument may be drawn. Its practice is the disputation, where one puts a case and another answers.';
 
 /* ---- the topics: standing places an argument may be drawn from ---- */
 /* Each topic carries its MAXIM — the governing proposition the argument
@@ -3575,22 +3575,22 @@ const DIAL_RULES = 'Dialectic reasons from what is probable — what seems so to
 const TOPICS = {
   def:{name:'From the definition', gloss:'what the thing is is used to settle what belongs to it.',
        max:'Whatever fits the definition fits the thing defined, and whatever does not, does not.',
-       use:'when you must show that something is, or is not, of a certain kind'},
+       use:'when one must show that something is, or is not, of a certain kind'},
   gen:{name:'From the wider kind (genus)', gloss:'what holds of the whole family is brought down to the member.',
        max:'Whatever belongs to the whole family belongs to each kind within it.',
-       use:'when you must show that something has a feature its whole family has'},
+       use:'when one must show that something has a feature its whole family has'},
   spec:{name:'From the narrower kind (species)', gloss:'what holds of the kind is carried up to the family, or applied to one of its members.',
        max:'Whatever is said of the kind is said of the individuals under it.',
-       use:'when you must show that some individual has what its kind has'},
+       use:'when one must show that some individual has what its kind has'},
   prop:{name:'From the property', gloss:'a mark that belongs to the thing alone and always is used to identify or exclude it.',
        max:'Where the property is, the thing is; where it is absent, the thing is absent.',
-       use:'when you must show that this is, or is not, the very thing'},
+       use:'when one must show that this is, or is not, the very thing'},
   opp:{name:'From opposites', gloss:'what holds of one of two opposites is used to settle the other.',
        max:'What holds of one opposite, the contrary holds of the other.',
-       use:'when you must praise or blame something and its contrary is easier to judge'},
-  more:{name:'From the more and the less', gloss:'if it holds where it is less likely, it holds where it is more likely — or the reverse.',
+       use:'when one must praise or blame something and its contrary is easier to judge'},
+  more:{name:'From the more and the less', gloss:'if it holds where it is less likely, it holds where it is more likely, or the reverse.',
        max:'If it holds where it is less to be expected, it holds all the more where it is more to be expected.',
-       use:'when you have an easier case in hand than the one in dispute'},
+       use:'when one has an easier case in hand than the one in dispute'},
   like:{name:'From likeness', gloss:'what holds in one case is carried to a case that resembles it in the relevant way.',
         max:'What holds in one case holds in a case like it, so far as they are alike.',
         use:'when the case in dispute is unfamiliar but resembles a familiar one'},
@@ -3599,16 +3599,16 @@ const TOPICS = {
          use:'when the thing in dispute is a part of something already agreed'},
   cause:{name:'From the cause and the end', gloss:'what a thing comes from, or what it is for, is used to settle what it is or ought to be.',
          max:'Where the cause is, the effect follows; and a thing is judged by what it is for.',
-         use:'when you must show why something is so, or whether it is any good'},
-  conj:{name:'From words of the same root (conjugates)', gloss:'what holds of one form of a word holds of its kin — just, justice, justly.',
+         use:'when one must show why something is so, or whether it is any good'},
+  conj:{name:'From words of the same root (conjugates)', gloss:'what holds of one form of a word holds of its kin, as with just, justice, justly.',
         max:'What holds of the thing holds of what is named from it: if justice is good, acting justly is good.',
         use:'when the dispute is over one form of a word and another form is already granted'},
   nom:{name:'From the name', gloss:'what the word itself means, or where it came from, is used to settle the question.',
-       max:'What the name means tells something of what the thing is — though not always, and never on its own.',
+       max:'What the name means tells something of what the thing is, though not always, and never on its own.',
        use:'when the word carries its meaning on its face, or has been misunderstood'},
-  auth:{name:'From authority', gloss:'the judgement of those who know is offered as a reason — the weakest of the topics, says the tradition, though not nothing.',
+  auth:{name:'From authority', gloss:'the judgement of those who know is offered as a reason; the tradition counts it the weakest of the topics, though not worthless.',
         max:'What those who know a subject agree on may be granted, until better reason appears.',
-        use:'when the matter is beyond your own competence and the learned agree'}
+        use:'when the matter is beyond one’s own competence and the learned agree'}
 };
 const TOPIC_KEYS = Object.keys(TOPICS);
 const DIAL_TOPICS = [
@@ -3664,9 +3664,9 @@ function genDialInventQ(d){
   const others = sample(TOPIC_KEYS.filter(k=>k!==it.k), 3).map(k=>TOPICS[k].name);
   return mc4Make({prompt:it.t, options:[TOPICS[it.k].name].concat(others),
     correct:TOPICS[it.k].name,
-    ruleShow: d>=5 ? '' : 'The Topics is a book about FINDING, not about judging. Given something you must show, a topic tells you where to go and look for an argument. Ask what you already have in hand, and which place will turn it into a reason.',
-    why: `Go to ${TOPICS[it.k].name.toLowerCase()} — ${TOPICS[it.k].use}. The rule that does the work: ${TOPICS[it.k].max}`,
-    rules: DIAL_RULES, mcInstr:'Where will you go to find an argument?'});
+    ruleShow: d>=5 ? '' : 'The Topics is a book about FINDING, not about judging. Given something to be shown, a topic indicates where to look for an argument. The question is what we already have in hand, and which place will turn it into a reason.',
+    why: `The argument is drawn ${TOPICS[it.k].name.toLowerCase()}, the place used ${TOPICS[it.k].use}. The maxim that gives it force is this: ${TOPICS[it.k].max}`,
+    rules: DIAL_RULES, mcInstr:'Where is an argument to be found?'});
 }
 /* The maxim of a topic and the hidden rule of a fallacy are one machinery:
    a true maxim gives an argument its force, a false one only its appearance. */
@@ -3678,8 +3678,8 @@ function genDialMaximQ(d){
   const others = sample(TOPIC_KEYS.filter(k=>k!==it.k), 3).map(k=>TOPICS[k].max);
   return mc4Make({prompt:it.t, options:[TOPICS[it.k].max].concat(others),
     correct:TOPICS[it.k].max,
-    ruleShow: d>=5 ? '' : 'Every topic carries a MAXIM — the governing proposition an argument drawn from that place depends on. The schools called it the maxima propositio. When the maxim is true the argument holds; when it is false but looks true, you have a fallacy instead.',
-    why: `This argument is drawn ${TOPICS[it.k].name.toLowerCase()}, and that place carries this maxim. Notice that a fallacy works the same way, only backwards: it depends on a maxim that is false and looks true.`,
+    ruleShow: d>=5 ? '' : 'Every topic carries a MAXIM, the governing proposition on which an argument drawn from that place depends. The schools called it the maxima propositio. When the maxim is true the argument holds; when it is false but looks true, the result is a fallacy instead.',
+    why: `This argument is drawn ${TOPICS[it.k].name.toLowerCase()}, and that place carries this maxim. A fallacy works the same way, only backwards, since it depends on a maxim that is false and looks true.`,
     rules: DIAL_RULES, mcInstr:'Which maxim does this argument depend on?'});
 }
 function genDialTopicQ(d){
@@ -3690,21 +3690,21 @@ function genDialTopicQ(d){
   const others = sample(TOPIC_KEYS.filter(k=>k!==it.k), 3).map(k=>TOPICS[k].name);
   return mc4Make({prompt:it.t, options:[TOPICS[it.k].name].concat(others),
     correct:TOPICS[it.k].name,
-    ruleShow: d>=5 ? '' : 'A topic (locus) is a standing place an argument can be drawn from: the definition, the wider kind, the narrower kind, the property, opposites, the more and the less, likeness, whole and parts, or authority. Name the topic and you can see at once what would answer the argument.',
-    why: `${TOPICS[it.k].name}: ${TOPICS[it.k].gloss}`,
+    ruleShow: d>=5 ? '' : 'A topic (locus) is a standing place from which an argument can be drawn: the definition, the wider kind, the narrower kind, the property, opposites, the more and the less, likeness, whole and parts, or authority. Once the topic is named, we can see at once what would answer the argument.',
+    why: `${TOPICS[it.k].name}. In this topic, ${TOPICS[it.k].gloss}`,
     rules: DIAL_RULES, mcInstr:'From which topic is this argument drawn?'});
 }
 
 /* ---- the standing of a premise: may I ask my opponent to grant it? ---- */
 const ENDOX = {
-  dem:{short:'Demonstrable', name:'Demonstrable — it can be proved, and need not be merely granted',
-       gloss:'a matter of science: it follows from what cannot be otherwise, so it is not the business of dialectic at all.'},
-  all:{short:'Granted by everyone', name:'Granted by everyone — you may simply assume it',
-       gloss:'probable in the fullest sense: it seems so to all, and an opponent who denied it would be thought perverse.'},
+  dem:{short:'Demonstrable', name:'Demonstrable, since it can be proved and need not be merely granted',
+       gloss:'a matter of science, since it follows from what cannot be otherwise, and so it is not the business of dialectic at all.'},
+  all:{short:'Granted by everyone', name:'Granted by everyone, so that it may simply be assumed',
+       gloss:'probable in the fullest sense, since it seems so to all, and an opponent who denied it would be thought perverse.'},
   wise:{short:'Granted by the learned', name:'Granted by the learned, though not by everyone',
-       gloss:'still probable, and still usable — but you must expect to defend it, since the many do not hold it.'},
-  one:{short:'One person’s opinion', name:'One person’s opinion — not yet something you may assume',
-       gloss:'it may be true, but it is not yet probable in the required sense, and an opponent may refuse it without shame.'}
+       gloss:'still probable, and still usable, but it must be expected to need defence, since the many do not hold it.'},
+  one:{short:'One person’s opinion', name:'One person’s opinion, and so not yet something that may be assumed',
+       gloss:'perhaps true, but not yet probable in the required sense, and an opponent may refuse it without shame.'}
 };
 const ENDOX_ITEMS = [
   {tier:1, k:'all', t:'A promise ought generally to be kept.'},
@@ -3732,52 +3732,52 @@ function genDialEndoxQ(d){
   const others = keys.filter(k=>k!==it.k).map(k=>ENDOX[k].name);
   return mc4Make({prompt:it.t, options:[ENDOX[it.k].name].concat(others),
     correct: ENDOX[it.k].name,
-    ruleShow: d>=5 ? '' : 'Dialectic works from the probable — what seems so to everyone, or to most, or to the wise. Before you use a premise, ask what standing it has: is it demonstrable, granted by all, granted by the learned only, or merely somebody’s opinion?',
-    why: `${ENDOX[it.k].short}: ${ENDOX[it.k].gloss}`,
-    rules: DIAL_RULES, mcInstr:'What standing has this premise, if you offer it in argument?'});
+    ruleShow: d>=5 ? '' : 'Dialectic works from the probable, that is, what seems so to everyone, or to most, or to the wise. Before a premise is used, we ask what standing it has: is it demonstrable, granted by all, granted by the learned only, or merely somebody’s opinion?',
+    why: `${ENDOX[it.k].short}. Such a premise is ${ENDOX[it.k].gloss}`,
+    rules: DIAL_RULES, mcInstr:'What standing has this premise, if it is offered in argument?'});
 }
 
 /* ---- answering an objection: the four moves of the disputed question ---- */
 const RESP = {
-  dist:{short:'the distinguo', name:'Distinguish the term — it is true in one sense, false in another',
-        gloss:'it works whenever a word in the objection carries two senses: grant the sense that is true, deny the other, and the objection falls apart.'},
-  deny:{short:'denying the premise', name:'Deny the premise — it is simply not so',
-        gloss:'it is the answer when the objection simply rests on something false — no distinction is needed; you refuse the premise and say why.'},
+  dist:{short:'the distinguo', name:'Distinguish the term, since it is true in one sense and false in another',
+        gloss:'it works whenever a word in the objection carries two senses: the sense that is true is granted and the other denied, and the objection fails.'},
+  deny:{short:'denying the premise', name:'Deny the premise, since it is simply not so',
+        gloss:'it is the answer when the objection simply rests on something false; no distinction is needed, and the respondent refuses the premise and says why.'},
   conc:{short:'conceding the matter and denying the consequence', name:'Grant it all, and deny that the conclusion follows',
-        gloss:'it is the answer when every premise stands and the conclusion still does not follow — the matter is sound, the form is not.'},
-  full:{short:'a plain concession', name:'Grant the whole objection — it is right, and your thesis must be narrowed',
-        gloss:'it is the honest answer when the objection is simply sound: concede, and state the claim again more carefully.'}
+        gloss:'it is the answer when every premise stands and the conclusion still does not follow, since the matter is sound but the form is not.'},
+  full:{short:'a plain concession', name:'Grant the whole objection, since it is right and the thesis must be narrowed',
+        gloss:'it is the honest answer when the objection is simply sound, so that the respondent concedes and states the claim again more carefully.'}
 };
 const RESP_KEYS = Object.keys(RESP);
 const RESP_ITEMS = [
   {tier:1, th:'A good knife cuts well.', ob:'But a good knife in the hands of a murderer does harm — so a good knife is not good.',
-   k:'dist', w:'“Good” is said in two ways: good as a knife, and good in what it is used for. Grant the first, deny the second, and the objection is answered.'},
+   k:'dist', w:'“Good” is said in two ways: good as a knife, and good in what it is used for. When the first is granted and the second denied, the objection is answered.'},
   {tier:1, th:'Promises ought to be kept.', ob:'But a promise made to a madman to give back his sword ought not to be kept. So promises need not be kept.',
-   k:'dist', w:'“Ought to be kept” holds without qualification of promises whose keeping does no grave harm. Distinguish, and the rule stands in the sense it was meant.'},
+   k:'dist', w:'“Ought to be kept” holds without qualification of promises whose keeping does no grave harm. Once the senses are distinguished, the rule stands in the sense in which it was meant.'},
   {tier:1, th:'Every bird has feathers.', ob:'But the bat flies and has no feathers, so not every flying thing has feathers.',
-   k:'conc', w:'Everything in the objection is true, and none of it touches the thesis. The thesis was about birds, not about flying things. Grant it all; the conclusion does not follow.'},
+   k:'conc', w:'Everything in the objection is true, and none of it touches the thesis, which was about birds, not about flying things. So everything is granted, but the conclusion does not follow.'},
   {tier:1, th:'This road is the shortest way to the town.', ob:'But the bridge on it is down, so nobody can get through.',
    k:'full', w:'The objection is simply right, and it defeats the thesis as stated. The honest move is to concede and say instead that it is the shortest way when passable.'},
   {tier:2, th:'A definition must fit exactly what it defines.', ob:'But “man is a rational animal” fits every man, and so does “man is a featherless biped.” So exact fit is not enough.',
-   k:'conc', w:'Both premises may be granted, and the conclusion still does not follow: the thesis said exact fit is necessary, not that it is sufficient. The form is at fault, not the matter.'},
+   k:'conc', w:'Both premises may be granted, and the conclusion still does not follow, since the thesis said that exact fit is necessary, not that it is sufficient. The form is at fault, not the matter.'},
   {tier:2, th:'Nobody willingly does what harms him.', ob:'But men drink themselves sick knowing it will harm them. So some do it willingly.',
-   k:'dist', w:'“Willingly” is said of what a man chooses as good for him, and of what he chooses knowing it is bad. Distinguish the senses and the thesis holds in the first.'},
+   k:'dist', w:'“Willingly” is said of what a man chooses as good for him, and of what he chooses knowing it is bad. Once the senses are distinguished, the thesis holds in the first.'},
   {tier:2, th:'The heavier body always falls faster.', ob:'Two stones of different weight, dropped together, strike the ground together.',
    k:'deny', w:'No distinction is needed and nothing about the form is wrong. The premise of the thesis is simply false, and the observation shows it.'},
   {tier:2, th:'Every part of the wall is white, so the wall is white.', ob:'Every brick is light, yet the wall is not light.',
-   k:'conc', w:'The objection grants the pattern and shows it fails elsewhere — which is to attack the form of the inference, not the truth of any premise.'},
+   k:'conc', w:'The objection grants the pattern and shows that it fails elsewhere, which is to attack the form of the inference, not the truth of any premise.'},
   {tier:3, th:'Knowledge is always of what cannot be otherwise.', ob:'But I know that you are sitting down, and you might stand up.',
-   k:'dist', w:'“Knowledge” is said strictly, of what is demonstrated and cannot be otherwise, and loosely, of what we are sure of at the time. Distinguish, and the thesis holds in the strict sense.'},
+   k:'dist', w:'“Knowledge” is said strictly, of what is demonstrated and cannot be otherwise, and loosely, of what we are sure of at the time. Once the senses are distinguished, the thesis holds in the strict sense.'},
   {tier:3, th:'A law binds everyone in the realm.', ob:'But the law was never published in this province, and nobody there has heard it.',
-   k:'full', w:'The objection is sound and the thesis must be narrowed: a law binds when it has been made known. Concede, and restate.'},
+   k:'full', w:'The objection is sound and the thesis must be narrowed, since a law binds when it has been made known. The respondent concedes and restates the thesis.'},
   {tier:3, th:'Whatever is learned is learned from a teacher.', ob:'But the first teacher had no teacher, and yet knew.',
-   k:'dist', w:'“Learned from a teacher” covers learning by instruction; discovery is another way of coming to know. Distinguish the two and the thesis stands of the first.'},
+   k:'dist', w:'“Learned from a teacher” covers learning by instruction; discovery is another way of coming to know. Once the two are distinguished, the thesis stands of the first.'},
   {tier:5, th:'No one errs willingly.', ob:'The forger knows he is forging, and does it on purpose.',
-   k:'dist', w:'To err is one thing, to do wrong another. The forger does not err about what he is doing; he chooses it. Distinguish erring from choosing badly.'},
+   k:'dist', w:'To err is one thing, and to do wrong another. The forger does not err about what he is doing; he chooses it. So erring must be distinguished from choosing badly.'},
   {tier:5, th:'Every effect has a cause.', ob:'But we often cannot find the cause, so some effects have none.',
-   k:'conc', w:'Grant that we often cannot find it. That we cannot find a thing is no proof that it is not there — the conclusion simply does not follow from the premise.'},
+   k:'conc', w:'It may be granted that we often cannot find the cause. But that we cannot find a thing is no proof that it is not there, so the conclusion simply does not follow from the premise.'},
   {tier:5, th:'The city should always follow the majority.', ob:'The majority once voted to exile its best general, to its own ruin.',
-   k:'full', w:'The objection stands and the thesis as stated cannot. Concede, and state the thesis again with the qualification the case demands.'}
+   k:'full', w:'The objection stands, and the thesis as stated cannot. The respondent concedes and states the thesis again with the qualification the case demands.'}
 ];
 function genDialResponseQ(d){
   const tiers = defTiers(d);
@@ -3789,21 +3789,21 @@ function genDialResponseQ(d){
     promptRaw: `<div class="disp-row"><span class="disp-label">The claim</span>${it.th}</div>`
              + `<div class="disp-row"><span class="disp-label">The objection</span>${it.ob}</div>`,
     options:[RESP[it.k].name].concat(others), correct:RESP[it.k].name,
-    ruleShow: d>=5 ? '' : 'Four answers are open to an objection. DISTINGUISH the term — the distinguo — when a word is true in one sense and false in another. DENY the premise when it is simply false. GRANT it all and deny that the conclusion follows, when the matter is sound but the form is not. Or GRANT the whole objection and narrow your claim, when the objection is right.',
-    why: `${it.w} — this is the move the schools call ${RESP[it.k].short}, and ${RESP[it.k].gloss}`,
+    ruleShow: d>=5 ? '' : 'Four answers are open to an objection. We DISTINGUISH the term (the distinguo) when a word is true in one sense and false in another. We DENY the premise when it is simply false. We GRANT it all and deny that the conclusion follows, when the matter is sound but the form is not. Or we GRANT the whole objection and narrow the claim, when the objection is right.',
+    why: `${it.w} This is the move the schools call ${RESP[it.k].short}, and ${RESP[it.k].gloss}`,
     rules: DIAL_RULES, mcInstr:'How should this objection be answered?'});
 }
 
 /* ---- the doctrine of dialectic itself ---- */
 const DIAL_DOCTRINE = [
   {tier:1, q:'Dialectic reasons from premises of what sort?',
-   correct:'Probable ones — what seems so to everyone, or to most, or to the wise',
+   correct:'Probable ones, that is, what seems so to everyone, or to most, or to the wise',
    ds:['Ones that have been demonstrated and cannot be otherwise','Ones that are known to be false','Ones invented for the sake of the argument'],
    why:'This is the definition Aristotle gives and St Thomas repeats. The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
   {tier:1, q:'What does dialectic reach, at its best?',
    correct:'A reasoned opinion, well supported but not proved',
    ds:['Certain knowledge of the cause','A persuasive speech','A story that makes sense of the facts'],
-   why:'Demonstration reaches science; dialectic reaches opinion held for good reasons. Knowing which one you are doing keeps you honest about how much you have shown.'},
+   why:'Demonstration reaches science; dialectic reaches opinion held for good reasons. Knowing which of the two we are doing keeps us honest about how much we have shown.'},
   {tier:1, q:'Logic divides into two arts. What are they?',
    correct:'The art of finding an argument, and the art of judging one',
    ds:['The art of speaking, and the art of writing','The art of defining, and the art of dividing','The art of the true, and the art of the probable'],
@@ -3811,43 +3811,43 @@ const DIAL_DOCTRINE = [
   {tier:2, q:'What is the maxim (maxima propositio) of a topic?',
    correct:'The governing rule an argument drawn from that place depends on',
    ds:['The strongest argument that can be drawn from it','The name of the topic in Latin','The conclusion the argument reaches'],
-   why:'From the wider kind, the maxim is: whatever belongs to the whole family belongs to each kind within it. When the maxim is true the argument holds. A fallacy depends on a maxim that is false and looks true — the same machinery backwards.'},
+   why:'From the wider kind, for example, the maxim is that whatever belongs to the whole family belongs to each kind within it. When the maxim is true the argument holds. A fallacy depends on a maxim that is false and looks true, so it works in the same way, only backwards.'},
   {tier:1, q:'What is a topic (locus) in dialectic?',
    correct:'A standing relation an argument may be drawn from, such as genus to species',
    ds:['A subject that is being argued about','A place in a book where the argument is found','The conclusion an argument aims at'],
-   why:'A topic is the place an argument is drawn from: the definition, the wider kind, opposites, the cause, and so on. Its first use is finding — given something to show, it tells you where to look.'},
+   why:'A topic is the place from which an argument is drawn: the definition, the wider kind, opposites, the cause, and so on. Its first use is finding, since, given something to show, it indicates where to look.'},
   {tier:2, q:'Two people are disputing. Who are the two parties called?',
    correct:'The one who puts the case and the one who answers',
    ds:['The teacher and the learner','The speaker and the audience','The judge and the witness'],
-   why:'St Thomas: a disputation turns between the opponens and the respondens. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
+   why:'St Thomas says that a disputation takes place between the opponens and the respondens. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
   {tier:2, q:'Why is the argument from authority called the weakest of the topics?',
    correct:'Because it gives no reason drawn from the thing itself, only the judgement of those who know',
    ds:['Because authorities are usually wrong','Because it is not a topic at all','Because only the ignorant use it'],
-   why:'It is genuinely a topic and genuinely probable — but it moves us by who says a thing rather than by what makes it so. Hence weakest, and hence not nothing.'},
+   why:'It is genuinely a topic and genuinely probable, but it moves us by who says a thing rather than by what makes it so. Hence it is the weakest, though not worthless.'},
   {tier:2, q:'What is the distinguo?',
    correct:'Answering by dividing a term into the sense in which the claim is true and the sense in which it is false',
    ds:['Refusing to answer until the terms are defined','Proving the opposite of what was claimed','Asking a question in reply to a question'],
-   why:'It is the characteristic move of the disputed question, and it is not a dodge: most objections that look decisive turn on a word doing two jobs at once.'},
+   why:'It is the characteristic move of the disputed question, and it is not an evasion, since most objections that look decisive turn on a word used in two senses at once.'},
   {tier:3, q:'How does dialectic differ from a testing disputation?',
    correct:'Dialectic argues toward the better view; testing only finds out whether a man knows',
    ds:['They are two names for the same thing','Dialectic uses syllogisms and testing does not','Testing reaches certainty and dialectic does not'],
    why:'A testing disputation works from what seems true to the respondent, and aims at taking his measure. It need not care which view is better.'},
-  {tier:3, q:'A premise is granted by the learned but not by most people. May you use it?',
-   correct:'Yes — it is probable in the required sense, but you should expect to defend it',
-   ds:['No — only what everyone grants may be used','Yes, and no defence of it is needed','Only if you can also demonstrate it'],
-   why:'Aristotle’s definition of the probable includes what seems so to the wise. What it does not do is excuse you from defending it when the many disagree.'},
+  {tier:3, q:'A premise is granted by the learned but not by most people. May it be used?',
+   correct:'Yes, since it is probable in the required sense, though it should be expected to need defence',
+   ds:['No, since only what everyone grants may be used','Yes, and since it is probable no defence of it is needed','Only if it can also be demonstrated'],
+   why:'Aristotle’s definition of the probable includes what seems so to the wise. But it does not excuse the one who uses such a premise from defending it when the many disagree.'},
   {tier:3, q:'Why does the tradition place dialectic between rhetoric and demonstration?',
    correct:'Because it has more than persuasion and less than proof',
    ds:['Because it is easier than rhetoric and harder than demonstration','Because it came later in history','Because it uses fewer premises'],
-   why:'Rhetoric inclines us where evidence is nearly even; dialectic reaches what is probable; demonstration proves through the cause. The three are stages of one inquiry ripening.'},
+   why:'Rhetoric inclines us where evidence is nearly even; dialectic reaches what is probable; demonstration proves through the cause. The three are stages of one inquiry as it matures.'},
   {tier:5, q:'An objection is granted in every premise, and the conclusion still does not follow. What has gone wrong with it?',
-   correct:'Its form — the matter is sound but the inference is not',
-   ds:['Its matter — one premise must be false after all','Its terms — a word must be ambiguous','Nothing: if the premises are granted the conclusion follows'],
-   why:'This is the third of the four answers: concede everything and deny the consequence. It is the answer to give whenever an objection is true in every part and still proves nothing.'},
+   correct:'Its form, since the matter is sound but the inference is not',
+   ds:['Its matter, since one premise must be false after all','Its terms, since a word must be ambiguous','Nothing, since if the premises are granted the conclusion follows'],
+   why:'This is the third of the four answers: to concede everything and deny the consequence. It is the right answer whenever an objection is true in every part and still proves nothing.'},
   {tier:5, q:'What does it mean to say the probable is what seems so “to the wise, and among the wise to the most eminent”?',
    correct:'That the standing of a premise rises with the standing of those who grant it',
    ds:['That only the wise may take part in a disputation','That the wise are always right','That a premise is probable only if all the wise agree'],
-   why:'St Thomas gives the qualification carefully. Not every opinion of every man is probable; but neither does dialectic need everyone to agree.'}
+   why:'St Thomas gives the qualification carefully. Not every opinion of every man is probable, but neither does dialectic need everyone to agree.'}
 ];
 function genDialDoctrineQ(d){
   const tiers = defTiers(d);
@@ -4019,7 +4019,7 @@ function formatQuizItem(q){
 
   if(q.kind==='modal'){
     if(q.sub==='equip'){
-      out.instr = 'Are these two expressions equipollent — equal in force, the same corner of the square?';
+      out.instr = 'Are these two expressions equipollent, that is, equal in force and in the same corner of the square?';
       out.stemHtml = `<div class="qprompt">“${q.t1}.”<br><em>and</em><br>“${q.t2}.”</div>`;
       out.choices = [{letter:'a', text:'Equipollent'},{letter:'b', text:'Not equipollent'}];
       out.answerText = q.valid ? '(a) Equipollent' : '(b) Not equipollent';
