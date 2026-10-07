@@ -2526,7 +2526,7 @@ const PRED_ITEMS = {
     {tier:2, subj:'triangle', t:'A triangle is a figure', w:'Figure is the genus, the wider kind under which the triangle falls.'},
     {tier:2, subj:'hammer', t:'A hammer is a tool', w:'Tool is the genus, the wider kind under which the hammer falls.'},
     {tier:3, subj:'bee', t:'A bee is an insect', w:'Insect is the genus, said of the bee as its wider kind.'},
-    {tier:3, subj:'oak', t:'An oak is a living thing', w:'This is a remote genus: an oak is a tree, a tree a plant, a plant a living thing. The genus need not be the nearest one (the tree of Porphyry).'},
+    {tier:3, subj:'oak', t:'An oak is a living thing', w:'Living thing is a remote genus of the oak, since an oak is a tree, a tree a plant, a plant a living thing. The genus need not be the nearest one (the tree of Porphyry).'},
     {tier:5, subj:'white', t:'White is a colour', w:'Colour is the genus, said of white as its wider kind.'}
   ],
   spec: [
@@ -2537,7 +2537,7 @@ const PRED_ITEMS = {
     {tier:2, subj:'daisy', t:'This flower is a daisy', w:'Daisy is the species, said of the single flower that falls under it.'},
     {tier:2, subj:'oak', t:'This tree is an oak', w:'Oak is the species, said of the single tree that falls under it.'},
     {tier:3, subj:'Plato', t:'Plato is a man', w:'Man is the species, said of the individual Plato.'},
-    {tier:5, subj:'sheep', t:'This animal is a sheep', w:'It is the lowest species, said of the individual that falls under it.'}
+    {tier:5, subj:'sheep', t:'This animal is a sheep', w:'Sheep is the lowest species, said of the individual that falls under it.'}
   ],
   diff: [
     {tier:1, subj:'man', t:'Man is rational', nosort:true, w:'Being able to reason is the difference that divides animal and makes man (Porphyry; the tree).'},
@@ -2550,9 +2550,9 @@ const PRED_ITEMS = {
   ],
   prop: [
     {tier:1, subj:'man', t:'Man is able to laugh', w:'The power to laugh belongs to man alone, to every man, and always; it follows from reason yet is no part of what a man is (the classic property).'},
-    {tier:2, subj:'man13', t:'Man is able to learn grammar', w:'This is Aristotle’s own example of a property (Topics I.5): it belongs to man alone, to every man, and always, and it swaps, for whatever can learn grammar is a man.'},
-    {tier:2, subj:'triangle', t:'A triangle has its angles equal to two right angles', w:'It is a property, since it follows from what a triangle is and always goes with it, yet is not what a triangle is (Aristotle’s model of a per se accident).'},
-    {tier:3, subj:'square', t:'A square’s diagonals are equal and cut each other in half at right angles', w:'It follows from what a square is, holds of every square and of no other four-sided figure, yet it is not what a square is.'},
+    {tier:2, subj:'man13', t:'Man is able to learn grammar', w:'Being able to learn grammar is Aristotle’s own example of a property (Topics I.5): it belongs to man alone, to every man, and always, and it swaps, for whatever can learn grammar is a man.'},
+    {tier:2, subj:'triangle', t:'A triangle has its angles equal to two right angles', w:'Having angles equal to two right angles is a property, since it follows from what a triangle is and always goes with it, yet is not what a triangle is (Aristotle’s model of a per se accident).'},
+    {tier:3, subj:'square', t:'A square’s diagonals are equal and cut each other in half at right angles', w:'Having such diagonals follows from what a square is, holds of every square and of no other four-sided figure, yet it is not what a square is.'},
     {tier:5, subj:'oak', t:'An oak is able to bear acorns', w:'The power to bear acorns belongs to oaks alone and to every oak, always. A sapling bears none yet, but it has the power. It follows from what an oak is, yet is not what an oak is.'}
   ],
   acc: [
@@ -2566,9 +2566,9 @@ const PRED_ITEMS = {
     {tier:1, subj:'coin', t:'This coin is old', w:'The coin has grown old with use, yet a new coin and an old one are equally coins.'},
     {tier:1, subj:'sky', t:'The sky is cloudy', w:'Cloudiness is a passing accident of the sky today.'},
     {tier:1, subj:'field', t:'The field lies fallow', w:'Lying fallow is a passing state of the field, no part of what a field is.'},
-    {tier:2, subj:'raven', t:'A raven is black', w:'This is an inseparable accident: blackness never leaves the raven, yet being a raven does not consist in being black (Porphyry).'},
+    {tier:2, subj:'raven', t:'A raven is black', w:'Blackness is an inseparable accident: it never leaves the raven, yet being a raven does not consist in being black (Porphyry).'},
     {tier:2, subj:'man9', t:'This man is sitting', w:'Sitting is a separable accident that comes and goes while the man stays the same (Porphyry).'},
-    {tier:2, subj:'man10', t:'This man is musical', w:'This is Aristotle’s stock accident: the same man may be musical or not, and be the same man either way.'},
+    {tier:2, subj:'man10', t:'This man is musical', w:'Being musical is Aristotle’s stock accident: the same man may be musical or not, and be the same man either way.'},
     {tier:2, subj:'swan', t:'This swan is white', w:'Whiteness is in this swan but is no part of what a swan is. Not every swan is white, and white is said of many other things.'},
     {tier:2, subj:'man14', t:'This man is laughing', w:'Laughing comes and goes; the power to laugh is the property, and the act is an accident (Porphyry).'},
     {tier:2, subj:'boy2', t:'This boy knows grammar', w:'Knowing grammar is gained and can be lost; being able to learn it is the property (Topics I.5).'},
@@ -2604,7 +2604,7 @@ function genPredIdentifyQ(d, forcedTarget){
   return mc4Make({ruleShow: d>=5 ? '' : PRED_DOCTRINE[target],
     options: optKinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `In “${chosen[target].t}”, the predicate gives the ${PRED_NAME[target]}. ${chosen[target].w} Of the others, ${glossOthers}.`,
+    why: `In “${chosen[target].t}”, ${lcProp(chosen[target].w)} Of the others, ${glossOthers}.`,
     rules: PRED_RULES,
     mcInstr: `In which of these does the predicate give the ${PRED_NAME[target].toUpperCase()} of the subject?`});
 }
@@ -2625,7 +2625,7 @@ const PRED_PRINCIPLES = [
    why:'In the tree of Porphyry a middle term is a genus to whatever lies below it and a species to whatever lies above it; only the topmost is always a genus, only the lowest always a species.'},
   {tier:1, once:'pred-count', q:'How many are the predicables, and who fixed their number for the tradition?',
    correct:'Five, as Porphyry sets them out in the Isagoge: genus, species, difference, property, accident',
-   ds:['Ten, as Aristotle sets them out in the Categories','Four, as the causes are four','Three, as the acts of the mind are three'],
+   ds:['Ten, as the categories are ten','Four, as the causes are four','Three, as the acts of the mind are three'],
    why:'Porphyry’s Isagoge, the classic introduction to Aristotle’s Categories, sets out the five predicables.'},
   {tier:2, q:'The difference (differentia) answers which question about a thing?',
    correct:'“What sort of thing is it?” in its very nature (quale quid)',
