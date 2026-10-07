@@ -1061,7 +1061,7 @@ function mistakeNoteValidity(q, mode){
   if(isPart(q.mood[2]) && !isPart(q.mood[0]) && !isPart(q.mood[1]))
     return 'This is a very common hesitation. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply; but the scholastic account grants every term existential import, so the weakened conclusion follows.';
   if(q.fig===4)
-    return 'Fourth-figure syllogisms run against the natural flow of predication, so even valid ones feel wrong. Read slowly and tested against the rules, these premises break none of them.';
+    return 'Fourth-figure syllogisms run against the natural flow of predication, so even valid ones feel wrong. But if the premises are read slowly and the syllogism is tested against the rules, it breaks none of them.';
   if(mode!=='letters')
     return 'The likeliest cause of the error is that the premises are implausible, and falsity feels like fallacy. But validity concerns form alone: if the premises are granted, however absurd, the question is what must follow.';
   return 'This form keeps every rule: the middle is distributed once, no term is distributed in the conclusion alone, and negatives and particulars are balanced.';
@@ -2115,7 +2115,7 @@ function genDefKindQ(d){
   return mc4Make({ruleShow: d>=5 ? '' : DEF_KIND_DOCTRINE[target],
     options: kinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `“${chosen[target].t}”. ${chosen[target].w} Of the others, ${others}.`,
+    why: `“${chosen[target].t}” is ${art(DEF_KIND_NAME[target])} ${DEF_KIND_NAME[target]} definition. ${chosen[target].w} Of the others, ${others}.`,
     rules: 'The four kinds: nominal (what the name means), essential (nearest kind and difference), descriptive (a property or telltale feature), causal (through one of its causes).',
     mcInstr: `Which of these is ${art(DEF_KIND_NAME[target])} ${DEF_KIND_NAME[target].toUpperCase()} definition?`});
 }
@@ -2444,7 +2444,7 @@ function genDivKindQ(d){
   return mc4Make({ruleShow: rShow,
     options: kinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `“${chosen[target].t}”. ${chosen[target].w} Of the others, ${others}.`,
+    why: `“${chosen[target].t}” is ${DIVKIND_LABEL[target].toLowerCase()}. ${chosen[target].w} Of the others, ${others}.`,
     rules: 'The kinds of division: essential (a general kind into the kinds beneath it), integral (a whole into the parts that make it up), by powers (one thing according to what it can do), accidental (a subject sorted by features it can gain or lose).',
     mcInstr: `Which of these is ${DIVKIND_LABEL[target]}?`});
 }
@@ -2604,7 +2604,7 @@ function genPredIdentifyQ(d, forcedTarget){
   return mc4Make({ruleShow: d>=5 ? '' : PRED_DOCTRINE[target],
     options: optKinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
-    why: `“${chosen[target].t}”. ${chosen[target].w} Of the others, ${glossOthers}.`,
+    why: `In “${chosen[target].t}”, the predicate gives the ${PRED_NAME[target]}. ${chosen[target].w} Of the others, ${glossOthers}.`,
     rules: PRED_RULES,
     mcInstr: `In which of these does the predicate give the ${PRED_NAME[target].toUpperCase()} of the subject?`});
 }
@@ -2624,8 +2624,8 @@ const PRED_PRINCIPLES = [
    ds:['A genus only, never a species','A species only, never a genus','Neither: it is an individual'],
    why:'In the tree of Porphyry a middle term is a genus to whatever lies below it and a species to whatever lies above it; only the topmost is always a genus, only the lowest always a species.'},
   {tier:1, once:'pred-count', q:'How many are the predicables, and who fixed their number for the tradition?',
-   correct:'Five, fixed by Porphyry in the Isagoge: genus, species, difference, property, accident',
-   ds:['Ten, fixed by Aristotle in the Categories','Four, fixed by the four causes','Three, fixed by the acts of the mind'],
+   correct:'Five, as Porphyry sets them out in the Isagoge: genus, species, difference, property, accident',
+   ds:['Ten, as Aristotle sets them out in the Categories','Four, as the causes are four','Three, as the acts of the mind are three'],
    why:'Porphyry’s Isagoge, the classic introduction to Aristotle’s Categories, sets out the five predicables.'},
   {tier:2, q:'The difference (differentia) answers which question about a thing?',
    correct:'“What sort of thing is it?” in its very nature (quale quid)',
@@ -2863,7 +2863,7 @@ const CAT_PRINCIPLES = [
    why:'Substance alone exists in its own right; the nine other categories are accidents, which exist only in a substance (Categories 5; Metaphysics VII).'},
   {tier:1, once:'cat-count', q:'How many are the categories, and who set them out?',
    correct:'Ten, set out by Aristotle in the Categories',
-   ds:['Five, set out by Porphyry in the Isagoge','Four, set out as the four causes','Three, set out as the acts of the mind'],
+   ds:['Five, set out by Porphyry in the Isagoge','Four, as the causes are four','Three, as the acts of the mind are three'],
    why:'Aristotle’s Categories names ten: substance, quantity, quality, relation, action, passion, when, where, position, and habit.'},
   {tier:1, q:'Which of these does NOT signify a substance?',
    correct:'white',
@@ -2902,7 +2902,7 @@ const CAT_PRINCIPLES = [
    ds:['The place in which a thing is found','What a thing has on it, such as shoes or armour','The time at which a thing acts or is acted on'],
    why:'Posture (situs) differs from where (the place itself) and from habit, since it is the arrangement of the parts, as in lying, sitting, or standing (Metaphysics V, lect. 9).'},
   {tier:3, q:'How do the ten categories differ from the five predicables?',
-   correct:'The categories sort things as we first know them (first intentions); the predicables are relations they have only because they are known (second intentions)',
+   correct:'The categories sort what things are, as we first know them (first intentions); the predicables are relations those things have only because they are known (second intentions)',
    ds:['The categories are in the mind alone, the predicables in things apart from knowledge','They are two names for the same ten kinds, sorted the same way','The predicables concern bodies, the categories spirits, so the two never meet'],
    why:'A first intention is a reality as known, not a thing apart from knowledge. A second intention is a relation things have only because they are known, though grounded in what the things are.'},
   {tier:3, q:'To which category does “knowledge,” taken as a stable state of the soul, belong?',
@@ -3221,7 +3221,7 @@ function genFalMetaQ(d){
   const others = sample(keys,3).map(k=>META_KINDS[k].name);
   return mc4Make({prompt:it.t, options:[META_KINDS[it.k].name].concat(others),
     correct: META_KINDS[it.k].name,
-    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. St Thomas names five such positions: to contradict yourself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
+    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. St Thomas names five such positions: to contradict himself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
     why: `${META_KINDS[it.k].name} means that ${META_KINDS[it.k].gloss} Here, ${it.w}`,
     rules: FAL_RULES, mcInstr:'Where is the sophist trying to drive the respondent?'});
 }
@@ -3702,7 +3702,7 @@ const ENDOX = {
   all:{short:'Granted by everyone', name:'Granted by everyone, so that it may simply be assumed',
        gloss:'probable in the fullest sense, since it seems so to all, and an opponent who denied it would be thought perverse.'},
   wise:{short:'Granted by the learned', name:'Granted by the learned, though not by everyone',
-       gloss:'still probable, and still usable, but it must be expected to need defence, since the many do not hold it.'},
+       gloss:'still probable, and still usable, but whoever uses it should expect to defend it, since the many do not hold it.'},
   one:{short:'One person’s opinion', name:'One person’s opinion, and so not yet something that may be assumed',
        gloss:'perhaps true, but not yet probable in the required sense, and an opponent may refuse it without shame.'}
 };
@@ -3833,7 +3833,7 @@ const DIAL_DOCTRINE = [
    ds:['They are two names for the same thing','Dialectic uses syllogisms and testing does not','Testing reaches certainty and dialectic does not'],
    why:'A testing disputation works from what seems true to the respondent, and aims at taking his measure. It need not care which view is better.'},
   {tier:3, q:'A premise is granted by the learned but not by most people. May it be used?',
-   correct:'Yes, since it is probable in the required sense, though it should be expected to need defence',
+   correct:'Yes, since it is probable in the required sense; but whoever uses it should expect to defend it',
    ds:['No, since only what everyone grants may be used','Yes, and since it is probable no defence of it is needed','Only if it can also be demonstrated'],
    why:'Aristotle’s definition of the probable includes what seems so to the wise. But it does not excuse the one who uses such a premise from defending it when the many disagree.'},
   {tier:3, q:'Why does the tradition place dialectic between rhetoric and demonstration?',
