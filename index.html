@@ -2853,7 +2853,7 @@ if(typeof document!=='undefined'){
     detail += `<div class="fb-venn">${svgVenn(V2, labels, marks.shaded, marks.xs)}
       <div class="venn-cap">${q.expected
         ? `“${eTxt}” pictured on the original circles; a complement is simply the region outside its circle.`
-        : 'The original proposition, of which nothing survives the operation.'}</div></div>`;
+        : 'The original proposition; the operation yields no proposition from it.'}</div></div>`;
     fbHTML(res.correct, pts, detail);
     finishOrNext();
   }
@@ -2940,9 +2940,9 @@ if(typeof document!=='undefined'){
     detail += q.valid
       ? `The form is <em>${q.name}</em> (${q.mood}-${q.fig}).`
       : (q.viols[0]||'');
-    if(q.answer==='sound') detail += ' True premises in a valid form: the conclusion is thereby proved.';
+    if(q.answer==='sound') detail += ' The premises are true and the form is valid, so the conclusion is proved.';
     if(q.answer==='unsound') detail += ' A valid form proves nothing from false matter.';
-    if(q.answer==='invalid' && q.premisesTrue) detail += ' Even true premises cannot rescue a broken form.';
+    if(q.answer==='invalid' && q.premisesTrue) detail += ' Even true premises cannot make an invalid form valid.';
     const pl = ['Major premise','Minor premise'].map((lbl,i)=>{
       const tp = premiseTerms(q.fig, i, q.roles);
       return `${lbl}, “${q.lines[i]}” — ${q.truths[i] ? 'true'
@@ -3006,7 +3006,7 @@ if(typeof document!=='undefined'){
     if(q.valid){
       cap = diag.importTerm
         ? `With the existential import of “${termLabel(q.roles[diag.importTerm])}” (⊗), the premises contain the conclusion: ${concl}.`
-        : `Diagramming the premises already contains the conclusion: ${concl}.`;
+        : `The diagram of the premises already contains the conclusion: ${concl}.`;
     } else {
       const tc = q.mood[2];
       const where = (tc==='E'||tc==='I')
@@ -3140,12 +3140,12 @@ if(typeof document!=='undefined'){
     } else if(q.valid){
       detail = `<strong>Valid</strong>: <em>${b.name}</em> (${b.mood}-${b.fig}), and the conclusion keeps to the weaker mode (${MOD_NAME[q.stated]}), as the rule requires.`;
     } else {
-      detail = `<strong>Invalid</strong>, though the form itself is sound (<em>${b.name}</em>), but the conclusion claims the <strong>${MOD_NAME[q.stated]}</strong> mode where the premises warrant only the <strong>${MOD_NAME[b.answer]}</strong>: peiorem sequitur semper conclusio partem.`;
+      detail = `<strong>Invalid</strong>. The form itself is valid (<em>${b.name}</em>), but the conclusion claims the <strong>${MOD_NAME[q.stated]}</strong> mode where the premises warrant only the <strong>${MOD_NAME[b.answer]}</strong>: peiorem sequitur semper conclusio partem.`;
     }
     if(!ok){
       const why = !b.valid ? mistakeNoteValidity(b, 'english')
         : !q.valid ? 'The modal language hides the flaw. Reducing the argument to its form and then checking the modes shows it, since a conclusion can never be stronger in mode than the weaker premise.'
-        : 'Modal language makes sound arguments feel doubtful. Reduced to its form and tested, with the rule of the weaker part applied, this argument proves to be in order.';
+        : 'Modal language makes valid arguments seem doubtful. When it is reduced to its form and tested, with the rule of the weaker part applied, this argument proves to be in order.';
       detail += `<div class="fb-why">${why}</div>`;
     }
     detail += `<div class="fb-standard"><em>In standard form:</em><br>
@@ -3171,11 +3171,11 @@ if(typeof document!=='undefined'){
     let detail;
     if(q.none){
       detail = res.correct
-        ? 'That is right: <strong>no premise can complete this argument validly</strong>, since the conclusion outruns any possible help from the remaining term.'
-        : 'In fact <strong>nothing can complete it</strong>: no arrangement of the middle with the orphaned term yields a valid mood for that conclusion.';
+        ? 'That is right: <strong>no premise can complete this argument validly</strong>, since the conclusion claims more than any premise built from the remaining term could support.'
+        : 'In fact <strong>nothing can complete it</strong>: no arrangement of the middle term with the conclusion’s term that is missing from the given premise yields a valid mood for that conclusion.';
     } else {
       const best = res.hit || q.accepted[0];
-      detail = `The tacit premise: <strong>${best.text}</strong>, completing <em>${best.name}</em> (${best.mood}-${best.fig}). A ${q.order}-order enthymeme: the ${q.missingRole} lay hidden.`;
+      detail = `The tacit premise is <strong>${best.text}</strong>, which completes <em>${best.name}</em> (${best.mood}-${best.fig}). This is a ${q.order}-order enthymeme, in which the ${q.missingRole} lay hidden.`;
       if(q.accepted.length>1){
         const alts = q.accepted.filter(a=>a!==best).map(a=>`“${a.text}” <em>(${a.name})</em>`).join('&ensp;·&ensp;');
         detail += ` Also accepted: ${alts}.`;
@@ -3216,7 +3216,7 @@ if(typeof document!=='undefined'){
       ? (q.expectedProp ? pPropText(q.expectedProp) : null)
       : (q.expected ? hcCompText(q, q.expected) : null);
     let detail = conclTxt
-      ? `What follows: <strong>${conclTxt}</strong>${(q.style==='prop'&&q.statedDenied)?' (the denial of the other component, asserted as its contradictory)':''}: <em>${info.name}</em>. ${info.why}`
+      ? `What follows is “<strong>${conclTxt}</strong>”${(q.style==='prop'&&q.statedDenied)?' (the denial of the other component, asserted as its contradictory)':''}, by the mood <em>${info.name}</em>. ${info.why}`
       : `<strong>Nothing follows</strong>: <em>${info.name}</em>. ${info.why}`;
     if(!res.correct) detail += `<div class="fb-why">${hypcMistake(q, res)}</div>`;
     fbHTML(res.correct, pts, detail);
@@ -3274,10 +3274,10 @@ if(typeof document!=='undefined'){
     const pts = applyScore(ok);
     let detail;
     if(!q.valid){
-      detail = `The form is <strong>invalid</strong> (${q.mood}-${q.fig}). ${q.viols[0]||''} No mode can rescue a broken form, so <strong>nothing follows</strong>.`;
+      detail = `The form is <strong>invalid</strong> (${q.mood}-${q.fig}). ${q.viols[0]||''} No mode can make an invalid form valid, so <strong>nothing follows</strong>.`;
     } else {
       const conclSent = q.answer==='assert' ? q.concl : MOD_PRE[q.answer].toLowerCase()+decap(q.concl);
-      detail = `The form is valid — <em>${q.name}</em> (${q.mood}-${q.fig}). The premises stand in the ${MOD_NAME[q.mods[0]]} and the ${MOD_NAME[q.mods[1]]} mode; by the received rule (<em>peiorem sequitur semper conclusio partem</em>) the conclusion follows in the <strong>${MOD_NAME[q.answer]}</strong> mode: ${conclSent}.`;
+      detail = `The form is valid: <em>${q.name}</em> (${q.mood}-${q.fig}). The premises stand in the ${MOD_NAME[q.mods[0]]} and the ${MOD_NAME[q.mods[1]]} mode; by the received rule (<em>peiorem sequitur semper conclusio partem</em>) the conclusion follows in the <strong>${MOD_NAME[q.answer]}</strong> mode: ${conclSent}.`;
     }
     if(!ok) detail += `<div class="fb-why">${modalSyllMistake(q, choice)}</div>`;
     detail += diagramBlock(q);
@@ -3311,7 +3311,7 @@ if(typeof document!=='undefined'){
     const pts = applyScore(ok);
     let detail = q.valid
       ? `The chain is <strong>valid</strong>: every one of its ${q.k} links is a valid syllogism, so the reasoning holds from first premise to last conclusion.`
-      : `The chain is <strong>invalid</strong>. Link ${q.badIdx+1} does not hold, since its stated conclusion does not follow from the two propositions above it, and one broken link breaks the whole chain.`;
+      : `The chain is <strong>invalid</strong>. Link ${q.badIdx+1} does not hold, since its stated conclusion does not follow from the two propositions above it, and one invalid link makes the whole chain invalid.`;
     fbHTML(ok, pts, detail);
     finishOrNext();
   }
@@ -3366,7 +3366,7 @@ if(typeof document!=='undefined'){
       const best = res.hit || q.accepted[0];
       const alts = q.accepted.map(a=>`“${a.text}” <em>(${a.name})</em>`).join('&ensp;·&ensp;');
       detail = res.correct
-        ? `“${cap(best.text)}” follows — <em>${best.name}</em>. Accepted answers: ${alts}.`
+        ? `“${cap(best.text)}” follows; the mood is <em>${best.name}</em>. Accepted answers: ${alts}.`
         : `The conclusion that follows: <strong>${cap(q.accepted[0].text)}</strong> <em>(${q.accepted[0].name})</em>.` +
           (q.accepted.length>1 ? ` Also accepted: ${alts}.` : '');
     }
@@ -4026,7 +4026,7 @@ if(typeof document!=='undefined'){
     blk.style.display = 'block';
     if(!ms.length){
       head.textContent = 'Errors to review';
-      list.innerHTML = '<div class="mistake-none">Not one error. Nothing to review.</div>';
+      list.innerHTML = '<div class="mistake-none">There were no errors, so there is nothing to review.</div>';
       return;
     }
     head.textContent = ms.length===1 ? 'The one error to review' : `The ${ms.length} errors to review`;
@@ -4054,7 +4054,7 @@ if(typeof document!=='undefined'){
     $('done-suggest').style.display = suggest ? 'block' : 'none';
     $('btn-english').style.display = suggest ? 'inline-block' : 'none';
     if(suggest) $('done-suggest').textContent =
-      'Well done. Now attempt the same exercise in English terms — the harder dress, where the matter tempts the judgment.';
+      'Well done. Now attempt the same exercise in English terms, which is harder, because the matter of the terms can sway the judgment.';
     renderMistakes();
     show('scr-done');
   }
