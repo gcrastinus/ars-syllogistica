@@ -650,8 +650,8 @@ function vennMistake(q, user){
   for(const r of regs){
     if(q.correct[r]!=='none' && user[r]!=='none' && user[r]!==q.correct[r])
       return q.correct[r]==='shade'
-        ? 'The region is right but the mark is wrong. A universal proposition declares a region <em>empty</em>, and that is shown by shading. Students often feel that a universal must “put something” into the diagram, but a universal only takes away; it asserts no existence.'
-        : 'The region is right but the mark is wrong. “Some” asserts that something <em>exists</em>, and that is shown by the ×. Shading would declare the region empty, the very opposite of what is said. The urge to shade comes from treating every proposition as a claim about a whole region.';
+        ? 'The region is right but the mark is wrong. A universal proposition declares a region <em>empty</em>, and that is shown by shading. Students often think that a universal must add a mark of existence to the diagram, but a universal only declares a region empty; it asserts no existence.'
+        : 'The region is right but the mark is wrong. “Some” asserts that something <em>exists</em>, and that is shown by the ×. Shading would declare the region empty, the very opposite of what is said. Shading here usually comes from treating every proposition as a claim about a whole region.';
   }
   if(regs.some(r=>user[r]!=='none') && regs.every(r=>user[r]===q.correct[mirror[r]]))
     return 'This diagram shows the converse, in which subject and predicate have changed places. “All S are P” empties the part of S <em>outside</em> P (not the part of P outside S), and “Some S are not P” marks S outside P. A and O propositions do not convert, so the direction matters; this is the most common slip.';
@@ -662,7 +662,7 @@ function vennMistake(q, user){
   if(q.type==='I' && user.AB==='none')
     return 'The × for “Some S are P” belongs in the <em>overlap</em>, since the proposition asserts a common member. It is tempting to mark the subject’s own crescent because the sentence begins with S, but the claim concerns what S and P share.';
   if(q.type==='O' && user.AB!=='none')
-    return '“Some S are not P” locates its witness in S <em>outside</em> P. Students often mark the overlap because both terms are mentioned, but the proposition asserts distance from P, not fellowship with it.';
+    return '“Some S are not P” locates its witness in S <em>outside</em> P. Students often mark the overlap because both terms are mentioned, but the proposition places some S outside P, not inside it.';
   return 'The first question is whether the proposition <em>empties</em> a region (shading it) or <em>populates</em> one (placing an ×). The second is which region it concerns: the subject’s crescent, or the overlap.';
 }
 
@@ -707,7 +707,7 @@ function vennMistake3(q, user){
         : 'The region is right but the mark is wrong: “some” asserts existence, and so calls for an ×. Shading would declare that very region empty, the opposite of what is said.';
   const imp = q.diag.xs.find(x=>x.kind==='import');
   if(imp && user[imp.regions[0]]!=='x')
-    return `The conclusion asserts existence that the universal premises do not yet witness. The traditional account grants existential import: place the × in the sole unshaded region of “${termLabel(q.roles[imp.term])}”. Missing this is the commonest slip here; on the modern reading the weakened moods fail for exactly this reason.`;
+    return `The conclusion asserts existence that the universal premises do not yet witness. The traditional account grants existential import, so the × goes in the only unshaded region of “${termLabel(q.roles[imp.term])}”. Missing this is the commonest slip here; on the modern reading the weakened moods fail for exactly this reason.`;
   const expX = REGIONS3.filter(r=>q.expect[r]==='x'), usrX = REGIONS3.filter(r=>user[r]==='x');
   if(expX.length && usrX.join()!==expX.join())
     return 'The placing of the × matters. The universal premises are shaded first, and the shading then decides which cell of the “some”-zone can still hold a witness. An × in a shaded cell asserts what was declared empty; an × on the wrong side of a circle asserts a membership never claimed.';
@@ -716,7 +716,7 @@ function vennMistake3(q, user){
     return 'There is too much shading. Only what the universal premises declare empty should be shaded, which is a lens of two cells for each. Students often shade the conclusion as well, but its content should appear of itself once the premises are pictured.';
   if(usrS<expS)
     return 'Each universal premise empties a full lens of <em>two</em> cells, one inside the third circle and one outside it. Half-shading usually comes from forgetting that the zone continues into the third circle.';
-  return 'The universals come first: shading what they empty leaves each × only one possible cell.';
+  return 'We diagram the universal premises first, because once we shade what they declare empty, each × has only one possible cell.';
 }
 
 /* ================================================================
@@ -1036,9 +1036,9 @@ function mistakeNoteSound(q, choice){
   if(q.answer!=='invalid' && choice==='invalid')
     return mistakeNoteValidity(q, 'english');
   if(q.answer==='invalid' && choice!=='invalid')
-    return (q.premisesTrue ? 'Every premise here is true, and true matter makes a form feel trustworthy; but no truth of matter can repair a broken form. ' : '') + mistakeNoteValidity(q, 'english');
+    return (q.premisesTrue ? 'Every premise here is true, and true premises make a form seem trustworthy; but no truth in the matter can make an invalid form valid. ' : '') + mistakeNoteValidity(q, 'english');
   if(q.answer==='unsound' && choice==='sound')
-    return 'The deduction is flawless, but an argument is only as strong as its matter, and a false premise hides easily inside a valid form. Students often stop once the form checks out, but each premise should also be tried against the definitions.';
+    return 'The deduction is valid, but an argument is only as strong as its matter, and a false premise is easy to miss in a valid form. Students often stop once they see that the form is valid, but each premise should also be tested against the definitions.';
   if(q.answer==='sound' && choice==='unsound')
     return 'Each premise here is true by the classical definitions, though one may have sounded doubtful (Euclid’s isosceles has two sides <em>alone</em> equal; no passion is a habit; the theological virtues observe no mean; and the oyster is an animal without sight). Surprising premises are tested against the definitions, not against first impressions.';
   return 'The form is judged first and then the matter: validity concerns what would follow, and soundness adds that the premises are in fact true.';
@@ -1048,33 +1048,33 @@ function mistakeNoteSound(q, choice){
 function mistakeNoteValidity(q, mode){
   if(!q.valid){ // student called it valid
     const v = q.viols[0]||'';
-    if(v.indexOf('Exclusive')===0) return 'Two negatives feel as though they position the terms against one another; in truth two denials sever every link and establish nothing at all.';
-    if(v.indexOf('Undistributed middle')===0) return 'This is the classic trap. Both extremes are related to the middle term, so they seem related to each other; but unless the middle is taken in its whole extension at least once, each premise may speak of a different part of it, and the extremes never meet.';
-    if(v.indexOf('Illicit major')===0) return 'The conclusion speaks of the major term in its whole extension, though the premise engaged only part of it. The sweeping sound of the premise hides the gap, so what the premise actually distributes needs checking.';
-    if(v.indexOf('Illicit minor')===0) return 'The conclusion generalizes over the whole minor term, though the premise covered only part of it. This slips by easily when the premise sounds universal.';
-    if(v.indexOf('A negative premise')===0) return 'A denial in the premises can never yield a joining in the conclusion. Students often let the affirmative-sounding terms carry them past the negative sign.';
-    if(v.indexOf('A negative conclusion')===0) return 'Two affirmations can only join terms. The separation asserted in the conclusion must come from somewhere, and no premise supplies it.';
-    if(v.indexOf('Two particular')===0) return 'Each “some” may pick out a different portion of the middle term, so the premises need never meet.';
+    if(v.indexOf('Exclusive')===0) return 'Two negative premises seem to relate the terms to one another; in fact two denials leave the extremes unconnected and establish nothing at all.';
+    if(v.indexOf('Undistributed middle')===0) return 'This is a classic error. Both extremes are related to the middle term, so they seem related to each other; but unless the middle is taken in its whole extension at least once, each premise may speak of a different part of it, and so the extremes are never connected.';
+    if(v.indexOf('Illicit major')===0) return 'The conclusion speaks of the major term in its whole extension, though the premise engaged only part of it. Because the premise sounds general, the gap is easy to miss, so we need to check what the premise actually distributes.';
+    if(v.indexOf('Illicit minor')===0) return 'The conclusion generalizes over the whole minor term, though the premise covered only part of it. The error is easy to miss when the premise sounds universal.';
+    if(v.indexOf('A negative premise')===0) return 'A negative premise can never yield an affirmative conclusion. Students often overlook the negative because the terms sound affirmative.';
+    if(v.indexOf('A negative conclusion')===0) return 'Two affirmative premises can only join terms. The conclusion separates its terms, and no premise supplies that separation.';
+    if(v.indexOf('Two particular')===0) return 'Each “some” may pick out a different part of the middle term, so the two premises may not speak of the same things at all.';
     return 'Tracing the distribution of each term shows that some rule of the syllogism is broken here.';
   }
   // student called a valid syllogism invalid
   if(isPart(q.mood[2]) && !isPart(q.mood[0]) && !isPart(q.mood[1]))
-    return 'This is a very common hesitation. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply; but the scholastic account grants every term existential import, so the weakened conclusion follows.';
+    return 'Many students hesitate here. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply; but the scholastic account grants every term existential import, so the weakened conclusion follows.';
   if(q.fig===4)
-    return 'Fourth-figure syllogisms run against the natural flow of predication, so even valid ones feel wrong. But if the premises are read slowly and the syllogism is tested against the rules, it breaks none of them.';
+    return 'Fourth-figure syllogisms reverse the natural order of predication, so even valid ones seem wrong. But if we read the premises slowly and test the syllogism against the rules, we find that it breaks none of them.';
   if(mode!=='letters')
-    return 'The likeliest cause of the error is that the premises are implausible, and falsity feels like fallacy. But validity concerns form alone: if the premises are granted, however absurd, the question is what must follow.';
+    return 'The likeliest cause of the error is that the premises are implausible, and a false premise is easily mistaken for a fallacy. But validity concerns form alone: if the premises are granted, however absurd, the question is what must follow.';
   return 'This form keeps every rule: the middle is distributed once, no term is distributed in the conclusion alone, and negatives and particulars are balanced.';
 }
 function mistakeNoteConclusion(q, parsed){
   if(parsed.none)
-    return 'Something does follow here, and the connection is easy to overlook, especially outside the first figure. Diagramming the premises and reading off what the shading forces will show it.';
+    return 'Something does follow here, and the connection is easy to overlook, especially outside the first figure. If we diagram the premises and read off what the shading requires, the conclusion appears.';
   if(q.none)
-    return 'It is natural to feel that two statements sharing a middle term must connect the extremes. But here the middle never does its work, and no valid mood fits these premises in any arrangement.';
+    return 'It is natural to feel that two statements sharing a middle term must connect the extremes. But here the middle term never connects the extremes, and no valid mood fits these premises in any arrangement.';
   const su = normTerm(parsed.s), pu = normTerm(parsed.p);
   const mid = termKey(q.roles.M);
   if(su===mid || pu===mid)
-    return 'The middle term never appears in the conclusion, since its whole office is to join the extremes and then withdraw.';
+    return 'The middle term never appears in the conclusion, since its whole office is to join the extremes in the premises.';
   if(q.accepted.some(a=>termKey(a.S)===su && termKey(a.P)===pu &&
       ((parsed.c==='A'&&a.c==='I')||(parsed.c==='E'&&a.c==='O'))))
     return 'This answer concludes universally where only a particular follows. The premises secure a part of the subject term, not the whole of it; overclaiming the quantity is the most common slip in this exercise.';
@@ -1083,7 +1083,7 @@ function mistakeNoteConclusion(q, parsed){
     return 'The order of the terms matters: A and O propositions do not convert simply, so a conclusion cannot merely be turned around. Only E and I convert term for term.';
   if(q.accepted.some(a=>termKey(a.S)===su && termKey(a.P)===pu && isNeg(a.c)!==isNeg(parsed.c)))
     return 'The quality matters: a negative premise demands a negative conclusion, and purely affirmative premises can only affirm. The negative signs should be counted before concluding.';
-  return 'The diagram settles it: once the universal premises are shaded and the particulars marked, we assert only what the premises force.';
+  return 'The diagram decides the question. Once the universal premises are shaded and the particulars marked, we assert only what the premises require.';
 }
 
 /* ================================================================
@@ -1206,7 +1206,7 @@ function immMarks(pr){
 function immMistakeOp(q, parsed){
   if(!q.expected)
     return q.op==='converse'
-      ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S; yet the habit of converting E and I carries many students along.'
+      ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S; yet many students convert it out of the habit of converting E and I.'
       : 'An I proposition has no contrapositive. Contraposition obverts, then converts, then obverts; but the obverse of I is an O, and an O does not convert, so the process cannot be completed.';
   if(parsed && parsed.none)
     return `This proposition does have a ${q.op}. Only O lacks a converse, and only I lacks a contrapositive.`;
@@ -1229,7 +1229,7 @@ function immMistakeOp(q, parsed){
         return 'The complements are right, but the terms must also change places: the contrapositive of “All S are P” is “All non-P are non-S.”';
     }
     if(q.op==='contradictory' && ((q.pr.t==='A'&&parsed.c==='E')||(q.pr.t==='E'&&parsed.c==='A')))
-      return 'That is the contrary, not the contradictory. Contradictories differ in both quantity and quality, so that A pairs with O, and E with I. Contraries can both be false; contradictories never agree.';
+      return 'That is the contrary, not the contradictory. Contradictories differ in both quantity and quality, so that A pairs with O, and E with I. Contraries can both be false; contradictories never have the same truth-value.';
     if(q.op==='contradictory' && ((q.pr.t==='I'&&parsed.c==='O')||(q.pr.t==='O'&&parsed.c==='I')))
       return 'That is the subcontrary. The contradictory of a particular is the universal of opposite quality: I pairs with E, O with A.';
   }
@@ -1251,7 +1251,7 @@ function immMistakeTruth(q, choice){
     return 'Falsity does not descend. A false universal leaves its particular entirely open, since truth descends and falsity ascends.';
   if(q.rel==='subalternUp' && q.given==='T')
     return 'Truth does not ascend. A true particular leaves its universal entirely open, since falsity ascends and truth descends.';
-  return 'Contradictories always disagree; that much is fixed. For the other relations, the question is what the square forbids, and whatever it does not forbid remains undetermined.';
+  return 'Contradictories always have opposite truth-values. For the other relations, the question is what the square forbids, and whatever it does not forbid remains undetermined.';
 }
 
 /* ================================================================
@@ -1296,21 +1296,21 @@ const HYP_INFO = {
   PP:{name:'ponendo ponens (modus ponens)',
       why:'To posit the antecedent is to posit the consequent, because the conditional binds them.'},
   TT:{name:'tollendo tollens (modus tollens)',
-      why:'To destroy the consequent is to destroy the antecedent, because no room remains for it.'},
+      why:'To destroy the consequent is to destroy the antecedent, because the antecedent cannot hold without the consequent.'},
   AC:{name:'the fallacy of affirming the consequent',
       why:'The consequent may hold on other grounds; positing it does not posit the antecedent.'},
   DA:{name:'the fallacy of denying the antecedent',
-      why:'The consequent was never made to depend on the antecedent alone; removing the antecedent leaves it free.'},
+      why:'The consequent was never made to depend on the antecedent alone, so removing the antecedent does not remove the consequent.'},
   PT:{name:'ponendo tollens',
       why:'The conjunctive forbids the two together, so to posit one member is to remove the other.'},
   TP:{name:'the fallacy of tollendo ponens',
-      why:'A conjunctive promises neither member; both may be absent together, so denying one posits nothing.'},
+      why:'A conjunctive asserts neither member; both may be absent together, so denying one posits nothing.'},
   PTS:{name:'ponendo tollens (strict disjunction)',
       why:'Marked “but not both”, the disjunction is strict: exactly one member holds, so to posit one is to remove the other.'},
   TPS:{name:'tollendo ponens (strict disjunction)',
       why:'Exactly one member must hold, so if one is removed the other stands.'},
   TPI:{name:'tollendo ponens',
-      why:'The disjunction pledges at least one member, so if one is removed the other cannot be refused.'},
+      why:'The disjunction asserts that at least one member holds, so if one is removed, the other must be granted.'},
   PTI:{name:'the fallacy of ponendo tollens (broad disjunction)',
       why:'A broad disjunction permits both members together; positing one removes nothing.'}
 };
@@ -1461,15 +1461,15 @@ function hypMistake(q, saidValid){
   const k = hypMoodKey(q);
   if(!q.valid){
     if(k==='AC') return 'Perhaps the conditional was read backwards, as though “if B, then C” also said “if C, then B”. The consequent can be true from other causes, and so the diagram leaves the subject two possible regions.';
-    if(k==='DA') return '“If B, then C” does not say “only if B, C”. Removing the antecedent leaves the consequent standing free; this is the classic mirror-image of modus tollens.';
+    if(k==='DA') return '“If B, then C” does not say “only if B, C”. Removing the antecedent does not remove the consequent; this error is the reverse of modus tollens.';
     if(k==='PTI') return 'The marker matters: this “or” is the broad one, so the members may stand together and positing one removes nothing. Only the strict “either–or, but not both” licenses ponendo tollens.';
-    return 'It is tempting to hear the conjunctive as a disjunctive, as though one of the two must hold. But “not both” promises neither, and both members may fail together.';
+    return 'It is tempting to read the conjunctive as a disjunctive, as though one of the two must hold. But “not both” asserts neither, and both members may fail together.';
   }
-  if(k==='PP') return 'The bond of the conditional is exactly this: if the antecedent is granted, the consequent cannot be refused.';
-  if(k==='TT') return 'Tollendo tollens runs backwards and so feels suspect; but once the consequent is denied, every region where the antecedent could lie is closed.';
-  if(k==='TPS'||k==='TPI') return 'The disjunction pledges at least one member, so if one is denied the other cannot be refused. Tollendo ponens is the disjunctive’s native mood.';
+  if(k==='PP') return 'The conditional asserts exactly this, that if the antecedent is granted, the consequent must be granted.';
+  if(k==='TT') return 'Tollendo tollens reasons from the consequent back to the antecedent, and so it seems suspect; but once the consequent is denied, no case remains in which the antecedent could hold.';
+  if(k==='TPS'||k==='TPI') return 'The disjunction asserts that at least one member holds, so if one is denied, the other must be granted. Tollendo ponens is the proper mood of the disjunctive.';
   if(k==='PTS') return 'Marked “but not both”, this disjunction is strict: its members exclude each other, so ponendo tollens holds here as it does for the conjunctive.';
-  return 'The conjunctive forbids its members to stand together: where one member stands, the other must fall. Ponendo tollens is its one lawful mood.';
+  return 'The conjunctive denies that its members hold together, so if one member holds, the other does not. Ponendo tollens is its one lawful mood.';
 }
 function hypcMistake(q, ans){
   const k = hypMoodKey(q);
@@ -1691,7 +1691,7 @@ function modalSquareMistake(q){
   if(q.rel==='subalternDown' && q.given==='F')
     return 'Falsity does not descend: that a thing is not necessary leaves it possibly so and possibly not.';
   if(q.rel==='subalternUp' && q.given==='T')
-    return 'Truth does not ascend: a posse ad necesse non valet consequentia. Only falsity climbs from the weaker mode to the stronger.';
+    return 'Truth does not ascend: a posse ad necesse non valet consequentia. Only falsity passes from the weaker mode to the stronger.';
   return 'Contradictories on the modal square always disagree; for the rest, the question is what the square forbids, and what it does not forbid remains undetermined.';
 }
 /* the composite and the divided sense — sensus compositus / divisus */
@@ -1705,7 +1705,7 @@ const SENSE_POOL = [
   {sent:'The sleeping man can be awake', comp:false, div:true,
    why:'Sleeping and waking at once is impossible; but waking is in his power.'},
   {sent:'The young man can be old', comp:false, div:true,
-   why:'Being young and old together is excluded; but age will come to him.'},
+   why:'Being young and old together is excluded; but he can become old.'},
   {sent:'The sighted man can be blind', comp:false, div:true,
    why:'He cannot be sighted and blind at once; but sight can be lost, so privation is possible for the one who possesses sight.'},
   {sent:'A man is necessarily an animal', comp:true, div:true,
@@ -1715,15 +1715,15 @@ const SENSE_POOL = [
   {sent:'The musician can build', comp:true, div:true,
    why:'The two are compossible (nothing hinders the musician from building while he is a musician), and the power belongs to him.'},
   {sent:'The one who is seated is necessarily seated', comp:true, div:false,
-   why:'In the composite sense (“necessarily: the seated is seated”) the dictum cannot be false, so it is true. In the divided sense it would make sitting essential to the man, which is false, for he sits contingently. The famous sophism trades on this.'},
+   why:'In the composite sense (“necessarily: the seated is seated”) the dictum cannot be false, so it is true. In the divided sense it would make sitting essential to the man, which is false, for he sits contingently. The famous sophism depends on this ambiguity.'},
   {sent:'The white thing is necessarily white', comp:true, div:false,
    why:'It is true in the composite sense, since whatever is white, is white; it is false in the divided sense, since whiteness does not belong to the thing of necessity.'},
   {sent:'A man can be a stone', comp:false, div:false,
-   why:'It is true in neither sense: the essence of man excludes it, so no power reaches it and the compound is impossible.'},
+   why:'It is true in neither sense: the essence of man excludes it, so man has no power to become a stone, and the compound is impossible.'},
   {sent:'A horse can be a man', comp:false, div:false,
    why:'It is true in neither sense: natures do not pass from one kind to another, so the compound is impossible and the subject has no such power.'},
   {sent:'A bachelor can be married', comp:false, div:true,
-   why:'In the composite sense (“possibly: a bachelor is married”) it is contradictory, for no one is married while unmarried. In the divided sense it is true, since the man who is a bachelor has it in him to marry.'},
+   why:'In the composite sense (“possibly: a bachelor is married”) it is contradictory, for no one is married while unmarried. In the divided sense it is true, since the man who is a bachelor has the power to marry.'},
   {sent:'The silent man can speak', comp:false, div:true,
    why:'He cannot speak while silent, since speaking in silence is impossible. But the power of speech remains his.'},
   {sent:'The winner of the race could have lost', comp:false, div:true,
@@ -1731,7 +1731,7 @@ const SENSE_POOL = [
   {sent:'The blind man can see', comp:false, div:false,
    why:'It is false in both senses: seeing while blind is contradictory, and blindness is a privation, so the power itself is gone, not merely unexercised.'},
   {sent:'Fire can be cold', comp:false, div:false,
-   why:'On the classical account heat belongs to fire’s nature, so the compound is impossible, and no power in fire reaches coldness.'},
+   why:'On the classical account heat belongs to fire’s nature, so the compound is impossible, and fire has no power to become cold.'},
   {sent:'The literate man is necessarily literate', comp:true, div:false,
    why:'In the composite sense (“necessarily: the literate is literate”) it cannot be false. In the divided sense it fails, because literacy is acquired and belongs to no one by necessity.'},
   {sent:'Two and three are necessarily five', comp:true, div:false,
@@ -2058,7 +2058,7 @@ const DEF_KIND_STOCK = {
     {tier:1, t:'‘Geometry’ means the measuring of the earth', w:'It gives the word’s signification and nothing more.'},
     {tier:1, t:'‘Island’ is the word for land standing in water', w:'It says what the name refers to, before any account of the thing itself.'},
     {tier:2, t:'‘Philosopher’ means a lover of wisdom', w:'It explains the name, which must come first, since we cannot ask what a thing is until we know what its name refers to.'},
-    {tier:2, t:'‘Manuscript’ means a thing written by hand', w:'It tells the word’s own story, not the nature of any writing.'},
+    {tier:2, t:'‘Manuscript’ means a thing written by hand', w:'It gives the origin of the word, not the nature of any writing.'},
     {tier:2, t:'‘Hippopotamus’ means river-horse', w:'It explains the word from hippos (horse) and potamos (river).'},
     {tier:3, t:'‘Eclipse’ means a forsaking — the light’s abandonment of its luminary', w:'It gives the word’s origin, before any account of the cause.'},
     {tier:5, t:'‘Geography’ means a description of the earth', w:'It gives the word’s signification, from gē (earth) and graphē (description).'},
@@ -2084,7 +2084,7 @@ const DEF_KIND_STOCK = {
     {tier:2, t:'A triangle is the figure whose angles sum to two right angles', w:'It gives a property, which follows from the thing’s nature and always goes with it, but is not that nature.'},
     {tier:2, t:'Man is the animal that laughs', w:'It gives the classic property: the power to laugh picks out man alone, without saying what he is.'},
     {tier:3, t:'Fire is the burning that gives off heat and light', w:'It names the thing by its characteristic effects (the heat and light it gives off), which point it out without saying what it is.'},
-    {tier:3, t:'Wine is the drink that gladdens the heart', w:'It names a characteristic effect, dear to the Psalmist, but not what wine is.'},
+    {tier:3, t:'Wine is the drink that gladdens the heart', w:'It names a characteristic effect, one the Psalmist mentions, but it does not say what wine is.'},
     {tier:5, t:'The camel is the beast that crosses the desert', w:'A telltale feature points the thing out, without saying what it is.'},
     {tier:5, t:'The nightingale is the bird that sings by night', w:'A characteristic mark picks the thing out without saying what it is.'}
   ],
@@ -2224,7 +2224,7 @@ function genDivComputedQ(d){
   }
   let why;
   if(verdict.v==='sound')
-    why = 'The members together cover the whole and do not overlap: the division holds.';
+    why = 'The members together cover the whole and do not overlap, so the division is correct.';
   else if(verdict.v==='deficient')
     why = `The members leave part of the whole out: ${verdict.witness.name} is ${art(pick.whole)} ${pick.whole} that belongs to none of the members.`;
   else if(verdict.v==='overlap')
@@ -2576,7 +2576,7 @@ const PRED_ITEMS = {
     {tier:2, subj:'soldier', t:'The soldier is weary', w:'Weariness is a passing state, no part of what a soldier is.'},
     {tier:2, subj:'mary', t:'Mary is cheerful', w:'Cheerfulness comes and goes; the person stays the same person through the change.'},
     {tier:3, subj:'Socrates2', t:'Socrates is in the marketplace', w:'Being in a place is an accident that changes while the man stays the same man.'},
-    {tier:3, subj:'iron', t:'This iron is rusty', w:'Rust comes on the iron in time; iron is iron, bright or rusty.'},
+    {tier:3, subj:'iron', t:'This iron is rusty', w:'Rust forms on iron over time, but the iron is still iron, whether it is bright or rusty.'},
     {tier:3, subj:'scholar', t:'The scholar is standing', w:'Standing is a posture taken up and left again, changing nothing of what he is.'},
     {tier:5, subj:'wall', t:'The wall is white', w:'The whiteness is in the wall but is no part of what a wall is (Aristotle’s “present in a subject”).'},
     {tier:5, subj:'stone', t:'This stone is wet', w:'Wetness is a separable accident; the stone dries and is the same stone.'},
@@ -3015,7 +3015,7 @@ function checkEnthAnswer(q, input){
 }
 function enthMistake(q, res){
   if(q.none && res && !res.none)
-    return 'Nothing can complete this one, since no arrangement of the remaining term yields a valid mood with that conclusion. The strength of a conclusion can outrun any possible help, because a particular or negative premise sets limits that no addition overcomes.';
+    return 'Nothing can complete this one, since no arrangement of the remaining term yields a valid mood with that conclusion. A conclusion can claim more than any added premise could support, because a particular or negative premise sets limits that no added premise can overcome.';
   if(!q.none && res && res.none)
     return `A premise does complete it, for instance “${q.accepted[0].text}”. The middle term is joined to the ${q.missingRole==='major'?'predicate':'subject'} of the conclusion, and the mood is then tested.`;
   if(res && res.parsedAns){
@@ -3023,7 +3023,7 @@ function enthMistake(q, res){
     const mKey = termKey(q.roles.M), xKey = termKey(q.missingRole==='major' ? q.roles.P : q.roles.S);
     const usedRight = (su===mKey&&pu===xKey)||(su===xKey&&pu===mKey);
     if(!usedRight)
-      return `The tacit premise must join the middle term (“${termLabel(q.roles.M)}”) with the conclusion’s orphaned term (“${termLabel(q.missingRole==='major'?q.roles.P:q.roles.S)}”), since nothing else can bridge the gap.`;
+      return `The tacit premise must join the middle term (“${termLabel(q.roles.M)}”) with the term of the conclusion that is not in the given premise (“${termLabel(q.missingRole==='major'?q.roles.P:q.roles.S)}”), since nothing else can connect them.`;
     return 'The terms are right, but that premise makes no valid mood with the given premise and conclusion. Quantity and quality need checking: the conclusion follows the weaker part, and the middle must be distributed once.';
   }
   return 'The first question is which term of the conclusion is left unsupported. The tacit premise must join it to the middle term, in a mood the rules allow.';
@@ -3045,7 +3045,7 @@ const ENTH_POOL = [
   {tier:1, txt:'He cannot be trusted — he is a politician.',
    correct:'No politicians can be trusted',
    traps:['Some politicians cannot be trusted','No trustworthy man is in politics by choice','Politicians seek power'],
-   why:'The argument is valid only with the universal, and the universal is false, which is exactly why it stays unspoken. The particular “some politicians…” is true but concludes nothing about this one. So the enthymeme conceals its premises, and tacit premises escape inspection.'},
+   why:'The argument is valid only with the universal, and the universal is false, which is exactly why it stays unspoken. The particular “some politicians…” is true but concludes nothing about this one. So the enthymeme conceals its premises, and premises that are not stated are not examined.'},
   {tier:2, txt:'I think, therefore I am.',
    correct:'Whatever thinks, is',
    traps:['Whatever is, thinks','I think that I am','Whatever doubts, exists'],
@@ -3061,7 +3061,7 @@ const ENTH_POOL = [
   {tier:2, txt:'The law is good, for it protects the poor.',
    correct:'Whatever protects the poor is good',
    traps:['All good laws protect the poor','The poor deserve protection','Some laws protect the poor'],
-   why:'The needed premise runs from the mark to the goodness. Its converse (“good laws protect the poor”) would leave the argument affirming the consequent.'},
+   why:'The needed premise takes the mark (protecting the poor) as its subject and goodness as its predicate. Its converse (“good laws protect the poor”) would leave the argument affirming the consequent.'},
   {tier:3, txt:'Whatever is moved is moved by another; so there must be a first mover.',
    correct:'There cannot be an infinite series of movers',
    traps:['Everything moves something else','Some mover is itself unmoved','Whatever moves another is itself moved'],
@@ -3081,7 +3081,7 @@ const ENTH_POOL = [
   {tier:1, txt:'The gods must be angry — the harvest has failed.',
    correct:'Whenever the harvest fails, the gods are angry',
    traps:['Whenever the gods are angry, the harvest fails','The gods send every misfortune upon men','Some failed harvests are sent by the gods'],
-   why:'This is the refutable sign in an older form. The familiar thought, that angry gods blight the fields, runs the wrong way and merely affirms the consequent. The premise that actually concludes, that every failed harvest shows divine anger, is the suspicious one, and drought, blight, and pests refute it every season.'},
+   why:'This is the refutable sign in an older form. The familiar thought, that angry gods blight the fields, has the anger as antecedent and the failed harvest as consequent; to reason from the failed harvest to the anger merely affirms the consequent. The premise that actually concludes, that every failed harvest shows divine anger, is the suspicious one, and drought, blight, and pests refute it every season.'},
   {tier:1, txt:'The mushroom is safe to eat — the squirrels eat it.',
    correct:'Whatever the squirrels eat is safe for a man to eat',
    traps:['Whatever is safe for a man, the squirrels will eat','Squirrels know which mushrooms are poisonous','Some things the squirrels eat are safe for a man'],
@@ -3093,7 +3093,7 @@ const ENTH_POOL = [
   {tier:1, txt:'She will make a fine doctor — she took the top marks in her class.',
    correct:'Whoever takes the top marks will make a fine doctor',
    traps:['All fine doctors took the top marks in their class','Medicine demands years of hard study','Some who take the top marks make fine doctors'],
-   why:'The argument stands only on the universal, and the universal is doubtful, since examinations test memory, not skill at the bedside. Doubtful premises are most persuasive when left unspoken, and this has long been a use of the enthymeme.'},
+   why:'The argument depends only on the universal, and the universal is doubtful, since examinations test memory, not skill at the bedside. Doubtful premises are most persuasive when left unspoken, and this has long been a use of the enthymeme.'},
   {tier:2, txt:'A storm is coming — the swallows are flying low.',
    correct:'When the swallows fly low, a storm is coming',
    traps:['When a storm is coming, the swallows fly low','The swallows fly low to chase their food','Sometimes a storm follows when the swallows fly low'],
@@ -3101,11 +3101,11 @@ const ENTH_POOL = [
   {tier:2, txt:'The old house must be soundly built — it has stood a hundred years.',
    correct:'Whatever has stood a hundred years was soundly built',
    traps:['Whatever is soundly built will stand a hundred years','They built better in the old days','Some houses that stand a hundred years were soundly built'],
-   why:'The moderns call this error survivorship bias: we see the houses that stood and never those that fell. The familiar converse does no work here; the work is done by the hidden universal, and the houses that fell are evidence against it.'},
+   why:'The moderns call this error survivorship bias: we see the houses that stood and never those that fell. The familiar converse contributes nothing here; the conclusion depends on the hidden universal, and the houses that fell are evidence against it.'},
   {tier:2, txt:'The remedy cannot hurt you — it is all natural.',
    correct:'Nothing natural is harmful',
    traps:['Whatever is artificial is harmful','Nature heals more gently than art','Some natural things are harmless'],
-   why:'When the major is supplied the syllogism is Celarent, and hemlock, nightshade, and the viper’s venom refute it at once. The appeal to nature persuades only while its premise stays out of sight.'},
+   why:'When the major is supplied the syllogism is Celarent, and hemlock, nightshade, and the viper’s venom refute it at once. The appeal to nature persuades only while its premise is left unstated.'},
   {tier:2, txt:'The book must be good — everyone is reading it.',
    correct:'Whatever everyone reads is good',
    traps:['Whatever is good, everyone reads','People read what pleases them','Some books that everyone reads are good'],
@@ -3250,7 +3250,7 @@ const FAL_KINDS = {
     doc:'ACCENT turns on how a word is stressed or pronounced. Shifting the stress changes the claim without changing a letter.'},
   comp:{side:'dict', mod:'the fallacy of composition', name:'Composition — true of them one by one, claimed of them together',
     app:'It holds of each of them, so it looks as though it must hold of them all together.',
-    def:'What holds of them one by one need not hold of them taken together, since the joining itself can change the case.',
+    def:'What holds of them one by one need not hold of them taken together, since being joined can change what is true of them.',
     ans:'By asking whether the claim is being made of them one by one, or of them all together.',
     doc:'COMPOSITION moves from what is true of things taken singly to what is claimed of them taken together. Each brick is light; the wall made of them is not. A seated man can walk, but he cannot walk while seated.'},
   divis:{side:'dict', mod:'the fallacy of division', name:'Division — true of them together, claimed of them one by one',
@@ -3259,10 +3259,10 @@ const FAL_KINDS = {
     ans:'By asking whether the claim was made of them together, or of each one by itself.',
     doc:'DIVISION is composition run backwards, from what is true of things taken together to what is claimed of each singly. Two and three are five taken together, but two by itself is not five. The choir sings beautifully, but not every singer in it does.'},
   figura:{side:'dict', mod:'the fallacy of grammatical analogy; where the words name different sorts of thing altogether it is what is now called a category mistake', name:'Figure of speech — words that look alike but work differently',
-    app:'Two words share a shape, so they seem to work the same way.',
-    def:'The likeness is only in the shape; the things named are of different sorts.',
+    app:'Two words have the same form, so they seem to signify in the same way.',
+    def:'The likeness is only in the form; the things named are of different sorts.',
     ans:'By asking what each word is actually naming; if the grammar runs parallel and the things do not, the argument rests on the grammar alone.',
-    doc:'FIGURE OF SPEECH (St Thomas calls it the likeness of a word) is when two expressions of the same shape are treated as of the same sort.'},
+    doc:'FIGURE OF SPEECH (St Thomas calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
   accid:{side:'extra', mod:'the fallacy of accident, also called <em>a dicto simpliciter</em>, destroying the exception, or applying a general rule to a special case', name:'Accident — taking a passing feature for the thing itself',
     app:'The passing feature and the thing really do go together here.',
     def:'The passing feature and the thing are nevertheless not the same.',
@@ -3270,7 +3270,7 @@ const FAL_KINDS = {
     doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St Thomas’s case is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
   secquid:{side:'extra', mod:'converse accident, or <em>secundum quid</em>; modern books usually call it hasty generalisation, or ignoring the qualification', name:'In a certain respect, taken flatly',
     app:'What is true in some respect looks like what is true without qualification.',
-    def:'The qualification was doing real work, and it has been quietly dropped.',
+    def:'The qualification mattered, and it has been dropped without notice.',
     ans:'By putting the qualification back in, aloud, and reading the argument again.',
     doc:'IN A CERTAIN RESPECT, TAKEN FLATLY, asserts something true in one way, or at one time, or for one person, without any limit at all.'},
   ignel:{side:'extra', mod:'ignoratio elenchi, the irrelevant conclusion, or missing the point; the straw man and the red herring are species of it', name:'Missing the point — proving something else',
@@ -3280,7 +3280,7 @@ const FAL_KINDS = {
     doc:'MISSING THE POINT (the schools call it ignorance of the refutation) proves something, but not the thing that was denied.'},
   petitio:{side:'extra', mod:'begging the question, or circular reasoning, that is, arguing in a circle', name:'Begging the question — assuming what you set out to prove',
     app:'The premise is granted and the conclusion follows from it perfectly well.',
-    def:'Nobody who doubted the conclusion could have granted that premise. The argument has helped itself to the point.',
+    def:'Nobody who doubted the conclusion could have granted that premise. The argument has assumed the point at issue.',
     ans:'By asking whether someone who doubted the conclusion could accept the premise.',
     doc:'BEGGING THE QUESTION puts the conclusion into the premises, usually in different words, so that the argument goes in a circle.'},
   noncausa:{side:'extra', mod:'false cause; where the mistake is that one thing merely came after another, <em>post hoc ergo propter hoc</em>, or, as is now said, “correlation is not causation”', name:'Treating what is not the cause as the cause',
@@ -3374,7 +3374,7 @@ function falPick(d){
   return recentPick(pool, x=>x.t);
 }
 const SIDE_WORD = {dict:'in the words, since the language itself is ambiguous',
-                   extra:'outside the words — the language is fine; the thinking is not'};
+                   extra:'outside the words, since the language is fine but the thinking is not'};
 function genFalNameQ(d){
   const it = falPick(d), K = FAL_KINDS[it.k];
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].name);
@@ -3451,7 +3451,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever is true of the whole is true of each part',
        'Whatever follows from a thing belongs to the thing',
        'Whatever two things go together, one causes the other'],
-   why:'Weight adds up, but lightness does not survive the addition. The rule looks true because many properties do carry from parts to whole, as colour often does.'},
+   why:'Weight adds up, but lightness does not, so a wall of light bricks need not be light. The rule looks true because many properties do carry from parts to whole, as colour often does.'},
   {tier:3, t:'The ground is wet, so it has rained.',
    correct:'Whatever produces an effect is the only thing that could have produced it',
    ds:['Whatever follows from a cause must have had that cause',
@@ -3463,7 +3463,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever causes a thing goes with it',
        'Whatever is true of a part is true of the whole',
        'Whatever the wider kind is said of, the narrower is said of'],
-   why:'Going together is not producing. Both may follow from some third thing, as ice cream and drowning both follow the hot weather.'}
+   why:'That two things go together does not mean that one produces the other. Both may follow from some third thing, as ice cream and drowning both follow the hot weather.'}
 ];
 function genFalPrincipleQ(d){
   const tiers = defTiers(d);
@@ -3605,7 +3605,7 @@ const TOPICS = {
         use:'when the dispute is over one form of a word and another form is already granted'},
   nom:{name:'From the name', gloss:'what the word itself means, or where it came from, is used to settle the question.',
        max:'What the name means tells something of what the thing is, though not always, and never on its own.',
-       use:'when the word carries its meaning on its face, or has been misunderstood'},
+       use:'when the word plainly shows its meaning, or has been misunderstood'},
   auth:{name:'From authority', gloss:'the judgement of those who know is offered as a reason; the tradition counts it the weakest of the topics, though not worthless.',
         max:'What those who know a subject agree on may be granted, until better reason appears.',
         use:'when the matter is beyond one’s own competence and the learned agree'}
@@ -3664,7 +3664,7 @@ function genDialInventQ(d){
   const others = sample(TOPIC_KEYS.filter(k=>k!==it.k), 3).map(k=>TOPICS[k].name);
   return mc4Make({prompt:it.t, options:[TOPICS[it.k].name].concat(others),
     correct:TOPICS[it.k].name,
-    ruleShow: d>=5 ? '' : 'The Topics is a book about FINDING, not about judging. Given something to be shown, a topic indicates where to look for an argument. The question is what we already have in hand, and which place will turn it into a reason.',
+    ruleShow: d>=5 ? '' : 'The Topics is a book about FINDING, not about judging. Given something to be shown, a topic indicates where to look for an argument. The question is what we already know, and from which place it can be made into a reason.',
     why: `The argument is drawn ${TOPICS[it.k].name.toLowerCase()}, the place used ${TOPICS[it.k].use}. The maxim that gives it force is this: ${TOPICS[it.k].max}`,
     rules: DIAL_RULES, mcInstr:'Where is an argument to be found?'});
 }
@@ -3679,7 +3679,7 @@ function genDialMaximQ(d){
   return mc4Make({prompt:it.t, options:[TOPICS[it.k].max].concat(others),
     correct:TOPICS[it.k].max,
     ruleShow: d>=5 ? '' : 'Every topic carries a MAXIM, the governing proposition on which an argument drawn from that place depends. The schools called it the maxima propositio. When the maxim is true the argument holds; when it is false but looks true, the result is a fallacy instead.',
-    why: `This argument is drawn ${TOPICS[it.k].name.toLowerCase()}, and that place carries this maxim. A fallacy works the same way, only backwards, since it depends on a maxim that is false and looks true.`,
+    why: `This argument is drawn ${TOPICS[it.k].name.toLowerCase()}, and that place carries this maxim. A fallacy works in the same way but in reverse, since it depends on a maxim that is false and looks true.`,
     rules: DIAL_RULES, mcInstr:'Which maxim does this argument depend on?'});
 }
 function genDialTopicQ(d){
@@ -3755,7 +3755,7 @@ const RESP_ITEMS = [
   {tier:1, th:'Promises ought to be kept.', ob:'But a promise made to a madman to give back his sword ought not to be kept. So promises need not be kept.',
    k:'dist', w:'“Ought to be kept” holds without qualification of promises whose keeping does no grave harm. Once the senses are distinguished, the rule stands in the sense in which it was meant.'},
   {tier:1, th:'Every bird has feathers.', ob:'But the bat flies and has no feathers, so not every flying thing has feathers.',
-   k:'conc', w:'Everything in the objection is true, and none of it touches the thesis, which was about birds, not about flying things. So everything is granted, but the conclusion does not follow.'},
+   k:'conc', w:'Everything in the objection is true, and none of it bears on the thesis, which was about birds, not about flying things. So everything is granted, but the conclusion does not follow.'},
   {tier:1, th:'This road is the shortest way to the town.', ob:'But the bridge on it is down, so nobody can get through.',
    k:'full', w:'The objection is simply right, and it defeats the thesis as stated. The honest move is to concede and say instead that it is the shortest way when passable.'},
   {tier:2, th:'A definition must fit exactly what it defines.', ob:'But “man is a rational animal” fits every man, and so does “man is a featherless biped.” So exact fit is not enough.',
@@ -3811,7 +3811,7 @@ const DIAL_DOCTRINE = [
   {tier:2, q:'What is the maxim (maxima propositio) of a topic?',
    correct:'The governing rule an argument drawn from that place depends on',
    ds:['The strongest argument that can be drawn from it','The name of the topic in Latin','The conclusion the argument reaches'],
-   why:'From the wider kind, for example, the maxim is that whatever belongs to the whole family belongs to each kind within it. When the maxim is true the argument holds. A fallacy depends on a maxim that is false and looks true, so it works in the same way, only backwards.'},
+   why:'From the wider kind, for example, the maxim is that whatever belongs to the whole family belongs to each kind within it. When the maxim is true the argument holds. A fallacy depends on a maxim that is false and looks true, so it works in the same way but in reverse.'},
   {tier:1, q:'What is a topic (locus) in dialectic?',
    correct:'A standing relation an argument may be drawn from, such as genus to species',
    ds:['A subject that is being argued about','A place in a book where the argument is found','The conclusion an argument aims at'],
@@ -3831,7 +3831,7 @@ const DIAL_DOCTRINE = [
   {tier:3, q:'How does dialectic differ from a testing disputation?',
    correct:'Dialectic argues toward the better view; testing only finds out whether a man knows',
    ds:['They are two names for the same thing','Dialectic uses syllogisms and testing does not','Testing reaches certainty and dialectic does not'],
-   why:'A testing disputation works from what seems true to the respondent, and aims at taking his measure. It need not care which view is better.'},
+   why:'A testing disputation works from what seems true to the respondent, and aims at finding out how much he knows. It need not care which view is better.'},
   {tier:3, q:'A premise is granted by the learned but not by most people. May it be used?',
    correct:'Yes, since it is probable in the required sense; but whoever uses it should expect to defend it',
    ds:['No, since only what everyone grants may be used','Yes, and since it is probable no defence of it is needed','Only if it can also be demonstrated'],
@@ -3839,7 +3839,7 @@ const DIAL_DOCTRINE = [
   {tier:3, q:'Why does the tradition place dialectic between rhetoric and demonstration?',
    correct:'Because it has more than persuasion and less than proof',
    ds:['Because it is easier than rhetoric and harder than demonstration','Because it came later in history','Because it uses fewer premises'],
-   why:'Rhetoric inclines us where evidence is nearly even; dialectic reaches what is probable; demonstration proves through the cause. The three are stages of one inquiry as it matures.'},
+   why:'Rhetoric inclines us where evidence is nearly even; dialectic reaches what is probable; demonstration proves through the cause. The three are successive stages of one inquiry.'},
   {tier:5, q:'An objection is granted in every premise, and the conclusion still does not follow. What has gone wrong with it?',
    correct:'Its form, since the matter is sound but the inference is not',
    ds:['Its matter, since one premise must be false after all','Its terms, since a word must be ambiguous','Nothing, since if the premises are granted the conclusion follows'],
