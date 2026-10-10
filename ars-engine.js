@@ -2638,7 +2638,7 @@ const PRED_PRINCIPLES = [
   {tier:2, q:'In “Man is a species,” what does man stand for?',
    correct:'The nature as known, not any man; this is simple supposition',
    ds:['The particular men there are','The written letters only','Nothing, because no man is a species'],
-   why:'No particular man is a species, so the term stands for the nature as known. Its signification has not changed, but its supposition (what the term stands for in this proposition) has. Supposition is a property of terms in logic, and this art is its home.'},
+   why:'No particular man is a species, so the term stands for the nature as known. Its signification has not changed, but its supposition (what the term stands for in this proposition) has. Supposition is a property of terms, and it is studied in logic.'},
   {tier:2, q:'Which of these is an individual — neither a genus nor a species, but only something things are said about?',
    correct:'Socrates',
    ds:['Animal','Man','Substance'],
