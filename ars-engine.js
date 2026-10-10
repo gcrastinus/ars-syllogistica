@@ -1207,7 +1207,7 @@ function immMistakeOp(q, parsed){
   if(!q.expected)
     return q.op==='converse'
       ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S; yet the habit of converting E and I carries many students along.'
-      : 'An I proposition has no contrapositive. Contraposition obverts, then converts, then obverts; but the obverse of I is an O, and an O will not convert, so the process stalls.';
+      : 'An I proposition has no contrapositive. Contraposition obverts, then converts, then obverts; but the obverse of I is an O, and an O does not convert, so the process cannot be completed.';
   if(parsed && parsed.none)
     return `This proposition does have a ${q.op}. Only O lacks a converse, and only I lacks a contrapositive.`;
   const e = q.expected;
