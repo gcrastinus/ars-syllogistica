@@ -3288,9 +3288,9 @@ if(typeof document!=='undefined'){
     if(state.locked || !(state.q && state.q.kind==='mc4')) return;
     state.locked = true;
     [0,1,2,3].forEach(j=>$('qbtn-'+j).disabled=true);
-    const q = state.q, ok = (i===q.correctIdx);
+    const q = state.q, okIdx = q.correctIdxs || [q.correctIdx], ok = okIdx.indexOf(i)>=0;
     const pts = applyScore(ok);
-    let detail = `<strong>${q.options[q.correctIdx]}${stop(q.options[q.correctIdx])}</strong> ${q.why}`;
+    let detail = `${okIdx.map(j=>`<strong>${q.options[j]}${stop(q.options[j])}</strong>`).join(' ')} ${q.why}`;
     if(!ok) detail += `<div class="fb-why">${q.rules}</div>`;
     fbHTML(ok, pts, detail);
     finishOrNext();

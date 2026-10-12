@@ -1852,6 +1852,7 @@ function mc4Make(spec){
   for(let i=opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=opts[i]; opts[i]=opts[j]; opts[j]=t; }
   return {kind:'mc4', prompt:spec.prompt||'', promptRaw:spec.promptRaw||'', ruleShow:spec.ruleShow||'',
           options:opts, correctIdx:opts.indexOf(spec.correct),
+          correctIdxs:[spec.correct].concat(spec.alsoCorrect||[]).map(c=>opts.indexOf(c)),
           why:spec.why, rules:spec.rules, mcInstr:spec.mcInstr};
 }
 const DEF_RULES = 'The rules of definition: it must fit exactly the thing defined (no more, no less) and be clearer than it; it must not contain the term being defined; it should say what a thing is rather than what it is not, wherever it can; and it should be brief, giving the nearest kind (genus) and the difference that marks the thing off, with no wasted words.';
@@ -2192,6 +2193,27 @@ function divVerdict(dom, whole, members){
   if(miss) return {v:'deficient', witness:miss};
   return {v:'sound'};
 }
+/* every fault the division has (divVerdict reports only the first), so that a
+   division breaking more than one rule accepts each true answer */
+function divFaults(dom, whole, members){
+  const E = DOM_EXT[dom];
+  const W = new Set(E[whole].map(a=>a.id));
+  const out = [];
+  for(const m of members){
+    const a = E[m].find(x=>!W.has(x.id));
+    if(a){ out.push({v:'exceeds', witness:a, member:m}); break; }
+  }
+  overlap: for(let i=0;i<members.length;i++) for(let j=i+1;j<members.length;j++){
+    const s = new Set(E[members[i]].map(x=>x.id));
+    const a = E[members[j]].find(x=>s.has(x.id));
+    if(a){ out.push({v:'overlap', witness:a, pair:[members[i],members[j]]}); break overlap; }
+  }
+  const un = new Set();
+  members.forEach(m=>E[m].forEach(x=>un.add(x.id)));
+  const miss = E[whole].find(a=>!un.has(a.id));
+  if(miss) out.push({v:'deficient', witness:miss});
+  return out;
+}
 const DIV_OPTS = ['A sound division','Incomplete, since part of the whole is left out',
   'The members overlap, since something falls under two of them','One member does not belong to the whole being divided'];
 const DIV_OPT_OF = {sound:DIV_OPTS[0], deficient:DIV_OPTS[1], overlap:DIV_OPTS[2], exceeds:DIV_OPTS[3]};
@@ -2222,17 +2244,22 @@ function genDivComputedQ(d){
     }
     if(!pick){ pick = rand(mathList); verdict = {v:'sound'}; }
   }
-  let why;
-  if(verdict.v==='sound')
-    why = 'The members together cover the whole and do not overlap, so the division is correct.';
-  else if(verdict.v==='deficient')
-    why = `The members leave part of the whole out: ${verdict.witness.name} is ${art(pick.whole)} ${pick.whole} that belongs to none of the members.`;
-  else if(verdict.v==='overlap')
-    why = `The members overlap, since ${verdict.witness.name} falls under both “${verdict.pair[0]}” and “${verdict.pair[1]}”.`;
-  else
-    why = `The member “${verdict.member}” does not belong to the whole being divided: ${verdict.witness.name} is ${art(verdict.member)} ${verdict.member} but not ${art(pick.whole)} ${pick.whole}.`;
+  const whyOf = v => {
+    if(v.v==='sound')
+      return 'The members together cover the whole and do not overlap, so the division is correct.';
+    if(v.v==='deficient')
+      return `The members leave part of the whole out: ${v.witness.name} is ${art(pick.whole)} ${pick.whole} that belongs to none of the members.`;
+    if(v.v==='overlap')
+      return `The members overlap, since ${v.witness.name} falls under both “${v.pair[0]}” and “${v.pair[1]}”.`;
+    return `The member “${v.member}” does not belong to the whole being divided: ${v.witness.name} is ${art(v.member)} ${v.member} but not ${art(pick.whole)} ${pick.whole}.`;
+  };
+  const faults = verdict.v==='sound' ? [] : divFaults(pick.dom, pick.whole, pick.members);
+  const also = faults.filter(f=>f.v!==verdict.v);
+  let why = whyOf(verdict);
+  if(also.length) why = 'This division breaks more than one rule, so each of these answers is correct. '
+    + [verdict].concat(also).map(whyOf).join(' ');
   return mc4Make({prompt: divText(pick.whole, pick.members), options: DIV_OPTS,
-    correct: DIV_OPT_OF[verdict.v], why, rules: DIV_RULES,
+    correct: DIV_OPT_OF[verdict.v], alsoCorrect: also.map(f=>DIV_OPT_OF[f.v]), why, rules: DIV_RULES,
     mcInstr: 'Is this division sound — and if not, where does it fail?'});
 }
 /* rule-in-view: divisions everyday and classical, the rule always displayed.
@@ -3964,8 +3991,9 @@ function formatQuizItem(q){
     const correctStr = q.options[q.correctIdx];
     const printOpts = _shuffle(q.options.slice());
     out.choices = printOpts.map((t,i)=>({letter:L[i], text:t}));
-    const ans = out.choices.find(c=>c.text===correctStr);
-    out.answerText = ans ? `(${ans.letter}) ${ans.text}` : correctStr;
+    const correctStrs = (q.correctIdxs||[q.correctIdx]).map(i=>q.options[i]);
+    const anss = out.choices.filter(c=>correctStrs.indexOf(c.text)>=0);
+    out.answerText = anss.length ? anss.map(a=>`(${a.letter}) ${a.text}`).join(' — or — ') : correctStr;
     out.explainHtml = q.why || '';
     return out;
   }
@@ -4064,7 +4092,9 @@ function formatQuizItem(q){
     out.instr = 'What conclusion, if any, follows? (Standard form, or “none”.)';
     out.stemHtml = `<div class="argblock">${q.lines[0]}.<br>${q.lines[1]}.<br><span class="therefore">∴</span> <em>?</em></div>`;
     out.workClass = 's1';
-    if(q.none || !q.accepted || !q.accepted.length) out.answerText = 'none';
+    if(q.kind==='hypc') out.answerText = hcNothing(q) ? 'none'
+      : q.style==='prop' ? pPropText(q.expectedProp) : hcCompText(q, q.expected);
+    else if(q.none || !q.accepted || !q.accepted.length) out.answerText = 'none';
     else out.answerText = q.accepted.map(a=>a.text || a).join(' — or — ');
     return out;
   }
@@ -4146,7 +4176,7 @@ if(typeof module!=='undefined' && module.exports){
     KB_ATOMS, MATH_TERMS, MATH_KEYS, MATH_EXT, propTruth, counterexample,
     genSoundnessQ, mistakeNoteSound,
     KB_DOMAINS, DOM_KEYS, DOM_EXT, ETH_ATOMS, ETH_TERMS, SOUL_ATOMS, SOUL_TERMS,
-    genDefQ, genDivQ, genDivComputedQ, divVerdict, DIV_SOUND_LIST, DIV_OPTS, DIV_OPT_OF,
+    genDefQ, genDivQ, genDivComputedQ, divVerdict, divFaults, DIV_SOUND_LIST, DIV_OPTS, DIV_OPT_OF,
     mc4Make, divText, DEF_ITEMS, DEF_RULE_META, DEF_KIND_STOCK, genDefRuleQ, genDefKindQ,
     DIV_STOCK, DIV_RULE_META, DIVKIND_STOCK, genDivRuleQ, genDivKindQ,
     genPredicableQ, genPredIdentifyQ, genPredPrincipleQ, genPredSortQ, PRED_ITEMS, PRED_DOCTRINE, PRED_NAME, PRED_PRINCIPLES, PRED_SWAP, PRED_PAIRS, PRED_SORT_OPTS,
