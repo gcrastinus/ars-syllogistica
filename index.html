@@ -2300,7 +2300,7 @@ if(typeof document!=='undefined'){
       else if(j===pick) btn.classList.add('chosen');
     });
     const ex = $('orient-explain');
-    let html = `<span class="verdict">${ok ? 'Just so' : 'The answer'}</span>`
+    let html = `<span class="verdict">${ok ? 'Correct' : 'Incorrect'}</span>`
              + `<strong>${q.options[q.correct]}.</strong> ${q.explain||''}`;
     if(!ok && q.wrong) html += `<div class="orient-wrong"><em>Why not the others.</em> ${q.wrong}</div>`;
     ex.innerHTML = html;
