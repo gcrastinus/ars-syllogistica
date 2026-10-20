@@ -1728,10 +1728,10 @@ if(typeof document!=='undefined'){
      the other fifteen replace the old static intro screens). Same renderer as
      the study decks; every card offers "Skip to the Exercise", and its check
      question never blocks the skip. */
-  const SRC_LEAD = `${SRC_MAR}; ${SRC_JST}.`;
-  /* Sources for the lead-ins of the other fifteen sets: the ECT article first,
-     then the works actually used for that set. */
+  /* Sources for the lead-ins: the ECT article first, then the works actually
+     used for that set. */
   const SRC_ART = `Timothy Kearns, “Logic (General and Historical),” <i>Encyclopedia of Catholic Theology</i> (ect.org, 2025)`;
+  const SRC_LEAD = `${SRC_ART}; ${SRC_MAR}; ${SRC_JST}.`;
   const SRC_OES = `John A. Oesterle, <i>Logic: The Art of Defining and Reasoning</i>, 2nd ed. (Prentice-Hall, 1963)`;
   const LEADINS = {
     1:[
