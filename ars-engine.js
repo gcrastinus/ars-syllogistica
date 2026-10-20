@@ -91,7 +91,7 @@ const PLURAL_EX = {
   'thing that has vegetative powers':'things that have vegetative powers',
   'thing that has sensitive powers':'things that have sensitive powers',
   'thing that can fly':'things that can fly',
-  'thing that can swim':'things that can swim',
+  'thing that has fins':'things that have fins',
   'thing made by man':'things made by man'
 };
 const PLURAL_EX_REV = {};
@@ -919,12 +919,12 @@ const NAT_ATOMS = (function(){
     v('n_rose','the rose',          ['living','plant','flower']),
     v('n_grass','the grass',        ['living','plant']),
     v('n_sparrow','the sparrow',    ['living','animal','bird','flier']),
-    v('n_swan','the swan',          ['living','animal','bird','flier','swimmer']),
+    v('n_swan','the swan',          ['living','animal','bird','flier']),
     v('n_ostrich','the ostrich',    ['living','animal','bird']),
     v('n_bee','the bee',            ['living','animal','insect','flier']),
     v('n_ant','the ant',            ['living','animal','insect']),
-    v('n_salmon','the salmon',      ['living','animal','fish','swimmer']),
-    v('n_dog','the dog',            ['living','animal','swimmer']),
+    v('n_salmon','the salmon',      ['living','animal','fish','finned']),
+    v('n_dog','the dog',            ['living','animal']),
     v('n_horse','the horse',        ['living','animal']),
     v('n_stone','the stone',        []),
     v('n_river','the river',        []),
@@ -944,7 +944,7 @@ const NAT_TERMS = {
   'fish':              hasTag('fish'),
   'insect':            hasTag('insect'),
   'thing that can fly':  hasTag('flier'),
-  'thing that can swim': hasTag('swimmer'),
+  'thing that has fins': hasTag('finned'),
   'thing made by man': hasTag('made'),
   'tool':              hasTag('tool')
 };
@@ -963,7 +963,7 @@ const KB_DOMAINS = {
   nature: {atoms: NAT_ATOMS, terms: NAT_TERMS, label:'the everyday world of living things and things made',
     families: [
       ['living thing','plant','tree','flower','animal','bird','fish','insect'],
-      ['living thing','animal','bird','thing that can fly','thing that can swim',
+      ['living thing','animal','bird','thing that can fly','thing that has fins',
        'thing made by man','tool']
     ]}
 };
@@ -1002,8 +1002,8 @@ const KB_GLOSS = {
   'virtue':'a good habit, disposing its possessor and his work to the good',
   'vice':'a bad habit, the corruption of good action',
   'passion':'a movement of the sensitive appetite (fear, anger, joy), neither good nor evil of itself',
-  'moral virtue':'a virtue perfecting appetite and conduct: justice, courage, temperance and their kin',
-  'intellectual virtue':'a virtue perfecting the intellect: understanding, science, wisdom, art, and prudence',
+  'moral virtue':'a virtue perfecting appetite and conduct: justice, courage, temperance, and prudence, which is counted with them because it concerns conduct',
+  'intellectual virtue':'a virtue perfecting the intellect: understanding, science, wisdom, art, and prudence, which is intellectual in what it is',
   'theological virtue':'faith, hope, or charity, which bear on God directly and are infused rather than acquired',
   'cardinal virtue':'one of the four hinges of the moral life: prudence, justice, fortitude, temperance',
   'mean':'the middle course that virtue holds between excess and defect',
@@ -1041,7 +1041,7 @@ const KB_GLOSS = {
   'fish':'an animal that lives in water and breathes through gills',
   'insect':'a small animal with six legs, such as the bee or the ant',
   'thing that can fly':'whatever moves through the air under its own power',
-  'thing that can swim':'whatever moves through water under its own power',
+  'thing that has fins':'an animal with fins, such as a fish',
   'thing made by man':'an artifact, made rather than grown',
   'tool':'a thing made to be used in doing work'
 };
@@ -1116,7 +1116,7 @@ function mistakeNoteValidity(q, mode){
     return 'Fourth-figure syllogisms reverse the natural order of predication, so even valid ones seem wrong. But if we read the premises slowly and test the syllogism against the rules, we find that it breaks none of them.';
   if(mode!=='letters')
     return 'The likeliest cause of the error is that the premises are implausible, and a false premise is easily mistaken for a fallacy. But validity concerns form alone: if the premises are granted, however absurd, the question is what must follow.';
-  return 'This form keeps every rule: the middle is distributed once, no term is distributed in the conclusion alone, and negatives and particulars are balanced.';
+  return 'This form keeps every rule: the middle is distributed at least once, no term is distributed in the conclusion alone, and negatives and particulars are balanced.';
 }
 function mistakeNoteConclusion(q, parsed){
   if(parsed.none)
@@ -1285,7 +1285,7 @@ function immMistakeOp(q, parsed){
     if(q.op==='contradictory' && ((q.pr.t==='I'&&parsed.c==='O')||(q.pr.t==='O'&&parsed.c==='I')))
       return 'That is the subcontrary. The contradictory of a particular is the universal of opposite quality: I pairs with E, O with A.';
   }
-  return 'The four operations are these: conversion exchanges the terms; obversion changes the quality and negates the predicate; contraposition does both at once; and the contradictory reverses quantity and quality together.';
+  return 'The four operations are these: conversion exchanges the terms; obversion changes the quality and negates the predicate; contraposition obverts, converts, and obverts again; and the contradictory reverses quantity and quality together.';
 }
 const REL_TEXT = {
   contradictory:'contradictories, which always take opposite truth-values',
@@ -1640,7 +1640,11 @@ function spConsequences(marks, labs){
       if(satF[c] || (c==='I' && (satF.A || iDone)) || (c==='O' && satF.E)) continue;
       const clone = {shaded:prem, xs:xs.slice(), importTerm:null};
       if(tryImport(clone, c, s, p)){
-        withImport.push(`${T[c]}, granting the existential import of “${labs[clone.importTerm]}”`);
+        /* the universal affirmative, if any, whose shading asserts that the term has members */
+        const X = clone.importTerm;
+        const Y = ['S','M','P'].find(y=>y!==X && zone3(X, y, 'diff').every(r=>shadedAll.has(r)));
+        const src = Y ? `All ${labs[X]} are ${labs[Y]}` : '';
+        withImport.push(`${T[c]}, if something is “${labs[X]}”${src ? `, as “${src}” asserts` : ' (nothing in the diagram asserts this)'}`);
         if(c==='I') iDone = true;
       }
     }
@@ -1808,14 +1812,34 @@ const MODAL_GLOSS = {
 };
 /* the modal syllogism. Aristotle (Prior Analytics I.9): in the first figure a
    necessary major with an assertoric minor gives a necessary conclusion, and an
-   assertoric major with a necessary minor only an assertoric one. Otherwise the
-   conclusion takes the weaker mode. Outside the first figure Aristotle's rules
-   for mixing necessary and assertoric premises vary by mood (I.10–11), so that
-   mixture is not generated there. */
+   assertoric major with a necessary minor only an assertoric one. Outside the
+   first figure Aristotle's rules for mixing necessary and assertoric premises
+   vary by mood (I.10–11), so that mixture is not generated there. Contingent
+   premises are generated only where Aristotle's rule is simple: in the first
+   figure with a contingent major and a contingent or assertoric minor
+   (I.14–15), and in the third figure with contingent or assertoric premises
+   (I.20–21), the conclusion is contingent; in the second figure two contingent
+   premises give nothing (I.17). Contingent premises are never mixed with
+   necessary ones, nor used in the fourth figure, which Aristotle does not have. */
 const MOD_RANK = {nec:3, assert:2, cont:1};
 const MOD_PRE = {nec:'Necessarily, ', assert:'', cont:'Contingently, '};
 const MOD_NAME = {nec:'necessary', assert:'assertoric', cont:'contingent'};
+/* the pairs of modes (major, minor) the drill joins in each figure */
+function modalPairs(fig, d){
+  const pairs = [['nec','nec'], ['assert','assert']];
+  if(fig===1) pairs.push(['nec','assert'], ['assert','nec']);
+  if(d>=3){
+    if(fig===1) pairs.push(['cont','cont'], ['cont','assert']);
+    if(fig===2) pairs.push(['cont','cont']);
+    if(fig===3) pairs.push(['cont','cont'], ['cont','assert'], ['assert','cont']);
+  }
+  return pairs;
+}
+/* a valid form in the second figure with two contingent premises */
+const modalNone = (fig, mods) => fig===2 && mods[0]==='cont' && mods[1]==='cont';
+const MODAL_NONE_NOTE = 'Nothing follows. In the second figure two contingent premises give no conclusion, whatever their quantity or quality (Aristotle, <em>Prior Analytics</em> I.17).';
 function modalConclusion(fig, mods){
+  if(modalNone(fig, mods)) return 'none';
   if(fig===1 && mods[0]==='nec' && mods[1]==='assert') return 'nec';
   return MOD_RANK[mods[0]] <= MOD_RANK[mods[1]] ? mods[0] : mods[1];
 }
@@ -1826,24 +1850,25 @@ function modalRuleClause(q){
     return 'in the first figure a necessary major premise with a plain minor premise gives a necessary conclusion, because what belongs necessarily to everything under the middle term belongs necessarily to whatever falls under it (Aristotle, <em>Prior Analytics</em> I.9)';
   if(q.fig===1 && m[0]==='assert' && m[1]==='nec')
     return 'in the first figure a plain major premise with a necessary minor premise gives only a plain conclusion, because the major premise says only that the predicate belongs, not that it must (Aristotle, <em>Prior Analytics</em> I.9)';
-  if(m[0]===m[1]) return 'both premises have the same mode';
-  return 'a contingent premise makes the conclusion contingent';
+  if(m.indexOf('cont')>=0)
+    return 'in the first and third figures a contingent premise joined to a contingent or plain premise gives a contingent conclusion (<em>Prior Analytics</em> I.14–15, 20–21)';
+  return 'both premises have the same mode';
 }
 function genModalSyllQ(d, mode){
   const base = genValidityQ(d, mode);
-  const pool = d>=3 ? ['nec','assert','cont'] : ['nec','assert'];
-  let mods = [rand(pool), rand(pool)];
-  for(let i=0; i<50 && base.fig!==1 && mods[0]!==mods[1] && mods.indexOf('cont')<0; i++)
-    mods = [rand(pool), rand(pool)];
-  if(base.fig!==1 && mods[0]!==mods[1] && mods.indexOf('cont')<0) mods = [mods[0], mods[0]];
+  const pairs = modalPairs(base.fig, d);
+  /* in the second figure, half the items set two contingent premises */
+  const mods = (base.fig===2 && d>=3 && Math.random()<0.5) ? ['cont','cont'] : rand(pairs).slice();
   const weaker = MOD_RANK[mods[0]] <= MOD_RANK[mods[1]] ? mods[0] : mods[1];
   const answer = base.valid ? modalConclusion(base.fig, mods) : 'none';
   const mlines = base.lines.map((l,i)=> MOD_PRE[mods[i]] ? MOD_PRE[mods[i]]+decap(l) : l);
-  return Object.assign(base, {kind:'modsyll', mods, weaker, answer, mlines});
+  return Object.assign(base, {kind:'modsyll', mods, weaker, answer, mlines,
+    modalNone: base.valid && modalNone(base.fig, mods)});
 }
 const MODSYLL_LABELS = ['Necessarily','Assertorically','Contingently','Nothing follows'];
 const MODSYLL_VALUES = ['nec','assert','cont','none'];
 function modalSyllMistake(q, choice){
+  if(q.modalNone) return 'The form is valid, but the modes of the premises also decide whether anything follows. Aristotle shows that in the second figure two contingent premises give no conclusion in any mood (<em>Prior Analytics</em> I.17).';
   if(q.answer==='none') return mistakeNoteValidity(q, 'english');
   if(choice==='none') return mistakeNoteValidity(q, 'english');
   if(q.fig===1 && q.mods[0]==='nec' && q.mods[1]==='assert' && choice==='assert')
@@ -1902,6 +1927,8 @@ function genWildModalQ(d){
   let stated, valid;
   if(!base.valid){
     stated = rand(['nec','assert','cont']); valid = false;
+  } else if(base.modalNone){
+    stated = 'cont'; valid = false;      // second figure, both premises contingent
   } else {
     const strongerOpts = ['nec','assert','cont'].filter(m=>MOD_RANK[m]>MOD_RANK[base.answer]);
     if(Math.random()<0.5 || !strongerOpts.length){ stated = base.answer; valid = true; }
@@ -1950,7 +1977,7 @@ const DEF_ITEMS = [
    broad:'A square is a quadrilateral', narrow:'A square is a small quadrilateral with equal sides and right angles',
    circ:'A square is a square-shaped quadrilateral', neg:'A square is a quadrilateral that is not oblong',
    met:'A square is the bricklayer’s ideal', extra:'A square is a quadrilateral with equal sides, right angles, and four corners'},
-  {tier:1, name:'a bachelor', sound:'A bachelor is an unmarried man',
+  {tier:1, name:'a bachelor', sound:'A bachelor is an unmarried man', negSound:true,
    broad:'A bachelor is a man', narrow:'A bachelor is an unmarried man who dines alone',
    circ:'A bachelor is a man in the state of bachelorhood',
    met:'A bachelor is a ship that never found its harbor', extra:'A bachelor is an unmarried man without a wife'},
@@ -1984,15 +2011,15 @@ const DEF_ITEMS = [
    met:'A ladder is a road stood on end', extra:'A ladder is a set of rungs joined by rails, made and used for the purpose of climbing up'},
   {tier:2, name:'man', sound:'Man is a rational animal',
    broad:'Man is an animal', narrow:'Man is a rational animal that studies geometry',
-   circ:'Man is a human being', neg:'Man is that which is not irrational',
-   met:'Man is the measure of all things', extra:'Man is a rational animal able to laugh'},
-  {tier:2, name:'a house', sound:'A house is a shelter built to protect living things and goods',
+   circ:'Man is a man that reasons', neg:'Man is that which is not irrational',
+   met:'Man is a reed that thinks', extra:'Man is a rational animal able to laugh'},
+  {tier:2, name:'a house', sound:'A house is a building made for people to live in',
    broad:'A house is a building', narrow:'A house is a shelter built of stone',
    circ:'A house is a dwelling in which one is housed',
    met:'A house is a man’s shell', extra:'A house is a shelter with walls, a roof, and a door, keeping off wind, rain, sun, and cold'},
   {tier:2, name:'a number', sound:'A number is a multitude composed of units',
    broad:'A number is a quantity', narrow:'A number is a multitude of tens',
-   circ:'A number is what is counted in counting',
+   circ:'A number is a numbered multitude',
    met:'A number is the shadow of quantity'},
   {tier:2, name:'ice', sound:'Ice is water solidified by cold',
    broad:'Ice is a solid', narrow:'Ice is water frozen in the mountains',
@@ -2035,18 +2062,18 @@ const DEF_ITEMS = [
    circ:'A spring is the springing-up of water from the ground', neg:'A spring is water that does not fall as rain',
    met:'A spring is the earth’s first word'},
   /* ---- tier 5: first seen at the Master level, with no rule or definition shown ---- */
-  {tier:5, name:'a line', sound:'A line is length without breadth',
+  {tier:5, name:'a line', sound:'A line is length without breadth', negSound:true,
    broad:'A line is a magnitude', narrow:'A line is a straight length without breadth',
    circ:'A line is a linear extension', neg:'A line is that which is not a point',
-   met:'A line is the track of a moving point', extra:'A line is length without any breadth or thickness of any kind'},
-  {tier:5, name:'a point', sound:'A point is that which has no part',
+   met:'A line is a thread drawn out of a point', extra:'A line is length without any breadth or thickness of any kind'},
+  {tier:5, name:'a point', sound:'A point is that which has no part', negSound:true,
    broad:'A point is a position', narrow:'A point is the smallest dot a pen can make',
    circ:'A point is a pointlike position', neg:'A point is that which is not a line',
    met:'A point is the seed of every figure'},
   {tier:5, name:'a father', sound:'A father is a male parent',
    broad:'A father is a parent', narrow:'A father is the male parent of a son',
    circ:'A father is one who has fathered a child', neg:'A father is a parent who is not the mother',
-   met:'A father is the head of the household', extra:'A father is a male parent who has begotten offspring of his own'},
+   met:'A father is the oak of the family', extra:'A father is a male parent who has begotten offspring of his own'},
   {tier:5, name:'a river', sound:'A river is a large natural stream of flowing water',
    broad:'A river is a body of water', narrow:'A river is a large stream that flows into the sea',
    circ:'A river is a riverine flow of water', neg:'A river is flowing water that is not a lake',
@@ -2054,7 +2081,7 @@ const DEF_ITEMS = [
   {tier:5, name:'a shepherd', sound:'A shepherd is one who tends sheep',
    broad:'A shepherd is a keeper of animals', narrow:'A shepherd is one who tends white sheep',
    circ:'A shepherd is one who shepherds a flock', neg:'A shepherd is a herdsman who does not keep cattle',
-   met:'A shepherd is the guardian of the flock'},
+   met:'A shepherd is the wall around his flock'},
   {tier:5, name:'a mirror', sound:'A mirror is a smooth surface that reflects images',
    broad:'A mirror is a surface', narrow:'A mirror is a glass that reflects the face',
    circ:'A mirror is a reflecting looking-glass', neg:'A mirror is a surface that does not let light through',
@@ -2122,7 +2149,7 @@ function genDefRuleQ(d){
   return mc4Make({ruleShow: rShow,
     options: [keeper.sound].concat(breakers.map(b=>b[key])),
     correct: keeper.sound,
-    why: `“${keeper.sound}” holds, since it fits exactly and is clear, positive, and brief. Each of the other three ${meta.w}`,
+    why: `“${keeper.sound}” holds, since it fits exactly and ${keeper.negSound ? 'is clear and brief, and is negative only because no positive account is available' : 'is clear, positive, and brief'}. Each of the other three ${meta.w}`,
     rules: DEF_RULES, mcInstr: d>=5 ? 'Three of these break a rule of definition; one keeps it. Which one keeps it?' : 'Three of these break the rule shown; one keeps it. Which one keeps it?'});
 }
 const DEF_KIND_DOCTRINE = {
@@ -2177,8 +2204,8 @@ const DEF_KIND_STOCK = {
     {tier:3, t:'Rust is what iron becomes when it is long left in damp air', w:'It defines through what brings it about, namely the damp air working on the iron.'},
     {tier:3, t:'A nest is a shelter a bird builds to hold its eggs and its young', w:'It defines through the end, holding the eggs and the young, and through the bird that builds it.'},
     {tier:3, t:'A well is a shaft dug in the ground to reach water', w:'It defines through the end for which the shaft is dug, which is to reach water.'},
-    {tier:5, t:'A loaf is bread baked from kneaded dough', w:'It defines through the making, the baking of the dough, that is, the efficient cause.'},
-    {tier:5, t:'A statue is bronze shaped by the sculptor into a likeness', w:'It defines through its maker, the sculptor, who is the efficient cause.'}
+    {tier:5, t:'A loaf is bread shaped and baked by a baker', w:'It defines through the one who makes it, the efficient cause.'},
+    {tier:5, t:'A statue is a likeness made by a sculptor', w:'It defines through its maker, the sculptor, who is the efficient cause.'}
   ]
 };
 function genDefKindQ(d){
@@ -2361,7 +2388,6 @@ const DIV_STOCK = {
     {tier:1, g:'animal', t:'Animals into those that mainly live in the water, on the land, under the ground, and in the air'},
     {tier:2, g:'tree', t:'Trees into the deciduous and the evergreen'},
     {tier:2, g:'metal', t:'Metals into the precious and the base'},
-    {tier:2, g:'ship', t:'Ships into those driven by oar and those driven by sail'},
     {tier:2, g:'year', t:'The year into spring, summer, autumn, and winter'},
     {tier:1, g:'angle', t:'Angles into the acute, the right, and the obtuse'},
     {tier:1, g:'letter', t:'Letters into the vowels and the consonants'},
@@ -2382,6 +2408,7 @@ const DIV_STOCK = {
     {tier:2, g:'metal', t:'Metals into gold, silver, and iron', w:'copper, tin, and lead are metals too, and they are left out of every member'},
     {tier:2, g:'living thing', t:'Living things into plants and animals', w:'the fungi belong to neither member, and so are left out'},
     {tier:2, g:'bird', t:'Birds into those that swim and those that fly', w:'the ostrich neither swims nor flies, and so is left out of both members'},
+    {tier:2, g:'ship', t:'Ships into those driven by oar and those driven by sail', w:'steamships are driven by neither, and so are left out; and the members also overlap, since the galleys were driven by both'},
     {tier:3, g:'colour', t:'Colors into the white and the black', w:'all the colors in between (red, green, and the rest) are left out'},
     {tier:5, g:'time', t:'Time into the past and the future', w:'the present is left out'},
     {tier:5, g:'year', t:'The four seasons into spring, summer, and autumn', w:'winter is left out'}
@@ -2395,6 +2422,7 @@ const DIV_STOCK = {
     {tier:1, g:'flower', t:'Flowers into the red and the sweet-smelling', w:'a red rose falls under both members'},
     {tier:2, g:'card', t:'Playing cards into the red and the face cards', w:'the king of hearts is both red and a face card'},
     {tier:2, g:'animal', t:'Animals into the swift and the striped', w:'a running tiger is both swift and striped'},
+    {tier:2, g:'ship', t:'Ships into those driven by oar and those driven by sail', w:'the galleys were driven by both, so the members overlap; and steamships are driven by neither, so they are also left out'},
     {tier:3, g:'quadrilateral', t:'Quadrilaterals into the square and the rectangle', w:'every square is a rectangle, so the members are not exclusive'},
     {tier:3, g:'letter', t:'Letters into the vowels and the capitals', w:'the capital A is both a vowel and a capital'},
     {tier:3, g:'plant', t:'Plants into trees and evergreens', w:'the pine is both a tree and an evergreen, so the members are not exclusive'},
@@ -2737,7 +2765,7 @@ const PRED_PRINCIPLES = [
   {tier:2, q:'Which is the SUPREME genus — said of everything below it, but itself under no higher kind?',
    correct:'Substance',
    ds:['Animal','Man','Socrates'],
-   why:'Substance is the highest genus of all (genus generalissimum), said of everything beneath it but falling under no wider kind (the tree of Porphyry).'},
+   why:'Substance is the highest genus in its own line (the tree of Porphyry), said of everything beneath it but falling under no wider kind; being itself is not a genus.'},
   {tier:2, q:'In “Man is a species,” what does man stand for?',
    correct:'The nature as known, not any man; this is simple supposition',
    ds:['The particular men there are','The written letters only','Nothing, because no man is a species'],
@@ -2877,14 +2905,14 @@ function resetSessionOneShots(){
    the author's article and St Thomas: what belongs to the substance
    (by matter → quantity, by form → quality, toward another →
    relation) and what affects it (within → action, passion; without,
-   as measure → when, where, position; without, as adjacent → habit).
+   as measure → when, where, posture; without, as adjacent → having).
    Examples are Aristotle's own from Categories 4 (man, horse; two
    feet; white, strong; double, half; in the school; yesterday;
    sits, lies; is shod, is armed; cuts, burns; is cut, is burnt),
    drawn out from the wider corpus but kept to their teaching.
    ================================================================ */
-const CAT_RULES = 'The ten categories (Aristotle) are substance, quantity, quality, relation, action, passion, when (time), where (place), posture, and habit. Substance exists in its own right; the other nine are accidents, which exist only in a substance or affect it. St Thomas derives them (Metaphysics V, lect. 9): what belongs to the substance itself follows from its matter (quantity), from its form (quality), or from a bearing toward something else (relation); what affects the substance does so from within (action, passion) or from outside, either measuring it (when, where, posture) or merely attached to it (habit).';
-const CAT_NAME = {sub:'substance', qnt:'quantity', qual:'quality', rel:'relation', act:'action', pas:'passion', whn:'when (time)', whr:'where (place)', pos:'posture', hab:'habit (having)'};
+const CAT_RULES = 'The ten categories (Aristotle) are substance, quantity, quality, relation, action, passion, when (time), where (place), posture, and having. Substance exists in its own right; the other nine are accidents, which exist only in a substance or affect it. St Thomas derives them (Metaphysics V, lect. 9): what belongs to the substance itself follows from its matter (quantity), from its form (quality), or from a bearing toward something else (relation); what affects the substance does so from within (action, passion) or from outside, either measuring it (when, where, posture) or merely attached to it (having).';
+const CAT_NAME = {sub:'substance', qnt:'quantity', qual:'quality', rel:'relation', act:'action', pas:'passion', whn:'when (time)', whr:'where (place)', pos:'posture', hab:'having'};
 const CAT_KEYS = ['sub','qnt','qual','rel','act','pas','whn','whr','pos','hab'];
 const CAT_DOCTRINE = {
   sub:'SUBSTANCE exists in itself, not present in a subject. Primary substance (this man, this horse) is neither said of a subject nor present in one; secondary substance (the species and genera in which they fall, such as man and animal) is said of a subject but is present in none (Categories 5, 2a11–19).',
@@ -2896,7 +2924,7 @@ const CAT_DOCTRINE = {
   whn:'WHEN (time) measures the substance by time: yesterday, last year, now, an hour ago.',
   whr:'WHERE (place) sets the substance in a place: in the school, in the marketplace, at home.',
   pos:'POSTURE (situs) is how a thing’s parts are arranged in the place it occupies: he lies, he sits, he stands, he reclines.',
-  hab:'HABIT (having) is what a substance has on it, attached to it but not measuring it: he is shod, he is armed, he is clothed.'
+  hab:'HAVING is what a substance has on it, attached to it but not measuring it: he is shod, he is armed, he is clothed.'
 };
 /* short, example-free glosses — safe to show beside word-options */
 const CAT_GLOSS = {
@@ -2967,22 +2995,22 @@ const CAT_PRINCIPLES = [
   {tier:1, once:'cat-count', q:'How many are the categories, and who set them out?',
    correct:'Ten, set out by Aristotle in the Categories',
    ds:['Five, set out by Porphyry in the Isagoge','Four, as the causes are four','Three, as the acts of the mind are three'],
-   why:'Aristotle’s Categories names ten: substance, quantity, quality, relation, action, passion, when, where, position, and habit.'},
+   why:'Aristotle’s Categories names ten: substance, quantity, quality, relation, action, passion, when, where, posture, and having.'},
   {tier:1, q:'Which of these does NOT signify a substance?',
    correct:'white',
    ds:['man','horse','stone'],
    why:'“White” signifies a quality present in a subject; man, horse, and stone signify substances existing in themselves.'},
   {tier:1, q:'“He is shod” and “he is armed” fall under which category, that of what a man has on him, attached but not measuring him?',
-   correct:'Habit (having)',
+   correct:'Having',
    ds:['Posture (situs)','Where (place)','Passion (undergoing)'],
-   why:'Habit (echein / habitus) is Aristotle’s tenth category, the having of shoes or arms on the body (Categories 4).'},
+   why:'Having (echein / habitus) is Aristotle’s tenth category, the having of shoes or arms on the body (Categories 4).'},
   {tier:2, q:'St Thomas derives quantity and quality thus: quantity belongs to a substance by reason of its ___, quality by reason of its ___.',
    correct:'matter; form',
    ds:['form; matter','end; agent','place; time'],
    why:'In his Commentary on the Metaphysics (V, lect. 9) St Thomas says that what belongs to a substance in its own right follows either from the matter (quantity) or from the form (quality).'},
   {tier:2, q:'Into which two categories does St Thomas divide what affects a substance from within, namely the doing and the being-done-to?',
    correct:'Action and passion',
-   ds:['Quantity and quality','Place and time','Relation and habit'],
+   ds:['Quantity and quality','Place and time','Relation and having'],
    why:'What affects the subject from within is action (in the doer) and passion (in the thing done to), as St Thomas says (Metaphysics V, lect. 9).'},
   {tier:2, q:'Primary substance (this man) differs from secondary substance (man, animal) in that…',
    correct:'Primary substance is the individual thing; secondary substance is the species or genus it belongs to',
@@ -3003,7 +3031,7 @@ const CAT_PRINCIPLES = [
   {tier:3, q:'The category of “posture” (situs), as in “he lies” or “he sits,” signifies…',
    correct:'How a thing’s parts are arranged in the place it occupies',
    ds:['The place in which a thing is found','What a thing has on it, such as shoes or armor','The time at which a thing acts or is acted on'],
-   why:'Posture (situs) differs from where (the place itself) and from habit, since it is the arrangement of the parts, as in lying, sitting, or standing (Metaphysics V, lect. 9).'},
+   why:'Posture (situs) differs from where (the place itself) and from having, since it is the arrangement of the parts, as in lying, sitting, or standing (Metaphysics V, lect. 9).'},
   {tier:3, q:'How do the ten categories differ from the five predicables?',
    correct:'The categories sort what things are, as we first know them (first intentions); the predicables are relations those things have only because they are known (second intentions)',
    ds:['The categories are in the mind alone, the predicables in things apart from knowledge','They are two names for the same ten kinds, sorted the same way','The predicables concern bodies, the categories spirits, so the two never meet'],
@@ -3011,7 +3039,7 @@ const CAT_PRINCIPLES = [
   {tier:3, q:'To which category does “knowledge,” taken as a stable state of the soul, belong?',
    correct:'Quality',
    ds:['Substance','Relation','Action'],
-   why:'Knowledge and virtue are habits, the first species of quality, which is a lasting state (Categories 8). (Spoken of as “knowledge of the knowable,” knowledge is also relative.)'}
+   why:'Knowledge and virtue are habits, the first species of quality, which is a lasting state (Categories 8). This is “habit” in the sense of a lasting quality, not the category of having. (Spoken of as “knowledge of the knowable,” knowledge is also relative.)'}
 ];
 function genCatPrincipleQ(d){
   let pool = CAT_PRINCIPLES.filter(x=> (d>=2 || x.tier===1) && oneShotFree(x));
@@ -3127,7 +3155,7 @@ function enthMistake(q, res){
     const usedRight = (su===mKey&&pu===xKey)||(su===xKey&&pu===mKey);
     if(!usedRight)
       return `The tacit premise must join the middle term (“${termLabel(q.roles.M)}”) with the term of the conclusion that is not in the given premise (“${termLabel(q.missingRole==='major'?q.roles.P:q.roles.S)}”), since nothing else can connect them.`;
-    return 'The terms are right, but that premise makes no valid mood with the given premise and conclusion. Quantity and quality need checking: the conclusion follows the weaker part, and the middle must be distributed once.';
+    return 'The terms are right, but that premise makes no valid mood with the given premise and conclusion. Quantity and quality need checking: the conclusion follows the weaker part, and the middle must be distributed at least once.';
   }
   return 'The first question is which term of the conclusion is left unsupported. The tacit premise must join it to the middle term, in a mood the rules allow.';
 }
@@ -3180,7 +3208,7 @@ const ENTH_POOL = [
   {tier:3, txt:'Pleasure is not the good, for even fools attain it.',
    correct:'What even fools attain is not the good',
    traps:['Fools attain nothing good','The good is hard to attain','Some pleasures are foolish'],
-   why:'This is an Aristotelian commonplace against hedonism. When the premise is supplied the argument is valid, and the dispute moves, as it should, to whether the tacit premise is true.'},
+   why:'This argument is after Aristotle, though the words are not his. He observes that any chance person, even a slave, can enjoy the bodily pleasures no less than the best man, but that no one assigns to a slave a share in happiness (Nicomachean Ethics X.6). When the premise is supplied the argument is valid, and the dispute moves, as it should, to whether the tacit premise is true.'},
   {tier:1, txt:'The gods must be angry — the harvest has failed.',
    correct:'Whenever the harvest fails, the gods are angry',
    traps:['Whenever the gods are angry, the harvest fails','The gods send every misfortune upon men','Some failed harvests are sent by the gods'],
@@ -3417,7 +3445,8 @@ const FAL_ITEMS = [
   {tier:3, k:'accent',  t:'A desert is a dry waste. He got his just desert. So he was given a dry waste.'},
   {tier:5, k:'accent',  t:'They will present the present at present. Three of the same word, so three of the same thing.'},
   {tier:1, k:'comp',    t:'The man who is silent can speak. So the man can speak and be silent at the same time.'},
-  {tier:2, k:'comp',    t:'Each of these stones can be lifted by one man. So all of them together can be lifted by one man.'},
+  {tier:2, k:'comp',    t:'He who can carry only one stone can carry many. So he who cannot carry more than one stone can carry many.',
+   w:'Taken together, “can carry only one” means he is unable to carry more, and the premise is false; taken apart, it means that he now carries only one, and the premise is true.'},
   {tier:3, k:'comp',    t:'A man who is sitting can walk. So a man can walk while he is sitting.'},
   {tier:5, k:'comp',    t:'It is possible for what is black to be white. So it is possible for a thing to be black and white at once.'},
   {tier:1, k:'divis',   t:'Two and three are five. Two is even and three is odd. So five is even and odd.'},
@@ -3682,11 +3711,11 @@ const TOPICS = {
        max:'Whatever fits the definition fits the thing defined, and whatever does not, does not.',
        use:'when one must show that something is, or is not, of a certain kind'},
   gen:{name:'From the wider kind (genus)', gloss:'what holds of the whole family is brought down to the member.',
-       max:'Whatever belongs to the whole family belongs to each kind within it.',
+       max:'Whatever belongs to the whole family belongs to each kind within it, and what the whole family lacks, each kind lacks.',
        use:'when one must show that something has a feature its whole family has'},
-  spec:{name:'From the narrower kind (species)', gloss:'what holds of the kind is carried up to the family, or applied to one of its members.',
-       max:'Whatever is said of the kind is said of the individuals under it.',
-       use:'when one must show that some individual has what its kind has'},
+  spec:{name:'From the narrower kind (species)', gloss:'what the narrower kind is said of is shown to fall under the wider kind as well.',
+       max:'Whatever the narrower kind is said of, the wider kind is said of too.',
+       use:'when one must show that something falls under a wider kind, because it falls under a narrower one'},
   prop:{name:'From the property', gloss:'a mark that belongs to the thing alone and always is used to identify or exclude it.',
        max:'Where the property is, the thing is; where it is absent, the thing is absent.',
        use:'when one must show that this is, or is not, the very thing'},
@@ -3731,7 +3760,7 @@ const DIAL_TOPICS = [
   {tier:3, k:'more', t:'If even the innocent are punished under this law, how much more the guilty who are merely suspected.'},
   {tier:3, k:'opp',  t:'If health is to be sought, sickness is to be avoided — they are contraries, and the one follows from the other.'},
   {tier:3, k:'like', t:'A ship needs one pilot, not a committee of them. So too, they argued, does a state.'},
-  {tier:3, k:'whole',t:'Every part of the argument has been granted. So the argument as a whole has been granted.'},
+  {tier:3, k:'whole',t:'The whole wall is white because it is plastered white. So this patch of it is white.'},
   {tier:5, k:'prop',t:'Whatever laughs is a man, and only man laughs. He laughs. So he is a man.'},
   {tier:5, k:'gen', t:'No plant has sensation, and moss is a plant. So moss has no sensation.'},
   {tier:5, k:'auth',t:'Aristotle says it, and on such a question there is no better judge. So it is to be held, until better reason appears.'},
@@ -3821,7 +3850,8 @@ const ENDOX_ITEMS = [
   {tier:2, k:'wise',t:'The fever should be let run its course rather than broken early.'},
   {tier:2, k:'one', t:'This poem is the best in the language.'},
   {tier:2, k:'all', t:'It is worse to suffer a great harm than a small one.'},
-  {tier:2, k:'dem', t:'Every whole is greater than any one of its parts.'},
+  {tier:2, k:'all', t:'Every whole is greater than any one of its parts.', w:'It is known through itself, as soon as the terms are understood; it is certain, but it is not proved.'},
+  {tier:2, k:'dem', t:'There is no greatest prime number.'},
   {tier:3, k:'wise',t:'A law that nobody can obey is no true law.'},
   {tier:3, k:'one', t:'The old road was pleasanter than the new one.'},
   {tier:3, k:'all', t:'A judge should not decide a case in which he himself has an interest.'},
@@ -3839,7 +3869,7 @@ function genDialEndoxQ(d){
   return mc4Make({prompt:it.t, options:[ENDOX[it.k].name].concat(others),
     correct: ENDOX[it.k].name,
     ruleShow: d>=5 ? '' : 'Dialectic works from the probable, that is, what seems so to everyone, or to most, or to the wise. Before a premise is used, we ask what standing it has: is it demonstrable, granted by all, granted by the learned only, or merely somebody’s opinion?',
-    why: `${ENDOX[it.k].short}. Such a premise is ${ENDOX[it.k].gloss}`,
+    why: `${ENDOX[it.k].short}. Such a premise is ${ENDOX[it.k].gloss}${it.w ? ' '+it.w : ''}`,
     rules: DIAL_RULES, mcInstr:'What standing has this premise, if it is offered in argument?'});
 }
 
@@ -3871,7 +3901,7 @@ const RESP_ITEMS = [
   {tier:2, th:'The heavier body always falls faster.', ob:'Two stones of different weight, dropped together, strike the ground together.',
    k:'full', w:'The observation is true, and the thesis as stated is false, so the respondent grants the objection and restates the thesis.'},
   {tier:2, th:'Every part of the wall is white, so the wall is white.', ob:'Every brick is light, yet the wall is not light.',
-   k:'conc', w:'The objection grants the pattern and shows that it fails elsewhere, which is to attack the form of the inference, not the truth of any premise.'},
+   k:'conc', w:'Every premise of the thesis may be granted, but the consequence is denied: what holds of each part need not hold of the whole, as the bricks show.'},
   {tier:3, th:'Knowledge is always of what cannot be otherwise.', ob:'But I know that you are sitting down, and you might stand up.',
    k:'dist', w:'“Knowledge” is said strictly, of what is demonstrated and cannot be otherwise, and loosely, of what we are sure of at the time. Once the senses are distinguished, the thesis holds in the strict sense.'},
   {tier:3, th:'A law binds everyone in the realm.', ob:'But the law was never published in this province, and nobody there has heard it.',
@@ -4253,7 +4283,7 @@ if(typeof module!=='undefined' && module.exports){
     genVennQ, checkVenn, vennMistake, vennStateToMarks, termKey,
     mistakeNoteValidity, mistakeNoteConclusion, termLabel,
     diagToState, genVenn2Q, genVennSyllQ, checkVenn3, vennMistake3,
-    VENN_KEY, VENN_KEY1, vennKeyHtml, importPremise, importExplain, modalConclusion, modalRuleClause,
+    VENN_KEY, VENN_KEY1, vennKeyHtml, importPremise, importExplain, modalConclusion, modalRuleClause, modalPairs, MODAL_NONE_NOTE,
     KB_ATOMS, MATH_TERMS, MATH_KEYS, MATH_EXT, propTruth, counterexample,
     genSoundnessQ, mistakeNoteSound,
     KB_DOMAINS, DOM_KEYS, DOM_EXT, ETH_ATOMS, ETH_TERMS, SOUL_ATOMS, SOUL_TERMS,

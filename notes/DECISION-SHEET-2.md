@@ -2,6 +2,8 @@
 
 Prepared October 20, 2026. This sheet covers what commit `24dcd8c` left untouched. Each item was rechecked against current `main` (`/workspace/ars-syllogistica`), and every line number below is from that commit. Nothing in the app was changed, and nothing was pushed.
 
+**Status:** Timothy approved every recommendation in Part A as written. Part A and all of Part B were carried out on October 20, 2026; see the commit that follows this sheet.
+
 The items are in two groups. **Part A** holds the judgment calls: real choices for Timothy, each with a recommendation. **Part B** holds the plain slips, each with its fix.
 
 Rules applied throughout:
