@@ -1267,7 +1267,7 @@ function immMistakeOp(q, parsed){
     const plainSwap = parsed.s.key===termKey(q.pr.p.term) && parsed.p.key===termKey(q.pr.s.term)
                       && !parsed.s.neg && !parsed.p.neg;
     if(q.op==='converse' && q.pr.t==='A' && parsed.c==='A' && plainSwap)
-      return 'This is illicit conversion, the classic slip. “All S are P” distributes its subject only, so it converts merely <em>per accidens</em>, to “Some P are S.”';
+      return 'This is illicit conversion, the classic slip. “All S are P” distributes its subject only, so it converts only by limitation, to “Some P are S.”';
     if(q.op==='obverse'){
       if(parsed.c===e.t && !parsed.p.neg)
         return 'Obversion has two steps: changing the quality <em>and</em> replacing the predicate with its complement. This answer changes the quality only.';
@@ -1712,7 +1712,7 @@ function modalEquipMistake(q){
     return 'The negations are folded step by step: “impossible” is “necessary not”; a negation <em>before</em> the mode turns “necessary” into “possible not” and “possible” into “necessary not”; a negation <em>after</em> the mode changes only the dictum (what is said). Both expressions come to the same corner.';
   const pair = [q.c1, q.c2].sort().join('');
   if(pair==='NnPn') return '“Not necessary” is not “impossible”: denying the stronger mode grants only the weaker denial, possible-not. This is the commonest modal slip.';
-  if(pair==='NpPp') return '“Possible” does not rise to “necessary”: a posse ad necesse non valet consequentia.';
+  if(pair==='NpPp') return '“Possible” does not rise to “necessary”, since the inference from the possible to the necessary does not hold.';
   if(pair==='NnPp' || pair==='NpPn') return 'These are contradictories, not equipollents (equal in force), since they always take opposite truth-values.';
   if(pair==='NpNn') return 'These are contraries, both false of whatever is contingent, and not equipollents.';
   if(pair==='PpPn') return 'These are subcontraries, both true of whatever is contingent, and not equipollents.';
@@ -1729,7 +1729,7 @@ const MREL_TEXT = {
   contradictory:'contradictories on the modal square, and so always of opposite truth-value',
   contrary:'contraries, which are never both true, though both fail of the contingent',
   subcontrary:'subcontraries, which are never both false, though both hold of the contingent',
-  subalternDown:'in subalternation, since ab necesse ad posse valet consequentia, and truth descends from the stronger mode',
+  subalternDown:'in subalternation, since the inference from the necessary to the possible holds, and truth descends from the stronger mode',
   subalternUp:'in subalternation, so that falsity ascends from the weaker mode to the stronger, but truth does not ascend'
 };
 function genModalSquareQ(d, mode){
@@ -1748,7 +1748,7 @@ function modalSquareMistake(q){
   if(q.rel==='subalternDown' && q.given==='F')
     return 'Falsity does not descend: that a thing is not necessary leaves it possibly so and possibly not.';
   if(q.rel==='subalternUp' && q.given==='T')
-    return 'Truth does not ascend: a posse ad necesse non valet consequentia. Only falsity passes from the weaker mode to the stronger.';
+    return 'Truth does not ascend, since the inference from the possible to the necessary does not hold. Only falsity passes from the weaker mode to the stronger.';
   return 'Contradictories on the modal square always disagree; for the rest, the question is what the square forbids, and what it does not forbid remains undetermined.';
 }
 /* the composite and the divided sense — sensus compositus / divisus */
@@ -1802,7 +1802,7 @@ function genModalSenseQ(){
 const SENSE_LABELS = ['In the composite sense only','In the divided sense only','In both senses','In neither sense'];
 const SENSE_VALUES = ['comp','div','both','neither'];
 function modalSenseNote(){
-  return 'The two readings give two verdicts, and the difference is one of <em>scope</em>. In the <strong>composite</strong> sense (in sensu composito) the mode governs the whole proposition <em>composed</em> of its parts, taken together as one; the question is <em>whether the whole (subject with predicate, both at once) is possible or necessary</em>. In the <strong>divided</strong> sense (in sensu diviso) the mode’s scope is <em>divided off</em> and narrowed to the subject alone; the question is <em>whether this subject, as it actually is, has the power (or the necessity) claimed</em>, even if it cannot exercise it just now. So “the seated man can walk” is false in the composite sense (seated and walking together is impossible) but true in the divided sense (the man himself keeps the power to walk).';
+  return 'The two readings give two verdicts, and the difference is one of <em>scope</em>. In the <strong>composite</strong> sense the mode governs the whole proposition <em>composed</em> of its parts, taken together as one; the question is <em>whether the whole (subject with predicate, both at once) is possible or necessary</em>. In the <strong>divided</strong> sense the mode’s scope is <em>divided off</em> and narrowed to the subject alone; the question is <em>whether this subject, as it actually is, has the power (or the necessity) claimed</em>, even if it cannot exercise it just now. So “the seated man can walk” is false in the composite sense (seated and walking together is impossible) but true in the divided sense (the man himself keeps the power to walk).';
 }
 /* small-print helps shown above each modal question */
 const MODAL_GLOSS = {
@@ -3031,7 +3031,7 @@ const CAT_PRINCIPLES = [
   {tier:3, q:'The category of “posture” (situs), as in “he lies” or “he sits,” signifies…',
    correct:'How a thing’s parts are arranged in the place it occupies',
    ds:['The place in which a thing is found','What a thing has on it, such as shoes or armor','The time at which a thing acts or is acted on'],
-   why:'Posture (situs) differs from where (the place itself) and from having, since it is the arrangement of the parts, as in lying, sitting, or standing (Metaphysics V, lect. 9).'},
+   why:'Posture differs from where (the place itself) and from having, since it is the arrangement of the parts, as in lying, sitting, or standing (Metaphysics V, lect. 9).'},
   {tier:3, q:'How do the ten categories differ from the five predicables?',
    correct:'The categories sort what things are, as we first know them (first intentions); the predicables are relations those things have only because they are known (second intentions)',
    ds:['The categories are in the mind alone, the predicables in things apart from knowledge','They are two names for the same ten kinds, sorted the same way','The predicables concern bodies, the categories spirits, so the two never meet'],
@@ -3325,11 +3325,11 @@ function genFalDisputationQ(d){
 
 /* ---- the five awkward places a sophist drives you to (De fallaciis, c. 3) ---- */
 const META_KINDS = {
-  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; De fallaciis, the treatise attributed to St. Thomas, calls this fault redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
+  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; De fallaciis, the treatise attributed to St. Thomas, calls this fault refutation. It offends against metaphysics, which holds that contradictories cannot both be true.'},
   fal:{name:'To grant something plainly false', gloss:'the respondent is forced into a statement anyone can see is untrue. It offends against natural science and mathematics, where we can check.'},
   ino:{name:'To grant something absurd',   gloss:'the respondent is driven against what nearly everyone believes, which need not be false, but is hard to accept. It offends against dialectic, which works from what people grant.'},
   sol:{name:'To say something ungrammatical', gloss:'the respondent is maneuvered into speaking badly. It offends against grammar.'},
-  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which De fallaciis, the treatise attributed to St. Thomas, calls nugatio. It offends against rhetoric, whose business is to speak well.'}
+  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which De fallaciis, the treatise attributed to St. Thomas, calls babbling. It offends against rhetoric, whose business is to speak well.'}
 };
 const META_ITEMS = [
   {tier:1, k:'red', t:'You denied that you ate the raw meat. He argues: whatever you bought, you ate; you bought raw meat; so you ate raw meat.', w:'the example comes from the same treatise, and the aim is to make the respondent take back what he has just denied.'},
@@ -3647,7 +3647,7 @@ const FAL_DOCTRINE = [
   {tier:2, q:'A modern book calls an argument a “straw man.” Which of the thirteen is it a species of?',
    correct:'Missing the point, which proves something else',
    ds:['Equivocation','Many questions asked as one','Composition'],
-   why:'Ignoratio elenchi covers every case of proving something other than what was in dispute. The straw man distorts the claim first and then refutes the distortion; the red herring simply changes the subject. Both are the same fault underneath.'},
+   why:'Missing the point, which the schools call ignorance of the refutation, covers every case of proving something other than what was in dispute. The straw man distorts the claim first and then refutes the distortion; the red herring simply changes the subject. Both are the same fault underneath.'},
   {tier:3, q:'What makes an argument sophistical, if both its premises may be true?',
    correct:'It depends on a hidden rule that is false but looks true',
    ds:['It is stated too quickly to follow','Its conclusion is false','It uses technical words'],
@@ -3699,7 +3699,7 @@ function genFallacyQ(d){
    on, the STANDING of a premise offered, and the RESPONSE an objection
    calls for — the distinguo of the disputed question.
    ================================================================ */
-const DIAL_RULES = 'Dialectic reasons from what is probable (what seems so to everyone, or to most, or to the wise) and reaches a reasoned opinion, not a proof. Its instrument is the topic (locus), a standing relation, such as genus to species or whole to part, from which an argument may be drawn. Its practice is the disputation, where one puts a case and another answers.';
+const DIAL_RULES = 'Dialectic reasons from what is probable (what seems so to everyone, or to most, or to the wise) and reaches a reasoned opinion, not a proof. Its instrument is the topic, a standing relation, such as genus to species or whole to part, from which an argument may be drawn. Its practice is the disputation, where one puts a case and another answers.';
 
 /* ---- the topics: standing places an argument may be drawn from ---- */
 /* Each topic carries its MAXIM — the governing proposition the argument
@@ -3955,7 +3955,7 @@ const DIAL_DOCTRINE = [
   {tier:2, q:'Two people are disputing. Who are the two parties called?',
    correct:'The one who puts the case and the one who answers',
    ds:['The teacher and the learner','The speaker and the audience','The judge and the witness'],
-   why:'St. Thomas says that a disputation takes place between the opponens and the respondens. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
+   why:'St. Thomas says that a disputation takes place between the opponent and the respondent. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
   {tier:2, q:'Why is the argument from authority called the weakest of the topics?',
    correct:'Because it gives no reason drawn from the thing itself, only the judgment of those who know',
    ds:['Because authorities are usually wrong','Because it is not a topic at all','Because only the ignorant use it'],

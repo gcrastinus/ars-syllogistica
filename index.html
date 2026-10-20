@@ -3271,8 +3271,8 @@ if(typeof document!=='undefined'){
     } else {
       detail = `The ${q.op} of “${immPropText(q.pr)}” is: <strong>${eTxt}</strong>.`;
       if(q.perAcc) detail += q.pr.t==='A'
-        ? ' (Conversion <em>per accidens</em>: the universal is reduced to a particular, and existential import supplies the witness.)'
-        : ' (Contraposition <em>per accidens</em>: an E contraposes only by limitation, to an O.)';
+        ? ' (Conversion by limitation: the universal is reduced to a particular, and existential import supplies the witness.)'
+        : ' (Contraposition by limitation: an E contraposes only to an O.)';
     }
     if(!res.correct) detail += `<div class="fb-why">${immMistakeOp(q, res.parsedAns)}</div>`;
     const marks = immMarks(q.expected || q.pr);
