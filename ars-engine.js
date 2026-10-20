@@ -1550,9 +1550,9 @@ function readout2(marks, la, lb){
   if(marks.A==='x')      props.push(`Some ${la} are not ${lb}`);
   if(marks.B==='x')      props.push(`Some ${lb} are not ${la}`);
   if(marks.A==='shade' && marks.AB==='shade')
-    warns.push(`the whole of “${la}” is declared empty, so no affirmative proposition with “${labs[T]}” as its subject can be true`);
+    warns.push(`the whole of “${la}” is declared empty, so no affirmative proposition with “${la}” as its subject can be true`);
   if(marks.B==='shade' && marks.AB==='shade')
-    warns.push(`the whole of “${lb}” is declared empty, so no affirmative proposition with “${labs[T]}” as its subject can be true`);
+    warns.push(`the whole of “${lb}” is declared empty, so no affirmative proposition with “${lb}” as its subject can be true`);
   return {props, warns};
 }
 function cellDesc3(r, labs){
