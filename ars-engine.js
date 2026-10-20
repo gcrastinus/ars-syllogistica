@@ -491,8 +491,30 @@ function genOrdinaryQ(d){
 /* ================================================================
    VENN DIAGRAMS
    Shading declares a region empty; × declares an occupant;
-   ⊗ marks traditional existential import.
+   ⊗ declares an occupant whose existence comes from an affirmative
+   universal premise (traditional existential import), not from a
+   particular premise. Student states: none / shade / x / imp.
    ================================================================ */
+const VENN_KEY = 'Shading: the region is empty. ×: something is here. ⊗: something is here because an affirmative universal premise asserts that its subject exists, not because a particular premise says so.';
+const VENN_KEY1 = 'Shading: the region is empty. ×: something is here. ⊗: something is here because a universal affirmative proposition asserts that its subject exists, not because a particular proposition says so.';
+function vennKeyHtml(one){ return `<div class="venn-key">${one ? VENN_KEY1 : VENN_KEY}</div>`; }
+/* Which premise supplies the existence that a ⊗ on term T marks: the A
+   premise whose subject is T, or -1 (Camestros, Camenos), where T is the
+   subject only of a negative premise. */
+function importPremise(fig, t1, t2, T){
+  for(const j of [0,1]) if((j?t2:t1)==='A' && FIG_POS[fig][j][0]===T) return j;
+  return -1;
+}
+/* Sentences that say where the ⊗ on term T comes from. */
+function importExplain(fig, t1, t2, T, roles){
+  const name = termLabel(roles[T]);
+  const j = importPremise(fig, t1, t2, T);
+  if(j>=0){
+    const tp = premiseTerms(fig, j, roles);
+    return `The affirmative premise “${propText('A', tp[0], tp[1])}” asserts that something falls under “${name}”, and the ⊗ marks that existence.`;
+  }
+  return `No premise asserts that something falls under “${name}”, since it appears only in a negative premise. The diagram writes the particular negative conclusion with an ×, so it must suppose such a thing, and the ⊗ marks that supposition. On the medieval reading the mood is valid without it, because a particular negative asserts no existence and is true even if nothing falls under “${name}”.`;
+}
 const V2 = {
   circles:{A:{x:170,y:150,r:90}, B:{x:270,y:150,r:90}}, W:440, H:290,
   cent:{A:[138,150], AB:[220,150], B:[302,150], O:[220,266]},
@@ -632,33 +654,47 @@ function genVennQ(d, mode){
   if(type==='E') correct.AB='shade';
   if(type==='I') correct.AB='x';
   if(type==='O') correct[sLune]='x';
-  return {kind:'venn', type, S, P, left, right, sLune, sentence, correct};
+  /* “All S are P” also asserts that some S exists; a ⊗ in the open cell of S
+     (the overlap) is accepted but not required. */
+  const optImp = type==='A' ? 'AB' : null;
+  return {kind:'venn', type, S, P, left, right, sLune, sentence, correct, optImp};
 }
 function vennStateToMarks(state){
   const shaded = new Set(), xs = [];
   for(const r of ['A','AB','B']){
     if(state[r]==='shade') shaded.add(r);
     if(state[r]==='x') xs.push({regions:[r], kind:'def'});
+    if(state[r]==='imp') xs.push({regions:[r], kind:'import'});
   }
   return {shaded, xs};
 }
 function checkVenn(q, user){
-  return ['A','AB','B'].every(r=>user[r]===q.correct[r]);
+  return ['A','AB','B'].every(r=>user[r]===q.correct[r] || (r===q.optImp && user[r]==='imp'));
 }
 function vennMistake(q, user){
   const regs=['A','AB','B'], mirror={A:'B',AB:'AB',B:'A'};
   for(const r of regs){
+    if(q.correct[r]==='x' && user[r]==='imp')
+      return 'The region is right, but the mark should be an ×, not a ⊗. A particular proposition itself asserts that something exists in this region, and that is shown by the ×. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
     if(q.correct[r]!=='none' && user[r]!=='none' && user[r]!==q.correct[r])
       return q.correct[r]==='shade'
-        ? 'The region is right but the mark is wrong. A universal proposition declares a region <em>empty</em>, and that is shown by shading. Students often think that a universal must add a mark of existence to the diagram, but a universal only declares a region empty; it asserts no existence.'
+        ? (q.type==='A'
+          ? 'The region is right but the mark is wrong. The diagram shows a universal by what it denies, so the region it empties is shaded. “All S are P” does also assert that some S exists, and that existence may be shown by a ⊗ in the part of S that is left open (the overlap), but the part of S outside P must be shaded.'
+          : 'The region is right but the mark is wrong. The diagram shows a universal by what it denies, so the region it empties is shaded. A negative proposition asserts no existence, so “No S are P” makes no × and no ⊗.')
         : 'The region is right but the mark is wrong. “Some” asserts that something <em>exists</em>, and that is shown by the ×. Shading would declare the region empty, the very opposite of what is said. Shading here usually comes from treating every proposition as a claim about a whole region.';
+  }
+  const impAt = regs.filter(r=>user[r]==='imp' && r!==q.optImp);
+  if(impAt.length){
+    if(q.type==='E') return 'A negative proposition asserts no existence, so the diagram of “No S are P” has no ⊗. The overlap is shaded, and nothing more is drawn.';
+    if(q.type==='A') return 'The ⊗ is in the wrong region. “All S are P” asserts that some S exists, and since every S is P, that S can only be in the overlap. The ⊗ may go there (it is not required), and the part of S outside P is shaded.';
+    return 'A particular proposition shows its existence with an ×, because the proposition itself says that something is there. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
   }
   if(regs.some(r=>user[r]!=='none') && regs.every(r=>user[r]===q.correct[mirror[r]]))
     return 'This diagram shows the converse, in which subject and predicate have changed places. “All S are P” empties the part of S <em>outside</em> P (not the part of P outside S), and “Some S are not P” marks S outside P. A and O propositions do not convert, so the direction matters; this is the most common slip.';
-  const uMarks = regs.filter(r=>user[r]!=='none').length;
+  const uMarks = regs.filter(r=>user[r]!=='none' && !(r===q.optImp && user[r]==='imp')).length;
   const cMarks = regs.filter(r=>q.correct[r]!=='none').length;
   if(uMarks>cMarks)
-    return 'There are too many marks. Each categorical proposition makes exactly one claim, and so has one shaded region or one ×. Students often add what they take to be implied (e.g. shading elsewhere after an ×), but the diagram should show only what the proposition itself asserts.';
+    return 'There are too many marks. Each categorical proposition makes exactly one claim about a region, and so has one shaded region or one × (a universal affirmative may also show the existence of its subject with a ⊗). Students often add what they take to be implied (e.g. shading elsewhere after an ×), but the diagram should show only what the proposition itself asserts.';
   if(q.type==='I' && user.AB==='none')
     return 'The × for “Some S are P” belongs in the <em>overlap</em>, since the proposition asserts a common member. It is tempting to mark the subject’s own crescent because the sentence begins with S, but the claim concerns what S and P share.';
   if(q.type==='O' && user.AB!=='none')
@@ -670,7 +706,7 @@ function vennMistake(q, user){
 function diagToState(diag){
   const st = {}; REGIONS3.forEach(r=>st[r]='none');
   diag.shaded.forEach(r=>st[r]='shade');
-  diag.xs.forEach(x=>{ st[x.regions[0]] = 'x'; });
+  diag.xs.forEach(x=>{ st[x.regions[0]] = x.kind==='import' ? 'imp' : 'x'; });
   return st;
 }
 /* two premises together (set V after 50 points) — always determinate (no ambiguous ×?) */
@@ -689,7 +725,7 @@ function genVenn2Q(d, mode){
   return {kind:'venn3', sub:'pair', fig:1, t1:'A', t2:'A', roles, diag, expect:diagToState(diag),
     lines:[propText('A',roles.M,roles.P), propText('A',roles.S,roles.M)]};
 }
-/* a whole valid syllogism (set VI) — premises plus, where needed, the import × */
+/* a whole valid syllogism (set VIII) — premises plus, where needed, the import ⊗ */
 function genVennSyllQ(d, mode){
   const v = pickValid(d);
   const diag = diagramSyllogism(v.fig, v.mood);
@@ -700,14 +736,30 @@ function genVennSyllQ(d, mode){
 }
 function checkVenn3(q, user){ return REGIONS3.every(r=>user[r]===q.expect[r]); }
 function vennMistake3(q, user){
-  for(const r of REGIONS3)
-    if(q.expect[r]!=='none' && user[r]!=='none' && user[r]!==q.expect[r])
-      return q.expect[r]==='shade'
-        ? 'The region is right but the mark is wrong: a universal proposition <em>empties</em> its region, and so the region is shaded. The × asserts existence, which no universal claims.'
-        : 'The region is right but the mark is wrong: “some” asserts existence, and so calls for an ×. Shading would declare that very region empty, the opposite of what is said.';
   const imp = q.diag.xs.find(x=>x.kind==='import');
-  if(imp && user[imp.regions[0]]!=='x')
-    return `The conclusion asserts existence that the universal premises do not yet witness. The traditional account grants existential import, so the × goes in the only unshaded region of “${termLabel(q.roles[imp.term])}”. Missing this is the commonest slip here; on the modern reading the weakened moods fail for exactly this reason.`;
+  const impName = imp ? termLabel(q.roles[imp.term]) : '';
+  const impSrc = imp ? importPremise(q.fig, q.mood ? q.mood[0] : q.t1, q.mood ? q.mood[1] : q.t2, imp.term) : -1;
+  for(const r of REGIONS3){
+    if(q.expect[r]==='x' && user[r]==='imp')
+      return 'The cell is right, but the mark should be an ×, not a ⊗. The particular premise itself says that something is here, and that is shown by an ×. The ⊗ is kept for existence that comes from an affirmative universal premise.';
+    if((q.expect[r]==='shade' || q.expect[r]==='x') && user[r]!=='none' && user[r]!==q.expect[r])
+      return q.expect[r]==='shade'
+        ? 'The region is right but the mark is wrong: a universal proposition <em>empties</em> its region, and so the region is shaded. What an affirmative universal asserts about existence is drawn with a ⊗, and only where the conclusion needs it.'
+        : 'The region is right but the mark is wrong: “some” asserts existence, and so calls for an ×. Shading would declare that very region empty, the opposite of what is said.';
+  }
+  const strayImp = REGIONS3.filter(r=>user[r]==='imp' && q.expect[r]!=='imp');
+  if(strayImp.length && !imp)
+    return 'This syllogism needs no ⊗. Once the premises are drawn, the conclusion is already in the diagram, so nothing more about existence has to be shown.';
+  if(imp && user[imp.regions[0]]==='x')
+    return impSrc>=0
+      ? `The cell is right, but the mark should be a ⊗, not an ×. No particular premise says that something is here. The existence comes from the affirmative premise “${q.lines[impSrc]}”, which asserts that something falls under “${impName}”; the ⊗ marks existence of that kind.`
+      : `The cell is right, but the mark should be a ⊗, not an ×. No premise says that something is here. The diagram writes the conclusion with an ×, and so must suppose that something falls under “${impName}”; the ⊗ marks that supposition.`;
+  if(imp && user[imp.regions[0]]!=='imp')
+    return impSrc>=0
+      ? `The conclusion asserts an existence that the premises, as drawn, do not yet show. The affirmative premise “${q.lines[impSrc]}” asserts that something falls under “${impName}”, so a ⊗ goes in the only unshaded region of “${impName}”. Missing this is the commonest slip here. On the modern reading, which gives no universal proposition existential import, these moods (the five weakened ones and Darapti, Felapton, Bramantip, and Fesapo) fail for exactly this reason.`
+      : `The conclusion is drawn as an ×, so the diagram must suppose that something falls under “${impName}”, and a ⊗ goes in the only unshaded region of “${impName}”. No premise asserts this, since “${impName}” appears only in a negative premise. On the medieval reading the mood is valid anyway, because a particular negative asserts no existence and is true even if nothing falls under “${impName}”; the ⊗ only lets the diagram show the conclusion.`;
+  if(strayImp.length)
+    return `The ⊗ is in the wrong cell. It belongs in the only region of “${impName}” that the shading leaves open, and nowhere else.`;
   const expX = REGIONS3.filter(r=>q.expect[r]==='x'), usrX = REGIONS3.filter(r=>user[r]==='x');
   if(expX.length && usrX.join()!==expX.join())
     return 'The placing of the × matters. The universal premises are shaded first, and the shading then decides which cell of the “some”-zone can still hold a witness. An × in a shaded cell asserts what was declared empty; an × on the wrong side of a circle asserts a membership never claimed.';
@@ -978,7 +1030,7 @@ const KB_GLOSS = {
   'square':'a quadrilateral with equal sides and right angles',
   'circle':'a plane figure bounded by one line, every point of it equally far from the center',
   'equilateral triangle':'a triangle whose three sides are equal',
-  'isosceles triangle':'a triangle having two equal sides',
+  'isosceles triangle':'a triangle having two sides alone equal (Euclid, Elements I, def. 20)',
   'scalene triangle':'a triangle whose three sides are all unequal',
   'right triangle':'a triangle having one right angle',
   'straight line':'a line lying evenly between its ends',
@@ -1059,7 +1111,7 @@ function mistakeNoteValidity(q, mode){
   }
   // student called a valid syllogism invalid
   if(isPart(q.mood[2]) && !isPart(q.mood[0]) && !isPart(q.mood[1]))
-    return 'Many students hesitate here. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply; but the scholastic account grants every term existential import, so the weakened conclusion follows.';
+    return 'Many students hesitate here. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply. But in the older logic an affirmative proposition asserts that its subject exists'+(q.mood[2]==='O' ? ', and a particular negative asserts no existence' : '')+', so the '+(SUBALTERN.has(q.fig+q.mood) ? 'weakened conclusion' : 'conclusion')+' follows.';
   if(q.fig===4)
     return 'Fourth-figure syllogisms reverse the natural order of predication, so even valid ones seem wrong. But if we read the premises slowly and test the syllogism against the rules, we find that it breaks none of them.';
   if(mode!=='letters')
@@ -1601,8 +1653,9 @@ function spConsequences(marks, labs){
    After John of St Thomas: the four modes; equipollences (the
    mnemonic table of Amabimus, Edentuli, Iliace, Purpurea); the
    modal square; the composite and divided senses; and the modal
-   syllogism under the received rule — peiorem sequitur semper
-   conclusio partem, the conclusion follows the weaker part.
+   syllogism after Aristotle (Prior Analytics I.9), whom the Thomist
+   school follows: in the first figure a necessary major with an
+   assertoric minor concludes necessarily.
    Semantics by sense-distinction, not possible worlds.
    ================================================================ */
 const M_CORNERS = ['Np','Nn','Pp','Pn'];   // necessary / impossible / possible / possible-not
@@ -1753,16 +1806,38 @@ const MODAL_GLOSS = {
   equip: '<em>Equipollent</em> means equal in force: the same meaning and truth-value, and the same corner of the square (though the words differ). &ensp;·&ensp; The <em>laws</em> are these: “impossible” = “necessary not” · a NOT <em>before</em> the mode changes the corner (“not possible” = “impossible”; “not necessary” = only “possible not”) · a NOT <em>after</em> the mode negates the content alone.',
   msq: 'On <em>the modal square</em>, necessary and impossible are contraries, never both true &ensp;·&ensp; possible and possible-not are subcontraries, never both false &ensp;·&ensp; necessary↔possible-not and impossible↔possible are contradictories &ensp;·&ensp; truth descends: necessary ⇒ possible'
 };
-/* the modal syllogism — conclusion follows the weaker part */
+/* the modal syllogism. Aristotle (Prior Analytics I.9): in the first figure a
+   necessary major with an assertoric minor gives a necessary conclusion, and an
+   assertoric major with a necessary minor only an assertoric one. Otherwise the
+   conclusion takes the weaker mode. Outside the first figure Aristotle's rules
+   for mixing necessary and assertoric premises vary by mood (I.10–11), so that
+   mixture is not generated there. */
 const MOD_RANK = {nec:3, assert:2, cont:1};
 const MOD_PRE = {nec:'Necessarily, ', assert:'', cont:'Contingently, '};
 const MOD_NAME = {nec:'necessary', assert:'assertoric', cont:'contingent'};
+function modalConclusion(fig, mods){
+  if(fig===1 && mods[0]==='nec' && mods[1]==='assert') return 'nec';
+  return MOD_RANK[mods[0]] <= MOD_RANK[mods[1]] ? mods[0] : mods[1];
+}
+/* the rule that settles the mode, as a clause for feedback */
+function modalRuleClause(q){
+  const m = q.mods;
+  if(q.fig===1 && m[0]==='nec' && m[1]==='assert')
+    return 'in the first figure a necessary major premise with a plain minor premise gives a necessary conclusion, because what belongs necessarily to everything under the middle term belongs necessarily to whatever falls under it (Aristotle, <em>Prior Analytics</em> I.9)';
+  if(q.fig===1 && m[0]==='assert' && m[1]==='nec')
+    return 'in the first figure a plain major premise with a necessary minor premise gives only a plain conclusion, because the major premise says only that the predicate belongs, not that it must (Aristotle, <em>Prior Analytics</em> I.9)';
+  if(m[0]===m[1]) return 'both premises have the same mode';
+  return 'a contingent premise makes the conclusion contingent';
+}
 function genModalSyllQ(d, mode){
   const base = genValidityQ(d, mode);
   const pool = d>=3 ? ['nec','assert','cont'] : ['nec','assert'];
-  const mods = [rand(pool), rand(pool)];
+  let mods = [rand(pool), rand(pool)];
+  for(let i=0; i<50 && base.fig!==1 && mods[0]!==mods[1] && mods.indexOf('cont')<0; i++)
+    mods = [rand(pool), rand(pool)];
+  if(base.fig!==1 && mods[0]!==mods[1] && mods.indexOf('cont')<0) mods = [mods[0], mods[0]];
   const weaker = MOD_RANK[mods[0]] <= MOD_RANK[mods[1]] ? mods[0] : mods[1];
-  const answer = base.valid ? weaker : 'none';
+  const answer = base.valid ? modalConclusion(base.fig, mods) : 'none';
   const mlines = base.lines.map((l,i)=> MOD_PRE[mods[i]] ? MOD_PRE[mods[i]]+decap(l) : l);
   return Object.assign(base, {kind:'modsyll', mods, weaker, answer, mlines});
 }
@@ -1771,9 +1846,13 @@ const MODSYLL_VALUES = ['nec','assert','cont','none'];
 function modalSyllMistake(q, choice){
   if(q.answer==='none') return mistakeNoteValidity(q, 'english');
   if(choice==='none') return mistakeNoteValidity(q, 'english');
+  if(q.fig===1 && q.mods[0]==='nec' && q.mods[1]==='assert' && choice==='assert')
+    return 'This answer follows the rule of Theophrastus, Aristotle’s successor at the Lyceum, that the conclusion follows the weaker premise in mode. Aristotle holds otherwise for the first figure: a necessary major premise with a plain minor premise gives a necessary conclusion, because what belongs necessarily to everything under the middle term belongs necessarily to whatever falls under it (<em>Prior Analytics</em> I.9). The Thomist school follows Aristotle, and so does this course.';
   if(MOD_RANK[choice] > MOD_RANK[q.answer])
-    return 'Peiorem sequitur semper conclusio partem: as the conclusion follows the negative and the particular premise, so it follows the weaker mode. A necessary conclusion needs necessity in both premises.';
-  return 'This answer weakens further than the premises require: the conclusion may take the mode of the weaker premise itself, here the '+MOD_NAME[q.answer]+'.';
+    return q.fig===1 && q.mods[0]==='assert' && q.mods[1]==='nec'
+      ? 'In the first figure the major premise settles how the predicate belongs. Here the major premise is plain, so the conclusion is plain, even though the minor premise is necessary (Aristotle, <em>Prior Analytics</em> I.9).'
+      : 'The conclusion here can be no stronger in mode than the weaker premise, since '+modalRuleClause(q)+'.';
+  return 'This answer weakens further than the premises require: the conclusion follows in the '+MOD_NAME[q.answer]+' mode, since '+modalRuleClause(q)+'.';
 }
 /* small SVG of the modal square for feedback */
 function modalSquareSvg(hl){
@@ -2047,10 +2126,10 @@ function genDefRuleQ(d){
     rules: DEF_RULES, mcInstr: d>=5 ? 'Three of these break a rule of definition; one keeps it. Which one keeps it?' : 'Three of these break the rule shown; one keeps it. Which one keeps it?'});
 }
 const DEF_KIND_DOCTRINE = {
-  nom:'A NOMINAL definition gives what the name means. It must come first, says John of St Thomas: we cannot ask what a thing is until we know what its name refers to.',
+  nom:'A NOMINAL definition gives what the name means. Aristotle puts it first, because we cannot ask what a thing is until we know what its name refers to (Posterior Analytics II.10).',
   ess:'An ESSENTIAL definition says what the thing is, by giving its nearest kind (genus) and the difference that marks it off from everything else of that kind.',
   desc:'A DESCRIPTIVE definition identifies the thing by a property, or by a telltale feature, that is, by marks that point it out without saying what it is.',
-  caus:'A CAUSAL definition identifies the thing through one of its causes: what made it, what it is made of, its form, or what it is for.'
+  caus:'A CAUSAL definition identifies the thing through its outside causes: what made it, or what it is for. A definition by matter and form is a kind of essential definition, the physical.'
 };
 const DEF_KIND_NAME = {nom:'nominal', ess:'essential', desc:'descriptive', caus:'causal'};
 const DEF_KIND_STOCK = {
@@ -2058,7 +2137,7 @@ const DEF_KIND_STOCK = {
     {tier:1, t:'‘Widow’ names a woman whose husband has died', w:'It explains what the word means, not what the thing is.'},
     {tier:1, t:'‘Geometry’ means the measuring of the earth', w:'It gives the word’s signification and nothing more.'},
     {tier:1, t:'‘Island’ is the word for land standing in water', w:'It says what the name refers to, before any account of the thing itself.'},
-    {tier:2, t:'‘Philosopher’ means a lover of wisdom', w:'It explains the name, which must come first, since we cannot ask what a thing is until we know what its name refers to.'},
+    {tier:2, t:'‘Philosopher’ means a lover of wisdom', w:'It explains the name. Aristotle puts this first, since we cannot ask what a thing is until we know what its name refers to.'},
     {tier:2, t:'‘Manuscript’ means a thing written by hand', w:'It gives the origin of the word, not the nature of any writing.'},
     {tier:2, t:'‘Hippopotamus’ means river-horse', w:'It explains the word from hippos (horse) and potamos (river).'},
     {tier:3, t:'‘Eclipse’ means a forsaking — the light’s abandonment of its luminary', w:'It gives the word’s origin, before any account of the cause.'},
@@ -2068,12 +2147,9 @@ const DEF_KIND_STOCK = {
   ess: [
     {tier:1, t:'A triangle is a three-sided figure', w:'It gives the nearest kind plus the difference, and so says what the thing actually is.'},
     {tier:1, t:'A square is a quadrilateral with equal sides and right angles', w:'It gives the nearest kind, with the differences that fit it exactly.'},
-    {tier:1, t:'A bachelor is an unmarried man', w:'It says briefly the whole of what the thing is.'},
-    {tier:1, t:'A lamb is a young sheep', w:'It gives the nearest kind (a sheep) with a single difference (young), and is as brief as a definition can be.'},
+    {tier:1, t:'Man is a rational animal', w:'It gives the nearest kind (animal) with the specific difference (rational), and so says what man is.'},
     {tier:2, t:'A number is a multitude composed of units', w:'It is Euclid’s account, giving the nearest kind (a multitude) with the difference (composed of units).'},
-    {tier:2, t:'Ice is water solidified by cold', w:'It says what the thing is, naming the very stuff it is made of.'},
-    {tier:3, t:'A nest is a shelter a bird builds to hold its eggs and its young', w:'It gives the nearest kind (a shelter a bird builds) with the difference that marks it off.'},
-    {tier:3, t:'A well is a shaft dug in the ground to reach water', w:'It gives the nearest kind (a shaft dug in the ground), narrowed by what it is dug for.'},
+    {tier:2, t:'A square number is a number contained by two equal numbers', w:'It is Euclid’s account (Elements VII, def. 18), giving the nearest kind (number) with the difference (contained by two equal numbers).'},
     {tier:5, t:'A father is a male parent', w:'It gives the proximate genus (parent), narrowed by the difference (male).'},
     {tier:5, t:'A line is length without breadth', w:'It gives the genus (length) and the difference (without breadth), and so the nature itself.'}
   ],
@@ -2083,7 +2159,8 @@ const DEF_KIND_STOCK = {
     {tier:1, t:'The magnet is the stone that draws iron', w:'An effect peculiar to it points the thing out without saying what it is.'},
     {tier:1, t:'Gold is the metal that never rusts', w:'It gives a characteristic mark, not the nature itself.'},
     {tier:2, t:'A triangle is the figure whose angles sum to two right angles', w:'It gives a property, which follows from the thing’s nature and always goes with it, but is not that nature.'},
-    {tier:2, t:'Man is the animal that laughs', w:'It gives the classic property: the power to laugh picks out man alone, without saying what he is.'},
+    {tier:1, t:'A lamb is a young sheep', w:'It points the thing out by an accident (being young), not by a difference that says what it is.'},
+    {tier:2, t:'Man is the animal that can laugh', w:'It gives the classic property, the power to laugh, which belongs to man alone, but it does not say what man is.'},
     {tier:3, t:'Fire is the burning that gives off heat and light', w:'It names the thing by its characteristic effects (the heat and light it gives off), which point it out without saying what it is.'},
     {tier:3, t:'Wine is the drink that gladdens the heart', w:'It names a characteristic effect, one the Psalmist mentions, but it does not say what wine is.'},
     {tier:5, t:'The camel is the beast that crosses the desert', w:'A telltale feature points the thing out, without saying what it is.'},
@@ -2096,10 +2173,12 @@ const DEF_KIND_STOCK = {
     {tier:1, t:'A house is a building raised to shelter its dwellers', w:'It defines through the end for which it is built.'},
     {tier:2, t:'Thunder is the noise in the clouds made by a stroke of lightning', w:'It defines through the efficient cause, the lightning-discharge whose report the thunder is.'},
     {tier:2, t:'A saw is a toothed blade made for the cutting of wood', w:'It defines through the end, which enters the definition of every tool (Physics II).'},
-    {tier:2, t:'Ash is what remains when fire has consumed its fuel', w:'It defines through the efficient cause and its matter.'},
+    {tier:2, t:'Ash is what remains when fire has consumed its fuel', w:'It defines through the efficient cause, the fire that consumed the fuel.'},
     {tier:3, t:'Rust is what iron becomes when it is long left in damp air', w:'It defines through what brings it about, namely the damp air working on the iron.'},
-    {tier:5, t:'A loaf is bread baked from kneaded dough', w:'It defines through the matter and the making, that is, the efficient cause.'},
-    {tier:5, t:'A statue is bronze shaped by the sculptor into a likeness', w:'It defines through its matter (bronze) and its maker (the efficient cause).'}
+    {tier:3, t:'A nest is a shelter a bird builds to hold its eggs and its young', w:'It defines through the end, holding the eggs and the young, and through the bird that builds it.'},
+    {tier:3, t:'A well is a shaft dug in the ground to reach water', w:'It defines through the end for which the shaft is dug, which is to reach water.'},
+    {tier:5, t:'A loaf is bread baked from kneaded dough', w:'It defines through the making, the baking of the dough, that is, the efficient cause.'},
+    {tier:5, t:'A statue is bronze shaped by the sculptor into a likeness', w:'It defines through its maker, the sculptor, who is the efficient cause.'}
   ]
 };
 function genDefKindQ(d){
@@ -2117,7 +2196,7 @@ function genDefKindQ(d){
     options: kinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
     why: `“${chosen[target].t}” is ${art(DEF_KIND_NAME[target])} ${DEF_KIND_NAME[target]} definition. ${chosen[target].w} Of the others, ${others}.`,
-    rules: 'The four kinds: nominal (what the name means), essential (nearest kind and difference), descriptive (a property or telltale feature), causal (through one of its causes).',
+    rules: 'The four kinds: nominal (what the name means), essential (nearest kind and difference, or matter and form), descriptive (a property or telltale feature), causal (through its outside causes, what made it or what it is for).',
     mcInstr: `Which of these is ${art(DEF_KIND_NAME[target])} ${DEF_KIND_NAME[target].toUpperCase()} definition?`});
 }
 /* ---- definition: questions on the rules and principles themselves ----
@@ -2146,8 +2225,8 @@ const DEF_PRINCIPLES = [
    why:'A definition gives the nearest kind and the difference, and nothing extra, since wasted words spoil it.'},
   {tier:2, q:'Which kind of definition must come first, since we cannot ask what a thing is until we know what its name means?',
    correct:'The nominal definition (what the name means)',
-   ds:['The essential definition (nearest kind and difference)','The descriptive definition (a telltale feature)','The causal definition (through one of its causes)'],
-   why:'John of St Thomas holds that the nominal definition (the meaning of the name) comes first, since the question “what is it?” already assumes we know what the name refers to.'},
+   ds:['The essential definition (nearest kind and difference)','The descriptive definition (a telltale feature)','The causal definition (through its outside causes)'],
+   why:'Aristotle holds that the nominal definition (the meaning of the name) comes first, since the question “what is it?” already assumes we know what the name refers to (Posterior Analytics II.10).'},
   {tier:2, q:'A metaphor such as calling a window “the eye of the house” fails as a definition because…',
    correct:'A definition must be clearer than the defined',
    ds:['It is far too short to be a real definition','It names the very same genus twice over','It is stated wholly in the negative voice'],
@@ -2390,9 +2469,9 @@ function genDivRuleQ(d){
     rules: DIV_RULES, mcInstr: d>=5 ? 'Three of these break a rule of division; one is sound. Which one is sound?' : 'Three of these break the rule shown; one keeps it. Which one keeps it?'});
 }
 const DIVKIND_DOCTRINE = {
-  ess:'An ESSENTIAL division divides a general kind (a genus) into the kinds beneath it, marked off by opposed differences.',
+  ess:'A LOGICAL division divides a genus into its species, the kinds beneath it, marked off by opposed differences. (An essential division is different: it divides an essence into its parts, as man into body and soul, or into animal and rational.)',
   int:'An INTEGRAL division divides a whole into the parts that make it up, and no part is called by the name of the whole.',
-  pot:'A DIVISION BY POWERS divides one thing according to what it is able to do, as a person is divided into the powers of body and of mind.',
+  pot:'A DIVISION BY POWERS divides a soul, or one of its powers, according to what it is able to do, as the soul is divided into its power to know and its power to desire.',
   acc:'An ACCIDENTAL division sorts a subject by features it can gain or lose without becoming a different thing.'
 };
 /* two simple examples of each kind — none of them used as exercise items —
@@ -2400,13 +2479,13 @@ const DIVKIND_DOCTRINE = {
 const DIVKIND_EG = {
   ess:['a musical instrument into strings, winds, and percussion','a vertebrate into fish, amphibians, reptiles, birds, and mammals'],
   int:['a book into its chapters','a clock into its face, its hands, and its gears'],
-  pot:['a bird into its power to fly, to sing, and to build a nest','a person into the powers of body and of mind'],
+  pot:['the soul into its power to know and its power to desire','the appetite into the sensitive appetite and the will'],
   acc:['apples into the red and the green','cloaks into the new and the old']
 };
 function divKindEgHtml(k){ return `<div class="rule-eg"><em>e.g.</em> ${DIVKIND_EG[k][0]}; &ensp; ${DIVKIND_EG[k][1]}.</div>`; }
 /* short adjectival form for the “X is …” gloss, and full label for the prompt */
-const DIVKIND_IS = {ess:'essential', int:'integral', pot:'a division by powers', acc:'accidental'};
-const DIVKIND_LABEL = {ess:'an ESSENTIAL division', int:'an INTEGRAL division', pot:'a DIVISION BY POWERS', acc:'an ACCIDENTAL division'};
+const DIVKIND_IS = {ess:'a logical division', int:'integral', pot:'a division by powers', acc:'accidental'};
+const DIVKIND_LABEL = {ess:'a LOGICAL division', int:'an INTEGRAL division', pot:'a DIVISION BY POWERS', acc:'an ACCIDENTAL division'};
 const DIVKIND_STOCK = {
   ess: [
     {tier:1, g:'letter', t:'Letters into the vowels and the consonants', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
@@ -2416,8 +2495,7 @@ const DIVKIND_STOCK = {
     {tier:2, g:'angle', t:'Angles into the acute, the right, and the obtuse', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
     {tier:2, g:'living thing', t:'Living things into plants, animals, and fungi', w:'It divides a general kind into the kinds beneath it by opposed differences.'},
     {tier:3, g:'plant', t:'Plants into trees, shrubs, and grasses', w:'It divides a general kind into the kinds beneath it, by how each one grows.'},
-    {tier:5, g:'line', t:'Line into the straight and the curved', w:'It divides a general kind into its two kinds by an opposed difference.'},
-    {tier:5, g:'bee', t:'The bees of a hive into the queen, the workers, and the drones', w:'It divides a general kind into the kinds beneath it, each with its own work.'}
+    {tier:5, g:'line', t:'Line into the straight and the curved', w:'It divides a general kind into its two kinds by an opposed difference.'}
   ],
   int: [
     {tier:1, g:'house', t:'A house into foundation, walls, and roof', w:'It names the parts that make up the whole, and none of them is called a house.'},
@@ -2430,14 +2508,12 @@ const DIVKIND_STOCK = {
     {tier:5, g:'sentence', t:'A sentence into its subject and its predicate', w:'It names the parts that make up the whole, and neither on its own is the sentence.'}
   ],
   pot: [
-    {tier:1, g:'animal power', t:'An animal into its power to be nourished, to move, and to sense', w:'It divides one animal, not into pieces, but into what it is able to do.'},
-    {tier:1, g:'hand', t:'The hand into its power to grasp and its power to strike', w:'It divides one part of the body by what it is able to do.'},
+    {tier:1, g:'soul', t:'The soul into the vegetative, the sensitive, and the rational powers', w:'It divides one soul, not into pieces, but into what it is able to do.'},
+    {tier:1, g:'animal power', t:'The soul of an animal into its power to be nourished, to move, and to sense', w:'It divides one soul, not into pieces, but into what it is able to do.'},
     {tier:1, g:'mind', t:'The mind into its power to remember, to understand, and to choose', w:'It divides one mind into what it is able to do.'},
-    {tier:2, g:'sense', t:'The senses of an animal into sight, hearing, touch, taste, and smell', w:'It divides one power of sensing into the five powers under it.'},
-    {tier:2, g:'horse', t:'A horse into its power to run, to pull, and to carry', w:'It divides one animal by what it is able to do, not into parts.'},
-    {tier:3, g:'seed', t:'A seed into its power to sprout, to grow, and to bear fruit', w:'It divides one seed by what it is able to do in its turn.'},
-    {tier:5, g:'tongue', t:'The tongue into its power to taste and its power to speak', w:'It divides one organ into its two powers.'},
-    {tier:5, g:'dog', t:'A dog into its power to run, to smell, and to bark', w:'It divides one animal by what it is able to do.'}
+    {tier:2, g:'prudence', t:'Prudence into taking counsel, judging, and commanding', w:'It divides one power, prudence, into its parts, each of which has some of its power (John of St Thomas’s example).'},
+    {tier:2, g:'sense', t:'The senses of an animal into sight, hearing, touch, taste, and smell', w:'The whole divided here is the sensitive power, and it is divided into the five powers under it.'},
+    {tier:3, g:'plant soul', t:'The soul of a plant into its power to take nourishment, to grow, and to reproduce', w:'It divides one soul by what it is able to do, not into parts of a body.'}
   ],
   acc: [
     {tier:1, g:'musical', t:'People into the musical and the unmusical', w:'It sorts a subject by a feature it can gain or lose, which is no part of what a person is.'},
@@ -2472,7 +2548,7 @@ function genDivKindQ(d){
     options: kinds.map(k=>chosen[k].t),
     correct: chosen[target].t,
     why: `“${chosen[target].t}” is ${DIVKIND_LABEL[target].toLowerCase()}. ${chosen[target].w} Of the others, ${others}.`,
-    rules: 'The kinds of division: essential (a general kind into the kinds beneath it), integral (a whole into the parts that make it up), by powers (one thing according to what it can do), accidental (a subject sorted by features it can gain or lose).',
+    rules: 'The kinds of division: logical (a genus into its species), integral (a whole into the parts that make it up), by powers (one thing according to what it can do), accidental (a subject sorted by features it can gain or lose).',
     mcInstr: `Which of these is ${DIVKIND_LABEL[target]}?`});
 }
 /* ---- division: questions on the rules and principles themselves ----
@@ -2498,7 +2574,7 @@ const DIV_PRINCIPLES = [
    correct:'Complete, non-overlapping, and sorted on one basis',
    ds:['Arranged in strict alphabetical order','All three of them fixed by pure metaphor','Named after their efficient causes'],
    why:'They cover every living thing (plants and animals alone would leave the fungi out); nothing falls under two of them; and they are sorted on a single basis.'},
-  {tier:2, q:'An essential division divides a general kind into the kinds beneath it. What does an integral division divide, and into what?',
+  {tier:2, q:'A logical division divides a genus into its species. What does an integral division divide, and into what?',
    correct:'A whole into the parts that make it up',
    ds:['A subject into the features it can gain or lose','A general kind into its opposed differences','A name into the syllables that spell it'],
    why:'Integral division takes a whole (a house) into the parts that make it up (foundation, walls, roof), and no part is called a house.'}
@@ -2559,7 +2635,7 @@ const PRED_ITEMS = {
   spec: [
     {tier:1, subj:'Socrates', t:'Socrates is a man', w:'Man is the species, said of the individual who falls under it (Porphyry).'},
     {tier:1, subj:'fido', t:'Fido is a dog', w:'Dog is the species, said of the individual Fido.'},
-    {tier:1, subj:'man', t:'Man is a species of animal', w:'Man is the lowest species under the genus animal, and beneath it lie only individual men.'},
+    {tier:1, subj:'robin', t:'This bird is a robin', w:'Robin is the species, said of the single bird that falls under it.'},
     {tier:2, subj:'rex', t:'Rex is a horse', w:'Horse is the species, said of the single animal Rex.'},
     {tier:2, subj:'daisy', t:'This flower is a daisy', w:'Daisy is the species, said of the single flower that falls under it.'},
     {tier:2, subj:'oak', t:'This tree is an oak', w:'Oak is the species, said of the single tree that falls under it.'},
@@ -2570,7 +2646,7 @@ const PRED_ITEMS = {
     {tier:1, subj:'man', t:'Man is rational', nosort:true, w:'Being able to reason is the difference that divides animal and makes man (Porphyry; the tree).'},
     {tier:1, subj:'triangle', t:'A triangle is three-sided', w:'Having three sides is the difference that marks the triangle off from every other figure.'},
     {tier:2, subj:'angel', t:'An angel has no body', nosort:true, w:'Having no body is the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
-    {tier:2, subj:'body', t:'A body takes up space', w:'Taking up space is the difference that divides substance into the bodily and the spiritual (the tree of Porphyry).'},
+    {tier:2, subj:'body', t:'A body is corporeal', w:'Corporeal is the difference that divides substance into the bodily and the spiritual (the tree of Porphyry). Taking up space follows from being a body, as a property, but it is not the difference.'},
     {tier:3, subj:'animal', t:'An animal can sense', w:'The power of sense is the difference that divides living things and makes the animal (the tree of Porphyry).'},
     {tier:3, subj:'plant', t:'A plant cannot sense', nosort:true, w:'Lacking the power of sense is the difference that marks the plant off from the animal (the tree of Porphyry).'},
     {tier:5, subj:'number', t:'This number is even', nosort:true, w:'Even is the difference that divides the genus number into the kinds beneath it.'}
@@ -2811,7 +2887,7 @@ const CAT_RULES = 'The ten categories (Aristotle) are substance, quantity, quali
 const CAT_NAME = {sub:'substance', qnt:'quantity', qual:'quality', rel:'relation', act:'action', pas:'passion', whn:'when (time)', whr:'where (place)', pos:'posture', hab:'habit (having)'};
 const CAT_KEYS = ['sub','qnt','qual','rel','act','pas','whn','whr','pos','hab'];
 const CAT_DOCTRINE = {
-  sub:'SUBSTANCE exists in itself, neither said of a subject nor present in one as in a subject. It is either this man or this horse (primary substance), or the species and genera in which they fall, such as man and animal (secondary substance).',
+  sub:'SUBSTANCE exists in itself, not present in a subject. Primary substance (this man, this horse) is neither said of a subject nor present in one; secondary substance (the species and genera in which they fall, such as man and animal) is said of a subject but is present in none (Categories 5, 2a11–19).',
   qnt:'QUANTITY belongs to a substance by reason of its matter and answers “how much?”: two feet long, a number, a line, a surface.',
   qual:'QUALITY belongs to a substance by reason of its form and answers “of what sort?”: white, hot, healthy, just, strong, triangular.',
   rel:'RELATION is said toward another (ad aliquid), since its whole being consists in a bearing toward something else: double, half, greater, a master, a neighbor.',
@@ -2824,7 +2900,7 @@ const CAT_DOCTRINE = {
 };
 /* short, example-free glosses — safe to show beside word-options */
 const CAT_GLOSS = {
-  sub:'exists in its own right, neither present in anything else nor said of anything else.',
+  sub:'exists in its own right, not in anything else; primary substance is also not said of anything else, but secondary substance is said of its individuals.',
   qnt:'belongs to a thing by reason of its matter, and answers “how much?”',
   qual:'belongs to a thing by reason of its form, and answers “of what sort?”',
   rel:'is said toward another, since its whole being is a reference to something else.',
@@ -3275,27 +3351,27 @@ const FAL_KINDS = {
     def:'Said with a different stress it is a different word, or a different claim.',
     ans:'By putting the stress back where the speaker put it, and reading it again.',
     doc:'ACCENT turns on how a word is stressed or pronounced. Shifting the stress changes the claim without changing a letter.'},
-  comp:{side:'dict', mod:'the fallacy of composition', name:'Composition — true of them one by one, claimed of them together',
-    app:'It holds of each of them, so it looks as though it must hold of them all together.',
-    def:'What holds of them one by one need not hold of them taken together, since being joined can change what is true of them.',
-    ans:'By asking whether the claim is being made of them one by one, or of them all together.',
-    doc:'COMPOSITION moves from what is true of things taken singly to what is claimed of them taken together. Each brick is light; the wall made of them is not. A seated man can walk, but he cannot walk while seated.'},
-  divis:{side:'dict', mod:'the fallacy of division', name:'Division — true of them together, claimed of them one by one',
-    app:'It holds of them taken together, so it looks as though it must hold of each of them.',
-    def:'What holds of them together need not hold of each, since it may belong to them precisely as joined.',
-    ans:'By asking whether the claim was made of them together, or of each one by itself.',
-    doc:'DIVISION is composition run backwards, from what is true of things taken together to what is claimed of each singly. Two and three are five taken together, but two by itself is not five. The choir sings beautifully, but not every singer in it does.'},
+  comp:{side:'dict', mod:'the fallacy of composition', name:'Composition — words taken together that are true only taken apart',
+    app:'The words are true when they are taken apart, so they seem true when they are taken together.',
+    def:'Joining the words changes the sense of the sentence, and the joined sense is false.',
+    ans:'By asking whether the words should be taken apart, and granting the sentence only in that divided sense.',
+    doc:'COMPOSITION takes words together that are true only when taken apart, so that the sentence changes its sense. “A seated man can walk” is true when “seated” and “can walk” are taken apart, but a man cannot walk while he is seated.'},
+  divis:{side:'dict', mod:'the fallacy of division', name:'Division — words taken apart that are true only taken together',
+    app:'The words are true when they are taken together, so they seem true when they are taken apart.',
+    def:'Separating the words changes the sense of the sentence, and the separated sense is false.',
+    ans:'By asking whether the words should be taken together, and granting the sentence only in that composite sense.',
+    doc:'DIVISION is composition run backwards: it takes words apart that are true only when taken together. Two and three are five taken together, but two by itself is not five. All the angles of a triangle together are equal to two right angles, but no one of them is.'},
   figura:{side:'dict', mod:'the fallacy of grammatical analogy; where the words name different sorts of thing altogether it is what is now called a category mistake', name:'Figure of speech — words that look alike but work differently',
     app:'Two words have the same form, so they seem to signify in the same way.',
     def:'The likeness is only in the form; the things named are of different sorts.',
     ans:'By asking what each word is actually naming; if the grammar runs parallel and the things do not, the argument rests on the grammar alone.',
     doc:'FIGURE OF SPEECH (St Thomas calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
-  accid:{side:'extra', mod:'the fallacy of accident, also called <em>a dicto simpliciter</em>, destroying the exception, or applying a general rule to a special case', name:'Accident — taking a passing feature for the thing itself',
+  accid:{side:'extra', modNote:'Modern books have no exact name for this fallacy. What they call the fallacy of accident is applying a general rule to a special case, which the schools place under <em>in a certain respect, taken flatly</em>.', name:'Accident — taking a passing feature for the thing itself',
     app:'The passing feature and the thing really do go together here.',
     def:'The passing feature and the thing are nevertheless not the same.',
     ans:'By asking whether the thing is taken as what it is, or under some feature it happens to have.',
     doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St Thomas’s case is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
-  secquid:{side:'extra', mod:'converse accident, or <em>secundum quid</em>; modern books usually call it hasty generalization, or ignoring the qualification', name:'In a certain respect, taken flatly',
+  secquid:{side:'extra', mod:'hasty generalization, ignoring the qualification, or converse accident; in its other direction, where a rule that holds for the most part is applied to a case it does not fit, they call it the fallacy of accident, or <em>a dicto simpliciter ad dictum secundum quid</em>', name:'In a certain respect, taken flatly',
     app:'What is true in some respect looks like what is true without qualification.',
     def:'The qualification mattered, and it has been dropped without notice.',
     ans:'By putting the qualification back in, aloud, and reading the argument again.',
@@ -3315,7 +3391,7 @@ const FAL_KINDS = {
     def:'Going together is not the same as one producing the other.',
     ans:'By asking what else the two have in common, and whether the supposed cause can be removed while the effect stays.',
     doc:'NOT THE CAUSE AS CAUSE takes something that merely accompanies a thing for what produced it.'},
-  conseq:{side:'extra', mod:'affirming the consequent when it takes the form of an “if”; in the categorical form, the undistributed middle (modern logic counts them the same fault)', name:'The consequent — arguing backwards along a one-way link',
+  conseq:{side:'extra', mod:'affirming the consequent when it takes the form of an “if”, and the undistributed middle in the categorical form. Modern books count these as two faults, but Aristotle and the schools counted them as one, the fallacy of the consequent', name:'The consequent — arguing backwards along a one-way link',
     app:'The link really does hold one way, so it looks as though it must hold the other way too.',
     def:'The link runs one way only, since the mark belongs to more things than the one named, so finding the mark does not find the thing.',
     ans:'By asking what else carries the same mark; if anything else does, the argument proves nothing.',
@@ -3329,7 +3405,7 @@ const FAL_KINDS = {
 const FAL_KEYS = Object.keys(FAL_KINDS);
 const FAL_ITEMS = [
   {tier:1, k:'equiv',   t:'All banks are beside rivers. I keep my money in a bank. So I keep my money beside a river.'},
-  {tier:2, k:'equiv',   t:'Nothing is lighter than a feather. This box is lighter than a feather. So this box is nothing.'},
+  {tier:2, k:'equiv',   t:'Food is healthy. A complexion is healthy. A body is healthy. So all three have health in them the same way.', w:'The word “healthy” is said of the body first, and of food and complexion by reference to the body’s health, as its cause and as its sign. St Thomas counts such analogous words under equivocation.'},
   {tier:3, k:'equiv',   t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.'},
   {tier:5, k:'equiv',   t:'A good pen writes well. He has a good pen. So he writes well.'},
   {tier:1, k:'amphi',   t:'The notice says dogs must be carried on the escalator. I have no dog. So I may not use the escalator.'},
@@ -3340,19 +3416,19 @@ const FAL_ITEMS = [
   {tier:2, k:'accent',  t:'The paper is invalid. An invalid is a sick person. So the paper is unwell.'},
   {tier:3, k:'accent',  t:'A desert is a dry waste. He got his just desert. So he was given a dry waste.'},
   {tier:5, k:'accent',  t:'They will present the present at present. Three of the same word, so three of the same thing.'},
-  {tier:1, k:'comp',    t:'Every brick in the wall is light. So the wall is light.'},
+  {tier:1, k:'comp',    t:'The man who is silent can speak. So the man can speak and be silent at the same time.'},
   {tier:2, k:'comp',    t:'Each of these stones can be lifted by one man. So all of them together can be lifted by one man.'},
   {tier:3, k:'comp',    t:'A man who is sitting can walk. So a man can walk while he is sitting.'},
-  {tier:5, k:'comp',    t:'Each player on the team is excellent. So the team is excellent.'},
-  {tier:1, k:'divis',   t:'This machine is heavy. So every part of it is heavy — including that one small screw.'},
-  {tier:2, k:'divis',   t:'The choir sings beautifully. So each singer sings beautifully.'},
+  {tier:5, k:'comp',    t:'It is possible for what is black to be white. So it is possible for a thing to be black and white at once.'},
+  {tier:1, k:'divis',   t:'Two and three are five. Two is even and three is odd. So five is even and odd.'},
+  {tier:2, k:'divis',   t:'All the angles of a triangle are equal to two right angles. So each angle of a triangle is equal to two right angles.'},
   {tier:3, k:'divis',   t:'Five is two and three. So five is two, and five is three.'},
-  {tier:5, k:'divis',   t:'The army is enormous. So the soldiers in it are enormous.'},
-  {tier:1, k:'figura',  t:'Nothing is better than lifelong happiness. A dry crust is better than nothing. So a dry crust is better than lifelong happiness.'},
-  {tier:2, k:'figura',  t:'Food is healthy. A complexion is healthy. A body is healthy. So all three have health in them the same way.'},
+  {tier:5, k:'divis',   t:'The apostles are twelve. Peter and John are apostles. So Peter and John are twelve.'},
+  {tier:1, k:'figura',  t:'Nothing is better than lifelong happiness. A dry crust is better than nothing. So a dry crust is better than lifelong happiness.', w:'The word “nothing” has one meaning, but it has the form of a name, so it seems to name something.'},
+  {tier:2, k:'figura',  t:'Nothing is lighter than a feather. This box is lighter than a feather. So this box is nothing.', w:'The word “nothing” has one meaning, but it has the form of a name, so it seems to name something.'},
   {tier:3, k:'figura',  t:'He is a false friend. So he is a friend — of the false sort.'},
   {tier:5, k:'figura',  t:'A large mouse is a large animal, since a mouse is an animal and this one is large.'},
-  {tier:1, k:'accid',   t:'Cutting people with knives is a crime. Surgeons cut people with knives. So surgeons are criminals.'},
+  {tier:1, k:'accid',   t:'Cutting people with knives is a crime. Surgeons cut people with knives. So surgeons are criminals.', w:'The middle term, “cutting people with knives,” is taken in two senses. It is a crime as wounding, but surgeons cut to heal, so what belongs to the one is concluded of the other, which agrees with it only by accident.'},
   {tier:2, k:'accid',   t:'You know your brother. That man in the mask is your brother. So you know that man in the mask.'},
   {tier:3, k:'accid',   t:'I know the man who is coming. Coriscus is the man who is coming. So I know Coriscus.'},
   {tier:5, k:'accid',   t:'The wine is good. This is the same wine, gone sour. So this is good.'},
@@ -3386,7 +3462,9 @@ const FAL_ITEMS = [
    levels, so the student must first settle "in the words, or outside them?" */
 /* The schools' name and the modern one, always together: a student should be
    able to read either book afterwards. */
-function falDoc(K){ return `${K.doc} <em>Modern books call this ${K.mod}.</em>`; }
+function falDoc(K){ return `${K.doc} <em>${K.modNote || `Modern books call this ${K.mod}.`}</em>`; }
+/* an item's own explanation, where it needs one beyond the kind's doctrine */
+const falNote = it => it.w ? it.w+' ' : '';
 function falDistractors(k, d, n){
   const side = FAL_KINDS[k].side;
   const same = FAL_KEYS.filter(x=>x!==k && FAL_KINDS[x].side===side);
@@ -3407,7 +3485,7 @@ function genFalNameQ(d){
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].name);
   return mc4Make({prompt:it.t, options:[K.name].concat(others), correct:K.name,
     ruleShow: d>=5 ? '' : 'Six fallacies come from the words: equivocation, amphiboly, accent, composition, division, figure of speech. Seven come from outside the words: accident; in a certain respect taken flatly; missing the point; begging the question; not the cause as cause; the consequent; many questions as one.',
-    why: `${falDoc(K)} It is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app} The cause of the failure is this: ${K.def}`,
+    why: `${falNote(it)}${falDoc(K)} It is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app} The cause of the failure is this: ${K.def}`,
     rules: FAL_RULES, mcInstr:'Which fallacy is this?'});
 }
 function genFalSideQ(d){
@@ -3419,7 +3497,7 @@ function genFalSideQ(d){
     'Both at once, since the words and the thinking fail together'];
   return mc4Make({prompt:it.t, options:opts, correct: K.side==='dict' ? inW : outW,
     ruleShow: d>=5 ? '' : 'St Thomas divides every fallacy in two. If what makes the argument look good comes from the WORD (one sound taken for one thing), the fallacy is in the words. If it comes from the THING (two things that agree in some way taken as simply one), it is outside the words.',
-    why: `${K.name.split(' — ')[0]} is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app}`,
+    why: `${falNote(it)}${K.name.split(' — ')[0]} is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app}`,
     rules: FAL_RULES, mcInstr:'Does this fallacy come from the words, or from outside them?'});
 }
 function genFalAppearQ(d){
@@ -3427,7 +3505,7 @@ function genFalAppearQ(d){
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].app);
   return mc4Make({prompt:it.t, options:[K.app].concat(others), correct:K.app,
     ruleShow: d>=5 ? '' : 'Every fallacy has a CAUSE OF THE APPEARANCE, which makes it look sound and moves a person to accept it. Once that is named, we understand why the deception works.',
-    why: `${falDoc(K)} The cause of the failure is something else: ${K.def}`,
+    why: `${falNote(it)}${falDoc(K)} The cause of the failure is something else: ${K.def}`,
     rules: FAL_RULES, mcInstr:'What makes this argument LOOK sound?'});
 }
 function genFalDefectQ(d){
@@ -3435,7 +3513,7 @@ function genFalDefectQ(d){
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].def);
   return mc4Make({prompt:it.t, options:[K.def].concat(others), correct:K.def,
     ruleShow: d>=5 ? '' : 'Every fallacy also has a CAUSE OF THE FAILURE, which actually destroys the argument. It is never the same as what made it look good, and that is exactly why a man is deceived.',
-    why: `${falDoc(K)} The cause of the appearance was something else: ${K.app}`,
+    why: `${falNote(it)}${falDoc(K)} The cause of the appearance was something else: ${K.app}`,
     rules: FAL_RULES, mcInstr:'What makes this argument FAIL?'});
 }
 function genFalAnswerQ(d){
@@ -3443,7 +3521,7 @@ function genFalAnswerQ(d){
   const others = falDistractors(it.k, d, 3).map(x=>FAL_KINDS[x].ans);
   return mc4Make({prompt:it.t, options:[K.ans].concat(others), correct:K.ans,
     ruleShow: d>=5 ? '' : '',
-    why: `${falDoc(K)} The cause of the failure is this: ${K.def}`,
+    why: `${falNote(it)}${falDoc(K)} The cause of the failure is this: ${K.def}`,
     rules: FAL_RULES, mcInstr:'How is this argument to be answered?'});
 }
 
@@ -3550,7 +3628,7 @@ const FAL_DOCTRINE = [
    ds:['They are the five parts of a syllogism','They are the five predicables applied to argument','They are the five ways a premise can be false'],
    why:'Contradiction offends metaphysics; plain falsehood offends natural science and mathematics; the absurd offends dialectic; bad grammar offends grammar; babbling offends rhetoric. By driving the respondent through all five, the sophist appears universally wise.'},
   {tier:5, q:'What is the difference between something false and something merely unbelievable?',
-   correct:'Everything false is unbelievable, but some unbelievable things are true',
+   correct:'The false and the unbelievable differ: some false things are widely believed, and some unbelievable things are true',
    ds:['They are two names for the same thing','Everything unbelievable is false, but not the reverse','The false offends grammar; the unbelievable offends rhetoric'],
    why:'This is St Thomas’s own distinction, with his own example: that a star is bigger than the earth is against common opinion, and true. So the sophist can win by driving the respondent to what is merely unbelievable.'}
 ];
@@ -3646,7 +3724,8 @@ const DIAL_TOPICS = [
   {tier:1, k:'prop', t:'Only a bell rings when struck like that. This rings when struck like that. So it is a bell.'},
   {tier:2, k:'more', t:'If he will not lend a penny to his brother, he will hardly lend a pound to a stranger.'},
   {tier:2, k:'like', t:'A city is governed as a household is: badly, if nobody is in charge of the whole.'},
-  {tier:2, k:'spec',t:'Justice is a virtue, and every virtue is worth having. So justice is worth having.'},
+  {tier:2, k:'gen', t:'Justice is a virtue, and every virtue is worth having. So justice is worth having.'},
+  {tier:2, k:'spec',t:'A robin can fly. So some bird can fly.'},
   {tier:2, k:'auth',t:'Every physician of standing holds that the fever must be let run. So it should be let run.'},
   {tier:2, k:'def',  t:'A definition must fit exactly what it defines. This one fits more. So it is no definition.'},
   {tier:3, k:'more', t:'If even the innocent are punished under this law, how much more the guilty who are merely suspected.'},
@@ -3790,7 +3869,7 @@ const RESP_ITEMS = [
   {tier:2, th:'Nobody willingly does what harms him.', ob:'But men drink themselves sick knowing it will harm them. So some do it willingly.',
    k:'dist', w:'“Willingly” is said of what a man chooses as good for him, and of what he chooses knowing it is bad. Once the senses are distinguished, the thesis holds in the first.'},
   {tier:2, th:'The heavier body always falls faster.', ob:'Two stones of different weight, dropped together, strike the ground together.',
-   k:'deny', w:'No distinction is needed and nothing about the form is wrong. The premise of the thesis is simply false, and the observation shows it.'},
+   k:'full', w:'The observation is true, and the thesis as stated is false, so the respondent grants the objection and restates the thesis.'},
   {tier:2, th:'Every part of the wall is white, so the wall is white.', ob:'Every brick is light, yet the wall is not light.',
    k:'conc', w:'The objection grants the pattern and shows that it fails elsewhere, which is to attack the form of the inference, not the truth of any premise.'},
   {tier:3, th:'Knowledge is always of what cannot be otherwise.', ob:'But I know that you are sitting down, and you might stand up.',
@@ -4124,12 +4203,13 @@ function formatQuizItem(q){
   if(q.kind==='venn3'){
     out.instr = q.sub==='pair'
       ? 'Diagram what the two premises together assert.'
-      : 'Diagram the full syllogism (shade universals; mark × / ⊗ where needed).';
+      : 'Diagram the full syllogism (shade universals; mark × or ⊗ where needed).';
     const lines = (q.lines||[]).map(l=>l+'.').join('<br>');
     const concl = q.concl ? `<br><span class="therefore">∴</span> ${q.concl}.` : '';
-    out.stemHtml = `<div class="argblock">${lines}${concl}</div>` + _blankVenn3();
+    const key = q.sub==='syll' ? `<div class="venn-key" style="font-size:12px; font-style:italic; color:#555">${VENN_KEY}</div>` : '';
+    out.stemHtml = `<div class="argblock">${lines}${concl}</div>` + _blankVenn3() + key;
     const labels = {S:termLabel(q.roles.S), P:termLabel(q.roles.P), M:termLabel(q.roles.M)};
-    out.diagramHtml = svgVenn(V3, labels, q.diag.shaded, q.diag.xs);
+    out.diagramHtml = svgVenn(V3, labels, q.diag.shaded, q.diag.xs) + key;
     out.answerText = q.sub==='syll'
       ? `Valid ${q.name || (q.mood+'-'+q.fig)}.`
       : 'See diagram.';
@@ -4173,6 +4253,7 @@ if(typeof module!=='undefined' && module.exports){
     genVennQ, checkVenn, vennMistake, vennStateToMarks, termKey,
     mistakeNoteValidity, mistakeNoteConclusion, termLabel,
     diagToState, genVenn2Q, genVennSyllQ, checkVenn3, vennMistake3,
+    VENN_KEY, VENN_KEY1, vennKeyHtml, importPremise, importExplain, modalConclusion, modalRuleClause,
     KB_ATOMS, MATH_TERMS, MATH_KEYS, MATH_EXT, propTruth, counterexample,
     genSoundnessQ, mistakeNoteSound,
     KB_DOMAINS, DOM_KEYS, DOM_EXT, ETH_ATOMS, ETH_TERMS, SOUL_ATOMS, SOUL_TERMS,

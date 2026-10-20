@@ -376,6 +376,7 @@ h1{
 .venn.clickable{cursor:pointer; max-width:440px}
 .venn-wrap{margin-top:18px}
 .venn-legend{text-align:center; font-size:15px; color:var(--ink-soft); font-style:italic; margin-top:2px}
+.venn-key{text-align:center; font-size:14px; color:var(--ink-soft); margin-top:4px; line-height:1.45}
 .venn-submit-row{display:flex; justify-content:center; margin-top:16px}
 /* ---- the errors of a finished run ---- */
 .mistake-block{max-width:660px; margin:22px auto 6px; text-align:left}
@@ -619,7 +620,7 @@ h1{
     </div>
 
     <div class="section-label">Feedback</div>
-    <div class="mode-note">Every answer is illustrated with a Venn diagram of the correct analysis: shading declares a region empty; an × declares an occupant; ⊗ marks the existential import assumed in the traditional reading.</div>
+    <div class="mode-note">Every answer in the categorical sets is illustrated with a Venn diagram of the correct analysis: shading declares a region empty; an × declares that something is there; a ⊗ declares that something is there because an affirmative universal premise asserts that its subject exists, not because a particular premise says so.</div>
 
     <div class="section-label">Study</div>
     <div class="sets" id="labs"></div>
@@ -780,11 +781,11 @@ h1{
           <text x="66" y="296" text-anchor="middle" font-size="12.5" font-style="italic" fill="var(--ink-soft)" font-family="inherit">the singulars</text>
           <text x="280" y="332" text-anchor="middle" font-size="13" font-style="italic" fill="var(--ink-soft)" font-family="inherit">shading the region declares that no individuals are there</text>
         </svg>
-        <p>Every circle in these diagrams is such a universal seen from above, its individuals gathered inside. There are only two marks. An <strong>×</strong> picks out one individual at random (“some dog”) without saying which; <strong>shading</strong> declares that a region holds no individuals at all. When two or three circles overlap, their regions sort the individuals beneath, and the whole logic of propositions and syllogisms can be read off the picture. Use the buttons below to see any form drawn for you, or mark the regions yourself and let the readout say what your diagram asserts.</p>
+        <p>Every circle in these diagrams is such a universal seen from above, its individuals gathered inside. There are two basic marks. An <strong>×</strong> picks out one individual at random (“some dog”) without saying which; <strong>shading</strong> declares that a region holds no individuals at all. When two or three circles overlap, their regions sort the individuals beneath, and the whole logic of propositions and syllogisms can be read off the picture. Use the buttons below to see any form drawn for you, or mark the regions yourself and let the readout say what your diagram asserts.</p>
       </details>
       <details class="help">
         <summary>How to read a Venn diagram</summary>
-        <p><strong>Shading</strong> declares a region <em>empty</em>; an <strong>×</strong> declares that <em>something</em> exists there. Each categorical proposition makes exactly one mark:</p>
+        <p><strong>Shading</strong> declares a region <em>empty</em>; an <strong>×</strong> declares that <em>something</em> exists there. Each categorical proposition makes exactly one mark in the diagram (what an affirmative universal also says about existence is shown by a <strong>⊗</strong> when it is needed):</p>
         <p>“All S are P”: shade the part of S outside P (no S lies outside P).<br>
            “No S are P” — shade the overlap (nothing is both).<br>
            “Some S are P” — place an × in the overlap.<br>
@@ -919,7 +920,7 @@ h1{
     <div class="q-card">
       <div class="q-instr">Anything that can be said about a thing falls under one of ten highest kinds, the categories of Aristotle. One is <strong>substance</strong>, the thing itself; the other nine are <strong>accidents</strong>, which exist only in a substance. St Thomas shows how the nine follow from the different ways they relate to substance (<em>Commentary on the Metaphysics</em> V, lect. 9).</div>
       <div class="intro-list">
-        <div class="intro-item"><strong>Substance — what exists in its own right.</strong> It is not said of anything else, nor does it exist in anything else: <em>this man</em>, <em>this horse</em> (primary substance); and the kinds they belong to, such as <em>man</em> and <em>animal</em> (secondary substance). Everything else depends on substance.</div>
+        <div class="intro-item"><strong>Substance — what exists in its own right, not in anything else.</strong> Primary substance (<em>this man</em>, <em>this horse</em>) is neither said of a subject nor in one; secondary substance (<em>man</em>, <em>animal</em>) is said of a subject but is in none (<em>Categories</em> 5, 2a11–19). Everything else depends on substance.</div>
         <div class="intro-item"><strong>What BELONGS TO the substance itself.</strong> <strong>Quantity</strong> follows from its <em>matter</em> (how much? <em>two feet long</em>, <em>a number</em>); <strong>Quality</strong> follows from its <em>form</em> (of what sort? <em>white</em>, <em>hot</em>, <em>just</em>); and <strong>Relation</strong> is a bearing toward something else (<em>double</em>, <em>half</em>, <em>a master</em>).</div>
         <div class="intro-item"><strong>What the substance DOES or UNDERGOES.</strong> <strong>Action</strong> is what it does to something else (<em>cutting</em>, <em>burning</em>), and <strong>Passion</strong> is what is done to it (<em>being cut</em>, <em>being burnt</em>).</div>
         <div class="intro-item"><strong>What measures it from outside.</strong> <strong>When</strong> is its position in time (<em>yesterday</em>, <em>now</em>); <strong>Where</strong> is its position in place (<em>in the school</em>, <em>in the marketplace</em>); and <strong>Posture</strong> is how its parts are arranged in that place (<em>he sits</em>, <em>he lies</em>).</div>
@@ -942,14 +943,14 @@ h1{
     <div class="q-card">
       <div class="q-instr">To divide is to break a whole into its members. But wholes are of different sorts, and so are divisions. There are four kinds, and each is given here with two plain examples and one faulty case.</div>
       <div class="intro-list">
-        <div class="intro-item"><strong>Essential — a general kind into the kinds beneath it.</strong> The whole is a shared nature; the members are its kinds, marked off from one another by opposed differences.
+        <div class="intro-item"><strong>Logical — a genus into its species.</strong> The whole is a shared nature; the members are its kinds, marked off from one another by opposed differences. (This is not the same as an essential division, which divides an essence into its parts: man into body and soul, or into animal and rational.)
           <div class="intro-eg"><em>e.g.</em> a musical instrument into strings, winds, and percussion; &ensp; a vertebrate into fish, amphibians, reptiles, birds, and mammals.</div>
           <div class="intro-corrupt"><em>Faulty:</em> animals into the footed and the white, which uses two different bases at once, so that the members overlap.</div></div>
         <div class="intro-item"><strong>Integral — a whole into the parts that make it up.</strong> The members together compose the whole, and no one of them is called by the name of the whole.
           <div class="intro-eg"><em>e.g.</em> a book into its chapters; &ensp; a clock into its face, its hands, and its gears.</div>
           <div class="intro-corrupt"><em>Faulty:</em> a tree into root, trunk, and the soil; the soil is not a part of the tree at all, so it does not belong to the whole being divided.</div></div>
-        <div class="intro-item"><strong>By its powers (potestative) — one thing according to what it can do.</strong> A single thing is divided not into pieces but into its capacities.
-          <div class="intro-eg"><em>e.g.</em> a bird into its power to fly, to sing, and to build a nest; &ensp; a person into the powers of body and of mind.</div>
+        <div class="intro-item"><strong>By its powers (potestative) — a soul or a power according to what it can do.</strong> A soul, or one of its powers, is divided not into pieces but into its capacities.
+          <div class="intro-eg"><em>e.g.</em> the soul into its power to know and its power to desire; &ensp; the appetite into the sensitive appetite and the will.</div>
           <div class="intro-corrupt"><em>Faulty:</em> the soul of an animal into sense and the paw, since a paw is a bodily part, not a power of the soul.</div></div>
         <div class="intro-item"><strong>Accidental — a subject by its passing features.</strong> The division uses features the subject can gain or lose without becoming a different thing.
           <div class="intro-eg"><em>e.g.</em> apples into the red and the green; &ensp; cloaks into the new and the old.</div>
@@ -972,10 +973,10 @@ h1{
     <div class="q-card">
       <div class="q-instr">A definition answers the question <em>what is it?</em>, but there is more than one way of answering. The tradition distinguishes four kinds, and we learn to recognize each before we judge it.</div>
       <div class="intro-list">
-        <div class="intro-item"><strong>Nominal — what the name means.</strong> It explains the word, not the thing, and must come first: we cannot ask what a thing is until we know what its name refers to. <em>“Astronomy” means the law of the stars.</em></div>
+        <div class="intro-item"><strong>Nominal — what the name means.</strong> It explains the word, not the thing, and Aristotle puts it first, because we cannot ask what a thing is until we know what its name refers to. <em>“Astronomy” means the law of the stars.</em></div>
         <div class="intro-item"><strong>Essential — nearest kind plus the difference.</strong> It is the complete definition, and it says what the thing is: the nearest wider kind (genus), narrowed by the difference that belongs to this thing and nothing else. <em>A circle is a plane figure bounded by one line, every point of which lies equally distant from the center.</em></div>
         <div class="intro-item"><strong>Descriptive — by a property or telltale feature.</strong> It picks the thing out by a mark that follows from its nature, or merely goes along with it, without saying what the thing is. <em>Man is an animal that can laugh.</em></div>
-        <div class="intro-item"><strong>Causal — through one of its causes.</strong> It identifies the thing by what made it, what it is made of, its form, or what it is for; the last applies to everything made by human craft. <em>A cloak is a covering made to keep off the cold.</em></div>
+        <div class="intro-item"><strong>Causal — through its outside causes.</strong> It identifies the thing by what made it or by what it is for; the second applies to everything made by human craft. (A definition by matter and form is a kind of essential definition, called the physical definition.) <em>A cloak is a covering made to keep off the cold.</em></div>
         <div class="intro-item"><strong>And the rules.</strong> Whatever its kind, a good definition fits exactly what it defines, neither too broad nor too narrow; it is clearer than the thing defined, so it uses no metaphor; it does not contain the term being defined; it says what a thing is rather than what it is not, wherever it can; and it is brief, with no wasted words. Each of the questions that follow takes up one rule, or one kind.</div>
       </div>
       <div class="venn-submit-row" style="margin-top:22px">
@@ -1003,7 +1004,7 @@ h1{
         <div class="intro-item"><strong>Verbs other than the copula must be restated with it.</strong> “All dogs bark” becomes <em>All dogs are things that bark</em>; we supply “things that” and restore <em>is</em> or <em>are</em>.</div>
         <div class="intro-item"><strong>Singular subjects are taken whole.</strong> “Socrates is a man” takes its subject in its entirety: we treat it as a universal with existential import, since it concerns one thing, which is either wholly included or wholly excluded.</div>
         <div class="intro-item"><strong>Mark the connectives.</strong> “If… then” is the conditional (where the common error is affirming the consequent); “not both” is the conjunctive, which concludes only by positing; “either… or” must show which kind it is: the strict disjunction (“but not both”) licenses both moods, and the broad disjunction (“or perhaps both”) licenses only tollendo ponens.</div>
-        <div class="intro-item"><strong>The modes.</strong> “Necessarily” and “contingently” must be attached to the conclusion with care, because the conclusion may never be stronger in mode than the weaker premise.</div>
+        <div class="intro-item"><strong>The modes.</strong> “Necessarily” and “contingently” must be attached to the conclusion with care, because the conclusion may be no stronger in mode than the premises allow. In the first figure a necessary major premise with a plain minor premise gives a necessary conclusion; in the other cases treated here the conclusion follows the weaker premise.</div>
       </div>
       <div class="venn-submit-row" style="margin-top:22px">
         <button class="submit-btn" id="intro14-begin">Begin the Exercise ⟶</button>
@@ -1022,7 +1023,7 @@ h1{
       <div class="q-instr">An <strong>immediate inference</strong> draws a new proposition from a single one, with no middle term and no second premise, so the conclusion is read directly from the first. Each turns on the four categorical forms: <strong>A</strong> (<em>All S are P</em>), <strong>E</strong> (<em>No S are P</em>), <strong>I</strong> (<em>Some S are P</em>), and <strong>O</strong> (<em>Some S are not P</em>). You may experiment freely with every inference below in the <em>Square of Opposition</em> study section before you begin.</div>
       <div class="intro-list">
         <div class="intro-item"><strong>Conversion — exchange subject and predicate.</strong> E and I convert <em>simply</em>, truth passing both ways: <em>“No fish are birds”</em> ⇄ <em>“No birds are fish.”</em> A converts only <em>per accidens</em>, the quantity weakening: <em>“All oaks are trees”</em> yields only <em>“Some trees are oaks.”</em> O cannot be converted at all: <em>“Some animals are not dogs”</em> is true, yet <em>“Some dogs are not animals”</em> is false.</div>
-        <div class="intro-item"><strong>Obversion — change the quality, negate the predicate.</strong> It holds for all four forms and always preserves truth: <em>“All oaks are trees”</em> ⇄ <em>“No oaks are non-trees”</em>; <em>“Some men are just”</em> ⇄ <em>“Some men are not unjust.”</em></div>
+        <div class="intro-item"><strong>Obversion — change the quality, negate the predicate.</strong> It holds for all four forms and always preserves truth: <em>“All oaks are trees”</em> ⇄ <em>“No oaks are non-trees”</em>; <em>“Some men are just”</em> ⇄ <em>“Some men are not non-just.”</em></div>
         <div class="intro-item"><strong>Contraposition — obvert, then convert, then obvert.</strong> For A and O it preserves truth: <em>“All oaks are trees”</em> → (obvert) <em>“No oaks are non-trees”</em> → (convert) <em>“No non-trees are oaks”</em> → (obvert) <em>“All non-trees are non-oaks.”</em> We cannot simply convert first, because an A does not convert. E contraposes only to an O, and I has no contrapositive.</div>
         <div class="intro-item"><strong>The relations of the square.</strong> From one proposition’s truth the square yields the rest: <strong>contradictories</strong> (A–O, E–I) always take opposite values; <strong>contraries</strong> (A–E) are never both true; <strong>subcontraries</strong> (I–O) never both false; and by <strong>subalternation</strong> truth descends from a universal to its particular. <em>“All swans are white,” if true, makes “Some swan is not white” false.</em></div>
       </div>
@@ -1080,11 +1081,12 @@ h1{
       <div class="badge">Introduction</div>
     </div>
     <div class="q-card">
-      <div class="q-instr">A <strong>modal syllogism</strong> is one whose premises are qualified by a <em>mode</em>, that is, the manner in which the predicate belongs to the subject. Three modes are considered here: the <strong>necessary</strong> (it cannot be otherwise), the <strong>assertoric</strong> or plain (it simply is so), and the <strong>contingent</strong> (it is so, yet might not be). The question is not only <em>whether</em> a conclusion follows, but <em>in what mode</em>.</div>
+      <div class="q-instr">A <strong>modal syllogism</strong> is one whose premises are qualified by a <em>mode</em>, that is, the manner in which the predicate belongs to the subject. Three modes are considered here: the <strong>necessary</strong> (it cannot be otherwise), the <strong>assertoric</strong> or plain (it simply is so), and the <strong>contingent</strong> (it can be, and can also not be). The question is not only <em>whether</em> a conclusion follows, but <em>in what mode</em>.</div>
       <div class="intro-list">
-        <div class="intro-item"><strong>The governing rule.</strong> <em>Peiorem sequitur semper conclusio partem</em>: the conclusion always follows the weaker premise. As a negative premise requires a negative conclusion, and a particular premise a particular one, so the weaker <em>mode</em> governs the conclusion: if a necessary premise is joined to a merely contingent one, the conclusion can be no stronger than contingent.</div>
-        <div class="intro-item"><strong>The order of strength.</strong> Necessity is strongest, the plain assertion stands between, contingency is weakest. A conclusion may sink to the level of the weaker premise, but never rise above it.</div>
-        <div class="intro-item"><strong>An example.</strong> <em>“Every man is necessarily mortal; every scholar is (in fact) a man; therefore every scholar is mortal.”</em> Yet the conclusion is drawn only as a plain assertion, not as a necessity, since the minor premise was merely assertoric. So we judge each argument by the mode its weakest premise allows.</div>
+        <div class="intro-item"><strong>The rule in the first figure.</strong> In quality and quantity the conclusion follows the weaker premise (<em>peiorem sequitur semper conclusio partem</em>): a negative premise requires a negative conclusion, and a particular premise a particular one. In mode, Aristotle holds a different rule for the first figure. A necessary major premise with a plain minor premise gives a necessary conclusion, because what belongs necessarily to everything under the middle term belongs necessarily to whatever falls under it (<em>Prior Analytics</em> I.9). A plain major premise with a necessary minor premise gives only a plain conclusion. The Thomist school follows Aristotle here, and so does this course.</div>
+        <div class="intro-item"><strong>The other cases.</strong> Necessity is the strongest mode, the plain assertion stands between, and contingency is the weakest. When both premises have the same mode, the conclusion has that mode too. When one premise is contingent, the course draws the conclusion as contingent. Outside the first figure, Aristotle’s rules for joining a necessary premise to a plain one differ from mood to mood (<em>Prior Analytics</em> I.10–11), so the course treats that mixture only in the first figure.</div>
+        <div class="intro-item"><strong>An example.</strong> <em>“Every man is necessarily an animal; every runner is in fact a man; therefore every runner is necessarily an animal.”</em> The syllogism is in the first figure and its major premise is necessary, so the conclusion is necessary, although the minor premise is plain.</div>
+        <div class="intro-item"><strong>Another view.</strong> Theophrastus, Aristotle’s successor at the Lyceum, held that the conclusion always follows the weaker premise, in mode as in quality and quantity. By his rule the example above concludes only that every runner is an animal, as a plain assertion. The medieval commentators, the logic handed down under St Thomas’s name, and St Thomas himself when he cites the rule all follow Aristotle on this point, and so does this course.</div>
       </div>
       <div class="venn-submit-row" style="margin-top:22px">
         <button class="submit-btn" id="intro-modsyll-begin">Begin the Exercise ⟶</button>
@@ -1196,7 +1198,7 @@ h1{
         <div class="intro-item"><strong>The six in the words.</strong> They follow from a division rather than from a list. Ambiguity is threefold. <em>Actual</em> ambiguity is one sound, unchanged, meaning several things: in a word, <strong>equivocation</strong>; in a phrase, <strong>amphiboly</strong>. <em>Potential</em> ambiguity is meaning several things according to how it is said: in a word, <strong>accent</strong>; in a phrase, <strong>composition</strong> and <strong>division</strong>. <em>Apparent</em> ambiguity is a word that truly means one thing and seems to mean another: <strong>figure of speech</strong>. So there are six fallacies in the words (two, three, and one), and the number follows from the division.</div>
         <div class="intro-item"><strong>The seven outside the words.</strong> <strong>Accident</strong> (taking a passing feature for the thing); <strong>in a certain respect, taken flatly</strong>; <strong>missing the point</strong>; <strong>begging the question</strong>; <strong>not the cause as cause</strong>; <strong>the consequent</strong> (reading a one-way connection backwards); and <strong>many questions asked as one</strong>. These are the dangerous ones, because the language is faultless and only the thinking is at fault.</div>
         <div class="intro-item"><strong>The hidden rule.</strong> Every argument depends on a rule, usually unspoken. <em>Socrates is a man, therefore an animal</em> depends on a true one: whatever the narrower kind is said of, the wider kind is said of too. <em>Socrates is an animal, therefore a man</em> depends on the same rule reversed, which is false. Both premises may be true and the argument still worthless, because the rule it depends on is false.</div>
-        <div class="intro-item"><strong>The same faults, under two sets of names.</strong> Modern books keep most of these and rename some. <em>Accident</em> is now called applying a general rule to a special case; <em>in a certain respect taken flatly</em> is hasty generalization, or ignoring the qualification; <em>missing the point</em> is the irrelevant conclusion, with the straw man and the red herring as species of it; <em>not the cause as cause</em> is false cause, or <em>post hoc ergo propter hoc</em>; <em>many questions as one</em> is the loaded question. And <em>the consequent</em> is what is now called affirming the consequent when it is stated with an “if,” and the undistributed middle when it is not; modern logic counts those one fault, as the schools did. Each answer here gives you both names, so that you can read either kind of book afterwards.</div>
+        <div class="intro-item"><strong>The same faults, under two sets of names.</strong> Modern books keep most of these and rename some. <em>Accident</em> has no exact modern name; it concludes of a thing what belongs only to something joined with it by accident. <em>In a certain respect taken flatly</em> is what modern books call hasty generalization, or ignoring the qualification; in its other direction, applying a rule that holds for the most part to a case it does not fit, they call it the fallacy of accident, <em>a dicto simpliciter ad dictum secundum quid</em>; <em>missing the point</em> is the irrelevant conclusion, with the straw man and the red herring as species of it; <em>not the cause as cause</em> is false cause, or <em>post hoc ergo propter hoc</em>; <em>many questions as one</em> is the loaded question. And <em>the consequent</em> is what is now called affirming the consequent when it is stated with an “if,” and the undistributed middle when it is not. Modern books count these as two faults, but Aristotle and the schools counted them as one, the fallacy of the consequent. Each answer here gives you both names, so that you can read either kind of book afterwards.</div>
         <div class="intro-item"><strong>The other half of the same doctrine.</strong> In <em>Dialectic</em> we learn that every topic (every place an argument may be drawn from) carries a <em>maxim</em>, the rule the argument depends on. When that rule is true, the argument holds. A fallacy is the same art turned about: an argument that depends on a rule that is false and looks true. So the two exercises teach one doctrine from opposite sides, and the question below about the hidden rule connects them.</div>
         <div class="intro-item"><strong>Why we study them.</strong> We study them not in order to use them. St Thomas notes that when we reason badly by ourselves, it always happens <em>beside our intention</em>, since nobody sets out to deceive himself. The honest man who has not noticed that his word shifted is commoner than the sophist who shifts it on purpose. So we should apply this study to our own arguments first.</div>
       </div>
@@ -1289,7 +1291,7 @@ if(typeof document!=='undefined'){
      desc:'The modes are necessary, impossible, and possible, as John of St Thomas treats them. We judge equipollences (whether two expressions have the same force and the same corner of the square, as when we ask whether “not possible that not” comes to “necessary”), the modal square, and the composite and divided senses (whether the seated man may walk).',
      instr:'The modes of propositions.'},
     {id:8, title:'Diagramming Syllogisms',
-     desc:'Diagram a whole valid syllogism on three circles: shade the universal premises, place the ×s — and, where a weakened conclusion demands existence, the import ×.',
+     desc:'Diagram a whole valid syllogism on three circles: shade the universal premises, place the ×s, and, where the conclusion needs the existence of a term, the import mark ⊗.',
      instr:'Diagram the full syllogism, then submit.'},
     {id:9, title:'Syllogistic Form in the Abstract',
      desc:'Judge whether a syllogism in schematic letters is valid, considering its form alone. Capital letters are general terms; lower-case letters are singular.',
@@ -1313,7 +1315,7 @@ if(typeof document!=='undefined'){
      desc:'Ordinary English arguments of every kind (categorical, conditional, conjunctive, disjunctive, and modal), not in standard form. Discern the syllogism within and judge its validity.',
      instr:'Is the argument below a valid syllogism?'},
     {id:16, title:'The Modal Syllogism',
-     desc:'Syllogisms with premises necessary, assertoric, or contingent. The received rule is peiorem sequitur semper conclusio partem: the conclusion follows the weaker premise, in mode as in quality and quantity.',
+     desc:'Syllogisms with premises necessary, assertoric, or contingent. In quality and quantity the conclusion follows the weaker premise; in mode the course follows Aristotle, so that in the first figure a necessary major premise with a plain minor premise gives a necessary conclusion.',
      instr:'In what mode, if any, does the conclusion follow?'},
     {id:17, title:'The Chain of Syllogisms',
      desc:'The purely formal art at its fullest extent: a chain of syllogisms (a polysyllogism), where each conclusion becomes a premise of the next. Follow the reasoning link by link and judge whether the whole chain holds, for one invalid link makes the whole chain invalid. The terms are schematic letters, and there are no diagrams.',
@@ -1632,11 +1634,11 @@ if(typeof document!=='undefined'){
           options:['Some S are P','All S are P','No S are P','Some S are not P'],
           correct:0,
           explain:`An × in the lens where the circles overlap says that at least one thing is both S and P, that is, <em>Some S are P</em> (the form I). If that same lens is shaded empty instead, the diagram says <em>No S are P</em> (E).` } },
-    { h:`<p><strong>Two ways to shade — and why we shade the empty.</strong> One could picture these diagrams two ways. In the traditional way used here, to <strong>shade</strong> a region is to declare it <em>empty</em>, and only an <strong>×</strong> asserts that something is there. (One could instead shade the regions that are <em>occupied</em>, leaving the empty ones blank; but that is not the convention here.) Beneath the choice of shading lies a deeper one. The older logic of Aristotle treats every general term as <em>non-empty</em> (there really are men, dogs, triangles), so a universal already carries existence with it (the term of art is <em>existential import</em>), and “All S are P” yields “Some S are P.” Modern set theory instead treats a class as possibly <em>empty</em> until something is shown to fall within it, and so denies that step. This course follows the classical way: every term stands for real things.</p>`,
-      q:{ prompt:`On the classical account this course follows, a general term such as “dog” is taken to…`,
-          options:['Be empty until something is placed in it','Stand for real things, that is, be non-empty','Name only an idea, and never any things','Shade the whole of the diagram at once'],
-          correct:1,
-          explain:`Traditional logic presumes every term non-empty (there <em>are</em> dogs), which is why a universal carries existential import, and “All S are P” yields “Some S are P.” Modern set theory allows empty classes and drops that inference.` } },
+    { h:`<p><strong>Two ways to shade — and why we shade the empty.</strong> One could picture these diagrams two ways. In the traditional way used here, to <strong>shade</strong> a region is to declare it <em>empty</em>, and only an <strong>×</strong> asserts that something is there. (One could instead shade the regions that are <em>occupied</em>, leaving the empty ones blank; but that is not the convention here.) Beneath the choice of shading lies a deeper one. In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. That is why “All S are P” yields “Some S are P” (the term of art is <em>existential import</em>). A negative proposition carries no such existence. Modern set theory reads “All S are P” as true when there are no S, and so denies the step. This course follows the classical way. In the diagrams a universal is still drawn by shading what it denies, and the existence that an affirmative universal asserts is drawn with a <strong>⊗</strong> where an argument needs it.</p>`,
+      q:{ prompt:`On the classical account this course follows, an affirmative proposition whose subject stands for nothing, such as “All unicorns are white,” is…`,
+          options:['False, since an affirmative asserts that its subject exists','True, since nothing contradicts it','Neither true nor false, since it is about nothing','True, since a universal only declares a region empty'],
+          correct:0,
+          explain:`In the older logic an affirmative proposition asserts that its subject exists, so “All unicorns are white” is false, and that is why “All S are P” yields “Some S are P.” A negative proposition asserts no existence, so “No unicorns are white” is true. Modern set theory allows empty classes, reads “All S are P” as true when there are no S, and drops the inference.` } },
     { h:`<p><strong>Only an instrument.</strong> Useful as they are, these diagrams prove nothing by themselves; they only display what a proposition already says, so that the eye may help the mind keep track of what is included, what is excluded, and whether a thing exists. The diagram only assists the reasoning; it never replaces it. And the greatest instrument of the mind is not the circle but the <em>word</em>: language is the first and highest tool of reason, and it is language one wields in every exercise. Begin when you are ready.</p>` }
   ];
   /* Five questions for every grammar panel. One of the five is drawn at random
@@ -2683,7 +2685,7 @@ if(typeof document!=='undefined'){
     updateProgress();
     $('q-instr').textContent = state.q.kind==='venn3'
       ? (state.q.sub==='pair' ? 'Diagram what the two premises together assert.'
-                              : 'Diagram the full syllogism — shading, ×s, and the import × if its conclusion needs one.')
+                              : 'Diagram the full syllogism: shade the universal premises, place the ×s, and place a ⊗ if the conclusion needs one.')
       : state.q.kind==='imm'
       ? (state.q.sub==='op' ? 'Type the result of the operation in standard form.'
                             : 'What truth-value does the square of opposition assign?')
@@ -2710,7 +2712,8 @@ if(typeof document!=='undefined'){
       state.venn = {A:'none', AB:'none', B:'none'};
       body.innerHTML = `<div class="syllogism" style="width:auto; text-align:center">${q.sentence}.</div>
         <div class="venn-wrap"><div id="venn-box"></div>
-        <div class="venn-legend">Click a region: once to shade it (declared empty) · twice for an × (something exists) · a third time to clear</div>
+        <div class="venn-legend">Click a region: once to shade it (declared empty) · twice for an × (something exists) · three times for a ⊗ (existence asserted by an affirmative universal) · a fourth time to clear</div>
+        ${vennKeyHtml(true)}
         <div class="venn-submit-row"><button class="submit-btn" id="btn-venn-submit">Submit Diagram</button></div></div>`;
       renderVennBox();
       $('btn-venn-submit').onclick = submitVenn;
@@ -2720,7 +2723,7 @@ if(typeof document!=='undefined'){
         ? `<br><div class="concl"><span class="therefore">∴</span>${q.concl}.</div>` : '';
       body.innerHTML = `<div class="syllogism">${q.lines[0]}.<br>${q.lines[1]}.${conclHtml}</div>
         <div class="venn-wrap"><div id="venn-box"></div>
-        <div class="venn-legend">Click a region: once to shade it (declared empty) · twice for an × (something exists) · a third time to clear</div>
+        ${q.sub==='syll' ? '<div class="venn-legend">Click a region: once to shade it (declared empty) · twice for an × (something exists) · three times for a ⊗ (existence asserted by an affirmative universal) · a fourth time to clear</div>' + vennKeyHtml() : '<div class="venn-legend">Click a region: once to shade it (declared empty) · twice for an × (something exists) · a third time to clear</div>'}
         <div class="venn-submit-row"><button class="submit-btn" id="btn-venn-submit">Submit Diagram</button></div></div>`;
       renderVennBox3();
       $('btn-venn-submit').onclick = submitVenn3;
@@ -2890,6 +2893,7 @@ if(typeof document!=='undefined'){
     REGIONS3.forEach(r=>{
       if(state.venn3[r]==='shade') shaded.add(r);
       if(state.venn3[r]==='x') xs.push({regions:[r], kind:'def'});
+      if(state.venn3[r]==='imp') xs.push({regions:[r], kind:'import'});
     });
     const labels = {S:termLabel(q.roles.S), P:termLabel(q.roles.P), M:termLabel(q.roles.M)};
     const box = $('venn-box');
@@ -2905,7 +2909,9 @@ if(typeof document!=='undefined'){
         if((x-c.x)**2+(y-c.y)**2 <= c.r*c.r) reg += k;
       }
       if(!reg) return;
-      state.venn3[reg] = {none:'shade', shade:'x', x:'none'}[state.venn3[reg]];
+      state.venn3[reg] = (q.sub==='syll'
+        ? {none:'shade', shade:'x', x:'imp', imp:'none'}
+        : {none:'shade', shade:'x', x:'none'})[state.venn3[reg]];
       renderVennBox3();
     });
   }
@@ -2916,14 +2922,14 @@ if(typeof document!=='undefined'){
     const q = state.q, ok = checkVenn3(q, state.venn3);
     const pts = applyScore(ok);
     let detail = q.sub==='syll'
-      ? `<em>${q.name}</em> (${q.mood}, figure ${q.fig})${q.diag.importTerm
-          ? `; the ⊗ supplies the existential import of “${termLabel(q.roles[q.diag.importTerm])}” that the weakened conclusion requires`
-          : '; once the premises are pictured, the conclusion is already contained in the diagram'}.`
+      ? (q.diag.importTerm
+          ? `<em>${q.name}</em> (${q.mood}, figure ${q.fig}). ${importExplain(q.fig, q.mood[0], q.mood[1], q.diag.importTerm, q.roles)}${importPremise(q.fig, q.mood[0], q.mood[1], q.diag.importTerm)>=0 ? ' The conclusion requires that existence.' : ''}`
+          : `<em>${q.name}</em> (${q.mood}, figure ${q.fig}); once the premises are pictured, the conclusion is already contained in the diagram.`)
       : 'Universals shade a lens of two cells; a particular’s × goes where the shading leaves room.';
     if(!ok) detail += `<div class="fb-why">${vennMistake3(q, state.venn3)}</div>`;
     const labels = {S:termLabel(q.roles.S), P:termLabel(q.roles.P), M:termLabel(q.roles.M)};
     detail += `<div class="fb-venn">${svgVenn(V3, labels, q.diag.shaded, q.diag.xs)}
-      <div class="venn-cap">The correct diagram.</div></div>`;
+      <div class="venn-cap">The correct diagram.</div>${q.sub==='syll' ? vennKeyHtml() : ''}</div>`;
     fbHTML(ok, pts, detail);
     finishOrNext();
   }
@@ -2973,7 +2979,7 @@ if(typeof document!=='undefined'){
       const dB = (x-V2.circles.B.x)**2+(y-V2.circles.B.y)**2 <= V2.circles.B.r**2;
       const reg = dA&&dB ? 'AB' : dA ? 'A' : dB ? 'B' : null;
       if(!reg) return;
-      state.venn[reg] = {none:'shade', shade:'x', x:'none'}[state.venn[reg]];
+      state.venn[reg] = {none:'shade', shade:'x', x:'imp', imp:'none'}[state.venn[reg]];
       renderVennBox();
     });
   }
@@ -2983,12 +2989,14 @@ if(typeof document!=='undefined'){
     $('btn-venn-submit').disabled = true;
     const q = state.q, ok = checkVenn(q, state.venn);
     const pts = applyScore(ok);
-    const DESC = {A:'the subject’s region outside the predicate is shaded empty',
+    const DESC = {A:'the subject’s region outside the predicate is shaded empty (a ⊗ in the overlap, for the existence of the subject that the affirmative asserts, may also be drawn)',
                   E:'the overlap is shaded empty',
                   I:'an × sits in the overlap',
                   O:'an × sits in the subject’s region outside the predicate'};
     let detail = `“${q.sentence}” is an <strong>${q.type}</strong> proposition: ${DESC[q.type]}.`;
     if(!ok) detail += `<div class="fb-why">${vennMistake(q, state.venn)}</div>`;
+    else if(q.optImp && state.venn[q.optImp]==='imp')
+      detail += `<div class="fb-why">The ⊗ is also correct, but it is not required here. “All S are P” asserts that some S exists, and since every S is P, that S is in the overlap.</div>`;
     const cm = vennStateToMarks(q.correct);
     const labels = {A:termLabel(q.left), B:termLabel(q.right)};
     detail += `<div class="fb-venn">${svgVenn(V2, labels, cm.shaded, cm.xs)}
@@ -3005,7 +3013,7 @@ if(typeof document!=='undefined'){
     let cap;
     if(q.valid){
       cap = diag.importTerm
-        ? `With the existential import of “${termLabel(q.roles[diag.importTerm])}” (⊗), the premises contain the conclusion: ${concl}.`
+        ? `${importExplain(q.fig, q.mood[0], q.mood[1], diag.importTerm, q.roles)} With the ⊗, the premises contain the conclusion: ${concl}.`
         : `The diagram of the premises already contains the conclusion: ${concl}.`;
     } else {
       const tc = q.mood[2];
@@ -3019,7 +3027,7 @@ if(typeof document!=='undefined'){
       if(ambig)
         cap += ` Where a “some” could sit in more than one open cell, each candidate is marked <strong>×?</strong>, since one of those cells holds the witness, but the premises do not say which.`;
     }
-    return `<div class="fb-venn">${svgVenn(V3, labels, diag.shaded, diag.xs)}<div class="venn-cap">${cap}</div></div>`;
+    return `<div class="fb-venn">${svgVenn(V3, labels, diag.shaded, diag.xs)}<div class="venn-cap">${cap}</div>${vennKeyHtml()}</div>`;
   }
   function diagramBlock3(q){
     const labels = {S:termLabel(q.roles.S), P:termLabel(q.roles.P), M:termLabel(q.roles.M)};
@@ -3033,10 +3041,10 @@ if(typeof document!=='undefined'){
       const pred = subj==='S' ? 'P' : 'S';
       if(!conclSatisfiedFor(diag, a.c, subj, pred)) tryImport(diag, a.c, subj, pred);
       cap = (diag.importTerm
-        ? `With the existential import of “${termLabel(q.roles[diag.importTerm])}” (⊗), the diagram yields: `
+        ? `${importExplain(q.fig, q.t1, q.t2, diag.importTerm, q.roles)} With the ⊗, the diagram yields: `
         : 'The diagram yields: ') + a.text + '.';
     }
-    return `<div class="fb-venn">${svgVenn(V3, labels, diag.shaded, diag.xs)}<div class="venn-cap">${cap}</div></div>`;
+    return `<div class="fb-venn">${svgVenn(V3, labels, diag.shaded, diag.xs)}<div class="venn-cap">${cap}</div>${vennKeyHtml()}</div>`;
   }
 
   function figMood(q){ return `${q.mood}-${q.fig}`; }
@@ -3108,7 +3116,7 @@ if(typeof document!=='undefined'){
   function validityDetail(q){
     if(q.valid){
       const sub = SUBALTERN.has(q.fig+q.mood)
-        ? ' This is a weakened (subaltern) mood, valid on the traditional reading, where universal premises carry existential import.' : '';
+        ? ' This is a weakened (subaltern) mood, since its particular conclusion is weaker than the universal one the premises allow. It is valid on the traditional reading, where an affirmative proposition asserts that its subject exists and a particular negative asserts no existence.' : '';
       return `This syllogism is <strong>valid</strong>: <em>${q.name}</em> (${figMood(q)}, figure ${q.fig}).${sub}`;
     }
     return `This syllogism is <strong>invalid</strong> (${figMood(q)}, figure ${q.fig}). ${q.viols[0]||''}`;
@@ -3138,14 +3146,14 @@ if(typeof document!=='undefined'){
     if(!b.valid){
       detail = `<strong>Invalid</strong>: the underlying form (${b.mood}-${b.fig}) breaks the rules. ${b.viols[0]||''}`;
     } else if(q.valid){
-      detail = `<strong>Valid</strong>: <em>${b.name}</em> (${b.mood}-${b.fig}), and the conclusion keeps to the weaker mode (${MOD_NAME[q.stated]}), as the rule requires.`;
+      detail = `<strong>Valid</strong>: <em>${b.name}</em> (${b.mood}-${b.fig}), and the conclusion claims no stronger mode (${MOD_NAME[q.stated]}) than the premises allow, since ${modalRuleClause(b)}.`;
     } else {
-      detail = `<strong>Invalid</strong>. The form itself is valid (<em>${b.name}</em>), but the conclusion claims the <strong>${MOD_NAME[q.stated]}</strong> mode where the premises warrant only the <strong>${MOD_NAME[b.answer]}</strong>: peiorem sequitur semper conclusio partem.`;
+      detail = `<strong>Invalid</strong>. The form itself is valid (<em>${b.name}</em>), but the conclusion claims the <strong>${MOD_NAME[q.stated]}</strong> mode where the premises warrant only the <strong>${MOD_NAME[b.answer]}</strong>, since ${modalRuleClause(b)}.`;
     }
     if(!ok){
       const why = !b.valid ? mistakeNoteValidity(b, 'english')
-        : !q.valid ? 'The modal language hides the flaw. Reducing the argument to its form and then checking the modes shows it, since a conclusion can never be stronger in mode than the weaker premise.'
-        : 'Modal language makes valid arguments seem doubtful. When it is reduced to its form and tested, with the rule of the weaker part applied, this argument proves to be in order.';
+        : !q.valid ? 'The modal language hides the flaw. Reducing the argument to its form and then checking the modes shows it, since a conclusion can be no stronger in mode than the premises allow.'
+        : 'Modal language makes valid arguments seem doubtful. When it is reduced to its form and tested, with the rules of mode applied, this argument proves to be in order.';
       detail += `<div class="fb-why">${why}</div>`;
     }
     detail += `<div class="fb-standard"><em>In standard form:</em><br>
@@ -3277,7 +3285,7 @@ if(typeof document!=='undefined'){
       detail = `The form is <strong>invalid</strong> (${q.mood}-${q.fig}). ${q.viols[0]||''} No mode can make an invalid form valid, so <strong>nothing follows</strong>.`;
     } else {
       const conclSent = q.answer==='assert' ? q.concl : MOD_PRE[q.answer].toLowerCase()+decap(q.concl);
-      detail = `The form is valid: <em>${q.name}</em> (${q.mood}-${q.fig}). The premises stand in the ${MOD_NAME[q.mods[0]]} and the ${MOD_NAME[q.mods[1]]} mode; by the received rule (<em>peiorem sequitur semper conclusio partem</em>) the conclusion follows in the <strong>${MOD_NAME[q.answer]}</strong> mode: ${conclSent}.`;
+      detail = `The form is valid: <em>${q.name}</em> (${q.mood}-${q.fig}). The premises stand in the ${MOD_NAME[q.mods[0]]} and the ${MOD_NAME[q.mods[1]]} mode, and ${modalRuleClause(q)}, so the conclusion follows in the <strong>${MOD_NAME[q.answer]}</strong> mode: ${conclSent}.`;
     }
     if(!ok) detail += `<div class="fb-why">${modalSyllMistake(q, choice)}</div>`;
     detail += diagramBlock(q);
