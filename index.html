@@ -961,10 +961,10 @@ if(typeof document!=='undefined'){
      desc:'Two premises are given in standard form. Type the conclusion that follows logically — or “none” if nothing follows.',
      instr:'What conclusion, if any, follows from these premises?'},
     {id:12, title:'The Conjunctive and Disjunctive Syllogism',
-     desc:'There are two forms, the conjunctive (“not both”) and the disjunctive (“either–or”). The conjunctive concludes only by ponendo tollens; the disjunctive by tollendo ponens, and by ponendo tollens too only when strict (“but not both”). So we must note which marker the premise uses.',
+     desc:'There are two forms, the conjunctive (“not both”) and the disjunctive (“either–or”). The conjunctive concludes only in the mood that denies by affirming (modus ponendo tollens). The disjunctive concludes in the mood that affirms by denying (modus tollendo ponens), and in the mood that denies by affirming only when it is strict (“but not both”). So we must note which marker the premise uses.',
      instr:'Is this syllogism valid or invalid?'},
     {id:13, title:'The Hypothetical Syllogism',
-     desc:'The conditional and its two lawful moods, ponendo ponens and tollendo tollens, set beside the twin fallacies of affirming the consequent and denying the antecedent.',
+     desc:'The conditional and its two lawful moods, the mood that affirms by affirming (modus ponendo ponens) and the mood that denies by denying (modus tollendo tollens), set beside the twin fallacies of affirming the consequent and denying the antecedent.',
      instr:'Is this hypothetical syllogism valid or invalid?'},
     {id:14, title:'The Mixed Consequence',
      desc:'Conditional, conjunctive, and disjunctive premises together in one drill. Type the conclusion that follows about the subject — or “none” if the mood is fallacious.',
@@ -1823,22 +1823,22 @@ if(typeof document!=='undefined'){
     12:[
       { src:`${SRC_ART}; ${SRC_MAR}; ${SRC_JST}.`,
         h:`<p><strong>Arguments from a compound premise.</strong> The conjunctive and the disjunctive syllogism are built not on terms but on whole propositions joined by a connective. The major premise is compound; the minor premise posits one member (asserts it) or removes it (denies it); and the conclusion posits or removes the other member. Each question asks whether the conclusion follows.</p>`
-        + `<p>The <strong>conjunctive</strong> premise says “not both”: it denies that two propositions are true together, as in “No one can serve both God and Mammon.” Positing one member removes the other: “Judas serves Mammon; therefore he does not serve God.” This is the positing-removing mood (<em>ponendo tollens</em>), and it is the only lawful mood of the conjunctive. Removing one member posits nothing, because both members may be false together; so from “He does not serve Mammon” it does not follow that he serves God. To argue so is the fallacy of the removing-positing mood (<em>tollendo ponens</em>).</p>`
-        + `<p>The <strong>disjunctive</strong> premise says “either … or,” and it asserts that at least one member is true. So removing one member posits the other: “The number is either odd or even; it is not odd; therefore it is even.” This removing-positing mood is the proper mood of the disjunctive, and it holds for every disjunction.</p>` },
+        + `<p>The <strong>conjunctive</strong> premise says “not both”: it denies that two propositions are true together, as in “No one can serve both God and Mammon.” Positing one member removes the other: “Judas serves Mammon; therefore he does not serve God.” This is the mood that denies by affirming (<em>modus ponendo tollens</em>), and it is the only lawful mood of the conjunctive. Removing one member posits nothing, because both members may be false together; so from “He does not serve Mammon” it does not follow that he serves God. To argue so is the fallacy of the mood that affirms by denying (<em>modus tollendo ponens</em>).</p>`
+        + `<p>The <strong>disjunctive</strong> premise says “either … or,” and it asserts that at least one member is true. So removing one member posits the other: “The number is either odd or even; it is not odd; therefore it is even.” The mood that affirms by denying is therefore the proper mood of the disjunctive, and it holds for every disjunction.</p>` },
       { h:`<p><strong>Strict and broad disjunction.</strong> Whether positing one member of a disjunction removes the other depends on the kind of disjunction, and the premise marks the kind. A <strong>strict</strong> disjunction, marked “but not both,” says that exactly one member is true; so positing one removes the other, and both moods are lawful. A <strong>broad</strong> disjunction, marked “or perhaps both,” says only that at least one member is true; so from “He is either clever or lucky, or perhaps both” and “He is clever,” nothing follows about his luck. The marker must therefore be read before the conclusion is judged.</p>`
         + `<p>The members may concern one subject, as in “Socrates is not both a B and a C,” and then positing and removing are said of that subject. Or each member may be a whole categorical proposition, such as “All B are C.” To remove such a member is to assert its contradictory: the contradictory of A is O, of O is A, of E is I, and of I is E. So “Some B are not C” removes “All B are C,” and “No D are F” removes “Some D are F.” Whatever the members are, the mood alone decides whether the conclusion follows.</p>` }
     ],
     13:[
       { src:`${SRC_ART}; ${SRC_MAR}; ${SRC_JST}.`,
         h:`<p><strong>The conditional and its two lawful moods.</strong> A conditional proposition asserts a connection, not a fact: “If it has rained, the ground is wet.” The clause after “if” is the <strong>antecedent</strong>, and the clause it supports is the <strong>consequent</strong>. A conditional is true when the consequent really follows from the antecedent, even if neither is true in fact. Each question gives a conditional premise, a second premise, and a conclusion, and asks whether the conclusion follows.</p>`
-        + `<p>Two moods are lawful. In the positing mood (<em>modus ponens</em>, also called <em>ponendo ponens</em>), the second premise posits the antecedent, and the consequent follows: “It has rained; therefore the ground is wet.” In the removing mood (<em>modus tollens</em>, also called <em>tollendo tollens</em>), the second premise removes the consequent, and the antecedent is removed with it: “The ground is not wet; therefore it has not rained.” The second mood holds because the antecedent cannot be true without the consequent.</p>` },
+        + `<p>Two moods are lawful. In the mood that affirms by affirming (<em>modus ponendo ponens</em>), the second premise posits the antecedent, and the consequent follows: “It has rained; therefore the ground is wet.” In the mood that denies by denying (<em>modus tollendo tollens</em>), the second premise removes the consequent, and the antecedent is removed with it: “The ground is not wet; therefore it has not rained.” The second mood holds because the antecedent cannot be true without the consequent.</p>` },
       { h:`<p><strong>The two fallacies.</strong> Two arguments imitate these moods and fail. <strong>Affirming the consequent</strong> reasons, “If it rained, the ground is wet; the ground is wet; so it rained.” It fails because the consequent may be true on other grounds, as a burst pipe would also wet the ground. <strong>Denying the antecedent</strong> reasons, “If it rained, the ground is wet; it did not rain; so the ground is not wet,” and it fails for the same reason, since the consequent was never made to depend on the antecedent alone. A conditional asserts the connection in one direction only, from antecedent to consequent; it does not assert the reverse, even when the reverse happens to be true.</p>`
         + `<p>The antecedent or the consequent may itself be negative, as in “If Socrates is not a B, then Socrates is a C.” To posit a negative antecedent is to assert it as it stands (“Socrates is not a B”), and to remove it is to assert the affirmative (“Socrates is a B”). The components may also be whole categorical propositions, and then to remove one is to assert its contradictory, as “Some B are not C” removes “All B are C.” In every case the mood decides whether the conclusion follows, whatever the components are.</p>` }
     ],
     14:[
       { src:SRC_LEAD,
-        h:`<p><strong>The lawful moods.</strong> Each item joins a compound premise to a simple one, and the task is to type what follows, or “none.” For the conditional (“if A, then B”), positing the antecedent posits the consequent (<em>ponendo ponens</em>), and removing the consequent removes the antecedent (<em>tollendo tollens</em>); affirming the consequent and denying the antecedent conclude nothing. For the conjunctive (“not both A and B”), positing one member removes the other (<em>ponendo tollens</em>), but removing one posits nothing.</p>`
-        + `<p>For the disjunctive (“either A or B”), removing one member posits the other (<em>tollendo ponens</em>). Positing one member removes the other only when the disjunction is strict (“but not both”); when it is broad (“or perhaps both”), positing one member removes nothing.</p>` },
+        h:`<p><strong>The lawful moods.</strong> Each item joins a compound premise to a simple one, and the task is to type what follows, or “none.” For the conditional (“if A, then B”), positing the antecedent posits the consequent, in the mood that affirms by affirming (<em>modus ponendo ponens</em>), and removing the consequent removes the antecedent, in the mood that denies by denying (<em>modus tollendo tollens</em>); affirming the consequent and denying the antecedent conclude nothing. For the conjunctive (“not both A and B”), positing one member removes the other, in the mood that denies by affirming (<em>modus ponendo tollens</em>), but removing one posits nothing.</p>`
+        + `<p>For the disjunctive (“either A or B”), removing one member posits the other, in the mood that affirms by denying (<em>modus tollendo ponens</em>). Positing one member removes the other only when the disjunction is strict (“but not both”); when it is broad (“or perhaps both”), positing one member removes nothing.</p>` },
       { h:`<p><strong>Writing the answer.</strong> When the premises concern one subject, as in “If Socrates is a B, then Socrates is a C,” the answer is written about that subject: “Socrates is a C” or “Socrates is not a C.” Removing a negative component asserts the positive one: if the premise begins “If Socrates is not a B,” then removing that antecedent gives “Socrates is a B.”</p>`
         + `<p>From Level III, the components may be whole categorical propositions, such as “All B are C.” To deny such a component is to assert its contradictory: the contradictory of A is O, of O is A, of E is I, and of I is E. So if the conclusion removes “All B are C,” the answer is “Some B are not C.” Where the mood is fallacious, the answer is “none.”</p>` }
     ],
@@ -2203,10 +2203,10 @@ if(typeof document!=='undefined'){
     },
     13:{
       0:{ qs:[
-        Q(`“If Socrates is a B, then Socrates is a C. Socrates is a B. So Socrates is a C.” Is it valid?`, [`Valid, by the positing mood (modus ponens)`,`Invalid, by affirming the consequent`,`Invalid, by denying the antecedent`,`Valid, by the removing mood (modus tollens)`], 0,
+        Q(`“If Socrates is a B, then Socrates is a C. Socrates is a B. So Socrates is a C.” Is it valid?`, [`Valid, by the mood that affirms by affirming`,`Invalid, by affirming the consequent`,`Invalid, by denying the antecedent`,`Valid, by the mood that denies by denying`], 0,
           `The second premise posits the antecedent, so the consequent follows.`,
           `Nothing is removed here, and it is the antecedent, not the consequent, that is posited.`),
-        Q(`“If Socrates is a B, then Socrates is a C. Socrates is not a C. So Socrates is not a B.” Is it valid?`, [`Valid, by the removing mood (modus tollens)`,`Invalid, by denying the antecedent`,`Invalid, by affirming the consequent`,`Valid, by the positing mood (modus ponens)`], 0,
+        Q(`“If Socrates is a B, then Socrates is a C. Socrates is not a C. So Socrates is not a B.” Is it valid?`, [`Valid, by the mood that denies by denying`,`Invalid, by denying the antecedent`,`Invalid, by affirming the consequent`,`Valid, by the mood that affirms by affirming`], 0,
           `The antecedent cannot be true without the consequent, so removing the consequent removes the antecedent.`,
           `The second premise removes the consequent, not the antecedent, so this is no fallacy.`),
         Q(`In “If it has rained, the ground is wet,” which clause is the antecedent?`, [`“it has rained”`,`“the ground is wet”`,`The whole conditional`,`Neither, since a conditional asserts no fact`], 0,
@@ -2231,7 +2231,7 @@ if(typeof document!=='undefined'){
           `A broad disjunction allows both members together, so positing one removes nothing.`,
           `Only a strict disjunction (“but not both”) lets us remove the other member.`),
         Q(`“If Socrates is a B, then Socrates is a C; Socrates is not a C.” What follows?`, [`Socrates is not a B`,`Socrates is a B`,`Nothing`,`Socrates is a C`], 0,
-          `Removing the consequent removes the antecedent (<em>tollendo tollens</em>).`,
+          `Removing the consequent removes the antecedent, in the mood that denies by denying.`,
           `The premises deny that Socrates is a C, so nothing can make him one; and something does follow.`)
       ]},
       1:{ qs:[
@@ -3553,8 +3553,8 @@ if(typeof document!=='undefined'){
     const pts = applyScore(ok);
     const info = HYP_INFO[hypMoodKey(q)];
     let detail = q.valid
-      ? `This ${q.hkind==='conj'?'conjunctive':'hypothetical'} syllogism is <strong>valid</strong>: <em>${info.name}</em>. ${info.why}`
-      : `This ${q.hkind==='conj'?'conjunctive':'hypothetical'} syllogism is <strong>invalid</strong>: <em>${info.name}</em>. ${info.why}`;
+      ? `This ${q.hkind==='conj'?'conjunctive':'hypothetical'} syllogism is <strong>valid</strong>: ${info.name}. ${info.why}`
+      : `This ${q.hkind==='conj'?'conjunctive':'hypothetical'} syllogism is <strong>invalid</strong>: ${info.name}. ${info.why}`;
     if(!ok) detail += `<div class="fb-why">${hypMistake(q, saysValid)}</div>`;
     if(q.prose) detail += `<div class="fb-standard"><em>In standard form:</em><br>
       ${q.lines[0]}.<br>${q.lines[1]}.<br>∴ ${q.concl}.</div>`;
@@ -3651,8 +3651,8 @@ if(typeof document!=='undefined'){
       ? (q.expectedProp ? pPropText(q.expectedProp) : null)
       : (q.expected ? hcCompText(q, q.expected) : null);
     let detail = conclTxt
-      ? `What follows is “<strong>${conclTxt}</strong>”${(q.style==='prop'&&q.statedDenied)?' (the denial of the other component, asserted as its contradictory)':''}, by the mood <em>${info.name}</em>. ${info.why}`
-      : `<strong>Nothing follows</strong>: <em>${info.name}</em>. ${info.why}`;
+      ? `What follows is “<strong>${conclTxt}</strong>”${(q.style==='prop'&&q.statedDenied)?' (the denial of the other component, asserted as its contradictory)':''}, by ${info.name}. ${info.why}`
+      : `<strong>Nothing follows</strong>: ${info.name}. ${info.why}`;
     if(!res.correct) detail += `<div class="fb-why">${hypcMistake(q, res)}</div>`;
     fbHTML(res.correct, pts, detail);
     finishOrNext();

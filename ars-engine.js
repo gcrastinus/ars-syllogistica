@@ -1345,25 +1345,25 @@ const HYP_MOODS = {
   disjI: {PT1:false, PT2:false, TP1:true, TP2:true}   // broad: tollendo ponens only
 };
 const HYP_INFO = {
-  PP:{name:'ponendo ponens (modus ponens)',
+  PP:{name:'the mood that affirms by affirming (<em>modus ponendo ponens</em>)', en:'the mood that affirms by affirming',
       why:'To posit the antecedent is to posit the consequent, because the conditional binds them.'},
-  TT:{name:'tollendo tollens (modus tollens)',
+  TT:{name:'the mood that denies by denying (<em>modus tollendo tollens</em>)', en:'the mood that denies by denying',
       why:'To destroy the consequent is to destroy the antecedent, because the antecedent cannot hold without the consequent.'},
-  AC:{name:'the fallacy of affirming the consequent',
+  AC:{name:'the fallacy of affirming the consequent', en:'the fallacy of affirming the consequent',
       why:'The consequent may hold on other grounds; positing it does not posit the antecedent.'},
-  DA:{name:'the fallacy of denying the antecedent',
+  DA:{name:'the fallacy of denying the antecedent', en:'the fallacy of denying the antecedent',
       why:'The consequent was never made to depend on the antecedent alone, so removing the antecedent does not remove the consequent.'},
-  PT:{name:'ponendo tollens',
+  PT:{name:'the mood that denies by affirming (<em>modus ponendo tollens</em>)', en:'the mood that denies by affirming',
       why:'The conjunctive forbids the two together, so to posit one member is to remove the other.'},
-  TP:{name:'the fallacy of tollendo ponens',
+  TP:{name:'the fallacy of the mood that affirms by denying (<em>modus tollendo ponens</em>)', en:'the fallacy of the mood that affirms by denying',
       why:'A conjunctive asserts neither member; both may be absent together, so denying one posits nothing.'},
-  PTS:{name:'ponendo tollens (strict disjunction)',
+  PTS:{name:'the mood that denies by affirming (<em>modus ponendo tollens</em>), in a strict disjunction', en:'the mood that denies by affirming, in a strict disjunction',
       why:'Marked “but not both”, the disjunction is strict: exactly one member holds, so to posit one is to remove the other.'},
-  TPS:{name:'tollendo ponens (strict disjunction)',
+  TPS:{name:'the mood that affirms by denying (<em>modus tollendo ponens</em>), in a strict disjunction', en:'the mood that affirms by denying, in a strict disjunction',
       why:'Exactly one member must hold, so if one is removed the other stands.'},
-  TPI:{name:'tollendo ponens',
+  TPI:{name:'the mood that affirms by denying (<em>modus tollendo ponens</em>)', en:'the mood that affirms by denying',
       why:'The disjunction asserts that at least one member holds, so if one is removed, the other must be granted.'},
-  PTI:{name:'the fallacy of ponendo tollens (broad disjunction)',
+  PTI:{name:'the fallacy of the mood that denies by affirming (<em>modus ponendo tollens</em>), in a broad disjunction', en:'the fallacy of the mood that denies by affirming, in a broad disjunction',
       why:'A broad disjunction permits both members together; positing one removes nothing.'}
 };
 function hypMoodKey(q){
@@ -1513,22 +1513,22 @@ function hypMistake(q, saidValid){
   const k = hypMoodKey(q);
   if(!q.valid){
     if(k==='AC') return 'Perhaps the conditional was read backwards, as though “if B, then C” also said “if C, then B”. The consequent can be true from other causes, and so the diagram leaves the subject two possible regions.';
-    if(k==='DA') return '“If B, then C” does not say “only if B, C”. Removing the antecedent does not remove the consequent; this error is the reverse of modus tollens.';
-    if(k==='PTI') return 'The marker matters: this “or” is the broad one, so the members may stand together and positing one removes nothing. Only the strict “either–or, but not both” licenses ponendo tollens.';
+    if(k==='DA') return '“If B, then C” does not say “only if B, C”. Removing the antecedent does not remove the consequent; this error is the reverse of the mood that denies by denying.';
+    if(k==='PTI') return 'The marker matters: this “or” is the broad one, so the members may stand together and positing one removes nothing. Only the strict disjunction, marked “but not both”, allows the mood that denies by affirming.';
     return 'It is tempting to read the conjunctive as a disjunctive, as though one of the two must hold. But “not both” asserts neither, and both members may fail together.';
   }
   if(k==='PP') return 'The conditional asserts exactly this, that if the antecedent is granted, the consequent must be granted.';
-  if(k==='TT') return 'Tollendo tollens reasons from the consequent back to the antecedent, and so it seems suspect; but once the consequent is denied, no case remains in which the antecedent could hold.';
-  if(k==='TPS'||k==='TPI') return 'The disjunction asserts that at least one member holds, so if one is denied, the other must be granted. Tollendo ponens is the proper mood of the disjunctive.';
-  if(k==='PTS') return 'Marked “but not both”, this disjunction is strict: its members exclude each other, so ponendo tollens holds here as it does for the conjunctive.';
-  return 'The conjunctive denies that its members hold together, so if one member holds, the other does not. Ponendo tollens is its one lawful mood.';
+  if(k==='TT') return 'The mood that denies by denying reasons from the consequent back to the antecedent, and so it seems suspect; but once the consequent is denied, no case remains in which the antecedent could hold.';
+  if(k==='TPS'||k==='TPI') return 'The disjunction asserts that at least one member holds, so if one is denied, the other must be granted. The mood that affirms by denying is the proper mood of the disjunctive.';
+  if(k==='PTS') return 'Marked “but not both”, this disjunction is strict: its members exclude each other, so the mood that denies by affirming holds here as it does for the conjunctive.';
+  return 'The conjunctive denies that its members hold together, so if one member holds, the other does not. The mood that denies by affirming is its one lawful mood.';
 }
 function hypcMistake(q, ans){
   const k = hypMoodKey(q);
   if(hcNothing(q) && ans && !ans.none)
     return HYP_INFO[k].why + ' Students supply the missing conclusion out of habit; here the mood is fallacious and nothing follows.';
   if(!hcNothing(q) && ans && ans.none)
-    return `Something does follow: this is ${HYP_INFO[k].name}. ${HYP_INFO[k].why}`;
+    return `Something does follow: this is ${HYP_INFO[k].en}. ${HYP_INFO[k].why}`;
   if(q.style==='prop')
     return 'The mood posits and removes whole propositions. The question is which component the minor posits or denies (to deny is to assert the contradictory); the other is then posited or removed accordingly.';
   if(ans && !ans.subjOk)
