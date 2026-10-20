@@ -3285,7 +3285,7 @@ function genEnthCuratedQ(d){
    (causa defectus). Technical terms are kept, always with their sense
    attached, so a young student meets the real vocabulary and can use it.
    ================================================================ */
-const FAL_RULES = 'A fallacy is an argument that looks sound and is not. St. Thomas teaches that every fallacy has two causes: the cause of the appearance, which makes it look good, and the cause of the failure, which makes it break. Six fallacies come from the words (the language is ambiguous); seven come from outside the words (the language is fine, but the thinking is not).';
+const FAL_RULES = 'A fallacy is an argument that looks sound and is not. De fallaciis, the treatise attributed to St. Thomas, teaches that every fallacy has two causes: the cause of the appearance, which makes it look good, and the cause of the failure, which makes it break. Six fallacies come from the words (the language is ambiguous); seven come from outside the words (the language is fine, but the thinking is not).';
 
 /* ---- the four kinds of disputation (De fallaciis, c. 2) ---- */
 const DISP_KINDS = {
@@ -3325,18 +3325,18 @@ function genFalDisputationQ(d){
 
 /* ---- the five awkward places a sophist drives you to (De fallaciis, c. 3) ---- */
 const META_KINDS = {
-  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; St. Thomas calls this fault redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
+  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; De fallaciis, the treatise attributed to St. Thomas, calls this fault redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
   fal:{name:'To grant something plainly false', gloss:'the respondent is forced into a statement anyone can see is untrue. It offends against natural science and mathematics, where we can check.'},
   ino:{name:'To grant something absurd',   gloss:'the respondent is driven against what nearly everyone believes, which need not be false, but is hard to accept. It offends against dialectic, which works from what people grant.'},
   sol:{name:'To say something ungrammatical', gloss:'the respondent is maneuvered into speaking badly. It offends against grammar.'},
-  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which St. Thomas calls nugatio. It offends against rhetoric, whose business is to speak well.'}
+  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which De fallaciis, the treatise attributed to St. Thomas, calls nugatio. It offends against rhetoric, whose business is to speak well.'}
 };
 const META_ITEMS = [
-  {tier:1, k:'red', t:'You denied that you ate the raw meat. He argues: whatever you bought, you ate; you bought raw meat; so you ate raw meat.', w:'the example comes from De fallaciis, and the aim is to make the respondent take back what he has just denied.'},
-  {tier:1, k:'fal', t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.', w:'the example comes from De fallaciis, and the aim is to force the respondent into something plainly untrue.'},
-  {tier:1, k:'ino', t:'Whoever can be beaten by someone is unhappy. A king can be beaten by an enemy. So the king is unhappy.', w:'the example comes from De fallaciis, and the aim is a conclusion nobody would accept, though it is not exactly false.'},
-  {tier:1, k:'nug', t:'This nose is a snub nose. But snub means snub nose. So this is a nose nose snub.', w:'the example comes from De fallaciis, and the aim is to reduce the respondent to useless repetition.'},
-  {tier:2, k:'sol', t:'You know this. This is a stone. Therefore you know stone — which is not how the words go.', w:'the example comes from De fallaciis, and the aim is to trip the respondent into bad grammar.'},
+  {tier:1, k:'red', t:'You denied that you ate the raw meat. He argues: whatever you bought, you ate; you bought raw meat; so you ate raw meat.', w:'the example comes from the same treatise, and the aim is to make the respondent take back what he has just denied.'},
+  {tier:1, k:'fal', t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is to force the respondent into something plainly untrue.'},
+  {tier:1, k:'ino', t:'Whoever can be beaten by someone is unhappy. A king can be beaten by an enemy. So the king is unhappy.', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is a conclusion nobody would accept, though it is not exactly false.'},
+  {tier:1, k:'nug', t:'This nose is a snub nose. But snub means snub nose. So this is a nose nose snub.', w:'the example comes from the same treatise, and the aim is to reduce the respondent to useless repetition.'},
+  {tier:2, k:'sol', t:'You know this. This is a stone. Therefore you know stone — which is not how the words go.', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is to trip the respondent into bad grammar.'},
   {tier:2, k:'red', t:'You said the tax was too high. But you pay it every year without complaint. So you think it is about right after all.', w:'the aim is to make the respondent retract what he asserted a moment ago.'},
   {tier:2, k:'fal', t:'Everything that shines is gold. The wet road shines. So the wet road is gold.', w:'the aim is a conclusion anyone can see is false.'},
   {tier:3, k:'ino', t:'Whoever gives away what he owns becomes poor. The generous man gives away what he owns. So the generous man is to be pitied.', w:'the aim is a conclusion that offends what everyone believes about generosity.'},
@@ -3352,7 +3352,7 @@ function genFalMetaQ(d){
   const others = sample(keys,3).map(k=>META_KINDS[k].name);
   return mc4Make({prompt:it.t, options:[META_KINDS[it.k].name].concat(others),
     correct: META_KINDS[it.k].name,
-    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. St. Thomas names five such positions: to contradict himself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
+    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. De fallaciis, the treatise attributed to St. Thomas, names five such positions: to contradict himself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
     why: `${META_KINDS[it.k].name} means that ${META_KINDS[it.k].gloss} Here, ${it.w}`,
     rules: FAL_RULES, mcInstr:'Where is the sophist trying to drive the respondent?'});
 }
@@ -3368,12 +3368,12 @@ const FAL_KINDS = {
     app:'One word is used, so it seems to name one thing.',
     def:'The one word is naming two different things.',
     ans:'By having him state the word twice, once for each premise, in different words.',
-    doc:'EQUIVOCATION uses a single word in two senses. St. Thomas’s own case is “dog”, which means the barking animal, the star, and a fish of the sea.'},
+    doc:'EQUIVOCATION uses a single word in two senses. The case given in De fallaciis, the treatise attributed to St. Thomas, is “dog”, which means the barking animal, the star, and a fish of the sea.'},
   amphi:{side:'dict', mod:'amphiboly, or syntactic ambiguity', name:'Amphiboly — one phrase, two readings',
     app:'One sentence is used, so it seems to make one claim.',
     def:'The grammar allows two readings, and the argument takes each in turn.',
     ans:'By rewriting the sentence so that only one reading survives, and seeing whether it still works.',
-    doc:'AMPHIBOLY is ambiguity not in a word but in a whole phrase. St. Thomas’s case is “the book of Aristotle”: is it the one he wrote, or the one he owned?'},
+    doc:'AMPHIBOLY is ambiguity not in a word but in a whole phrase. The case given in De fallaciis, the treatise attributed to St. Thomas, is “the book of Aristotle”: is it the one he wrote, or the one he owned?'},
   accent:{side:'dict', mod:'the fallacy of accent, or of emphasis; quoting out of context is its near relation', name:'Accent — how the word is said',
     app:'The word looks the same on the page, so it seems to be one word.',
     def:'Said with a different stress it is a different word, or a different claim.',
@@ -3393,12 +3393,12 @@ const FAL_KINDS = {
     app:'Two words have the same form, so they seem to signify in the same way.',
     def:'The likeness is only in the form; the things named are of different sorts.',
     ans:'By asking what each word is actually naming; if the grammar runs parallel and the things do not, the argument rests on the grammar alone.',
-    doc:'FIGURE OF SPEECH (St. Thomas calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
+    doc:'FIGURE OF SPEECH (De fallaciis, the treatise attributed to St. Thomas, calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
   accid:{side:'extra', modNote:'Modern books have no exact name for this fallacy. What they call the fallacy of accident is applying a general rule to a special case, which the schools place under <em>in a certain respect, taken flatly</em>.', name:'Accident — taking a passing feature for the thing itself',
     app:'The passing feature and the thing really do go together here.',
     def:'The passing feature and the thing are nevertheless not the same.',
     ans:'By asking whether the thing is taken as what it is, or under some feature it happens to have.',
-    doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St. Thomas’s case is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
+    doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. The case given in De fallaciis, the treatise attributed to St. Thomas, is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
   secquid:{side:'extra', mod:'hasty generalization, ignoring the qualification, or converse accident; in its other direction, where a rule that holds for the most part is applied to a case it does not fit, they call it the fallacy of accident, or <em>a dicto simpliciter ad dictum secundum quid</em>', name:'In a certain respect, taken flatly',
     app:'What is true in some respect looks like what is true without qualification.',
     def:'The qualification mattered, and it has been dropped without notice.',
@@ -3433,7 +3433,7 @@ const FAL_KINDS = {
 const FAL_KEYS = Object.keys(FAL_KINDS);
 const FAL_ITEMS = [
   {tier:1, k:'equiv',   t:'All banks are beside rivers. I keep my money in a bank. So I keep my money beside a river.'},
-  {tier:2, k:'equiv',   t:'Food is healthy. A complexion is healthy. A body is healthy. So all three have health in them the same way.', w:'The word “healthy” is said of the body first, and of food and complexion by reference to the body’s health, as its cause and as its sign. St. Thomas counts such analogous words under equivocation.'},
+  {tier:2, k:'equiv',   t:'Food is healthy. A complexion is healthy. A body is healthy. So all three have health in them the same way.', w:'The word “healthy” is said of the body first, and of food and complexion by reference to the body’s health, as its cause and as its sign. De fallaciis, the treatise attributed to St. Thomas, counts such analogous words under equivocation.'},
   {tier:3, k:'equiv',   t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.'},
   {tier:5, k:'equiv',   t:'A good pen writes well. He has a good pen. So he writes well.'},
   {tier:1, k:'amphi',   t:'The notice says dogs must be carried on the escalator. I have no dog. So I may not use the escalator.'},
@@ -3525,7 +3525,7 @@ function genFalSideQ(d){
     'Neither, since the argument is sound',
     'Both at once, since the words and the thinking fail together'];
   return mc4Make({prompt:it.t, options:opts, correct: K.side==='dict' ? inW : outW,
-    ruleShow: d>=5 ? '' : 'St. Thomas divides every fallacy in two. If what makes the argument look good comes from the WORD (one sound taken for one thing), the fallacy is in the words. If it comes from the THING (two things that agree in some way taken as simply one), it is outside the words.',
+    ruleShow: d>=5 ? '' : 'De fallaciis, the treatise attributed to St. Thomas, divides every fallacy in two. If what makes the argument look good comes from the WORD (one sound taken for one thing), the fallacy is in the words. If it comes from the THING (two things that agree in some way taken as simply one), it is outside the words.',
     why: `${falNote(it)}${K.name.split(' — ')[0]} is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app}`,
     rules: FAL_RULES, mcInstr:'Does this fallacy come from the words, or from outside them?'});
 }
@@ -3561,7 +3561,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever the narrower kind is said of, the wider kind is said of too',
        'Whatever is true of a part is true of the whole',
        'Whatever is true at one time is true at every time'],
-   why:'This is St. Thomas’s own pair. The good argument (Socrates is a man, therefore an animal) depends on a true rule: whatever the species is said of, the genus is said of. Reversed, it becomes a false rule, and this argument depends on it.'},
+   why:'This is the pair given in De fallaciis, the treatise attributed to St. Thomas. The good argument (Socrates is a man, therefore an animal) depends on a true rule: whatever the species is said of, the genus is said of. Reversed, it becomes a false rule, and this argument depends on it.'},
   {tier:1, t:'Socrates is a man, therefore Socrates is an animal.',
    correct:'Whatever the narrower kind is said of, the wider kind is said of too',
    ds:['Whatever the wider kind is said of, the narrower kind is said of too',
@@ -3573,7 +3573,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever is true of the thing is true of its passing features',
        'Whatever the wider kind is said of, the narrower kind is said of too',
        'Whatever is said of many things is said of each'],
-   why:'This is St. Thomas’s worked case. The rule is false, because a thing and a feature it happens to have are not the same. It looks true because here they do go together.'},
+   why:'This is the worked case in De fallaciis, the treatise attributed to St. Thomas. The rule is false, because a thing and a feature it happens to have are not the same. It looks true because here they do go together.'},
   {tier:2, t:'The wall is white. So every part of the wall is white.',
    correct:'Whatever is true of the whole is true of each part',
    ds:['Whatever is true of each part is true of the whole',
@@ -3612,22 +3612,22 @@ function genFalPrincipleQ(d){
 
 /* ---- the doctrine itself ---- */
 const FAL_DOCTRINE = [
-  {tier:1, q:'What does St. Thomas say a fallacy always has two of?',
+  {tier:1, q:'According to De fallaciis, the treatise attributed to St. Thomas, what does every fallacy have two of?',
    correct:'Two causes, one that makes it look sound and one that makes it fail',
    ds:['Two premises, both of them false','Two conclusions that contradict each other','Two words that mean the same thing'],
    why:'The cause of the appearance makes the argument look good; the cause of the failure breaks it. A man is deceived by the two together, since something appears to be so and is not.'},
   {tier:1, q:'“Sophistical” comes from a word meaning what?',
    correct:'Apparent wisdom, that is, wisdom that only looks like wisdom',
    ds:['Careful reasoning','A short argument','Speech before a crowd'],
-   why:'St. Thomas says, sophistica quasi apparens sapientia. The sophist argues for glory, wanting to seem wise.'},
-  {tier:1, q:'A disputation, says St. Thomas, is an act of one person toward another. For what purpose?',
+   why:'De fallaciis, the treatise attributed to St. Thomas, says that “sophistical” means apparent wisdom (sophistica quasi apparens sapientia). The sophist argues for glory, wanting to seem wise.'},
+  {tier:1, q:'According to De fallaciis, the treatise attributed to St. Thomas, a disputation is an act of one person toward another. For what purpose?',
    correct:'To show something proposed',
    ds:['To display a form of argument as an example','To pass the time agreeably','To discover a new science'],
    why:'That last part marks a real disputation off from an argument given merely to illustrate a pattern, since a disputation aims at showing something.'},
   {tier:2, q:'What does the tradition mean by calling a premise “probable”?',
    correct:'It seems so to everyone, or to most people, or to the wise',
    ds:['It is more likely than not to be true','It has been proved, but only roughly','It is what one particular expert happens to think'],
-   why:'St. Thomas gives the definition exactly: probabilia are what seem so to all, or to most, or to the wise, and among the wise, to all of them or to the most eminent. The probable is what a reasonable person may be asked to grant, not a guess about odds.'},
+   why:'De fallaciis, the treatise attributed to St. Thomas, gives the definition exactly: probabilia are what seem so to all, or to most, or to the wise, and among the wise, to all of them or to the most eminent. The probable is what a reasonable person may be asked to grant, not a guess about odds.'},
   {tier:2, q:'Why are there exactly six fallacies in the words?',
    correct:'Because ambiguity is threefold, and two of the three divide again into word and phrase',
    ds:['Because Aristotle happened to find six of them','Because there are six parts of speech','Because six is the number of the true loci'],
@@ -3636,7 +3636,7 @@ const FAL_DOCTRINE = [
    correct:'In the same respect and at the same time',
    ds:['In the same words the speaker used','Before the speaker has finished','In front of the same audience'],
    why:'If either condition is missing, what is refuted is something nobody claimed. This is the fault called missing the point, or ignorance of the refutation.'},
-  {tier:3, q:'When a man reasons badly by himself, St. Thomas says it always happens how?',
+  {tier:3, q:'When a man reasons badly by himself, how does De fallaciis, the treatise attributed to St. Thomas, say it always happens?',
    correct:'Beside his intention, since nobody sets out to deceive himself',
    ds:['On purpose, for the pleasure of it','Because he has not read Aristotle','Because his memory has failed him'],
    why:'This is why the study of fallacies is aimed first at our own arguments. Reasoning badly to someone else may be deliberate; reasoning badly to oneself never is.'},
@@ -3651,7 +3651,7 @@ const FAL_DOCTRINE = [
   {tier:3, q:'What makes an argument sophistical, if both its premises may be true?',
    correct:'It depends on a hidden rule that is false but looks true',
    ds:['It is stated too quickly to follow','Its conclusion is false','It uses technical words'],
-   why:'St. Thomas’s example, “Socrates is an animal, therefore a man”, has a true premise and a false conclusion, because the rule it depends on (that whatever the genus is said of, the species is said of) is false.'},
+   why:'De fallaciis, the treatise attributed to St. Thomas, gives the example “Socrates is an animal, therefore a man”, which has a true premise and a false conclusion, because the rule it depends on (that whatever the genus is said of, the species is said of) is false.'},
   {tier:3, q:'The sophist drives the respondent into five different awkward positions. Why five, and why those?',
    correct:'Each offends a different science, so that he appears to know them all',
    ds:['They are the five parts of a syllogism','They are the five predicables applied to argument','They are the five ways a premise can be false'],
@@ -3659,7 +3659,7 @@ const FAL_DOCTRINE = [
   {tier:5, q:'What is the difference between something false and something merely unbelievable?',
    correct:'The false and the unbelievable differ: some false things are widely believed, and some unbelievable things are true',
    ds:['They are two names for the same thing','Everything unbelievable is false, but not the reverse','The false offends grammar; the unbelievable offends rhetoric'],
-   why:'This is St. Thomas’s own distinction, with his own example: that a star is bigger than the earth is against common opinion, and true. So the sophist can win by driving the respondent to what is merely unbelievable.'}
+   why:'This distinction, with its example, is given in De fallaciis, the treatise attributed to St. Thomas: that a star is bigger than the earth is against common opinion, and true. So the sophist can win by driving the respondent to what is merely unbelievable.'}
 ];
 function genFalDoctrineQ(d){
   const tiers = defTiers(d);
