@@ -183,6 +183,8 @@ h1{
 .mode-mini .mode-btn{padding:5px 13px; font-size:14px}
 .mode-note{text-align:center; font-size:15px; color:var(--ink-soft); margin-top:8px; font-style:italic}
 .sets{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:18px; margin-top:16px}
+/* a doctrine deck tile spans the whole row at the head of its section */
+.sets > .deck-wide{grid-column:1 / -1}
 .set-card{
   background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px 24px;
   cursor:pointer; transition:all .18s ease; box-shadow:var(--shadow); position:relative;
@@ -601,7 +603,7 @@ h1{
 
     <details class="help" style="max-width:700px">
       <summary>How to Proceed</summary>
-      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, followed by a study of each of the three acts of the mind. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. The <strong>Study</strong> section below (<em>Seeing with Circles</em>, the Diagram Workshop, and the Square of Opposition) teaches without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
+      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. <em>Seeing with Circles</em> (with the Second Act) and the <strong>Study</strong> section below (the Diagram Workshop and the Square of Opposition) teach without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
       <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms — capital letters stand for general terms, lower-case letters and proper names for singular. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
       <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays any immediate inference (converse, obverse, contrapositive, contradictory) drawn from whichever corner you choose.</p>
@@ -618,7 +620,7 @@ h1{
 
     <div class="act-block" id="actblk-intro">
       <div class="section-label">Introduction · The Art of Reasoning</div>
-      <div class="section-gloss">Logic is the art of reasoning well. These four studies set out what logic is and what its parts are, and then the three acts of the mind that the exercises below perfect: simple apprehension, judgment, and reasoning.</div>
+      <div class="section-gloss">Logic is the art of reasoning well. This study sets out what logic is and what its parts are. A study of each of the three acts of the mind (simple apprehension, judgment, and reasoning) opens the section of exercises that perfects it.</div>
       <div class="sets" id="sets-intro"></div>
     </div>
 
@@ -2451,9 +2453,8 @@ if(typeof document!=='undefined'){
     for(const id in LEADINS) apply(LEADINS[id], LEADIN_EXTRA[id] || {});
   })();
 
-  /* The four decks of the Introduction, in home-page order; each tile carries
-     a Review strip (the pattern of Ars Grammatica's deck tiles). Seeing with
-     Circles is a plain study tile, first in the Study section. */
+  /* The four doctrine decks; each tile carries a Review strip (the pattern of
+     Ars Grammatica's deck tiles). Seeing with Circles is a plain study tile. */
   const STUDY_DECKS = [
     {id:'logic', num:'INTRODUCTION', title:'What Logic Is', deck:INTRO_LOGIC, review:true,
      desc:'What logic is and what it covers; logic as an art and a science; logic and thought; Aristotle’s <em>Organon</em>; the parts of logic (demonstration, dialectic, rhetoric, poetics, and the study of fallacies); form and matter; a short history of logic; and the order of this course.'},
@@ -2490,9 +2491,16 @@ if(typeof document!=='undefined'){
     return c;
   }
   (function(){
-    const box = $('sets-intro');
-    STUDY_DECKS.forEach(d=>box.appendChild(makeStudyTile(d)));
-    labsDiv.insertBefore(makeStudyTile(CIRCLES_STUDY), labsDiv.firstChild);
+    /* What Logic Is heads the Introduction; each act's deck heads its act;
+       Seeing with Circles follows the Second Act's deck, just before
+       Exercise V (Diagramming Propositions). */
+    const HOME = {logic:'sets-intro', act1:'sets-a1', act2:'sets-a2', act3:'sets-a3'};
+    STUDY_DECKS.forEach(d=>{
+      const box = $(HOME[d.id]), t = makeStudyTile(d);
+      t.classList.add('deck-wide');
+      box.insertBefore(t, box.firstChild);
+      if(d.id==='act2') box.insertBefore(makeStudyTile(CIRCLES_STUDY), t.nextSibling);
+    });
   })();
 
   /* Which lead-ins have been finished or skipped, and which reviews finished.
@@ -4074,7 +4082,7 @@ if(typeof document!=='undefined'){
          0) App title + subtitle
          1) How to Proceed (always expanded)
          1b) How the Guided Path Works — only if Guided Path is selected
-         2) Introduction section (title, gloss, the four study tiles)
+         2) Introduction section (title, gloss, What Logic Is)
          3) Feedback, Study, then each act — section titles + card titles & descriptions */
       const home = $('scr-home');
       if(!home) return '';
