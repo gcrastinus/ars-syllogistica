@@ -1308,7 +1308,7 @@ function immMistakeTruth(q, choice){
 
 /* ================================================================
    SETS VII–IX — THE CONJUNCTIVE AND HYPOTHETICAL SYLLOGISM
-   After John of St Thomas, Ars Logica: the conditional syllogism
+   After John of St. Thomas, Ars Logica: the conditional syllogism
    concludes by ponendo ponens and tollendo tollens alone; the
    conjunctive ("not both at once") concludes only by ponendo
    tollens — from the denial of one member nothing follows, since
@@ -1402,7 +1402,7 @@ function hcMajorText(q){
   if(k==='disjI') return `${sn} is either ${xd} or ${yd} — or perhaps both`;
   return `If ${hcCompText(q, q.major.ant)}, then ${hcCompText(q, q.major.cons)}`;
 }
-/* Components may be of any quantity (John of St Thomas): from level 3,
+/* Components may be of any quantity (John of St. Thomas): from level 3,
    half the questions use whole categorical propositions as components.
    A component is denied by asserting its contradictory. */
 const CONTRA_T = {A:'O', O:'A', E:'I', I:'E'};
@@ -1550,9 +1550,9 @@ function readout2(marks, la, lb){
   if(marks.A==='x')      props.push(`Some ${la} are not ${lb}`);
   if(marks.B==='x')      props.push(`Some ${lb} are not ${la}`);
   if(marks.A==='shade' && marks.AB==='shade')
-    warns.push(`the whole of “${la}” is declared empty, though traditional logic presumes every term non-empty`);
+    warns.push(`the whole of “${la}” is declared empty, so no affirmative proposition with “${labs[T]}” as its subject can be true`);
   if(marks.B==='shade' && marks.AB==='shade')
-    warns.push(`the whole of “${lb}” is declared empty, though traditional logic presumes every term non-empty`);
+    warns.push(`the whole of “${lb}” is declared empty, so no affirmative proposition with “${labs[T]}” as its subject can be true`);
   return {props, warns};
 }
 function cellDesc3(r, labs){
@@ -1595,7 +1595,7 @@ function readout3(marks, labs){
   }
   for(const T of ['S','M','P'])
     if(REGIONS3.filter(r=>inRg(r,T)).every(r=>shaded.has(r)))
-      warns.push(`the whole of “${labs[T]}” is declared empty, though traditional logic presumes every term non-empty`);
+      warns.push(`the whole of “${labs[T]}” is declared empty, so no affirmative proposition with “${labs[T]}” as its subject can be true`);
   return {props, frags, xreads:Array.from(xset), warns};
 }
 /* What the marks force about S and P (syllogism mode).
@@ -1654,7 +1654,7 @@ function spConsequences(marks, labs){
 
 /* ================================================================
    SETS XII–XIII — THE MODALS (scholastic, not modern)
-   After John of St Thomas: the four modes; equipollences (the
+   After John of St. Thomas: the four modes; equipollences (the
    mnemonic table of Amabimus, Edentuli, Iliace, Purpurea); the
    modal square; the composite and divided senses; and the modal
    syllogism after Aristotle (Prior Analytics I.9), whom the Thomist
@@ -1941,7 +1941,7 @@ function genWildModalQ(d){
 }
 
 /* ================================================================
-   SETS I–II — DEFINITION AND DIVISION (John of St Thomas)
+   SETS I–II — DEFINITION AND DIVISION (John of St. Thomas)
    The first operation of the intellect. Rules of definition:
    convertible with the defined; clearer than it; not circular;
    positive where a positive can be had; brief — proximate genus
@@ -1967,7 +1967,7 @@ const DIV_RULES = 'The rules of division: the members together must cover the wh
    presupposed; the candidates are everyday definitions whose soundness or
    fault is visible to ordinary knowledge. */
 /* Tiers: 1 = homely (retired at the highest levels), 2 = classical but plain,
-   3 = subtle, drawn from Aristotle and St Thomas. */
+   3 = subtle, drawn from Aristotle and St. Thomas. */
 const DEF_ITEMS = [
   {tier:1, name:'a triangle', sound:'A triangle is a three-sided figure',
    broad:'A triangle is a figure', narrow:'A triangle is a figure with three equal sides',
@@ -2539,7 +2539,7 @@ const DIVKIND_STOCK = {
     {tier:1, g:'soul', t:'The soul into the vegetative, the sensitive, and the rational powers', w:'It divides one soul, not into pieces, but into what it is able to do.'},
     {tier:1, g:'animal power', t:'The soul of an animal into its power to be nourished, to move, and to sense', w:'It divides one soul, not into pieces, but into what it is able to do.'},
     {tier:1, g:'mind', t:'The mind into its power to remember, to understand, and to choose', w:'It divides one mind into what it is able to do.'},
-    {tier:2, g:'prudence', t:'Prudence into taking counsel, judging, and commanding', w:'It divides one power, prudence, into its parts, each of which has some of its power (John of St Thomas’s example).'},
+    {tier:2, g:'prudence', t:'Prudence into taking counsel, judging, and commanding', w:'It divides one power, prudence, into its parts, each of which has some of its power (John of St. Thomas’s example).'},
     {tier:2, g:'sense', t:'The senses of an animal into sight, hearing, touch, taste, and smell', w:'The whole divided here is the sensitive power, and it is divided into the five powers under it.'},
     {tier:3, g:'plant soul', t:'The soul of a plant into its power to take nourishment, to grow, and to reproduce', w:'It divides one soul by what it is able to do, not into parts of a body.'}
   ],
@@ -2900,9 +2900,9 @@ function resetSessionOneShots(){
 
 /* ================================================================
    SET II — THE TEN CATEGORIES (Aristotle, Categories 4;
-   St Thomas, Commentary on the Metaphysics V, lect. 9, nos. 889–92)
+   St. Thomas, Commentary on the Metaphysics V, lect. 9, nos. 889–92)
    Substance and the nine accidents. The order and derivation follow
-   the author's article and St Thomas: what belongs to the substance
+   the author's article and St. Thomas: what belongs to the substance
    (by matter → quantity, by form → quality, toward another →
    relation) and what affects it (within → action, passion; without,
    as measure → when, where, posture; without, as adjacent → having).
@@ -2911,7 +2911,7 @@ function resetSessionOneShots(){
    sits, lies; is shod, is armed; cuts, burns; is cut, is burnt),
    drawn out from the wider corpus but kept to their teaching.
    ================================================================ */
-const CAT_RULES = 'The ten categories (Aristotle) are substance, quantity, quality, relation, action, passion, when (time), where (place), posture, and having. Substance exists in its own right; the other nine are accidents, which exist only in a substance or affect it. St Thomas derives them (Metaphysics V, lect. 9): what belongs to the substance itself follows from its matter (quantity), from its form (quality), or from a bearing toward something else (relation); what affects the substance does so from within (action, passion) or from outside, either measuring it (when, where, posture) or merely attached to it (having).';
+const CAT_RULES = 'The ten categories (Aristotle) are substance, quantity, quality, relation, action, passion, when (time), where (place), posture, and having. Substance exists in its own right; the other nine are accidents, which exist only in a substance or affect it. St. Thomas derives them (Metaphysics V, lect. 9): what belongs to the substance itself follows from its matter (quantity), from its form (quality), or from a bearing toward something else (relation); what affects the substance does so from within (action, passion) or from outside, either measuring it (when, where, posture) or merely attached to it (having).';
 const CAT_NAME = {sub:'substance', qnt:'quantity', qual:'quality', rel:'relation', act:'action', pas:'passion', whn:'when (time)', whr:'where (place)', pos:'posture', hab:'having'};
 const CAT_KEYS = ['sub','qnt','qual','rel','act','pas','whn','whr','pos','hab'];
 const CAT_DOCTRINE = {
@@ -3004,14 +3004,14 @@ const CAT_PRINCIPLES = [
    correct:'Having',
    ds:['Posture (situs)','Where (place)','Passion (undergoing)'],
    why:'Having (echein / habitus) is Aristotle’s tenth category, the having of shoes or arms on the body (Categories 4).'},
-  {tier:2, q:'St Thomas derives quantity and quality thus: quantity belongs to a substance by reason of its ___, quality by reason of its ___.',
+  {tier:2, q:'St. Thomas derives quantity and quality thus: quantity belongs to a substance by reason of its ___, quality by reason of its ___.',
    correct:'matter; form',
    ds:['form; matter','end; agent','place; time'],
-   why:'In his Commentary on the Metaphysics (V, lect. 9) St Thomas says that what belongs to a substance in its own right follows either from the matter (quantity) or from the form (quality).'},
-  {tier:2, q:'Into which two categories does St Thomas divide what affects a substance from within, namely the doing and the being-done-to?',
+   why:'In his Commentary on the Metaphysics (V, lect. 9) St. Thomas says that what belongs to a substance in its own right follows either from the matter (quantity) or from the form (quality).'},
+  {tier:2, q:'Into which two categories does St. Thomas divide what affects a substance from within, namely the doing and the being-done-to?',
    correct:'Action and passion',
    ds:['Quantity and quality','Place and time','Relation and having'],
-   why:'What affects the subject from within is action (in the doer) and passion (in the thing done to), as St Thomas says (Metaphysics V, lect. 9).'},
+   why:'What affects the subject from within is action (in the doer) and passion (in the thing done to), as St. Thomas says (Metaphysics V, lect. 9).'},
   {tier:2, q:'Primary substance (this man) differs from secondary substance (man, animal) in that…',
    correct:'Primary substance is the individual thing; secondary substance is the species or genus it belongs to',
    ds:['Primary substance is the species; secondary substance is the individual','Primary substance is an accident; secondary substance is a nature','They differ in name only, and not in what they signify'],
@@ -3196,7 +3196,7 @@ const ENTH_POOL = [
   {tier:3, txt:'Whatever is moved is moved by another; so there must be a first mover.',
    correct:'There cannot be an infinite series of movers',
    traps:['Everything moves something else','Some mover is itself unmoved','Whatever moves another is itself moved'],
-   why:'This is St Thomas’s first way, with its most important premise left tacit. If the impossibility of an infinite regress is denied, the stated premise concludes nothing. “Some mover is unmoved” merely restates the conclusion.'},
+   why:'This is St. Thomas’s first way, with its most important premise left tacit. If the impossibility of an infinite regress is denied, the stated premise concludes nothing. “Some mover is unmoved” merely restates the conclusion.'},
   {tier:3, txt:'Virtue is teachable, for it is knowledge.',
    correct:'All knowledge is teachable',
    traps:['All that is teachable is knowledge','Virtue is a kind of skill','Some knowledge is teachable'],
@@ -3277,7 +3277,7 @@ function genEnthCuratedQ(d){
 }
 
 /* ================================================================
-   SET XXI — THE FALLACIES (St Thomas, De fallaciis; Aristotle, Soph. El.)
+   SET XXI — THE FALLACIES (St. Thomas, De fallaciis; Aristotle, Soph. El.)
    The treatise's own order: what a disputation is, the four kinds of it,
    the five awkward places a sophist drives you to, and then the thirteen
    fallacies — each with the two causes De fallaciis insists on: what makes
@@ -3285,7 +3285,7 @@ function genEnthCuratedQ(d){
    (causa defectus). Technical terms are kept, always with their sense
    attached, so a young student meets the real vocabulary and can use it.
    ================================================================ */
-const FAL_RULES = 'A fallacy is an argument that looks sound and is not. St Thomas teaches that every fallacy has two causes: the cause of the appearance, which makes it look good, and the cause of the failure, which makes it break. Six fallacies come from the words (the language is ambiguous); seven come from outside the words (the language is fine, but the thinking is not).';
+const FAL_RULES = 'A fallacy is an argument that looks sound and is not. St. Thomas teaches that every fallacy has two causes: the cause of the appearance, which makes it look good, and the cause of the failure, which makes it break. Six fallacies come from the words (the language is ambiguous); seven come from outside the words (the language is fine, but the thinking is not).';
 
 /* ---- the four kinds of disputation (De fallaciis, c. 2) ---- */
 const DISP_KINDS = {
@@ -3325,11 +3325,11 @@ function genFalDisputationQ(d){
 
 /* ---- the five awkward places a sophist drives you to (De fallaciis, c. 3) ---- */
 const META_KINDS = {
-  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; St Thomas calls this fault redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
+  red:{name:'To contradict yourself',      gloss:'the respondent is made to take back, in the same argument, something he had just said; St. Thomas calls this fault redargutio. It offends against metaphysics, which holds that contradictories cannot both be true.'},
   fal:{name:'To grant something plainly false', gloss:'the respondent is forced into a statement anyone can see is untrue. It offends against natural science and mathematics, where we can check.'},
   ino:{name:'To grant something absurd',   gloss:'the respondent is driven against what nearly everyone believes, which need not be false, but is hard to accept. It offends against dialectic, which works from what people grant.'},
   sol:{name:'To say something ungrammatical', gloss:'the respondent is maneuvered into speaking badly. It offends against grammar.'},
-  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which St Thomas calls nugatio. It offends against rhetoric, whose business is to speak well.'}
+  nug:{name:'To babble',                   gloss:'the respondent is made to repeat the same thing uselessly, which St. Thomas calls nugatio. It offends against rhetoric, whose business is to speak well.'}
 };
 const META_ITEMS = [
   {tier:1, k:'red', t:'You denied that you ate the raw meat. He argues: whatever you bought, you ate; you bought raw meat; so you ate raw meat.', w:'the example comes from De fallaciis, and the aim is to make the respondent take back what he has just denied.'},
@@ -3352,7 +3352,7 @@ function genFalMetaQ(d){
   const others = sample(keys,3).map(k=>META_KINDS[k].name);
   return mc4Make({prompt:it.t, options:[META_KINDS[it.k].name].concat(others),
     correct: META_KINDS[it.k].name,
-    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. St Thomas names five such positions: to contradict himself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
+    ruleShow: d>=5 ? '' : 'A sophist wins by driving the respondent into an awkward position. St. Thomas names five such positions: to contradict himself, to grant something plainly false, to grant something absurd, to say something ungrammatical, or to babble.',
     why: `${META_KINDS[it.k].name} means that ${META_KINDS[it.k].gloss} Here, ${it.w}`,
     rules: FAL_RULES, mcInstr:'Where is the sophist trying to drive the respondent?'});
 }
@@ -3368,12 +3368,12 @@ const FAL_KINDS = {
     app:'One word is used, so it seems to name one thing.',
     def:'The one word is naming two different things.',
     ans:'By having him state the word twice, once for each premise, in different words.',
-    doc:'EQUIVOCATION uses a single word in two senses. St Thomas’s own case is “dog”, which means the barking animal, the star, and a fish of the sea.'},
+    doc:'EQUIVOCATION uses a single word in two senses. St. Thomas’s own case is “dog”, which means the barking animal, the star, and a fish of the sea.'},
   amphi:{side:'dict', mod:'amphiboly, or syntactic ambiguity', name:'Amphiboly — one phrase, two readings',
     app:'One sentence is used, so it seems to make one claim.',
     def:'The grammar allows two readings, and the argument takes each in turn.',
     ans:'By rewriting the sentence so that only one reading survives, and seeing whether it still works.',
-    doc:'AMPHIBOLY is ambiguity not in a word but in a whole phrase. St Thomas’s case is “the book of Aristotle”: is it the one he wrote, or the one he owned?'},
+    doc:'AMPHIBOLY is ambiguity not in a word but in a whole phrase. St. Thomas’s case is “the book of Aristotle”: is it the one he wrote, or the one he owned?'},
   accent:{side:'dict', mod:'the fallacy of accent, or of emphasis; quoting out of context is its near relation', name:'Accent — how the word is said',
     app:'The word looks the same on the page, so it seems to be one word.',
     def:'Said with a different stress it is a different word, or a different claim.',
@@ -3393,12 +3393,12 @@ const FAL_KINDS = {
     app:'Two words have the same form, so they seem to signify in the same way.',
     def:'The likeness is only in the form; the things named are of different sorts.',
     ans:'By asking what each word is actually naming; if the grammar runs parallel and the things do not, the argument rests on the grammar alone.',
-    doc:'FIGURE OF SPEECH (St Thomas calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
+    doc:'FIGURE OF SPEECH (St. Thomas calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
   accid:{side:'extra', modNote:'Modern books have no exact name for this fallacy. What they call the fallacy of accident is applying a general rule to a special case, which the schools place under <em>in a certain respect, taken flatly</em>.', name:'Accident — taking a passing feature for the thing itself',
     app:'The passing feature and the thing really do go together here.',
     def:'The passing feature and the thing are nevertheless not the same.',
     ans:'By asking whether the thing is taken as what it is, or under some feature it happens to have.',
-    doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St Thomas’s case is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
+    doc:'ACCIDENT treats what is only incidentally true of a thing as if it belonged to the thing itself. St. Thomas’s case is this: I know the man who is coming; Coriscus is the man coming; so I know Coriscus.'},
   secquid:{side:'extra', mod:'hasty generalization, ignoring the qualification, or converse accident; in its other direction, where a rule that holds for the most part is applied to a case it does not fit, they call it the fallacy of accident, or <em>a dicto simpliciter ad dictum secundum quid</em>', name:'In a certain respect, taken flatly',
     app:'What is true in some respect looks like what is true without qualification.',
     def:'The qualification mattered, and it has been dropped without notice.',
@@ -3433,7 +3433,7 @@ const FAL_KINDS = {
 const FAL_KEYS = Object.keys(FAL_KINDS);
 const FAL_ITEMS = [
   {tier:1, k:'equiv',   t:'All banks are beside rivers. I keep my money in a bank. So I keep my money beside a river.'},
-  {tier:2, k:'equiv',   t:'Food is healthy. A complexion is healthy. A body is healthy. So all three have health in them the same way.', w:'The word “healthy” is said of the body first, and of food and complexion by reference to the body’s health, as its cause and as its sign. St Thomas counts such analogous words under equivocation.'},
+  {tier:2, k:'equiv',   t:'Food is healthy. A complexion is healthy. A body is healthy. So all three have health in them the same way.', w:'The word “healthy” is said of the body first, and of food and complexion by reference to the body’s health, as its cause and as its sign. St. Thomas counts such analogous words under equivocation.'},
   {tier:3, k:'equiv',   t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.'},
   {tier:5, k:'equiv',   t:'A good pen writes well. He has a good pen. So he writes well.'},
   {tier:1, k:'amphi',   t:'The notice says dogs must be carried on the escalator. I have no dog. So I may not use the escalator.'},
@@ -3525,7 +3525,7 @@ function genFalSideQ(d){
     'Neither, since the argument is sound',
     'Both at once, since the words and the thinking fail together'];
   return mc4Make({prompt:it.t, options:opts, correct: K.side==='dict' ? inW : outW,
-    ruleShow: d>=5 ? '' : 'St Thomas divides every fallacy in two. If what makes the argument look good comes from the WORD (one sound taken for one thing), the fallacy is in the words. If it comes from the THING (two things that agree in some way taken as simply one), it is outside the words.',
+    ruleShow: d>=5 ? '' : 'St. Thomas divides every fallacy in two. If what makes the argument look good comes from the WORD (one sound taken for one thing), the fallacy is in the words. If it comes from the THING (two things that agree in some way taken as simply one), it is outside the words.',
     why: `${falNote(it)}${K.name.split(' — ')[0]} is a fallacy ${SIDE_WORD[K.side]}. The cause of the appearance is this: ${K.app}`,
     rules: FAL_RULES, mcInstr:'Does this fallacy come from the words, or from outside them?'});
 }
@@ -3561,7 +3561,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever the narrower kind is said of, the wider kind is said of too',
        'Whatever is true of a part is true of the whole',
        'Whatever is true at one time is true at every time'],
-   why:'This is St Thomas’s own pair. The good argument (Socrates is a man, therefore an animal) depends on a true rule: whatever the species is said of, the genus is said of. Reversed, it becomes a false rule, and this argument depends on it.'},
+   why:'This is St. Thomas’s own pair. The good argument (Socrates is a man, therefore an animal) depends on a true rule: whatever the species is said of, the genus is said of. Reversed, it becomes a false rule, and this argument depends on it.'},
   {tier:1, t:'Socrates is a man, therefore Socrates is an animal.',
    correct:'Whatever the narrower kind is said of, the wider kind is said of too',
    ds:['Whatever the wider kind is said of, the narrower kind is said of too',
@@ -3573,7 +3573,7 @@ const FAL_PRINCIPLES = [
    ds:['Whatever is true of the thing is true of its passing features',
        'Whatever the wider kind is said of, the narrower kind is said of too',
        'Whatever is said of many things is said of each'],
-   why:'This is St Thomas’s worked case. The rule is false, because a thing and a feature it happens to have are not the same. It looks true because here they do go together.'},
+   why:'This is St. Thomas’s worked case. The rule is false, because a thing and a feature it happens to have are not the same. It looks true because here they do go together.'},
   {tier:2, t:'The wall is white. So every part of the wall is white.',
    correct:'Whatever is true of the whole is true of each part',
    ds:['Whatever is true of each part is true of the whole',
@@ -3612,22 +3612,22 @@ function genFalPrincipleQ(d){
 
 /* ---- the doctrine itself ---- */
 const FAL_DOCTRINE = [
-  {tier:1, q:'What does St Thomas say a fallacy always has two of?',
+  {tier:1, q:'What does St. Thomas say a fallacy always has two of?',
    correct:'Two causes, one that makes it look sound and one that makes it fail',
    ds:['Two premises, both of them false','Two conclusions that contradict each other','Two words that mean the same thing'],
    why:'The cause of the appearance makes the argument look good; the cause of the failure breaks it. A man is deceived by the two together, since something appears to be so and is not.'},
   {tier:1, q:'“Sophistical” comes from a word meaning what?',
    correct:'Apparent wisdom, that is, wisdom that only looks like wisdom',
    ds:['Careful reasoning','A short argument','Speech before a crowd'],
-   why:'St Thomas says, sophistica quasi apparens sapientia. The sophist argues for glory, wanting to seem wise.'},
-  {tier:1, q:'A disputation, says St Thomas, is an act of one person toward another. For what purpose?',
+   why:'St. Thomas says, sophistica quasi apparens sapientia. The sophist argues for glory, wanting to seem wise.'},
+  {tier:1, q:'A disputation, says St. Thomas, is an act of one person toward another. For what purpose?',
    correct:'To show something proposed',
    ds:['To display a form of argument as an example','To pass the time agreeably','To discover a new science'],
    why:'That last part marks a real disputation off from an argument given merely to illustrate a pattern, since a disputation aims at showing something.'},
   {tier:2, q:'What does the tradition mean by calling a premise “probable”?',
    correct:'It seems so to everyone, or to most people, or to the wise',
    ds:['It is more likely than not to be true','It has been proved, but only roughly','It is what one particular expert happens to think'],
-   why:'St Thomas gives the definition exactly: probabilia are what seem so to all, or to most, or to the wise, and among the wise, to all of them or to the most eminent. The probable is what a reasonable person may be asked to grant, not a guess about odds.'},
+   why:'St. Thomas gives the definition exactly: probabilia are what seem so to all, or to most, or to the wise, and among the wise, to all of them or to the most eminent. The probable is what a reasonable person may be asked to grant, not a guess about odds.'},
   {tier:2, q:'Why are there exactly six fallacies in the words?',
    correct:'Because ambiguity is threefold, and two of the three divide again into word and phrase',
    ds:['Because Aristotle happened to find six of them','Because there are six parts of speech','Because six is the number of the true loci'],
@@ -3636,7 +3636,7 @@ const FAL_DOCTRINE = [
    correct:'In the same respect and at the same time',
    ds:['In the same words the speaker used','Before the speaker has finished','In front of the same audience'],
    why:'If either condition is missing, what is refuted is something nobody claimed. This is the fault called missing the point, or ignorance of the refutation.'},
-  {tier:3, q:'When a man reasons badly by himself, St Thomas says it always happens how?',
+  {tier:3, q:'When a man reasons badly by himself, St. Thomas says it always happens how?',
    correct:'Beside his intention, since nobody sets out to deceive himself',
    ds:['On purpose, for the pleasure of it','Because he has not read Aristotle','Because his memory has failed him'],
    why:'This is why the study of fallacies is aimed first at our own arguments. Reasoning badly to someone else may be deliberate; reasoning badly to oneself never is.'},
@@ -3651,7 +3651,7 @@ const FAL_DOCTRINE = [
   {tier:3, q:'What makes an argument sophistical, if both its premises may be true?',
    correct:'It depends on a hidden rule that is false but looks true',
    ds:['It is stated too quickly to follow','Its conclusion is false','It uses technical words'],
-   why:'St Thomas’s example, “Socrates is an animal, therefore a man”, has a true premise and a false conclusion, because the rule it depends on (that whatever the genus is said of, the species is said of) is false.'},
+   why:'St. Thomas’s example, “Socrates is an animal, therefore a man”, has a true premise and a false conclusion, because the rule it depends on (that whatever the genus is said of, the species is said of) is false.'},
   {tier:3, q:'The sophist drives the respondent into five different awkward positions. Why five, and why those?',
    correct:'Each offends a different science, so that he appears to know them all',
    ds:['They are the five parts of a syllogism','They are the five predicables applied to argument','They are the five ways a premise can be false'],
@@ -3659,7 +3659,7 @@ const FAL_DOCTRINE = [
   {tier:5, q:'What is the difference between something false and something merely unbelievable?',
    correct:'The false and the unbelievable differ: some false things are widely believed, and some unbelievable things are true',
    ds:['They are two names for the same thing','Everything unbelievable is false, but not the reverse','The false offends grammar; the unbelievable offends rhetoric'],
-   why:'This is St Thomas’s own distinction, with his own example: that a star is bigger than the earth is against common opinion, and true. So the sophist can win by driving the respondent to what is merely unbelievable.'}
+   why:'This is St. Thomas’s own distinction, with his own example: that a star is bigger than the earth is against common opinion, and true. So the sophist can win by driving the respondent to what is merely unbelievable.'}
 ];
 function genFalDoctrineQ(d){
   const tiers = defTiers(d);
@@ -3935,7 +3935,7 @@ const DIAL_DOCTRINE = [
   {tier:1, q:'Dialectic reasons from premises of what sort?',
    correct:'Probable ones, that is, what seems so to everyone, or to most, or to the wise',
    ds:['Ones that have been demonstrated and cannot be otherwise','Ones that are known to be false','Ones invented for the sake of the argument'],
-   why:'This is the definition Aristotle gives and St Thomas repeats. The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
+   why:'This is the definition Aristotle gives and St. Thomas repeats. The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
   {tier:1, q:'What does dialectic reach, at its best?',
    correct:'A reasoned opinion, well supported but not proved',
    ds:['Certain knowledge of the cause','A persuasive speech','A story that makes sense of the facts'],
@@ -3955,7 +3955,7 @@ const DIAL_DOCTRINE = [
   {tier:2, q:'Two people are disputing. Who are the two parties called?',
    correct:'The one who puts the case and the one who answers',
    ds:['The teacher and the learner','The speaker and the audience','The judge and the witness'],
-   why:'St Thomas says that a disputation takes place between the opponens and the respondens. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
+   why:'St. Thomas says that a disputation takes place between the opponens and the respondens. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
   {tier:2, q:'Why is the argument from authority called the weakest of the topics?',
    correct:'Because it gives no reason drawn from the thing itself, only the judgment of those who know',
    ds:['Because authorities are usually wrong','Because it is not a topic at all','Because only the ignorant use it'],
@@ -3983,7 +3983,7 @@ const DIAL_DOCTRINE = [
   {tier:5, q:'What does it mean to say the probable is what seems so “to the wise, and among the wise to the most eminent”?',
    correct:'That the standing of a premise rises with the standing of those who grant it',
    ds:['That only the wise may take part in a disputation','That the wise are always right','That a premise is probable only if all the wise agree'],
-   why:'St Thomas gives the qualification carefully. Not every opinion of every man is probable, but neither does dialectic need everyone to agree.'}
+   why:'St. Thomas gives the qualification carefully. Not every opinion of every man is probable, but neither does dialectic need everyone to agree.'}
 ];
 function genDialDoctrineQ(d){
   const tiers = defTiers(d);
