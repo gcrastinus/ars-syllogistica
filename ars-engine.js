@@ -3745,6 +3745,10 @@ const TOPICS = {
         use:'when the matter is beyond one’s own competence and the learned agree'}
 };
 const TOPIC_KEYS = Object.keys(TOPICS);
+/* the rule shown with the topic questions: all twelve places, each with its maxim */
+const TOPIC_RULE = 'A topic (locus) is a standing place from which an argument can be drawn, and each topic carries a maxim, the proposition on which an argument drawn from it depends. The exercise uses these twelve:'
+  + TOPIC_KEYS.map(k=>`<br>${TOPICS[k].name}: ${TOPICS[k].max.charAt(0).toLowerCase()+TOPICS[k].max.slice(1)}`).join('')
+  + '<br>Once the topic is named, we can see at once what would answer the argument.';
 const DIAL_TOPICS = [
   {tier:1, k:'gen',  t:'Every bird has feathers, and a robin is a bird — so a robin has feathers.'},
   {tier:1, k:'def',  t:'A widow is a woman whose husband has died. She has never married. So she is no widow.'},
@@ -3825,7 +3829,7 @@ function genDialTopicQ(d){
   const others = sample(TOPIC_KEYS.filter(k=>k!==it.k), 3).map(k=>TOPICS[k].name);
   return mc4Make({prompt:it.t, options:[TOPICS[it.k].name].concat(others),
     correct:TOPICS[it.k].name,
-    ruleShow: d>=5 ? '' : 'A topic (locus) is a standing place from which an argument can be drawn: the definition, the wider kind, the narrower kind, the property, opposites, the more and the less, likeness, whole and parts, or authority. Once the topic is named, we can see at once what would answer the argument.',
+    ruleShow: d>=5 ? '' : TOPIC_RULE,
     why: `${TOPICS[it.k].name}. In this topic, ${TOPICS[it.k].gloss}`,
     rules: DIAL_RULES, mcInstr:'From which topic is this argument drawn?'});
 }
