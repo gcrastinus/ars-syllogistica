@@ -1,0 +1,2105 @@
+# Matthew Minerd, BCS Logic 2023 (slides, text only)
+
+## Slide 1
+Overview of Logic (BCS) 
+Week 1.1 Course Outline - Syllabus
+
+## Slide 2
+Overview of Logic (BCS) 
+Week 1.2 Second Intentions and the Three Acts of the Intellect in its Speculative Activity
+
+## Slide 3
+First and Second Intentions
+First intention: Knowledge concerned with realities that are fully mind-independent
+Examples from “natural” being: Tomato, Plant, Ivy, Human, Animal, Wolf
+Moral being: Virtue, Justice, Temperance, Human Act, Merit, Demerit
+Second intention: Knowledge concerned with realities inasmuch as they are known and, in particular, are subject to our natural processes of knowledge
+Tomato is a species of plant
+Merit is a property of human acts
+Virtue is a genus in relation to justice and temperance
+A way to remember this: You’ve never seen a genus walking down the street
+
+## Slide 4
+First and Second Intentions
+However, it is important to realize that there are three genera of second intentions.
+To understand this, we must see that the human intellect has three kinds of actions in our speculation
+(“Simple apprehension”) Definition: Man = Rational Animal; Wolf = Wild Animal; Virtue = operative habitus
+Propositions: [Every] Man is a rational animal; [Every] Man is a cultural being; [Every] man is intelligent (=has an intellect)
+(“Argumentation”) Syllogisms
+[Every] man is an intelligent being
+Intelligent beings are cultural by their very nature
+Therefore, [every] man is a cultural being
+(For the philosophers out there, note carefully what I qualified: in our speculation.  There are other intellectual acts involved in practical intellection, especially command and artistic judgment.)
+
+## Slide 5
+Second Intentions
+These “second intentions” are what are called “relations of reason” (relationes rationis)
+They tell us something about how realities as known relate to each other
+Historically, the term “second intention” came to be attached to these kinds of relations formed naturally by our reason as it works out definitions, propositions, and syllogisms
+We could call them, broadly, “logical relations”
+We won’t dispute terms for our purposes
+
+## Slide 6
+Logic: The Science of Second Intentions
+Logic
+The art of sound discourse
+The science of second intentions
+In logic we study the essence, properties, and effects of the various “second intentions” formed by the intellect
+Thus, for example…
+Definition: accidental vs. essential definition
+Extension and comprehension of genus and species
+Opposition and conversion of propostitions
+Validity of reasoning
+The primary topic: argumentation
+
+## Slide 7
+Aristotle’s Logical Works
+Logic as “organon” (instrument)
+Defining: Categories (+ Isagoge of Porphyry) 
+Statements: On Interpretation
+Reasoning
+Formal Logic: Prior Analytics
+Material Logic
+Posterior Analytics
+Topics
+Poetics				(Arab Aristotelians and some medievals)
+Rhetoric				(Arab Aristotelians and some medievals)
+Sophstical Refutations			
+
+## Slide 8
+Additional Points of Logic to Be Addressed
+Terminist (broadly so called) vs. Propositional Logic
+Certain Stoics developed propositional logic, which is quite important in most contemporary logic courses
+Aristotelians often show how these propositional expressions are able to be reduced to terminological constructions
+We will merely introduce some of the logical procedures you can use in this domain
+Conditional, Disjunctive, Conjunctive reasoning / “syllogisms”
+We will not do predicate logic in this course, though we will occasionally use Venn Diagrams to give you a tool for general syllogistic analysis.
+Development of knowledge and some related theological applications
+
+## Slide 9
+Overview of Logic (BCS) 
+Week 1.3 Division of Logic; Modern and Calculational Logic
+
+## Slide 10
+Terminist Vs. Predicate Logic
+Broadly speaking, Aristotelian logic is terminist logic, though this did involve some Western-medieval development and changes
+We cannot avoid this sort of logic, and it would be foolish to do so
+We obviously:
+Form terms and concepts – even if imperfectly
+We form propositions – which are made up of terms
+And we form syllogisms, which are made up of propositions and of terms
+Let’s take a few examples…
+
+## Slide 11
+Terms, terms, terms
+For example: Nestorians reduce Christ‘s unity to a mere moral unity.  There are various propositions we can derive from this:
+Every Nestorian is someone who reduces Christ‘s unity to a mere moral unity
+Nestorianism is a position that denies personal unity in Christ
+Etc.
+Other examples
+Grace is a participation in the uncreated life of God
+Participated grace causally derives from Christ‘s own grace as head of the Church
+The Triune God is one in Essence
+Humans are political beings
+Etc.
+
+## Slide 12
+Some more examples… Syllogisms
+Example 1
+Grace is a participation in the uncreated life of God
+Participation in the uncreated life of God is Thaboric in character
+Therefore, grace is Thaboric in charcter
+Example 2
+Salvation in Christ is eschatological in character
+The life of grace lived in the Church is the means for salvation in Christ
+Therefore, the life of grace in the Church is a means for living an eschatological life
+Example 3 (Developing 2 in slightly more formal articulation)
+That which is eschatological is in some way participatively eternal
+The life of grace lived in the Church is eschatological.
+Therefore, the life of grace lived in the Church is in some way participatively eternal
+
+## Slide 13
+Terms without which dogmas would be meaningless
+In Trinitarian theology: Essence / Substance / Nature, Hypostais, Person, “Sending“, relation (?), Unbegotten, Begotten, Generation, Spiration, Monarchy, eternity, perfect, unchanging, beautiful, Good, One, etc....
+In Christology: Person, nature, will, intellect, operation / activity
+In moral theology: Grace, theosis / divinization, virtue, ascesis, nepsis / watchfulnes, acedia, passions, faith, hope, charity, etc.
+In ecclesiology: Church, churches, primacy, patriarch, subsidiarity, bishop, priest, laity, etc.
+
+## Slide 14
+Terms are Important
+In short: All knowledge is attained through some kind of statement of truth.  The creeds are not merely pure apophaticism, even though they ultimately demand mysticism.
+We believe in transcendent truths about whom God is, even if we do so imperfectly
+Moreover, theologians (even ones who claim to deny this) exercise reasoning – and the Fathers did too
+Too many great saints suffered for the truths of faith for us to act as though the Christian message is merely a kind of inarticulable experience that does not, in fact, communicate a truth
+The tools of terminist logic will help us to provide ourselves with guideposts for how to ensure that we do not misuse human reasoning
+But this does not mean to deny that, in the end, we must pass beyond reason to that which reason presupposes: the experience of reality, above all the Divine Reality known through mystical experience
+
+## Slide 15
+Propositional Logic and Terms
+As already noted, we will also make use of predicate logic.  For now, a few examples
+We‘ll start with hypothetical syllogisms.  Notice, however, how many terms are involved in every single proposition here
+Example 1:
+If one denies the hypostatic union as something “too uncreated“, then one also denies theosis
+But Arius denies the hypostatic union
+Therefore, he also denies theosis
+Example 2:
+If the sacramental mysteries are not received by a person who is rightly disposed, that person will impede the grace received
+A person who receives the Eucharist while freely denying truths of the faith is not rightly disposed
+Therefore, such a person will impede the grace received from the Eucharist
+
+## Slide 16
+Propositional Logic and Terms
+A disjunctive syllogism together with a conditional syllogism
+Grace is either created or uncreated in its most important specificiative nature
+But, if grace is specificatively created, then theosis is impossible
+However, we know through the Word of God that we are called to the life of theosis
+Therefore, grace is not specificatively created
+And, thus, it must be specificatively uncreated
+A conjunctive syllogism
+You cannot be in a state of grace and not love God above all things: Note, the structure here is something like this: State of Grace AND Loving God above all things. Technically, we could rewrite this in a categorical form.
+You are in a state of grace
+Therefore, you love God above all things
+
+## Slide 17
+Formalization and Thinking
+At times, we will formalize our logic, using symbols and shorthand.
+But, you need to always ask yourself: what is going on here?  What am I thinking? 
+It is a temptation to reduce reasoning to a kind of calculus, pushing tokens around.... Don‘t give into this.  Logical symbolization is a tool of thinking, not a replacement for it.  
+True rationalism is to be found in a kind of thoughtless logic-chopping that doesn‘t stop to ask: why is this a good definition?  Why is this a valid propositional conversion?  Why is this a valid syllogism?
+
+## Slide 18
+Overview of Logic (BCS) 
+Week 2.1 Universals, Individuals, LogicLogic vs. Metaphysics
+
+## Slide 19
+Universals
+The problem of universals haunts all of philosophy: what in reality provides the grounding for our thought?
+There are several humans involved in this course.  But what about  “human nature“?  What does human refer too?
+There will be various solutions:
+Absolute / Extreme Realism
+Moderate Realism
+Nominalism
+Ultimately, this question is one of metaphysics, not logic
+But, because you nonetheless need to keep a kind of “ background metaphysics“ in mind, we should consider each case...
+
+## Slide 20
+Absolute Realism
+Plato is the king of absolute realism: Ideas actually exist independent of our knowing of them
+To know reality is to have a kind of remembrance of these ideas, to be in touch with the “really real”
+There is an exact reality that corresponds to the strongest case of what we call “knowledge”
+This sort of realism will variously be operative in the Fathers and in Scholastics
+Sometimes, it is allied to related topics, such as “divine illumination”
+But somewhat found in someone like Bl. Duns Scotus: Common natures exist positively before we know them (We’ll come back to this in a second)
+
+## Slide 21
+Nominalism
+You‘ll hear this term bandied about a lot
+It is tied up with a lot of different positions that took root in the West from the early 14th century onward
+For our purposes, we‘re worried about this aspect: individual humans are maximally similar to each other, but they do not share one and the same nature, as some kind of positive reality
+Think of this as a kind of Anti-Platonism.  The only thing that gives unity to our knowledge of reality is our activity of knowing it and naming it (hence, “nominalism”—nomen, name)
+This tends to be the bête noire of a kind of “good vs. evil” narrative set forward by thinkers in the West
+It’s not wrong to say that nominalism caused immense problems in philosophy and theology
+But, that being said, often the greatest nominalists were trying to deal with real questions raised in Scholastic theology
+But, this is not the class for this important topic of intellectual history
+
+## Slide 22
+Moderate Realism
+Generally associated with Aristotelianism (and echoes of this can be found variously in different later Patristic and Greek scholastic thinkers)
+Common natures exist as common only in potency before we know them.
+But different schools of thought will articulate this differently.  Two very characteristic solutions:
+Thomists: Individuals are only not-divided (ONE) as regards sameness of nature—this is how they are ONE; The intellect actualizes this commonality
+Scotists: Individuals share in a kind of unity of nature,  though it is a kind of less than numerical unity.  This is the common nature.
+Thomism leans in the direction of nominalism; Scotists in the direction of Platonism
+
+## Slide 23
+But what is a Universal Logically Speaking?
+For our purposes (but ALWAYS remembering that logic presupposes a metaphysics and a theory of knowledge, even if the logician denies this fact), universal just means this: One thing standing over others
+Thus, notice the various universality relationships here…
+Humanity
+Dr. Minerd, Fr. Christiaan, et al.
+Animal
+Hog
+Wilbur the Pig
+Heretic
+Arius, Barlaam, Luther
+
+## Slide 24
+But what is a Universal Logically Speaking?
+Therefore, when we speak about universals and particulars, you must keep remembering that we are above all concerned with a relationship of superiority and inferiority, as well as a claim about…
+Extension: How broadly does the term in question extend over that which is “under it”
+Comprehension: the meaning / “notes” involved in that concept
+It is in this sense, and not in an absolutely metaphysically definitive sense, that we can say that universality and individuality / singularity are second intentions
+(Note, however, that we will distinguish between particularity and singularity)
+
+## Slide 25
+Overview of Logic (BCS) 
+Week 2.2 Universality and Individuality, Predicables, and Related Properties
+
+## Slide 26
+Keep this in mind
+We are ultimately dealing with the issue of definitions
+These definitions help us to get our terms straight so that we can then form propositions and, ultimately, reason
+Thus, consider:
+Man: Rational animal
+Wolf: Wild Animal
+Justice: Meritorious Action
+Virtue: habit that enables free operation in view of moral ends
+Mug: vessel for holding hot liquid
+We will return to these examples next week
+
+## Slide 27
+The Basics of Simple Apprehension
+Concerned with grasping what something is (essence)
+We are not concerned here with the “psychology” of knowing (formal concept) but only with knowledge considered precisely an object of understanding
+Term
+External sign of a concept
+ALSO, the starting point and ending point of reasoning
+Skip what is said about signs
+Definitum / Definiendum: The thing to be defined.  Thus:
+Man (Definiendum): Rational animal (Definition)
+Wolf (Definiendum): Wild animal (Definition)
+
+## Slide 28
+The Basics of Predicables
+For more information on this topic, see Porphyry’s Isagoge; also Smith, 40–54
+Every definition deploys what came to be called “predicables”
+Genus
+Species
+(Specific Difference)	 - Pay close attention to what I say about this
+Property			 - Pay close attention to what I say about this
+Accident			- Pay close attention to what I say about this
+Thus…
+Man is a species in relation to animal
+Animal is a genus in relation to wolf
+Wild is an accidental predicate of animal when defining wolf
+
+## Slide 29
+The Basics of Predicables
+Genus: That which is predicated essentially (in quid) of several things, themselves differing in species
+Species: That which is predicated essentially (in quid) of several things, themselves differing individually
+Specific difference: that which quale (in quale) makes one species differ from another in a genus
+But, often, we will have to use…
+Accidents
+Properties, ideally: belong only one species, all together, at the same time, always
+
+## Slide 30
+Genus and Species
+The use of genus and species helps us to understand how concepts are related to each other in essential ways.  Thus…
+Notice the multiple genus-species relationships
+(Obviously, the final case has an individual as well.  Perhaps, though, we could consider “Losskyite”.)
+Vehicle
+Fourwheeled
+Truck
+Monastic Life
+Benedictine
+Trappist
+Theologians
+Palamites
+Vladimir Lossky
+
+## Slide 31
+Accident and Property
+Accidents reveal something about what we are considering, but not something that uniquely belongs to it.  Thus:
+Human: tall, blue-eyed, hairy
+Heretic: vexatious, contemptuous, sinful (perhaps loosely proper)
+Thomist: orthodox, profound, Western
+Palamite: anti-naturalist in matters of grace (perhaps loosely proper); hesychastic (perhaps loosely proper)
+Properties, however, reveal something essential, even if they are (definitionally) qualitative
+Human: political, scientific, capable of carpentry
+Church: One, Holy, Catholic, Apostolic
+Christ: Dyothelite, hypostatically Holy, risen at the right hand of the Father
+Almost all of the task of trying to define something will be taken up with attempting to provide definitions that are increasingly proper and, perhaps, essential
+
+## Slide 32
+Overview of Logic (BCS) 
+Week 3.1 Division and DefinitionDivision
+
+## Slide 33
+Division: The Tool of Definition
+All praise be to Plato who realized and worked through the notions of “division” and “collection” (cf., for example, Sophist, Phaedrus, Statesman)
+It is an attempt to divide up genera and species and identify what falls “under” what.
+Thus, some rules (modified slightly from Smith, 68-9):
+What is divided must be of greater extension than what it is divided into
+All of the members of a division must ultimately have the same extension as what is divided (don’t leave anything out)
+There must be some sort of opposition that divides the members (so that they don’t overlap)
+We could call these:
+Rule of hierarchy
+Rule of extension
+Rule of comprehension
+
+## Slide 34
+Division: The Tool of Definition
+It is really important to realize that we use this kind of reasoning all the time
+Plato thought this was so important that, for him, dialectic was the most important sort of reasoning (and so too thought the neo-Platonists)—for dialectic helps us to reach understanding / insight
+Aristotle deals with some related topics to this in Posterior analytics and, especially, Topics.  For him, though, syllogistic reasoning holds a special place.  (Nonetheless, we should be careful not to contrast him too much to the Platonists.)
+
+## Slide 35
+Division: The Tool of Definition
+An example division:
+Think about how people fail in drawing these divisions:
+Placing the hierarchy out of sorts (Roman at top….)
+Creating a single category of “Eastern” in contrast to Roman, but basically forgetting all of the others
+Overlapping, e.g., Syriac and Byzantine Churches
+
+## Slide 36
+Whetting our Appetite for Defining – revisiting our examples from before
+Man: Rational animal				Essential Definition
+Man: Definiendum
+Rational: Specific-difference
+Animal: Genus
+Sin: Evil Human Act				Essential definition
+Evil: Specific difference
+Human Act: Genus
+Wolf: Wild Animal				Descriptive / Accidental Definition
+Wild: Accident-difference
+Animal: Genus
+
+## Slide 37
+Whetting our Appetite for Defining – revisiting our examples from before
+Justice: Meritorious Action				 Descriptive / Accidental Definition
+Meritorious: Accident-difference
+Action: Genus
+Mug: vessel for holding hot liquid			 Descriptive / Accidental Definition
+Hot-liquid-holding: Accident-difference
+Vessel: Genus
+Man: Cultural animal			 	Descriptive / Property Definition
+Cultural: Property-difference
+Animal: Genus
+Sin: Demeritorious Human Act			Descriptive / Property Definition
+Demeritorious: property-difference
+Human Act: Genus
+
+## Slide 38
+Overview of Logic (BCS) 
+Week 3.2 Division and DefinitionKinds of Definition
+
+## Slide 39
+Various kinds of definition
+Nominal: About how something is used (etymology)
+Real: About the actual meaning
+Descriptive definition: using properties or accidents
+“Physical” definition—using causes [sometimes end up being descriptive]
+Efficient cause		House: Building made by carpentry
+End / Final Cause	House: Building for living a family life
+Form			House: Building with X,Y,Z sorts of structural specifications
+Matter		House: Building made out of stud walls, sub floors, rafters, 					etc.
+“Metaphysical” definition: genus and specific difference
+See Wallace 3.7 if you are interested in a very quick outline of the rules for defining
+
+## Slide 40
+A Theological Example: The Church 
+Essential-Metaphysical: Mystical Body of Christ (Christ Sacramentally-Mystically Present in Time)
+(In what follows “society” is standing for visible corporate body)
+Essential-Physical:
+Efficient Cause:  Society supernaturally constituted by Christ through the ministry of sacraments
+Final Cause: Society ordered to communion in the Godhead
+Formal: Society mystically bound together in charity
+Material Cause: Society made up of the people of God baptized into Christ
+(These are just rough approximations.  Notice, also, of course, there would be further precisions for the various historical states of the Church.)
+
+## Slide 41
+Another Theological Example 
+In ST I-II, q. 55, a. 4, St. Thomas Aquinas uses four causes to give a full picture of the definition of virtue.
+Drawn from Augustine: “Virtue is a good quality of the mind, by which we live righteously, of which no one can make bad use, which God works in us, without us.”
+Genus: Quality or Habit (more proximate)
+Various differences
+Formal: Good
+Material in which: “of the mind”
+End: by which we live rightly and of which no one makes bad use
+Efficient cause: which God works within us, without us
+Note – this applies to infused virtues
+If you get rid of this, the definition works for all the acquired virtues
+
+## Slide 42
+Some other examples
+Taken from Peter Kreeft’s Socratic Logic, 128–9
+Nominal
+Man: the species called “homo sapiens”
+Triangle: English word for the figured drawn ∆
+Democracy: The English word for arche by demos
+Essential
+Man: Rational animal
+Triangle: Three-sided enclosed plane figure
+Democracy: government by popular sovereignty
+Property
+Man: The animal that speaks
+Triangle: Enclosed plane figure with 180˚ in its three interior angles
+Democracy: Form of Government in which laws are determined by popular consent
+Accidental
+Man: Animal with two legs and now feathers
+Triangle: Favorite geometrical figure of late medieval mystics
+Form of governemtn most prevalent in 20th century Europe
+
+## Slide 43
+Some other examples
+
+## Slide 44
+A Remark
+Notice how important this is—and how often we can be wrong about what is the most essential definition of something
+Very (VERY) often, the thing that distinguishes outlooks, philosophies, and theologies is what is taken to be the essential definition.
+For example, man:
+Rational animal
+Religious animal
+Animal living in either Adam or Christ
+Animal open to transcendence
+Animal capable of communion
+Semiotic animal
+Etc….
+In fact, the work of discursive reasoning will be, in part, to show how various properties are related to each other, thus helping us to critique, update, and deepen our definitions
+
+## Slide 45
+Homework!
+Provide two (or if you wish 3) divisions of the Byzantine Churches in union with Rome
+Sketch them out in writing and post an image on Populi
+Explain the general reasoning for your division
+Explain the best definitions you have for several of these Churches
+Give eight examples of definitions, four theological, four non-theological
+For each kind of definition, explain the type of definition you ended up forming
+Explain several possible definitions of man that lead to entirely different philosophies and / or theologies
+
+## Slide 46
+Overview of Logic (BCS) 
+Week 4.1 Preparatories for Second Act of IntellectSuppositio
+
+## Slide 47
+Types of Concepts
+We skipped this when we did universals
+Singular: this army / this man
+Common
+Particular: Some army / some man
+Distributive (or universal): Every army / each man
+Cf. Maritain, 30–45 (rather advanced in places)
+
+## Slide 48
+Types of Concepts
+Another helpful diagram from Maritain
+
+## Slide 49
+Supposition
+Supposition is concerned with this question: For what does this term stand?
+Thus, in addition to the meaning of a term, it can stand for different things
+In modern logic, one will speak of “sense” and “reference”
+However, much earlier logic was aware of the suppositio of a term
+We are only going to introduce this, without examination.  Just exposing you to this
+I will follow Maritain rather directly with examples (p. 64ff)
+
+## Slide 50
+Supposition
+Material: Stands for the written sign.  “Lamb is a four letter word”; “Man is a one-syllable word”
+Improper (metaphor): ”The Lamb was offered up for the sins of the world” or better “The red herring distracted me in the debate”
+Simple: Reference to common term as common (“Lamb / man is a species of the genus animal”)
+Singular: Also for the individual, but one: “The man ran away at once”
+Common
+Particular-Determinate: Only stands for some determinate few (“Men are liars” = “Some men are liars”)
+Particular-Indeterminate: Stands for some things but indistinctly (“Some instrument is necessary”)
+Particular-Collective: Stands for a group (“The apostles were twelve.”  Or “The men (as a group) pushed forward.”)
+Universal / Distributed
+Complete: Stands for all individual subject (”Man is mortal” = Every man is mortal)
+Incomplete: Stands for all the kinds of subjects (“Every [kind of] animal was in the Ark.”)
+Exceptive: Every man that is merely a man is born in sin, exception made for the Mother of God
+
+## Slide 51
+Chart from Maritain
+
+## Slide 52
+Overview of Logic (BCS) 
+Week 4.2 Preparatories for Second (and Third…) Act of IntellectBasic truth tables
+
+## Slide 53
+Truth Tables
+As I said earlier, we’re not going to profoundly engage with modern logic (especially predicate logic)
+However, there are elements of modern logical tools that will be of use for us when we analyze syllogisms
+Truth tables (especially useful for hypothetical, disjunctive, and conjunctive syllogisms)
+Venn diagrams (useful for categorical syllogisms)
+Unlike the suppositio content, you’ll likely want to revisit this when we do syllogistic logic
+No homework this week, but this will be very useful later on
+
+## Slide 54
+Conditional Syllogisms
+Hypothetical syllogisms take this form:
+	If P, then Q….
+	If ANTECEDENT, then CONEQUENT
+This kind of inference is ONLY false when the ANTECEDENT (P) is True and the CONSEQUENT (Q) is False
+P
+If you eat too much
+Q
+Then you will get fat
+ p => q (if p, then q)
+T
+T
+T
+T
+F
+F
+F
+T
+T
+F
+F
+T
+
+## Slide 55
+Disjunctive Syllogisms
+Disjunctive syllogisms take this form:
+	Either P or Q is true
+Note that this can be either INCLUSIVE or EXCLUSIVE
+Example of Exclusive
+P
+You can either be sitting 
+Q
+Or not sitting
+ P v Q (P or Q)
+T
+T
+F
+T
+F
+T
+F
+T
+T
+F
+F
+F
+
+## Slide 56
+Conjunctive Syllogisms
+Conjunctive syllogisms take this form:
+	P and Q are true
+(I’m being light-hearted in this example—remember, I am, if anything, too Latin in my ways, so some would say that I am case )
+P
+You are Eastern Catholic
+Q
+And You are Orthodox in Union with Rome
+ P ^ Q (P and Q)
+T
+T
+T
+T
+F
+F
+F
+T
+F
+F
+F
+F
+
+## Slide 57
+Super Simple Not….
+For the sake of exposure, one other quick one…
+If P is true, then NOT P is not true
+And if P is false, then NOT P is true
+For example:
+	TRUE: Humans have intellects. 
+	THEREFORE, it is FALSE to say: Humans do not have intellects.
+	FALSE: Humans are plants.
+	THEREFORE, it is TRUE to say: Humans are not plants.
+Simple chart:
+P
+~P
+T
+F
+F
+T
+
+## Slide 58
+Venn Diagrams
+Useful extensional tool.
+I’m merely going to show you how to draw basic propositional models for now, we’ll use a few when we do syllogisms
+Taken from Kreeft, 259–60
+Base Diagram: S and P have some relationship
+
+## Slide 59
+Venn Diagrams
+All S is P
+Some S is P
+
+## Slide 60
+Venn Diagrams
+No S is P
+Some S is Not P
+
+## Slide 61
+That’s it, for this week
+This week is a little bit briefer, but I want you to perhaps practice making these kinds of charts. 
+If you have questions, post them on the board for the week.
+We will deploy these when we come back to talking about these kinds of syllogisms
+There are other applications (for example: if and only if…)
+And you can do all kinds of fancy conversions of statements into each other (some of which we will do)
+But, we can only do so much in a non-credit class…!
+
+## Slide 62
+Overview of Logic (BCS) 
+Week 5.1 Opposition of PropositionsSquare of Opposition
+
+## Slide 63
+Forming of Statements
+The second operation of the intellect involves the forming of complex wholes: statements, upon which we render judgments
+A definition solely states the essence, by means of a definition
+In a statement / judgment, we affirm that one thing IS or IS NOT another in some way.  It is a kind of duality held together by the verb to be
+It is only here that we begin to formally speak about truth: judgments are true and false; concepts might be clear / obscure / vague / distinct / etc.; but only judgements are true and false
+But, notice that in some way every statement must involve notions / concepts that it unites
+And by such judgments, we slowly but surely begin the process of unpacking the richness of reality
+(Moreover, some theologians will hold that faith, being made up of truths, is primarily an act of judgment
+
+## Slide 64
+The Four Categorical Propositions
+Matter: What is stated in the statement’s subject and predicate
+Form
+Quality: Affirmative or Negative
+Quantity: Universal or Particular
+Affirmative Universal: 	Every man is wise 
+Affirmative Particular: 	Some man is wise
+Negative Universal: 	No man is wise
+Negative Particular: 	Some man is not wise
+It is very important to realize that in classical logic, there is not a concern about existential import.  To handle this, the notion of suppositio was applied (for what reality do the terms in question “stand”)
+
+## Slide 65
+Square of Opposition (Maritain, 132)
+
+## Slide 66
+Venn Diagrams
+All S is P
+Some S is P
+
+## Slide 67
+Venn Diagrams
+No S is P
+Some S is Not P
+
+## Slide 68
+Square of Opposition (Kreeft, 175)
+
+## Slide 69
+Square of Opposition With Truth Relationships (Kreeft, 177)
+
+## Slide 70
+Modal Square of Opposition (Maritain, 139)
+
+## Slide 71
+Stepping Back for a Second
+Before we keep getting lost in the details of operations, treating the vital activity of the mind as though it were nothing other than token calculation, let’s observe a few points
+We opened by noting that logic is concerned with second intentions, a special kind of relationship formed by the mind in its various speculative activities
+When defining, we had all the various “predicable” relationships, as well as others, and also properties thereof: species, genus, property, universal, supposition, etc.
+By these, we noted how various notions (REALITIES AS KNOWN) are related to each other as we strive to define
+Now, we are considering a new kind of ”interweaving” relationship: that of forming propositions.  
+Thus, there will be various ways of relating subjects and predicate
+And these relationships themselves will be able to be converted into each other
+But we must always appreciate that each kind of statement is not merely some token in a calculus but, RATHER, a way that the mind expresses truth to itself
+These too are second intentions, but second intentions formed by the intellect’s second operation
+
+## Slide 72
+Overview of Logic (BCS) 
+Week 5.2 Opposition of Propositions
+
+## Slide 73
+Square of Opposition (Kreeft, 175)
+
+## Slide 74
+Square of Opposition With Truth Relationships (Kreeft, 177)
+
+## Slide 75
+Contradiction: The easiest opposition
+The relationship of pure negation between two propositions
+This exists between the “corners” of the square of opposition
+RULE: Two contradictory propositions cannot be TRUE at the same time, nor can they be FALSE at the same time
+A-O Contradiction
+Every Arian denies theosis means It is false to say SOME ARIAN DOES NOT DENY THEOSIS
+And, moreover, if O is true, then A must be False: Some Bananas are not soft means that it is FALSE to say that All bananas are soft
+E-I Contradiction
+If we can say that it is FALSE that No Arian denies theosis
+Then, it is TRUE to say that SOME ARIAN DENIES THEOSIS
+
+## Slide 76
+Contrariety
+Relationship between A and E
+Cannot both be true.  BUT, they could both be false.  (See the arrows of Kreeft.)
+You can pass from a true to a false.
+Examples
+All sacraments are eschatological => it is FALSE to say No sacraments are eschatological
+However, if someone proves to me that it is FALSE to say No Sacraments are Eschatological, I cannot prove that all of them ar
+Likewise, even if it is false to say, All Eastern Churches are Byzantine I cannot thereby infer No Eastern Churches are Byzantine
+
+## Slide 77
+Sub-Contrariety
+Relationship between I and O
+Cannot both be false.  BUT, they could both be true.  (See the arrows of Kreeft.)
+You can pass from a false to a true.
+Examples
+That it is TRUE that Some sacraments are unrepeateable DOES NOT BY ITSELF allow us to say it is FALSE that Some sacraments are not unrepeatable
+But, when we say that it is FALSE to say Some divine persons are subordinate, we can then say immediately: Some divine persons are not subordinate
+Notice, that this is a question of IMMEDIATE “inference” from a given truth, not a full exhaustion of the state of affairs.
+(More on the question of so-called immediate inferences briefly next week.)
+
+## Slide 78
+Sub-alternation
+Relationship from A to I and from E to O
+From a true A or E we can pass to a true I or O
+Thus…
+All sacraments are eschatological => Some sacraments are eschatological
+(But, obviously, merely because some are eschatological, we cannot then immediately hold that all are)
+So too, No divine persons are subordinate => Some divine persons are not subordinate
+
+## Slide 79
+Homework!
+Give examples of each opposition type
+See populi for basic format.  Please submit using the exam online (this makes grading easier)
+This will be due at the end of next week, once we cover some further material.
+
+## Slide 80
+Overview of Logic (BCS) 
+Week 6.1 Review and Conversion of Propositions
+“Immediate Inference”Review
+
+## Slide 81
+Immediate Inference
+We cannot discuss this technical point in detail, but it is important to see that immediate conversions do not involve new truths
+For this reason, they do not involve “inference” in the strict sense of objectively involving a new truth as a conclusion
+This point, discussed with some technical detail in Maritain 162–169 is very important as regards not only the notion of science but, very importantly for theologians, in the question concerning The Development of Dogma and the De Fide Definability of Theological Conclusions Properly So Called
+This latter topic was a huge debate before Vatican II, and it remains an unsettled matter
+
+## Slide 82
+(Repetition) Square of Opposition (Kreeft, 175)
+
+## Slide 83
+(Repetition) Square of Opposition With Truth Relationships (Kreeft, 177)
+
+## Slide 84
+Summary
+Contradiction
+Relationship between “corners”: A and O; E and I
+Relationship explanation: Cannot be the same; From TRUE to FALSE and FALSE to TRUE
+Contraries
+Relationship between the “tops”: A and E
+Relationship explanation: Cannot both be true; but could both be false.  From TRUE to FALSE
+Sub-contraries
+Relationship between the “bottoms”: I and O
+Relationship explanation: Cannot both be false; but both can be true. From FALSE to TRUE
+Subalternation
+Relationship “downward”:  A TO I and E TO O
+Relationship explanation: From TRUE to TRUE
+Superalternation
+Relationship “upward”: I TO A and O TO E
+Relationship explanation: From FALSE to FALSE
+
+## Slide 85
+Turning off Your Brain and Letting the Tokens do Your Thinking…
+However, think about the Kreeft table from earlier and the way that we can basically turn off our brain and let the tokens do the thinking.
+You can say: I know that an A statement is true…. Therefore
+O must be false
+E must be False
+I must be True
+Or, an O statement is False
+E must be False
+I must be True
+Or, an I statement is True
+E must be false
+Or E is False
+I must be true
+Or E is True
+I is False
+O is True
+A is False
+Etc….
+
+## Slide 86
+Overview of Logic (BCS) 
+Week 6.2 Conversion of Propositions
+Conversion, Obversion, Contraposition
+
+## Slide 87
+Conversion
+Conversion involves the swapping of subject and predicate of a proposition
+This is another tool for drawing examples of how we can play out what is implicit in a given statement (note: I am trying to avoid “immediate inference”, as many speak)
+But, obviously, we can’t go swapping in all cases!
+All Byzantine Churches are Eastern DOES NOT mean that All Eastern Churches are Byzantine!
+Likewise: Some theologians are not Palamites DOES NOT MEAN Some Palamites are not theologians.  (Or more down to earth: Some trees are not oaks does not mean Some oaks are not trees.)
+Etc.
+
+## Slide 88
+Conversion
+Although you can use Venn diagrams to help you, this is pretty easy to memorize.  (Cf. Kreeft, 167-170, which is very clear)
+The two easy cases: E and I directly convert
+E Propositions
+No Arians are orthodox believers.=> No orthodox believers are Arians.
+No mysteries of faith are merely rational truths. => No merely rational truths are mysteries of faith.
+No trees are cows.  => And, yes indeed, no cows are trees.
+I Propositions
+Some sacramental mystery is a water-using cultic activity. =>  Some water-using cultic activity is a sacramental mystery.
+Some homily is a boring speeches. => Some boring speech is a homily.
+Some virtue is supernaturally infused states of soul.  => Some supernaturally infused state of soul is a virtues.
+
+## Slide 89
+Conversion
+Two other cases
+A can convert to I
+Every liturgy is an encounter with Christ => Some encounter with Christ is a liturgy.
+Every just act is morally good.  => Some morally good [act / thing] is a just act.
+E can also convert to O
+No divine names are finite realities. => Some finite realities are not divine names.
+No tomatoes are vegetables.  => Some vegetable is not a tomato.
+In short
+E => E
+I => I
+A => I
+E => O
+
+## Slide 90
+Obversion
+Here too, Kreeft is good summary (p. 170ff)
+Double negation
+Negate quality
+Negate the predicate
+Examples
+Every tree is living => No tree is non-living.
+Some Byzantine is a Palamite.  => Some Byzantine is not a non-Palamite.
+Some Eucharistic form uses leavened bread. => Some Eucharistic form does not use unleavened bread.
+Etc…
+
+## Slide 91
+Valid Obversions
+A to E
+Every tree is living => No tree is non-living.
+Every heresy is evil => No heresy is good.
+E to A
+No heresy is good. => Every heresy is evil.
+No philosophy is salvific. => Every philosophy is non-salvific.
+I to O
+Some Eucharistic form uses leavened bread. => Some Eucharistic form does not use unleavened bread.
+Some Heretic is a Barlaamite. => Some Heretic is not an anti-Barlaamite.
+O to I
+Some argument is not sophistical. => Some argument is non-sophistical.
+Some hot tubs are not cheap. => Some hot tubs are non-cheap.  (Notice how careful we have to be)
+Thus, in summary:
+A  E
+I  O
+
+## Slide 92
+Contraposition
+A more complex series of operations.  Basically strung together:
+(1) Obversion
+(2) Followed by a conversion			“Partial contraposition”
+(3) Then followed by another obversion
+For example:
+Every Byzantine is an Eastern Catholics.			A
+(1) No Byzantine is a Non-Eastern Catholic.		E
+(2) No Non-Eastern Catholic is a Byzantine.		E
+(3) Every Non-Eastern Catholic is a non-Byzantine.		A
+As you see, this is really:
+Every B is E => Every non-E is non-B.
+Works for A, E [But note that the conversion changes the quantity], and O
+
+## Slide 93
+BUT NOTHING IS INFERRED!
+Note, yet again this important point
+In the end, we are not stating new truths. We are showing what is, in some way, contained in the original truth.
+This is very important.
+
+## Slide 94
+Homework!
+Give 2 examples of each kind of…
+Conversion
+Obversion
+
+## Slide 95
+Overview of Logic (BCS) 
+Week 7.1 Introduction to Discursive Reasoning
+Introduction and role of middle termsPer se nota propositions (Very brief intro)
+
+## Slide 96
+Moving on to a third act of the reasoning intellect
+Syllogistic reasoning is the most unique mark of our finitude and the material conditioning of our minds
+Already, up to this part, we have experienced the multiplicity that our condition as embodied knowers has “foisted” upon us
+[Implicit use of reasoning all this time…]
+Division
+Parts of definition and various kinds of definitions
+The parts of propositions
+The various qualities / quantities of propositions
+The various oppositional rules
+Etc…
+But, now in particular, we will experience the somewhat mysterious “spiritual movement” that is reasoning
+
+## Slide 97
+A Simple Syllogism
+Every man is a political being.
+Every political being reasons relative to the societal common good.
+Therefore, every man reasons relative to the societal common good.
+(From now on, we will sometimes have predicates that leave the “is” implicit at times – for the sake of simplicity of expression.)
+These are the: Major Premise, Minor Premise, and Conclusion
+Notice the colors
+Every man—Major Term
+political being—Middle Term
+reasons relative to the societal common good—Minor Term
+
+## Slide 98
+A Simple Syllogism
+Every man is a political being.
+Every political being reasons relative to the societal common good.
+Therefore, every man reasons relative to the societal common good.
+Notice how the middle term disappears right in the midst of what we are doing
+It is the essential tissue that holds everything together, enabling the discourse from the premises to the conclusion
+Moreover—and this is very important and often under-emphasized—it is in light of the middle term that we understand the conclusion….
+
+## Slide 99
+Various Middle Terms, “Same” Conclusion
+Example 1
+Every man is a political being.
+Every political being reasons relative to the societal common good.
+Therefore, every man reasons relative to the societal common good.
+Example 2
+Every man is a being that must reason justly.
+Every being that must reason justly reasons relative to the societal common good.
+Therefore, every man reasons relative to the societal common good.
+Example 3
+Every man is a being that is subject to authority because it is constituted by God.
+Every is a being that is subject to authority because it is constituted by God reasons relative to the societal common good.
+Therefore, every man reasons relative to the societal common good.
+
+## Slide 100
+Propositions aren’t free floating tokens...
+These are only meant to be loose examples, but they bear witness to this incredibly important point: When we draw a conclusion, we understand that conclusion precisely in light of that reasoning 
+This is why the way that we define our middle terms is so important.  That bears witness to the particular mode of discourse we are in.
+In technical language: the manner of defining bears witness to the abstraction involved in our thinking
+Therefore, you should never just treat propositions and conclusions like free-floating tokens that are disconnected from the living discourse of human reason
+
+## Slide 101
+Reasoning…
+From the time of Plato onward a division between direct insight and reasoned knowledge has been operative in various ways
+Aristotle sees himself as developing (and, in his eyes, correcting) this very important insight
+The Posterior analytics is written as a response to the Meno
+In Nicomachean ethics, he distinguishes between reasoning to principles and reasoning from principles
+Some things are just known in themselves
+Not merely factually
+But also in the proposition itself
+For example: 
+One and the same thing cannot be and not be at the same time and in the same respect
+Movement always begins from privative terminus 
+Every activity is formally structured by some end
+The discovery of such truths is often very difficult, however…
+Most often, we are reasoning such that we know truths in light of other truths
+And this is the activity of discursive reasoning
+
+## Slide 102
+Overview of Logic (BCS) 
+Week 7.2 Introduction to Discursive Reasoning
+Classification of Syllogisms
+
+## Slide 103
+Kinds of Inference
+Inference is either:
+“Immediate” (Inference improperly so called)
+Mediated in some way
+In a non inferential / illative way: 			Expository Syllogism
+In an inferential / illative way
+Subjectively illative (only a kind of clarification of		Explicative Syllogism
+	the major)					
+Objectively illative (the conclusion drawn states		Syllogism properly 		 a new truth not formally stated in the 		so called
+	premises)			 	
+
+## Slide 104
+Distribution of Terms
+We need this for applying rules to analyzing syllogisms for validity.  See Kreeft 163–165 for an easy overview
+Every man is mortal.
+Notice that man passes over into mortal.  
+If you drew a Venn diagram, the Man circle would be inside of mortal 
+No man is an aardvark.
+In this case, BOTH sides are excluded from each other
+Two totally separate circles: man and aardvark
+Some man is French.
+No full distribution EITHER by the Subject or the Predicate
+Some man is not French.
+The entirety of the SOME portion is not French
+The not-French predicate distributes over the whole of that some-man subject
+
+## Slide 105
+Distribution of Terms
+So, we can summarize it this way:
+A: Subject distributes
+E: Subject and Predicate Distributes
+O: Predicate distributes
+A quick way to summarize the rule: The predicate of an affirmative prposition 
+
+## Slide 106
+Distribution of Terms
+(Summary from Kreeft, 164)
+
+## Slide 107
+Mood
+The ”mood” of a syllogism is the combination of premises and conclusion, using the shorthand from the square of opposition.
+4 x 4 x 4 => 64 different moods
+AAA, EIO, AOE………….
+Then, as we will see there are four different figures, based on the placement of the middle term, such that there are a total 256 possible layouts of syllogisms
+We will learn some rules for how to deal with all of these possible cases…
+
+## Slide 108
+Figure
+Maritain 186
+
+## Slide 109
+Valid Categorical Syllogisms
+First Figure (Subject of Major; Predicate of Minor): AAA, EAE, AII, EIO
+Second Figure (2 predicate middle terms): AEE, EAE, AOO, EIO
+Third Figure (2 subject middle terms): AAI, IAI, AII, EAO,OAO,EIO
+Fourth Figure (Predicate of Major; Subject of Minor): AAI, AEE, IAI, AEO, EIO
+
+## Slide 110
+Figure-Non Galenic 4th
+Woodbury, no. 266
+
+## Slide 111
+Valid Categorical Syllogisms (Non Galenic 4th)
+First Figure: Mixed middle term placement
+Direct (Subject of Major; Predicate of Minor): AAA, EAE, AII, EIO
+Indirect (Predicate of Major; Subject of Minor): AAI, AEE, IAI, AEO, EIO
+Second Figure (2 predicate middle terms): AEE, EAE, AOO, EIO
+Third Figure (2 subject middle terms): AAI, IAI, AII, EAO,OAO,EIO
+
+## Slide 112
+Mneumonics that Used to Be Used
+First Figure (Direct)—Barbara, Celarent, Darii, Ferio: AAA, EAE, AII, EIO
+Second Figure—Camestres, Cesare, Baroko, Festino: AEE, EAE, AOO, EIO
+Third Figure—Darapti, Disamis, Datisi, Felapton, Bokardo, Ferison: AAI, IAI, AII, EAO,OAO,EIO
+Fourth / First Figure (Indirect)—Bramantip, Camenes, Dimaris, Fesapo, Fresison: AAI, AEE, IAI, AEO, EIO
+(Here following Kreeft, 258; cf. Maritain 190 and 190n1 – and issues raised between moderns and medieval Westerners…)
+
+## Slide 113
+I won’t make you memorize this!!!
+I’m going to follow the wisdom of other teachers, especially on this point, Kreeft, who provides a very clear layout of rules, which I’ll teach next lecture
+Obviously, in this class you won’t be able to memorize it all.  But I want you to have exposure. So, let’s go (next week)…!
+
+## Slide 114
+Modes of Per Se Predication
+Oh, yeah…
+We’ll actually return to this when we talk about scientific logical form
+Just wanted to put this here to let you have a forward pointer
+
+## Slide 115
+Overview of Logic (BCS) 
+Week 8.1 Deductive Validity
+Basic rules of validity
+
+## Slide 116
+Rules for Syllogism
+Only three terms
+Three propositions (2 premises and a conclusion)
+Middle term must be distributed at least once
+If term is undistributed in a premise, it cannot be distributed in the conclusion 
+Cannot have two negative premises
+If one premise is negative, conclusion is negative; and vice versa
+Two corollaries 
+Can’t have two particular premises (though, there semi-exceptions here, for example, for expository syllogisms… Not our problem)
+If there is a particular premise, conclusion must be particular
+(Cf. Kreeft, 243ff)
+
+## Slide 117
+Rule 1: Three Terms
+Obviously bad reasoning (many examples could be made):
+Every Nestorian is a heretic.
+Every Heretic is a sinner.
+Every Nestorian is a beefcake.
+But, it’s really more operative in the case of ambiguity.  Example from Kreeft:
+Every power tends to corrupt.
+Knowledge is power.
+Therefore, knowledge tends to corrupt.
+This is an AAA syllogism in the first-direct figure.  BUT, the sense of power (and of knowledge…) is ambiguous.  (In major: political power)
+
+## Slide 118
+Rule 2: Three Propositions
+Sometimes, there is an implied premise in an argument that only is presented as premise and a conclusion.
+This is called an enthymeme. (See Kreeft, 264–275)
+It’s always best to try to concede what ever would be the strongest implied premise.
+Example:
+A true man (one having a human nature) must have a will human will.
+Christ is a true man (one having a human nature) .
+Therefore, Christ has a human will.
+We’re not going to get into poly-syllogisms, sorites (a “heap” of propositions), which can in fact lead to paradoxes.  (See Kreeft, 275–279)
+(Technically, though, there are certain specifically dialectical and rhetorical applications of Enthememes and what are called Epicheiremas, which are syllogisms that have enthymemes attached to one or both premises.  On Epicheiremas, see Kreeft, 279–282)
+
+## Slide 119
+A Sorites Gone Wrong
+He who drinks gets drunk.
+He who gets drunk, sleeps.
+He who sleeps does not sin.
+He who does not sin goes to heaven.
+Therefore, he who drinks goes to heaven.
+Clearly is playing on an ambiguity.
+As Kreeft shows well in a Euler Diagram, this is a kind of “Bull’s eye” in its supposed structure:
+
+## Slide 120
+Overview of Logic (BCS) 
+Week 8.2 Deductive Validity
+Rules of validity – More
+
+## Slide 121
+Rule 3: Middle Term Distributed At Least Once
+(Summary from Kreeft, 164)
+
+## Slide 122
+Rule 3: Middle Term Distributed At Least Once
+Random 2nd Figure that works:
+No Nominalists are Thomists.		This distributes
+All Garrigouvians are Thomists.
+No Garrigouvians are Nominalists.
+One more example in 3rd figure
+All Thomists are moderate realists.	This distributes
+Some Thomists are Cajetanians.
+Some Cajetanians are moderate realists.
+
+## Slide 123
+Rule 3: Middle Term Distributed At Least Once
+ 1st Figure (Indirect) that doesn’t work (even if its conclusion is true):
+Every Sacrament is a grace-conferring reality.		
+Some grace-conferring reality is liturgical.
+Some liturgical reality is a sacrament.
+2nd figure
+Every man is mortal.
+Every cow is mortal.
+Every cow is a man.
+Etc.
+
+## Slide 124
+Rule 4: If term is undistributed in a premise, it cannot be distributed in the conclusion 
+Example in third figure
+Every grace is a divinizing reality.
+Every grace is solely (efficiently) caused by God.
+Everything that is solely (efficiently) caused by God is a divinizing reality. 
+					 (NOTE extended distribution)
+Another in third figure
+Every kind man is moral.
+Some kind man is elderly.
+Every elderly person is moral.	(Again, note distribution expansion)
+Contrast the final one to:
+Every kind man is moral.
+Some kind man is elderly.
+Some elderly person is moral.
+
+## Slide 125
+Rule 5: Cannot have two negative premises
+First (Indirect)—Lots of distribution here; but not ”in the right place”
+No Byzantine Catholic is Roman Catholic.
+No Roman Catholic is a Protestant.
+No Byzantine Catholic is a Protestant.
+First (Indirect)
+Some Byzantine Catholic is not a Thomist.
+No Thomists are Scotists.
+Therefore, some Byzantine Catholic is a Scotist.
+Both of these would be very clear on Venn Diagrams
+
+## Slide 126
+Rule 6: Negative Premise  Negative Conclusion
+Third figure
+No philosophers are sane.
+Some philosopher is a skiier.
+Some skiier is sane.
+Valid
+No philosophers are sane.
+Some philosopher is a skiier.
+Some skiier is not sane.
+
+## Slide 127
+Rules for Syllogism
+Only three terms
+Three propositions (2 premises and a conclusion)
+Middle term must be distributed at least once
+If term is undistributed in a premise, it cannot be distributed in the conclusion 
+Cannot have two negative premises
+If one premise is negative, conclusion is negative; and vice versa
+Two corollaries 
+Can’t have two particular premises (though, there semi-exceptions here, for example, for expository syllogisms… Not our problem)
+If there is a particular premise, conclusion must be particular
+(Cf. Kreeft, 243ff)
+
+## Slide 128
+Overview of Logic (BCS) 
+Week 8.3 Deductive Validity
+Venn Diagram Examples
+(All too…) Brief remarks on induction
+
+## Slide 129
+Venn Diagrams
+Venn diagrams are very useful for checking validity, though they do not immediately reveal the reason for the invalidity when it takes place.
+Broadly, too, they are structured around extension, which is only part of the nature of a propositions.  (The comprehension / signification of terms must be taken into account, as well as the nature of the predication itself.)
+To this end, we will look at a PDF from Kreeft (p. 259–263) and Maritain (p. 192–200), who also takes comprehension into account.  (I’m only going to show this to you – as we are already way too deep into the weeds for a course like this.  Note, also that Maritain is technically using Euler’s circles.  I’ll explain in lecture why we aren’t using them.)
+We will lecture on top of PDF… (Switching screen.)
+
+## Slide 130
+Induction
+In a purely philosophical course on logic, we would by necessity need to deal with the problem of induction.  However, it goes beyond what we can do in a class like this.
+Maritain approaches this topic with great speculative insight on pp. 258–287
+Vincent Smith has interesting, if somewhat cursory remarks on p. 156–161, though also see 181–190 (important points of contact to dialectical reasoning), and his pertinent remarks on more modern scientific topics on p. 219–249 (note, also, his references to Mill); Also see his index entry for Induction in The General Science of Nature; same for Wallace, The Modeling of Nature
+Houser (360–374) is very brief.
+Very important theme, related to this, is doxa / opinion.  On this, see L.-M. Régis, L’Opinion selon Aristote (Paris: Vrin, 1935); Ambroise Gardeil, “La certitude probable,” Revue des sciences philosophiques et théologiques 5 (1911): 237–66, 441–85; Gardeil, “La topicité,” Revue des sciences philosophiques et théologiques 5 (1911): 750–57. 
+Also, Louis Groarke, An Aristotelian account of Induction: Creating Something from Nothing
+
+## Slide 131
+Overview of Logic (BCS) 
+Week 9.1 Hypothetical (Conditional, Disjunctive, Conjunctive) Syllogisms
+Review
+
+## Slide 132
+Hypothetical Syllogisms
+Hypothetical syllogisms take this form:
+	If P, then Q….
+	If ANTECEDENT, then CONEQUENT
+This kind of inference is ONLY false when the ANTECEDENT (P) is True and the CONSEQUENT (Q) is False
+P
+If you eat too much
+Q
+Then you will get fat
+ p => q (if p, then q)
+T
+T
+T
+T
+F
+F
+F
+T
+T
+F
+F
+T
+
+## Slide 133
+Disjunctive Syllogisms
+Disjunctive syllogisms take this form:
+	Either P or Q is true
+Note that this can be either INCLUSIVE or EXCLUSIVE
+Example of Exclusive
+P
+You can either be sitting 
+Q
+Or standing
+ P v Q (P or Q)
+T
+T
+F
+T
+F
+T
+F
+T
+T
+F
+F
+F
+
+## Slide 134
+Conjunctive Syllogisms
+Conjunctive syllogisms take this form:
+	P and 
+Note that this can be either INCLUSIVE or EXCLUSIVE
+Example of Inclusive
+P
+An Eastern Catholic can be a priest
+Q
+Or a Married Man
+ P v Q (P or Q)
+T
+T
+T
+T
+F
+T
+F
+T
+T
+F
+F
+F
+
+## Slide 135
+Disjunctive Syllogisms
+Disjunctive syllogisms take this form:
+	P and Q are true
+(I’m being light-hearted in this example—remember, I am, if anything, too Latin in my ways, so some would say that I am case )
+P
+You are Eastern Catholic
+Q
+And You are Orthodox in Union with Rome
+ P ^ Q (P and Q)
+T
+T
+T
+T
+F
+F
+F
+T
+F
+F
+F
+F
+
+## Slide 136
+Super Simple Not….
+For the sake of exposure, one other quick one…
+If P is true, then NOT P is not true
+And if P is false, then NOT P is true
+For example:
+	TRUE: Humans have intellects. 
+	THEREFORE, it is FALSE to say: Humans do not have intellects.
+	FALSE: Humans are plants.
+	THEREFORE, it is TRUE to say: Humans are not plants.
+Simple chart:
+P
+~P
+T
+F
+F
+T
+
+## Slide 137
+Overview of Logic (BCS) 
+Week 9.2 Hypothetical (Conditional, Disjunctive, Conjunctive) Syllogisms
+
+## Slide 138
+Hypothetical Syllogisms
+Basic forms
+Conditional: If X then Y
+Disjunctive: X or Y
+Conjunctive: X and Y
+Technically, disjunctive and conjunctive syllogisms can be reduced to conditional form
+However, the conditional form cannot be reduced to categorical reasoning, though it can be translated or resolved into it (cf. Maritain, 241-243)
+
+## Slide 139
+Hypothetical Syllogisms
+These sorts of “syllogisms” are not like categorical syllogisms, in that they do not necessarily involve a new light cast upon a conclusion through a middle term. 
+Rather they tell us something about how propositions are related / connected
+Maritain (244): “It is no longer a question of manifesting the union (or separation) of wo terms to each other by means of a third term or concept but of manifesting by means of one of the members of the Major the necessity of positing or destroying the other member.  Consequently, the conditional syllogism does indeed conclude from the whole to the part; but not, as in the categorical syllogism, from a more universal (from the point of view of logical relations that exist between the connected terms) to a less universal truth, but from a compound proposition to one of the members that it contains.  The mind, in the conditional syllogism does not infer one proposition from another; rather, it infers a proposition from an inference that has already been made and affirmed between two propositions.  The need is not to see by a new light and in virtue of an inference that the mind discovers while it brings it about; rather, it is to affirm or deny something by a renewed application of an already existing light and by the use of a previously made inference.”
+Developed by Theophrastus (c. 371–287); then in stoicism, especially in Chrysippus (c. 279–206); and passed on to the medieval west by Boethius 
+
+## Slide 140
+Conditional: Pure Conditional
+(Cf. Houser, 338)
+If A then B; if C then A; therefore if C then B
+Thus:
+If someone is an Arian, he also denies that the Church is the mystical body of Christ
+If someone argues that Uncreated communication to creation is impossible, then he is (also) an Arian.
+Therefore, we can say: if someone argues that Uncreated communication to creation is impossible, that person also denies that the Church is the mystical body of Christ
+(NOTICE THE DEPENDENCE HERE UPON CATEGORICAL REASONING)
+
+## Slide 141
+Conditional: Affirming the Antecedent Modus Ponens
+This is a very straight forward argument
+If A then B
+A
+B
+A => B; A; B
+In other words, for example:
+If Peter died a martyr’s death, then he is in heaven
+Peter died a martyr’s death
+Therefore, he is in ehaven
+Or
+If a believer loves Christ, then that believer takes up his cross
+Someone loves Christ
+Then, that person takes up his cross
+(You can sense, however, that there are categorical forms that could express these examples.)
+But, where you have A => B structure, you can argue Modus ponens
+BUT, You cannot Deny the Antecedent and then Deny the Consequent
+
+## Slide 142
+Conditional: Denying the ConsequentModus Tollens
+This is relatively straight forward too
+If A then B
+Not B
+Then A cannot B either
+A => B; ~B; ~A
+For example
+If you murder someone, then you are guilty of a crime
+You are not guilty of a crime
+Therefore, it is false to say that you have murdered someone
+Or
+If you are baptized, then you are saved in Christ (at least by seal)
+You are not saved in Christ (at least by seal)
+Therefore, it is false to say that you are baptized
+BUT, You cannot Affirm the Consequent and then Affirm the Antecednet
+
+## Slide 143
+Disjunctive Syllogism (Inclusive)
+Form: X or Y, NOT X Then Y
+X v Y; ~X; Y
+For inclusive forms, both can be true
+Thus, for example
+A good Catholic likes either Byzantine or Non-Byzantine Liturgies
+A given good Catholic does not like Non-Byzantine Liturgies
+Therefore, that person likes Byzantine liturgies
+Notice, though, in this case, IF you affirm X, you cannot DENY Y
+Both can be true
+This is called “Affirming a disjunct”
+
+## Slide 144
+Disjunctive Syllogism (Exclusive)
+Very often, though, we form exclusive disjunctives:
+Overly simple example
+The food is either hot or cool.
+The food is hot
+Therefore, it is not cool
+Another
+A philosopher is functioning like a pagan, according to completely ‘purified’ reason or is functioning like a Christian
+ A philosopher is functioning like a Christian
+Therefore, we cannot say that this philosopher is functioning like a pagan, according to completely ‘purified’ reason
+Therefore, just always ask yourself: is this a case where both can be true?  If not, then you can also do this kind of affirming of a disjunct.
+
+## Slide 145
+Conjunctive Syllogism
+Form:
+X and Y; X; Y
+Thus, for example
+The sun is out and it is hot; both are true, on the supposition of the truth of the first claim in a given situation
+More useful: Negative conjunctive
+Form: Not (X and Y); X; Therefore, not Y
+Example: You cannot serve God and Mammon; but you serve mammon; therefore you do not serve God
+Notice how easily this is reduced a conditional:
+If a man serves God, then he does not serve mammon… 
+But, you cannot pass from saying X is not true to holding something one way or the other about Y
+This is called “denying a conjunct”
+
+## Slide 146
+Negation of Disjunctive / Conjunctive
+Sometimes referred to as “De Morgan’s Law”
+NOT (A and B)  NOT A or NOT B
+NOT (A or B)  NOT A and NOT B
+Symbolized:
+~(A ^ B)  ~A v ~B
+~(A v B)  ~A ^ ~B
+
+## Slide 147
+Homework!
+Give examples of:
+A pure conditional argument
+A conditional modus ponens
+A conditional modus tollens
+An inclusive disjunctive syllogism
+An exclusive disjunctive syllogism
+A negative conjunctive syllogism
+
+## Slide 148
+Overview of Logic (BCS) 
+Week 10 Objective and Subjective Illation
+
+## Slide 149
+Why are we doing this topic?
+We have had some very detailed material of late, so your head is likely swimming. 
+For this reason, I want to touch on a topic that is a little bit esoteric but which will not involve any homework
+I’m mostly doing this…
+Because it’s useful for myself to teach it, yes…
+But, because it is at the center of how to think about doctrinal development
+And you are seminarians, who, even if you will not remember all the details, should be aware of the ways that philosophy impacts theological possibilities and problems
+
+## Slide 150
+Recall
+We noted that really there are not, strictly speaking, “direct inferences”, if by “inference” we mean the drawing of a new truth
+Also, too, we noted that there is not really a kind of conceptual advance involved in hypothetical syllogisms.  
+But, categorical syllogisms involve conceptual development.
+That being said, not every syllogism involves such advance…
+Therefore, in what follows, I am updating (with some background considerations in mind from Jacques Maritain, Fr. Reginald Garrigou-Lagrange, and Fr. Reginald Schultes) certain outline remarks made by Fr. Austin Woodbury
+
+## Slide 151
+Improper Syllogisms
+A proper syllogism: when a new truth is deduced from another truth
+Improper syllogism: no new truth
+Expository
+Explicative	Though here, it is a newly known truth (more explicitly)
+
+## Slide 152
+Expository Syllogism
+Example
+Judas betrayed Christ.				Middle: Judas 
+But Judas was an apostle.
+Therefore, an apostle betrayed Christ
+The middle term is singular (not particular) – therefore no passage from one truth to another.  Not ILLATIVE / inferential
+“We must note, however, that this form has only the exterior appearance of of a syllogism***
+
+## Slide 153
+Expository Syllogism
+Third figure is most naturally suited to it
+In second figure, has four moods outside ordinary negative moods (more is needed from syllogistics), with premises: AA, II, AI, IA;
+In third figure, only has two moods, with premises: AA and EA
+A here is not universal affirmative but singular affirmative; E singular negative 
+(Cf. Maritain, 235)
+In a fuller class, we would work through examples of all of these.  Feel free to put some together
+
+## Slide 154
+Explicative Syllogism
+Example
+Man is mortal						Middle: man
+But a rational animal is a man
+Therefore, a rational animal is a mortal
+Here, we have a universal middle.  Therefore, there is illation / inference, but not properly so called
+Why? The conclusion does not involve the inference of a new truth.
+Rather, it expresses the same truth, explicated by other concepts.
+Compare the major premise and the conclusion.  This is the same truth but the conclusion uses concepts that are more distinct
+
+## Slide 155
+Explicative Syllogism
+Example from Garrigou-Lagrange(?) 
+The production of the entire being of anything is [production] from no being just as the production of a man is not from a man. 
+But by creation we understand the production of the entire being of some thing.
+Therefore, by creation we understand the production of a thing out of nothing.
+Example from Garrigou-Lagrange(?)
+Good and being are convertible.  [Non-good and non-being are “convertible”.]
+But evil is opposed to good. 	(Nominal / confused definition of evil)
+Therefore, evil is not something positive but the negation or rather the privation of good.		(More explicit / distinct statement of definition)
+Example from Garrigou-Lagrange(?)
+Outside of motion in action and passion, nothing remains but the relation of the effect to the agent.
+But creation, since it is out of no presupposed subject, is without motion or change.
+Therefore, creation in the creature is nothing but a certain relation to the Creator
+
+## Slide 156
+Explicative Syllogism
+In explicative syllogisms, the conclusion is of itself (quoad se) identical to the major premise
+But it is not identical as regards our knowledge (quoad nos) because it involves us re-expressing the terms in a more explicit manner
+Therefore, there is formally illation / inference, but NOT objective inference
+Here, cf. Schultes’s studies on implicit / explicit faith, as well as the history of dogmas
+More advanced point (recalling the “modes of per se”)—the major and the conclusion must be in the same mode of per se.  Otherwise, there will be objective inference.  Example:
+A rational animal is capable of scientific knowledge.	Fourth mode
+But man is a rational animal
+Therefore, man is capable of scientific knowledge.		Second mode per se
+
+## Slide 157
+Overview of Logic (BCS) 
+Week 10 Basic Notes on Analogy
+
+## Slide 158
+Some Basic Remarks About Analogy
+Very often, the topic of analogy is treated (if at all) when one discusses terms
+However, in point of fact, the notion of analogy involves all of our powers of reasoning:
+The formation of unified wholes (1st operation)
+The use of propositional relations (2nd and 3rd operation)
+We look at some set of meanings and ask: just how are these held in unity amid a seeming diversity, even though the unity cannot be that of generic abstraction?
+
+## Slide 159
+Some Basic Remarks About Analogy
+That being said, there are thinkers who (e.g., most famously, Bl. John Duns Scotus), who emphasize the objective-intentional-cognitional-logical union of meaning, even if the metaphysical referent is in some sense “analogical”
+This is famously referred to (with no small over-simplification) to “univocity” as applied to certain terms like being
+For the best treatment of this topic to date, see Garrett R. Smith, “The Analogy of Being in the Scotist Tradition,“ American Catholic Philosophical Quarterly 93, no. 4 (2019): 633–673
+I just cannot address this in full breadth.  I personally present a kind of Thomistic position, based on years of reading and research.  But there are certain points of Scotism that must, indeed, be responded to, even if the answers are not acceptable to Scotists.... I‘ll explain that in passing when we talk about the unity of the analogue
+
+## Slide 160
+Some Basic Remarks About Analogy
+Terms have can be...
+Univocal
+Equivocal
+Analogical
+Univocal terms have a single meaning
+Animal said of man and ox
+Virtue said of justice and Temperance
+Tree said of oak and maple
+Equivocation: Same word / term (“equal vox“), different meanings
+Sometimes totally and purely equivocal
+Bank: edge of river; place you put your money
+Pen: writing instrument; place you put animals
+Sometimes, however there are richer relations of terms...
+
+## Slide 161
+Some Basic Remarks About Analogy
+Sometimes equivocation has a foundation of some sort, though it is not formally one.  This is especially true in metaphor
+Bright said of light and of intelligence
+Lofty: physical place; thought; 
+Red herring: in logic; in avoiding a dog
+Will: a power of the soul and that power’s act; a document saying what to do with your estate after you die.
+See Lakoff’s Metaphors We Live By
+
+## Slide 162
+Some Basic Remarks About Analogy
+Sometimes, equivocation becomes what is called an “analogy to one” (or “extrinsic attribution”)
+Health is something about good organismic ordering
+But...
+Food is healthy insofar is promotes health
+Blood can be healthy as a sign of health
+Sometimes, also, there is a proportional sense of analogy (or, “analogy of proper proportionality”)
+Being is said of: substance, accident, finite being (creatures), infinite being (God)
+Wisdom: prudence / practical wisdom; metaphysical wisdom; theological wisdom; God as Subsistent Wisdom
+Involves:
+Causality: God can be called wise insofar as we can reason to this by His effects
+Negation: God is not Wise in any way that is like finite wisdom
+Eminence: God is Wisdom in a way far beyond finite limits
+This is, however, a very complex topic...
+
+## Slide 163
+Many Senses of Analogy…. (Ramirez)
+
+## Slide 164
+Many Senses of Analogy…. (Ramirez)
+
+## Slide 165
+Many Senses of Analogy…. (Garrigou)
+
+## Slide 166
+The main divisions of analogy – For Reference
+Analogy of Attribution: Analogy where the analogue is not intrinsically in the analogates
+Analogy of Proportionality: Analogy where the analogue is intrinsically in all the analogates
+If not formally so, then it is a metaphoric proportionality
+If formally so, it is properly proportional analogy
+Admittedly, I am papering over some major debates here
+I am basically teaching you the position found in many great Thomists in the 20th century, though with some blending and correction
+Of particular importance for my account is above all others Yves R. Simon, though also Austin Woodbury; many others held variations on the position I explaining
+
+## Slide 167
+Kinds of Attributional Analogy – For Reference
+Attributions need to have some reason for linking various analogates to a primary case
+These reasons can be according to…
+Efficient Causality
+Material Causality (the subject in which the analogue is found)
+Final Causality
+Exemplary Causality
+
+## Slide 168
+Examples of Attributional Analogy – For Reference
+Attribution by efficient cause: Foresight (prudent), a book written – the former is the efficient cause of the latter being called prudent
+Attribution by material cause: Man (human), an intellect — the former is the subject called human, leading the latter to be called human
+Attribution by final cause: Normal organic constitution (healthy), climate, medicine, sleep — the former is the end leading the latter things to be called healthy
+Attribution by exemplary cause: Msgr. Robert Sokolowski, a picture of Msgr. Sokolowski — when you say, ”That is Msgr. Sokolowski” when pointing to a picture, you’re using attributional analogy
+
+## Slide 169
+Examples of Metaphoric Analogy – For Reference
+Male and female: animals, fittings for pipes or hoses
+Bright: light, intelligence
+Wild: animal; amazing idea
+Pointed: physical object; conversation
+Lofty: physical object; idea / concept
+Angry: man, God, sea
+Bridegroom: married man, Christ (in relation to Church), God (in relation to Israel)
+
+## Slide 170
+Examples of Properly Proportional Analogy – For Reference
+Being
+Substance and accident
+Substance, relation, 
+Created and Uncreated
+Beauty
+Natural
+Fine art
+God’s Uncreated Beauty
+Good  / Evil
+Natural
+Moral-Free
+
+## Slide 171
+Homework!
+Give at least 3 examples each of univocity, pure equivocity, metaphor, and analogy (of any kind)
+
+## Slide 172
+Overview of Logic (BCS) 
+Week 11 Kinds of Arguments: Scientific Demonstration
+
+## Slide 173
+Take a breather
+Whew… We are now coming back to a simpler line of work for the rest of the semester.
+This will be more factual again – and you will be able to round out the end of the term without much stress
+
+## Slide 174
+Scientific demonstration is rare…
+Aristotelianism, especially in the west, under the influence of certain pressures from Arabic interpretations of Aristotle, tends, toward an immense focus on science
+This is a very specific meaning, however, quite different from how we tend to use the term today
+It is a question of knowing what properly belongs to a given subject, and to subjects that are related to that one subject, to the degree that this is possible
+What is the essential nature of what something is?
+What are its proper causes?
+What are its properties?
+What are its proper effects?
+This technically is an unfolding of the various details that we can say about this given reality, abstractly considered
+
+## Slide 175
+Scientific demonstration is rare…
+But, the constituting of particular sciences was quite limited in Aristotle
+Physics / Natural Philosophy (and its various branches)
+Mathematics
+Mathematical physics?  (Known as subalternate sciences—these would become the modern sciences)
+Metaphysics
+Moral philosophy, in its own way
+And often Aristotelians would repeat the same listing...
+But, that being said, the basic project of knowing what is properly attributable to something, and knowing it on the basis of some kind of evidence (for Aristotle: intellectual evidence of first principles in a given order) is a noble inspiration that still remains with us today.
+
+## Slide 176
+Scientific demonstration requires…
+ A (Scientific Demonstration): A syllogism inferring a conclusion from true and necessary premises 
+Note: Necessary, not evident
+This is something often used in discussions of theological science
+Greatest care must go into the discovery and definition of the middle term, as well as showing how it relates to its subject
+This is the topic of Aristotle, Posterior analytics book 2
+Per se attributions will be the most important...
+
+## Slide 177
+Per Se Attribution
+Predicate is definition (or part of the definition) of the subject
+Man is a rational animal
+Man is an animal
+Man is rational
+Predicate is a property of the subject
+Man is capable of being artisitic
+Man is capable of exercising political rationality
+Man is a religious being
+Man is a being with a rational will
+Predicate is a proper act or proper [efficient] causality of S
+Ancients had 4 modes.  See diagram below (not really super important for us)
+For what is said here, see Woodbury, no. 299ff.
+
+## Slide 178
+Per Se Attribution – Mode 1
+Mode 1 – Predicate is part definition or part of definition
+Convertible = Definition / Difference: Per se primo
+Notice that in this case, due to the matter, a conversion works:
+Every man is a rational animal DOES convert into Every rational animal is a man.
+Not convertible = Genus: Per se secundo
+But, here we encounter the normal conversion rule for A statements (namely, that they convert into I statements)
+Every man is an animal => Some animal is man
+
+## Slide 179
+Per Se Attribution – Mode 2
+Mode 2 – Predicate is property of subject
+Convertible = strict property, Per se primo
+Notice that in this case, due to the matter, a conversion works:
+Every man is capable of being an political being <=> Everything that is capable of exercising political rationality is a man
+Not convertible = Less strict property (flowing from the genus of the subject) Per se secundo
+But, here we encounter the normal conversion rule for A statements (namely, that they convert into I statements)
+An isoceles triangle has three angles equal to two right angles. 
+This converts A=>I
+But, the sense of property here is broader than normal (belongs always to all, but not to only it)
+I‘m hiding the important distinction between physical and metaphysical properties (cf. Woodbury, Logic, 124E)
+Physical property: Real acident consequent upon an essence
+Metaphysical property: only conceptually distinct from the essence, or the essence itself as foundation for a physical property —Cf. Antoine Goudin
+
+## Slide 180
+Per Se Attribution – Mode 3
+Mode 3 – Predicate is proper effect of subject
+No distinction of conversion here
+A sculptor, qua sculptor, makes statue.
+God, uniquely as God, is capable of creative activity
+The final judgment of the intellect, precisely as such, moulds the formality of the will in moral choice
+And the terminal moral choice of the will is the proper efficient cause of the final judgment of the intellect
+
+## Slide 181
+Don’t Confuse Per Se Attribution and Per Se Nota
+We have been talking about attribution that is per se – essential and not per accidens
+However, there is also the question of premises that are directly known (which we mentioned earlier)
+Some, following Boethius (and seemingly rightly too) hold that some per se nota propositions are known “only to to the wise“
+The terms of such propositions would need to be sufficiently clarified in order to grasp their per se character
+This involves the use of non inferential reasoning and also dialectical reasoning—the latter of which we will discuss in our next lecture, at least briefly
+
+## Slide 182
+Not Important for Us, but Just for Documentation
+
+## Slide 183
+So… Science
+Thus, for the Aristotelian notion of scientific demontration, one seeks to articulate conclusions that are drawn through per se connections and ultimately through a resoultion to first principles
+(There is an entire question, however, about the distinction between what the Aristotelians call science and what they call wisdom.  But that is not our problem in this course.  But, I would be remiss if I didn‘t gesture in the direction of vast swaths of topics that are underneath the surface of so many philosophical matters.)
+
+## Slide 184
+Overview of Logic (BCS) 
+Week 11.2 Kinds of Arguments Dialectic, Rhetorical, Analogical
+
+## Slide 185
+Dialectical Reasoning
+Dialectical reasoning is something akin to what Socrates engaged in, though developed and nuanced
+Begin with well-founded opinions (which do seem true but with fear that they might not be true, lacking full certitude)
+This is a very important aspect of reasoning, sadly neglected in most books of traditional logic
+But it is concerned with the kind of not-fully-certain reasoning that we perform all the time
+Much of science is involved with this kind of opining
+(Such opining, in science, is directed by that science)
+
+## Slide 186
+Dialectics
+This was the subject of the Topics of Aristotle, partly in the De inventione and Topica of Cicero, also Boethius‘s De topicis differentiis; also, Alexander of Aphrodisias’s commentary; also see new translations of Aristotle with commentaries (Clarendon); short commentary by Averroes
+Some Western medieval authors wrote on the Topics.  See, in particular, St. Albert the Great; also 
+We need a way to tease out…
+Genera, species, definition, properties, accidents
+Also, in general, principles for discourse
+In addition to the works by Regis and Gardeil, see Sara Rubinelli, Ars Topica: The Classical Technique of Constructing Arguments from Aristotle to Cicero
+On week 14 will see why, for theological reasons, we cannot even in the Byzantine East ignore this aspect of logic
+
+## Slide 187
+Dialectics
+This was the subject of the Topics of Aristotle, partly in the De inventione and Topica of Cicero, also Boethius‘s De topicis differentiis; also, Alexander of Aphrodisias’s commentary; also see new translations of Aristotle with commentaries (Clarendon); short commentary by Averroes
+Some Western medieval authors wrote on the Topics.  See, in particular, St. Albert the Great; also 
+We need a way to tease out…
+Genera, species, definition, properties, accidents
+Also, in general, principles for discourse
+In addition to the works by Regis and Gardeil, see Sara Rubinelli, Ars Topica: The Classical Technique of Constructing Arguments from Aristotle to Cicero
+On week 14 will see why, for theological reasons, we cannot even in the Byzantine East ignore this aspect of logic
+
+## Slide 188
+Dialectics
+Involves both…
+Extrinsic authority (a huge amount of our knowledge is based upon this)
+Intrinsic sources
+Probable in themselves (either immediately or after argumentation)
+Or from something similar – through analogical reasoning
+Reasoning by analogy is treated in most standard classical logic books, though also in some modern non-mathematical logical ones; though in both cases, it is done with more or less detail…
+
+## Slide 189
+Rhetoric
+See Aristotle, Rhetoric (especially see U. Chicago edition with commentary, upon which this summary is based); Cicero, De inventione, De oratore, Orator, De partitionibus oratoriae, Topica
+Modes of persuasion
+Ethos – speaker‘s character (as perceived in speech by audience)
+Pathos – by the emotional disposition experienced in speech
+Logos – by establishing or, at least, appearing to establish something
+Three kinds of rhetoric
+Deliberative – all of those good and evil things that depend upon us
+Judicial, to make clear...
+Make clear the ends pursued by those who committ injustice
+... the dispositions of such persons when they commit injustice
+... The people who are most likely to be victims of injustice
+Epideictic: To set forth / “display“ something in a grand occasion – above all the nobility characteristic of virtue and the baseness of vice
+You can see why this was viewed as being a moral-philosophical treatise
+
+## Slide 190
+Homework!
+What is meant by the Aristotelian notion of Science?
+Why is dialectical reasoning important?
+Why / when is rhetorical reasoning important?
+
+## Slide 191
+Overview of Logic (BCS) 
+Week 12 Overview of Fallacies
+
+## Slide 192
+Some fallacies
+Obviously, we cannot go over all sorts of fallacies in a course like this
+Moreover, just always be aware that different books divide up the types of fallacies quite differently
+We‘ll consider some strictly formal fallacies and then some 
+
+## Slide 193
+Recall: Formal Fallacies (Conditional)
+Denying the Antecedent
+If you eat then you will feel full
+You don‘t eat
+You won‘t fill full
+Affirming the Consequent
+If you eat then you will feel full
+You feel full
+You ate
+Both of these involve a confussion of IF with IF AND ONLY IF
+
+## Slide 194
+Recall: Formal Fallacies (Disjunctive and Conjunctive)
+Affirming a Disjunct (in inclusive OR)
+I am in my office or I am in the country.
+I am in my office
+I‘m not in the country 		This only works for Inclusive OR
+					Very often, our language indicates 							EXCLUSIVE OR
+Denying a Conjunct
+A being cannot both be a man and be an angel.
+This being is not a man.
+Therefore it is an angel. 
+
+## Slide 195
+Recall: Formal Fallacies (Categorical Syllogisms)
+Only three terms
+Many informal fallacies end up here
+Three propositions (2 premises and a conclusion)
+Middle term must be distributed at least once
+If term is undistributed in a premise, it cannot be distributed in the conclusion 
+Cannot have two negative premises
+If one premise is negative, conclusion is negative; and vice versa
+3 and 4 are perhaps the most interesting of them, as we saw.
+
+## Slide 196
+Some non-formal fallacies
+Equivocation / Amphiboly (ambiguity in syntax)
+Non sequitur / ignoratio elenchi
+Begging the Question (Petitio principii): Presuming what you are setting out to prove
+Straw man: Question of formation of argument
+Various rhetorical devices: Ad hominem (see gripe), appeal to reverence (ad verecundiam), appeal to fear (ad baculum), to pity, to shame, ad populum 
+Inductive fallacies: Hasty generalizations, slippery slope, post hoc propter hoc, false analogy, selective evidence…. 
+There are lots that are listed in Kreeft, p. 68-122
+See Aristotle, Sophistical Refutations; De fallaciis (misattributed to Aquinas)
+
+## Slide 197
+Gripe
+Don‘t misuse “ad hominem“
+Usually, this means a kind of appeal to someone‘s character to disprove the point unjustly or to evade argumentation
+Classically:
+“ An ‘absolute’ demonstration is one which proceeds from premises whose truth we admit and assume in order to then draw an inference, absolutely speaking, as when we demonstrate the real existence of God on the basis of the contingent character of creatures, and other such demonstrations. However, a ‘relative’ (that is, ‘ad hominem’) demonstration is one which proceeds from principles which are admitted by the person we are arguing against and which we assume for the sake of refutation, setting aside the question of the truth of such principles, as when someone assumes principles admitted by materialists or by rationalists, in order to convince them that their doctrine is false.” (Tommaso Zigliara, Summa philosophica, 157)
+
+## Slide 198
+Overview of Logic (BCS) 
+Week 13 Basic Introduction to Rhetoric and Rhetorical Devices
+
+## Slide 199
+Just a few tools in Rhetoric
+Be sure to look back to the slides on Rhetoric in general
+Here, as we draw our time to a close, I am merely cataloguing some particular rhetorical argument strategies that stuck out in a little but very useful book (even if a bit liberal): Rhetoric: The Art of Persuasion by Adina Arvatu and Andrew Aberdein. (Anything in quotes is from them.)
+Recall, always in the background:
+Three species rhetorical arguments
+Deliberative
+Judicial
+Epideictic
+Three appeals
+Ethos
+Pathos
+Logos
+
+## Slide 200
+The Canons
+Inventio—Determine the conflict (stasis): Define it, determine its quality, determine if this is the venue for resolving, etc.
+Determine the relative topoi—the various relations and data 
+Arrange ideas (Dispositio)—Cf. Aristotle / Cicero
+Style (Elocutio): Inventio at the level of words; we will focus a bit on rhetorical figures
+Memory and delivery 
+
+## Slide 201
+Metaphor
+“Life is like a box of chocolates, Forrest. You never know what you‘re gonna get“ (p. 16)
+“Sin is couching at the door; its desire is for you, but you must [with great awareness] master it“ (Gen. 4:7).
+“But if they cannot exercise self-control, they should marry. For it is better to marry than to be aflame with passion“ (1 Cor. 7:9)
+“He will cover you with his pinions, and under his wings you will find refuge; his faithfulness is a shield and buckler“ (Ps. 90[1]:4).=> therefore trust in Him.
+Specialized metaphors
+Synecdoche – from part to whole or whole to part: “The slogan of [implied: full and complete] progress  is changing from the full dinner pail to the full garage“ (Herbert Hoover; p. 18)
+Metonymy—metaphorical use of an aspect of something for the whole thing: “One day you are a signature [bureaucrat], the next day you‘re an autograph“ (Billy Wilder; ibid.)
+
+## Slide 202
+Simile and Analogy
+Open likening of two things to each other, sometimes even incongruously
+“The Stoical scheme of supplying our wants by lopping off our desires is lke cutting off our feet when we want shoes“ (Jonathan Swift)
+“To read without reflecting is like eating without digesting“ (Edmund Burke)
+Adding points of similarity
+To read without reflecting is like eating without digesting, leaving the noursishment to turn into dead and putrid decay, harming the person who took it in
+Analogy is here used as regards analogical reasoning
+Really, the latter example already does this
+
+## Slide 203
+Sententia and Exempla
+Sententia
+Aristotle in Nicomachean Ethics 1: Happiness really does require a complete life. For [as the saying goes] one swallow does not make a summer, nor does one day; and so too one day, or a short time, does not make a man blessed and happy.
+Or: A Christian should always remain of good hope, for Christ has said, I will remain with you until the end of time.
+Exemplum: Using an anecdote well placed—think of motivational speeches
+When we were kids, we all loved...
+Or, telling some other a tale that others can relate to 
+Or citing examples of holy priests, great rulers, etc.
+Etc.
+
+## Slide 204
+Concession; Motte-and-bailey
+Concession
+Think of how I presented the Scotist view on analogy... (though I do have deep respect for the Subtle Doctor)
+Very helpful for ethos
+Close to irony too: I know someone who is really is good at many languages; he can say a lot of nothing in many different ways
+Motte-and Bailey
+Often called a fallacy
+But it is useful rhetorically
+Conflate two positions, one of which is quite controversial (motte)
+Register objections
+Then, retreat to the easier of the two to defend (bailey)
+Needs careful management
+
+## Slide 205
+Repetition
+Conduplication – begin a second clause / sentence with a key term from the previous
+Anaphora – repeat at the start of each sentence
+For you did not turn away from your creature forever, O Good One, 	nor [did you] forget the work of your hands; rather, you intervened in various ways because of your merciful loving-	kindness. You sent prophets and performed mighty deeds 	through your holy ones who have pleased you in every generation. You spoke to us through the mouth of your servants, the prophets, 	who foretold the salvation which was to come. You gave the Law as an aid, 	and [you] appointed angels as guardians. 
+When the fullness of time had come, you spoke to us through your own Son, the very one through whom you created the ages. 
+Then, it passes on to He for Christ
+Epistrophe: At the end
+Symploce: both
+
+## Slide 206
+Amplification
+Auxesis (Strengthening): “I have brought before you, judges, not a theif but a plunderer; not an adulter but a ravisher; not a mere committer of sacrilege, but the enemy of all religious observance and all holy things“ (p. 44)
+Climax can be added
+Congeries (a list, perhaps synonyms)—“He is the Living Word, True God, Eternal Wisdom, Life, Sanctification, Power, and the True Light...“ (Our liturgy in particular is very Epideictic)
+Fun term for a congeries of insulting terms: bdelygmia
+And also Tricolon: A three-fold harmony of repetition
+
+## Slide 207
+Epicrisis
+The use of a past authority to successfully give a kind of added credibility to your argument
+Very good example in Arvatu and Aberdein:
+Archimedes, in explaining the princilpes of the lever, was said to have declared to his friends: “Give me a place where I can stand—and I shall move the world.“  My felow inhabitants of this planet: Let us take our stand here in this assembly of nations.  And let us see if we, in our own time, can move the world to a just and lasting peace.“
+This remark is an allusion to allusion made by Thomas Jefferson: The good opinion of mankind, like the lever of Archimedes, with the given fulcrum, moves the world.
+
+## Slide 208
+Rhetoric is not bad
+Rhetoric is, in fact, necessary – for all sorts of contingent matters
+But, also, it is necessary for a kind of communication of difficult truths
+Not only “exoterically“ to the Masses (cf. Averroes, Strauss)
+But also to those who are learning—how often will I do it over the coming years of teaching?
+And, perhaps, Plato was haunted by the fact that he realized that for all of his hatred of the Sophists, the philosopher looked a lot like the rhetorician at times...
+
+## Slide 209
+An Open Platonic Musing on Rhetoric
+Eleatic Visitor: One type of imitation is the art of likeness-making. That’s the one we have whenever someone produces an imitation by keeping to the proportions of length, breadth, and depth of his model, and also by keeping to the appropriate colors of its parts. 
+Theatetus: But don’t all imitators try to do that? 
+Visitor: Not the ones who sculpt or draw very large works. If they reproduced the true proportions of their beautiful subjects, you see, the upper parts would appear smaller than they should, and the lower parts would appear larger, because we see upper parts from farther away and the lower parts from closer.
+(Sophist, 235e–236a)
+
+## Slide 210
+Overview of Logic (BCS) 
+Week 14 Applications to Theology
+
+## Slide 211
+Overview of Logic (BCS) 
+Applications in Theology
+
+## Slide 212
+Universality
+The Persons in the Trinity are not…
+Species of the universal genus “Godhead”
+Nor are they individuals of the universal species “Godhead”
+Technically, this is also involved in the question of our inclusion in Christ: Some Greek Fathers (and moderns) explain our inclusion in Christ precisely insofar as we share the same universal nature
+
+## Slide 213
+A Theological Debate over Illation…
+In the background of our discussion of expository and explicative syllogisms is an entire debate concerning the kind of reasoning that is permitted for the defining of dogmas
+This was hotly debated running up to Vatican II
+The two major contenders were 
+Francisco Marín-Sola: Followed by most people; has some questionable points in his explanations… 
+Reginald Schultes: Followed only by a few, Reginald Garrigou-Lagrange, but also Michel Labourdette (likely, for that reason, Marie-Rosaire Gagnebet)
+On many points they agreed, but Marín-Sola held that conclusions that are theologically deduced and even enunciate new truths (but not new realities) can be defined as dogmas
+Schultes (following a number of Latin Baroque figures) combatted this particular point (though he was not a “fixist”)
+
+## Slide 214
+A Theological Debate over Illation…
+Basically – the debate came down to this:
+When theologians do at least one kind of reasoning, where they add something to the doctrine of faith that is not implicitly or explicitly revealed, what can be said about this truth and the Church’s authority to declare this truth?
+And one cannot say that one does not use theological reasoning of this sort in the East.  The Fathers did—admittedly with less zeal than some later day scholastics—and even the theologians who claim that we don’t nonetheless avail themselves of modern scholarship, categories, and methods.
+There had a been a distinction between “Divine Faith” and “Ecclesiastical Faith.”  This all got lost after the 1960s, though echoes of it still remain in the Doctrinal Commentary on the Professio Fidei (1998)
+
+## Slide 215
+A Theological Debate over Illation…
+So then, in theology, one must make some very careful distinctions:
+Is there certitude or only opinion in theologoumena?
+What kind of reasoning is involved in theological reasoning?
+When it is inferential, does it always draw new conclusions?  If not, what is the structure of the various kinds of reasoning involved? 
+How do the conclusions of such reasoning relate to what can be defined De fide?  How do we work to identify different sorts of reasoning so as to ensure that we do not make faith subservient to any theological school?
+(I personally would add: to what degree are rhetorical and poetic reasoning necessary for discourse about matters of faith?  But that’s a different topic)
+
+## Slide 216
+Analogy
+Used regarding our reasoning to God
+But, most importantly, analogy indicates the way that our reasoning falls short of knowing God
+Every analogy involves more difference than likeness
+Famous passage from Lateran IV (Denzinger, no. 806 [432]): “When, then, he who is the Truth prays to the Father for his faithful ‘that they may be one in us as we also are one’, the word ‘one’ as applied to the disciples is to be taken in the sense of a union of charity in grace, but in the case of the Divine Persons in the sense of the unity of identity in nature.  In the same way, on another occasion the Truth says, ‘you must be perfect as your heavenly Father is perfect,” as though he were saying more explicitly, ‘You must be perfect’ in the perfection of grace, ‘as your heavenly Father is perfect’ in the perfection of nature, that is, each in his own way. For between Creator and creature, no similitude can be expressed without implying a greater dissimilitude.”
+Also: What kind of analogy does faith involve (“superanalogy”)
+How is this related to the intrinsic demand for mystical experience—without, however, ultimately “breaking” the “logic” of faith (and, hence, the truth content of the statements of faith)
+
+## Slide 217
+Truth and Science
+What is speculative truth—and why is truth not merely a question of pragmatic usefulness?
+This topic overlaps with metaphysics
+But, remember: When we pray the Creed, we presuppose that we can know the truth
+Think back to our discussion of science
+It is important to consider what we think science is
+Merely observation and the prediction of future observations?
+Causal explanation among various truths that are essentially connected to each other?
+This will play a very important role regarding…
+Our natural knowledge of God (metaphysics as a science)
+But also our supernatural knowledge (theology as a science?)
+
+## Slide 218
+Other Matters of Theological Methodology
+One cannot fully articulate the nature of theology for oneself without taking serious the Topics and its later tradition
+Melchior Cano‘s (c. 1509–1560) De locis theologicis was a very important treatise
+Married together Aristotle and Cicero on the model of Rodolphus Agricola‘s (1443–1485) De inventione dialectica 
+See Gardeil‘s article on this in the Dictionnaire de théologie catholique, Doronzo‘s De theologia dogmatica, Berthier‘s De locis theologicis, Albert Lang‘s Die loci theologici des Melchior Cano und die Methode des dogmatischen Beweises: ein Beitrag zur theologischen Methodologie und ihrer Geschichte; Eugène Marcotte, La nature de la théologie d‘après Melchior Cano; Boris Hogenmüller, Melcioris Cani De Locis Theolgoicis Libri Duodecim: Studien zu Autor und Werk
+What is the proper use of rhetoric in theological reasoning?  (How does this relate to the foundation of theology in faith?)
+Relationship of metaphor, revelation, and theological reasoning
+Need a further bibliography on this topic
+See Journet, The Wisdom of Faith, chs. 2 and 3; 
+Jaroslav Pelikan, Divine Rhetoric: The Sermon on the Mount as Message and Model in Augustine, Chrysostom, and Luther
+
+## Slide 219
+Other Matters of Theological Methodology
+A very important method in the Fathers (and in theology more generally): Reduction to heresy (showing how some position implies a denial of something that must be held definitively
+Another useful manner of arguing apologetically: Ad hominem in the classic sense—accept only the texts / authorities / presuppositions of the person in question, at least to show how they do not lead to the conclusions that they claim against the faith
