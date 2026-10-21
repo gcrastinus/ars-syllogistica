@@ -579,6 +579,267 @@ h1{
 .daily-links .preset-btn{text-decoration:none; display:inline-block}
 .daily-hint{margin-top:11px; font-size:14px; color:var(--ink-soft); font-style:italic; line-height:1.5}
 @media (max-width:560px){ .daily-box{padding:12px 16px} }
+
+/* Recitation Tablet: a fixed writing-tablet button, twice the height of the speak controls. */
+.recite-panel .btn{
+  font-family:'Cinzel',serif; font-size:14px; letter-spacing:.04em; padding:11px 22px;
+  border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:9px;
+  cursor:pointer; box-shadow:var(--shadow); transition:all .15s; text-transform:none;
+}
+.recite-panel .btn:hover{border-color:var(--gold-soft)}
+.recite-panel .btn:disabled{opacity:.4; cursor:default}
+.recite-open{
+  position:fixed; top:14px; left:16px; z-index:50;
+  width:88px; height:88px; padding:0;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gold); background:var(--card);
+  border:1px solid var(--line); border-radius:16px;
+  box-shadow:var(--shadow); cursor:pointer;
+  transition:transform .15s, border-color .15s;
+}
+.recite-open:hover{transform:scale(1.06); border-color:var(--gold-soft)}
+.recite-icon{width:58px; height:58px; display:block}
+.recite-icon .tab-wood{fill:none; stroke:var(--gold-soft); stroke-width:1.3}
+.recite-icon .tab-rule{fill:none; stroke:var(--gold-soft); stroke-width:.6; opacity:.55}
+.recite-icon .tab-wax{fill:none}
+.recite-icon .tab-hole{fill:var(--gold-soft)}
+.recite-icon .tab-cord{fill:none; stroke:var(--gold-soft); stroke-width:.9; stroke-linecap:round; opacity:.8}
+.recite-icon .tab-script{fill:none; stroke:var(--gold-soft); stroke-width:1; stroke-linecap:round; opacity:.7}
+.recite-icon .tab-corner{display:none}
+.recite-icon .tab-stylus{fill:none; stroke:var(--gold); stroke-width:1.3; stroke-linecap:round}
+.recite-icon .tab-stylus-end{fill:var(--gold)}
+body.recite-lock .recite-open{visibility:hidden}
+@media (max-width:420px){
+  .recite-open{top:12px; left:12px; width:80px; height:80px; border-radius:14px}
+  .recite-icon{width:52px; height:52px}
+}
+@keyframes recite-glow{
+  0%, 100%{box-shadow:var(--shadow), 0 0 0 0 rgba(201,164,92,0)}
+  50%{box-shadow:var(--shadow), 0 0 22px 8px rgba(201,164,92,.5)}
+}
+.recite-open.is-glow{animation:recite-glow 3.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){
+  .recite-open.is-glow{animation:none; box-shadow:var(--shadow), 0 0 16px 4px rgba(201,164,92,.4)}
+}
+.recite-callout{
+  position:fixed; top:22px; left:116px; z-index:50;
+  max-width:min(300px, calc(100vw - 148px));
+  margin:0; padding:12px 14px; text-align:left; cursor:pointer;
+  font-family:'EB Garamond', Georgia, serif; font-size:17px; line-height:1.4;
+  font-weight:400; letter-spacing:0; text-transform:none;
+  color:var(--ink); background:var(--card);
+  border:1px solid var(--line); border-left:3px solid var(--gold-soft);
+  border-radius:12px; box-shadow:var(--shadow);
+}
+.recite-callout[hidden]{display:none !important}
+.recite-callout{padding-right:34px}
+.recite-callout-x{position:absolute; top:6px; right:10px; font-size:20px; line-height:1; color:var(--ink-soft); opacity:.75}
+.recite-callout:hover .recite-callout-x{opacity:1; color:var(--ink)}
+.recite-callout:hover{border-color:var(--gold-soft)}
+.recite-callout:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+@media (max-width:1240px){
+  body.recite-nudge .wrap{padding-top:190px}
+}
+@media (max-width:640px){
+  .recite-callout{top:112px; left:16px; right:16px; max-width:none}
+  body.recite-nudge .wrap{padding-top:300px}
+}
+@media (max-width:420px){
+  .recite-callout{top:104px; left:12px; right:12px}
+}
+.recite-due{
+  text-align:center; font-style:italic; color:var(--ink-soft); font-size:16.5px;
+  margin:16px auto 0; max-width:680px; line-height:1.55;
+}
+.recite-due[hidden]{display:none}
+.recite-due-btn{
+  font-family:inherit; font-size:inherit; font-style:normal; color:var(--gold);
+  background:none; border:none; border-bottom:1px solid var(--gold-soft);
+  padding:0 1px; cursor:pointer;
+}
+.recite-due-btn:hover{color:var(--ink)}
+body.recite-lock{overflow:hidden}
+.recite-overlay{
+  position:fixed; inset:0; z-index:40;
+  display:flex; padding:64px 3vw 3vh;
+  background:rgba(43, 33, 24, .46);
+}
+body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
+.recite-overlay[hidden]{display:none}
+.recite-panel{
+  flex:1; min-height:0; min-width:0;
+  display:flex; flex-direction:column;
+  background:var(--paper); color:var(--ink);
+  border:1px solid var(--line); border-radius:16px;
+  box-shadow:var(--shadow); padding:20px 22px 16px;
+}
+.recite-top{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px}
+.recite-top h2{
+  font-family:'Cinzel',serif; font-size:clamp(20px, 2.2vw, 28px);
+  font-weight:600; letter-spacing:.04em;
+}
+.recite-desc{
+  margin:0 0 14px; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-left:3px solid var(--gold-soft);
+  border-radius:10px; box-shadow:var(--shadow);
+}
+.recite-desc summary{
+  cursor:pointer; list-style:none;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-family:'Cinzel',serif; font-size:16px; letter-spacing:.03em; color:var(--gold);
+  padding:10px 14px;
+}
+.recite-desc summary::-webkit-details-marker{display:none}
+.recite-desc summary::after{
+  content:"▾"; color:var(--gold); font-size:14px; line-height:1; transition:transform .15s;
+}
+.recite-desc:not([open]) summary::after{transform:rotate(-90deg)}
+.recite-desc-body{max-height:min(42vh, 22em); overflow:auto; padding:0 16px 12px}
+.recite-desc p{font-size:18px; line-height:1.5; margin:0 0 10px}
+.recite-desc p:last-child{margin-bottom:0}
+.recite-tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.recite-picker{position:relative; flex:1; min-width:min(100%, 260px)}
+.recite-menu-btn{
+  width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
+  text-align:left; font-family:'Cinzel',serif; font-size:16px; letter-spacing:.03em;
+  color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:9px;
+  padding:10px 14px; cursor:pointer; box-shadow:var(--shadow);
+}
+.recite-menu-btn:hover{border-color:var(--gold-soft)}
+#recite-menu-label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.recite-caret{color:var(--gold); flex:none}
+.recite-menu-list{
+  position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:5;
+  max-height:min(52vh, 440px); overflow:auto;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  box-shadow:var(--shadow); padding:6px;
+}
+.recite-menu-list[hidden]{display:none}
+.recite-menu-head{
+  font-family:'Cinzel',serif; font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold); padding:10px 12px 4px;
+}
+.recite-menu-head:first-child{padding-top:4px}
+.recite-opt{
+  display:block; width:100%; text-align:left;
+  font-family:'EB Garamond',Georgia,serif; font-size:18px; line-height:1.35;
+  color:var(--ink); background:transparent; border:none; border-radius:8px;
+  padding:8px 12px; cursor:pointer;
+}
+.recite-opt:hover:not(:disabled){background:var(--panel)}
+.recite-opt.is-on{background:var(--panel)}
+.recite-opt:disabled{opacity:.48; cursor:default}
+.recite-opt-note{display:block; font-style:italic; font-size:14.5px; color:var(--ink-soft); margin-top:1px}
+.recite-opt-section{font-family:'Cinzel',serif; font-size:15px; letter-spacing:.02em; margin-top:2px}
+.recite-note{margin:8px 0 0; font-style:italic; font-size:15.5px; color:var(--ink-soft)}
+.recite-note[hidden]{display:none}
+.recite-columns{
+  flex:1; min-height:0; display:grid; grid-template-columns:1fr; gap:14px; margin-top:12px;
+}
+.recite-columns.is-split{grid-template-columns:1fr 1fr}
+.recite-text{
+  width:100%; height:100%; min-height:220px; resize:none; box-sizing:border-box;
+  font-family:'EB Garamond',Georgia,serif; font-size:20px; line-height:1.5;
+  color:var(--ink); background:var(--panel2); caret-color:var(--ink);
+  border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow);
+}
+.recite-text:focus{outline:none; border-color:var(--gold)}
+.recite-text[readonly]{background:var(--panel)}
+.recite-text:disabled{opacity:.72}
+.recite-full{
+  height:100%; min-height:0; overflow:auto; box-sizing:border-box;
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:16px 16px 8px; box-shadow:var(--shadow);
+}
+.recite-full[hidden]{display:none}
+.recite-full-h{
+  font-family:'Cinzel',serif; font-size:13px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+}
+.recite-deck-h{
+  font-family:'Cinzel',serif; font-size:16px; font-weight:600;
+  letter-spacing:.03em; margin:14px 0 8px; color:var(--ink);
+}
+.recite-point{display:flex; gap:10px; align-items:flex-start; margin:0 0 10px; cursor:pointer}
+.recite-point input{margin-top:6px; width:16px; height:16px; flex:none; accent-color:var(--gold)}
+.recite-point span{font-size:17.5px; line-height:1.45}
+.recite-open:focus-visible, .recite-menu-btn:focus-visible, .recite-opt:focus-visible, .recite-desc summary:focus-visible{
+  outline:2px solid var(--gold); outline-offset:2px;
+}
+@media (max-width:800px){
+  .recite-overlay{padding:60px 10px 10px}
+  .recite-panel{padding:14px; border-radius:12px}
+  .recite-columns.is-split{grid-template-columns:1fr; grid-template-rows:minmax(180px, 1fr) minmax(180px, 1fr)}
+  .recite-text{min-height:160px}
+}
+.recite-print{display:none}
+@media print{
+  @page{margin:0.65in 0.7in}
+  body.recite-printing{
+    background:#fff !important; overflow:visible !important;
+    height:auto !important; min-height:0 !important;
+  }
+  body.recite-printing .wrap,
+  body.recite-printing #top-right-controls,
+  body.recite-printing #recite-open,
+  body.recite-printing #recite-callout,
+  body.recite-printing #recite-overlay,
+  body.recite-printing .screen{display:none !important}
+  #recite-callout{display:none !important}
+  body.recite-printing #recite-sheet{
+    display:block !important;
+    background:#fff !important; color:#2b2118 !important;
+    font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
+    font-size:12pt; line-height:1.4;
+  }
+  .recite-print-head{
+    border-bottom:1pt solid #2b2118; margin:0 0 12pt; padding:0 0 6pt;
+    break-after:avoid; page-break-after:avoid;
+  }
+  .recite-print-head h1{
+    font-family:'Cinzel', Georgia, serif; font-size:16pt; font-weight:600;
+    letter-spacing:.03em; line-height:1.25; margin:0 0 2pt; color:#2b2118;
+  }
+  .recite-print-date{
+    font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
+    font-style:italic; font-size:12pt; margin:0; color:#2b2118;
+  }
+  .recite-print-cols{
+    display:grid; grid-template-columns:1fr 1fr; column-gap:20pt; align-items:start;
+  }
+  .recite-print-col h2{
+    font-family:'Cinzel', Georgia, serif; font-size:10pt; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; margin:0 0 8pt; color:#2b2118;
+    break-after:avoid; page-break-after:avoid;
+  }
+  .recite-print-col + .recite-print-col{
+    border-left:0.75pt solid #9a8b6e; padding-left:16pt;
+  }
+  .recite-print-text{
+    white-space:pre-wrap; font-size:12pt; line-height:1.45; color:#2b2118;
+  }
+  .recite-print-deck{
+    font-family:'Cinzel', Georgia, serif; font-size:11pt; font-weight:600;
+    letter-spacing:.03em; margin:12pt 0 6pt; color:#2b2118;
+    break-after:avoid; page-break-after:avoid;
+  }
+  .recite-print-point{
+    display:flex; align-items:flex-start; gap:7pt; margin:0 0 7pt;
+    break-inside:avoid; page-break-inside:avoid; color:#2b2118;
+  }
+  .recite-print-box{
+    box-sizing:border-box; width:11pt; height:11pt; margin-top:2pt; flex:none;
+    border:1pt solid #2b2118; border-radius:1pt;
+    display:flex; align-items:center; justify-content:center;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .recite-print-box svg{display:block; width:9pt; height:9pt}
+  .recite-print-point div{flex:1; min-width:0; font-size:12pt; line-height:1.45}
+}
+
+/* The Recitation Tablet button shows only on the homepage; below 1100px the page starts below it. */
+@media (max-width:1100px){ body:not(.off-home) .wrap{padding-top:118px} }
+@media (max-width:640px){ body.recite-nudge .wrap{padding-top:300px} }
 </style>
 </head>
 <body>
@@ -598,6 +859,26 @@ h1{
 </div>
 <button id="dark-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
 </div>
+<button type="button" id="recite-open" class="recite-open" title="Recitation Tablet" aria-label="Recitation Tablet">
+  <svg class="recite-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+    <rect class="tab-wood" x="3" y="2.5" width="44" height="59" rx="2.5"/>
+    <rect class="tab-rule" x="7.2" y="6.6" width="35.6" height="50.8" rx="1"/>
+    <rect class="tab-wax" x="9.3" y="8.7" width="31.4" height="46.6"/>
+    <circle class="tab-hole" cx="6.15" cy="14.2" r="1.25"/>
+    <circle class="tab-hole" cx="6.15" cy="49.8" r="1.25"/>
+    <path class="tab-cord" d="M6.15 15.4C3.7 20.2 3.7 43.8 6.15 48.6"/>
+    <g class="tab-script">
+      <path d="M14 21h9.2M25 21h6.6M33.2 21.35h4.4"/>
+      <path d="M14 28.6h6.8M22.5 28.6h10.6"/>
+      <path d="M14 36.2h11.8M27.6 36.2h6.2"/>
+    </g>
+    <path class="tab-corner" d="M35.4 8.8h6.6v6.6"/>
+    <line class="tab-stylus" x1="29" y1="53.2" x2="55.2" y2="39.6"/>
+    <path class="tab-stylus-end" d="M29.48 54.13 L23.6 58.43 Q22.61 56.52 21.62 54.61 L28.52 52.27 Z"/>
+    <path class="tab-stylus-end" d="M61.24 36.47 L55.59 40.35 L54.81 38.85 Z"/>
+  </svg>
+</button>
+<button type="button" id="recite-callout" class="recite-callout" hidden><span class="recite-callout-x" aria-hidden="true">×</span>You have finished <span id="recite-callout-name"></span>. The best way to continue toward mastery is to set out the whole subject yourself, then check your account against the full recitation.</button>
 <div class="wrap">
 
   <!-- ============ HOME ============ -->
@@ -615,6 +896,8 @@ h1{
       </div>
       <div class="mode-note" id="storage-notice" style="display:none"></div>
     </header>
+
+    <div id="recite-due" class="recite-due" hidden></div>
 
     <div class="daily-box" id="daily-box" style="display:none">
       <div class="daily-streak">
@@ -647,8 +930,8 @@ h1{
 
     <details class="help" id="guided-help" style="max-width:700px; display:none; text-align:left">
       <summary style="text-align:left">How the Guided Path Works</summary>
-      <p><strong>Two paths.</strong> <em>Free Practice</em> lets you attempt any exercise at will and keeps no record. The <em>Guided Path</em> opens the exercises act by act, judges when each is mastered, and brings them back for spaced review. Only the Guided Path stores anything, and only in this browser.</p>
-      <p><strong>First, enable tracking.</strong> Open <strong>Progress &amp; Review</strong> and turn tracking on. Nothing is recorded until you do. Your record never leaves this browser; use <em>Export</em> there to keep a copy.</p>
+      <p><strong>Two paths.</strong> <em>Free Practice</em> opens any exercise at will and keeps no record of those exercises. The <em>Guided Path</em> opens the exercises act by act, judges when each is mastered, and brings them back for spaced review. The Guided Path stores that record only in this browser.</p>
+      <p><strong>First, enable tracking.</strong> Open <strong>Progress &amp; Review</strong> and turn tracking on. No exercise record is kept until tracking is on. Your record never leaves this browser; use <em>Export</em> there to keep a copy.</p>
       <p><strong>Opening the acts.</strong> The path unfolds by the <strong>acts of the mind</strong>. All four exercises of the <strong>First Act</strong> (the Predicables, the Categories, Division, and Definition) are open from the start; work them in any order. Only <strong>Division and Definition</strong> must be passed to open the <strong>Second Act</strong>; when those two are passed, the Second Act appears. (The Predicables and the Categories are not required to open the path, so they can be studied at leisure and deepened along the way.) When all of the Second Act is passed, the <strong>Third Act</strong> (the syllogism) appears; and when all of its exercises are passed, the final sections, <em>Ad Demonstrationem</em>, <em>Dialectica</em>, <em>Rhetorica</em>, and <em>Sophistica</em>, open together. In <strong>Logic as a Science</strong>, the studies of each act open when that act’s exercises are passed: the First Act’s with all four of its exercises, the Second Act’s with all three, and the Third Act’s with its reasoning (VIII–XVII); the Demonstration exercise and study open with <em>Ad Demonstrationem</em>, and the study of the fallacies with <em>Sophistica</em>. To <em>pass</em> a set is to show real competence: <strong>9 of your last 10 answers at Level III or above</strong> correct, across <strong>two different days</strong>. The <strong>Progress &amp; Review</strong> page names the next exercise to learn and any reviews due, with a button that opens them.</p>
       <p><strong>Earning true mastery.</strong> Passing a set opens the next part of the path; mastery is the highest standing, and it is earned only at <strong>Level V</strong>. A set is <strong>mastered ★</strong> once at least <strong>8 of your last 10 Level V answers</strong> are correct across two different days. Lower levels build your skill and score and can bring you to a pass, but mastery is earned only at the top level. Mastering a set earns the ★ and enrolls it in spaced review.</p>
       <p><strong>Keeping it (reviews).</strong> A mastered set returns on a widening schedule, after <strong>1, 3, 7, 16, then 35 days</strong> across five boxes. A due review asks <strong>three questions</strong>: answer all correctly to move to the longer interval; miss one and the set lapses back to daily review. The reviews are <strong>staged</strong>: a freshly mastered set is reviewed gently (Level III), rising to Level IV and then back to the full Master level (Level V) only as it proves durable over the weeks. The Progress page gathers everything due into <em>Today's Review</em>, interleaved.</p>
@@ -972,6 +1255,42 @@ h1{
 
 </div>
 
+
+<div id="recite-overlay" class="recite-overlay" hidden>
+  <div class="recite-panel" role="dialog" aria-modal="true" aria-labelledby="recite-heading">
+    <div class="recite-top">
+      <h2 id="recite-heading">Recitation Tablet</h2>
+      <button type="button" class="btn" id="recite-close">Close</button>
+    </div>
+    <details class="recite-desc" id="recite-desc" open>
+      <summary>What is recitation?</summary>
+      <div class="recite-desc-body">
+        <p>One of the oldest and best-proven ways to study is to read a section of a book, or study a topic, in one sitting, then close your notes and write down everything you remember, in as much detail as you can. This is called "recitation," and this tablet lets you do it.</p>
+        <p>After you finish studying a part of the course, close it and open the Recitation Tablet. Choose the part you just finished from the menu, then write down, in order, everything you can remember about it. This is not easy. But the difficulty is what produces results, especially the moment when you feel you remember nothing more and then keep searching.</p>
+        <p>When you have finished, click "See Full Recitation." You will see a complete outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
+      </div>
+    </details>
+    <div class="recite-tools">
+      <div class="recite-picker" id="recite-picker">
+        <button type="button" class="recite-menu-btn" id="recite-menu-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="recite-menu-list">
+          <span id="recite-menu-label">Choose a deck</span>
+          <span class="recite-caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="recite-menu-list" id="recite-menu-list" role="listbox" hidden></div>
+      </div>
+      <button type="button" class="btn" id="recite-see" disabled>See full recitation</button>
+      <button type="button" class="btn" id="recite-print" hidden>Print</button>
+      <button type="button" class="btn" id="recite-new" hidden>Start a new recitation</button>
+    </div>
+    <p class="recite-note" id="recite-note" hidden>Write a fuller recitation to see the full one.</p>
+    <div class="recite-columns" id="recite-columns">
+      <textarea id="recite-text" class="recite-text" aria-label="Recitation" spellcheck="true" disabled></textarea>
+      <div id="recite-full" class="recite-full" hidden></div>
+    </div>
+  </div>
+</div>
+<div id="recite-sheet" class="recite-print" aria-hidden="true"></div>
+
 <script src="ars-engine.js"></script>
 <script src="ars-advanced.js"></script>
 <script>
@@ -1139,6 +1458,7 @@ if(typeof document!=='undefined'){
     /* every screen change begins at the top — otherwise a scrolled-down home
        page leaves an intro screen opening in the middle of its list */
     window.scrollTo(0, 0);
+    if(typeof reciteScreenChanged==='function') reciteScreenChanged(id);
   }
 
   /* ==================== STUDY LABS ==================== */
@@ -2535,15 +2855,124 @@ if(typeof document!=='undefined'){
 
   /* The four doctrine decks; each tile carries a Review strip (the pattern of
      Ars Grammatica's deck tiles). Seeing with Circles is a plain study tile. */
+  /* Recitation outlines for the four Logic as an Art decks, taken unchanged
+     from notes/recitations/. A deck without one does not appear in the tablet. */
+  const RECITE_LOGIC = [
+    `Man is the rational animal, and every human act, so far as it is well directed, is directed by reason.`,
+    `Reason can be exercised with more or less skill, and the art that governs its exercise is logic; so the tradition defines logic simply as <em>the art of reasoning well</em>.`,
+    `St. Thomas says the same thing more fully: logic is the art that directs the very act of reason, so that a man may proceed in that act in order, with ease, and without error.`,
+    `Logic is therefore not merely the study of precise arguments, or of statements and inferences written in symbols, but directs all the ways we use reason to arrive at truth: proof and demonstration, probable argument, rhetoric, the proposing of plausible explanations, and the guarding against errors in reasoning.`,
+    `Logic also includes how we make definitions, how we classify things, and how we come to know things from experience and by comparison with other things, and it governs the decisions we make about how to act in accord with the truth.`,
+    `Logic is both an art, because it gives rules for reasoning, and a speculative science, because its end is to know, just as medicine is an art that aims at producing health and also a body of certain knowledge about the body.`,
+    `As a science, logic has its own object, which is second intentions, that is, the relations that things have only as they are known; the mind forms a first intention when it first comes to know what white is, and a second intention when it turns back to what it knows and sees that white is a species of color.`,
+    `Genus, species, subject, predicate, proposition, and conclusion are relations of this second kind, which the tradition calls beings of reason (<em>entia rationis</em>), and because such relations are found wherever anything is known, the art of logic can be used in every inquiry.`,
+    `The goal of rationality is the discovery of truth and the guidance of human action by the truths we have discovered, and thoughts are the acts of the mind as it deliberates, while it is still seeking and has not yet arrived at knowledge.`,
+    `Since thought exists for the sake of discovering truth, it is not the fundamental human capacity, and logic is not properly called the art of thinking; logic governs the whole process of human reasoning, from principles to conclusions, for the sake of knowing.`,
+    `Aristotle’s logical writings are called the <em>Organon</em>, which means “instrument,” because logic is studied chiefly as a tool for coming to know; the books are the <em>Categories</em>, on terms and what can be said of things; the <em>De interpretatione</em>, on propositions and their relations to one another; the <em>Prior Analytics</em>, on the form of reasoning; the <em>Posterior Analytics</em>, on demonstration and the matter of reasoning; the <em>Topics</em>, on probable argument; and the <em>Sophistical Refutations</em>, on errors and tricks in reasoning.`,
+    `Avicenna and St. Thomas also count the <em>Rhetoric</em> (on persuasion) and the <em>Poetics</em> (on storytelling and literature) among Aristotle’s logical works, since each directs an act of reason that falls short of certainty.`,
+    `The parts of logic are distinguished by the evidence available to us, and the highest part is <strong>demonstration</strong> (the Greek word means “showing”), which produces science (Latin <em>scientia</em>), that is, certain knowledge of what things are and of why they are as they are, as in the proofs of Euclid’s <em>Elements</em>.`,
+    `A demonstration of the fact (<em>quia</em>) shows <em>that</em> something is so, often by reasoning from an effect or a sign, and a demonstration of the cause (<em>propter quid</em>) shows <em>why</em> it is so, through its proper cause.`,
+    `Because we think we know a thing best when we know both what it is and why it is as it is, demonstration of the cause gives the highest kind of knowledge; Aristotle treats demonstration in the <em>Prior</em> and <em>Posterior Analytics</em>.`,
+    `When the evidence makes one view probable but does not prove it, we consider what we already know and the opinions of those who know the matter, and we discuss both sides of the question to see which is more probably true; this part of logic is <strong>dialectic</strong>, which Aristotle treats in the <em>Topics</em> (as a doctor may judge that one disease is the most likely cause of a sickness).`,
+    `When the evidence favors one view about as much as the other, we look for whatever gives us a reason to prefer one view, and we persuade others by examples of similar things, by the character of the speaker, by the circumstances, and, where it is fitting, by appeal to the feelings of the hearers; this part of logic is <strong>rhetoric</strong>.`,
+    `Aristotle’s <em>Rhetoric</em> concerns chiefly speeches in law courts and assemblies, but the art is used far more widely, in teaching, among friends and family, and in business.`,
+    `Below even probable evidence, a story or an image can incline the mind by a likeness, making a thing seem attractive or repugnant; this part of logic is <strong>poetics</strong>, whose end, St. Thomas says, is to lead to virtue by a fitting representation, and we also use stories to propose possible accounts of something we barely understand and to see which account fits best.`,
+    `Reasoning can also fail: besides accepting something false, we may err in the form of our reasoning, and the study of the typical errors in reasoning, the <strong>fallacies</strong>, is the subject of Aristotle’s <em>Sophistical Refutations</em>.`,
+    `St. Thomas orders all these parts by the certainty they reach: demonstration gives science; dialectic gives belief or opinion; rhetoric gives only a suspicion; poetics inclines the mind by a representation; and the study of fallacies concerns reasoning that falls short of the truth.`,
+    `Formal logic and material logic are the two parts of the logic that judges arguments, by their form (the <em>Prior Analytics</em>) and by their matter (the <em>Posterior Analytics</em>): <strong>formal logic</strong> considers the <strong>form</strong> of an argument (how its terms are arranged), and <strong>material logic</strong> considers its <strong>matter</strong> (whether its premises are true, and of what kind).`,
+    `Formal logic asks whether, from premises taken as given, the conclusion can be deduced, and reasoning is <strong>valid</strong> when the truth of the premises necessitates the truth of the conclusion, that is, when it is impossible for the premises to be true and the conclusion false, because of the way its terms are related, whatever they stand for.`,
+    `Material logic studies how demonstration works, how different kinds of premises (necessary, probable, or merely possible) relate to the truths we can reach through them, and how each discipline reasons according to its own subject matter.`,
+    `In the proem to his commentary on the <em>Posterior Analytics</em>, St. Thomas assigns the judgment by form to the <em>Prior Analytics</em> and the judgment by matter, which demonstration requires, to the <em>Posterior Analytics</em>.`,
+    `Each part of logic is used in every branch of knowledge, but the parts also correspond broadly to the stages of an inquiry that begins without much knowledge of its subject: first we propose possible accounts (poetics); then we find reasons to prefer one account (rhetoric); then we may reach a probable explanation that makes sense of much of the evidence without proving the truth (dialectic); and finally we may discover a demonstration. Not every inquiry proceeds in this way, but many do.`,
+    `Aristotle and St. Thomas usually begin the study of a subject with an account of how it has been studied, because the history of a discipline brings its terms, distinctions, and principles to light and shows how they were discovered.`,
+    `Before philosophy, people commonly thought of the things around them as persons and told the order of the world as a story; the Greek philosophers were not the first to inquire into causes, but they were the first to propose explanations based on the natures or essences of things, and that search made the discovery of demonstration possible.`,
+    `Aristotle drew on the sophists for the construction of arguments, for methods of disputation, and for the discovery of fallacies, and on Plato for the theory of classification and definition, for the root notion of the syllogism, and for a conception of proof.`,
+    `The Stoics then developed a logic of propositions, which studies what follows from given propositions (as in “if A, then B; A; therefore B”).`,
+    `Aristotle’s logic was recovered in the West in the eleventh and twelfth centuries, brought to great refinement in the medieval universities from about 1150 to 1500, and remained the logic of the schools until the early twentieth century, when modern mathematical logic largely replaced it.`,
+    `From the classical point of view, mathematical logic is the formal and material logic of mathematics, not logic in general, and it applies widely because every discipline has quantitative aspects.`,
+    `The course follows the order that the teaching of logic kept through the Middle Ages, beginning with terms and concepts, then treating propositions, then reasoning, and ending with the fallacies.`,
+    `The three acts of the mind are <em>simple apprehension</em>, by which we grasp what a thing is; <em>judgment</em>, by which we affirm or deny one thing of another; and <em>reasoning</em>, by which we move from what we know to what we do not yet know; and St. Thomas names the product of each: the definition, the proposition, and the syllogism or argument.`,
+    `The First, Second, and Third Acts of the Mind are the first three parts of the exercises, each introduced by a study deck; then <em>Ad Demonstrationem</em> weighs an argument in both its form and its matter, as demonstration requires; <em>Dialectica</em> treats reasoning from the probable; <em>Rhetorica</em> treats the enthymeme, the orator’s argument; and <em>Sophistica</em> treats the fallacies.`
+  ];
+  const RECITE_ACT1 = [
+    `The first act of the mind is <em>simple apprehension</em>, the grasp of what a thing is without affirming or denying anything about it; when we think “man” or “snow,” we have only the beginning of a truth, because nothing is yet asserted, and so nothing is yet true or false.`,
+    `St. Thomas assigns the study of this act to Aristotle’s <em>Categories</em>, because by it the mind conceives what a thing is.`,
+    `The tradition takes the word “thing” (Latin <em>res</em>) very broadly: informally, a thing is anything we can speak about, anything that could answer the question “What are you talking about?”`,
+    `Words are signs of things, and John of St. Thomas defines a sign as “What represents to a cognoscitive faculty something other than itself.”`,
+    `Some signs are <strong>natural</strong>, because the sign is caused by what it signifies (smoke is a sign of fire), and other signs are <strong>conventional</strong>, having their meaning by the agreement of a community (the sounds of our words).`,
+    `Both natural and conventional signs are <strong>instrumental</strong> signs, because the sign itself must be perceived first, and only then does it lead us to what it signifies.`,
+    `There is a third kind of sign: the concept is a representation, but it does not represent by means of something else, as a spoken word uses sound or a photograph uses ink on paper; it represents through itself, without a medium, and so it is a <strong>formal sign</strong>.`,
+    `This is why the classical tradition holds that concepts of the same thing are the same for everyone: words differ from language to language, but two concepts of the same thing, so far as they represent it, are the same, because what distinguishes one concept from another is the thing that each represents.`,
+    `According to St. Thomas, we form concepts to represent things, and words signify concepts immediately and things only by means of the concepts.`,
+    `Words do not signify things immediately, because what exists outside the mind is singular, while a word such as “man” signifies the nature that the mind has grasped.`,
+    `So logic is concerned with words, not with their correct use, which is the business of grammar, but in so far as reasoning is carried out by means of words that express the acts of the mind.`,
+    `The concept is the end of the act of understanding a thing, and it is called a <strong>mental term</strong> (from the Latin <em>terminus</em>, an end or boundary) because it can be one of the two ends of a simple proposition: in “A is B,” A and B are the terms, and the copula “is” joins them.`,
+    `The spoken term is the word that expresses the mental term, that is, a sound that signifies a concept by convention.`,
+    `The tradition therefore distinguishes each act of the mind from its expression in words: the mental term is expressed by the spoken term, the judgment by the proposition, and the inference by the syllogism.`,
+    `We come to have concepts by beginning from the experience of the senses, and from our experience of men the mind draws out what it is to be a man, leaving aside what belongs only to this or that man, such as his weight or the place where he stands.`,
+    `This drawing out is <strong>abstraction</strong>, and its result is a universal concept, one that can be said of many, as “man” can be said of Socrates, of Plato, and of every other man.`,
+    `An image of a particular man in the imagination, by contrast, represents only that man, with his color and size; the senses and the imagination supply the materials, but the concept is the work of the intellect.`,
+    `Every universal concept can be measured in two ways: its <strong>comprehension</strong> is the set of notes (that is, the characteristics) that make it up, as the comprehension of “man” includes substance, living body, sentient, and rational; and its <strong>extension</strong> is the range of individuals, or of kinds, of which it can be said, as the extension of “man” is all men.`,
+    `Comprehension and extension vary inversely: “animal” has less comprehension than “man,” since it lacks the note “rational,” and for that very reason it has greater extension, since it can be said of beasts as well as of men.`,
+    `The exercises of the First Act take up four ways of making a concept clear and distinct: <strong>the predicables</strong> (Exercise I), the five ways a universal can be said of a subject (genus, species, difference, property, and accident), which Porphyry set out in his introduction to the <em>Categories</em>; and <strong>the categories</strong> (Exercise II), Aristotle’s ten highest kinds, substance and the nine kinds of accident.`,
+    `<strong>Division</strong> (Exercise III) distributes a whole into its parts: dividing a genus into its species is <em>logical division</em> (animal into rational and irrational animals), and dividing an essence into its parts is <em>essential division</em> (man into body and soul, or into animal and rational).`,
+    `<strong>Definition</strong> (Exercise IV) sets forth what a thing is, or what a word means; according to John of St. Thomas, a simple thing is made clear by a definition when its essence is obscure, and by a division when its parts are confused.`
+  ];
+  const RECITE_ACT2 = [
+    `The second act of the mind affirms or denies one thing of another, and the tradition calls this act <em>composing and dividing</em>: to affirm is to compose, joining a predicate to a subject (“snow is white”), and to deny is to divide, holding them apart (“no stone is alive”).`,
+    `St. Thomas says that in this act of the intellect the true and the false are present for the first time, and he assigns its study to Aristotle’s <em>De interpretatione</em>; the act of the mind is the <strong>judgment</strong>, and its expression in words is the <strong>proposition</strong>.`,
+    `A proposition is a sentence that is true or false, or more fully, a complete discourse signifying the true or the false; so not every sentence is a proposition, because a command, a question, or a wish is neither true nor false.`,
+    `Every simple proposition has three parts: the <strong>subject</strong>, of which something is said; the <strong>predicate</strong>, which is said of it; and the <strong>copula</strong> “is” (or “is not”), which joins or separates them (in “Every man is mortal,” the subject is “man,” the predicate “mortal,” and the copula “is”).`,
+    `Each simple categorical proposition has a <strong>quality</strong>, affirmative or negative, according as it affirms or denies the predicate of the subject, and a <strong>quantity</strong>, universal or particular, according as it speaks of every member of the subject (“all,” “no”) or only of some (“some”).`,
+    `A singular proposition, such as “Socrates is wise,” has a single individual as its subject, and because it speaks of the whole of its subject, it is treated in the syllogism as universal.`,
+    `Quality and quantity together give four forms, named with the vowels of the Latin <em>affirmo</em> (“I affirm”) and <em>nego</em> (“I deny”): <strong>A</strong>, the universal affirmative (All S are P); <strong>E</strong>, the universal negative (No S are P); <strong>I</strong>, the particular affirmative (Some S are P); and <strong>O</strong>, the particular negative (Some S are not P).`,
+    `These four forms are not an arbitrary choice, because they relate two general terms in the simplest ways possible, and so the study of them shows the basic structure of the assertions and denials we make in demonstration.`,
+    `Truth is properly in the judgment of the intellect, and the proposition, which signifies that judgment, is true in a secondary sense; Aristotle states it this way: “To say of what is that it is not, or of what is not that it is, is false, while to say of what is that it is, and of what is not that it is not, is true.”`,
+    `The judgment is the act that asserts, and so truth does not belong properly to the first act of the mind, which asserts nothing; as St. Thomas says, truth has its foundation in reality, but it is completed in the intellect, when a thing is understood to be as it is.`,
+    `In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false (“All unicorns are white” is false, because there are no unicorns); that is why “All S are P” yields “Some S are P,” and the term of art for this is <em>existential import</em>.`,
+    `A negative proposition carries no such existence, so “No unicorns are white” is true, and so is “Some unicorn is not white”; modern set theory reads “All S are P” as true when there are no S and so denies the step to “Some S are P,” but this course follows the classical way, in which affirmatives carry existential import and negatives do not.`,
+    `Propositions with the same subject and predicate that differ in quality, in quantity, or in both are <em>opposed</em>, and their relations make up the square of opposition; <strong>contradictories</strong> (A and O; E and I) differ in both quality and quantity, so one must be true and the other false.`,
+    `<strong>Contraries</strong> (A and E) cannot both be true, though both may be false, and <strong>subcontraries</strong> (I and O) cannot both be false, though both may be true.`,
+    `<strong>Subalterns</strong> (A and I; E and O) share their quality: if the universal is true, the particular is true, and if the particular is false, the universal is false.`,
+    `Because the affirmatives carry existential import and the negatives do not, these relations hold even when the subject stands for nothing, for then A and I are false, and E and O are true.`,
+    `Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there; the study <em>Seeing with Circles</em> explains these diagrams more fully.`,
+    `Exercise VI treats the square of opposition, which the study <em>The Square of Opposition</em> shows for any pair of terms, and <em>immediate inference</em>, which draws one proposition from a single other: conversion exchanges subject and predicate (“No S are P” converts to “No P are S”), obversion changes the quality and negates the predicate, and contraposition joins the two.`,
+    `Exercise VII treats the <em>modal</em> propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.`
+  ];
+  const RECITE_ACT3 = [
+    `Reasoning is the third act of the mind, by which we move from what we already know to what we do not yet know, and John of St. Thomas defines argumentation as a “statement in which knowledge follows from something already known.”`,
+    `Put another way, reasoning is a discourse in which, once certain things have been granted (the <strong>premises</strong>), something else must of necessity be granted (the <strong>conclusion</strong>), as from “no C is A” and “some B is A” we see, simply from what these propositions mean, that some B is not C.`,
+    `The movement of the mind from the premises to the conclusion is the <strong>inference</strong>, and its expression in words is the argument.`,
+    `In Greek, and in the languages that took the word from Greek, reasoning of this kind is called a <em>syllogism</em>, and originally the word meant what “reasoning” means in English; in ordinary use it has come to mean the syllogism in the narrow sense, a set form of argument with two premises and a conclusion, relating three terms.`,
+    `Three terms are needed because two terms alone give a single proposition, not a chain of reasoning; the simplest reasoning takes three terms related across two propositions and from these alone draws a third proposition that must be true if the first two are (“Every man is mortal; Socrates is a man; therefore Socrates is mortal”).`,
+    `The predicate of the conclusion is the <strong>major term</strong>, and its subject is the <strong>minor term</strong>; the third term appears in both premises but never in the conclusion, and it is called the <strong>middle term</strong> because it mediates between the other two.`,
+    `The premise that relates the middle term to the major term is the <strong>major premise</strong>, and the premise that relates it to the minor term is the <strong>minor premise</strong>; the different positions of the middle term in the two premises are called the <em>figures</em> of the syllogism.`,
+    `In “Every man is mortal; Socrates is a man; therefore Socrates is mortal,” the major term is “mortal,” the minor term is “Socrates,” and the middle term is “man.”`,
+    `The middle term is the term that allows us to state the relation between the other two, and in a demonstration it is essential, because it can reveal the cause of that relation (as “subsisting without matter” gives the reason why the human soul is incorruptible).`,
+    `Since demonstration chiefly concerns the cause, negative conclusions are of limited use in it, because a negative conclusion can at best show what is not the cause.`,
+    `An argument is <strong>valid</strong> when it is impossible for its premises to be true and its conclusion false, so validity depends on form alone; an argument is <strong>sound</strong> when it is valid and its premises are also true.`,
+    `A <strong>demonstration</strong> requires still more: its premises must be true, necessary, and better known than the conclusion, and in the strictest sense they must express the cause of the conclusion.`,
+    `So every demonstration is sound, and every sound argument is valid, but the reverse does not hold (“No man can do evil; this criminal is a man; therefore this criminal can do no evil” is valid but not sound, because its first premise is false).`,
+    `John of St. Thomas, following St. Thomas, names two ways of acquiring science: demonstration, which is a syllogism and proceeds from universals, and induction, which proceeds from singulars; for there are only two ways of making a truth manifest, from principles known by the intellect or from the singular things given in experience.`,
+    `<strong>Induction</strong> is the movement from sufficiently enumerated singulars to a universal (this fire warms, and this one, and this one; therefore every fire warms), and the <em>example</em>, which argues from one case to another like it, is an incomplete induction.`,
+    `A proof by induction shows <em>that</em> something is so (a demonstration of the fact), not <em>why</em> it is so, but a syllogism whose middle term gives the cause can show why.`,
+    `The exercises of the Third Act begin with the categorical syllogism: drawing it on three circles (Exercise VIII), judging its validity in letters and in English (IX and X), and drawing the conclusion from two premises (XI); they then take up syllogisms built on compound propositions: the conjunctive (“not both”) and the disjunctive (“either … or”) in XII, the conditional (“if … then”) (The Hypothetical Syllogism) in XIII, and all of them together (The Mixed Consequence) in XIV.`,
+    `Exercise XV finds the syllogism in ordinary speech, XVI treats the modal syllogism, and XVII the chain of syllogisms, in which the conclusion of one syllogism becomes a premise of the next.`,
+    `The later sections apply the third act to its uses: <em>Ad Demonstrationem</em> (XVIII) weighs an argument in its form and its matter together; <em>Dialectica</em> (XX) treats reasoning from what is probable; <em>Rhetorica</em> (XIX) treats the enthymeme, an argument with one premise left unsaid; and <em>Sophistica</em> (XXI) treats the fallacies, arguments that seem sound and are not.`
+  ];
   const STUDY_DECKS = [
     {id:'logic', num:'INTRODUCTION', title:'What Logic Is', deck:INTRO_LOGIC, review:true,
-     desc:'What logic is and what it covers; logic as an art and a science; logic and thought; Aristotle’s <em>Organon</em>; the parts of logic (demonstration, dialectic, rhetoric, poetics, and the study of fallacies); form and matter; a short history of logic; and the order of this course.'},
+     desc:'What logic is and what it covers; logic as an art and a science; logic and thought; Aristotle’s <em>Organon</em>; the parts of logic (demonstration, dialectic, rhetoric, poetics, and the study of fallacies); form and matter; a short history of logic; and the order of this course.',
+     recitation: RECITE_LOGIC},
     {id:'act1', num:'THE FIRST ACT', title:'The First Act: Simple Apprehension', deck:FIRST_ACT, review:true,
-     desc:'The grasp of what a thing is: signs, natural, conventional, and formal; how words signify concepts and concepts represent things; the concept and the term; abstraction; comprehension and extension; and what the exercises of the First Act take up.'},
+     desc:'The grasp of what a thing is: signs, natural, conventional, and formal; how words signify concepts and concepts represent things; the concept and the term; abstraction; comprehension and extension; and what the exercises of the First Act take up.',
+     recitation: RECITE_ACT1},
     {id:'act2', num:'THE SECOND ACT', title:'The Second Act: Judgment (Composition and Division)', deck:SECOND_ACT, review:true,
-     desc:'Affirming or denying one thing of another: the proposition and its parts; quality and quantity; the four forms A, E, I, and O; truth in the proposition; existential import; and the square of opposition.'},
+     desc:'Affirming or denying one thing of another: the proposition and its parts; quality and quantity; the four forms A, E, I, and O; truth in the proposition; existential import; and the square of opposition.',
+     recitation: RECITE_ACT2},
     {id:'act3', num:'THE THIRD ACT', title:'The Third Act: Reasoning', deck:THIRD_ACT, review:true,
-     desc:'Moving from what is known to what is not yet known: the syllogism in the broad and narrow senses; its three terms and two premises; the middle term and the cause; valid, sound, and demonstrative arguments; induction; and what the exercises of the Third Act take up.'}
+     desc:'Moving from what is known to what is not yet known: the syllogism in the broad and narrow senses; its three terms and two premises; the middle term and the cause; valid, sound, and demonstrative arguments; induction; and what the exercises of the Third Act take up.',
+     recitation: RECITE_ACT3}
   ];
   const CIRCLES_STUDY = {id:'circles', num:'STUDY', title:'Seeing with Circles', deck:CIRCLES, review:false,
      desc:'How a Venn diagram shows a proposition: shading for what is empty, an × for what exists, the four forms drawn on two circles, and the ⊗ for the existence that an affirmative asserts.'};
@@ -2659,6 +3088,7 @@ if(typeof document!=='undefined'){
   let orientIdx = 0, orientTry = 0;
   let orientDeck = null, orientTitle = '';
   let orientLead = null;                         /* the exercise set a lead-in opens onto, or null */
+  let orientStudyId = null;                      /* the study deck now open; finishing its last card opens recitation */
   let orientOrder = null, orientOrderFor = -1;   /* the draw for the panel now on screen */
   let orientEpoch = 0;                           /* bumped whenever a fresh draw is wanted */
   let orientShown = null, orientShownKey = '';   /* the question as it now stands on screen */
@@ -2673,8 +3103,8 @@ if(typeof document!=='undefined'){
     $('orient-badge').textContent = badge;
     show('scr-orient'); renderOrient();
   }
-  function openStudy(d){ orientOpen(d.deck, d.title, 'Study', null); }
-  function openLeadIn(s){ orientOpen(LEADINS[s.id], 'Before the Exercise · '+s.title, 'Introduction', s); }
+  function openStudy(d){ orientStudyId = d.id; orientOpen(d.deck, d.title, 'Study', null); }
+  function openLeadIn(s){ orientStudyId = null; orientOpen(LEADINS[s.id], 'Before the Exercise · '+s.title, 'Introduction', s); }
   function leadStart(){
     const s = orientLead;
     setStudyFlag('lead', s.id);
@@ -2817,7 +3247,13 @@ if(typeof document!=='undefined'){
   function advanceOrient(){
     orientTry = 0; orientResetOrder();
     if(orientIdx >= orientDeck.length-1){
-      if(orientLead) leadStart(); else show('scr-home');
+      if(orientLead) leadStart();
+      else {
+        const finished = orientStudyId;
+        orientStudyId = null;
+        if(finished && typeof reciteDeckFinished==='function') reciteDeckFinished(finished);
+        show('scr-home');
+      }
       return;
     }
     orientIdx++; renderOrient();
@@ -4801,7 +5237,30 @@ if(typeof document!=='undefined'){
       {state:'learning', seen:0, correct:0, history:[], box:null, nextDue:null, masteredOn:null};
     return gpProg.sets[id];
   }
-  function gpSave(){ if(gpProg) gpSet(GP.STORAGE_KEY, JSON.stringify(gpProg)); }
+  function gpSave(){
+    if(!gpProg) return;
+    if(window.__arsReciteBag) gpProg.recite = window.__arsReciteBag;
+    gpSet(GP.STORAGE_KEY, JSON.stringify(gpProg));
+  }
+  /* The Recitation Tablet keeps its record on this same progress object. */
+  window.__arsReadProgress = function(){
+    try{ return JSON.parse(gpGet(GP.STORAGE_KEY) || 'null'); }
+    catch(e){ return null; }
+  };
+  window.__arsReciteLive = function(){
+    if(gpProg && gpProg.recite && typeof gpProg.recite==='object') return gpProg.recite;
+    return null;
+  };
+  window.__arsSaveProgress = function(){
+    const bag = window.__arsReciteBag;
+    if(!bag) return;
+    if(gpProg){ gpProg.recite = bag; gpSave(); return; }
+    let o = null;
+    try{ o = JSON.parse(gpGet(GP.STORAGE_KEY) || 'null'); }catch(e){}
+    if(!o || typeof o!=='object' || Array.isArray(o)) o = {};
+    o.recite = bag;
+    gpSet(GP.STORAGE_KEY, JSON.stringify(o));
+  };
 
   /* ---------------- path (separate key; nothing written until chosen) ---------------- */
   let gpPath = (gpGet(GP.PATH_KEY)==='guided') ? 'guided' : 'practice';
@@ -5104,11 +5563,18 @@ if(typeof document!=='undefined'){
     if(!gpTracking()){
       const had = !!gpProg;
       optBox.innerHTML =
-        `<p><strong>Track my progress.</strong> The Guided Path keeps a private record of your answers (stored only in this browser, never sent anywhere) to unlock exercises in order, judge mastery, and schedule reviews. ${had ? 'Tracking is paused; your earlier record is kept and will resume.' : 'Nothing is stored until you enable it.'}</p>
+        `<p><strong>Track my progress.</strong> The Guided Path keeps a private record of your answers (stored only in this browser, never sent anywhere) to unlock exercises in order, judge mastery, and schedule reviews. ${had ? 'Tracking is paused; your earlier record is kept and will resume.' : 'No exercise record is stored until tracking is enabled.'}</p>
          <div class="venn-submit-row"><button class="submit-btn" id="prog-optin-btn">${had?'Resume Tracking':'Enable Tracking'}</button></div>`;
       $('prog-optin-btn').onclick = ()=>{
-        if(!gpProg) gpProg = {schemaVersion:GP.SCHEMA, settings:{trackingEnabled:true}, sets:{}};
-        else gpProg.settings.trackingEnabled = true;
+        if(!gpProg){
+          gpProg = {schemaVersion:GP.SCHEMA, settings:{trackingEnabled:true}, sets:{}};
+          if(!window.__arsReciteBag){
+            try{
+              const existing = JSON.parse(gpGet(GP.STORAGE_KEY) || 'null');
+              if(existing && existing.recite && typeof existing.recite==='object') gpProg.recite = existing.recite;
+            }catch(e){}
+          }
+        } else gpProg.settings.trackingEnabled = true;
         gpSave(); renderProgress(); refreshCards();
       };
     } else {
@@ -5119,6 +5585,7 @@ if(typeof document!=='undefined'){
       $('prog-pause').onclick = ()=>{ gpProg.settings.trackingEnabled=false; gpSave(); renderProgress(); refreshCards(); };
       $('prog-erase').onclick = ()=>{
         if(confirm('Erase all stored progress? This cannot be undone.')){
+          if(typeof window.__arsReciteReset==='function') window.__arsReciteReset();
           gpProg = null; gpRemove(GP.STORAGE_KEY); renderProgress(); refreshCards();
         }
       };
@@ -5226,7 +5693,9 @@ if(typeof document!=='undefined'){
         const o = JSON.parse(rd.result);
         if(!o || o.schemaVersion!==GP.SCHEMA || !o.sets || typeof o.sets!=='object' || !o.settings)
           throw new Error('schema');
-        gpProg = gpMigrate(o); gpSave(); renderProgress(); refreshCards();
+        gpProg = gpMigrate(o);
+        if(typeof window.__arsReciteAdopt==='function') window.__arsReciteAdopt(gpProg.recite);
+        gpSave(); renderProgress(); refreshCards();
         note.textContent = 'Progress imported.'; note.style.display = 'block';
       }catch(err){
         renderProgress();
@@ -5243,10 +5712,14 @@ if(typeof document!=='undefined'){
   $('path-guided').onclick = ()=>setPath('guided');
   $('btn-progress').onclick = ()=>{ renderProgress(); show('scr-progress'); };
   $('prog-back').onclick = ()=>show('scr-home');
+  window.__arsStudyDecks = STUDY_DECKS;
   setPath(gpPath, false);   /* reflect stored choice; write nothing for new visitors */
 
 })();
 }
 </script>
+<script src="recitation-adapter.js"></script>
+<script src="recitation.js"></script>
+<script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 </body>
 </html>

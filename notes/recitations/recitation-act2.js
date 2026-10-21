@@ -1,5 +1,5 @@
 /* Recitation outline for act2 (The Second Act: Judgment (Composition and Division)): 19 points. DRAFT for Timothy's review, written 21 Oct 2026 from the deck's final cards (SECOND_ACT in index.html).
-   Not yet a field on the deck; this file is not loaded by the page.
+   The same points are that deck's recitation field in index.html. This file is not loaded by the page.
    Each string is one checkable point, shown with a check box; HTML as on the cards (<em>, <strong>). */
   recitation: [
     `The second act of the mind affirms or denies one thing of another, and the tradition calls this act <em>composing and dividing</em>: to affirm is to compose, joining a predicate to a subject (“snow is white”), and to deny is to divide, holding them apart (“no stone is alive”).`,

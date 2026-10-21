@@ -1,5 +1,5 @@
 /* Recitation outline for logic (What Logic Is): 35 points. DRAFT for Timothy's review, written 21 Oct 2026 from the deck's final cards (INTRO_LOGIC in index.html).
-   Not yet a field on the deck; this file is not loaded by the page.
+   The same points are that deck's recitation field in index.html. This file is not loaded by the page.
    Each string is one checkable point, shown with a check box; HTML as on the cards (<em>, <strong>). */
   recitation: [
     `Man is the rational animal, and every human act, so far as it is well directed, is directed by reason.`,

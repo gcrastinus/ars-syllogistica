@@ -1,5 +1,5 @@
 /* Recitation outline for act1 (The First Act: Simple Apprehension): 22 points. DRAFT for Timothy's review, written 21 Oct 2026 from the deck's final cards (FIRST_ACT in index.html).
-   Not yet a field on the deck; this file is not loaded by the page.
+   The same points are that deck's recitation field in index.html. This file is not loaded by the page.
    Each string is one checkable point, shown with a check box; HTML as on the cards (<em>, <strong>). */
   recitation: [
     `The first act of the mind is <em>simple apprehension</em>, the grasp of what a thing is without affirming or denying anything about it; when we think “man” or “snow,” we have only the beginning of a truth, because nothing is yet asserted, and so nothing is yet true or false.`,
