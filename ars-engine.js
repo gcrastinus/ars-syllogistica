@@ -4025,7 +4025,7 @@ function genDialecticQ(d){
    drawn by level and returned as an mc4 question. A shared picker keeps
    an item from returning until the pool demands it.
    ================================================================ */
-const ADVANCED_SET_IDS = [22, 23];
+const ADVANCED_SET_IDS = [22, 23, 24, 25, 26];
 const ADV_RECENT = {};
 function advPick(key, pool, keyFn){
   const recent = ADV_RECENT[key] || (ADV_RECENT[key] = []);
@@ -4315,6 +4315,255 @@ function genCompoundPropQ(d){
   if(r<0.5) return genCompTruthQ(d);
   if(r<0.75) return genCompContraQ();
   return genCompResolveQ(d);
+}
+
+/* ---------------- XXIV. FIGURES, MOODS, AND REDUCTION (Maritain, pp. 185–205) ---------------- */
+const RED_RULES = 'The figure is fixed by the place of the middle term: subject of the major and predicate of the minor in the first figure; predicate of both in the second; subject of both in the third; predicate of the major and subject of the minor in the fourth (the later account). The mood names the propositions by A, E, I, O. An imperfect mood is reduced to the first-figure mood that begins with the same letter: B to Barbara, C to Celarent, D to Darii, F to Ferio. In the name, s means convert the preceding proposition simply, p convert it by limitation, m transpose the premises, and c reduce to the impossible.';
+const FIG_ORD = {1:'first', 2:'second', 3:'third', 4:'fourth'};
+const PERFECT_OF = {Barbara:'AAA', Celarent:'EAE', Darii:'AII', Ferio:'EIO'};
+const RED_TABLE = {
+  '2EAE':{to:'Celarent', op:'smaj'}, '2AEE':{to:'Celarent', op:'mscs'}, '2EIO':{to:'Ferio', op:'smaj'}, '2AOO':{to:'Barbara', op:'cmin'},
+  '3AAI':{to:'Darii', op:'pmin'}, '3IAI':{to:'Darii', op:'smajmsc'}, '3AII':{to:'Darii', op:'smin'}, '3EAO':{to:'Ferio', op:'pmin'},
+  '3OAO':{to:'Barbara', op:'cmaj'}, '3EIO':{to:'Ferio', op:'smin'},
+  '4AAI':{to:'Barbara', op:'mpc'}, '4AEE':{to:'Celarent', op:'msc'}, '4IAI':{to:'Darii', op:'msc'}, '4EAO':{to:'Ferio', op:'smajpmin'}, '4EIO':{to:'Ferio', op:'smajsmin'}
+};
+const RED_OP = {
+  smaj:'Convert the major premise simply', smin:'Convert the minor premise simply', pmin:'Convert the minor premise by limitation',
+  mscs:'Transpose the premises, then convert the minor and the conclusion simply', smajmsc:'Convert the major simply, transpose, and convert the conclusion simply',
+  cmin:'Reduce it to the impossible, replacing the minor premise', cmaj:'Reduce it to the impossible, replacing the major premise',
+  mpc:'Transpose the premises and convert the conclusion by limitation', msc:'Transpose the premises and convert the conclusion simply',
+  smajpmin:'Convert the major simply and the minor by limitation', smajsmin:'Convert both premises simply'
+};
+function moodLabel(fig, mood){ return `${mood} in the ${FIG_ORD[fig]} figure (${VALID[fig][mood]})`; }
+function syllHtml(fig, mood){
+  const roles = makeTerms('letters', null);
+  const p1 = propText(mood[0], ...premiseTerms(fig, 0, roles));
+  const p2 = propText(mood[1], ...premiseTerms(fig, 1, roles));
+  const c = propText(mood[2], roles.S, roles.P);
+  return `<div class="syllogism">${p1}.<br>${p2}.<br><div class="concl"><span class="therefore">∴</span>${c}.</div></div>`;
+}
+function moodPool(figs, weakened){
+  const out = [];
+  figs.forEach(f=>Object.keys(VALID[f]).forEach(m=>{ if(weakened || !SUBALTERN.has(f+m)) out.push({fig:f, mood:m}); }));
+  return out;
+}
+function genFigureNameQ(d){
+  const it = advPick('red-fig', moodPool(d<=1 ? [1,2,3] : [1,2,3,4], false), x=>x.fig+x.mood);
+  const labs = [1,2,3,4].map(f=> f===4 ? 'The fourth figure (in the later account)' : `The ${FIG_ORD[f]} figure`);
+  return mc4Make({promptRaw:syllHtml(it.fig, it.mood), options:labs, correct:labs[it.fig-1],
+    why:`The middle term is ${{1:'the subject of the major premise and the predicate of the minor',2:'the predicate of both premises',3:'the subject of both premises',4:'the predicate of the major premise and the subject of the minor'}[it.fig]}.`,
+    rules:RED_RULES, mcInstr:'Name the figure.'});
+}
+function genMoodNameQ(d){
+  const figs = d<=2 ? [1,2] : d===3 ? [1,2,3] : [1,2,3,4];
+  const it = advPick('red-mood', moodPool(figs, d>=5), x=>x.fig+x.mood);
+  const right = moodLabel(it.fig, it.mood);
+  const others = moodPool(figs, d>=5).filter(x=>!(x.fig===it.fig && x.mood===it.mood));
+  const near = others.filter(x=>x.fig===it.fig || x.mood===it.mood);
+  const pick = sample(near, Math.min(3, near.length));
+  while(pick.length<3){ const x = rand(others); if(pick.indexOf(x)<0) pick.push(x); }
+  return mc4Make({promptRaw:syllHtml(it.fig, it.mood), options:[right].concat(pick.map(x=>moodLabel(x.fig, x.mood))), correct:right,
+    why:`The premises and conclusion are ${it.mood.split('').join(', ')}, and the middle term stands as in the ${FIG_ORD[it.fig]} figure.`,
+    rules:RED_RULES, mcInstr:'Name the mood and figure.'});
+}
+function genReduceToQ(d){
+  const keys = Object.keys(RED_TABLE).filter(k=> d>=4 || (k[0]!=='4' && RED_TABLE[k].op[0]!=='c'));
+  const k = advPick('red-to', keys, x=>x);
+  const fig = +k[0], mood = k.slice(1), r = RED_TABLE[k];
+  const opts = Object.keys(PERFECT_OF).map(n=>moodLabel(1, PERFECT_OF[n]));
+  return mc4Make({promptRaw:syllHtml(fig, mood), options:opts, correct:moodLabel(1, PERFECT_OF[r.to]),
+    why:`Its name, ${VALID[fig][mood]}, begins with ${r.to[0]}, so it goes to ${r.to}.`,
+    rules:RED_RULES, mcInstr:'To which mood of the first figure is it reduced?'});
+}
+function genReduceOpQ(d){
+  const keys = Object.keys(RED_TABLE).filter(k=> d>=5 || RED_TABLE[k].op[0]!=='c');
+  const k = advPick('red-op', keys, x=>x);
+  const fig = +k[0], mood = k.slice(1), r = RED_TABLE[k];
+  const wrong = sample(Object.keys(RED_OP).filter(o=>o!==r.op), 3);
+  return mc4Make({promptRaw:syllHtml(fig, mood), options:[RED_OP[r.op]].concat(wrong.map(o=>RED_OP[o])), correct:RED_OP[r.op],
+    why:`The letters of ${VALID[fig][mood]} call for this, and the result is a syllogism in ${r.to}.`,
+    rules:RED_RULES, mcInstr:'How is this mood reduced to the first figure?'});
+}
+function genMoodReductionQ(d){
+  const r = Math.random();
+  if(d<=1) return genFigureNameQ(d);
+  if(d===2) return r<0.5 ? genFigureNameQ(d) : genMoodNameQ(d);
+  if(d===3) return r<0.25 ? genFigureNameQ(d) : r<0.6 ? genMoodNameQ(d) : genReduceToQ(d);
+  if(d===4) return r<0.3 ? genMoodNameQ(d) : r<0.6 ? genReduceToQ(d) : genReduceOpQ(d);
+  return r<0.3 ? genMoodNameQ(d) : r<0.5 ? genReduceToQ(d) : genReduceOpQ(d);
+}
+
+/* ---------------- XXV. COMPOUND ARGUMENTS (Maritain, pp. 247–258; Oesterle, ch. 18) ---------------- */
+const CARG_RULES = 'An epicheirema has a premise joined to its proof. A polysyllogism states each conclusion and uses it as a premise of the next; a sorites leaves them unstated. In the Aristotelian sorites the predicate of each premise is the subject of the next, only the first premise may be particular, and only the last may be negative; the Goclenian sorites runs the other way, and its rules are reversed. A dilemma draws one conclusion from both members of a disjunction; it holds only if the disjunction is complete, each consequence follows, and the conclusion is the only one possible. A disjunctive syllogism removes one member and posits the other.';
+const CARG_KIND = {epi:'An epicheirema', poly:'A polysyllogism', arist:'An Aristotelian sorites', gocl:'A Goclenian sorites',
+  dil:'A dilemma', disj:'A disjunctive syllogism', enth:'An enthymeme'};
+const CARG_ITEMS = [
+  {tier:1, k:'epi', t:'Every tyrant is unjust, since he rules for his own good and not for the common good; Nero was a tyrant; so Nero was unjust.'},
+  {tier:2, k:'epi', t:'Every virtue is praiseworthy, for it makes its possessor good; courage is a virtue; so courage is praiseworthy.'},
+  {tier:3, k:'epi', t:'Every metal conducts heat; copper is a metal, as its luster and hardness show; so copper conducts heat.'},
+  {tier:4, k:'epi', t:'No liar can be trusted, because trust rests on truthfulness; some witnesses are liars, since they contradicted themselves; so some witnesses cannot be trusted.'},
+  {tier:1, k:'poly', t:'Every square is a rectangle; every rectangle is a parallelogram; so every square is a parallelogram. Every parallelogram is a quadrilateral; so every square is a quadrilateral.'},
+  {tier:3, k:'poly', t:'Every man is an animal; every animal is mortal; so every man is mortal. Socrates is a man; so Socrates is mortal.'},
+  {tier:1, k:'arist', t:'Fido is a dog; every dog is a mammal; every mammal is an animal; every animal is a living thing; so Fido is a living thing.'},
+  {tier:2, k:'arist', t:'Whoever is prudent is temperate; whoever is temperate is constant; whoever is constant is untroubled; so whoever is prudent is untroubled.'},
+  {tier:3, k:'arist', t:'Some birds are songbirds; every songbird has a syrinx; whatever has a syrinx has lungs; so some birds have lungs.'},
+  {tier:4, k:'arist', t:'This stream is loud; what is loud is moving; what is moving is not frozen; what is not frozen gives way under weight; so this stream gives way under weight.'},
+  {tier:2, k:'gocl', t:'Every living thing is a body; every animal is a living thing; every dog is an animal; Fido is a dog; so Fido is a body.'},
+  {tier:3, k:'gocl', t:'No substance is a quality; every body is a substance; every stone is a body; so no stone is a quality.'},
+  {tier:4, k:'gocl', t:'Whatever is spiritual is incorruptible; whatever understands universals is spiritual; the human soul understands universals; so the human soul is incorruptible.'},
+  {tier:1, k:'dil', t:'Either the witness lied or he told the truth. If he lied, he is a perjurer; if he told the truth, he has confessed his own crime. Either way he is condemned.'},
+  {tier:2, k:'dil', t:'Either we fight or we surrender. If we fight, we lose men; if we surrender, we lose the city. Either way we suffer loss.'},
+  {tier:3, k:'dil', t:'Every rich man is tempted by pride; every poor man is tempted by envy; every man is rich or poor; so every man is tempted.'},
+  {tier:1, k:'disj', t:'Either the pump is broken or the well is dry. The pump is not broken. So the well is dry.'},
+  {tier:2, k:'disj', t:'The number is either odd or even. It is not odd. So it is even.'},
+  {tier:3, k:'disj', t:'Either the letter was delayed or it was lost. It was not lost. So it was delayed.'},
+  {tier:1, k:'enth', t:'He must be ill, since he is feverish.'},
+  {tier:2, k:'enth', t:'Every metal conducts heat; so copper conducts heat.'},
+  {tier:3, k:'enth', t:'She is a judge, so she must be impartial.'}
+];
+const DIL_LABEL = {
+  incomplete:'It fails: the disjunction is incomplete (escape between the horns)',
+  nofollow:'It fails: a consequence does not follow (take it by the horns)',
+  retort:'It fails: it can be retorted, since its conclusion is not the only one',
+  sound:'It holds: the disjunction is complete and each consequence follows'
+};
+const DIL_ITEMS = [
+  {k:'incomplete', t:'Either you agree with me or you are a fool. If you agree, you must vote my way; if you are a fool, your vote should not count. So your vote must go my way or not count.', why:'One may disagree without being a fool, so the disjunction is incomplete.'},
+  {k:'incomplete', t:'Every student either loves the subject or is forced to study it. If he loves it, rules are unnecessary; if he is forced, rules are useless. So rules are useless or unnecessary.', why:'Some students are indifferent and may be moved by rules, so the disjunction leaves out a third case.'},
+  {k:'incomplete', t:'Every philosopher holds either that ideas are innate or that all knowledge is sensation. Either way he falls into error. So every philosopher errs.', why:'The Aristotelian tradition holds neither view, so the disjunction is incomplete.'},
+  {k:'nofollow', t:'The books either agree with the Koran or they do not. If they agree, they are superfluous; if not, they are harmful. So they should be burned.', why:'A book that agrees with another is not thereby superfluous, so the first consequence does not follow.'},
+  {k:'nofollow', t:'Either the medicine is strong or it is weak. If strong, it will harm the patient; if weak, it will do nothing. So the medicine is useless.', why:'A strong medicine need not harm the patient when the dose is right, so a consequence does not follow.'},
+  {k:'retort', t:'Either you will govern honestly or dishonestly. If honestly, you will please God; if dishonestly, you will please men. Either way it is to your advantage.', why:'It is retorted: honestly, you will displease men; dishonestly, God. The members support the opposite conclusion as well.'},
+  {k:'retort', t:'If you marry a beautiful woman, you will be jealous; if a plain one, you will be bored. You must marry one or the other, or not at all. So do not marry.', why:'It is retorted: a beautiful wife will delight you, and a plain one will give you no cause for jealousy.'},
+  {k:'sound', t:'Either the man was guilty or innocent. If guilty, the decree forbidding a search for him is unjust; if innocent, his punishment is unjust. Either way the decree is unjust.', why:'This is Tertullian’s dilemma: the disjunction is complete and each consequence follows.'},
+  {k:'sound', t:'Either this man will obey his badly formed conscience or he will not. If he obeys it, he acts against the eternal law; if not, against his conscience. Either way he does wrong.', why:'The disjunction is complete and each consequence follows; the fault lies in his having formed his conscience badly.'}
+];
+const SOR_LABEL = {
+  valid:'Valid, since every link keeps the rules',
+  part:'Invalid, since a premise after the first is particular',
+  neg:'Invalid, since a premise before the last is negative',
+  concl:'Invalid, since the conclusion claims more than the premises allow'
+};
+function sortitesItem(){
+  const n = 3 + Math.floor(Math.random()*2);          /* premises */
+  const L = sample(LETTERS, n+1);
+  const fault = rand(['valid','valid','part','neg','concl']);
+  const types = Array(n).fill('A');
+  if(Math.random()<0.5) types[0] = 'I';              /* the first may be particular */
+  if(Math.random()<0.5) types[n-1] = 'E';            /* the last may be negative */
+  if(fault==='part') types[1+Math.floor(Math.random()*(n-1))] = 'I';
+  if(fault==='neg') types[Math.floor(Math.random()*(n-1))] = 'E';
+  const prem = types.map((t,i)=>propText(t, {kind:'L', l:L[i]}, {kind:'L', l:L[i+1]}));
+  const particular = types[0]==='I', negative = types[n-1]==='E';
+  let ct = particular ? (negative?'O':'I') : (negative?'E':'A');
+  if(fault==='concl'){ if(particular) ct = negative?'E':'A'; else { types[0]='I'; prem[0]=propText('I',{kind:'L',l:L[0]},{kind:'L',l:L[1]}); ct = negative?'E':'A'; } }
+  const concl = propText(ct, {kind:'L', l:L[0]}, {kind:'L', l:L[n]});
+  return {fault, html:`<div class="syllogism">${prem.join('.<br>')}.<div class="concl"><span class="therefore">∴</span>${concl}.</div></div>`};
+}
+function genSoritesQ(){
+  const it = sortitesItem();
+  const keys = ['valid','part','neg','concl'];
+  return mc4Make({promptRaw:it.html, options:keys.map(k=>SOR_LABEL[k]), correct:SOR_LABEL[it.fault],
+    why:{valid:'Only the first premise is particular, if any, and only the last is negative, if any, and the conclusion claims no more than they allow.',
+         part:'A particular premise after the first leaves a middle term undistributed.',
+         neg:'A negative premise before the last makes the major term distributed in the conclusion though not in its premise.',
+         concl:'With a particular first premise the conclusion must be particular.'}[it.fault],
+    rules:CARG_RULES, mcInstr:'Is this Aristotelian sorites valid?'});
+}
+function genCargKindQ(d){
+  const tiers = d<=1?[1]:d===2?[1,2]:d===3?[1,2,3]:[2,3,4];
+  const it = advPick('carg-k', CARG_ITEMS.filter(x=>tiers.indexOf(x.tier)>=0), x=>x.t);
+  const near = {epi:['enth','poly'], poly:['arist','epi'], arist:['gocl','poly'], gocl:['arist','poly'], dil:['disj','epi'], disj:['dil','enth'], enth:['epi','disj']}[it.k];
+  const opts = [it.k].concat(advDistract(it.k, near, Object.keys(CARG_KIND)));
+  return mc4Make({promptRaw:`<div class="disp-block">${it.t}</div>`, options:opts.map(k=>CARG_KIND[k]), correct:CARG_KIND[it.k],
+    why:{epi:'A premise is joined to its own proof.', poly:'Each conclusion is stated and used as a premise of the next.',
+         arist:'The predicate of each premise is the subject of the next, and the intermediate conclusions are unstated.',
+         gocl:'It begins with the premise that contains the predicate of the conclusion and runs toward its subject.',
+         dil:'The same conclusion is drawn from each member of a disjunction.', disj:'One member of the disjunction is removed, and the other is concluded.',
+         enth:'A premise is left unstated.'}[it.k],
+    rules:CARG_RULES, mcInstr:'What kind of argument is this?'});
+}
+function genDilemmaQ(){
+  const it = advPick('carg-d', DIL_ITEMS, x=>x.t);
+  const keys = ['incomplete','nofollow','retort','sound'];
+  return mc4Make({promptRaw:`<div class="disp-block">${it.t}</div>`, options:keys.map(k=>DIL_LABEL[k]), correct:DIL_LABEL[it.k],
+    why:it.why, rules:CARG_RULES, mcInstr:'Does this dilemma hold?'});
+}
+function genCompoundArgQ(d){
+  const r = Math.random();
+  if(d<=2) return genCargKindQ(d);
+  if(d===3) return r<0.6 ? genCargKindQ(d) : genSoritesQ();
+  return r<0.35 ? genCargKindQ(d) : r<0.65 ? genDilemmaQ() : genSoritesQ();
+}
+
+/* ---------------- XXVI. DEMONSTRATION (St. Thomas, Expositio Posteriorum I, lect. 4, 10, 23–25) ---------------- */
+const DEMO_RULES = 'A demonstration of the reasoned fact (propter quid) proceeds through the proper cause; a demonstration of the fact (quia) proceeds through an effect, or through a cause that is remote and does not convert with the effect. Its premises must be true, first and immediate, better known, prior, and causes of the conclusion, and proper to the science. A predicate is said per se in the first way when it is the definition of the subject or part of it; in the second way when the subject enters its definition; in the fourth way when the subject causes it; otherwise it is said per accidens.';
+const DEMO_KIND = {pq:'Of the reasoned fact, through the proper cause', eff:'Of the fact, through an effect', rem:'Of the fact, through a remote cause', none:'No demonstration, since a premise is only probable'};
+const DEMO_ITEMS = [
+  {tier:1, k:'pq', t:'Whatever is near does not twinkle; the planets are near; so the planets do not twinkle.', why:'Nearness is the cause of not twinkling, so this shows why.'},
+  {tier:1, k:'eff', t:'Whatever does not twinkle is near; the planets do not twinkle; so the planets are near.', why:'Not twinkling is the effect of nearness, so this shows only that the planets are near.'},
+  {tier:1, k:'eff', t:'Wherever there is smoke there is fire; there is smoke in the valley; so there is fire in the valley.', why:'Smoke is an effect of fire, so the argument shows the fact, not the reason.'},
+  {tier:2, k:'pq', t:'Every body screened from its source of light loses its light; the moon is screened by the earth from the sun; so the moon loses its light.', why:'The screening is the cause of the eclipse, so this gives the reason.'},
+  {tier:2, k:'eff', t:'Whatever casts a round shadow in every position is a sphere; the earth casts a round shadow on the moon; so the earth is a sphere.', why:'The round shadow follows from the earth’s shape, so it shows that, not why.'},
+  {tier:2, k:'rem', t:'Whatever is not an animal does not breathe; a wall is not an animal; so a wall does not breathe.', why:'Not being an animal is too wide to be the reason: many animals do not breathe in this way.'},
+  {tier:3, k:'pq', t:'Every triangle has angles equal to two right angles; this figure is a triangle; so its angles equal two right angles.', why:'Being a triangle is the proper reason why the angles equal two right angles.'},
+  {tier:3, k:'rem', t:'Whatever is not an animal does not fly; a stone is not an animal; so a stone does not fly.', why:'Not being an animal is not the reason a stone does not fly, since most animals do not fly either; the middle is too wide.'},
+  {tier:3, k:'eff', t:'Every woman who has milk has given birth; this woman has milk; so she has given birth.', why:'Having milk is a sign and effect of having given birth, so this shows the fact.'},
+  {tier:3, k:'none', t:'Most mothers love their children; Anna is a mother; so Anna loves her children.', why:'The major holds only for the most part, so the argument is probable, not a demonstration.'},
+  {tier:4, k:'none', t:'What the experts agree on is true; the experts agree that the bridge is safe; so the bridge is safe.', why:'Agreement of the experts gives a probable premise, which belongs to dialectic.'},
+  {tier:4, k:'pq', t:'Whatever is rational can laugh; every man is rational; so every man can laugh.', why:'Rationality is the proper cause of the power to laugh.'},
+  {tier:4, k:'eff', t:'Whatever has a fever has an infection; this patient has a fever; so he has an infection.', why:'The fever is taken as a sign and effect, so at best this shows the fact.'},
+  {tier:5, k:'none', t:'Every politician seeks power; this man is a politician; so he seeks power.', why:'The major is a common opinion, true for the most part at best, so the argument is probable.'}
+];
+const PERSE_LABEL = {p1:'Per se in the first way: part of the definition', p2:'Per se in the second way: the subject defines it', p4:'Per se in the fourth way: the subject causes it', pa:'Per accidens: neither defines the other'};
+const PERSE_ITEMS = [
+  {tier:1, k:'p1', t:'A triangle is a figure'}, {tier:1, k:'p1', t:'Man is an animal'}, {tier:2, k:'p1', t:'A line is bounded by points'},
+  {tier:2, k:'p1', t:'A circle is a plane figure'}, {tier:3, k:'p1', t:'Man is rational'},
+  {tier:1, k:'p2', t:'A number is odd or even'}, {tier:2, k:'p2', t:'A nose is snub'}, {tier:2, k:'p2', t:'A line is straight or curved'},
+  {tier:3, k:'p2', t:'Man is capable of laughter'}, {tier:3, k:'p2', t:'A number is prime or composite'},
+  {tier:3, k:'p4', t:'The man who was beheaded died'}, {tier:4, k:'p4', t:'What is heated becomes warm'}, {tier:4, k:'p4', t:'The glass that was struck shattered'},
+  {tier:1, k:'pa', t:'The animal is musical'}, {tier:2, k:'pa', t:'The man is white'}, {tier:3, k:'pa', t:'While he walked, it thundered'},
+  {tier:4, k:'pa', t:'The builder is a flute player'}
+];
+const PERSE_WHY = {p1:'The predicate is the definition of the subject or part of it.', p2:'The subject enters the definition of the predicate, as its proper subject.',
+  p4:'The subject is the cause of what is predicated.', pa:'Neither term enters the definition of the other, and neither causes the other.'};
+const DEMO_FAULT_LABEL = {false:'A premise is false', probable:'A premise is only probable, not necessary', notcause:'The middle term is not the cause', alien:'It proceeds from principles of another science or common to all'};
+const DEMO_FAULTS = [
+  {k:'false', t:'Every metal is liquid; iron is a metal; so iron is liquid.'},
+  {k:'false', t:'Every bird can fly; the penguin is a bird; so the penguin can fly.'},
+  {k:'probable', t:'Most people who study logic reason well; Paul studies logic; so Paul reasons well.'},
+  {k:'probable', t:'What is old is usually wise; this man is old; so he is wise.'},
+  {k:'notcause', t:'Whatever does not twinkle is near; the planets do not twinkle; so the planets are near.'},
+  {k:'notcause', t:'Whatever is not an animal does not breathe; a wall is not an animal; so a wall does not breathe.'},
+  {k:'alien', t:'In any kind where there is something greater and something less, there is something equal; there are squares greater and less than a circle; so there is a square equal to it.'},
+  {k:'alien', t:'Every whole is greater than its part; the diameter of a circle is a part of the circle; so the circumference is longer than the diameter.'}
+];
+const DEMO_FAULT_WHY = {false:'A demonstration must proceed from true premises.', probable:'The premises of a demonstration must be necessary, not true only for the most part.',
+  notcause:'The middle term is true but is not the proper cause of the conclusion, so this shows only the fact.',
+  alien:'A demonstration must proceed from principles proper to its own science, not from principles common to many.'};
+function genDemoKindQ(d){
+  const tiers = d<=1?[1]:d===2?[1,2]:d===3?[1,2,3]:[2,3,4,5];
+  const it = advPick('demo-k', DEMO_ITEMS.filter(x=>tiers.indexOf(x.tier)>=0 && (d>=3 || x.k!=='none')), x=>x.t);
+  const keys = ['pq','eff','rem','none'];
+  return mc4Make({promptRaw:`<div class="disp-block">${it.t}</div>`, options:keys.map(k=>DEMO_KIND[k]), correct:DEMO_KIND[it.k],
+    why:it.why, rules:DEMO_RULES, mcInstr:'What kind of demonstration is this?'});
+}
+function genPerseQ(d){
+  const tiers = d<=2?[1,2]:d===3?[1,2,3]:[2,3,4];
+  const it = advPick('demo-p', PERSE_ITEMS.filter(x=>tiers.indexOf(x.tier)>=0 && (d>=3 || x.k!=='p4')), x=>x.t);
+  return mc4Make({prompt:it.t, options:['p1','p2','p4','pa'].map(k=>PERSE_LABEL[k]), correct:PERSE_LABEL[it.k],
+    why:PERSE_WHY[it.k], rules:DEMO_RULES, mcInstr:'How is the predicate said of the subject?'});
+}
+function genDemoFaultQ(){
+  const it = advPick('demo-f', DEMO_FAULTS, x=>x.t);
+  return mc4Make({promptRaw:`<div class="disp-block">${it.t}</div>`, options:['false','probable','notcause','alien'].map(k=>DEMO_FAULT_LABEL[k]),
+    correct:DEMO_FAULT_LABEL[it.k], why:DEMO_FAULT_WHY[it.k], rules:DEMO_RULES, mcInstr:'Why is this not a demonstration of the reasoned fact?'});
+}
+function genDemonstrationQ(d){
+  const r = Math.random();
+  if(d<=2) return r<0.55 ? genDemoKindQ(d) : genPerseQ(d);
+  if(d===3) return r<0.45 ? genDemoKindQ(d) : r<0.8 ? genPerseQ(d) : genDemoFaultQ();
+  return r<0.4 ? genDemoKindQ(d) : r<0.7 ? genPerseQ(d) : genDemoFaultQ();
 }
 
 /* one entry point for the Advanced Studies sets, used by the exercise page

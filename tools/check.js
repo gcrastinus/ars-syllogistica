@@ -124,9 +124,9 @@ NEW_SETS.forEach(id => {
       if (!(q.correctIdx >= 0 && q.correctIdx < q.options.length)) fail(`set ${id} level ${lvl}: bad key in "${plain(q.prompt).slice(0, 60)}"`);
       if (new Set(q.options.map(plain)).size !== q.options.length) fail(`set ${id}: duplicate options in "${plain(q.prompt).slice(0, 60)}"`);
       if (q.options.length < 3) fail(`set ${id}: fewer than three options`);
-      [q.prompt, q.why, ...q.options].forEach(t => badDashes(t).forEach(x => fail(`set ${id}: dash in "${x}"`)));
+      [q.prompt, q.promptRaw, q.mcInstr, q.why, q.rules, ...q.options].forEach(t => badDashes(t).forEach(x => fail(`set ${id}: dash in "${x}"`)));
       mc++; if (longestIsCorrect(q.options, q.correctIdx)) longest++;
-      seen.add(plain(q.prompt) + '|' + plain(q.options[q.correctIdx]));
+      seen.add(plain(q.prompt || q.promptRaw) + '|' + plain(q.mcInstr) + '|' + plain(q.options[q.correctIdx]));
     }
   }
   const ratio = longest / Math.max(1, mc);
