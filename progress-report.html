@@ -181,8 +181,18 @@ const SETS = [
   {id:20, title:'Dialectic'},
   {id:21, title:'The Fallacies'}
 ];
-const TITLE = {}; SETS.forEach(s=>TITLE[s.id]=s.title);
-const ROMAN = {1:'I',2:'II',3:'III',4:'IV',5:'V',6:'VI',7:'VII',8:'VIII',9:'IX',10:'X',11:'XI',12:'XII',13:'XIII',14:'XIV',15:'XV',16:'XVI',17:'XVII',18:'XVIII',19:'XIX',20:'XX',21:'XXI'};
+/* The Advanced Studies exercises are optional: they are listed below the
+   ladder but count toward no part of the grade, so grades already given stay
+   as they were. */
+const ADV_SETS = [
+  {id:22, title:'Supposition'},
+  {id:23, title:'Compound and Exponible Propositions'},
+  {id:24, title:'Figures, Moods, and Reduction'},
+  {id:25, title:'Compound Arguments'},
+  {id:26, title:'Demonstration'}
+];
+const TITLE = {}; SETS.concat(ADV_SETS).forEach(s=>TITLE[s.id]=s.title);
+const ROMAN = {1:'I',2:'II',3:'III',4:'IV',5:'V',6:'VI',7:'VII',8:'VIII',9:'IX',10:'X',11:'XI',12:'XII',13:'XIII',14:'XIV',15:'XV',16:'XVI',17:'XVII',18:'XVIII',19:'XIX',20:'XX',21:'XXI',22:'XXII',23:'XXIII',24:'XXIV',25:'XXV',26:'XXVI'};
 /* The groups, in the order the app itself lists them on the home page. The four
    final sections all open together, once the whole Third Act has been passed. */
 const GROUPS = [
@@ -374,7 +384,13 @@ function analyze(prog){
   const lapsedN   = per.filter(p=>p.lapsed).length;
   const progressN = per.filter(p=>p.seen>0 && !p.mastered && !p.passed).length;
 
+  const adv = ADV_SETS.map(S=>{
+    const rec = sets[String(S.id)] || null;
+    return {id:S.id, title:S.title, seen:(rec && rec.seen) || 0,
+            mastered:!!(rec && rec.masteredOn), passed:!!(rec && rec.passedOn)};
+  });
   return {
+    adv,
     graded, firstDate, lastDate, winStart, winEnd,
     per, attempted, masteredN, passedN, lapsedN, progressN,
     lifeSeen, lifeCorrect, lifeAcc: lifeSeen? lifeCorrect/lifeSeen : 0,
@@ -456,6 +472,16 @@ function renderReport(A){
     });
   });
   h += `</div>`;
+
+  /* the optional Advanced Studies exercises: listed, not graded */
+  if(A.adv.some(p=>p.seen || p.passed || p.mastered)){
+    h += `<div class="card"><h2>Advanced Studies (optional, not graded)</h2>`;
+    A.adv.forEach(p=>{
+      const st = p.mastered ? 'Mastered' : p.passed ? 'Passed · Level III' : p.seen ? `In progress · ${p.seen} answered` : 'Not attempted';
+      h += `<div class="row"><div class="rn">${ROMAN[p.id]}</div><div class="ti">${p.title}</div><div><span class="chip">${st}</span></div></div>`;
+    });
+    h += `</div>`;
+  }
 
   /* coming reviews */
   const t=todayStr();
