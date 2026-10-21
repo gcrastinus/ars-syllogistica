@@ -240,14 +240,14 @@ function todayStr(){
 
 function buildSetList(){
   const box = $('setList');
-  const head = `<div class="part-heading part-head">Logic as the Art of Reasoning</div>`;
+  const head = `<div class="part-heading part-head">Logic as an Art</div>`;
   box.innerHTML = head + QUIZ_SETS.map(s=>{
     const modeNote = (typeof QUIZ_MODE_SETS!=='undefined' && QUIZ_MODE_SETS.has(s.id))
       ? ' · letters/English' : '';
     const divider = s.id===22
       ? `<div class="part-divider">
           <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
-          <div class="part-heading">The Science of Logic</div>
+          <div class="part-heading">Logic as a Science</div>
           <p class="part-sub">Perfecting the art, once the elements are in hand</p>
         </div>`
       : '';

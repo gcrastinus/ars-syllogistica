@@ -466,7 +466,7 @@ function renderReport(A){
     </div></div>`;
 
   /* per-exercise ladder */
-  h += `<h2 class="part-heading part-head">Logic as the Art of Reasoning</h2>`;
+  h += `<h2 class="part-heading part-head">Logic as an Art</h2>`;
   h += `<div class="card"><h2>The Ladder of Exercises</h2>`;
   GROUPS.forEach(g=>{
     h += `<div class="group-label">${g[0]}</div>`;
@@ -495,7 +495,7 @@ function renderReport(A){
   if(A.adv.some(p=>p.seen || p.passed || p.mastered)){
     h += `<div class="part-divider">
         <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
-        <h2 class="part-heading">The Science of Logic</h2>
+        <h2 class="part-heading">Logic as a Science</h2>
         <p class="part-sub">Perfecting the art, once the elements are in hand</p>
       </div>
       <p class="part-note">Optional, and not part of the grade.</p>

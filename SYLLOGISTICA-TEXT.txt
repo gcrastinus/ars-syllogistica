@@ -35,7 +35,7 @@ The second art of the trivium
 @path
 Title: Opening the path
 
-Logic as the Art of Reasoning
+Logic as an Art
 
 Logic is the art of reasoning well. This study sets out what logic is and what its parts are. A study of each of the three acts of the mind (simple apprehension, judgment, and reasoning) opens the section of exercises that perfects it.
 
@@ -53,11 +53,11 @@ Here the reasoning of the third act is carried into the art of persuasion. The *
 
 Reasoning goes wrong, and it goes wrong in ways that can be named. A **fallacy** is an argument that looks sound and is not, and *De fallaciis*, a treatise attributed to St. Thomas, insists that each has *two* causes: what makes it look good, and what makes it fail. Six come from the words and seven from outside them. We study them not to use them but to recognize them when others use them.
 
-The Science of Logic
+Logic as a Science
 
 Each act of the mind opens with its study and is trained by its exercises; these studies and exercises carry the same arts further. They take up what the earlier studies only name: the tree of Porphyry and the kinds of property, supposition, the modal and compound propositions, the figures and their reduction, induction, demonstration, and the modes of the fallacies.
 
-**Opening the acts.** The path unfolds by the **acts of the mind**. All four exercises of the **First Act** (the Predicables, the Categories, Division, and Definition) are open from the start; work them in any order. Only **Division and Definition** must be passed to open the **Second Act**; when those two are passed, the Second Act appears. (The Predicables and the Categories are not required to open the path, so they can be studied at leisure and deepened along the way.) When all of the Second Act is passed, the **Third Act** (the syllogism) appears; and when all of its exercises are passed, the final sections, *Ad Demonstrationem*, *Dialectica*, *Rhetorica*, and *Sophistica*, open together. In **The Science of Logic**, the studies of each act open when that act’s exercises are passed: the First Act’s with all four of its exercises, the Second Act’s with all three, and the Third Act’s with its reasoning (VIII–XVII); the Demonstration exercise and study open with *Ad Demonstrationem*, and the study of the fallacies with *Sophistica*. To *pass* a set is to show real competence: **9 of your last 10 answers at Level III or above** correct, across **two different days**. The **Progress & Review** page names the next exercise to learn and any reviews due, with a button that opens them.
+**Opening the acts.** The path unfolds by the **acts of the mind**. All four exercises of the **First Act** (the Predicables, the Categories, Division, and Definition) are open from the start; work them in any order. Only **Division and Definition** must be passed to open the **Second Act**; when those two are passed, the Second Act appears. (The Predicables and the Categories are not required to open the path, so they can be studied at leisure and deepened along the way.) When all of the Second Act is passed, the **Third Act** (the syllogism) appears; and when all of its exercises are passed, the final sections, *Ad Demonstrationem*, *Dialectica*, *Rhetorica*, and *Sophistica*, open together. In **Logic as a Science**, the studies of each act open when that act’s exercises are passed: the First Act’s with all four of its exercises, the Second Act’s with all three, and the Third Act’s with its reasoning (VIII–XVII); the Demonstration exercise and study open with *Ad Demonstrationem*, and the study of the fallacies with *Sophistica*. To *pass* a set is to show real competence: **9 of your last 10 answers at Level III or above** correct, across **two different days**. The **Progress & Review** page names the next exercise to learn and any reviews due, with a button that opens them.
 
 **An art and a science.** Logic is both an art and a science: an art, because it gives rules for reasoning; a speculative science, because its end is to know. Medicine offers a comparison, since it is an art that aims at producing health in the patient and also a body of certain knowledge about the body.
 
@@ -3549,7 +3549,7 @@ Why not the others: The word names the appearance of wisdom, not care, brevity, 
 
 @deck adv-pred
 Title: The Predicables in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Direct and reflex knowledge, and why the predicables are second intentions; the tree of Porphyry; the highest genus, the subaltern genera, and the lowest species; property in its four senses; the accident of the categories and the accident of the predicables; how the difference divides and constitutes; Aristotle’s four predicables and Porphyry’s five; and the question of universals.
 
@@ -3873,7 +3873,7 @@ Why not the others: The nominalist denies common natures, so a definition cannot
 
 @deck adv-cat
 Title: The Categories in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 What comes before and after the categories: univocal, equivocal, derivative, and analogous names; what is said of a subject and what is present in one; what can be placed in a category; why being is not a genus; the four kinds of opposition; the senses of prior and simultaneous; and motion and having.
 
@@ -4197,7 +4197,7 @@ Why not the others: A helmet worn on the head is neither a quality nor a quantit
 
 @deck adv-defdiv
 Title: Definition and Division in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 How a definition is found: Aristotle’s four questions; division as the way to a definition, with Plato’s angler; dividing in order; gathering the signs of a difference; definition by likeness; what cannot strictly be defined; definition through the four causes; and how definition and demonstration meet.
 
@@ -4521,7 +4521,7 @@ Why not the others: Definitions by cause and by effect appear in demonstration a
 
 @deck adv-supp
 Title: Supposition
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 What a term stands for in a proposition: signification and supposition; material and formal, proper and improper; simple and personal; singular, determinate, distributive, merely confused, and collective; supposition and distribution; the copula and existence; and how a change of supposition breaks an argument.
 
@@ -4845,7 +4845,7 @@ Why not the others: Denying true premises or granting a bad argument does not an
 
 @deck adv-opp
 Title: Opposition and Conversion in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Why contradiction is the strongest opposition; singular propositions; what necessary and contingent matter add to the square; future contingents; how conversion rests on supposition; Buridan’s limits on contraposition and obversion; why these operations are not inferences in the proper sense; the reciprocal and the inverse; and the modern reading of the universal.
 
@@ -5208,7 +5208,7 @@ Why not the others: The tradition does not call the formula invalid, and it plac
 
 @deck adv-modp
 Title: The Modal Proposition in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Modes of the copula; the quality and quantity of a modal; the square with a quantified dictum; the vowels that mark mode and dictum; a modal read of what is said and of the thing, with St. Thomas’s use of the distinction; the two senses of “possible”; and why the mode belongs to the proposition and not to the act of judging.
 
@@ -5493,7 +5493,7 @@ Why not the others: The mode is kept in conversion, and A converts only by limit
 
 @deck adv-comp
 Title: Compound and Exponible Propositions
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Propositions made of propositions: the copulative, disjunctive, conjunctive, and conditional; causal, rational, relative, and adversative propositions; how each is contradicted; and the hidden compounds, exclusive, exceptive, and reduplicative.
 
@@ -5817,7 +5817,7 @@ Why not the others: The proposition is true as reduplicative; read simply, it wo
 
 @deck adv-fig
 Title: Figures and Moods
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Figure and mood; the special rules and principle of each figure and what each is good for; the nineteen moods, the indirect moods, and the later account’s fourth figure; singular premises and the expository syllogism; what a syllogism essentially is; and why the first figure is the figure of science.
 
@@ -6141,7 +6141,7 @@ Why not the others: The others are imperfect moods of the second and third figur
 
 @deck adv-red
 Title: Reduction
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Perfect and imperfect moods; what the letters in the names of the moods mean; direct reduction by simple conversion, by limitation, and by transposition; reduction to the impossible; the indirect moods; and why the imperfect moods are valid in their own right.
 
@@ -6426,7 +6426,7 @@ Why not the others: Nothing is left unstated, and validity does not depend on th
 
 @deck adv-mods
 Title: The Modal Syllogism in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 Why Aristotle’s first-figure rule holds and why the reverse mixture fails; the necessity of the consequence and of the consequent; St. Thomas’s distinction applied to a syllogism; converting modal premises; one-sided possibility; and why the theory was called the logicians’ cross.
 
@@ -6711,7 +6711,7 @@ Why not the others: Aristotle and Albert grant a necessary conclusion in the fir
 
 @deck adv-carg
 Title: Compound Arguments
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 The epicheirema; the polysyllogism and the sorites, Aristotelian and Goclenian, with their rules; the dilemma, its three rules, and the three ways of answering it; the dilemma and the disjunctive syllogism; and oblique syllogisms.
 
@@ -7035,7 +7035,7 @@ Why not the others: Conversion would not fix the middle term, and nothing materi
 
 @deck adv-ind
 Title: Induction and Example
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 The two ways of making truth known; why induction has no middle term; why it concludes about a nature and not a collection; complete and incomplete induction; its two rules; why it is not a syllogism in Darapti; reasoning by resemblance; and analogy in reasoning and in knowledge.
 
@@ -7359,7 +7359,7 @@ Why not the others: Arguments by resemblance are weak; knowledge by analogy can 
 
 @deck adv-dem
 Title: Demonstration
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 The conditions of demonstrative premises; the four ways of being said per se; demonstration of the fact through an effect and through a remote cause, and of the reasoned fact through the proper cause; proper and common principles; the first figure as the figure of science; and fact and reason in different sciences.
 
@@ -7683,7 +7683,7 @@ Why not the others: Theology does not prove its own first principles.
 
 @deck adv-fal
 Title: The Fallacies in Depth
-Small heading: THE SCIENCE OF LOGIC
+Small heading: LOGIC AS A SCIENCE
 
 After De fallaciis, attributed to St. Thomas: the three kinds of multiplicity behind the six fallacies in the words and their modes; why there are seven outside the words; accident and consequent; the five ways to beg the question; non-cause and many questions; and why every fallacy is an ignorance of the refutation.
 
