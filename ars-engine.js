@@ -1192,6 +1192,8 @@ function sqAnswer(rel, given){
   if(rel==='subalternDown') return given==='T' ? 'T' : 'U';
   return given==='F' ? 'F' : 'U';   // subalternUp
 }
+const EMPTY_KINDS = ['unicorn','centaur','griffin','dragon','mermaid'];
+const BURIDAN_NOTE = 'Nothing falls under the subject, and the operation would end in an affirmative about it (“All S are non-P,” “Some S are non-P,” or, for contraposition, “Some non-P are S”). An affirmative whose subject stands for nothing is false, so nothing follows. John Buridan observed that obversion from the negative side to the affirmative, and contraposition, hold only when the terms stand for things that exist.';
 function genImmediateQ(d, mode){
   const roles = makeTerms(mode, null);
   const S = roles.S, P = roles.P;
@@ -1202,6 +1204,17 @@ function genImmediateQ(d, mode){
     const given = rand(['T','F']);
     return {kind:'imm', sub:'truth', rel, given, S, P,
       p1: immProp(tp[0],S,P), p2: immProp(tp[1],S,P), answer: sqAnswer(rel, given)};
+  }
+  /* Buridan's limits (Decision Sheet §1; Klima and Noone): obversion from
+     the negative side to the affirmative, and contraposition of E and O,
+     hold only when the subject stands for something that exists. From
+     Level IV some questions say that nothing falls under the subject; then
+     those operations yield nothing, and the answer is "none." */
+  if(d>=4 && Math.random()<0.25){
+    const op = rand(['obverse','contrapositive']), t = rand(['E','O']);
+    const S2 = mode==='english' ? {kind:'g', s:rand(EMPTY_KINDS)} : S;
+    const note = mode==='english' ? `There are no ${plural(S2.s)}.` : `Suppose that nothing is ${S2.l}.`;
+    return {kind:'imm', sub:'op', op, pr:immProp(t, S2, P), expected:null, perAcc:false, S:S2, P, emptyS:true, note};
   }
   const ops = ['contradictory','converse'].concat(d>=2?['obverse']:[]).concat(d>=3?['contrapositive']:[]);
   const op = rand(ops);
@@ -1256,6 +1269,7 @@ function immMarks(pr){
   return {shaded, xs};
 }
 function immMistakeOp(q, parsed){
+  if(q.emptyS) return BURIDAN_NOTE;
   if(!q.expected)
     return q.op==='converse'
       ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S; yet many students convert it out of the habit of converting E and I.'
@@ -4749,7 +4763,7 @@ function formatQuizItem(q){
   if(q.kind==='imm'){
     if(q.sub==='op'){
       out.instr = `Give the ${q.op} in standard form (or “none”).`;
-      out.stemHtml = `<div class="qprompt">${immPropText(q.pr)}.</div>`;
+      out.stemHtml = `<div class="qprompt">${q.note ? q.note+' ' : ''}${immPropText(q.pr)}.</div>`;
       out.workClass = 's1';
       out.answerText = q.expected ? immPropText(q.expected) : 'none';
       if(q.perAcc) out.explainHtml = 'Per accidens (quantity weakens).';
@@ -4877,7 +4891,7 @@ if(typeof module!=='undefined' && module.exports){
     enthCandidates, genEnthQ, checkEnthAnswer, enthMistake, genEnthCuratedQ, ENTH_POOL,
     MSQ_PAIR, SENSE_POOL, MOD_RANK, M_CORNERS, modalSquareSvg, SENSE_VALUES, MODSYLL_VALUES,
     proseWrap, genWildHypQ, genWildModalQ,
-    ADVANCED_SET_IDS, genAdvancedQ, genSuppositionQ, SUPP_ITEMS,
+    BURIDAN_NOTE, EMPTY_KINDS, ADVANCED_SET_IDS, genAdvancedQ, genSuppositionQ, SUPP_ITEMS,
     QUIZ_MODE_SETS, generateQuizQuestion, quizFingerprint, formatQuizItem};
 }
 

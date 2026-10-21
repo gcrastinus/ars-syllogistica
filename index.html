@@ -1811,7 +1811,8 @@ if(typeof document!=='undefined'){
         h:`<p><strong>The square of opposition.</strong> An immediate inference draws one proposition directly from another, with no middle term and no second premise. Some questions suppose that one proposition is true or false and ask whether a second, with the same terms, is true, false, or undetermined; the square of opposition answers them. <strong>Contradictories</strong> (A and O, E and I) differ in both quantity and quality, and they always take opposite truth values: if “All S are P” is true, “Some S are not P” is false, and if it is false, “Some S are not P” is true. <strong>Contraries</strong> (A and E) cannot both be true, but they can both be false; so if one is true the other is false, but if one is false the other is undetermined. <strong>Subcontraries</strong> (I and O) cannot both be false, but they can both be true; so if one is false the other is true, but if one is true the other is undetermined.</p>`
         + `<p>In <strong>subalternation</strong> (A and I, E and O), truth descends from the universal to the particular, and falsity ascends from the particular to the universal. If “All S are P” is true, “Some S are P” is true, because an affirmative carries existential import and so supplies the existence that “some” requires; if “Some S are P” is false, “All S are P” is false. But a false universal leaves its particular undetermined, and a true particular leaves its universal undetermined. Wherever the square forbids nothing, the answer is “undetermined.” The Square of Opposition, in the Study section, sets out these relations for any pair of terms.</p>` },
       { h:`<p><strong>Converse, obverse, contrapositive, contradictory.</strong> Other questions give one proposition and ask for one of these, typed in standard form, or “none” when the operation cannot be performed. The <strong>contradictory</strong> changes both quantity and quality: the contradictory of A is O, of E is I, of I is E, and of O is A. <strong>Conversion</strong> exchanges subject and predicate. E and I convert simply, so “No S are P” gives “No P are S,” and “Some S are P” gives “Some P are S.” A converts only by limitation (per accidens), to I: “All S are P” gives only “Some P are S,” because the predicate of an affirmative is not distributed. O has no converse.</p>`
-        + `<p><strong>Obversion</strong> changes the quality and replaces the predicate by its complement, written with “non-”: “All S are P” gives “No S are non-P,” “No S are P” gives “All S are non-P,” “Some S are P” gives “Some S are not non-P,” and “Some S are not P” gives “Some S are non-P.” The complement must be the contradictory term (“non-just”), not the contrary (“unjust”), since a man may be neither just nor unjust. <strong>Contraposition</strong> obverts, then converts, then obverts again, so that both terms are replaced by their complements and exchange places. “All S are P” gives “All non-P are non-S,” and “Some S are not P” gives “Some non-P are not non-S.” E contraposes only by limitation, to “Some non-P are not non-S,” and I has no contrapositive, because its obverse is an O, and an O does not convert.</p>` }
+        + `<p><strong>Obversion</strong> changes the quality and replaces the predicate by its complement, written with “non-”: “All S are P” gives “No S are non-P,” “No S are P” gives “All S are non-P,” “Some S are P” gives “Some S are not non-P,” and “Some S are not P” gives “Some S are non-P.” The complement must be the contradictory term (“non-just”), not the contrary (“unjust”), since a man may be neither just nor unjust. <strong>Contraposition</strong> obverts, then converts, then obverts again, so that both terms are replaced by their complements and exchange places. “All S are P” gives “All non-P are non-S,” and “Some S are not P” gives “Some non-P are not non-S.” E contraposes only by limitation, to “Some non-P are not non-S,” and I has no contrapositive, because its obverse is an O, and an O does not convert.</p>`
+        + `<p>Because affirmatives carry existential import, two of these operations need a further condition, as John Buridan, the fourteenth-century master at Paris, observed. Obversion from the negative side to the affirmative (E to A, O to I), and contraposition, hold only when the terms stand for things that exist. “No unicorn is a horse” is true, but “Every unicorn is a non-horse” is false, since there are no unicorns and an affirmative whose subject stands for nothing is false. So when a question says that nothing falls under the subject, the answer to such an operation is “none.”</p>` }
     ],
     7:[
       { src:`${SRC_ART}; ${SRC_JST}.`,
@@ -2070,6 +2071,9 @@ if(typeof document!=='undefined'){
         Q(`What is the obverse of “No S are P”?`, [`“All S are non-P”`,`“No non-S are P”`,`“All S are P”`,`“Some S are non-P”`], 0,
           `Obversion changes the quality (E becomes A) and replaces the predicate by its complement.`,
           `Obversion keeps the subject and the quantity, and it must both change the quality and negate the predicate.`),
+        Q(`There are no griffins. What follows by obversion from “No griffins are lions”?`, [`Nothing, since an affirmative about griffins would be false`,`“All griffins are non-lions”`,`“No griffins are non-lions”`,`“Some lions are griffins”`], 0,
+          `Obversion from E to A holds only when the subject stands for something; “All griffins are non-lions” would be an affirmative about nothing, and so false.`,
+          `The obverse form is “All griffins are non-lions,” but with no griffins it does not follow, and the other answers are not obverses at all.`),
         Q(`What is the contrapositive of “Some S are P”?`, [`“Some non-P are non-S”`,`“Some P are S”`,`“No non-P are non-S”`,`None, since an I proposition has no contrapositive`], 3,
           `Its obverse is “Some S are not non-P,” an O, and an O does not convert, so the contrapositive cannot be formed.`,
           `“Some P are S” is the converse; and no proposition with the terms exchanged and complemented follows from an I.`)
@@ -3237,7 +3241,7 @@ if(typeof document!=='undefined'){
       $('btn-venn-submit').onclick = submitVenn3;
     } else if(q.kind==='imm'){
       if(q.sub==='op'){
-        body.innerHTML = `<div class="q-instr" style="margin-bottom:6px">Give the <strong>${q.op}</strong> of:</div>
+        body.innerHTML = (q.note ? `<div class="gloss">❧ ${q.note}</div>` : '') + `<div class="q-instr" style="margin-bottom:6px">Give the <strong>${q.op}</strong> of:</div>
           <div class="syllogism" style="width:auto; text-align:center">${immPropText(q.pr)}.</div>`;
       } else {
         body.innerHTML = `<div class="syllogism" style="width:auto; text-align:center">
@@ -3348,7 +3352,9 @@ if(typeof document!=='undefined'){
     const pts = applyScore(res.correct);
     const eTxt = q.expected ? immPropText(q.expected) : null;
     let detail;
-    if(!q.expected){
+    if(q.emptyS){
+      detail = `<strong>Nothing follows.</strong> ${BURIDAN_NOTE}`;
+    } else if(!q.expected){
       detail = q.op==='converse'
         ? 'An <strong>O proposition has no converse</strong>, so this operation cannot be performed.'
         : 'An <strong>I proposition has no contrapositive</strong>, so this operation cannot be performed.';
@@ -3358,12 +3364,13 @@ if(typeof document!=='undefined'){
         ? ' (Conversion by limitation: the universal is reduced to a particular, and existential import supplies the witness.)'
         : ' (Contraposition by limitation: an E contraposes only to an O.)';
     }
-    if(!res.correct) detail += `<div class="fb-why">${immMistakeOp(q, res.parsedAns)}</div>`;
+    if(!res.correct && !q.emptyS) detail += `<div class="fb-why">${immMistakeOp(q, res.parsedAns)}</div>`;
     const marks = immMarks(q.expected || q.pr);
     const labels = {A:termLabel(q.S), B:termLabel(q.P)};
     detail += `<div class="fb-venn">${svgVenn(V2, labels, marks.shaded, marks.xs)}
       <div class="venn-cap">${q.expected
         ? `“${eTxt}” pictured on the original circles; a complement is simply the region outside its circle.`
+        : q.emptyS ? 'The original proposition; with its subject empty, the operation yields nothing that follows.'
         : 'The original proposition; the operation yields no proposition from it.'}</div></div>`;
     fbHTML(res.correct, pts, detail);
     finishOrNext();
