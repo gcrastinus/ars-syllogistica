@@ -1201,7 +1201,7 @@ root.arsAdvancedDecks = function(Q, SRC){
   };
   /* ---- Third Act: The Modal Syllogism in Depth ---- */
   const ADV_MODS = [
-    { src:`${SRC_ART}; ${SRC_MAR}; Aristotle, <i>Prior Analytics</i> I.3, 9, 13–17; St. Thomas Aquinas, commentary on the <i>Posterior Analytics</i>, bk. I, lect. 14, and commentary on the <i>Sentences</i> I, d. 38, q. 1, a. 5, ad 5; Matthew Minerd, “BCS Logic 2023” (course slides).`,
+    { src:`${SRC_ART}; ${SRC_MAR}; Aristotle, <i>Prior Analytics</i> I.3, 9, 13–17; St. Albert the Great, commentary on the <i>Prior Analytics</i>, bk. I, tract. 3, ch. 3; Stanford Encyclopedia of Philosophy, “Medieval Theories of Modality” (on Kilwardby); St. Thomas Aquinas, commentary on the <i>Posterior Analytics</i>, bk. I, lect. 14, and commentary on the <i>Sentences</i> I, d. 38, q. 1, a. 5, ad 5; Matthew Minerd, “BCS Logic 2023” (course slides).`,
       h:`<p><strong>Why the first-figure rule holds.</strong> Aristotle holds that in the first figure a necessary major premise with a plain minor premise gives a necessary conclusion (<em>Prior Analytics</em> I.9). The reason is the same principle that governs the first figure. If a predicate belongs necessarily to everything under the middle term, it belongs necessarily to whatever falls under the middle term; and the plain minor premise places the minor term under the middle.</p>`
       + `<p>So “Every metal necessarily conducts electricity; this wire is metal; so this wire necessarily conducts electricity” concludes necessarily, though the minor premise is plain, since the wire might have been made of something else. The necessity in the conclusion is the necessity with which the property follows from being metal; the minor premise contributes only that the wire falls under “metal,” which is enough.</p>` },
     { h:`<p><strong>Why the reverse mixture fails.</strong> The reverse does not hold: a plain major premise with a necessary minor premise gives only a plain conclusion. Aristotle’s example sets motion, animal, and man as the terms (<em>Prior Analytics</em> I.9). Every man is necessarily an animal, and suppose that every animal is in fact moving; it follows that every man is moving, but not that every man is necessarily moving, since neither animal nor man moves necessarily.</p>`
@@ -1214,7 +1214,7 @@ root.arsAdvancedDecks = function(Q, SRC){
       + `<p>The contingent universal negative behaves differently (I.17). “It is contingent that no man is white,” in the strict sense, means that any man may be white or not white, and it does not convert into “It is contingent that no white thing is a man.” Aristotle shows this just before he finds that two contingent premises give no conclusion in the second figure, where such a conversion would be needed to reduce the syllogism.</p>` },
     { h:`<p><strong>One-sided possibility in a conclusion.</strong> Since “possible” has two senses, the conclusion of a modal syllogism can be possible in one sense and not in the other. In the first figure, when the major premise is plain and the minor contingent, Aristotle says that the syllogisms are imperfect and that the negative ones conclude not to contingency in the strict sense, but only that the predicate does not belong necessarily (<em>Prior Analytics</em> I.15).</p>`
       + `<p>The difference is between “can be and can also not be” (contingent, or two-sided) and “need not be” (one-sided). A conclusion of the second kind says less: it denies necessity without asserting that the opposite can also hold. Aristotle’s mixtures with contingent premises differ in this way from mood to mood, and each has to be examined on its own.</p>` },
-    { h:`<p><strong>The logicians’ cross.</strong> When both premises are necessary, the conclusion is necessary, and the general rules apply without difficulty. The other mixtures led to so many distinctions that the theory of the modal syllogism has been called “the logicians’ cross” (<em>crux logicorum</em>), as Maritain reports. The <em>Summa totius logicae</em>, once attributed to St. Thomas, follows Aristotle and lists the cases figure by figure; Robert Kilwardby, the thirteenth-century English Dominican, and St. Albert the Great, St. Thomas’s teacher, also follow Aristotle, adding that the plain minor premise must be true “simply,” by the nature of its terms.</p>`
+    { h:`<p><strong>The logicians’ cross.</strong> When both premises are necessary, the conclusion is necessary, and the general rules apply without difficulty. The other mixtures led to so many distinctions that the theory of the modal syllogism has been called “the logicians’ cross” (<em>crux logicorum</em>), as Maritain reports. The <em>Summa totius logicae</em>, once attributed to St. Thomas, follows Aristotle and lists the cases figure by figure. St. Albert the Great, St. Thomas’s teacher, also follows Aristotle, but he adds that the plain minor premise must be true “simply” (<em>simpliciter</em>), by the nature of its terms, and not only “as of now” (<em>ut nunc</em>); by “simply” he means that the predicate belongs to the subject substantially (commentary on the <em>Prior Analytics</em>, bk. I, tract. 3, ch. 3). Historians of logic report that Robert Kilwardby, the thirteenth-century English Dominican, gave the same qualification.</p>`
       + `<p><strong>A short note.</strong> Theophrastus, Aristotle’s successor at the Lyceum, held a simpler rule, that the conclusion always follows the weaker premise in mode. The medieval commentators did not adopt it for the first figure, and this course follows Aristotle.</p>` }
   ];
   const ADV_MODS_EXTRA = {
@@ -1307,14 +1307,14 @@ root.arsAdvancedDecks = function(Q, SRC){
         [`The logicians’ cross`,`The bridge of asses`,`The tree of Porphyry`,`The square of opposition`], 0,
         `Its many mixtures earned it the name <em>crux logicorum</em>.`,
         `The bridge of asses is a name for finding the middle term, and the tree and the square belong elsewhere.`),
-      Q(`What did Kilwardby and St. Albert add to Aristotle’s first-figure rule?`,
+      Q(`What did St. Albert add to Aristotle’s first-figure rule?`,
         [`That the plain minor must be true by the nature of its terms`,`That the major must be contingent`,`That the conclusion must always follow the weaker premise in mode`,`That the rule holds in every figure`], 0,
-        `They required that the plain minor be true “simply,” by the nature of its terms.`,
-        `They followed Aristotle, not the weaker-premise rule, and kept the rule to the first figure.`),
+        `He required that the plain minor be true “simply,” by the nature of its terms.`,
+        `He followed Aristotle, not the weaker-premise rule, and kept the rule to the first figure.`),
       Q(`Whose rule is it that the conclusion follows the weaker premise in mode?`,
         [`Theophrastus’s`,`Aristotle’s`,`St. Albert’s`,`Kilwardby’s`], 0,
         `Theophrastus, Aristotle’s successor, held the simpler rule.`,
-        `Aristotle, Albert, and Kilwardby grant a necessary conclusion in the first-figure case.`)
+        `Aristotle and Albert grant a necessary conclusion in the first-figure case, and historians of logic report that Kilwardby did as well.`)
     ]}
   };
   /* ---- Third Act: Compound Arguments ---- */

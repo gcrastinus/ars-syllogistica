@@ -6427,7 +6427,7 @@ Small heading: ADVANCED STUDIES
 Why Aristotle’s first-figure rule holds and why the reverse mixture fails; the necessity of the consequence and of the consequent; St. Thomas’s distinction applied to a syllogism; converting modal premises; one-sided possibility; and why the theory was called the logicians’ cross.
 
 @card 1
-Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of Catholic Theology* (ect.org, 2025); Jacques Maritain, *Formal Logic*, trans. Imelda Choquette (Sheed & Ward, 1937); Aristotle, *Prior Analytics* I.3, 9, 13–17; St. Thomas Aquinas, commentary on the *Posterior Analytics*, bk. I, lect. 14, and commentary on the *Sentences* I, d. 38, q. 1, a. 5, ad 5; Matthew Minerd, “BCS Logic 2023” (course slides).
+Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of Catholic Theology* (ect.org, 2025); Jacques Maritain, *Formal Logic*, trans. Imelda Choquette (Sheed & Ward, 1937); Aristotle, *Prior Analytics* I.3, 9, 13–17; St. Albert the Great, commentary on the *Prior Analytics*, bk. I, tract. 3, ch. 3; Stanford Encyclopedia of Philosophy, “Medieval Theories of Modality” (on Kilwardby); St. Thomas Aquinas, commentary on the *Posterior Analytics*, bk. I, lect. 14, and commentary on the *Sentences* I, d. 38, q. 1, a. 5, ad 5; Matthew Minerd, “BCS Logic 2023” (course slides).
 
 **Why the first-figure rule holds.** Aristotle holds that in the first figure a necessary major premise with a plain minor premise gives a necessary conclusion (*Prior Analytics* I.9). The reason is the same principle that governs the first figure. If a predicate belongs necessarily to everything under the middle term, it belongs necessarily to whatever falls under the middle term; and the plain minor premise places the minor term under the middle.
 
@@ -6663,7 +6663,7 @@ Why not the others: The two-sided statement adds the possibility of raining.
 
 @card 7
 
-**The logicians’ cross.** When both premises are necessary, the conclusion is necessary, and the general rules apply without difficulty. The other mixtures led to so many distinctions that the theory of the modal syllogism has been called “the logicians’ cross” (*crux logicorum*), as Maritain reports. The *Summa totius logicae*, once attributed to St. Thomas, follows Aristotle and lists the cases figure by figure; Robert Kilwardby, the thirteenth-century English Dominican, and St. Albert the Great, St. Thomas’s teacher, also follow Aristotle, adding that the plain minor premise must be true “simply,” by the nature of its terms.
+**The logicians’ cross.** When both premises are necessary, the conclusion is necessary, and the general rules apply without difficulty. The other mixtures led to so many distinctions that the theory of the modal syllogism has been called “the logicians’ cross” (*crux logicorum*), as Maritain reports. The *Summa totius logicae*, once attributed to St. Thomas, follows Aristotle and lists the cases figure by figure. St. Albert the Great, St. Thomas’s teacher, also follows Aristotle, but he adds that the plain minor premise must be true “simply” (*simpliciter*), by the nature of its terms, and not only “as of now” (*ut nunc*); by “simply” he means that the predicate belongs to the subject substantially (commentary on the *Prior Analytics*, bk. I, tract. 3, ch. 3). Historians of logic report that Robert Kilwardby, the thirteenth-century English Dominican, gave the same qualification.
 
 **A short note.** Theophrastus, Aristotle’s successor at the Lyceum, held a simpler rule, that the conclusion always follows the weaker premise in mode. The medieval commentators did not adopt it for the first figure, and this course follows Aristotle.
 
@@ -6679,15 +6679,15 @@ Why: Its many mixtures earned it the name *crux logicorum*.
 Why not the others: The bridge of asses is a name for finding the middle term, and the tree and the square belong elsewhere.
 
 @question 7.2
-Question: What did Kilwardby and St. Albert add to Aristotle’s first-figure rule?
+Question: What did St. Albert add to Aristotle’s first-figure rule?
 Choices:
 - That the plain minor must be true by the nature of its terms
 - That the major must be contingent
 - That the conclusion must always follow the weaker premise in mode
 - That the rule holds in every figure
 Answer: That the plain minor must be true by the nature of its terms
-Why: They required that the plain minor be true “simply,” by the nature of its terms.
-Why not the others: They followed Aristotle, not the weaker-premise rule, and kept the rule to the first figure.
+Why: He required that the plain minor be true “simply,” by the nature of its terms.
+Why not the others: He followed Aristotle, not the weaker-premise rule, and kept the rule to the first figure.
 
 @question 7.3
 Question: Whose rule is it that the conclusion follows the weaker premise in mode?
@@ -6698,7 +6698,7 @@ Choices:
 - Kilwardby’s
 Answer: Theophrastus’s
 Why: Theophrastus, Aristotle’s successor, held the simpler rule.
-Why not the others: Aristotle, Albert, and Kilwardby grant a necessary conclusion in the first-figure case.
+Why not the others: Aristotle and Albert grant a necessary conclusion in the first-figure case, and historians of logic report that Kilwardby did as well.
 
 
 ########################################################################
