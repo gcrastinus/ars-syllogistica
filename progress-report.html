@@ -294,7 +294,8 @@ function analyze(prog){
   const sets=prog.sets||{};
   /* window = first activity date … +111 days */
   let all=[];
-  for(const id in sets){ (sets[id].history||[]).forEach(h=>{ if(h && h.date) all.push(h.date); }); }
+  /* only the graded exercises start the window; the optional Advanced sets do not */
+  SETS.forEach(S=>{ const r=sets[String(S.id)]; ((r && r.history)||[]).forEach(h=>{ if(h && h.date) all.push(h.date); }); });
   all.sort();
   const graded = all.length>0;
   const firstDate = graded ? all[0] : null;
