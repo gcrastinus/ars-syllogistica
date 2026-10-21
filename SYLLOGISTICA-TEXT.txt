@@ -208,7 +208,7 @@ Why not the others: White, heavy, and running belong to things as they exist, an
 
 @card 3
 
-**Logic and thought.** Rationality is a distinctively human capacity, and logic is the art that governs its use. What, then, is thought? The goal of rationality is the discovery of truth and the guidance of human action by the truths we have discovered. While we are still seeking, and have not yet arrived at knowledge, the acts of the mind as it deliberates are thoughts. So thought is not the fundamental human capacity, and logic is not properly called the art of thinking, because thought exists for the sake of discovering truth.
+**Logic and thought.** Rationality is a distinctively human capacity, and logic is the art that governs its use. What, then, is thought? The goal of rationality is the discovery of truth and the guidance of human action by the truths we have discovered. While we are still seeking, and have not yet arrived at knowledge, the acts of the mind as it deliberates are thoughts. Since thought exists for the sake of discovering truth, it is not the fundamental human capacity, and logic is not properly called the art of thinking.
 
 St. Thomas puts the point this way: “Thinking, properly speaking, is the movement of the mind as it deliberates, while it has not yet arrived at the full vision of the truth in question” (*Summa theologiae* II-II, q. 2, a. 1). Logic therefore governs the whole process of human reasoning, from principles to conclusions, for the sake of knowing.
 
@@ -403,9 +403,9 @@ Why not the others: Neither premise need be false, and no word is used in two se
 
 @card 8
 
-**Form and matter.** Within demonstrative science there are two broad parts: **formal logic**, which considers the **form** of an argument (how its terms are arranged), and **material logic**, which considers its **matter** (whether its premises are true, and of what kind). Formal logic studies the arrangement of the terms and asks whether, from premises taken as given, the conclusion can be deduced. Such reasoning is **valid** when the truth of the premises necessitates the truth of the conclusion, that is, when it is impossible for the premises to be true and the conclusion false. For example, “all B are A, and all C are B; therefore all C are A” is valid because of the way its terms are related, whatever B, A, and C stand for.
+**Form and matter.** Formal logic and material logic are the two parts of the logic that judges arguments, by their form (the *Prior Analytics*) and by their matter (the *Posterior Analytics*). **Formal logic** considers the **form** of an argument (how its terms are arranged), and **material logic** considers its **matter** (whether its premises are true, and of what kind). Formal logic studies the arrangement of the terms and asks whether, from premises taken as given, the conclusion can be deduced. Such reasoning is **valid** when the truth of the premises necessitates the truth of the conclusion, that is, when it is impossible for the premises to be true and the conclusion false. For example, “all B are A, and all C are B; therefore all C are A” is valid because of the way its terms are related, whatever B, A, and C stand for.
 
-Material logic studies how demonstration works, how different kinds of premises (necessary, probable, or merely possible) relate to the truths we can reach through them, and how each discipline reasons according to its own subject matter. In family counseling, for example, no one reasons about a family with 1.9 children, but in demography such a family can be reasoned about as a statistical average. Material logic is the greater part of demonstrative science: St. Thomas assigns the form of reasoning to the *Prior Analytics* and the matter, which demonstration requires, to the *Posterior Analytics*.
+Material logic studies how demonstration works, how different kinds of premises (necessary, probable, or merely possible) relate to the truths we can reach through them, and how each discipline reasons according to its own subject matter. In family counseling, for example, no one reasons about a family with 1.9 children, but in demography such a family can be reasoned about as a statistical average. In the proem to his commentary on the *Posterior Analytics*, St. Thomas assigns the judgment by form to the *Prior Analytics* and the judgment by matter, which demonstration requires, to the *Posterior Analytics*.
 
 @question 8.1
 Question: Which of these says the same thing as “the argument is valid”?
@@ -723,9 +723,9 @@ Why not the others: Correct speech is grammar’s work; logic does concern words
 
 @card 5
 
-**The concept and the term.** The concept is the end of the act of understanding a thing. A concept is called a **term** (from the Latin *terminus*, an end or boundary) because it can be one of the two ends of a simple proposition: in “A is B,” A and B are the terms, and the copula “is” joins them. The spoken term is the word that expresses the concept, that is, a sound that signifies a concept by convention.
+**The concept and the term.** The concept is the end of the act of understanding a thing. A concept is called a **mental term** (from the Latin *terminus*, an end or boundary) because it can be one of the two ends of a simple proposition: in “A is B,” A and B are the terms, and the copula “is” joins them. The spoken term is the word that expresses the mental term, that is, a sound that signifies a concept by convention.
 
-The tradition therefore distinguishes each act of the mind from its expression in words. The concept is expressed by the term, the judgment by the proposition, and the inference by the syllogism.
+The tradition therefore distinguishes each act of the mind from its expression in words. The mental term is expressed by the spoken term, the judgment by the proposition, and the inference by the syllogism.
 
 @question 5.1
 Question: Why is a concept called a “term”?
@@ -752,12 +752,12 @@ Why not the others: The copula is not a term, and a proposition always has two t
 @question 5.3
 Question: Which pair matches an act of the mind with its expression in words?
 Choices:
-- The concept and the term
-- The judgment and the syllogism
-- The inference and the term
-- The concept and the proposition
-Answer: The concept and the term
-Why: The concept is expressed by a term, the judgment by a proposition, and the inference by a syllogism.
+- The mental term and the spoken term
+- The judgment of the second act and the syllogism
+- The inference and the spoken term
+- The mental term and the proposition
+Answer: The mental term and the spoken term
+Why: The mental term is expressed by the spoken term, the judgment by a proposition, and the inference by a syllogism.
 Why not the others: The other pairs mix the acts: the syllogism expresses an inference, and the proposition expresses a judgment.
 
 @card 6
@@ -1488,9 +1488,9 @@ Why not the others: The letters are the vowels of two Latin verbs.
 
 @card 5
 
-**Truth is in the proposition.** Truth is most properly found in the proposition. Aristotle states it this way: “To say of what is that it is not, or of what is not that it is, is false, while to say of what is that it is, and of what is not that it is not, is true” (*Metaphysics* IV.7).
+**Truth is in the proposition.** Truth is properly in the judgment of the intellect, and the proposition, which signifies that judgment, is true in a secondary sense. Aristotle states it this way: “To say of what is that it is not, or of what is not that it is, is false, while to say of what is that it is, and of what is not that it is not, is true” (*Metaphysics* IV.7).
 
-Truth belongs properly to what is asserted, and so it does not belong properly to the first act of the mind, which asserts nothing. As St. Thomas says, truth has its foundation in reality, but it is completed in the intellect, when a thing is understood to be as it is.
+The judgment is the act that asserts, and so truth does not belong properly to the first act of the mind, which asserts nothing. As St. Thomas says, truth has its foundation in reality, but it is completed in the intellect, when a thing is understood to be as it is.
 
 @question 5.1
 Question: According to Aristotle, which of these is true?
@@ -1504,15 +1504,15 @@ Why: To say of what is that it is, and of what is not that it is not, is true (*
 Why not the others: The second and third are Aristotle’s examples of falsehood; and saying nothing asserts nothing, so it is neither true nor false.
 
 @question 5.2
-Question: Where is truth most properly found?
+Question: Where is truth properly found?
 Choices:
-- In the proposition, that is, in what is asserted
-- In a single concept
-- In a single word
+- In the judgment of the intellect
+- In the proposition alone, apart from the judgment
+- In a single concept, before anything is asserted
 - In the sound of the voice that pronounces the words
-Answer: In the proposition, that is, in what is asserted
-Why: Truth belongs properly to what is asserted, and only a proposition asserts.
-Why not the others: A concept or a word asserts nothing, and the sound of the voice is only its sign.
+Answer: In the judgment of the intellect
+Why: Truth is properly in the judgment of the intellect. The proposition signifies that judgment, and so the proposition is true only in a secondary sense.
+Why not the others: The proposition is true because it signifies a true judgment, so its truth is secondary. A concept asserts nothing, and the sound of the voice is only a sign.
 
 @question 5.3
 Question: True or false: a single concept, such as “snow,” is properly true or false.
@@ -1520,8 +1520,8 @@ Choices:
 - True
 - False
 Answer: False
-Why: A single concept asserts nothing, so truth does not belong to it properly. It can be called true only in a secondary sense, so far as it conforms to the thing it represents.
-Why not the others: Truth belongs properly to the proposition.
+Why: A single concept asserts nothing, so truth does not belong to it properly. Truth is properly in the judgment, and the proposition that signifies the judgment is true only in a secondary sense.
+Why not the others: Truth belongs properly to the judgment of the intellect.
 
 @card 6
 
@@ -2292,9 +2292,9 @@ Why not the others: Knowing why requires the cause as middle term; a sufficient 
 
 @card 7
 
-**What follows in the Third Act.** The exercises of the Third Act begin with the categorical syllogism: drawing it on three circles (Exercise VIII), judging its validity in letters and in English (IX and X), and drawing the conclusion from two premises (XI). They then take up syllogisms built on compound propositions: the conjunctive (“not both”) and the disjunctive (“either … or”) in XII, the conditional (“if … then”) in XIII, and all of them together in XIV. Exercise XV finds the syllogism in ordinary speech, XVI treats the modal syllogism, and XVII the chain of syllogisms, in which the conclusion of one syllogism becomes a premise of the next.
+**What follows in the Third Act.** The exercises of the Third Act begin with the categorical syllogism: drawing it on three circles (Exercise VIII), judging its validity in letters and in English (IX and X), and drawing the conclusion from two premises (XI). They then take up syllogisms built on compound propositions: the conjunctive (“not both”) and the disjunctive (“either … or”) in XII, the conditional (“if … then”) (The Hypothetical Syllogism) in XIII, and all of them together (The Mixed Consequence) in XIV. Exercise XV finds the syllogism in ordinary speech, XVI treats the modal syllogism, and XVII the chain of syllogisms, in which the conclusion of one syllogism becomes a premise of the next.
 
-The later sections apply the third act to its uses. *Ad Demonstrationem* (XVIII) weighs an argument in its form and its matter together; *Rhetorica* (XIX) treats the enthymeme, an argument with one premise left unsaid; *Dialectica* (XX) treats reasoning from what is probable; and *Sophistica* (XXI) treats the fallacies, arguments that seem sound and are not.
+The later sections apply the third act to its uses. *Ad Demonstrationem* (XVIII) weighs an argument in its form and its matter together; *Dialectica* (XX) treats reasoning from what is probable; *Rhetorica* (XIX) treats the enthymeme, an argument with one premise left unsaid; and *Sophistica* (XXI) treats the fallacies, arguments that seem sound and are not.
 
 @question 7.1
 Question: What is a chain of syllogisms?
