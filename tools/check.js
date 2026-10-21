@@ -18,6 +18,7 @@ const fs = require('fs'), path = require('path'), vm = require('vm');
 const ROOT = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const engineSrc = fs.readFileSync(path.join(ROOT, 'ars-engine.js'), 'utf8');
+const advSrc = fs.readFileSync(path.join(ROOT, 'ars-advanced.js'), 'utf8');
 let failures = 0;
 const fail = m => { failures++; console.log('FAIL  ' + m); };
 const note = m => console.log('      ' + m);
@@ -25,8 +26,10 @@ const ok = m => console.log('ok    ' + m);
 
 /* 1. syntax */
 const inline = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
-try { new vm.Script(engineSrc, {filename: 'ars-engine.js'}); ok('ars-engine.js parses'); }
-catch (e) { fail('ars-engine.js: ' + e.message); }
+for (const [n, src] of [['ars-engine.js', engineSrc], ['ars-advanced.js', advSrc]]) {
+  try { new vm.Script(src, {filename: n}); ok(n + ' parses'); }
+  catch (e) { fail(n + ': ' + e.message); }
+}
 inline.forEach((s, i) => {
   try { new vm.Script(s, {filename: 'index.html#script' + i}); }
   catch (e) { fail('index.html inline script ' + i + ': ' + e.message); }
@@ -48,7 +51,9 @@ const data = big.slice(a, b) + `
 ;this.__out = {INTRO_LOGIC, FIRST_ACT, SECOND_ACT, THIRD_ACT, CIRCLES, LEADINS, STUDY_DECKS,
   ADVANCED_DECKS: (typeof ADVANCED_DECKS!=='undefined') ? ADVANCED_DECKS : []};`;
 const ctx = {$: () => null, document: {getElementById: () => null}, console};
+ctx.window = ctx;
 vm.createContext(ctx);
+vm.runInContext(advSrc, ctx, {filename: 'ars-advanced.js'});
 vm.runInContext(data, ctx, {filename: 'index.html#decks'});
 const D = ctx.__out;
 
