@@ -4332,7 +4332,7 @@ function genCompoundPropQ(d){
 }
 
 /* ---------------- XXIV. FIGURES, MOODS, AND REDUCTION (Maritain, pp. 185–205) ---------------- */
-const RED_RULES = 'The figure is fixed by the place of the middle term: subject of the major and predicate of the minor in the first figure; predicate of both in the second; subject of both in the third; predicate of the major and subject of the minor in the fourth (the later account). The mood names the propositions by A, E, I, O. An imperfect mood is reduced to the first-figure mood that begins with the same letter: B to Barbara, C to Celarent, D to Darii, F to Ferio. In the name, s means convert the preceding proposition simply, p convert it by limitation, m transpose the premises, and c reduce to the impossible.';
+const RED_RULES = 'The figure is fixed by the place of the middle term: subject of the major and predicate of the minor in the first figure; predicate of both in the second; subject of both in the third; predicate of the major and subject of the minor in the fourth figure of the later account, which the Aristotelian and Thomist tradition does not count as a distinct figure but treats as the indirect first figure, that is, the first figure concluding indirectly by the transposition of the premises. The mood names the propositions by A, E, I, O. An imperfect mood is reduced to the first-figure mood that begins with the same letter: B to Barbara, C to Celarent, D to Darii, F to Ferio. In the name, s means convert the preceding proposition simply, p convert it by limitation, m transpose the premises, and c reduce to the impossible.';
 const FIG_ORD = {1:'first', 2:'second', 3:'third', 4:'fourth'};
 const PERFECT_OF = {Barbara:'AAA', Celarent:'EAE', Darii:'AII', Ferio:'EIO'};
 const RED_TABLE = {
