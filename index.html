@@ -2468,6 +2468,573 @@ if(typeof document!=='undefined'){
   const CIRCLES_STUDY = {id:'circles', num:'STUDY', title:'Seeing with Circles', deck:CIRCLES, review:false,
      desc:'How a Venn diagram shows a proposition: shading for what is empty, an × for what exists, the four forms drawn on two circles, and the ⊗ for the existence that an affirmative asserts.'};
 
+  /* ==================== ADVANCED STUDIES: DECKS ====================
+     Fourteen decks that perfect the skill of each act, after its doctrine deck
+     and its exercises. Each card states one point; its three question forms
+     follow in the *_EXTRA table, merged in below. Each deck carries a Review.
+     The gate on each entry is the set of exercises that opens it in the
+     Guided Path (see GP.PREREQS for the paired exercise sets). */
+  /* ---- First Act: The Predicables in Depth ---- */
+  const ADV_PRED = [
+    { src:`${SRC_ART}; ${SRC_MAR}; Matthew Minerd, “BCS Logic 2023” (course slides); John F. Peifer, <i>The Concept in Thomism</i> (Bookman, 1952); Porphyry, <i>Isagoge</i>, with Cajetan’s commentary; R. E. Houser, <i>Logic as a Liberal Art</i> (Catholic University of America Press, 2020); Aristotle, <i>Topics</i> I.4–8; St. Thomas Aquinas, <i>Summa theologiae</i> I, q. 77, a. 1, ad 5.`,
+      h:`<p><strong>The universal known by reflection.</strong> The mind first knows things. When we grasp what a tree is, the concept is not what we know but that by which we know the tree; this is <em>direct</em> knowledge. Afterward the mind can turn back on what it has grasped and consider the nature as it is in the mind: abstracted from this tree and that one, and able to be said of many. This turning back is <em>reflex</em> knowledge, and it always comes second, since we know that we know only by first knowing something.</p>`
+      + `<p>The predicables are found by reflex knowledge. Being a genus, being a species, and being said of many are relations that a nature has only as it is known, and the tradition calls them second intentions. No genus exists outside the mind as one thing among others; what exists outside the mind is this oak and that pine. So the logician studies the universal as it is in the mind, while the metaphysician asks what in things grounds it.</p>` },
+    { h:`<p><strong>The tree of Porphyry.</strong> Porphyry, a third-century Neoplatonist who wrote the standard introduction to Aristotle’s <em>Categories</em>, set out one line of the category of substance from the top down. Substance is divided into body and spirit; body into living and non-living body; living body into animal and plant; animal into rational and irrational animal; and rational animal gives man, under whom are Socrates, Plato, and every other man. Drawn on a page, with the differences branching to either side, the series became known as the tree of Porphyry.</p>`
+      + `<p>Each step is made by a difference, and each difference is one of a pair: corporeal or incorporeal, animate or inanimate, sentient or insentient, rational or irrational. The genus at each step joined to its difference gives the species at the next, so that “living body” is “body” with the difference “animate,” and “animal” is “living body” with the difference “sentient.” Reading the tree upward gives the definition of man by its successive genera and differences.</p>` },
+    { h:`<p><strong>Highest, middle, and lowest.</strong> In the tree some terms are only genera, some only species, and some both. The <strong>supreme genus</strong> (substance) has no genus above it, and so it is a genus and never a species. The <strong>lowest species</strong> (man) has no species below it, only individuals, and so it is a species and never a genus. Every term between them is a <strong>subaltern</strong> genus, that is, a species of the term above it and a genus of the term below it: animal is a species of living body and a genus of rational animal.</p>`
+      + `<p>The individual stands below the lowest species and is neither genus nor species, since it is not said of many. So Socrates is a man, but nothing is a Socrates. For the same reason the supreme genus cannot be defined by a genus and difference, because it has no genus, and the individual cannot be defined at all, because a definition states what is common, and the individual is known by the senses and named, not defined.</p>` },
+    { h:`<p><strong>Property in four senses.</strong> Porphyry distinguishes four senses of “property.” In the first sense, a property belongs to one species only, but not to every member of it, as being a physician or a geometer belongs to man alone, but not to every man. In the second, it belongs to every member, but not to that species only, as being two-footed belongs to every man and also to birds. In the third, it belongs to every member and only to that species, but not always, as turning gray in old age.</p>`
+      + `<p>In the fourth and strict sense, a property belongs to every member, only to that species, and always, as the power to laugh belongs to man, or the power to neigh to the horse. Only a property in this fourth sense converts with its species (whatever can laugh is a man, and every man can laugh), and so the tradition calls it property in the proper sense. The exercise on the predicables uses this fourth sense; the other three are properties only in a qualified way.</p>` },
+    { h:`<p><strong>Two kinds of accident.</strong> The word “accident” is used twice in logic, in two related senses. Among the categories, the nine accidents are the ways of being that exist <em>in</em> a substance and cannot exist on their own, such as quantity, quality, and relation; this is <strong>predicamental</strong> accident, the accident of the categories. Among the predicables, an accident is anything said of a subject that is no part of its essence and does not follow from it; this is <strong>predicable</strong> accident.</p>`
+      + `<p>The two do not always coincide. Rationality is a quality, and so a predicamental accident if we place it among the categories, but it is no predicable accident of man, since it belongs to his definition. And the predicable accident can be said of an accident as well as of a substance: in “This large area is white,” white is a predicable accident of the quantity, since the color has no necessary connection with the size. St. Thomas makes the same distinction when he notes that the soul’s powers are accidents in the first sense but not in the second (<em>Summa theologiae</em> I, q. 77, a. 1, ad 5).</p>` },
+    { h:`<p><strong>The difference divides and constitutes.</strong> A specific difference does two things at once. It <strong>divides</strong> the genus, separating the species that have it from those that lack it, as “rational” separates man from the brutes; and it <strong>constitutes</strong> the species, making it what it is, as “rational” joined to “animal” makes man. Cajetan, the sixteenth-century Dominican commentator on Porphyry and on St. Thomas, notes that it divides the genus not by cutting its essence in pieces, since the whole nature of animal is found in man and in the horse, but by dividing the species that fall under it.</p>`
+      + `<p>A property also marks off one species from another, but it does not constitute the species, because it flows from a species already constituted. The power to laugh distinguishes man from the brutes, but it follows from his being rational; it does not make him a man. So in seeking a definition we look for the difference, and we use the property as a sign that leads us to it.</p>` },
+    { h:`<p><strong>Aristotle’s four and Porphyry’s five.</strong> Aristotle does not list five predicables. In the <em>Topics</em> he considers every predicate in relation to a subject and finds four: a predicate either converts with its subject or does not. If it converts and states the essence, it is a <strong>definition</strong>; if it converts and does not state the essence, it is a <strong>property</strong>. If it does not convert and belongs to the essence, it is a <strong>genus</strong> (the difference is counted with the genus); if it does not convert and is outside the essence, it is an <strong>accident</strong>. The central books of the <em>Topics</em> are arranged under these four heads.</p>`
+      + `<p>Porphyry’s five are reached from a different question, namely how a universal is related to the things under it, and so the species and the difference appear in his list, while the definition does not. The two lists do not contradict each other. Aristotle’s is the list of the dialectician, who asks how a predicate stands to a subject in an argument; Porphyry’s is the list of the logician who orders universals for definition and classification.</p>` },
+    { h:`<p><strong>What the universal is.</strong> The question of universals asks what in reality grounds our general concepts. Three answers are usually distinguished. <strong>Absolute realism</strong>, associated with Plato, holds that the natures we grasp exist apart from things and from minds as universals. <strong>Nominalism</strong> holds that only individuals exist and that general words and concepts are names for groups of individuals, with nothing common in the things themselves. <strong>Moderate realism</strong>, the view of Aristotle and St. Thomas, holds that the nature exists in individuals, really but as individual, and becomes universal only in the mind, which abstracts it.</p>`
+      + `<p>The question bears on logic. If nominalism is true, a universal proposition such as “Every man is mortal” is only a summary of the cases observed, and a definition states no essence. On the moderate realist view, the universal concept grasps a nature that is truly in each individual, and so a definition can state what a thing is and a demonstration can show why it must be so. Nominalism, which became dominant in the later Middle Ages, is one of the sources of the modern doubt about definition and demonstration.</p>` }
+  ];
+  const ADV_PRED_EXTRA = {
+    0:{ qs:[
+      Q(`When we know what a horse is, what do we know first?`,
+        [`The horse itself, by means of the concept`,`The concept of horse, as a thing in the mind`,`The relation of species that the nature has`,`The word “horse” as a spoken sound`], 0,
+        `Direct knowledge reaches the thing; the concept is that by which it is known, and it becomes an object only when the mind turns back on it.`,
+        `The concept, its relations, and the word are known afterward, by reflection or by convention; what is known first is the thing.`),
+      Q(`Why does the tradition call “being a species” a second intention?`,
+        [`It belongs to a nature only as the nature is known`,`It is learned after the first intention of a teacher`,`It is the second of the five predicables in order`,`It belongs to things as their second kind of matter`], 0,
+        `Being a species, a genus, or a predicate is a relation the nature has in the mind, which reflection finds after the thing is known.`,
+        `The word “second” refers to the order of knowing: the mind first knows the thing and then turns back to what it knows.`),
+      Q(`Which of these exists outside the mind?`,
+        [`This oak growing on the hill`,`The genus to which oaks belong`,`The species “oak” as said of many`,`The relation of predicate to subject`], 0,
+        `Outside the mind there are individual things; genus, species, and predicate are relations the mind forms by reflection.`,
+        `A genus, a species as said of many, and a predicate are second intentions, which exist only in the mind.`)
+    ]},
+    1:{ qs:[
+      Q(`In a tree of figures built like Porphyry’s, what is “plane figure” joined to the difference “bounded by three straight lines”?`,
+        [`Triangle`,`Circle`,`Rectangle`,`Line`], 0,
+        `The genus joined to its difference gives the species at the next step, as in Porphyry’s tree of substance.`,
+        `A circle and a square have other differences, and a line is not a plane figure at all.`),
+      Q(`What divides each step of the tree of Porphyry?`,
+        [`A pair of opposed differences`,`A pair of accidents`,`A property and an accident`,`Two individuals of the species`], 0,
+        `Each genus is divided by a pair of differences such as corporeal and incorporeal, or animate and inanimate.`,
+        `Accidents and properties do not constitute species, and individuals come only at the foot of the tree.`),
+      Q(`Reading the tree of Porphyry upward from man, what do we find?`,
+        [`The genera and differences of his definition`,`The list of his proper accidents`,`The individuals who share his nature`,`The ten categories in their order`], 0,
+        `Each step adds a difference to a genus, and so reading upward gives the successive genera and differences in the definition of man.`,
+        `The tree stays within one category, substance, and it lists genera and differences, not accidents or individuals.`)
+    ]},
+    2:{ qs:[
+      Q(`In the line “quantity, continuous quantity, line,” what is “continuous quantity”?`,
+        [`A subaltern genus`,`The supreme genus`,`The lowest species`,`An individual`], 0,
+        `It is a species of quantity and a genus of line, so it is both genus and species, which is the mark of a subaltern genus.`,
+        `Quantity, at the top, is the supreme genus; and continuous quantity is not the lowest, since line falls under it.`),
+      Q(`Why can the supreme genus not be defined by genus and difference?`,
+        [`It has no genus above it`,`It has no species below it`,`It is not said of many things`,`It is an accident of substance`], 0,
+        `A definition by genus and difference requires a higher genus, and the supreme genus has none.`,
+        `The supreme genus has many species below it and is said of many; what it lacks is a genus above.`),
+      Q(`Why is the individual neither a genus nor a species?`,
+        [`It is not said of many`,`It has no accidents`,`It lies outside the categories`,`It has no definition in words`], 0,
+        `Genus and species are said of many, and the individual is not said of anything else.`,
+        `The individual has accidents and falls in a category as the subject of predication; it is not a predicate of many.`)
+    ]},
+    3:{ qs:[
+      Q(`“Having lungs belongs to every horse, but not to horses alone.” In which sense is having lungs a property of the horse?`,
+        [`The second: to every member, not only to it`,`The first: to it alone, not to every member`,`The third: to all and only, not always`,`The fourth: to all, only, and always`], 0,
+        `It belongs to every member of the species but not only to that species, which is Porphyry’s second sense.`,
+        `The first sense lacks “every,” the third lacks “always,” and the third and fourth both require “only,” which lungs do not satisfy, since many animals have them.`),
+      Q(`Which property is a property in the fourth and strict sense?`,
+        [`The power to bray, said of the donkey`,`Being a jockey, said of man`,`Having four legs, said of the horse`,`Going bald in old age, said of man`], 0,
+        `The power to bray belongs to every donkey, to the donkey alone, and always, and so it converts with the species.`,
+        `Being a jockey is not in every man, four legs are not in the horse alone, and going bald is not always present.`),
+      Q(`Why does the tradition call the fourth sense of property “property in the proper sense”?`,
+        [`Only it converts with its species`,`Only it belongs to the essence itself`,`Only it can be gained and lost`,`Only it is found in every genus`], 0,
+        `A property in the fourth sense belongs to every member, only, and always, and so whatever has it is of that species.`,
+        `No property belongs to the essence, and a property in the strict sense is never gained or lost.`)
+    ]},
+    4:{ qs:[
+      Q(`In “Snow is cold,” coldness is a quality. Is it a predicable accident of snow?`,
+        [`No, since coldness follows from what snow is`,`Yes, since every quality is a predicable accident`,`Yes, since snow can be found in many places`,`No, since a quality cannot be said of a substance`], 0,
+        `Coldness is a predicamental accident (a quality), but it follows from the nature of snow, and so it is not a predicable accident of it.`,
+        `The two senses of accident do not coincide; a quality can belong to the definition or follow from it.`),
+      Q(`What makes something a predicamental accident?`,
+        [`It exists in a substance and not on its own`,`It may be present or absent in its subject`,`It is said of many individuals at once`,`It belongs to every member of a species`], 0,
+        `The accidents of the categories are ways of being that exist only in a substance.`,
+        `Being present or absent describes the predicable accident, and being said of many describes any universal.`),
+      Q(`In “This long road is narrow,” what is narrowness to the length?`,
+        [`A predicable accident of an accident`,`A predicable property of the road`,`A substance said of an accident`,`A genus of the road’s quantity`], 0,
+        `Narrowness has no necessary connection with being long, so it is a predicable accident; and its subject here is a quantity, an accident.`,
+        `Narrowness does not follow from length, and it is a quantity of the road, not a substance or a genus.`)
+    ]},
+    5:{ qs:[
+      Q(`What two things does a specific difference do?`,
+        [`It divides the genus and constitutes the species`,`It names the genus and lists the individuals`,`It defines the genus and orders the categories`,`It follows the species and signals its property`], 0,
+        `The difference separates the species that have it from those that lack it, and joined to the genus it makes the species what it is.`,
+        `The difference does not follow the species as a property does; it is part of what the species is.`),
+      Q(`Why is the power to use language not the difference of man?`,
+        [`It flows from his being rational`,`It belongs to some other animals too`,`It is not found in every man`,`It is a quantity, not a quality`], 0,
+        `The power to use language follows from rationality, and so it is a property; the difference is what constitutes the species.`,
+        `As a power it belongs to every man and only to man; the reason it is not the difference is that it follows from the difference.`),
+      Q(`Does the difference “rational” cut the nature of animal in pieces?`,
+        [`No, the whole nature of animal is in each species`,`Yes, man has one part of animal and the brutes another`,`Yes, since a divided thing is no longer whole`,`No, since the difference is not said of the genus`], 0,
+        `Cajetan explains that the difference divides the species under the genus, not the genus’s essence, which is wholly in each.`,
+        `Man is wholly an animal, as the horse is; the difference sorts the species and leaves the genus whole in each.`)
+    ]},
+    6:{ qs:[
+      Q(`On Aristotle’s division, a predicate converts with its subject but does not state the essence. What is it?`,
+        [`A property`,`A definition`,`A genus`,`An accident`], 0,
+        `Converting predicates are definitions or properties, and the one that does not state the essence is the property.`,
+        `A definition converts and states the essence; genus and accident do not convert.`),
+      Q(`Where does the difference stand on Aristotle’s list in the <em>Topics</em>?`,
+        [`With the genus`,`With the property`,`With the accident`,`With the definition`], 0,
+        `Aristotle counts the difference with the genus, since both belong to the essence without converting with the subject.`,
+        `The difference belongs to the essence, so it cannot be a property or an accident, and alone it is not the whole definition.`),
+      Q(`Why does Porphyry’s list include the species, which Aristotle’s does not?`,
+        [`Porphyry asks how a universal stands to what is under it`,`Porphyry corrected an error in Aristotle’s list`,`Aristotle denied that species exist in things`,`Aristotle wrote before the species was named`], 0,
+        `The two lists answer different questions, and the species appears only when we ask how a universal relates to its inferiors.`,
+        `The lists do not contradict each other; Aristotle’s answers how a predicate stands to a subject in argument.`)
+    ]},
+    7:{ qs:[
+      Q(`“Only individual things exist, and ‘mammal’ is a name for a group of them.” Which position is this?`,
+        [`Nominalism`,`Moderate realism`,`Absolute realism`,`The view of St. Thomas`], 0,
+        `Nominalism holds that only individuals exist and that general words name groups, with nothing common in the things.`,
+        `Both kinds of realism hold that a nature is really common in some way, and St. Thomas is a moderate realist.`),
+      Q(`On the view of St. Thomas, where is the nature universal?`,
+        [`In the mind that abstracts it`,`In a separate world of forms`,`In each individual thing`,`Only in the word that names it`], 0,
+        `The nature is in individuals as individual and becomes universal in the mind, which abstracts it.`,
+        `Separate forms are the view of absolute realism, and a universal word without a universal concept is nominalism.`),
+      Q(`If nominalism were true, what would a definition state?`,
+        [`No essence, only what a name groups together`,`The essence of each individual one by one`,`The separate form in which things share`,`The same essence that a moderate realist finds`], 0,
+        `With nothing common in things, a definition cannot state what a thing is; it only fixes the use of a name.`,
+        `The nominalist denies common natures, so a definition cannot state an essence, separate or shared.`)
+    ]}
+  };
+  /* ---- First Act: The Categories in Depth ---- */
+  const ADV_CAT = [
+    { src:`${SRC_ART}; ${SRC_MAR}; Aristotle, <i>Categories</i> 1–2 and 10–15; ${SRC_OES}; Matthew Minerd, “BCS Logic 2023” (course slides); St. Thomas Aquinas, <i>Summa theologiae</i> I, q. 3, a. 5.`,
+      h:`<p><strong>Names said in one way or in many.</strong> Before the categories, Aristotle distinguishes the ways a name can be said of several things. Things are named <strong>equivocally</strong> when they share a name but the definition that goes with the name differs for each, as “animal” is said of a man and of a man painted in a picture. They are named <strong>univocally</strong> when they share both the name and its definition, as “animal” is said of a man and of an ox.</p>`
+      + `<p>Things are named <strong>derivatively</strong> (denominatively) when they take their name from something else, with a change of ending, as the grammarian is named from grammar and the courageous man from courage. These distinctions come first because the categories sort what is said univocally. An equivocal name must be divided into its senses, and each sense placed in its own category, before anything can be classified.</p>` },
+    { h:`<p><strong>Analogous names.</strong> Between the univocal and the equivocal stands the <strong>analogous</strong> name, which signifies different natures but is said first of one and of the others by reference to the first. “Healthy” is said first of the animal, which has health, and then of food, which causes health, and of a complexion, which is a sign of it. This is analogy by <strong>attribution</strong>, in which the secondary things are named from their relation to the first.</p>`
+      + `<p>In analogy by <strong>proportion</strong>, the name is said of each thing in its own way, according to a likeness of relations: “being” is said of substance and of accident, each according to its own manner of being, and “good” is said of a good knife and a good man, each good as it fulfills its own end. When the likeness of relations is only figurative, as when a brave man is called a lion, the analogy is <strong>metaphor</strong>. Many of the most important words in philosophy, such as “being,” “good,” and “true,” are analogous, and so neither univocal nor merely equivocal.</p>` },
+    { h:`<p><strong>Said of a subject, present in a subject.</strong> Aristotle also distinguishes two ways in which one thing can stand to a subject. To be <strong>said of</strong> a subject is to be predicable of it, as a universal is said of what falls under it. To be <strong>present in</strong> a subject is to exist in it, not as a part, but as something that cannot exist apart from it, as a color exists in a body. The first is a distinction in the order of knowing; the second is a distinction in the order of being.</p>`
+      + `<p>Combining the two gives four classes. What is said of a subject and present in none is <strong>universal substance</strong>, as “man.” What is neither said of a subject nor present in one is <strong>singular substance</strong>, as this man. What is said of a subject and present in one is <strong>universal accident</strong>, as “white.” What is present in a subject but said of none is <strong>singular accident</strong>, as the whiteness of this wall. Only the universals are placed in the categories, as genera and species of their kinds.</p>` },
+    { h:`<p><strong>What belongs in a category.</strong> The tradition sets five conditions for placing a nature in a category. It must be one simple nature, signified by a simple expression: “white horse” signifies two natures and belongs in no single category. It must be a natural thing, not an artifact as such, since an artifact is a shape given by the mind of the maker to some material. It must be signified univocally. It must be universal, since a category is a highest predicate. And it must be finite, so that God, who is not limited to any kind of being, is in no category.</p>`
+      + `<p>So a chair is a substance with respect to its wood, but the chair as a chair is outside the categories; Socrates is not in the category of substance as a predicate, but under it as the ultimate subject of predication; and an analogous word such as “being” is in no single category, since it is said of all of them, each in its own way.</p>` },
+    { h:`<p><strong>Why the categories belong to logic.</strong> The categories are the ten highest genera of what can be said of a thing: substance, quantity, quality, relation, action, passion, when, where, posture, and having (also called habit). As modes of being they belong to metaphysics; logic studies them as modes of predication, that is, as the highest kinds under which predicates are ordered. Logic does not tell us what a man or a color is, but it supplies the order in which natures are classified, and knowing the supreme genus of a thing is the first step toward its definition.</p>`
+      + `<p>Being itself is not an eleventh and highest genus above the ten. A genus is divided by differences that lie outside it, as “rational” lies outside the nature of animal; but nothing lies outside being, since every difference is itself something that is. So St. Thomas, following Aristotle’s <em>Metaphysics</em>, holds that being cannot be the genus of anything (<em>Summa theologiae</em> I, q. 3, a. 5), and each category is a highest genus in its own line.</p>` },
+    { h:`<p><strong>Four kinds of opposition.</strong> After the categories come the postpredicaments, the relations that appear once natures are placed in categories. The first is opposition, of which there are four kinds, in order of decreasing strength. <strong>Contradictory</strong> opposition sets a thing against its simple negation, as man against non-man, with nothing between them. <strong>Privative</strong> opposition sets a form against its absence in a subject that ought naturally to have it, as hearing against deafness in an animal.</p>`
+      + `<p><strong>Contrary</strong> opposition sets two positive extremes of one genus against each other in the same subject, as odd and even in number, or white and black in color, and some contraries have intermediates while others do not. <strong>Relative</strong> opposition, the weakest, sets two correlatives against each other, as whole and part or double and half, which exclude each other only in the same respect. Only contradiction is found in every category; privation and contrariety are found in several, and relative opposition chiefly in the category of relation.</p>` },
+    { h:`<p><strong>Prior and simultaneous.</strong> Aristotle counts the senses of “prior.” A thing is prior in <strong>time</strong>, as the older is prior to the younger. It is prior when the <strong>sequence of being cannot be reversed</strong>: if there are two, there is one, but not conversely, so one is prior to two. It is prior in <strong>order</strong>, as the elements of geometry come before the theorems and the opening of a speech before its narrative. It is prior in <strong>excellence</strong>, as the better is said to come first. And where two things imply each other, the one that is the <strong>cause</strong> is prior: a man’s being is the cause of the truth of “There is a man,” and not the reverse.</p>`
+      + `<p>Things are <strong>simultaneous</strong> in time when they come to be at once. They are simultaneous by nature when each implies the other and neither causes the other, as the double and the half, or when they are species divided from one genus by the same division, as the winged, the land, and the water animals. The genus, however, is prior to its species, since if there is a water animal there is an animal, but not conversely.</p>` },
+    { h:`<p><strong>Motion and having.</strong> Aristotle counts six kinds of motion: generation, destruction, increase, diminution, alteration, and change of place. They are distinct, since a thing can be altered in quality without growing, and a square can grow by an added figure without being altered. Rest is the contrary of motion in general, and each kind has its contrary: destruction of generation, diminution of increase, and motion downward of motion upward.</p>`
+      + `<p>He also counts the senses of “to have.” We have a quality, such as knowledge or virtue; a quantity, such as a height; clothing, or a ring on the hand; a part, such as a hand; a content, as a jar has wine; a possession, such as a house; and a husband or a wife, the most remote sense. Only one of these, what is worn or carried on the body, is the category of having. So “He has a cloak” falls under having, while “He has courage” falls under quality, though the same verb is used for both.</p>` }
+  ];
+  const ADV_CAT_EXTRA = {
+    0:{ qs:[
+      Q(`“The river bank was steep, and the bank lent us money.” How is “bank” said of the two?`,
+        [`Equivocally`,`Univocally`,`Derivatively`,`Analogously`], 0,
+        `The two share the name, but the definition that goes with it differs for each, which is equivocation.`,
+        `They do not share the definition, so the name is not univocal, and neither is named from the other.`),
+      Q(`A terrier and a collie are both called “dog.” How is the name said of them?`,
+        [`Univocally`,`Equivocally`,`Derivatively`,`Metaphorically`], 0,
+        `They share the name and the definition that answers to it, so the name is univocal.`,
+        `The definition of “dog” is the same for both, so there is no equivocation, derivation, or figure.`),
+      Q(`A just man is named from justice. How is he named?`,
+        [`Derivatively, from the quality, with a change of ending`,`Univocally, since justice and he share a definition`,`Equivocally, since justice is a quality and he a man`,`Analogously, since justice is said first of God and then of men`], 0,
+        `A thing named from another with a change of ending is named derivatively, as the grammarian from grammar.`,
+        `The just man and justice do not share a definition, and naming him “just” after his justice is derivation, not equivocation.`)
+    ]},
+    1:{ qs:[
+      Q(`“A medical book,” “a medical instrument,” and “a medical doctor” are said with reference to the art of medicine. What kind of name is “medical” here?`,
+        [`Analogous by attribution`,`Univocal, with one definition`,`Purely equivocal`,`Analogous by metaphor`], 0,
+        `Each is called medical by its relation to one first thing, the art of medicine, which is analogy by attribution.`,
+        `The things differ in nature, so the name is not univocal; and its uses are related, so it is not purely equivocal or merely figurative.`),
+      Q(`Calling a ship’s prow its “nose” is an analogy of what kind?`,
+        [`Metaphor, since the likeness of relations is figurative`,`Attribution, since the prow causes the nose`,`Proportion in the proper sense, as when “being” is said of all`,`None, since the name is said univocally`], 0,
+        `The prow stands to the ship somewhat as a nose to a face, but only figuratively, which is metaphor.`,
+        `The prow neither causes nor signifies a nose, and the likeness is not a proper sharing of one notion.`),
+      Q(`Why is “good” called analogous rather than univocal?`,
+        [`It is said of each thing according to its own end`,`It is said of every thing in exactly one sense`,`Its uses have no relation to one another`,`It is said only of men and of nothing else`], 0,
+        `A good knife and a good man are each good as they fulfill their own ends, so the name is said proportionally.`,
+        `A univocal name keeps one definition, and an equivocal name has unrelated senses; “good” does neither.`)
+    ]},
+    2:{ qs:[
+      Q(`Where does “horse” fall in Aristotle’s fourfold division?`,
+        [`Universal substance`,`Singular substance`,`Universal accident`,`Singular accident`], 0,
+        `“Horse” is said of many and is present in no subject, so it is universal substance.`,
+        `It is not one horse, so not singular substance, and it does not exist in another, so it is no accident.`),
+      Q(`Where does the courage of Achilles fall in the fourfold division?`,
+        [`Singular accident`,`Universal accident`,`Singular substance`,`Universal substance`], 0,
+        `It exists in Achilles and is said of nothing else, so it is a singular accident.`,
+        `Courage as said of many would be universal accident; this courage is one man’s.`),
+      Q(`What does “present in a subject” mean in this division?`,
+        [`Unable to exist apart from the subject, yet not a part of it`,`Being one of the integral parts that together make up the subject`,`Being predicable of the subject as its genus`,`Being near the subject in place or time`], 0,
+        `Aristotle means what exists in another, not as a part, but as unable to exist apart from it, as a color in a body.`,
+        `Parts are excluded, predication is the other half of the division, and nearness in place is not meant.`)
+    ]},
+    3:{ qs:[
+      Q(`Why does “tall tree” belong in no single category?`,
+        [`It signifies two natures, a quantity and a substance`,`It is an artifact made by the human mind`,`It is said of many trees at once`,`It is an equivocal name for a plant`], 0,
+        `A complex expression signifies two natures, and only one simple nature is placed in a category.`,
+        `A tree is not an artifact, being said of many is required for a category, and “tall tree” is not equivocal.`),
+      Q(`Why is a table, as a table, outside the categories?`,
+        [`Its form as a table is given by the mind of its maker`,`It is a single thing and so not a universal that is said of many`,`It has no quantity or quality of its own`,`It is said univocally of all furniture`], 0,
+        `An artifact as such is a shape given to some material by the maker, and so it is not one natural kind.`,
+        `The table’s material is a substance with quantity and quality; what is outside the categories is the artifact as such.`),
+      Q(`“One” is said of one man, one color, and one day. Why is it in no single category?`,
+        [`It is said of every category, each in its own way`,`It is a complex expression of two natures`,`It is the name of an artifact`,`It is a singular and not a universal`], 0,
+        `A name said of all the categories, each in its own way, is analogous, and a category requires a univocal name.`,
+        `“One” is a simple expression, not an artifact, and it is said of many; it fails the condition of univocity.`)
+    ]},
+    4:{ qs:[
+      Q(`How does logic consider the categories?`,
+        [`As the highest kinds of predicates`,`As the causes of all things that are`,`As the ten parts of every substance`,`As ten words of the Greek language`], 0,
+        `Metaphysics studies the categories as modes of being; logic studies them as the highest genera under which predicates are ordered.`,
+        `The categories are not causes, parts of a substance, or mere words; logic orders predicates under them.`),
+      Q(`Why is being not a genus?`,
+        [`Every difference that would divide it is itself a being`,`Being is said of only one category`,`Being has no species under it at all`,`Being is a name for the individual only`], 0,
+        `A genus is divided by differences outside its nature, and nothing lies outside being.`,
+        `Being is said of all the categories, analogously; the difficulty is that no difference lies outside it.`),
+      Q(`Why is knowing a thing’s category useful for defining it?`,
+        [`It is the highest genus, the first step to a nearer one`,`The category gives the specific difference of the thing`,`The category lists every property of the thing`,`The category tells whether the thing exists`], 0,
+        `Knowing the supreme genus starts the search for the nearer genus that a definition needs.`,
+        `The category does not supply the difference or the properties, and it says nothing about existence.`)
+    ]},
+    5:{ qs:[
+      Q(`A man who was born able to see has lost his sight. What opposition is there between sight and his blindness?`,
+        [`Privative`,`Contradictory`,`Contrary`,`Relative`], 0,
+        `Blindness is the absence of sight in a subject that ought naturally to have it, which is privation.`,
+        `Blindness is not the simple negation of sight in anything whatever, nor a positive extreme, nor a correlative.`),
+      Q(`A stone cannot see. Why is the stone not called blind?`,
+        [`A privation is only in a subject apt to have the form`,`A stone is opposed to sight by contrariety, not privation`,`Blindness is a relation and a stone has none`,`A stone has the form of sight in potency`], 0,
+        `Privation is the absence of a form in a subject naturally able to have it, and a stone is not such a subject.`,
+        `The stone is simply non-seeing, by contradiction; it is not blind, since it was never apt to see.`),
+      Q(`Master and servant are opposed in which way?`,
+        [`Relatively, as correlatives`,`Contrarily, as extremes of one genus`,`Privatively, as a form and its lack`,`Contradictorily, as a thing and its negation`], 0,
+        `Master and servant are each said by reference to the other, which is relative opposition.`,
+        `Neither is the absence or the negation of the other, and they are not two extremes of one genus.`)
+    ]},
+    6:{ qs:[
+      Q(`In a speech the introduction comes before the argument. In which sense is it prior?`,
+        [`In order`,`In time only`,`In excellence`,`As a cause`], 0,
+        `Aristotle gives the parts of a speech as an example of what is prior in order.`,
+        `The introduction is not said to be better or a cause, and the order meant is that of the parts, not simply of the clock.`),
+      Q(`“If there is a triangle, there is a figure, but not conversely.” In which sense is figure prior to triangle?`,
+        [`The sequence of being cannot be reversed`,`It is older in time`,`It is more honorable`,`It is prior in the order of the parts of a speech`], 0,
+        `The being of the one implies the other but not the reverse, which is Aristotle’s second sense of prior, as one is prior to two.`,
+        `The point is not age, honor, or the order of a speech, but that the implication runs only one way.`),
+      Q(`Why are the greater and the less simultaneous by nature?`,
+        [`Each implies the other and neither causes the other`,`They came into being at the same moment`,`They are species of the same genus`,`The one is the cause of the other’s being`], 0,
+        `If there is a greater there is a less, and conversely, and neither is the cause of the other’s being.`,
+        `Simultaneity in time is a different sense, and if one caused the other it would be prior.`)
+    ]},
+    7:{ qs:[
+      Q(`A puppy grows into a large dog. Which kind of motion is this?`,
+        [`Increase`,`Alteration`,`Generation`,`Change of place`], 0,
+        `Growing in size is increase, a change in quantity.`,
+        `Alteration is change in quality, generation is coming to be, and change of place is local motion.`),
+      Q(`Water warms in the sun without growing or moving. Which kind of motion is this?`,
+        [`Alteration`,`Increase`,`Generation`,`Destruction`], 0,
+        `Becoming warm is a change in quality, which is alteration.`,
+        `Nothing grows, comes to be, or perishes; only a quality changes.`),
+      Q(`“The soldier has a helmet on.” In which category is this “having”?`,
+        [`Having`,`Quality`,`Quantity`,`Relation`], 0,
+        `What is worn or carried on the body is the category of having.`,
+        `A helmet worn on the head is neither a quality nor a quantity of the soldier, nor a reference to another; it is what he has on.`)
+    ]}
+  };
+  /* ---- First Act: Definition and Division in Depth ---- */
+  const ADV_DEFDIV = [
+    { src:`${SRC_ART}; ${SRC_MAR}; ${SRC_JST}; Matthew Minerd, “BCS Logic 2023” (course slides); Aristotle, <i>Posterior Analytics</i> II.1, 8–10, 13; Plato, <i>Sophist</i>; R. E. Houser, <i>Logic as a Liberal Art</i> (Catholic University of America Press, 2020); Pierre Conway, <i>Aristotelian Formal and Material Logic</i>; St. Thomas Aquinas, <i>Summa theologiae</i> I-II, q. 55, a. 4.`,
+      h:`<p><strong>Four questions.</strong> Aristotle observes that every question we ask about things is one of four kinds. Of a single term we ask <em>whether it is</em> (“Is there such a thing as a comet?”) and <em>what it is</em> (“What is a comet?”). Of a subject and predicate together we ask <em>whether it is so</em> (“Is the moon eclipsed?”) and <em>why it is so</em> (“Why is the moon eclipsed?”). The first two questions concern the first act of the mind; the second two concern judgment and reasoning.</p>`
+      + `<p>A definition answers the question “What is it?” Yet we cannot ask what a thing is until we know what its name means, and we do not seriously ask what it is until we know that it is. So the nominal definition comes first, the question of existence next, and the real definition after them. The four questions also show why definition and demonstration belong together: the answer to “What is it?” often turns out to be the answer to “Why is it so?”</p>` },
+    { h:`<p><strong>Division leads to definition.</strong> Plato’s <em>Sophist</em> shows how division can lead to a definition. Seeking to define the angler, the speakers begin with art and divide it into making and acquiring; acquiring into exchange and taking by force; taking by force into open fighting and hunting; and hunting into the hunting of lifeless things and of living prey, and so on. At the end, the definition of angling gathers up the differences found along the way: an art, acquisitive, of taking by force, of hunting, of living prey, and the rest.</p>`
+      + `<p>Each division keeps one member and divides it again, and every member kept stays within the first genus. So the definition is reached by narrowing one genus step by step, and each step contributes one difference. The genera all fall in one category (here, art, a kind of quality), even when the differences that divide them, such as “living” and “lifeless,” are taken from elsewhere.</p>` },
+    { h:`<p><strong>Dividing in order.</strong> A division made to reach a definition must keep three requirements. It must state the essence, dividing by differences that belong to the genus as such and not by accidents. It must be <strong>ordered</strong>, so that no step is skipped and each member contains everything under the step before it. And it must be <strong>complete</strong>, continuing until it reaches a lowest species, which is divided only into individuals.</p>`
+      + `<p>A division that skips a step leaves something out. If animal is divided at once into the feather-winged and the membrane-winged, the animals that do not fly fall under neither member; the division should first separate the flying from the walking and the swimming, and only then divide the flying. John of St. Thomas makes the same point: substance is not well divided at once into man, plant, and angel, but in order, into corporeal and spiritual, and corporeal into living and non-living, and so on. Where the members are not immediate and equal, the division should have two members, or as few as possible.</p>` },
+    { h:`<p><strong>Gathering the difference.</strong> Often no single known difference marks off a species. Then we gather several characteristics, each of which belongs to more than the species but none of which goes outside its genus, until together they belong to that species alone. Aristotle’s example is the number three: it is odd, which it shares with other odd numbers; it is prime, which it shares with five and seven; and it is not the sum of other numbers, which it shares with two. Together these belong to three alone, and they lead toward its definition.</p>`
+      + `<p>The characteristics gathered this way are signs of the difference, not yet the difference itself, and the hope is to reach the single difference that explains why they occur together. We use such signs instead of the property because a property is known to be proper only after the species is known. So the search for a definition usually begins from what is outward and common, and moves inward toward what is essential.</p>` },
+    { h:`<p><strong>Definition by likeness.</strong> A second method begins from individuals rather than from the genus. We take a group of things called by one name and find what they have in common; then another group called by the same name, and find what they have in common; and then ask whether the two common features share something further. Aristotle’s example is magnanimity. Alcibiades, Achilles, and Ajax would not bear an insult; Lysander and Socrates were indifferent to good and bad fortune. If something is common to both, such as thinking oneself worthy of great things, that is the definition; if nothing is, there are two kinds of magnanimity.</p>`
+      + `<p>This method proceeds from what is easier for us to grasp, the single cases, and it guards against equivocation, since it compares small groups before forming a general notion. It has one rule: the likeness must be taken in the same sense throughout. If one group is “hot” in temperature and the other “hot” only by a figure of speech, nothing common will be found, because things alike only by metaphor do not share an essence.</p>` },
+    { h:`<p><strong>What cannot be strictly defined.</strong> A strict definition gives a genus and a difference, and so some things cannot be defined in the strict sense. The highest genera, such as substance and quality, have no genus above them; they are made known by examples and by their properties. Individuals cannot be defined, because a definition states what is common, and the individual is reached by the senses and named. Being and the other notions said of every category cannot be defined by genus and difference either, since nothing lies outside them.</p>`
+      + `<p>Accidents are defined, but in a special way: since an accident exists only in a subject, its subject enters its definition from outside its own genus. So “snub” is defined as a nose that is concave, and a passion of the soul is defined with reference to the body. The tradition therefore says that an accident has a definition by addition, and that the substance alone is defined in the full and proper sense.</p>` },
+    { h:`<p><strong>Definition through the four causes.</strong> Because to define a thing is to say what makes it what it is, a full definition can name its causes. St. Thomas gathers the definition of virtue in this way: virtue is a good quality (its formal cause, with “quality” as its genus) of the mind (its material cause, the subject in which it exists), by which one lives rightly and which no one uses badly (its final cause, the good act), which God works in us without us (its efficient cause, said of infused virtue).</p>`
+      + `<p>Not every definition names all four causes, and the best definition names the one that explains the rest. In natural things the form is usually that cause, and in things made for a purpose it is usually the end. This is why the tradition sets the essential definition above the causal one but values both: the causal definition by the outside causes (the maker and the end) often leads us to the essential one.</p>` },
+    { h:`<p><strong>Definition and demonstration.</strong> Aristotle shows that the same account can appear as a definition and as a demonstration. “What is an eclipse of the moon?” One answer is “a loss of light from the moon,” which states the effect. Another is “a loss of light from the moon caused by the earth’s coming between it and the sun,” which states the cause. Put in order, the cause is the middle term of a demonstration whose conclusion is the effect: the moon is screened by the earth, and what is so screened loses its light, so the moon loses its light.</p>`
+      + `<p>So there are three kinds of definition in relation to demonstration: the definition that states the cause, which serves as the middle term; the definition that states the effect, which is the conclusion; and the definition of the first principles, which is not demonstrated at all but understood. The definition through the cause is the most perfect, since it says not only what the thing is but why it is so.</p>` }
+  ];
+  const ADV_DEFDIV_EXTRA = {
+    0:{ qs:[
+      Q(`“Why does iron rust?” Which of Aristotle’s four questions is this?`,
+        [`Why it is so`,`Whether it is`,`What it is`,`Whether it is so`], 0,
+        `It joins a subject and predicate and asks for the cause, which is the question “Why is it so?”`,
+        `“Whether it is” and “What it is” concern a single term, and “Whether it is so” asks only for the fact.`),
+      Q(`Why does the nominal definition come before the real one?`,
+        [`We must know what a name means before asking what it is`,`The nominal definition states the thing’s essence more exactly`,`The real definition is only a guess until the name is fixed`,`A thing has no essence until it has been named by someone`], 0,
+        `To ask what a thing is, we must first know what the name refers to; then we ask whether it exists, and then what it is.`,
+        `The nominal definition states only what the name means; the essence is stated by the real definition.`),
+      Q(`Which two of Aristotle’s questions concern a single term?`,
+        [`Whether it is, and what it is`,`What it is, and why it is so`,`Whether it is so, and why it is so`,`Whether it is, and why it is so`], 0,
+        `Asking whether a thing is and what it is concerns one term; the other two questions join a subject and predicate.`,
+        `“Whether it is so” and “Why it is so” ask about a predicate belonging to a subject, which needs two terms.`)
+    ]},
+    1:{ qs:[
+      Q(`A division begins with “living body” and divides it into plant and animal, then animal into rational and irrational. What does the definition of man gather?`,
+        [`The genus and the differences found on the way`,`Every member that was set aside on the way down`,`The properties of each member of the division`,`Only the last difference, “rational”`], 0,
+        `As in Plato’s angler, the definition collects the genus and each difference that led to the species.`,
+        `The members set aside belong to other species, and the definition needs the genus as well as the last difference.`),
+      Q(`In a division aimed at a definition, what is done with each step’s chosen member?`,
+        [`It is divided again, staying within the first genus`,`It is compared with the members set aside earlier`,`It is replaced by a property that signals it`,`It is moved to a different category for clarity`], 0,
+        `Each member kept is divided again, so that one genus is narrowed step by step toward the species.`,
+        `The division narrows one genus; it does not leave the genus or exchange the member for a property.`),
+      Q(`Must the differences used in a division fall in the same category as the genus?`,
+        [`No, though the genera stay within one category`,`Yes, every difference must share the genus’s category`,`No, and the genera may change category at each step`,`Yes, otherwise the division is merely accidental`], 0,
+        `The genera divided stay in one category, while the differences that divide them may be taken from elsewhere.`,
+        `In the angler, the genera are all kinds of art, but differences such as “living” are not themselves arts.`)
+    ]},
+    2:{ qs:[
+      Q(`Vehicles are divided at once into gasoline cars and electric cars. Which requirement does this break?`,
+        [`Order, since a step is skipped and much is left out`,`Completeness, since it reaches a lowest species`,`The essence, since it divides by a difference`,`None of them, since the division has two members`], 0,
+        `Skipping from vehicle to kinds of car leaves bicycles, ships, and wagons under neither member.`,
+        `A division with two members can still skip a step, and here the members do not exhaust the whole.`),
+      Q(`Why does John of St. Thomas prefer two members where the species are not immediate and equal?`,
+        [`So that each step is ordered and nothing is skipped`,`Because every genus has exactly two species`,`Because three or more members always overlap one another`,`So that the division ends more quickly`], 0,
+        `Dividing into two, and then dividing again, keeps the order of the genera and leaves nothing out.`,
+        `Some genera have several equal species, which may be divided into all of them at once; the rule concerns order.`),
+      Q(`When is a division aimed at definition complete?`,
+        [`When it reaches a lowest species`,`When it reaches the supreme genus`,`When it lists the individuals by name`,`When it has made three divisions`], 0,
+        `The division must continue until a species is reached that is divided only into individuals.`,
+        `The supreme genus is the starting point, individuals are not defined, and no fixed number of steps is required.`)
+    ]},
+    3:{ qs:[
+      Q(`The swan is a bird, is white, and has a long neck; each mark is shared, but together they fit the swan alone. What are these marks?`,
+        [`Signs leading toward the difference`,`The specific difference itself`,`Three separate properties`,`Three accidents with no use`], 0,
+        `Characteristics that each overflow the species but together belong to it alone are signs of the difference.`,
+        `None of them is proper alone, so none is a property; and together they are useful, though not yet the difference.`),
+      Q(`Why do we gather common characteristics instead of using the property at once?`,
+        [`A property is known to be proper only after the species is known`,`A property never belongs to every single member of the species`,`A property belongs to the essence and so is too obvious`,`A property cannot be expressed in words`], 0,
+        `To know that a feature is proper to a species, we must already know the species, so we begin from common signs.`,
+        `A property belongs to every member and follows from the essence; the difficulty is that it presupposes the species.`),
+      Q(`When we gather signs of a difference, what must each one do?`,
+        [`Stay within the genus while belonging to more than the species`,`Belong to the species alone, to every member of it, and always`,`Go beyond the genus into other categories`,`Belong to only some members of the species`], 0,
+        `Each sign overflows the species but not the genus; together they fit the species alone.`,
+        `A sign that went outside the genus would not help, and one belonging to the species alone would already be proper.`)
+    ]},
+    4:{ qs:[
+      Q(`Some brave men charge into danger and others hold firm under it. If nothing is common to both, what follows?`,
+        [`There are two kinds of bravery`,`Bravery cannot be defined at all`,`Only one group is truly brave`,`The two groups are the same kind`], 0,
+        `In definition by likeness, if the common features of the groups share nothing further, the name covers two kinds.`,
+        `The method does not conclude that the thing is indefinable or that one group is false; it finds two species.`),
+      Q(`Why must the likeness be taken in the same sense throughout?`,
+        [`Things alike only by metaphor do not share an essence`,`A metaphor is always a false statement about the things it names`,`Each group must have the same number of members`,`The groups must be drawn from the same century`], 0,
+        `If one group is so called properly and the other figuratively, nothing common will be found.`,
+        `The rule concerns the sense of the likeness, not the number or the date of the cases.`),
+      Q(`What is an advantage of definition by likeness?`,
+        [`It begins from single cases, which are easier for us to grasp`,`It begins from the supreme genus, which is easiest to know`,`It avoids comparing any individuals at all`,`It requires no further inquiry after one example`], 0,
+        `It proceeds from individuals, which are easier for us, and compares small groups before forming a general notion.`,
+        `This method starts from individuals, not from the genus, and it compares several groups.`)
+    ]},
+    5:{ qs:[
+      Q(`Why can “quality” not be defined by genus and difference?`,
+        [`It is a highest genus, with no genus above it`,`It is an individual, known only by the senses`,`It is an accident, which has no definition`,`It is an artifact, made by the mind`], 0,
+        `The highest genera are made known by examples and properties, since they have no genus above them.`,
+        `Quality is not an individual or an artifact, and accidents can be defined by including their subject.`),
+      Q(`“Bald” is defined as a head without hair. Why does “head” enter the definition?`,
+        [`An accident is defined with its subject added`,`A head is the genus of baldness`,`Baldness is a substance with parts`,`Every definition of a quality must name a part of the body`], 0,
+        `An accident exists only in a subject, so its subject enters its definition from outside its own genus.`,
+        `“Head” is not the genus of baldness but its subject; baldness is an accident, a privation in a subject.`),
+      Q(`Why can Socrates not be defined?`,
+        [`A definition states what is common, and he is an individual`,`He is a highest genus, with no genus above him`,`He lived too long ago for us to know his essence`,`His name is equivocal and has several senses`], 0,
+        `A definition states what is common to many, and the individual is reached by the senses and named.`,
+        `Socrates is the opposite of a highest genus; and age or equivocation is not the reason.`)
+    ]},
+    6:{ qs:[
+      Q(`“A hammer is a tool made by a smith for driving nails.” Which causes does this name?`,
+        [`The efficient and the final`,`The material and the formal`,`The formal and the final`,`The material and the efficient`], 0,
+        `The smith is the efficient cause, and driving nails is the end, the final cause.`,
+        `Nothing is said of what the hammer is made of or of its shape; the definition names the maker and the purpose.`),
+      Q(`In things made for a purpose, which cause usually explains the rest?`,
+        [`The end`,`The matter`,`The maker`,`The shape`], 0,
+        `The end explains why the thing is shaped and made as it is.`,
+        `In things made for a purpose, the matter, the maker, and the shape are all chosen for the sake of the end.`),
+      Q(`Why is a definition through causes a full definition?`,
+        [`To define a thing is to say what makes it what it is`,`Every thing has exactly four parts`,`Causes are always easier to observe than their effects`,`A definition must be as long as possible`], 0,
+        `Defining declares what makes a thing what it is, and that is to give its causes.`,
+        `The causes are not parts, they are often harder to observe than effects, and brevity is a rule of definition.`)
+    ]},
+    7:{ qs:[
+      Q(`“Thunder is a noise in the clouds caused by fire being quenched.” What role can this definition play in a demonstration?`,
+        [`It states the cause, so it can be the middle term`,`It states only the effect, so it is the conclusion`,`It is a first principle, which cannot be demonstrated`,`It is nominal, and so has no place in demonstration`], 0,
+        `A definition that gives the cause can serve as the middle term of a demonstration of the effect.`,
+        `This definition names the cause, not only the effect, and it is real, not merely nominal.`),
+      Q(`Which definition is the most perfect?`,
+        [`The one that states the cause`,`The one that states the effect`,`The one that gives the name’s origin`,`The one with the most words`], 0,
+        `The definition through the cause says what the thing is and why it is so.`,
+        `The definition through the effect states only that something happens, and the origin of a name is nominal.`),
+      Q(`Which kind of definition is not demonstrated at all?`,
+        [`The definition of the first principles`,`The definition that states the effect`,`The definition that states the cause`,`The definition that gathers signs`], 0,
+        `The definitions of first principles are understood directly, not proved.`,
+        `Definitions by cause and by effect appear in demonstration as middle and conclusion.`)
+    ]}
+  };
+  /* ---- First Act: Supposition ---- */
+  const ADV_SUPP = [
+    { src:`${SRC_ART}; ${SRC_MAR}; Timothy B. Noone and Gyula Klima, <i>A Little Practical Olde Logick</i> (manuscript); ${SRC_JST}; Matthew Minerd, “BCS Logic 2023” (course slides); ${SRC_OES}.`,
+      h:`<p><strong>Signification and supposition.</strong> In “Man is a species,” “Man has three letters,” and “Peter is a man,” the word “man” means the same thing each time: a rational animal. Yet it stands for something different each time, since we cannot conclude that Peter is a species or that Peter has three letters. The tradition therefore distinguishes a term’s <strong>signification</strong>, what it makes us understand, from its <strong>supposition</strong> (Latin <em>suppositio</em>), what it stands for in a proposition.</p>`
+      + `<p>A term has its signification by itself and always; it has supposition only within a proposition. John of St. Thomas defines supposition as the use of a term for that of which it is verified, according to what the copula requires. And it is chiefly the predicate that decides what the subject stands for: “species” makes “man” stand for the nature, “three letters” makes it stand for the word, and “is Peter” makes it stand for individual men.</p>` },
+    { h:`<p><strong>Material and formal, proper and improper.</strong> A term has <strong>material</strong> supposition when it stands for itself, as a spoken or written word: in “‘Lamb’ is a four-letter word,” the term stands for the word “lamb,” not for any animal. It has <strong>formal</strong> supposition when it stands for what it signifies. In writing, material supposition is usually marked with quotation marks, which is why words mentioned as words are put in quotation marks.</p>`
+      + `<p>Formal supposition is <strong>proper</strong> when the term stands for what it signifies in its proper sense, and <strong>improper</strong> when it stands for something by a figure of speech. In “The Lamb was offered for the sins of the world,” “Lamb” stands for Christ, and not for an animal. An argument that treats improper supposition as proper fails, as in “Every lamb has four legs; the Lamb was offered for the world; so something with four legs was offered for the world.”</p>` },
+    { h:`<p><strong>Simple and personal.</strong> Formal supposition is <strong>simple</strong> when a common term stands for the nature it signifies, and not for the individuals that have it. In “Man is a species” or “The vertebrate is a branch of zoology,” the subject stands for the nature as known, since no individual man is a species. It is <strong>personal</strong> when the term stands for the individuals that have the nature, as in “Man is mortal,” which is true of each man. “Personal” here has nothing to do with persons; a stone has personal supposition in “Some stone is heavy.”</p>`
+      + `<p>The medieval logicians agreed on the name “simple supposition” but not on what it reaches. Realists such as Walter Burley, an English logician of the fourteenth century, held that the term stands for the common nature found in each individual. Nominalists such as William of Ockham, the English Franciscan, held that it stands for the concept in the mind. Either way, the inference from “Man is a species” to “Socrates is a species” fails, because the term “man” changes what it stands for.</p>` },
+    { h:`<p><strong>Singular, determinate, distributive.</strong> Personal supposition is <strong>singular</strong> (or discrete) when the term stands for one individual, as “Socrates” or “this man.” It is <strong>common</strong> when a common term stands for many. Common supposition is <strong>determinate</strong> when we may descend to the individuals by “or”: “Some man is running” means that this man is running, or that one, or that other one. It is <strong>distributive</strong> when we may descend by “and”: “Every man is mortal” means that this man is mortal, and that one, and that other one.</p>`
+      + `<p>The descent shows what the proposition requires to be true. A determinate term needs only one of the individuals to make the proposition true; a distributive term needs every one of them. From the singulars we may also ascend: from “This man is running” to “Some man is running,” but not from “This man is mortal” to “Every man is mortal,” since one instance does not establish all of them.</p>` },
+    { h:`<p><strong>Merely confused and collective.</strong> Some common terms allow neither descent. In “Every man is an animal,” the predicate “animal” does not allow the descent “Every man is this animal, or every man is that animal,” since both are false; it allows only “Every man is this animal or that animal or that other one,” with the “or” inside the predicate. This is <strong>merely confused</strong> supposition, and it is the supposition of the predicate of a universal affirmative. The subject of “Workmen are needed to build a house” has the same supposition, since no particular workman is needed.</p>`
+      + `<p>A term has <strong>collective</strong> supposition when it stands for many things taken together as one subject, as in “The apostles were twelve.” No apostle was twelve, so we cannot descend to “Peter was twelve, and Paul was twelve.” Collective supposition must not be confused with distributive: “All the soldiers are brave” is said of each soldier, while “All the soldiers surrounded the fort” is said of them together.</p>` },
+    { h:`<p><strong>Supposition and distribution.</strong> The modern word “distributed” names what the medieval logicians called common, confused, and distributive supposition. In A, “Every S is P,” the subject is distributive and the predicate merely confused. In E, “No S is P,” both terms are distributive. In I, “Some S is P,” both terms are determinate. In O, “Some S is not P,” the subject is determinate and the predicate distributive. These are the rules of distribution that the exercises on the syllogism use.</p>`
+      + `<p>The modes of supposition also explain conversion. E and I convert simply because their two terms have the same mode of supposition, so exchanging them changes nothing. A and O do not convert simply, because their terms have different modes, and a change in a term’s supposition is enough to spoil an inference. So the predicate of an affirmative is never taken universally, and the predicate of a negative is always taken universally.</p>` },
+    { h:`<p><strong>The copula and existence.</strong> Supposition also depends on the time and the manner of being signified by the copula. An affirmative proposition whose subject stands for nothing at the time signified is false: “Napoleon will be emperor” is false, said now, since there is no Napoleon in the future to stand for. A negative proposition can be true even when its subject stands for nothing: “Napoleon is not in Paris” is true. This is the ground of the classical rule that affirmatives carry existential import and negatives do not.</p>`
+      + `<p>Maritain distinguishes <strong>natural</strong> supposition, where the predicate belongs to the subject by its essence and the copula abstracts from time, from <strong>accidental</strong> supposition, where the predicate belongs only by accident and the copula signifies actual existence. “Every triangle has three sides” holds of triangles as possible; “Peter is running” is false if Peter does not now exist. Words such as “can,” “will,” and “was” <strong>enlarge</strong> a term to possible, future, or past things (ampliation), and qualifiers such as “the poor” or “of this town” <strong>restrict</strong> it (restriction).</p>` },
+    { h:`<p><strong>A change of supposition breaks the argument.</strong> Since a valid inference needs each term to stand for the same things throughout, an argument fails when a term’s kind of supposition changes from one premise to another. “The logical categories were set out by Aristotle; quantity is a logical category; so quantity was set out by Aristotle” fails, because in the minor premise “logical category” stands for the categories as known, and quantity itself, as a way of being, was not invented by anyone.</p>`
+      + `<p>The same rule covers a change in the manner of existence. From “Every centaur is half man, half horse” and “A centaur is a creature of fable,” we may conclude that some creature of fable is half man, half horse, but not that such a creature really exists, since the premises speak of the centaur only as imagined. Many errors that look like failures of form are failures of supposition, and the remedy is the one the disputations used: to distinguish what each term stands for.</p>` }
+  ];
+  const ADV_SUPP_EXTRA = {
+    0:{ qs:[
+      Q(`What is the difference between a term’s signification and its supposition?`,
+        [`Signification is what it means; supposition, what it stands for`,`Signification belongs to spoken words; supposition belongs to written words`,`Signification changes with the predicate; supposition never changes`,`Signification is said of nouns; supposition is said of verbs alone`], 0,
+        `A term keeps its meaning by itself, but what it stands for depends on the proposition in which it is used.`,
+        `It is supposition, not signification, that changes with the predicate, and both belong to spoken and written terms.`),
+      Q(`Which part of a proposition chiefly decides what its subject stands for?`,
+        [`The predicate`,`The copula alone`,`The first word`,`The speaker’s intention`], 0,
+        `The tradition says the subject stands for what the predicate allows, as “species” makes “man” stand for the nature.`,
+        `The copula fixes the time, but it is chiefly the predicate that decides the kind of supposition.`),
+      Q(`Does a term have supposition when it is said by itself, outside any proposition?`,
+        [`No, it has signification, but supposition only in a proposition`,`Yes, it has the same supposition everywhere it is used`,`Yes, but only when it is a proper name`,`No, a term has neither meaning nor supposition alone`], 0,
+        `Signification belongs to a term by itself; supposition belongs to it only as part of a proposition.`,
+        `A term said alone still means something, but it stands for nothing until it is used in a proposition.`)
+    ]},
+    1:{ qs:[
+      Q(`In “‘Horse’ is a noun,” what supposition does the subject have?`,
+        [`Material`,`Simple`,`Personal`,`Improper`], 0,
+        `The subject stands for the word itself, which is material supposition.`,
+        `No horse is a noun; the term stands for the word, not for the nature or for any animal.`),
+      Q(`“The lion of the tribe of Judah has conquered.” What supposition does “lion” have?`,
+        [`Improper, since it stands for Christ by a figure`,`Material, since it stands for the word itself`,`Simple, since it stands for the nature of lions`,`Proper, since it stands for an animal`], 0,
+        `The term stands for what it signifies only by a figure of speech, which is improper supposition.`,
+        `The term does not stand for the word, the nature, or any actual lion; it stands for Christ by metaphor.`),
+      Q(`Why are words mentioned as words put in quotation marks?`,
+        [`To mark material supposition, where a term stands for itself`,`To mark improper supposition, where a term is used as a figure`,`To show that the word is in a foreign language`,`To show that the word is being stressed`], 0,
+        `Quotation marks show that the term stands for the word itself, which is material supposition.`,
+        `A figure of speech, a foreign word, and stress are marked in other ways, if at all.`)
+    ]},
+    2:{ qs:[
+      Q(`In “Dog is a species of mammal,” what supposition does “dog” have?`,
+        [`Simple`,`Personal`,`Material`,`Collective`], 0,
+        `No individual dog is a species, so the term stands for the nature, which is simple supposition.`,
+        `It does not stand for the word, for the individual dogs, or for dogs taken together.`),
+      Q(`In “Some tree is tall,” what supposition does “tree” have?`,
+        [`Personal`,`Simple`,`Material`,`Improper`], 0,
+        `The term stands for the individual trees that have the nature, which is personal supposition.`,
+        `A species is not tall, and neither is the word; the subject stands for individual trees, in the proper sense.`),
+      Q(`On Ockham’s view, what does “man” stand for in “Man is a species”?`,
+        [`The concept in the mind`,`The common nature in things`,`Each individual man`,`The spoken word “man”`], 0,
+        `Ockham, a nominalist, denied common natures and held that the term stands for the concept.`,
+        `The common nature is Burley’s realist answer, individuals would be personal supposition, and the word would be material.`)
+    ]},
+    3:{ qs:[
+      Q(`In “Some river is frozen,” what supposition does “river” have?`,
+        [`Determinate`,`Distributive`,`Singular`,`Collective`], 0,
+        `We may descend by “or”: this river, or that one, or that other one, is frozen.`,
+        `We cannot descend by “and,” the term is common rather than singular, and the rivers are not taken together.`),
+      Q(`In “Every river flows downhill,” what supposition does “river” have?`,
+        [`Distributive`,`Determinate`,`Merely confused`,`Simple`], 0,
+        `We may descend by “and”: this river flows downhill, and that one, and that other one.`,
+        `The proposition is about each river, so the descent is by “and,” and the term stands for individuals.`),
+      Q(`From “This dog barks,” to which proposition may we ascend?`,
+        [`Some dog barks`,`Every dog barks`,`No dog barks`,`Dog is a species`], 0,
+        `From a singular we may ascend to the determinate “Some dog barks,” but not to the distributive “Every dog barks.”`,
+        `One instance does not establish every case, and the other options change the quality or the supposition.`)
+    ]},
+    4:{ qs:[
+      Q(`In “Every bird is an animal,” what supposition does “animal” have?`,
+        [`Merely confused`,`Distributive`,`Determinate`,`Collective`], 0,
+        `We cannot descend to “every bird is this animal, or every bird is that animal,” only to “every bird is this animal or that animal,” which is merely confused supposition.`,
+        `The predicate of a universal affirmative is neither distributed nor determinate.`),
+      Q(`“The jurors were twelve.” What supposition does “jurors” have?`,
+        [`Collective`,`Distributive`,`Determinate`,`Material`], 0,
+        `No juror was twelve; the jurors are taken together as one subject, which is collective supposition.`,
+        `We cannot descend to each juror by “and” or by “or,” and the term does not stand for the word.`),
+      Q(`“A key is needed to open this door.” Why can we not descend to “This key is needed, or that key is needed”?`,
+        [`No particular key is needed, so the supposition is merely confused`,`Every key is needed, so the supposition is distributive`,`The keys are all taken together, so the supposition is collective`,`The word “key” is meant, so the supposition is material`], 0,
+        `As with Maritain’s workmen, the term stands for keys without picking out any one, which is merely confused supposition.`,
+        `Not every key is needed, the keys are not taken together, and the word itself is not meant.`)
+    ]},
+    5:{ qs:[
+      Q(`In O, “Some S is not P,” which term is distributed?`,
+        [`The predicate only`,`The subject only`,`Both terms`,`Neither term`], 0,
+        `In O the subject is determinate and the predicate distributive.`,
+        `Both terms are distributed in E and neither in I; in O only the predicate.`),
+      Q(`Why does E convert simply?`,
+        [`Both its terms have the same mode, distributive`,`Its subject is determinate and its predicate distributive`,`It is negative, and every negative converts`,`Its terms are both singular`], 0,
+        `When both terms have the same mode of supposition, exchanging them changes nothing.`,
+        `O is negative and does not convert simply; what matters is that E’s two terms share one mode.`),
+      Q(`What did the medieval logicians call what modern books call a distributed term?`,
+        [`Common, confused, and distributive supposition`,`Common and determinate supposition`,`Simple supposition`,`Material supposition`], 0,
+        `The modern word “distributed” names common, confused, and distributive supposition.`,
+        `Determinate supposition is the undistributed subject of I and O, and simple and material are other kinds altogether.`)
+    ]},
+    6:{ qs:[
+      Q(`There are no dragons. Is “Some dragon is green” true or false?`,
+        [`False, since its subject stands for nothing`,`True, since nothing contradicts it`,`Neither, since it is about nothing`,`True in natural supposition`], 0,
+        `An affirmative proposition whose subject stands for nothing is false.`,
+        `The rule leaves no third value: the affirmative is false, and its contradictory “No dragon is green” is true.`),
+      Q(`There are no dragons. Is “No dragon is green” true or false?`,
+        [`True, since a negative needs no existing subject`,`False, since its subject stands for nothing that exists`,`Neither, since it is about nothing`,`False in natural supposition`], 0,
+        `A negative proposition can be true when its subject stands for nothing, which is why negatives carry no existential import.`,
+        `Only affirmatives are made false by an empty subject.`),
+      Q(`In “Every circle has a center,” what supposition does “circle” have?`,
+        [`Natural, since the predicate belongs by essence`,`Accidental, since some circles are drawn badly`,`Material, since “circle” is a word`,`Collective, since the circles are taken together`], 0,
+        `The predicate belongs to the subject by its essence, and the copula abstracts from time, which is natural supposition.`,
+        `Accidental supposition is for predicates that belong by accident, and the term here stands for circles, each one.`)
+    ]},
+    7:{ qs:[
+      Q(`“Bread is a word; I ate bread; so I ate a word.” What has gone wrong?`,
+        [`“Bread” changes from material to personal supposition`,`“Bread” changes from simple to collective supposition`,`The argument has two negative premises`,`Nothing, the argument is valid`], 0,
+        `In the first premise the term stands for the word, in the second for the food, so the middle term stands for different things.`,
+        `There is no negative premise and nothing collective; the term changes from the word to the thing.`),
+      Q(`“Rose is a species of flower; this flower is a rose; so this flower is a species of flower.” What has gone wrong?`,
+        [`The middle term shifts from the nature to an individual`,`The conclusion is true, so nothing has gone wrong`,`Both premises are affirmative, which is not allowed in this figure`,`The argument has two particular premises`], 0,
+        `In the first premise “rose” stands for the nature and in the second for individual roses, so the middle term stands for different things.`,
+        `The conclusion is false and the premises are true, and two affirmatives may conclude; the fault is the change in what the middle term stands for.`),
+      Q(`What remedy do the disputations use against a change of supposition?`,
+        [`To distinguish what each term stands for`,`To deny every premise of the argument`,`To grant the argument and narrow the thesis`,`To convert each premise simply`], 0,
+        `The respondent distinguishes the senses in which the term is taken, granting one and denying the other.`,
+        `Denying true premises or granting a bad argument does not answer it; the distinction shows where it fails.`)
+    ]}
+  };
+  (function(){
+    [[ADV_PRED, ADV_PRED_EXTRA], [ADV_CAT, ADV_CAT_EXTRA], [ADV_DEFDIV, ADV_DEFDIV_EXTRA], [ADV_SUPP, ADV_SUPP_EXTRA]].forEach(([deck, extra])=>{
+      for(const k in extra){
+        const p = deck[k|0]; if(!p) continue;
+        const qs = extra[k].qs.filter(Boolean);
+        p.q = qs[0]; p.q2 = qs[1]; p.q3 = qs[2];
+      }
+    });
+  })();
+  const ADVANCED_DECKS = [
+    {id:'adv-pred', num:'ADVANCED STUDIES', title:"The Predicables in Depth", deck:ADV_PRED, review:true,
+     group:'v1', gate:[1, 2, 3, 4],
+     desc:"Direct and reflex knowledge, and why the predicables are second intentions; the tree of Porphyry; the highest genus, the subaltern genera, and the lowest species; property in its four senses; the accident of the categories and the accident of the predicables; how the difference divides and constitutes; Aristotle’s four predicables and Porphyry’s five; and the question of universals."},
+    {id:'adv-cat', num:'ADVANCED STUDIES', title:"The Categories in Depth", deck:ADV_CAT, review:true,
+     group:'v1', gate:[1, 2, 3, 4],
+     desc:"What comes before and after the categories: univocal, equivocal, derivative, and analogous names; what is said of a subject and what is present in one; what can be placed in a category; why being is not a genus; the four kinds of opposition; the senses of prior and simultaneous; and motion and having."},
+    {id:'adv-defdiv', num:'ADVANCED STUDIES', title:"Definition and Division in Depth", deck:ADV_DEFDIV, review:true,
+     group:'v1', gate:[1, 2, 3, 4],
+     desc:"How a definition is found: Aristotle’s four questions; division as the way to a definition, with Plato’s angler; dividing in order; gathering the signs of a difference; definition by likeness; what cannot strictly be defined; definition through the four causes; and how definition and demonstration meet."},
+    {id:'adv-supp', num:'ADVANCED STUDIES', title:"Supposition", deck:ADV_SUPP, review:true,
+     group:'v1', gate:[1, 2, 3, 4],
+     desc:"What a term stands for in a proposition: signification and supposition; material and formal, proper and improper; simple and personal; singular, determinate, distributive, merely confused, and collective; supposition and distribution; the copula and existence; and how a change of supposition breaks an argument."}
+  ];
+  /* ==================== END OF ADVANCED STUDIES DECKS ==================== */
+
   function makeStudyTile(d){
     const c = document.createElement('div');
     c.className = 'set-card study-tile';

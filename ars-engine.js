@@ -4018,12 +4018,192 @@ function genDialecticQ(d){
 /* ================================================================
    TEACHER QUIZ API — printable stems and answer keys
    ================================================================ */
+/* ==================== ADVANCED STUDIES SETS: START ==================== */
+/* ================================================================
+   ADVANCED STUDIES: THE PAIRED EXERCISES (XXII–XXVI)
+   Each set is an item bank (or, for XXIV, a generator over VALID),
+   drawn by level and returned as an mc4 question. A shared picker keeps
+   an item from returning until the pool demands it.
+   ================================================================ */
+const ADVANCED_SET_IDS = [22];
+const ADV_RECENT = {};
+function advPick(key, pool, keyFn){
+  const recent = ADV_RECENT[key] || (ADV_RECENT[key] = []);
+  let cands = pool.filter(x=>recent.indexOf(keyFn(x))<0);
+  if(!cands.length) cands = pool.filter(x=>keyFn(x)!==recent[recent.length-1]);
+  if(!cands.length) cands = pool;
+  const it = rand(cands);
+  recent.push(keyFn(it));
+  while(recent.length > Math.min(12, Math.floor(pool.length*0.6))) recent.shift();
+  return it;
+}
+/* three wrong options from a list of keys, the plausible ones first */
+function advDistract(correct, prefer, all, n){
+  const out = [];
+  const add = k=>{ if(k!==correct && out.indexOf(k)<0 && out.length<(n||3)) out.push(k); };
+  sample(prefer.filter(k=>k!==correct), prefer.length).forEach(add);
+  sample(all.filter(k=>k!==correct), all.length).forEach(add);
+  return out;
+}
+
+/* ---------------- XXII. SUPPOSITION (Maritain, Formal Logic, pp. 59–76) ---------------- */
+const SUPP_RULES = 'A term’s supposition is what it stands for in a proposition, and the predicate chiefly decides it. Material supposition stands for the word itself; simple, for the nature as known; personal, for the individuals that have the nature. Personal supposition is singular (one individual), determinate (one or another, descent by “or”), distributive (each one, descent by “and”), merely confused (some, but none picked out), or collective (all taken together). Improper supposition stands for something by a figure of speech. An affirmative whose subject stands for nothing is false; a negative can be true.';
+const SUPP_LABEL = {
+  mat:  'Material, since it stands for the word itself',
+  simp: 'Simple, since it stands for the nature as known',
+  pers: 'Personal, since it stands for individual things',
+  sing: 'Singular, since it stands for one individual',
+  det:  'Determinate, since one or another of them will do',
+  dist: 'Distributive, since it stands for each of them',
+  conf: 'Merely confused, since none of them is picked out',
+  coll: 'Collective, since it stands for them all together',
+  impr: 'Improper, since it stands for a thing by a figure'
+};
+const SUPP_ITEMS = [
+  {tier:1, k:'mat',  s:'<strong>Horse</strong> has five letters', why:'No horse has letters; the term stands for the word “horse.”'},
+  {tier:1, k:'mat',  s:'<strong>Pious</strong> has two syllables', why:'The term stands for the spoken word, which has two syllables.'},
+  {tier:2, k:'mat',  s:'I can find no rhyme for <strong>orange</strong>', why:'What lacks a rhyme is the word, not the fruit, so the term stands for itself.'},
+  {tier:2, k:'mat',  s:'<strong>Run</strong> is a verb', why:'The term stands for the word, which is a verb; no running is a verb.'},
+  {tier:3, k:'mat',  s:'<strong>Whoever</strong> is a pronoun', why:'The word “whoever” is meant, not any person, so the supposition is material.'},
+  {tier:1, k:'simp', s:'<strong>Man</strong> is a species', why:'No individual man is a species, so the term stands for the nature as known.'},
+  {tier:1, k:'simp', s:'<strong>Animal</strong> is a genus', why:'No animal is a genus; the term stands for the nature, of which “genus” is said.'},
+  {tier:2, k:'simp', s:'<strong>Triangle</strong> is a species of figure', why:'Being a species belongs to the nature as known, not to any drawn triangle.'},
+  {tier:2, k:'simp', s:'<strong>The vertebrate</strong> is a branch of zoology', why:'No vertebrate is a branch of a science; the term stands for the nature as studied.'},
+  {tier:3, k:'simp', s:'<strong>Gold</strong> is one species of metal', why:'This nugget of gold is not a species; the term stands for the nature.'},
+  {tier:1, k:'sing', s:'<strong>Socrates</strong> is wise', why:'A proper name stands for one individual, which is singular supposition.'},
+  {tier:2, k:'sing', s:'<strong>This oak</strong> is tall', why:'A common term with “this” stands for one individual.'},
+  {tier:3, k:'sing', s:'<strong>The man</strong> by the door ran away at once', why:'The phrase picks out one man, so the supposition is singular.'},
+  {tier:3, k:'sing', s:'<strong>Napoleon</strong> won at Austerlitz', why:'A proper name stands for one individual; the past tense lets it stand for him as he was.'},
+  {tier:1, k:'det',  s:'<strong>Some man</strong> is a liar', why:'We may descend by “or”: this man, or that one, or that other one, is a liar.'},
+  {tier:2, k:'det',  s:'<strong>Some triangle</strong> is isosceles', why:'One or another triangle makes it true, so the descent is by “or.”'},
+  {tier:2, k:'det',  s:'<strong>A dog</strong> is barking in the yard', why:'Some one dog or other is barking; we may descend by “or.”'},
+  {tier:3, k:'det',  s:'<strong>Some soldiers</strong> fled the field', why:'This soldier, or that one, or that other one, fled; the descent is by “or.”'},
+  {tier:3, k:'det',  s:'<strong>Some angel</strong> is fallen', why:'The subject of an I proposition stands for one or another of its individuals.'},
+  {tier:1, k:'dist', s:'<strong>Every metal</strong> conducts heat', why:'We may descend by “and”: this metal conducts heat, and that one, and that other one.'},
+  {tier:2, k:'dist', s:'<strong>Every creature</strong> is finite', why:'The subject of a universal affirmative stands for each of its individuals.'},
+  {tier:2, k:'dist', s:'<strong>No circle</strong> is square', why:'The subject of E is distributive: this circle is not square, and that one, and that other one.'},
+  {tier:3, k:'dist', s:'<strong>Man</strong> is rational', why:'With no sign of quantity, a predicate that belongs by essence makes the subject universal.'},
+  {tier:3, k:'dist', s:'No man is a <strong>stone</strong>', why:'The predicate of a negative is taken universally: no man is this stone, and no man is that one.'},
+  {tier:3, k:'dist', s:'Some man is not a <strong>musician</strong>', why:'The predicate of O is distributive: that man is excluded from every musician.'},
+  {tier:4, k:'conf', s:'Every man is an <strong>animal</strong>', why:'We cannot say “every man is this animal, or every man is that animal,” only “every man is this animal or that one,” so the predicate is merely confused.'},
+  {tier:4, k:'conf', s:'<strong>Workmen</strong> are needed to build a house', why:'No particular workman is needed, so we cannot descend to any one of them.'},
+  {tier:4, k:'conf', s:'<strong>Romans</strong> were needed to build this empire', why:'Some Romans were needed, but no one Roman in particular.'},
+  {tier:5, k:'conf', s:'I need <strong>some enemy</strong> to teach me my faults', why:'No particular enemy is needed, so the term is merely confused.'},
+  {tier:5, k:'conf', s:'Every square is a <strong>rectangle</strong>', why:'The predicate of a universal affirmative is merely confused, though every square is a rectangle.'},
+  {tier:4, k:'coll', s:'<strong>The apostles</strong> were twelve', why:'No apostle was twelve; the apostles are taken together as one subject.'},
+  {tier:4, k:'coll', s:'<strong>The Romans</strong> were an imperial people', why:'No Roman was a people; the Romans are taken together.'},
+  {tier:5, k:'coll', s:'<strong>The stones</strong> of this wall weigh a hundred tons', why:'No single stone weighs a hundred tons; the stones are taken together.'},
+  {tier:5, k:'coll', s:'<strong>The twelve tribes</strong> made up one people', why:'No tribe was a people of twelve tribes; the tribes are taken together.'},
+  {tier:4, k:'impr', s:'<strong>The Lion of Judah</strong> has conquered', why:'The term stands for Christ, not for a lion, by a figure of speech.'},
+  {tier:4, k:'impr', s:'This man is a <strong>tiger</strong>', why:'The predicate is transferred by a figure; the man is fierce, not a tiger.'},
+  {tier:5, k:'impr', s:'<strong>The crown</strong> has spoken', why:'The crown stands for the king who wears it, which is a figure of speech.'},
+  {tier:5, k:'impr', s:'This philosopher is an <strong>ass</strong>', why:'The term is used by a figure, of a man thought foolish.'}
+];
+const SUPP_FINE = ['mat','simp','sing','det','dist','conf','coll','impr'];
+const SUPP_ARGS_BAD = [
+  {t:'Man is a species; Socrates is a man; so Socrates is a species.', why:'“Man” stands for the nature in the first premise and for individual men in the second.'},
+  {t:'“Mouse” is a syllable; a mouse eats cheese; so a syllable eats cheese.', why:'“Mouse” stands for the word in the first premise and for the animal in the second.'},
+  {t:'The apostles were twelve; Peter was an apostle; so Peter was twelve.', why:'“The apostles” is collective in the first premise, but the argument treats it as standing for each apostle.'},
+  {t:'Animal is a genus; the horse is an animal; so the horse is a genus.', why:'“Animal” stands for the nature in the first premise and for individuals in the second.'},
+  {t:'The Lion of Judah has conquered; every lion is a beast; so a beast has conquered.', why:'“Lion” stands for Christ by a figure in the first premise and properly in the second.'},
+  {t:'Workmen are needed to build a house; John is a workman; so John is needed to build a house.', why:'“Workmen” is merely confused in the first premise, but the argument descends to one workman as if it were distributive.'},
+  {t:'The Romans were an imperial people; Cicero was a Roman; so Cicero was an imperial people.', why:'“The Romans” is collective in the first premise and stands for one individual in the second.'}
+];
+const SUPP_ARGS_GOOD = [
+  'Every man is mortal; Socrates is a man; so Socrates is mortal.',
+  'No metal is alive; gold is a metal; so gold is not alive.',
+  'Every apostle was a Jew; Peter was an apostle; so Peter was a Jew.',
+  '“Rose” is a word; every word has letters; so “rose” has letters.',
+  'Man is a species; every species is said of many; so man is said of many.',
+  'Every metal conducts heat; copper is a metal; so copper conducts heat.',
+  'Some triangle is isosceles; every isosceles triangle has two equal angles; so some triangle has two equal angles.',
+  'Every lion is a beast; this lion is in the zoo; so a beast is in the zoo.'
+];
+const SUPP_EXIST_LABEL = {
+  tneg: 'True, since a negative needs no existing subject',
+  fempty: 'False, since its subject stands for nothing',
+  tnat: 'True, since the predicate belongs by essence',
+  fneg: 'False, since a negative needs an existing subject'
+};
+const SUPP_EXIST = [
+  {f:'There are no unicorns.', p:'Some unicorn is white', k:'fempty'},
+  {f:'There are no unicorns.', p:'No unicorn is white', k:'tneg'},
+  {f:'There are no unicorns.', p:'Some unicorn is not white', k:'tneg'},
+  {f:'There are no dragons.', p:'Every dragon in this cave is asleep', k:'fempty'},
+  {f:'No triangle is drawn on this page.', p:'Every triangle has three angles', k:'tnat'},
+  {f:'No eclipse of the moon is happening now.', p:'Every eclipse of the moon is caused by the earth’s shadow', k:'tnat'},
+  {f:'Peter has died.', p:'Peter is running', k:'fempty'},
+  {f:'Peter has died.', p:'Peter is not running', k:'tneg'},
+  {f:'France has no king.', p:'The king of France is wise', k:'fempty'},
+  {f:'France has no king.', p:'The king of France is not wise', k:'tneg'},
+  {f:'No square is being drawn now.', p:'Every square has four equal sides', k:'tnat'},
+  {f:'There are no phoenixes.', p:'No phoenix is mortal', k:'tneg'}
+];
+const SUPP_EXIST_WHY = {
+  fempty:'An affirmative whose subject stands for nothing at the time signified is false.',
+  tneg:'A negative proposition can be true even when its subject stands for nothing, so negatives carry no existential import.',
+  tnat:'The predicate belongs to the subject by its essence, and the copula abstracts from time, so the subject stands for its things as possible (natural supposition).'
+};
+function genSuppIdentifyQ(d){
+  const tiers = d<=2 ? [1,2] : d===3 ? [1,2,3] : d===4 ? [2,3,4] : [3,4,5];
+  let keys = d<=2 ? ['mat','simp','sing','det','dist'] : d===3 ? ['mat','simp','sing','det','dist'] : SUPP_FINE;
+  const pool = SUPP_ITEMS.filter(x=>tiers.indexOf(x.tier)>=0 && keys.indexOf(x.k)>=0);
+  const it = advPick('supp', pool, x=>x.s);
+  let correctKey = it.k, opts;
+  if(d<=2){
+    const coarse = k=> (k==='mat'||k==='simp') ? k : 'pers';
+    correctKey = coarse(it.k);
+    opts = [correctKey].concat(['mat','simp','pers','impr'].filter(k=>k!==correctKey).slice(0,3));
+  } else {
+    const near = {mat:['simp','impr'], simp:['mat','dist'], sing:['det','dist'], det:['dist','conf','sing'],
+                  dist:['det','conf','coll'], conf:['det','dist'], coll:['dist','conf'], impr:['mat','sing']}[it.k];
+    const pool2 = d===3 ? ['mat','simp','sing','det','dist'] : SUPP_FINE;
+    opts = [it.k].concat(advDistract(it.k, near.filter(k=>pool2.indexOf(k)>=0), pool2));
+  }
+  return mc4Make({prompt:it.s, options:opts.map(k=>SUPP_LABEL[k]), correct:SUPP_LABEL[correctKey],
+    why:it.why, rules:SUPP_RULES, mcInstr:'What supposition does the marked term have?'});
+}
+function genSuppArgQ(){
+  const bad = advPick('supp-arg', SUPP_ARGS_BAD, x=>x.t);
+  const good = sample(SUPP_ARGS_GOOD, 3);
+  return mc4Make({promptRaw:'', options:[bad.t].concat(good), correct:bad.t,
+    why:bad.why + ' A valid inference needs each term to stand for the same things throughout.',
+    rules:SUPP_RULES, mcInstr:'Which argument fails because a term changes its supposition?'});
+}
+function genSuppExistQ(){
+  const it = advPick('supp-ex', SUPP_EXIST, x=>x.f+x.p);
+  const opts = ['fempty','tneg','tnat','fneg'];
+  return mc4Make({promptRaw:`${it.f} Is “${it.p}” true or false?`, options:opts.map(k=>SUPP_EXIST_LABEL[k]),
+    correct:SUPP_EXIST_LABEL[it.k], why:SUPP_EXIST_WHY[it.k], rules:SUPP_RULES,
+    mcInstr:'Is the proposition true or false?'});
+}
+function genSuppositionQ(d){
+  const r = Math.random();
+  if(d>=5 && r<0.2) return genSuppArgQ();
+  if(d>=4 && r<0.4) return genSuppExistQ();
+  return genSuppIdentifyQ(d);
+}
+
+/* one entry point for the Advanced Studies sets, used by the exercise page
+   and by the teacher's quiz */
+function genAdvancedQ(setId, d){
+  if(setId===22) return genSuppositionQ(d);
+  if(setId===23) return genCompoundPropQ(d);
+  if(setId===24) return genMoodReductionQ(d);
+  if(setId===25) return genCompoundArgQ(d);
+  if(setId===26) return genDemonstrationQ(d);
+  return null;
+}
+
+/* ==================== ADVANCED STUDIES SETS: END ==================== */
+
 const QUIZ_MODE_SETS = new Set([5,6,7,8,11,12,13,14,16,19]);
 
 function generateQuizQuestion(setId, diff, mode){
   const d = Math.max(1, Math.min(5, diff|0));
   const m = mode==='english' ? 'english' : 'letters';
   if(typeof resetSessionOneShots==='function'){ /* keep one-shots available across a quiz */ }
+  if(ADVANCED_SET_IDS.indexOf(setId)>=0) return genAdvancedQ(setId, d);
   if(setId===20) return genDialecticQ(d);
   if(setId===21) return genFallacyQ(d);
   if(setId===1) return genPredicableQ(d);
@@ -4315,6 +4495,7 @@ if(typeof module!=='undefined' && module.exports){
     enthCandidates, genEnthQ, checkEnthAnswer, enthMistake, genEnthCuratedQ, ENTH_POOL,
     MSQ_PAIR, SENSE_POOL, MOD_RANK, M_CORNERS, modalSquareSvg, SENSE_VALUES, MODSYLL_VALUES,
     proseWrap, genWildHypQ, genWildModalQ,
+    ADVANCED_SET_IDS, genAdvancedQ, genSuppositionQ, SUPP_ITEMS,
     QUIZ_MODE_SETS, generateQuizQuestion, quizFingerprint, formatQuizItem};
 }
 
