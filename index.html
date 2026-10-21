@@ -15,6 +15,8 @@
   --venn-line:#5a4a38; --venn-shade:#a67c2e; --venn-mark:#7b2d26;
   --glow:#fbf7ea;
   --shadow:0 2px 14px rgba(74,58,32,.10);
+  /* Advanced Studies tiles: a warmer ground than the ordinary card, still lighter than the Review strip */
+  --adv-card:#fbf4e4;
 }
 body.dark{
   --paper:#1a1611; --paper2:#120f0c; --card:#241e17; --ink:#e9dfc8; --ink-soft:#b4a583;
@@ -24,6 +26,7 @@ body.dark{
   --venn-line:#c8b691; --venn-shade:#c9a45c; --venn-mark:#e08373;
   --glow:#231d15;
   --shadow:0 2px 14px rgba(0,0,0,.45);
+  --adv-card:#2a231c;
 }
 *{box-sizing:border-box; margin:0; padding:0}
 html{
@@ -148,6 +151,58 @@ h1{
 .section-gloss{
   text-align:center; font-style:italic; color:var(--ink-soft); font-size:16px;
   margin:-8px auto 14px; max-width:560px;
+}
+/* A second part of the course: fleuron between two thin accent rules, then the heading. */
+.part-divider{
+  margin:76px 0 48px;
+  text-align:center;
+}
+/* On the home page the gloss sits with the heading, so the space below belongs under the gloss. */
+#actblk-adv > .part-divider{margin-bottom:0; padding-bottom:14px}
+.part-ornament{
+  display:flex; align-items:center; gap:16px;
+  color:var(--gold); margin:0 0 18px;
+}
+.part-rule{flex:1; height:1px; background:var(--gold); min-width:24px}
+.part-fleuron{flex:none; font-size:22px; line-height:1}
+.part-heading{
+  font-family:'Cinzel', serif; font-weight:600; font-size:28px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink); line-height:1.25;
+}
+.part-sub{
+  margin:10px auto 0; max-width:40em;
+  font-style:italic; color:var(--ink-soft); font-size:18px; line-height:1.45;
+  text-wrap:balance;
+}
+#actblk-adv > .section-gloss{margin:16px auto 8px}
+#actblk-adv > .act-block > .act-label{margin-top:40px}
+/* Thin double rule (the border, a gap in the page color, then an outer hairline) and a warmer ground. */
+#actblk-adv .set-card{
+  background:var(--adv-card);
+  border-color:var(--gold);
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold), var(--shadow);
+}
+#actblk-adv .set-card:hover{
+  border-color:var(--gold);
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold), 0 6px 20px rgba(74,58,32,.16);
+}
+body.dark #actblk-adv .set-card:hover{
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold), 0 6px 20px rgba(0,0,0,.45);
+}
+#actblk-adv .set-card.locked:hover{
+  border-color:var(--gold);
+  transform:none;
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold), var(--shadow);
+}
+#actblk-adv .set-card .ex-link{
+  background:var(--track);
+  border-left-color:var(--gold-soft);
+}
+#actblk-adv .study-tile:focus-visible{outline-offset:5px}
+.prog-row.adv{
+  background:var(--adv-card);
+  border-color:var(--gold);
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold), var(--shadow);
 }
 .act-label{
   font-family:'Cinzel',serif; font-size:21px; font-weight:600; letter-spacing:.12em;
@@ -510,7 +565,16 @@ h1{
 .prog-mini-btn{margin-left:10px; font-family:inherit; font-size:15px; padding:4px 14px; border-radius:16px;
   border:1px solid var(--line); background:var(--card); color:var(--ink-soft); cursor:pointer}
 .prog-mini-btn:hover{border-color:var(--gold); color:var(--ink)}
-@media (max-width:560px){ h1{font-size:32px} .q-card{padding:22px 18px} .syllogism{font-size:20px} }
+@media (max-width:560px){
+  h1{font-size:32px} .q-card{padding:22px 18px} .syllogism{font-size:20px}
+  .part-divider{margin:52px 0 32px}
+  .part-heading{font-size:22px; letter-spacing:.08em}
+  .part-sub{font-size:17px}
+  .part-ornament{gap:12px; margin-bottom:14px}
+}
+@media (max-width:420px){
+  #actblk-adv > .act-block > .act-label{font-size:16px; letter-spacing:.06em; line-height:1.35}
+}
 
 /* ===== Daily practice: return-streak + calendar reminder ===== */
 .daily-box{
@@ -680,7 +744,11 @@ h1{
     </div>
 
     <div class="act-block" id="actblk-adv">
-      <div class="section-label">Advanced Studies · Perfecting the Art</div>
+      <div class="part-divider">
+        <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
+        <h2 class="part-heading">Advanced Studies</h2>
+        <p class="part-sub">Perfecting the art, once the elements are in hand</p>
+      </div>
       <div class="section-gloss">Each act of the mind opens with its study and is trained by its exercises; these studies and exercises carry the same arts further. They take up what the earlier studies only name: the tree of Porphyry and the kinds of property, supposition, the modal and compound propositions, the figures and their reduction, induction, demonstration, and the modes of the fallacies.</div>
       <div class="act-block" id="actblk-v1">
         <div class="act-label">Advanced Studies · The First Act</div>
@@ -4239,6 +4307,15 @@ if(typeof document!=='undefined'){
       ['actblk-a1','actblk-a2','actblk-a3','actblk-a4','actblk-a6','actblk-a5','actblk-a7']
         .forEach(id=>addSectionBlock($(id)));
 
+      /* Advanced Studies, the second part: the part heading, then each act that is open */
+      const adv = $('actblk-adv');
+      if(adv && adv.style.display!=='none'){
+        adv.querySelectorAll('.part-heading, .part-sub').forEach(el=>add(el.textContent));
+        const gloss = adv.querySelector(':scope > .section-gloss');
+        if(gloss) add(gloss.textContent);
+        ['actblk-v1','actblk-v2','actblk-v3'].forEach(id=>addSectionBlock($(id)));
+      }
+
       return parts.join('. ').replace(/\.\s*\./g, '.').replace(/\s+/g, ' ').trim();
     }
 
@@ -5106,9 +5183,17 @@ if(typeof document!=='undefined'){
       }
     }
 
-    const groups = GP.ACTS.map(a=>[a.label, a.ids]);
+    const groups = GP.ACTS.map(a=>({label:a.label, ids:a.ids, key:a.key}));
+    let advMarked = false;
     html += groups.map(g=>{
-      const rows = g[1].map(id=>{
+      const adv = g.key.charAt(0)==='v';
+      let mark = '';
+      if(adv && !advMarked){
+        advMarked = true;
+        const src = document.querySelector('#actblk-adv .part-divider');
+        mark = src ? src.outerHTML : '';
+      }
+      const rows = g.ids.map(id=>{
         const s = SETS.find(x=>x.id===id), st = gpStateOf(id);
         const chip = {locked:'Locked', learning:'Learning', passed:'Passed', mastered:'Mastered', lapsed:'Lapsed'}[st];
         let detail = '';
@@ -5128,12 +5213,12 @@ if(typeof document!=='undefined'){
           const q = gpProg.sets[id].history.filter(h=>h.diff>=GP.UNLOCK_DIFF).slice(-GP.MASTERY_WINDOW);
           if(q.length) detail = q.filter(h=>h.correct).length+' of last '+q.length+' at Level III+';
         }
-        return `<div class="prog-row ${st}"><span class="prog-num">${ROMAN[id]}</span>`
+        return `<div class="prog-row${adv?' adv':''} ${st}"><span class="prog-num">${ROMAN[id]}</span>`
           + `<span class="prog-title">${s.title}</span>`
           + `<span class="prog-state st-${st}">${chip}</span>`
           + `<span class="prog-detail">${detail}</span></div>`;
       }).join('');
-      return `<div class="section-label">${g[0]}</div><div class="prog-ladder">${rows}</div>`;
+      return mark + `<div class="section-label">${g.label}</div><div class="prog-ladder">${rows}</div>`;
     }).join('');
 
     $('prog-body').innerHTML = html;

@@ -35,9 +35,18 @@ details.help p{margin-top:10px; font-size:15.5px; color:var(--ink-soft)}
 .field label{display:block; font-size:13px; color:var(--ink-soft); margin-bottom:4px}
 input[type=text],input[type=number],select{font:inherit; width:100%; padding:8px 10px; border:1px solid var(--line);
   border-radius:8px; background:var(--panel2); color:var(--ink)}
-.setlist{max-height:340px; overflow:auto; border:1px solid var(--line); border-radius:10px; background:var(--panel2); padding:6px 8px}
+.setlist{max-height:min(52vh, 480px); overflow:auto; border:1px solid var(--line); border-radius:10px; background:var(--panel2); padding:6px 8px}
 .setrow{display:flex; align-items:flex-start; gap:10px; padding:7px 8px; border-bottom:1px dashed var(--line); cursor:pointer}
 .setrow:last-child{border-bottom:none}
+.part-divider{margin:22px 6px 16px; text-align:center}
+.part-ornament{display:flex; align-items:center; gap:12px; color:var(--gold); margin:0 0 12px}
+.part-rule{flex:1; height:1px; background:var(--gold); min-width:16px}
+.part-fleuron{flex:none; font-size:20px; line-height:1}
+.part-heading{font-family:'Cinzel',serif; font-weight:600; font-size:18px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink); line-height:1.25}
+.part-sub{margin:6px auto 0; font-style:italic; color:var(--ink-soft); font-size:15.5px; line-height:1.4; text-wrap:balance}
+.setrow.adv{background:#fbf4e4; border:1px solid var(--gold); border-radius:8px;
+  box-shadow:0 0 0 2px var(--panel2), 0 0 0 3px var(--gold); margin:6px 2px; padding:8px}
 .setrow input{margin-top:4px; accent-color:var(--gold)}
 .setrow .id{font-family:'Cinzel',serif; color:var(--gold); min-width:28px; font-size:14px}
 .setrow .nm{font-size:16px}
@@ -235,7 +244,15 @@ function buildSetList(){
   box.innerHTML = QUIZ_SETS.map(s=>{
     const modeNote = (typeof QUIZ_MODE_SETS!=='undefined' && QUIZ_MODE_SETS.has(s.id))
       ? ' · letters/English' : '';
-    return `<label class="setrow"><input type="checkbox" data-id="${s.id}">
+    const adv = s.id>=22;
+    const divider = s.id===22
+      ? `<div class="part-divider">
+          <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
+          <div class="part-heading">Advanced Studies</div>
+          <p class="part-sub">Perfecting the art, once the elements are in hand</p>
+        </div>`
+      : '';
+    return divider + `<label class="setrow${adv?' adv':''}"><input type="checkbox" data-id="${s.id}">
       <span class="id">${ROMAN[s.id]}</span>
       <span class="nm">${s.title}<span class="meta">Set ${ROMAN[s.id]}${modeNote}</span></span></label>`;
   }).join('');
