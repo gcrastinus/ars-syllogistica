@@ -8,8 +8,7 @@
    4. No prose dashes in deck, lead-in, or question text (ranges such as
       "I.14–15" and schematic forms such as "M–P" are allowed).
    5. The correct option is the longest option in no more than a third of
-      the questions of each Advanced Studies deck and each new exercise set
-      (reported, not enforced, for the older decks and lead-ins).
+      the questions of every deck, lead-in, and new exercise set.
    6. Each new exercise set (ids 22 and up) generates valid items at every
       level, from a bank of at least 20 distinct items.
    Exits with status 1 if an enforced check fails. */
@@ -77,7 +76,7 @@ function longestIsCorrect(opts, idx) {
 }
 
 /* 2–5. decks */
-function checkDeck(name, deck, enforce) {
+function checkDeck(name, deck, enforce, enforceLongest) {
   let qn = 0, tf = 0, longest = 0, mcq = 0;
   deck.forEach((card, ci) => {
     const where = `${name} card ${ci + 1}`;
@@ -100,11 +99,11 @@ function checkDeck(name, deck, enforce) {
   });
   const ratio = mcq ? longest / mcq : 0;
   const msg = `${name}: ${deck.length} cards, ${qn} questions (${tf} true/false); correct option longest in ${longest}/${mcq} (${Math.round(100 * ratio)}%)`;
-  if (enforce && ratio > 1 / 3) fail(msg + ', above one third'); else ok(msg);
+  if ((enforce || enforceLongest) && ratio > 1 / 3) fail(msg + ', above one third'); else ok(msg);
 }
 [['What Logic Is', D.INTRO_LOGIC], ['First Act', D.FIRST_ACT], ['Second Act', D.SECOND_ACT],
- ['Third Act', D.THIRD_ACT], ['Seeing with Circles', D.CIRCLES]].forEach(([n, d]) => checkDeck(n, d, false));
-Object.keys(D.LEADINS).forEach(id => checkDeck('Lead-in ' + id, D.LEADINS[id], false));
+ ['Third Act', D.THIRD_ACT], ['Seeing with Circles', D.CIRCLES]].forEach(([n, d]) => checkDeck(n, d, false, true));
+Object.keys(D.LEADINS).forEach(id => checkDeck('Lead-in ' + id, D.LEADINS[id], false, true));
 D.STUDY_DECKS.forEach(d => { if (!d.review) fail(`deck ${d.id} has no Review`); });
 ok(`${D.STUDY_DECKS.length} doctrine decks have a Review`);
 D.ADVANCED_DECKS.forEach(d => {
