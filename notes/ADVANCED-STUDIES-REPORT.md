@@ -2,6 +2,33 @@
 
 Prepared October 21, 2026. This phase made two cleanups (prose dashes; the attributions to St. Thomas in set XX) and built the Advanced Studies: fourteen doctrine decks and five paired exercise sets (XXII–XXVI), placed after Sophistica on the home page and gated in the Guided Path. The plan is `notes/ADVANCED-STUDIES-PLAN.md`; the "Further guidance" of October 20 (history and modern logic after the ECT article; Peifer, Simon, John of St. Thomas's *Material Logic*, the Klima–Noone book) was followed.
 
+## Follow-up after Timothy's decisions (October 21)
+
+| Commit | What |
+|---|---|
+| `a679ddd` | The Advanced Studies decks moved to `ars-advanced.js`, loaded after `ars-engine.js`; `index.html` builds them with `arsAdvancedDecks(Q, sources)` and drops from about 707 KB to 433 KB |
+| `7cb4853` | Exercise VI follows Buridan's limits (Decision 5 below) |
+| `f2acb3c` | Set XXI and lead-in XXI follow *De fallaciis* on non-cause as cause (Decision 6) |
+| `64365c2`, `3db225b` | Older studies and lead-ins rebalanced for the one-third rule (Decision 19) |
+| `59ff574` | `make_text.py` extended and run; `SYLLOGISTICA-TEXT.txt` regenerated; the progress report's window starts from graded exercises only (Decision 4) |
+| this commit | Report updated |
+
+- **Exercise VI.** From Level IV, a quarter of the operation questions state that nothing falls under the subject ("There are no unicorns"; "Suppose that nothing is B"). Then obversion of E or O and contraposition of E or O yield nothing, and the answer is "none," since the result would be an affirmative about nothing. Lead-in VI gains a paragraph on the rule (with Buridan introduced by appositive) and one new question form; the feedback and the teacher's quiz explain it. Answers when the terms stand for existing things are unchanged.
+- **Non-cause as cause.** `FAL_KINDS.noncausa` now defines the fallacy as *De fallaciis* ch. 17 does (an idle premise counted among the premises, chiefly in an argument to the impossible, so that a true premise is blamed for an absurdity it did not produce). Its four post hoc items were replaced by four arguments to the impossible, one of them the treatise's soul-and-life example. One sentence, in lead-in XXI and in the feedback, says that modern books use "false cause" for a different fault. The Advanced Fallacies deck now says the same.
+- **The one-third rule** now holds for every deck, lead-in, and set, and `tools/check.js` enforces it everywhere. In each changed question one distractor was lengthened with a plausible, false continuation; in two questions a long correct answer was shortened to "Nothing follows"; the three-option questions on the square now read "Undetermined / It must be true / It must be false." No doctrine or answer key changed.
+- **`make_text.py`** had read only the intro screens that Phase 2 removed, and its bank sampler read the wrong file (an off-by-one in `process.argv`), so the old export held neither the studies nor any bank samples. It now reads every study deck, lead-in, and Advanced deck through Node, with sources lines and check questions (choices, answer, why, why not), in the order of the home page, and samples the five new banks. The export now holds 40 decks, 574 check questions, and 12 bank samples.
+- **Checks.** `node tools/check.js` passes. Headless Chrome: all 14 Advanced decks walk to the end and their Reviews score; sets XXII–XXVI run at Levels I–V; exercise VI at Level V gives the empty-subject questions with the correct feedback; no overflow at 360 px; no console errors from the course (only the test server's favicon 404).
+
+### Decisions that touch doctrine, for Timothy to confirm
+
+These were applied as recommended in the first report because they follow the sources and the Decision Sheets, but each states doctrine:
+
+1. **Natural supposition** (exercise XXII and the Supposition deck): "Every triangle has three angles" is true when no triangle is drawn, while an accidental affirmative with an empty subject ("Peter is running," Peter having died) is false. This follows Maritain and Klima (Decision Sheet §1, bullet 5).
+2. **The modal vowels** are given as A, E, I, U, after Maritain, not A, E, I, O.
+3. **The fourth figure** enters exercise XXIV at Level IV and the weakened moods at Level V, as the later textbook account (Decision A5).
+4. **Kilwardby and St. Albert's "simply" qualification** in the modal-syllogism deck is taken from the Decision Sheet's report of the SEP and was not checked in their texts.
+5. **Details stated from standard knowledge, not from a file I opened:** Aristotle's four predicables (*Topics* I.4, I.8, with Houser p. 55); the planets, the wall, the round wounds, and Bryson (checked through St. Thomas's commentary and Conway, not Aristotle's Greek); Galatians 1:8 (Douay-Rheims); *ST* I q. 1 a. 2 on theology as a subalternated science; Tertullian's dilemma (from Maritain).
+
 ## Commits
 
 | # | Commit | What |
@@ -83,9 +110,9 @@ Replaced in `index.html` and `ars-engine.js`: enthymeme and dialectic item texts
 1. **Scope of the decks.** Fourteen decks (not one per topic in the starting map): the predicables, the categories (antepredicaments and postpredicaments), definition and division, and supposition; opposition with conversion, modal propositions, and compound propositions; figures and moods, reduction, the modal syllogism, compound arguments, induction, demonstration, and the fallacies.
 2. **Paired exercises.** Five new sets (XXII–XXVI); no new set for the predicables, categories, opposition, modal propositions, induction, or fallacies, where sets I, II, VI, VII, and XXI already drill the matter.
 3. **Gates.** Demonstration (deck and set) opens with XVIII rather than with the whole Third Act, and the Fallacies deck with XXI. The Advanced groups appear in the Guided Path once any of their sets is open.
-4. **Grades.** The Advanced sets are optional in `progress-report.html` and not graded, so no existing grade changes. The report's 16-week window still starts at the first answer in any set, including an Advanced one.
-5. **Buridan's limits** (Opposition deck): contraposition of A and O, and obversion from the negative side to the affirmative, need existing terms. This follows Decision §1, but exercise VI still treats obversion and contraposition as unrestricted. Should VI change?
-6. **"Non-cause as cause."** *De fallaciis* ch. 17 makes it a fault in arguments to the impossible (an idle premise blamed for an absurdity). Lead-in XXI and set XXI present it as modern "false cause." The Advanced deck teaches the treatise's sense and calls false cause "a near relation." Should XXI be brought into line?
+4. **Grades.** The Advanced sets are optional in `progress-report.html` and not graded, so no existing grade changes. The report's 16-week window now starts from the graded exercises only.
+5. **Buridan's limits** (Opposition deck). *Decided: yes; done.*: contraposition of A and O, and obversion from the negative side to the affirmative, need existing terms. This follows Decision §1, but exercise VI still treats obversion and contraposition as unrestricted. Should VI change?
+6. **"Non-cause as cause."** *Decided: yes; done.* *De fallaciis* ch. 17 makes it a fault in arguments to the impossible (an idle premise blamed for an absurdity). Lead-in XXI and set XXI present it as modern "false cause." The Advanced deck teaches the treatise's sense and calls false cause "a near relation." Should XXI be brought into line?
 7. **Natural supposition.** Following Maritain and Klima (Decision §1, bullet 5), XXII counts "Every triangle has three angles" as true when none is drawn, and an accidental affirmative with an empty subject as false.
 8. **The modal vowels.** Maritain's vowels are A, E, I, U (not A, E, I, O); the deck gives them once, in parentheses, with his verse.
 9. **De dicto / de re** are taught in English ("of what is said," "of the thing") with the Latin once in parentheses. The deck descriptions avoid the Latin.
@@ -98,7 +125,7 @@ Replaced in `index.html` and `ars-engine.js`: enthymeme and dialectic item texts
 16. **Supposition items show the marked term in bold, not in quotation marks**, even when its supposition is material, since quotation marks would give the answer away.
 17. **Quoted example arguments use "you"** ("If you study, you will tire yourself…"); this is the voice of the argument quoted, not coaching.
 18. **The help text** now says that Ad Demonstrationem, Dialectica, Rhetorica, and Sophistica open together; it had named only two, though `PREREQS` already opened all four.
-19. **The older decks and lead-ins** break the one-third longest-option rule (up to 83%). Rebalancing them would change wording in many questions; it was not done.
+19. **The older decks and lead-ins.** *Decided: rebalance; done.* Originally: break the one-third longest-option rule (up to 83%). Rebalancing them would change wording in many questions; it was not done.
 20. **Grid fix.** `.sets` now uses `minmax(min(340px,100%),1fr)`, removing a 2 px overflow at 360 px that predates this phase.
-21. **index.html size** grew from about 425 KB to about 707 KB with the decks inline, as the prompt specified. A separate `ars-advanced.js` would keep the page lighter if that matters.
-22. **`make_text.py` and `SYLLOGISTICA-TEXT.txt`** remain untracked and were not run or changed, so that text export does not yet include the Advanced Studies.
+21. **index.html size.** Done: the decks are now in `ars-advanced.js`.
+22. **`make_text.py` and `SYLLOGISTICA-TEXT.txt`.** Done: extended, run, and committed (see Follow-up).
