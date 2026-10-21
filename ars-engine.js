@@ -3939,7 +3939,7 @@ const DIAL_DOCTRINE = [
   {tier:1, q:'Dialectic reasons from premises of what sort?',
    correct:'Probable ones, that is, what seems so to everyone, or to most, or to the wise',
    ds:['Ones that have been demonstrated and cannot be otherwise','Ones that are known to be false','Ones invented for the sake of the argument'],
-   why:'This is the definition Aristotle gives and St. Thomas repeats. The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
+   why:'This is the definition Aristotle gives (<em>Topics</em> I.1), and St. Thomas repeats it (commentary on the <em>Posterior Analytics</em>, bk. I, lect. 31). The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
   {tier:1, q:'What does dialectic reach, at its best?',
    correct:'A reasoned opinion, well supported but not proved',
    ds:['Certain knowledge of the cause','A persuasive speech','A story that makes sense of the facts'],
@@ -3959,7 +3959,7 @@ const DIAL_DOCTRINE = [
   {tier:2, q:'Two people are disputing. Who are the two parties called?',
    correct:'The one who puts the case and the one who answers',
    ds:['The teacher and the learner','The speaker and the audience','The judge and the witness'],
-   why:'St. Thomas says that a disputation takes place between the opponent and the respondent. Teacher and learner belong to demonstrative disputation, which is a different kind.'},
+   why:'<em>De fallaciis</em>, a treatise attributed to St. Thomas, says that a disputation takes place between the opponent and the respondent (proem and ch. 1). Teacher and learner belong to demonstrative disputation, which is a different kind (ch. 2).'},
   {tier:2, q:'Why is the argument from authority called the weakest of the topics?',
    correct:'Because it gives no reason drawn from the thing itself, only the judgment of those who know',
    ds:['Because authorities are usually wrong','Because it is not a topic at all','Because only the ignorant use it'],
@@ -3987,7 +3987,7 @@ const DIAL_DOCTRINE = [
   {tier:5, q:'What does it mean to say the probable is what seems so “to the wise, and among the wise to the most eminent”?',
    correct:'That the standing of a premise rises with the standing of those who grant it',
    ds:['That only the wise may take part in a disputation','That the wise are always right','That a premise is probable only if all the wise agree'],
-   why:'St. Thomas gives the qualification carefully. Not every opinion of every man is probable, but neither does dialectic need everyone to agree.'}
+   why:'Aristotle gives the qualification carefully (<em>Topics</em> I.1), and <em>De fallaciis</em>, a treatise attributed to St. Thomas, repeats it (ch. 2). Not every opinion of every man is probable, but neither does dialectic need everyone to agree.'}
 ];
 function genDialDoctrineQ(d){
   const tiers = defTiers(d);
