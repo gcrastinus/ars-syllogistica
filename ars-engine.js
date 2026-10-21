@@ -1399,7 +1399,7 @@ function hcMajorText(q){
   const yd = q.Y.kind==='L' ? q.Y.l : art(q.Y.s)+' '+q.Y.s;
   if(k==='conj')  return `${sn} is not both ${xd} and ${yd}`;
   if(k==='disjS') return `${sn} is either ${xd} or ${yd}, but not both`;
-  if(k==='disjI') return `${sn} is either ${xd} or ${yd} — or perhaps both`;
+  if(k==='disjI') return `${sn} is either ${xd} or ${yd}, or perhaps both`;
   return `If ${hcCompText(q, q.major.ant)}, then ${hcCompText(q, q.major.cons)}`;
 }
 /* Components may be of any quantity (John of St. Thomas): from level 3,
@@ -1431,8 +1431,8 @@ function hcBuildProp(d, mode, kind, mood){
   const p1t = lcProp(pPropText(P1)), p2t = lcProp(pPropText(P2));
   q.lines = [
     kind==='conj'  ? `Not both: ${p1t}, and ${p2t}`
-    : kind==='disjS' ? `Either ${p1t}, or ${p2t} — but not both`
-    : kind==='disjI' ? `Either ${p1t}, or ${p2t} — or perhaps both`
+    : kind==='disjS' ? `Either ${p1t}, or ${p2t}, but not both`
+    : kind==='disjI' ? `Either ${p1t}, or ${p2t}, or perhaps both`
     : `If ${p1t}, then ${p2t}`,
     pPropText(q.minorRes)
   ];
@@ -1910,7 +1910,7 @@ const WILD_FRAMES_EASY = [
   (p1,p2,c)=>`${p1} Now ${decap(p2)} It follows that ${decap(c)}`
 ];
 const WILD_FRAMES_HARD = [
-  (p1,p2,c)=>`${stripDot(c)} — for ${decap(stripDot(p1))}; and ${decap(stripDot(p2))}.`,
+  (p1,p2,c)=>`${stripDot(c)}, for ${decap(stripDot(p1))}; and ${decap(stripDot(p2))}.`,
   (p1,p2,c)=>`${c} After all, ${decap(stripDot(p1))}; and ${decap(stripDot(p2))}.`
 ];
 function proseWrap(d, p1, p2, c){
@@ -2167,7 +2167,7 @@ const DEF_KIND_STOCK = {
     {tier:2, t:'‘Philosopher’ means a lover of wisdom', w:'It explains the name. Aristotle puts this first, since we cannot ask what a thing is until we know what its name refers to.'},
     {tier:2, t:'‘Manuscript’ means a thing written by hand', w:'It gives the origin of the word, not the nature of any writing.'},
     {tier:2, t:'‘Hippopotamus’ means river-horse', w:'It explains the word from hippos (horse) and potamos (river).'},
-    {tier:3, t:'‘Eclipse’ means a forsaking — the light’s abandonment of its luminary', w:'It gives the word’s origin, before any account of the cause.'},
+    {tier:3, t:'‘Eclipse’ means a forsaking, the light’s abandonment of its luminary', w:'It gives the word’s origin, before any account of the cause.'},
     {tier:5, t:'‘Geography’ means a description of the earth', w:'It gives the word’s signification, from gē (earth) and graphē (description).'},
     {tier:5, t:'‘Monarch’ means one who rules alone', w:'It explains the name from monos (alone) and archē (rule).'}
   ],
@@ -2366,7 +2366,7 @@ function genDivComputedQ(d){
     + [verdict].concat(also).map(whyOf).join(' ');
   return mc4Make({prompt: divText(pick.whole, pick.members), options: DIV_OPTS,
     correct: DIV_OPT_OF[verdict.v], alsoCorrect: also.map(f=>DIV_OPT_OF[f.v]), why, rules: DIV_RULES,
-    mcInstr: 'Is this division sound — and if not, where does it fail?'});
+    mcInstr: 'Is this division sound? If not, where does it fail?'});
 }
 /* rule-in-view: divisions everyday and classical, the rule always displayed.
    Tiers as with definitions: 1 homely, 2 classical but plain, 3 subtle. */
@@ -2750,7 +2750,7 @@ const PRED_PRINCIPLES = [
    correct:'It follows from what the thing is, and belongs to the whole species, to it alone, and always',
    ds:['The subject may have it or lack it and stay the same thing','It answers the bare question “what is it?”','It is the widest kind said of the subject'],
    why:'A property (the power to laugh) always goes together with the species, even though it is not part of what the thing is; an accident (white) may come and go.'},
-  {tier:1, q:'“Animal” — is it a genus or a species?',
+  {tier:1, q:'Is “animal” a genus or a species?',
    correct:'Both, since it is a genus in relation to man and a species in relation to living body; the terms are relative',
    ds:['A genus only, never a species','A species only, never a genus','Neither: it is an individual'],
    why:'In the tree of Porphyry a middle term is a genus to whatever lies below it and a species to whatever lies above it; only the topmost is always a genus, only the lowest always a species.'},
@@ -2762,7 +2762,7 @@ const PRED_PRINCIPLES = [
    correct:'“What sort of thing is it?” in its very nature (quale quid)',
    ds:['“What is it?” as to the bare kind','“How much of it is there?”','“What merely happens to be true of it?”'],
    why:'Porphyry says the genus answers “what is it?” and the difference “what sort of thing, in its nature?”; rational tells us what sort of animal a man is.'},
-  {tier:2, q:'Which is the SUPREME genus — said of everything below it, but itself under no higher kind?',
+  {tier:2, q:'Which is the SUPREME genus, said of everything below it but itself under no higher kind?',
    correct:'Substance',
    ds:['Animal','Man','Socrates'],
    why:'Substance is the highest genus in its own line (the tree of Porphyry), said of everything beneath it but falling under no wider kind; being itself is not a genus.'},
@@ -2770,7 +2770,7 @@ const PRED_PRINCIPLES = [
    correct:'The nature as known, not any man; this is simple supposition',
    ds:['The particular men there are','The written letters only','Nothing, because no man is a species'],
    why:'No particular man is a species, so the term stands for the nature as known. Its signification has not changed, but its supposition (what the term stands for in this proposition) has. Supposition is a property of terms, and it is studied in logic.'},
-  {tier:2, q:'Which of these is an individual — neither a genus nor a species, but only something things are said about?',
+  {tier:2, q:'Which of these is an individual, neither a genus nor a species, but only something things are said about?',
    correct:'Socrates',
    ds:['Animal','Man','Substance'],
    why:'An individual such as Socrates is never said of anything else; things are only ever said of him. Man is the lowest species, animal a middle genus, substance the highest genus.'},
@@ -3084,7 +3084,7 @@ function enthCandidates(givenSlot, givenType, givenMFirst, conclType){
 }
 const ENTH_FRAMES = [
   (c,g)=>`${c}. After all, ${decap(g)}.`,
-  (c,g)=>`${c} — for ${decap(g)}.`,
+  (c,g)=>`${c}, for ${decap(g)}.`,
   (c,g)=>`${c}, since ${decap(g)}.`,
   (c,g)=>`${g}; therefore ${decap(c)}.`
 ];
@@ -3165,7 +3165,7 @@ const ENTH_POOL = [
    correct:'All men are mortal',
    traps:['All mortals are men','Some men are mortal','Socrates is a mortal man'],
    why:'This is a first-order enthymeme, in which the major lay hidden. When it is supplied, the argument is Barbara. “All mortals are men” is the illicit converse, and “some men are mortal” is too weak to conclude.'},
-  {tier:1, txt:'It must have rained — the streets are wet.',
+  {tier:1, txt:'It must have rained; the streets are wet.',
    correct:'Whenever the streets are wet, it has rained',
    traps:['Whenever it rains, the streets are wet','The streets are usually dry','Rain always wets something'],
    why:'To conclude validly we need the suspicious premise, not the familiar one. The familiar premise, “rain wets streets”, is true but yields only the fallacy of affirming the consequent. The valid completion, “wet streets mean rain”, is refuted by every street-sweeper. This is Aristotle’s refutable sign.'},
@@ -3173,7 +3173,7 @@ const ENTH_POOL = [
    correct:'Whoever has milk has given birth',
    traps:['Whoever has given birth has milk','Some mothers have milk','Milk is nourishing'],
    why:'This is Aristotle’s own example (Rhetoric I.2; Prior Analytics II.27) of the necessary sign, the one kind of sign-argument that concludes of necessity. It needs the premise in this direction, not its converse.'},
-  {tier:1, txt:'He cannot be trusted — he is a politician.',
+  {tier:1, txt:'He cannot be trusted; he is a politician.',
    correct:'No politicians can be trusted',
    traps:['Some politicians cannot be trusted','No trustworthy man is in politics by choice','Politicians seek power'],
    why:'The argument is valid only with the universal, and the universal is false, which is exactly why it stays unspoken. The particular “some politicians…” is true but concludes nothing about this one. So the enthymeme conceals its premises, and premises that are not stated are not examined.'},
@@ -3185,7 +3185,7 @@ const ENTH_POOL = [
    correct:'The prize at Olympia is a crown',
    traps:['Dorieus is a great athlete','Crowns are given for victories','Whoever wins a crown has won at Olympia'],
    why:'This is Aristotle’s example in Rhetoric I.2. The premise is dropped precisely because every hearer knows it, so brevity, not concealment, is the motive of the honest enthymeme.'},
-  {tier:2, txt:'He must be guilty — he fled the city.',
+  {tier:2, txt:'He must be guilty; he fled the city.',
    correct:'Whoever flees is guilty',
    traps:['The guilty often flee','Some who flee are guilty','He had reason to flee'],
    why:'The argument is valid only with the universal, and the universal is false, since fear also makes the innocent run. “The guilty often flee” is the true premise, and it concludes nothing. This is the refutable sign again.'},
@@ -3209,59 +3209,59 @@ const ENTH_POOL = [
    correct:'What even fools attain is not the good',
    traps:['Fools attain nothing good','The good is hard to attain','Some pleasures are foolish'],
    why:'This argument is after Aristotle, though the words are not his. He observes that any chance person, even a slave, can enjoy the bodily pleasures no less than the best man, but that no one assigns to a slave a share in happiness (Nicomachean Ethics X.6). When the premise is supplied the argument is valid, and the dispute moves, as it should, to whether the tacit premise is true.'},
-  {tier:1, txt:'The gods must be angry — the harvest has failed.',
+  {tier:1, txt:'The gods must be angry; the harvest has failed.',
    correct:'Whenever the harvest fails, the gods are angry',
    traps:['Whenever the gods are angry, the harvest fails','The gods send every misfortune upon men','Some failed harvests are sent by the gods'],
    why:'This is the refutable sign in an older form. The familiar thought, that angry gods blight the fields, has the anger as antecedent and the failed harvest as consequent; to reason from the failed harvest to the anger merely affirms the consequent. The premise that actually concludes, that every failed harvest shows divine anger, is the suspicious one, and drought, blight, and pests refute it every season.'},
-  {tier:1, txt:'The mushroom is safe to eat — the squirrels eat it.',
+  {tier:1, txt:'The mushroom is safe to eat; the squirrels eat it.',
    correct:'Whatever the squirrels eat is safe for a man to eat',
    traps:['Whatever is safe for a man, the squirrels will eat','Squirrels know which mushrooms are poisonous','Some things the squirrels eat are safe for a man'],
    why:'The argument is valid only through the universal, and the universal is deadly: squirrels can eat amanitas that would kill a grown man. What is safe for one animal is not safe for another, and the tacit premise ignores the difference; it stays tacit for good reason.'},
-  {tier:1, txt:'She must love the sea — she grew up on the coast.',
+  {tier:1, txt:'She must love the sea; she grew up on the coast.',
    correct:'Whoever grows up on the coast loves the sea',
    traps:['Whoever loves the sea grew up on the coast','She has lived within sight of the water all her life','Some who grow up on the coast love the sea'],
    why:'Only the universal concludes, and every fishing town that ever produced a man who disliked the sea refutes it. The particular is true but concludes nothing; the converse would conclude nothing of her at all.'},
-  {tier:1, txt:'She will make a fine doctor — she took the top marks in her class.',
+  {tier:1, txt:'She will make a fine doctor; she took the top marks in her class.',
    correct:'Whoever takes the top marks will make a fine doctor',
    traps:['All fine doctors took the top marks in their class','Medicine demands years of hard study','Some who take the top marks make fine doctors'],
    why:'The argument depends only on the universal, and the universal is doubtful, since examinations test memory, not skill at the bedside. Doubtful premises are most persuasive when left unspoken, and this has long been a use of the enthymeme.'},
-  {tier:2, txt:'A storm is coming — the swallows are flying low.',
+  {tier:2, txt:'A storm is coming; the swallows are flying low.',
    correct:'When the swallows fly low, a storm is coming',
    traps:['When a storm is coming, the swallows fly low','The swallows fly low to chase their food','Sometimes a storm follows when the swallows fly low'],
    why:'The countryman’s proverb supplies the major, which is dropped because every hearer knows it already; the motive is brevity, not concealment. And it holds often enough, since before rain the heavy air keeps the insects low, and the swallows follow their food down.'},
-  {tier:2, txt:'The old house must be soundly built — it has stood a hundred years.',
+  {tier:2, txt:'The old house must be soundly built; it has stood a hundred years.',
    correct:'Whatever has stood a hundred years was soundly built',
    traps:['Whatever is soundly built will stand a hundred years','They built better in the old days','Some houses that stand a hundred years were soundly built'],
    why:'The moderns call this error survivorship bias: we see the houses that stood and never those that fell. The familiar converse contributes nothing here; the conclusion depends on the hidden universal, and the houses that fell are evidence against it.'},
-  {tier:2, txt:'The remedy cannot hurt you — it is all natural.',
+  {tier:2, txt:'The remedy cannot hurt you; it is all natural.',
    correct:'Nothing natural is harmful',
    traps:['Whatever is artificial is harmful','Nature heals more gently than art','Some natural things are harmless'],
    why:'When the major is supplied the syllogism is Celarent, and hemlock, nightshade, and the viper’s venom refute it at once. The appeal to nature persuades only while its premise is left unstated.'},
-  {tier:2, txt:'The book must be good — everyone is reading it.',
+  {tier:2, txt:'The book must be good; everyone is reading it.',
    correct:'Whatever everyone reads is good',
    traps:['Whatever is good, everyone reads','People read what pleases them','Some books that everyone reads are good'],
    why:'This is the argumentum ad populum concealed in an enthymeme. When the major is spoken aloud, its weakness is plain: what the crowd reads is a fact about the crowd, not about the book.'},
-  {tier:2, txt:'There was a frost overnight — the birdbath is iced over.',
+  {tier:2, txt:'There was a frost overnight; the birdbath is iced over.',
    correct:'Whenever the birdbath is iced over, there has been a frost',
    traps:['Whenever there is a frost, the birdbath ices over','Ice is nothing but frozen water','Some frosts leave the birdbath iced over'],
    why:'This is a necessary sign, like Aristotle’s example of milk. Water turns to ice only in freezing air, so the tacit premise holds of necessity, and the enthymeme concludes as firmly as any syllogism. The converse, true as it is, would conclude nothing, since validity depends on the direction of the premise, not merely on its truth.'},
-  {tier:2, txt:'The harvest will fail — the bees are vanishing from the orchard.',
+  {tier:2, txt:'The harvest will fail; the bees are vanishing from the orchard.',
    correct:'Where the bees fail, the harvest fails',
    traps:['Where the harvest fails, the bees have failed','The bees serve the blossom, and the blossom the fruit','Some harvests fail when the bees vanish'],
    why:'This is an honest enthymeme: the major is dropped because every orchardman knows it, and for orchards it is nearly true. Yet even here the universal passes over its exceptions, since wheat and the wind-pollinated grasses do not depend on bees.'},
-  {tier:3, txt:'Running must strengthen the heart — the runners all have strong hearts.',
+  {tier:3, txt:'Running must strengthen the heart; the runners all have strong hearts.',
    correct:'What the runners have, their running gave them',
    traps:['Whoever runs has a strong heart','A strong heart makes a strong runner','Some runners strengthened their hearts by running'],
    why:'The tacit premise assigns the cause, and that is the whole dispute, for perhaps strong hearts choose the sport rather than the sport making the heart strong. The confusion of correlation with cause usually lies, as here, in what is not said.'},
-  {tier:3, txt:'The new remedy works — I took it, and the cold was gone within the week.',
+  {tier:3, txt:'The new remedy works; I took it, and the cold was gone within the week.',
    correct:'What the recovery followed, the recovery came from',
    traps:['What causes a recovery must come before it','Remedies are made and sold to cure','Some who take the remedy recover'],
    why:'This is post hoc ergo propter hoc, stated at last as the missing major, and once stated it refutes itself, for colds pass of themselves within the week. The premise persuades only so long as no one states it.'},
-  {tier:3, txt:'The machine cannot be creative — it only does what it is programmed to do.',
+  {tier:3, txt:'The machine cannot be creative; it only does what it is programmed to do.',
    correct:'Nothing that only does what it is programmed to do is creative',
    traps:['No machine has a soul','Men too only follow their given nature','Some things that only follow their programming are not creative'],
    why:'This is Lady Lovelace’s objection, completed. The entire question, whether following rules excludes creation, lies inside the tacit major, which is assumed rather than argued; so the enthymeme hides the very point at issue.'},
-  {tier:3, txt:'Life must be common in the universe — the stars are without number.',
+  {tier:3, txt:'Life must be common in the universe; the stars are without number.',
    correct:'What can happen among numberless stars happens often',
    traps:['Most stars are suns much like our own','The universe is far older than the earth','Some of the numberless stars may bear life'],
    why:'All the force of the argument lies in the tacit premise, and the premise assumes a number no one knows: numberless chances multiplied by an unknown chance conclude nothing. If the chance is unknown, the number of stars does not make it known.'}
@@ -3297,14 +3297,14 @@ const DISP_KINDS = {
 const DISP_ITEMS = [
   {tier:1, k:'dem',  t:'A teacher shows the class that the angles of a triangle add to two right angles, proving it step by step from what they already grant.'},
   {tier:1, k:'dial', t:'Two townspeople argue whether the new bridge should be built. Neither can prove it; each gives reasons a sensible person would allow.'},
-  {tier:1, k:'tent', t:'A man says he knows what courage is. His friend asks him to say what it is, and keeps asking — not to teach him, but to find out whether he knows.'},
+  {tier:1, k:'tent', t:'A man says he knows what courage is. His friend asks him to say what it is, and keeps asking, not to teach him but to find out whether he knows.'},
   {tier:1, k:'soph', t:'Whenever he is losing the argument, he changes what he claimed and says he meant something else all along.'},
   {tier:2, k:'dem',  t:'A geometry master proves that the base angles of an isosceles triangle are equal, and the class sees that it cannot be otherwise.'},
-  {tier:2, k:'dial', t:'A council debates whether the harvest should be brought in early. Most farmers think so, and the most experienced think so — so it is taken as the better view.'},
+  {tier:2, k:'dial', t:'A council debates whether the harvest should be brought in early. Most farmers think so, and the most experienced think so, and so it is taken as the better view.'},
   {tier:2, k:'tent', t:'An examiner asks a boy questions he can answer from his own opinions, to see how far his knowledge really goes.'},
-  {tier:2, k:'soph', t:'He argues that since Socrates is an animal he must be a man — and the argument works only because nobody notices the rule it is standing on is false.'},
+  {tier:2, k:'soph', t:'He argues that since Socrates is an animal he must be a man, and the argument works only because nobody notices the rule it is standing on is false.'},
   {tier:3, k:'dial', t:'A physician weighs two treatments. Neither is certain, but one is favored by nearly every physician of repute.'},
-  {tier:3, k:'dem',  t:'From the definition of an even number it is shown that no odd number can be even — and the conclusion could not have been otherwise.'},
+  {tier:3, k:'dem',  t:'From the definition of an even number it is shown that no odd number can be even, and the conclusion could not have been otherwise.'},
   {tier:3, k:'soph', t:'He wins by driving his opponent into saying something ungrammatical, and then laughs at the grammar.'},
   {tier:5, k:'tent', t:'She does not argue for any view of her own. She only draws out what he already believes, until he sees it will not hold together.'},
   {tier:5, k:'dial', t:'The question is whether a promise made under threat still binds. There are respected authorities on each side, and the argument weighs them.'}
@@ -3336,7 +3336,7 @@ const META_ITEMS = [
   {tier:1, k:'fal', t:'Every dog can bark. The Dog Star is a dog. So the Dog Star can bark.', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is to force the respondent into something plainly untrue.'},
   {tier:1, k:'ino', t:'Whoever can be beaten by someone is unhappy. A king can be beaten by an enemy. So the king is unhappy.', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is a conclusion nobody would accept, though it is not exactly false.'},
   {tier:1, k:'nug', t:'This nose is a snub nose. But snub means snub nose. So this is a nose nose snub.', w:'the example comes from the same treatise, and the aim is to reduce the respondent to useless repetition.'},
-  {tier:2, k:'sol', t:'You know this. This is a stone. Therefore you know stone — which is not how the words go.', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is to trip the respondent into bad grammar.'},
+  {tier:2, k:'sol', t:'You know this. This is a stone. Therefore you know stone (which is not how the words go).', w:'the example comes from De fallaciis, the treatise attributed to St. Thomas, and the aim is to trip the respondent into bad grammar.'},
   {tier:2, k:'red', t:'You said the tax was too high. But you pay it every year without complaint. So you think it is about right after all.', w:'the aim is to make the respondent retract what he asserted a moment ago.'},
   {tier:2, k:'fal', t:'Everything that shines is gold. The wet road shines. So the wet road is gold.', w:'the aim is a conclusion anyone can see is false.'},
   {tier:3, k:'ino', t:'Whoever gives away what he owns becomes poor. The generous man gives away what he owns. So the generous man is to be pitied.', w:'the aim is a conclusion that offends what everyone believes about generosity.'},
@@ -3440,7 +3440,7 @@ const FAL_ITEMS = [
   {tier:2, k:'amphi',   t:'The oracle said that if he crossed the river he would destroy a great kingdom. He crossed. So the enemy kingdom was doomed.'},
   {tier:3, k:'amphi',   t:'He left the book of Aristotle to his son. Aristotle owned that book. So the son inherited nothing Aristotle wrote.'},
   {tier:5, k:'amphi',   t:'She saw the man with the telescope. So she was holding a telescope.'},
-  {tier:1, k:'accent',  t:'I never said he stole the money — so I have shown he did not steal it.'},
+  {tier:1, k:'accent',  t:'I never said he stole the money, so I have shown he did not steal it.'},
   {tier:2, k:'accent',  t:'The paper is invalid. An invalid is a sick person. So the paper is unwell.'},
   {tier:3, k:'accent',  t:'A desert is a dry waste. He got his just desert. So he was given a dry waste.'},
   {tier:5, k:'accent',  t:'They will present the present at present. Three of the same word, so three of the same thing.'},
@@ -3455,7 +3455,7 @@ const FAL_ITEMS = [
   {tier:5, k:'divis',   t:'The apostles are twelve. Peter and John are apostles. So Peter and John are twelve.'},
   {tier:1, k:'figura',  t:'Nothing is better than lifelong happiness. A dry crust is better than nothing. So a dry crust is better than lifelong happiness.', w:'The word “nothing” has one meaning, but it has the form of a name, so it seems to name something.'},
   {tier:2, k:'figura',  t:'Nothing is lighter than a feather. This box is lighter than a feather. So this box is nothing.', w:'The word “nothing” has one meaning, but it has the form of a name, so it seems to name something.'},
-  {tier:3, k:'figura',  t:'He is a false friend. So he is a friend — of the false sort.'},
+  {tier:3, k:'figura',  t:'He is a false friend. So he is a friend, of the false sort.'},
   {tier:5, k:'figura',  t:'A large mouse is a large animal, since a mouse is an animal and this one is large.'},
   {tier:1, k:'accid',   t:'Cutting people with knives is a crime. Surgeons cut people with knives. So surgeons are criminals.', w:'The middle term, “cutting people with knives,” is taken in two senses. It is a crime as wounding, but surgeons cut to heal, so what belongs to the one is concluded of the other, which agrees with it only by accident.'},
   {tier:2, k:'accid',   t:'You know your brother. That man in the mask is your brother. So you know that man in the mask.'},
@@ -3750,7 +3750,7 @@ const TOPIC_RULE = 'A topic (locus) is a standing place from which an argument c
   + TOPIC_KEYS.map(k=>`<br>${TOPICS[k].name}: ${TOPICS[k].max.charAt(0).toLowerCase()+TOPICS[k].max.slice(1)}`).join('')
   + '<br>Once the topic is named, we can see at once what would answer the argument.';
 const DIAL_TOPICS = [
-  {tier:1, k:'gen',  t:'Every bird has feathers, and a robin is a bird — so a robin has feathers.'},
+  {tier:1, k:'gen',  t:'Every bird has feathers, and a robin is a bird, so a robin has feathers.'},
   {tier:1, k:'def',  t:'A widow is a woman whose husband has died. She has never married. So she is no widow.'},
   {tier:1, k:'opp',  t:'If courage is to be praised, then cowardice is to be blamed.'},
   {tier:1, k:'whole',t:'If the whole roof is sound, the tiles over the kitchen are sound too.'},
@@ -3762,7 +3762,7 @@ const DIAL_TOPICS = [
   {tier:2, k:'auth',t:'Every physician of standing holds that the fever must be let run. So it should be let run.'},
   {tier:2, k:'def',  t:'A definition must fit exactly what it defines. This one fits more. So it is no definition.'},
   {tier:3, k:'more', t:'If even the innocent are punished under this law, how much more the guilty who are merely suspected.'},
-  {tier:3, k:'opp',  t:'If health is to be sought, sickness is to be avoided — they are contraries, and the one follows from the other.'},
+  {tier:3, k:'opp',  t:'If health is to be sought, sickness is to be avoided, since they are contraries, and the one follows from the other.'},
   {tier:3, k:'like', t:'A ship needs one pilot, not a committee of them. So too, they argued, does a state.'},
   {tier:3, k:'whole',t:'The whole wall is white because it is plastered white. So this patch of it is white.'},
   {tier:5, k:'prop',t:'Whatever laughs is a man, and only man laughs. He laughs. So he is a man.'},
@@ -3780,20 +3780,20 @@ const DIAL_TOPICS = [
 /* Given a thesis, which place will supply an argument? This is what the schools
    called the science of FINDING (inventio), and it is what the Topics is for. */
 const INVENT_ITEMS = [
-  {tier:1, k:'opp',  t:'You must show that laziness is to be blamed — and everyone already grants that hard work is to be praised.'},
-  {tier:1, k:'gen',  t:'You must show that this oak will one day die — and everyone grants that every living thing dies.'},
-  {tier:1, k:'def',  t:'You must show that this shape is not a square — and you have its definition in hand.'},
-  {tier:1, k:'cause',t:'You must show that this tool is a bad one — and everyone agrees what the tool is for.'},
-  {tier:2, k:'conj', t:'You must show that acting bravely is worth doing — and your opponent has already granted that bravery is worth having.'},
-  {tier:2, k:'more', t:'You must show that a rich man should give to the poor — and your hearers already grant that a poor man should.'},
-  {tier:2, k:'like', t:'You must show that a state needs one person at its head — and your hearers know that a ship needs one pilot.'},
-  {tier:2, k:'whole',t:'You must show that this chapter is worth reading — and everyone grants that the book is worth reading.'},
-  {tier:3, k:'prop', t:'You must show that this creature is a man — and you have marks that belong to men alone and always.'},
-  {tier:3, k:'auth', t:'You must show that the fever should be let run — and you are no physician, but every physician of standing says so.'},
-  {tier:3, k:'spec', t:'You must show that this particular act was unjust — and it has already been granted that acts of that kind are unjust.'},
-  {tier:5, k:'nom',  t:'You must show that what he calls a democracy is nothing of the sort — and the word itself says rule by the people.'},
-  {tier:5, k:'opp',  t:'You must show that peace would mend our troubles — and it is agreed that the war caused them.'},
-  {tier:5, k:'cause',t:'You must show that this argument is worthless — and you can show what produced it was a wish to win, not a wish for truth.'}
+  {tier:1, k:'opp',  t:'You must show that laziness is to be blamed, and everyone already grants that hard work is to be praised.'},
+  {tier:1, k:'gen',  t:'You must show that this oak will one day die, and everyone grants that every living thing dies.'},
+  {tier:1, k:'def',  t:'You must show that this shape is not a square, and you have its definition in hand.'},
+  {tier:1, k:'cause',t:'You must show that this tool is a bad one, and everyone agrees what the tool is for.'},
+  {tier:2, k:'conj', t:'You must show that acting bravely is worth doing, and your opponent has already granted that bravery is worth having.'},
+  {tier:2, k:'more', t:'You must show that a rich man should give to the poor, and your hearers already grant that a poor man should.'},
+  {tier:2, k:'like', t:'You must show that a state needs one person at its head, and your hearers know that a ship needs one pilot.'},
+  {tier:2, k:'whole',t:'You must show that this chapter is worth reading, and everyone grants that the book is worth reading.'},
+  {tier:3, k:'prop', t:'You must show that this creature is a man, and you have marks that belong to men alone and always.'},
+  {tier:3, k:'auth', t:'You must show that the fever should be let run, and you are no physician, but every physician of standing says so.'},
+  {tier:3, k:'spec', t:'You must show that this particular act was unjust, and it has already been granted that acts of that kind are unjust.'},
+  {tier:5, k:'nom',  t:'You must show that what he calls a democracy is nothing of the sort, and the word itself says rule by the people.'},
+  {tier:5, k:'opp',  t:'You must show that peace would mend our troubles, and it is agreed that the war caused them.'},
+  {tier:5, k:'cause',t:'You must show that this argument is worthless, and you can show what produced it was a wish to win, not a wish for truth.'}
 ];
 function genDialInventQ(d){
   const tiers = defTiers(d);
@@ -3890,7 +3890,7 @@ const RESP = {
 };
 const RESP_KEYS = Object.keys(RESP);
 const RESP_ITEMS = [
-  {tier:1, th:'A good knife cuts well.', ob:'But a good knife in the hands of a murderer does harm — so a good knife is not good.',
+  {tier:1, th:'A good knife cuts well.', ob:'But a good knife in the hands of a murderer does harm, so a good knife is not good.',
    k:'dist', w:'“Good” is said in two ways: good as a knife, and good in what it is used for. When the first is granted and the second denied, the objection is answered.'},
   {tier:1, th:'Promises ought to be kept.', ob:'But a promise made to a madman to give back his sword ought not to be kept. So promises need not be kept.',
    k:'dist', w:'“Ought to be kept” holds without qualification of promises whose keeping does no grave harm. Once the senses are distinguished, the rule stands in the sense in which it was meant.'},
@@ -4106,7 +4106,7 @@ function formatQuizItem(q){
     out.choices = printOpts.map((t,i)=>({letter:L[i], text:t}));
     const correctStrs = (q.correctIdxs||[q.correctIdx]).map(i=>q.options[i]);
     const anss = out.choices.filter(c=>correctStrs.indexOf(c.text)>=0);
-    out.answerText = anss.length ? anss.map(a=>`(${a.letter}) ${a.text}`).join(' — or — ') : correctStr;
+    out.answerText = anss.length ? anss.map(a=>`(${a.letter}) ${a.text}`).join('; or ') : correctStr;
     out.explainHtml = q.why || '';
     return out;
   }
@@ -4151,7 +4151,7 @@ function formatQuizItem(q){
 
   if(q.kind==='modsyll'){
     out.instr = 'In what mode, if any, does the conclusion follow?';
-    out.stemHtml = `<div class="argblock">${q.mlines[0]}.<br>${q.mlines[1]}.<br><span class="therefore">∴</span> ${q.concl} — <em>in what mode?</em></div>`;
+    out.stemHtml = `<div class="argblock">${q.mlines[0]}.<br>${q.mlines[1]}.<br><span class="therefore">∴</span> ${q.concl} <em>(in what mode?)</em></div>`;
     out.choices = MODSYLL_LABELS.map((t,i)=>({letter:L[i], text:t}));
     const ix = MODSYLL_VALUES.indexOf(q.answer);
     out.answerText = ix>=0 ? `(${L[ix]}) ${MODSYLL_LABELS[ix]}` : q.answer;
@@ -4208,7 +4208,7 @@ function formatQuizItem(q){
     if(q.kind==='hypc') out.answerText = hcNothing(q) ? 'none'
       : q.style==='prop' ? pPropText(q.expectedProp) : hcCompText(q, q.expected);
     else if(q.none || !q.accepted || !q.accepted.length) out.answerText = 'none';
-    else out.answerText = q.accepted.map(a=>a.text || a).join(' — or — ');
+    else out.answerText = q.accepted.map(a=>a.text || a).join('; or ');
     return out;
   }
 
@@ -4217,7 +4217,7 @@ function formatQuizItem(q){
     out.stemHtml = `<div class="qprompt">“${q.prose}”</div>`;
     out.workClass = 's2';
     if(q.none || !q.accepted || !q.accepted.length) out.answerText = 'none';
-    else out.answerText = q.accepted.map(a=>a.text || a).join(' — or — ');
+    else out.answerText = q.accepted.map(a=>a.text || a).join('; or ');
     if(q.why) out.explainHtml = q.why;
     return out;
   }
