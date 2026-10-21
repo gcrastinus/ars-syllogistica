@@ -45,8 +45,7 @@ input[type=text],input[type=number],select{font:inherit; width:100%; padding:8px
 .part-heading{font-family:'Cinzel',serif; font-weight:600; font-size:18px; letter-spacing:.1em;
   text-transform:uppercase; color:var(--ink); line-height:1.25}
 .part-sub{margin:6px auto 0; font-style:italic; color:var(--ink-soft); font-size:15.5px; line-height:1.4; text-wrap:balance}
-.setrow.adv{background:#fbf4e4; border:1px solid var(--gold); border-radius:8px;
-  box-shadow:0 0 0 2px var(--panel2), 0 0 0 3px var(--gold); margin:6px 2px; padding:8px}
+.part-head{text-align:center; margin:8px 6px 12px}
 .setrow input{margin-top:4px; accent-color:var(--gold)}
 .setrow .id{font-family:'Cinzel',serif; color:var(--gold); min-width:28px; font-size:14px}
 .setrow .nm{font-size:16px}
@@ -241,18 +240,18 @@ function todayStr(){
 
 function buildSetList(){
   const box = $('setList');
-  box.innerHTML = QUIZ_SETS.map(s=>{
+  const head = `<div class="part-heading part-head">Logic as the Art of Reasoning</div>`;
+  box.innerHTML = head + QUIZ_SETS.map(s=>{
     const modeNote = (typeof QUIZ_MODE_SETS!=='undefined' && QUIZ_MODE_SETS.has(s.id))
       ? ' · letters/English' : '';
-    const adv = s.id>=22;
     const divider = s.id===22
       ? `<div class="part-divider">
           <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
-          <div class="part-heading">Advanced Studies</div>
+          <div class="part-heading">The Science of Logic</div>
           <p class="part-sub">Perfecting the art, once the elements are in hand</p>
         </div>`
       : '';
-    return divider + `<label class="setrow${adv?' adv':''}"><input type="checkbox" data-id="${s.id}">
+    return divider + `<label class="setrow"><input type="checkbox" data-id="${s.id}">
       <span class="id">${ROMAN[s.id]}</span>
       <span class="nm">${s.title}<span class="meta">Set ${ROMAN[s.id]}${modeNote}</span></span></label>`;
   }).join('');

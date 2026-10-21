@@ -13,7 +13,6 @@
   --panel:#f4ecd8; --panel2:#fbf6e8; --track:#e6dcc2;
   --good:#48664c; --bad:#7b2d26; --sel-text:#f3e9cf;
   --glow:#fbf7ea; --shadow:0 2px 14px rgba(74,58,32,.10);
-  --adv-card:#fbf4e4;
 }
 body.dark{
   --paper:#1a1611; --paper2:#120f0c; --card:#241e17; --ink:#e9dfc8; --ink-soft:#b4a583;
@@ -21,7 +20,6 @@ body.dark{
   --panel:#2e261c; --panel2:#292219; --track:#332b20;
   --good:#8fbf95; --bad:#e08373; --sel-text:#1a1611;
   --glow:#231d15; --shadow:0 2px 14px rgba(0,0,0,.45);
-  --adv-card:#2a231c;
 }
 *{box-sizing:border-box; margin:0; padding:0}
 html{min-height:100%}
@@ -56,9 +54,8 @@ h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:
 .part-heading{font-family:'Cinzel', serif; font-weight:600; font-size:28px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ink); line-height:1.25}
 .part-sub{margin:10px auto 0; max-width:40em; font-style:italic; color:var(--ink-soft); font-size:18px; line-height:1.45; text-wrap:balance}
+.part-head{text-align:center; margin:28px auto 8px}
 .part-note{max-width:820px; margin:-18px auto 8px; text-align:center; font-style:italic; color:var(--ink-soft); font-size:16px}
-.row.adv{background:var(--adv-card); border-color:var(--gold);
-  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold)}
 
 /* loader */
 .load-row{text-align:center; margin:10px auto}
@@ -469,6 +466,7 @@ function renderReport(A){
     </div></div>`;
 
   /* per-exercise ladder */
+  h += `<h2 class="part-heading part-head">Logic as the Art of Reasoning</h2>`;
   h += `<div class="card"><h2>The Ladder of Exercises</h2>`;
   GROUPS.forEach(g=>{
     h += `<div class="group-label">${g[0]}</div>`;
@@ -497,14 +495,14 @@ function renderReport(A){
   if(A.adv.some(p=>p.seen || p.passed || p.mastered)){
     h += `<div class="part-divider">
         <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
-        <h2 class="part-heading">Advanced Studies</h2>
+        <h2 class="part-heading">The Science of Logic</h2>
         <p class="part-sub">Perfecting the art, once the elements are in hand</p>
       </div>
       <p class="part-note">Optional, and not part of the grade.</p>
       <div class="card">`;
     A.adv.forEach(p=>{
       const st = p.mastered ? 'Mastered' : p.passed ? 'Passed · Level III' : p.seen ? `In progress · ${p.seen} answered` : 'Not attempted';
-      h += `<div class="row adv"><div class="rn">${ROMAN[p.id]}</div><div class="ti">${p.title}</div><div><span class="chip">${st}</span></div></div>`;
+      h += `<div class="row"><div class="rn">${ROMAN[p.id]}</div><div class="ti">${p.title}</div><div><span class="chip">${st}</span></div></div>`;
     });
     h += `</div>`;
   }

@@ -174,10 +174,16 @@ def extract_intro_screens_v2(index: str) -> list[tuple[str, str]]:
 
 
 def extract_opening(index: str) -> str:
-    # Path / home prose
+    # Path / home prose, in page order: part titles among the section glosses.
     parts = []
-    for m in re.finditer(r'<div class="section-gloss">([\s\S]*?)</div>', index):
-        parts.append(html_to_markup(m.group(1)))
+    home = re.search(r'id="scr-home"(.*?)<!-- ============ LEVEL PICKER', index, re.S)
+    block = home.group(1) if home else index
+    for m in re.finditer(
+        r'<h2 class="part-heading[^"]*"[^>]*>([^<]+)</h2>|<div class="section-gloss">([\s\S]*?)</div>',
+        block,
+    ):
+        raw = m.group(1) if m.group(1) is not None else m.group(2)
+        parts.append(html_to_markup(raw))
     # opening paragraphs in home
     for m in re.finditer(r'<p><strong>(Opening the acts|An art)[\s\S]*?</p>', index):
         parts.append(html_to_markup(m.group(0)))

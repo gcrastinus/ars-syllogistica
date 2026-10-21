@@ -2,6 +2,10 @@
 
 Prepared October 21, 2026. This phase made two cleanups (prose dashes; the attributions to St. Thomas in set XX) and built the Advanced Studies: fourteen doctrine decks and five paired exercise sets (XXII–XXVI), placed after Sophistica on the home page and gated in the Guided Path. The plan is `notes/ADVANCED-STUDIES-PLAN.md`; the "Further guidance" of October 20 (history and modern logic after the ECT article; Peifer, Simon, John of St. Thomas's *Material Logic*, the Klima–Noone book) was followed.
 
+## The two parts
+
+The course now names two parts, in one heading style. The first, from *What Logic Is* through exercise XXI, is **Logic as the Art of Reasoning**. The second, the further studies and exercises XXII–XXVI, is **The Science of Logic**. The fleuron and the rule between them are unchanged. The second part’s cards use the same border, ground, and shadow as the first part’s cards. Where the page, the menus, the instructor report, or the help text named the second part “Advanced Studies,” the part title is now “The Science of Logic.” The individual study titles are unchanged. On each study card the small heading is “THE SCIENCE OF LOGIC,” in the same place “INTRODUCTION” and “THE FIRST ACT” stand on the earlier studies.
+
 ## Follow-up after Timothy's decisions (October 21)
 
 | Commit | What |
