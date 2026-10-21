@@ -4025,7 +4025,7 @@ function genDialecticQ(d){
    drawn by level and returned as an mc4 question. A shared picker keeps
    an item from returning until the pool demands it.
    ================================================================ */
-const ADVANCED_SET_IDS = [22];
+const ADVANCED_SET_IDS = [22, 23];
 const ADV_RECENT = {};
 function advPick(key, pool, keyFn){
   const recent = ADV_RECENT[key] || (ADV_RECENT[key] = []);
@@ -4182,6 +4182,139 @@ function genSuppositionQ(d){
   if(d>=5 && r<0.2) return genSuppArgQ();
   if(d>=4 && r<0.4) return genSuppExistQ();
   return genSuppIdentifyQ(d);
+}
+
+/* ---------------- XXIII. COMPOUND AND EXPONIBLE PROPOSITIONS (Maritain, pp. 99–110, 135) ---------------- */
+const COMP_RULES = 'A compound proposition joins propositions by a word other than the verb. The copulative (“and”) is true only when every part is true; the disjunctive (“or”) when at least one part is true; the conjunctive (“not both”) when the parts are not both true; the conditional (“if”) when the second part follows from the first; the causal (“because”) when both parts are true and the one causes the other. The contradictory of a copulative is a disjunctive of the contradictories of its parts, and the contradictory of a disjunctive is a copulative of them; the contradictory of a conditional denies the sequence. Exponibles look simple: the exclusive (“only”) resolves into two propositions, the exceptive (“except”) into three, and the reduplicative (“as”) names the reason for the predicate.';
+const COMP_KIND = {cop:'Copulative', disj:'Disjunctive', conj:'Conjunctive', cond:'Conditional', caus:'Causal',
+  excl:'Exclusive', exc:'Exceptive', redup:'Reduplicative', simp:'Simple (categorical)'};
+const COMP_TRUE = {
+  cop:  'Only when each of its parts is true',
+  disj: 'When at least one of its parts is true',
+  conj: 'When its two parts are not both true',
+  cond: 'When the second part follows from the first',
+  caus: 'When both parts are true and the one causes the other',
+  excl: 'When the subject has it and nothing else does',
+  exc:  'When the others have it and the excepted one lacks it'
+};
+const COMP_RESOLVE = {
+  excl:  'Two: that the subject has it, and that nothing else does',
+  exc:   'Three: that the rest have it, that the excepted belongs, and that it lacks it',
+  redup: 'Two: that the subject has the feature, and that the feature is the reason',
+  simp:  'One: it is a simple categorical proposition'
+};
+const COMP_ITEMS = [
+  {tier:1, k:'cop',  s:'The sun had set and the lamps were lit', p:'the sun had set', q:'the lamps were lit', np:'the sun had not set', nq:'the lamps were not lit'},
+  {tier:1, k:'cop',  s:'Rome is in Italy and Madrid is in Spain', p:'Rome is in Italy', q:'Madrid is in Spain', np:'Rome is not in Italy', nq:'Madrid is not in Spain'},
+  {tier:2, k:'cop',  s:'The garden is weeded and the hedge is trimmed', p:'the garden is weeded', q:'the hedge is trimmed', np:'the garden is not weeded', nq:'the hedge is not trimmed'},
+  {tier:2, k:'cop',  s:'The soldier was brave and the general was prudent', p:'the soldier was brave', q:'the general was prudent', np:'the soldier was not brave', nq:'the general was not prudent'},
+  {tier:3, k:'cop',  s:'Peter and Andrew were fishermen', why:'Each was a fisherman, so the joined subject hides a copulative: Peter was a fisherman and Andrew was a fisherman.'},
+  {tier:3, k:'cop',  s:'Socrates was wise and Alcibiades was rash', p:'Socrates was wise', q:'Alcibiades was rash', np:'Socrates was not wise', nq:'Alcibiades was not rash'},
+  {tier:2, k:'simp', s:'Peter and Paul are friends', why:'Being friends is said of the two together, so the proposition has one joined subject and is simple.'},
+  {tier:3, k:'simp', s:'Oil and water do not mix', why:'Not mixing is said of the two together; it cannot be divided into a statement about each.'},
+  {tier:3, k:'simp', s:'The bread and the wine were brought together', why:'Being brought together is said of the two as one subject, so the proposition is simple.'},
+  {tier:1, k:'disj', strict:true, s:'Either the number is odd or it is even', why:'The parts cannot be true together or false together, so this is a strict disjunctive.'},
+  {tier:1, k:'disj', s:'Either the letter was lost or it was never sent', p:'the letter was lost', q:'it was never sent', np:'the letter was not lost', nq:'it was sent'},
+  {tier:2, k:'disj', s:'Either we leave at dawn or we miss the tide', p:'we leave at dawn', q:'we miss the tide', np:'we do not leave at dawn', nq:'we do not miss the tide'},
+  {tier:2, k:'disj', strict:true, s:'The prisoner is either guilty or innocent', why:'The parts exclude each other and exhaust the case, so the disjunction is strict.'},
+  {tier:2, k:'disj', s:'Either the key is in the drawer or it is in the car', p:'the key is in the drawer', q:'it is in the car', np:'the key is not in the drawer', nq:'it is not in the car'},
+  {tier:3, k:'disj', strict:true, s:'Every animal is either rational or irrational', why:'The disjunction is hidden in the predicate: each animal is rational or it is irrational.'},
+  {tier:1, k:'conj', s:'No one can be both the judge and the accused in one case', why:'It denies that two propositions are true together, without denying that both may be false.'},
+  {tier:2, k:'conj', s:'No one can be both asleep and awake', why:'It denies that the two are true together; it is a conjunctive proposition.'},
+  {tier:2, k:'conj', s:'The road cannot be both open and closed', why:'It denies that both parts are true together.'},
+  {tier:3, k:'conj', s:'No man can be in Rome and in Athens at once', why:'It denies that the two are true together; he may be in neither.'},
+  {tier:1, k:'cond', s:'If the river rises, the bridge will close', p:'the river rises', q:'the bridge will close', nq:'the bridge will not close'},
+  {tier:1, k:'cond', s:'If a number is divisible by four, it is even', p:'a number is divisible by four', q:'it is even', nq:'it is not even'},
+  {tier:2, k:'cond', s:'If the barometer falls, a storm is coming', p:'the barometer falls', q:'a storm is coming', nq:'no storm is coming'},
+  {tier:2, k:'cond', s:'If he is a priest, he is ordained', p:'he is a priest', q:'he is ordained', nq:'he is not ordained'},
+  {tier:3, k:'cond', s:'If the wall is white, it reflects light', p:'the wall is white', q:'it reflects light', nq:'it does not reflect light'},
+  {tier:3, k:'cond', s:'If the patient has a fever, he has an infection', p:'the patient has a fever', q:'he has an infection', nq:'he has no infection'},
+  {tier:2, k:'caus', s:'The ice melted because the sun was hot', why:'It asserts that the ice melted, that the sun was hot, and that the heat caused the melting.'},
+  {tier:2, k:'caus', s:'The harvest failed because the rain did not come', why:'It asserts both parts and the causal link between them.'},
+  {tier:3, k:'caus', s:'The bell rang because the wind moved it', why:'A causal proposition asserts both parts and that the one causes the other.'},
+  {tier:3, k:'caus', s:'The pupils fell silent because the master entered', why:'It asserts both facts and the causal link.'},
+  {tier:3, k:'excl', s:'Only the bishop may ordain', why:'“Only” makes it two propositions: the bishop may ordain, and no one else may.'},
+  {tier:3, k:'excl', s:'Only the first-born inherits the land', why:'The first-born inherits, and no one else does.'},
+  {tier:4, k:'excl', s:'Among the animals, man alone is rational', why:'Man is rational, and no other animal is.'},
+  {tier:4, k:'excl', s:'Only gold was found in the chest', why:'Gold was found in the chest, and nothing else was.'},
+  {tier:4, k:'excl', s:'Only Peter answered the question', why:'Peter answered, and no one else did.'},
+  {tier:3, k:'exc',  s:'Every student except John passed', why:'Every student other than John passed, John is a student, and John did not pass.'},
+  {tier:3, k:'exc',  s:'All the guests except the doctor left early', why:'The other guests left early, the doctor was a guest, and the doctor did not leave early.'},
+  {tier:4, k:'exc',  s:'Every month except February has at least thirty days', why:'The other months have thirty days or more, February is a month, and it has fewer.'},
+  {tier:4, k:'exc',  s:'Every door except the front door was locked', why:'The other doors were locked, the front door is a door, and it was not locked.'},
+  {tier:5, k:'exc',  s:'All the windows except one were broken', why:'The other windows were broken, the one excepted is a window, and it was not broken.'},
+  {tier:4, k:'redup', s:'The judge, as judge, must be impartial', why:'“As judge” names the office that is the reason for the duty.'},
+  {tier:4, k:'redup', s:'Fire, as hot, warms what is near it', why:'“As hot” names the feature by reason of which fire warms.'},
+  {tier:5, k:'redup', s:'The teacher, as teacher, seeks the learning of the student', why:'“As teacher” names the reason for the aim.'},
+  {tier:5, k:'redup', s:'Man, as animal, is mortal', why:'“As animal” names the feature by reason of which man is mortal.'},
+  {tier:5, k:'redup', s:'The soldier, as soldier, obeys his officer', why:'“As soldier” names the reason for the obedience.'}
+];
+const COMP_KIND_WHY = {
+  cop:'The parts are joined by “and,” and each is asserted.', disj:'The parts are joined by “or,” and at least one is asserted to be true.',
+  conj:'It denies that two propositions are true together.', cond:'The parts are joined by “if,” and only the sequence is asserted.',
+  caus:'It asserts both parts and that the one causes the other.', excl:'“Only” or “alone” makes it two propositions.',
+  exc:'“Except” makes it three propositions.', redup:'“As” names the feature that is the reason for the predicate.',
+  simp:'The predicate is said of the subject taken as one.'};
+const capFirst = s=> s.charAt(0).toUpperCase()+s.slice(1);
+function compKindsFor(d){
+  return d<=1 ? ['cop','disj','conj','cond'] : d===2 ? ['cop','disj','conj','cond','caus','simp']
+       : ['cop','disj','conj','cond','caus','simp','excl','exc','redup'];
+}
+function genCompClassifyQ(d){
+  const kinds = compKindsFor(d);
+  const tiers = d<=1 ? [1] : d===2 ? [1,2] : d===3 ? [1,2,3] : d===4 ? [2,3,4] : [3,4,5];
+  const pool = COMP_ITEMS.filter(x=>kinds.indexOf(x.k)>=0 && tiers.indexOf(x.tier)>=0);
+  const it = advPick('comp-k', pool, x=>x.s);
+  const near = {cop:['simp','disj','caus'], simp:['cop','conj'], disj:['conj','cop'], conj:['disj','cop'],
+    cond:['caus','disj'], caus:['cond','cop'], excl:['exc','redup'], exc:['excl','cop'], redup:['excl','caus']}[it.k];
+  const opts = [it.k].concat(advDistract(it.k, near.filter(k=>kinds.indexOf(k)>=0), kinds));
+  return mc4Make({prompt:it.s, options:opts.map(k=>COMP_KIND[k]), correct:COMP_KIND[it.k],
+    why:(it.why || COMP_KIND_WHY[it.k]), rules:COMP_RULES, mcInstr:'What kind of proposition is this?'});
+}
+function genCompTruthQ(d){
+  const pool = COMP_ITEMS.filter(x=>COMP_TRUE[x.k] && !x.strict && x.tier<=Math.max(3,d) && (d>=4 || ['excl','exc'].indexOf(x.k)<0));
+  const it = advPick('comp-t', pool, x=>x.s);
+  const keys = Object.keys(COMP_TRUE);
+  const near = {cop:['disj','caus'], disj:['cop','conj'], conj:['disj','cop'], cond:['caus','cop'], caus:['cond','cop'], excl:['exc','cop'], exc:['excl','cop']}[it.k];
+  const opts = [it.k].concat(advDistract(it.k, near, keys));
+  return mc4Make({prompt:it.s, options:opts.map(k=>COMP_TRUE[k]), correct:COMP_TRUE[it.k],
+    why:`It is ${COMP_KIND[it.k].toLowerCase()}. ${COMP_KIND_WHY[it.k]}`, rules:COMP_RULES, mcInstr:'When is this proposition true?'});
+}
+function genCompContraQ(){
+  const pool = COMP_ITEMS.filter(x=>x.p && ['cop','disj','cond'].indexOf(x.k)>=0);
+  const it = advPick('comp-c', pool, x=>x.s);
+  let right, wrong, why;
+  if(it.k==='cop'){
+    right = `${capFirst(it.np)}, or ${it.nq}`;
+    wrong = [`${capFirst(it.np)}, and ${it.nq}`, `${capFirst(it.p)}, or ${it.q}`, `If ${it.p}, ${it.nq}`];
+    why = 'The contradictory of a copulative is a disjunctive of the contradictories of its parts, since the copulative is false if either part is false.';
+  } else if(it.k==='disj'){
+    right = `${capFirst(it.np)}, and ${it.nq}`;
+    wrong = [`${capFirst(it.np)}, or ${it.nq}`, `${capFirst(it.p)}, and ${it.q}`, `If ${it.p}, ${it.nq}`];
+    why = 'A disjunctive in the broad sense is false only when both parts are false, so its contradictory is a copulative of the contradictories.';
+  } else {
+    right = `It is not the case that if ${it.p}, ${it.q}`;
+    wrong = [`If ${it.p}, ${it.nq}`, `If ${it.q}, ${it.p}`, `${capFirst(it.p)}, and ${it.q}`];
+    why = 'The contradictory of a conditional denies the sequence, not its parts; “if it is so, then not” is a contrary claim, not the contradictory.';
+  }
+  return mc4Make({prompt:it.s, options:[right].concat(wrong), correct:right, why, rules:COMP_RULES,
+    mcInstr:'Which is its contradictory?'});
+}
+function genCompResolveQ(d){
+  const pool = COMP_ITEMS.filter(x=>COMP_RESOLVE[x.k] && (x.k!=='redup' || d>=5) && x.tier>=3);
+  const it = advPick('comp-r', pool, x=>x.s);
+  const opts = [it.k].concat(Object.keys(COMP_RESOLVE).filter(k=>k!==it.k));
+  return mc4Make({prompt:it.s, options:opts.map(k=>COMP_RESOLVE[k]), correct:COMP_RESOLVE[it.k],
+    why:(it.why || COMP_KIND_WHY[it.k]), rules:COMP_RULES, mcInstr:'Into what does this proposition resolve?'});
+}
+function genCompoundPropQ(d){
+  const r = Math.random();
+  if(d<=2) return genCompClassifyQ(d);
+  if(d===3) return r<0.6 ? genCompClassifyQ(d) : genCompTruthQ(d);
+  if(r<0.3) return genCompClassifyQ(d);
+  if(r<0.5) return genCompTruthQ(d);
+  if(r<0.75) return genCompContraQ();
+  return genCompResolveQ(d);
 }
 
 /* one entry point for the Advanced Studies sets, used by the exercise page

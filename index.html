@@ -3010,8 +3010,410 @@ if(typeof document!=='undefined'){
         `Denying true premises or granting a bad argument does not answer it; the distinction shows where it fails.`)
     ]}
   };
+  /* ---- Second Act: Opposition and Conversion in Depth ---- */
+  const ADV_OPP = [
+    { src:`${SRC_ART}; ${SRC_MAR}; Timothy B. Noone and Gyula Klima, <i>A Little Practical Olde Logick</i> (manuscript); Matthew Minerd, “BCS Logic 2023” (course slides); Aristotle, <i>De interpretatione</i> 7 and 9, with St. Thomas Aquinas’s commentary, bk. I, lect. 10 and 13–14.`,
+      h:`<p><strong>The strongest opposition.</strong> It is natural to think that contraries, “Every man is just” and “No man is just,” are the most opposed of propositions. The tradition holds the opposite: <strong>contradiction</strong> is the strongest opposition, because the one proposition simply denies what the other affirms, and the two agree in nothing. Contraries still agree in something, since both take the subject universally, and so both can be false together.</p>`
+      + `<p>Subalternation, between A and I or between E and O, is not opposition in the proper sense at all. The subaltern says the same thing as its universal, only partially: “Some man is mortal” repeats in part what “Every man is mortal” says. It is placed on the square of opposition for the sake of symmetry, so that all the relations between propositions with the same terms can be seen together, but Aristotle’s own account of opposition does not include it.</p>` },
+    { h:`<p><strong>Singulars and the universal taken as one.</strong> The square assumes a universal and a particular subject. A singular proposition has only one kind of opposition: “Peter is wise” and “Peter is not wise” are contradictories, since the second simply denies the first, and there is no singular that could be their contrary or their subaltern. So two singulars of opposite quality cannot both be true or both be false.</p>`
+      + `<p>The same holds when a universal nature is taken as one thing, as in “Man is the noblest of bodily creatures” and “Man is not the noblest of bodily creatures.” St. Thomas explains that here the predicate is said of the nature as it is one in the mind, though what is said belongs to the nature as it is in things (commentary on the <em>De interpretatione</em>, bk. I, lect. 10). Such propositions behave like singulars and admit only contradiction.</p>` },
+    { h:`<p><strong>What the matter adds.</strong> The laws of opposition hold by form, whatever the terms: contraries cannot both be true, subcontraries cannot both be false, and contradictories divide truth and falsity between them. The matter can add more. In <strong>necessary matter</strong>, where the predicate belongs to the subject by its essence, contraries cannot both be false and subcontraries cannot both be true: “Every man is mortal” is true and “No man is mortal” is false, and “Some man is not mortal” is false.</p>`
+      + `<p>In <strong>contingent matter</strong>, where the predicate may or may not belong, contraries are usually both false and subcontraries both true: “Every man is just” and “No man is just” are false, while “Some man is just” and “Some man is not just” are true. Only in necessary matter may we conclude from the truth of one subcontrary to the falsity of the other. An argument that does so in contingent matter mistakes a feature of the matter for a law of the form.</p>` },
+    { h:`<p><strong>Future contingents.</strong> Aristotle asks whether “There will be a sea battle tomorrow” and “There will not be a sea battle tomorrow” must be one true and the other false now. If one were already true, the battle would be already fixed, and deliberation would be useless. His answer, which St. Thomas develops in his commentary (bk. I, lect. 13–14), is that such propositions about a contingent future are not yet determinately true or false, since their truth depends on things that do not yet exist even in their causes.</p>`
+      + `<p>The law of contradiction is not abandoned. The disjunction “Either there will be a sea battle tomorrow or there will not” is necessarily true now; what is not yet determined is which part is true. So the two propositions exclude each other, but neither can yet be called the true one. This applies only to the contingent future: “The sun will rise tomorrow” concerns what follows from causes already at work, and “There was a battle yesterday” is already determinately true or false.</p>` },
+    { h:`<p><strong>Conversion rests on supposition.</strong> To convert a proposition is to exchange its terms so as to say the same truth. The term that becomes the subject must keep the extension it had as the predicate, and so the rules of conversion follow from the supposition of the terms. In E both terms are distributive, and in I both are determinate, so E and I convert simply. In A the subject is distributive and the predicate merely confused, so A converts only by limitation: “Every man is mortal” gives “Some mortal is a man.”</p>`
+      + `<p>O does not convert at all. In “Some man is not just,” the predicate “just” stands for just men, from whom some man is excluded; in “Some just thing is not a man,” the subject “just thing” could stand for something other than a man, such as God. So the supposed converse does not say the same truth. O converts only by contraposition: “Some man is not just” gives “Some non-just thing is not a non-man,” that is, some non-just thing is a man.</p>` },
+    { h:`<p><strong>Buridan’s limits on contraposition and obversion.</strong> John Buridan, the fourteenth-century master at Paris, noticed that contraposition and obversion need a further condition when the affirmatives carry existential import. “Every man is a being” is true, but its contrapositive “Every non-being is a non-man” is false, because nothing is a non-being, and an affirmative whose subject stands for nothing is false. Contraposition of A and of O holds only when the terms stand for things that actually exist.</p>`
+      + `<p>Obversion moves safely from the affirmative side of the square to the negative: “Every lawyer is learned” gives “No lawyer is non-learned.” But it moves from the negative to the affirmative only when the subject exists: “No chimera is a woman” is true, while “Every chimera is a non-woman” is false, since there are no chimeras. This is the same doctrine of existential import that the course follows throughout, applied to the operations on a single proposition.</p>` },
+    { h:`<p><strong>Not an inference in the proper sense.</strong> Conversion, obversion, subalternation, and the passage from a proposition to the falsity of its contradictory are often called immediate inferences. Maritain argues that none of them is an inference in the proper sense. In each, the mind says the same truth in a second form: “No man is an angel” and “No angel is a man” are two ways of stating one separation of the two terms, and the mind does not advance from a known truth to one not yet known.</p>`
+      + `<p>An inference in the proper sense reaches a new truth, and for that the mind must relate one known truth to another; so every inference properly so called has at least two premises and three terms. The immediate operations are still useful, since they let us restate a premise so that it fits an argument, and the logician can verify them by a syllogism. But the verification comes after the mind has already seen that the two forms say the same thing.</p>` },
+    { h:`<p><strong>The reciprocal and the inverse.</strong> The <strong>reciprocal</strong> of a universal affirmative exchanges its terms and keeps the universal quantity: the reciprocal of “Every square is a rectangle” is “Every rectangle is a square.” Since the predicate of an affirmative is taken particularly, the reciprocal says a different truth and must be proved on its own. Sometimes it is true, as with “Every square is a rhombus with right angles”; sometimes it is false, as here.</p>`
+      + `<p>The <strong>inverse</strong> negates both the subject and the copula: the inverse of “Every man is an animal” is “Every non-man is not an animal,” which says in negative form the same thing as the reciprocal, and is false. To pass from a universal affirmative to its reciprocal is a common error: from “Every great artist astonishes ordinary people” it does not follow that whoever astonishes ordinary people is a great artist.</p>` },
+    { h:`<p><strong>The modern reading of the universal.</strong> Modern predicate logic, developed by Gottlob Frege, the German mathematician and logician, writes “All men are mortal” as “For anything whatever, if it is a man, it is mortal.” On this reading the universal is true when there are no men at all, since a conditional with a false antecedent is counted true; so the A proposition carries no existential import, the step from “All S are P” to “Some S are P” fails, and the square loses its subalternation and contrariety.</p>`
+      + `<p>The tradition answers in two ways. First, the formula represents the universal without saying what it means: “All men are mortal” attributes mortality to man as such, and does not merely report that nothing in the universe is a man without being mortal. Second, as Gyula Klima, the Hungarian-American logician, and Timothy B. Noone, the American medievalist, point out, the medieval logicians did see the problem of empty terms, and placed existence in the affirmatives rather than at the bottom of the square. Contemporary Aristotelians, such as Klima and Terence Parsons, the American logician, have since shown that the older square can be stated formally without contradiction.</p>` }
+  ];
+  const ADV_OPP_EXTRA = {
+    0:{ qs:[
+      Q(`Why is contradiction a stronger opposition than contrariety?`,
+        [`Contradictories agree in nothing, while contraries can both be false`,`Contradictories are both universal, while contraries are not`,`Contraries can both be true, while contradictories cannot`,`Contradictories differ only in quantity, and contraries in quality`], 0,
+        `The contradictory simply denies what the other affirms; contraries keep the universal subject and can share falsity.`,
+        `Contraries cannot both be true, and contradictories differ in both quality and quantity.`),
+      Q(`Why is subalternation not opposition in the proper sense?`,
+        [`The subaltern repeats in part what the universal says`,`The subaltern denies part of what the universal affirms`,`The two can never both be true`,`The two have different terms`], 0,
+        `“Some S is P” says partially what “Every S is P” says, so the two are not opposed.`,
+        `Subalterns share the same terms and quality and can both be true; nothing is denied.`),
+      Q(`“Every planet is inhabited” and “No planet is inhabited” are both false. What does this show?`,
+        [`Contraries can both be false`,`Contradictories can both be false`,`Subcontraries can both be false`,`The square fails for planets`], 0,
+        `Contraries share something, the universal subject, and so they can both be false.`,
+        `Contradictories cannot both be false, and these two are universals of opposite quality, which is contrariety.`)
+    ]},
+    1:{ qs:[
+      Q(`What opposition holds between “Plato is a poet” and “Plato is not a poet”?`,
+        [`Contradiction`,`Contrariety`,`Subcontrariety`,`Subalternation`], 0,
+        `Two singulars of opposite quality are contradictories; the second simply denies the first.`,
+        `Contrariety and subcontrariety need a universal or a particular subject, which a singular does not have.`),
+      Q(`Can “Rome is the capital” and “Rome is not the capital” both be false?`,
+        [`No, since singulars of opposite quality are contradictories`,`Yes, since they are contraries, which can both be false`,`Yes, since singular propositions have no truth value`,`No, since they are subcontraries, which cannot both be false`], 0,
+        `Two singulars of opposite quality are contradictories, which divide truth and falsity between them.`,
+        `Singulars admit only contradiction, not contrariety or subcontrariety.`),
+      Q(`“The horse is a noble animal,” said of the nature as one. What opposition does its denial have to it?`,
+        [`Only contradiction, as with singulars`,`Contrariety, as with universals`,`Subcontrariety, as with particulars`,`No opposition, since it is not a proposition`], 0,
+        `A universal nature taken as one behaves like a singular subject, so its denial is its contradictory.`,
+        `The subject is not taken universally or particularly here, so only contradiction applies.`)
+    ]},
+    2:{ qs:[
+      Q(`“Some triangle has three angles” is true, and the matter is necessary. What of “Some triangle does not have three angles”?`,
+        [`It is false`,`It is true`,`It is undetermined`,`It is neither true nor false`], 0,
+        `In necessary matter two subcontraries cannot both be true, so the second is false.`,
+        `By form alone the subcontrary would be undetermined; the necessary matter decides it.`),
+      Q(`In contingent matter, what usually holds of “Some bird sings” and “Some bird does not sing”?`,
+        [`Both are true`,`Both are false`,`One is true and one false`,`Neither has a truth value`], 0,
+        `Where the predicate may or may not belong, subcontraries are usually both true.`,
+        `Subcontraries cannot both be false, and in contingent matter they are usually both true.`),
+      Q(`When may we conclude from the truth of one subcontrary to the falsity of the other?`,
+        [`Only in necessary matter`,`In every matter`,`Only in contingent matter`,`Only when both are singular`], 0,
+        `Only where the predicate belongs by essence can two subcontraries not both be true.`,
+        `By form alone subcontraries can both be true, so the conclusion depends on necessary matter.`)
+    ]},
+    3:{ qs:[
+      Q(`On Aristotle’s view, what is true now about “It will rain here a year from today”?`,
+        [`It is not yet determinately true or false`,`It is already true or already false`,`It is necessarily false, since it is future`,`It is not a proposition at all`], 0,
+        `A proposition about a contingent future is not yet determinately true or false.`,
+        `It is a proposition, and its truth is not fixed yet; nothing makes it necessarily false.`),
+      Q(`Which proposition is necessarily true now?`,
+        [`Either the ship will sail tomorrow or it will not`,`The ship will sail tomorrow`,`The ship will not sail tomorrow`,`The ship can neither sail nor stay`], 0,
+        `The disjunction of the two contradictories is necessary; which part is true is not yet determined.`,
+        `Neither part of the disjunction is yet determinately true, and the last option is impossible.`),
+      Q(`Why is “The sun will rise tomorrow” not a future contingent in this sense?`,
+        [`It follows from causes already at work`,`It is about the past and not the future`,`It is a negative proposition`,`It is about a substance, not an accident`], 0,
+        `What follows from causes already at work is determined now, unlike what depends on choice or chance.`,
+        `The proposition is affirmative and about the future; what matters is that its causes are already acting.`)
+    ]},
+    4:{ qs:[
+      Q(`Why does “No fish is a mammal” convert simply?`,
+        [`Both its terms are distributive`,`Both its terms are determinate`,`Its subject is singular`,`Its predicate is merely confused`], 0,
+        `In E both terms stand for each of their individuals, so exchanging them keeps the same truth.`,
+        `The terms of E are distributive, not determinate or merely confused, and the subject is common.`),
+      Q(`What is the converse of “Every rose is a flower”?`,
+        [`Some flower is a rose`,`Every flower is a rose`,`No flower is a rose`,`Some flower is not a rose`], 0,
+        `A converts only by limitation, since its predicate is taken particularly.`,
+        `“Every flower is a rose” would take the predicate universally, which the original never did.`),
+      Q(`Why does “Some animal is not a dog” have no simple converse?`,
+        [`In the converse the new subject could stand for other things`,`It is affirmative, and only negatives convert`,`It is universal, and universals convert only by limitation`,`Its terms are both distributive`], 0,
+        `In the original the predicate stands for dogs, from whom some animal is excluded; as a subject it changes what it stands for, and “Some dog is not an animal” is false.`,
+        `O is particular and negative; its subject is determinate and its predicate distributive, so the modes do not match.`)
+    ]},
+    5:{ qs:[
+      Q(`On Buridan’s account, what further condition does the contraposition of an A proposition require?`,
+        [`That its terms stand for things that actually exist`,`That its subject be a singular term`,`That its predicate be distributed`,`That it be in necessary matter`], 0,
+        `An affirmative whose subject stands for nothing is false, so the contrapositive holds only when its terms stand for existing things.`,
+        `The condition concerns existence, not the subject’s singularity, the predicate’s distribution, or the matter.`),
+      Q(`“No unicorn is a horse” is true. What of “Every unicorn is a non-horse”?`,
+        [`False, since there are no unicorns`,`True, since it is the obverse`,`True, since unicorns are not horses`,`Undetermined, since unicorns are imaginary`], 0,
+        `Obversion from E to A needs an existing subject; an affirmative about nothing is false.`,
+        `Obversion from the negative side to the affirmative holds only when the subject exists.`),
+      Q(`In which direction is obversion always safe?`,
+        [`From affirmative to negative`,`From negative to affirmative`,`From particular to universal`,`In every direction alike`], 0,
+        `Moving from the affirmative side to the negative needs no further condition, since negatives carry no existential import.`,
+        `Moving from negative to affirmative requires the subject to exist, and obversion never changes quantity.`)
+    ]},
+    6:{ qs:[
+      Q(`Why does Maritain deny that conversion is an inference properly so called?`,
+        [`The mind states one truth in two forms and does not advance`,`Conversion is invalid unless a premise is added`,`Conversion uses three terms instead of two`,`Conversion reaches a truth that is not yet known`], 0,
+        `The converse says the same truth as the original, so the mind does not move to a new truth.`,
+        `Conversion is valid, uses two terms, and reaches no new truth; that is why it is not an inference properly so called.`),
+      Q(`How many premises does an inference in the proper sense require at least?`,
+        [`Two`,`One`,`Three`,`None`], 0,
+        `To reach a new truth the mind must relate one known truth to another, so it needs at least two premises and three terms.`,
+        `One proposition alone can only be restated, not developed into a new truth.`),
+      Q(`What use do the immediate operations still have?`,
+        [`They let us restate a premise so that it fits an argument`,`They prove new conclusions from a single premise`,`They replace the syllogism in demonstration`,`They show which premises are true`], 0,
+        `Restating a premise in an equivalent form can make it fit the figure of an argument.`,
+        `They do not prove new conclusions, replace the syllogism, or establish truth.`)
+    ]},
+    7:{ qs:[
+      Q(`What is the reciprocal of “Every whale is a mammal”?`,
+        [`Every mammal is a whale`,`Some mammal is a whale`,`No whale is a non-mammal`,`Every non-whale is not a mammal`], 0,
+        `The reciprocal exchanges the terms and keeps the universal quantity.`,
+        `“Some mammal is a whale” is the converse by limitation; the others are the obverse and the inverse.`),
+      Q(`Why must a reciprocal be proved on its own?`,
+        [`It says a different truth from the original`,`It is always false`,`It is the contradictory of the original proposition`,`It changes the quality of the original`], 0,
+        `Since the predicate of an affirmative is taken particularly, the reciprocal adds a claim the original did not make.`,
+        `A reciprocal is sometimes true, it is not a contradictory, and it keeps the quality.`),
+      Q(`What does the inverse of “Every whale is a mammal” say in negative form?`,
+        [`The same as its reciprocal`,`The same as the original`,`The same as its converse by limitation`,`The same as its obverse`], 0,
+        `“Every non-whale is not a mammal” says the same as “Every mammal is a whale.”`,
+        `The inverse is false here, while the original, its converse by limitation, and its obverse are true.`)
+    ]},
+    8:{ qs:[
+      Q(`On the modern reading, when is “All griffins have wings” true?`,
+        [`Even when there are no griffins`,`Only when some griffin exists`,`Only when every winged thing is a griffin`,`Never, since griffins are imaginary`], 0,
+        `It is read as “For anything, if it is a griffin, it has wings,” which is counted true when nothing is a griffin.`,
+        `The modern reading gives the universal no existential import, so it does not require any griffin.`),
+      Q(`Which relations of the square does the modern reading give up?`,
+        [`Subalternation and contrariety`,`Contradiction only`,`Subcontrariety and contradiction`,`All four relations`], 0,
+        `Without existential import in the universals, “All S are P” no longer yields “Some S are P,” and contraries can both be true.`,
+        `The modern reading keeps contradiction; what it loses depends on the universals’ lack of import.`),
+      Q(`What is the tradition’s first answer to the modern reading?`,
+        [`The formula represents the universal without saying what it means`,`The modern formula is simply invalid`,`Universals should be read as particulars`,`Existential import belongs to the negatives`], 0,
+        `“All men are mortal” attributes mortality to man as such; the formula only reports that nothing is a man without being mortal.`,
+        `The tradition does not call the formula invalid, and it places existence in the affirmatives, not in the negatives.`)
+    ]}
+  };
+  /* ---- Second Act: The Modal Proposition in Depth ---- */
+  const ADV_MODP = [
+    { src:`${SRC_ART}; ${SRC_MAR}; ${SRC_JST}; Matthew Minerd, “BCS Logic 2023” (course slides); Aristotle, <i>Prior Analytics</i> I.3, 13; St. Thomas Aquinas, commentary on the <i>Sentences</i> I, d. 38, q. 1, a. 5, ad 5, and <i>De veritate</i>, q. 2, a. 12, ad 4.`,
+      h:`<p><strong>Modes of the copula.</strong> A mode is a determination added to something. Some modes affect only the subject, as in “The prudent man is wise,” and some affect only the predicate, as in “Peter runs fast.” Neither makes a proposition modal. A proposition is modal only when the mode affects the copula itself, that is, the way in which the predicate belongs to the subject: “Peter is necessarily a man,” “Peter can be ill.”</p>`
+      + `<p>There are four such modes: necessity (it cannot not be), impossibility (it cannot be), possibility (it can be), and contingency (it can be and can also not be). Aristotle treats only two, the necessary and the contingent, because the impossible is the necessary with a negation (necessary that it not be), and the possible, in the sense he uses there, goes with the contingent. A proposition with no mode of the copula, such as “Man is rational,” is called simply attributive (Latin <em>de inesse</em>, “of being in”).</p>` },
+    { h:`<p><strong>Quality and quantity of a modal.</strong> A modal proposition has two qualities, that of the mode and that of the dictum. The proposition is affirmative when both are affirmative or both are negative, and negative when one is affirmative and the other negative. So “It is impossible that it not be,” with a negative mode and a negative dictum, is affirmative, and it comes to “It is necessary that it be.” Counting “impossible” as “not possible” makes this rule work.</p>`
+      + `<p>The modes also have a kind of quantity. Necessity and impossibility are like universals, since what must be or cannot be holds in every case; possibility and contingency are like particulars, since what can be need hold only sometimes. This is why the four modes stand at the four corners of a square: “necessary” with the universal affirmative, “impossible” with the universal negative, “possible” with the particular affirmative, and “possible not” with the particular negative.</p>` },
+    { h:`<p><strong>The square with a quantified dictum.</strong> When the dictum itself has a universal or particular subject, the modal square grows to eight corners. “It is necessary that every man be mortal,” “It is necessary that some man be mortal,” “It is possible that every man be a geometer,” and so on, each standing in fixed relations to the others. The relations still follow the pattern of the square: what is necessary of every subject is necessary of some, and what is possible of some is not thereby possible of every.</p>`
+      + `<p>The ordinary wording can mislead. “It is impossible that every man run” does not mean “It is impossible that any man run”; it means only “It is not possible that every man run,” which is the contradictory of “It is possible that every man run.” To say that no man can run, we must say “It is impossible that any man run,” or simply “No man can run.” Maritain gives a serious example: from the falsity of “Every error can be avoided without revelation,” it follows only that some error cannot be so avoided, not that none can.</p>` },
+    { h:`<p><strong>Marking the combinations.</strong> To keep the combinations of mode and dictum in view, the scholastics marked each with a vowel (A, E, I, U): A when both mode and dictum are affirmative, E when the dictum is negative and the mode affirmative, I when the mode is negative and the dictum affirmative, and U when both are negative. Their verse runs: “E dictum negat, Ique modum, nihil A, sed U totum.”</p>`
+      + `<p>Each of the four words Purpurea, Iliace, Amabimus, and Edentuli then lists, in order, the forms with the modes possible, contingent, impossible, and necessary that say the same thing. So the first word, Purpurea, gathers “not possible that not,” “not contingent that not,” “impossible that not,” and “necessary that it be,” which are equipollent. The words are an aid to memory; what they record is the rule that a negation before the mode moves to the contradictory corner, and a negation after the mode denies only the dictum.</p>` },
+    { h:`<p><strong>De dicto and de re.</strong> A modal can be read in two ways. Read <em>de dicto</em> (of what is said), the mode governs the whole proposition: “It is necessary that whatever God knows is true” says that the proposition “What God knows is true” cannot be false. Read <em>de re</em> (of the thing), the mode is said of the thing the subject stands for: “Whatever God knows is necessarily true” would say that each thing God knows is necessary in itself.</p>`
+      + `<p>St. Thomas uses the distinction to answer an objection that God’s knowledge makes all things necessary. The statement “Everything known by God is necessarily so” is true <em>de dicto</em> and false <em>de re</em> (commentary on the <em>Sentences</em> I, d. 38, q. 1, a. 5, ad 5). God knows contingent things as contingent; what is necessary is the truth of the whole statement, not each thing known. The distinction runs close to that of the composite and divided senses, and it decides many arguments that seem to make free acts necessary.</p>` },
+    { h:`<p><strong>Two senses of “possible.”</strong> Aristotle distinguishes two senses of “possible” (<em>Prior Analytics</em> I.13). In one sense the possible is whatever is not impossible, and in this sense the necessary is also possible, since what must be certainly can be. In the other, stricter sense the possible is what is neither necessary nor impossible, what can be and can also not be; this is the <strong>contingent</strong>, and in this sense the necessary is not possible.</p>`
+      + `<p>Much confusion comes from passing between the two senses. From “It is necessary that fire is hot” it follows that it is possible in the first sense, but not that it is contingent. And from “It is contingent that Peter walks” it follows both that he can walk and that he can not walk. The course takes “contingent” in the strict sense: what can be and can also not be.</p>` },
+    { h:`<p><strong>The mode belongs to the proposition.</strong> Aristotle’s modes concern the way the predicate belongs to the subject: whether it belongs necessarily, contingently, or simply. Immanuel Kant, the eighteenth-century German philosopher, divided judgments instead by their modality as problematic, assertoric, and apodictic, and he meant by this the possibility or necessity of the act of judging, not of the relation judged. Maritain points out that Kant also counts the simple assertion as a mode, though in it nothing modifies the copula.</p>`
+      + `<p>The difference matters. For the tradition, “Man is necessarily an animal” states something about man and animal, not about the certainty of the one who judges; one can be certain of a contingent fact and uncertain of a necessary truth. A further sign that the mode belongs to the proposition is that conversion keeps it: “No man can think without images” converts to “No being that thinks without images is a man,” with the mode unchanged.</p>` }
+  ];
+  const ADV_MODP_EXTRA = {
+    0:{ qs:[
+      Q(`Which proposition is modal in the proper sense?`,
+        [`The fire is necessarily hot`,`The careful driver arrives safely`,`The horse runs swiftly`,`The old man walks slowly`], 0,
+        `“Necessarily” affects the copula, the way the predicate belongs to the subject.`,
+        `“Careful,” “swiftly,” and “slowly” affect the subject or the predicate, not the copula.`),
+      Q(`Why does Aristotle need only two of the four modes?`,
+        [`Impossibility and possibility reduce to the other two`,`Possibility and impossibility are not modes of the copula`,`Necessity and contingency are the only modes found in nature`,`The other two modes belong to rhetoric, not to logic`], 0,
+        `“Impossible” is “necessary that it not be,” and the possible goes with the contingent, so two modes suffice.`,
+        `All four are modes of the copula; Aristotle reduces two of them to the others.`),
+      Q(`What is a proposition with no mode of the copula called?`,
+        [`Simply attributive`,`Contingent`,`Composite`,`Problematic`], 0,
+        `It simply says that the predicate is in the subject, and so it is called simply attributive.`,
+        `“Contingent” names a mode, “composite” a sense of a modal, and “problematic” is Kant’s term for a judgment.`)
+    ]},
+    1:{ qs:[
+      Q(`Is “It is impossible that he not breathe” affirmative or negative?`,
+        [`Affirmative, since mode and dictum are both negative`,`Negative, since its mode is negative`,`Negative, since its dictum is negative and that decides it`,`Neither, since it has two negations`], 0,
+        `When mode and dictum are both negative, the proposition is affirmative; it comes to “It is necessary that he breathe.”`,
+        `One negation in mode or dictum makes a modal negative; two make it affirmative.`),
+      Q(`Which modes are like universals?`,
+        [`Necessity and impossibility`,`Possibility and contingency`,`Necessity and possibility`,`Impossibility and contingency`], 0,
+        `What must be or cannot be holds in every case, so these two modes are like universals.`,
+        `Possibility and contingency are like particulars, since what can be need hold only sometimes.`),
+      Q(`Which corner of the modal square answers to the universal negative?`,
+        [`Impossible`,`Necessary`,`Possible`,`Possible not`], 0,
+        `“Impossible” denies in every case, so it stands where the universal negative stands.`,
+        `“Necessary” is the universal affirmative corner, and the possibles are the particular corners.`)
+    ]},
+    2:{ qs:[
+      Q(`What does “It is impossible that every student pass” mean?`,
+        [`It is not possible that every student pass`,`It is impossible that any student pass`,`It is necessary that no student pass`,`It is possible that no student pass`], 0,
+        `“Impossible that every” denies only that all can pass together; it does not say that none can pass.`,
+        `“Impossible that any” or “necessary that no” would say that none can pass, which is a stronger claim.`),
+      Q(`“Every illness can be cured” is false. What follows?`,
+        [`Some illness cannot be cured`,`No illness can be cured`,`Every illness cannot be cured`,`Some illness can be cured`], 0,
+        `The contradictory of the false proposition is true: some illness cannot be cured.`,
+        `The falsity of the universal does not make its contrary true, and it says nothing either way about some illness being curable.`),
+      Q(`What is necessary of every subject is necessary of some. Which relation of the square is this?`,
+        [`Subalternation`,`Contradiction`,`Contrariety`,`Subcontrariety`], 0,
+        `The universal implies the particular below it, which is subalternation.`,
+        `Contradiction, contrariety, and subcontrariety are relations of opposed quality.`)
+    ]},
+    3:{ qs:[
+      Q(`Which vowel marks a modal with a negative mode and an affirmative dictum?`,
+        [`I`,`A`,`E`,`U`], 0,
+        `“Ique modum”: I denies the mode only.`,
+        `A denies nothing, E denies the dictum, and U denies both.`),
+      Q(`What rule do the words Purpurea, Iliace, Amabimus, and Edentuli record?`,
+        [`A negation before the mode moves to the contradictory corner`,`A negation after the mode leaves the proposition unchanged`,`Every modal with two negations is negative`,`The possible and the necessary always agree`], 0,
+        `The words gather equipollent forms, and they rest on where the negation falls.`,
+        `A negation after the mode denies the dictum, which changes the proposition, and two negations make the modal affirmative.`),
+      Q(`Which vowel marks a modal in which both the mode and the dictum are negative?`,
+        [`U`,`A`,`E`,`I`], 0,
+        `“Sed U totum”: U denies both the mode and the dictum.`,
+        `A affirms both, E denies the dictum, and I denies the mode.`)
+    ]},
+    4:{ qs:[
+      Q(`“Whatever is seen is necessarily seen.” How is this true?`,
+        [`De dicto, as the proposition “What is seen is seen”`,`De re, as each thing seen being necessary`,`In neither way, since seeing is contingent`,`De re, but not de dicto`], 0,
+        `The whole statement cannot be false, which is the de dicto reading; the things seen are not necessary in themselves.`,
+        `Read de re it would make each thing seen necessary, which is false; the truth is de dicto.`),
+      Q(`How does St. Thomas answer the objection that God’s knowledge makes all things necessary?`,
+        [`The statement is true of what is said and false of the thing`,`God does not know contingent things at all`,`God’s knowledge is only probable`,`Contingent things become necessary once they are known by God`], 0,
+        `“Everything known by God is necessarily so” is true de dicto and false de re; God knows contingent things as contingent.`,
+        `St. Thomas affirms that God knows contingent things, certainly, without making them necessary.`),
+      Q(`In a de re reading, what is the mode said of?`,
+        [`The thing the subject stands for`,`The whole proposition`,`The word that names the subject`,`The mind of the speaker`], 0,
+        `De re, the mode is said of the thing; de dicto, of what is said.`,
+        `The whole proposition is the de dicto reading, and the word and the speaker are not in question.`)
+    ]},
+    5:{ qs:[
+      Q(`In which sense is what is necessary also possible?`,
+        [`In the sense of “not impossible”`,`In the sense of “contingent”`,`In the sense of “can also not be”`,`In no sense at all`], 0,
+        `What must be certainly can be, so it is possible in the sense of not impossible.`,
+        `In the strict sense the possible can also not be, which the necessary cannot.`),
+      Q(`From “It is contingent that the bell rings,” what follows?`,
+        [`It can ring, and it can also not ring`,`It must ring, and it cannot fail to ring`,`It cannot ring`,`It rings now`], 0,
+        `The contingent in the strict sense can be and can also not be.`,
+        `The contingent is neither necessary nor impossible, and it says nothing about what happens now.`),
+      Q(`From “It is necessary that a square has four sides,” what does not follow?`,
+        [`It is contingent that a square has four sides`,`It is possible that a square has four sides`,`It is not impossible that a square has four sides`,`It is true that a square has four sides`], 0,
+        `The necessary is possible in the broad sense, but it is not contingent, since it cannot not be.`,
+        `The necessary is true, possible, and not impossible; it is only not contingent.`)
+    ]},
+    6:{ qs:[
+      Q(`What did Kant mean by the modality of a judgment?`,
+        [`The possibility or necessity of the act of judging`,`The way in which the predicate belongs to the subject itself`,`The number of terms in the proposition`,`The quantity of the subject`], 0,
+        `Kant spoke of the act of judging, while Aristotle spoke of the relation judged.`,
+        `The way the predicate belongs is Aristotle’s sense; quantity and the number of terms are other matters.`),
+      Q(`Why is a simple assertion not modal, on the tradition’s view?`,
+        [`Nothing in it modifies the copula`,`It is always uncertain`,`It is always about the future`,`It has no predicate`], 0,
+        `A modal proposition requires a mode of the copula, and a simple assertion has none.`,
+        `A simple assertion can be certain, can be about the past, and has a predicate.`),
+      Q(`“Every circle is necessarily round” converts to which proposition?`,
+        [`Something round is necessarily a circle`,`Something round is possibly a circle`,`Everything round is necessarily a circle`,`Something round is a circle, with no mode`], 0,
+        `Conversion keeps the mode and, for A, limits the quantity.`,
+        `The mode is kept in conversion, and A converts only by limitation.`)
+    ]}
+  };
+  /* ---- Second Act: Compound and Exponible Propositions ---- */
+  const ADV_COMP = [
+    { src:`${SRC_ART}; ${SRC_MAR}; ${SRC_JST}; Matthew Minerd, “BCS Logic 2023” (course slides).`,
+      h:`<p><strong>Simple and compound.</strong> A simple, or categorical, proposition joins two terms by the copula “is”: “Man is mortal.” A <strong>compound</strong>, or hypothetical, proposition joins two propositions by a connecting word other than the verb, such as “and,” “or,” or “if”: “The brave gave their lives, and the cowards fled.” A compound proposition states a new truth of its own, which depends on the truths of its parts but is not the same as any of them.</p>`
+      + `<p>A compound is <strong>openly</strong> compound when its structure shows two propositions joined, as in the examples with “and,” “or,” and “if.” It is <strong>hiddenly</strong> compound (exponible) when it looks simple but contains a word, such as “only,” “except,” or “as such,” that makes it equivalent to several propositions. “Only man laughs” looks like one categorical proposition, but it says two things: that man laughs, and that nothing else does.</p>` },
+    { h:`<p><strong>The copulative.</strong> A <strong>copulative</strong> proposition joins its parts by “and.” It is true only when every part is true, and false when any one part is false: “The moon moves and the earth stands still” is false because its second part is false. So from a true copulative we may assert either part by itself, but from a true part we may not assert the copulative, and from a false copulative we may not deny any particular part, since we do not know which one is false.</p>`
+      + `<p>Some copulatives are hidden in a joined subject or predicate: “Peter and Paul died at Rome” means that Peter died at Rome and Paul died at Rome. But a joined subject is not always copulative: “Peter and Paul are friends” says something of the two together, and so it is a simple proposition with one subject. John of St. Thomas notes that the copulative follows its weaker part: if any part is false, or only probable, the whole is no stronger than that part.</p>` },
+    { h:`<p><strong>The disjunctive and the conjunctive.</strong> A <strong>disjunctive</strong> proposition joins its parts by “or.” In the strict sense it says that the parts cannot be true together and cannot be false together, as in “A number is either odd or even.” In the broad sense it says only that at least one part is true. Either way, the disjunctive is true when one part is true, and so it follows its stronger part. An improper disjunctive merely offers alternatives (“You may come by train or on foot”), and denying one of these posits nothing.</p>`
+      + `<p>The <strong>conjunctive</strong> proposition denies that two propositions are true together, without denying that both may be false: “No one can be both a judge and a party in the same case.” Where there is no middle between the two, the conjunctive says the same thing as a disjunctive: “No one can serve both God and Mammon” amounts to “One serves either God or Mammon,” since on the Gospel’s account there is no middle between the two.</p>` },
+    { h:`<p><strong>The conditional.</strong> A <strong>conditional</strong> proposition joins its parts by “if.” It does not assert either part; it asserts only that the second follows from the first. So it is true when the sequence holds, even if both parts are false: “If twenty were odd, it could not be divided by two” is true. And it is false when the sequence fails, even if both parts are true: “If England is an island, two and two make four” is false, since the second does not follow from the first.</p>`
+      + `<p>This is why a conditional can be asserted without asserting its condition. St. Paul could write “But though we, or an angel from heaven, preach a gospel to you besides that which we have preached to you, let him be anathema” (Galatians 1:8) without thinking that an angel would do so. Maritain distinguishes conditionals in the strict sense, where “if” signifies a necessary sequence, from conditionals in a broad sense, where it signifies only a regular connection in fact: “If the speaker so much as opened his mouth, everyone yawned.” A broad conditional is true only if its parts are in fact verified.</p>` },
+    { h:`<p><strong>Causal, rational, relative, adversative.</strong> Other compounds can be resolved into categorical propositions. A <strong>causal</strong> proposition, “The soul is immortal because it is spiritual,” asserts three things: that the soul is immortal, that it is spiritual, and that its spirituality is the cause of its immortality. So, unlike a conditional, it requires the truth of both its parts. A <strong>rational</strong> proposition, “The soul is spiritual, therefore it is immortal,” is in fact a short argument, an enthymeme.</p>`
+      + `<p>A <strong>relative</strong> proposition may have a causal sense (“The soul, which is spiritual, is immortal”) or may amount to a copulative (“The man whom I see is running” means that I see a man and he is running). An <strong>adversative</strong> proposition, joined by “but,” may deny a causal link (“The soul is spiritual but is not joined to the body by force”) or may simply join two facts (“He laughs, but I weep”).</p>` },
+    { h:`<p><strong>The contradictory of a compound.</strong> To contradict a compound we must deny exactly what it asserts. The contradictory of a copulative is a disjunctive of the contradictories of its parts: the contradictory of “Every rich man is sad and honored” is “Some rich man is not sad or not honored.” The contradictory of a broad disjunctive is a copulative of the contradictories: the contradictory of “Either the bridge is closed or the road is flooded” is “The bridge is not closed and the road is not flooded.”</p>`
+      + `<p>The contradictory of a conditional denies the sequence, not the parts: the contradictory of “If he is rich, he is happy” is “It is not the case that if he is rich he is happy,” that is, he could be rich and not happy. It is not “If he is rich, he is not happy,” which is a contrary claim. Modern logic states the first two rules as De Morgan’s laws, after Augustus De Morgan, the nineteenth-century English logician.</p>` },
+    { h:`<p><strong>Exclusive and exceptive propositions.</strong> An <strong>exclusive</strong> proposition contains a word such as “only” or “alone,” and it resolves into two propositions. “Only the human species laughs” means that the human species laughs, and that no other species laughs; it is true only if both are true. An <strong>exceptive</strong> proposition contains “except” or “but,” and it resolves into three. “Every metal except mercury is solid at room temperature” means that every metal other than mercury is so solid, that mercury is a metal, and that mercury is not so solid.</p>`
+      + `<p>The resolution shows how such propositions can be false. “Only citizens may vote” is false if a non-citizen may vote, even if every citizen may. And an exceptive is false if the excepted thing does not really belong to the subject, as “Every bird except the bat flies” is, since the bat is not a bird.</p>` },
+    { h:`<p><strong>Reduplicative propositions.</strong> A <strong>reduplicative</strong> proposition contains “as,” “insofar as,” or “as such”: “The wicked, as wicked, are to be hated.” Sometimes the word names the very nature of the subject, so that the predicate is said to belong to the subject by its own nature: “The colored, as colored, is visible.” Sometimes it names a different feature of the subject, which is the reason or condition for the predicate: “Man, as rational, can laugh; as animal, he can be nourished.” This is the reduplicative in the strict sense.</p>`
+      + `<p>Mistaking a reduplicative for a simple proposition causes many errors. “The wicked, as wicked, are to be hated” does not say that the wicked are to be hated simply, since as men they are to be loved. And “Man as man is not greedy” (greed is not part of what man is) differs from “Man as man is non-greedy” (freedom from greed belongs to his nature): man as man is neither greedy nor free of greed.</p>` }
+  ];
+  const ADV_COMP_EXTRA = {
+    0:{ qs:[
+      Q(`“If it freezes, the pond will be safe to cross.” What kind of proposition is this?`,
+        [`Openly compound`,`Hiddenly compound`,`Simple`,`Singular`], 0,
+        `It plainly joins two propositions by “if,” so it is openly compound.`,
+        `Its structure shows two propositions, so it is neither simple nor hiddenly compound.`),
+      Q(`“Only the owl hunts at night in this wood.” What kind of proposition is this?`,
+        [`Hiddenly compound`,`Openly compound`,`Simple and categorical`,`Conditional`], 0,
+        `It looks simple, but “only” makes it equivalent to two propositions.`,
+        `No connecting word joins two propositions, but “only” hides a second one.`),
+      Q(`How does a compound proposition differ from a simple one?`,
+        [`It joins propositions, not terms, by a word other than the verb`,`It has more than one adjective in its predicate`,`It always has a universal subject and also a particular predicate`,`It is always longer than a simple proposition`], 0,
+        `A simple proposition joins two terms by “is”; a compound joins propositions by “and,” “or,” “if,” and the like.`,
+        `Adjectives, quantity, and length do not make a proposition compound.`)
+    ]},
+    1:{ qs:[
+      Q(`“The sun is a star and the moon is a planet.” Is this true?`,
+        [`No, since one part is false`,`Yes, since one part is true`,`Yes, since both terms are bodies`,`It cannot be decided`], 0,
+        `A copulative is false when any part is false, and the moon is not a planet.`,
+        `One true part is not enough for a copulative; every part must be true.`),
+      Q(`“Peter and John are cousins.” What kind of proposition is this?`,
+        [`Simple, with one joined subject`,`Copulative, meaning Peter is a cousin and John is a cousin`,`Disjunctive`,`Conditional`], 0,
+        `Being cousins is said of the two together, so the proposition has one subject and is simple.`,
+        `“Peter is a cousin and John is a cousin” would lose the relation between them.`),
+      Q(`It is false that “It is raining and cold.” What may we conclude?`,
+        [`At least one part is false, but not which`,`It is not raining`,`It is not cold`,`It is neither raining nor cold`], 0,
+        `A false copulative tells us only that some part is false.`,
+        `We may not deny any particular part, since we do not know which one is false.`)
+    ]},
+    2:{ qs:[
+      Q(`“Either the lamp is on or it is off.” What kind of disjunctive is this?`,
+        [`Strict, since the parts cannot be true or false together`,`Broad, since both parts may be true`,`Improper, since it only offers alternatives`,`Conjunctive, since it denies both parts`], 0,
+        `A lamp cannot be both on and off, nor neither, so the disjunction is strict.`,
+        `Both parts cannot be true together, so it is not broad, and it asserts a real alternative.`),
+      Q(`“No one can be both asleep and keeping watch.” What kind of proposition is this?`,
+        [`Conjunctive`,`Copulative`,`Disjunctive`,`Conditional`], 0,
+        `It denies that two propositions are true together, without denying that both may be false.`,
+        `It does not join by “and,” “or,” or “if” to assert; it denies that both are true together.`),
+      Q(`A disjunctive is said to follow its stronger part. Why?`,
+        [`It is true when any one part is true`,`It is true only when every part is true`,`Its parts are always necessary`,`It asserts a sequence between its parts`], 0,
+        `One true part is enough to make a disjunctive true.`,
+        `It is the copulative that needs every part true, and the conditional that asserts a sequence.`)
+    ]},
+    3:{ qs:[
+      Q(`“If a triangle had four sides, it would have four angles.” Is this conditional true?`,
+        [`Yes, since the second follows from the first`,`No, since both parts are false`,`No, since triangles have three sides and never four`,`It cannot be judged`], 0,
+        `A conditional asserts only that the sequence holds, and it holds here.`,
+        `The falsity of the parts does not make a conditional false; only a failed sequence does.`),
+      Q(`“If water is wet, Paris is in France.” Is this conditional true?`,
+        [`No, since the second does not follow from the first`,`Yes, since both of its parts are plainly true of the world`,`Yes, since the first part is true`,`It cannot be judged`], 0,
+        `A conditional is false when the sequence fails, even if both parts are true.`,
+        `The truth of the parts does not make the conditional true.`),
+      Q(`What does a strict conditional assert?`,
+        [`That the second part follows from the first`,`That both parts are true`,`That the first part is true, whatever the second`,`That the second part is true`], 0,
+        `The conditional asserts the sequence, not the truth of either part.`,
+        `A conditional can be true when both parts are false.`)
+    ]},
+    4:{ qs:[
+      Q(`“The bridge fell because the river flooded.” What must be true for this to be true?`,
+        [`Both parts, and that the flood caused the fall`,`Only that a flood of that size would cause the fall`,`Only that the bridge fell`,`Only that the river flooded`], 0,
+        `A causal proposition asserts both parts and the causal link between them.`,
+        `Unlike a conditional, a causal proposition requires the truth of both its parts.`),
+      Q(`“He is honest, therefore he will be trusted.” What kind of proposition is this?`,
+        [`Rational, in fact a short argument`,`Causal`,`Conditional`,`Copulative`], 0,
+        `A rational proposition, joined by “therefore,” is an enthymeme.`,
+        `It draws a conclusion; a causal proposition would say “because.”`),
+      Q(`“The man whom I met is a doctor.” Into what may this relative proposition be resolved?`,
+        [`I met a man, and he is a doctor`,`If I met a man, he is a doctor`,`I met a man because he is a doctor`,`I met a man or he is a doctor`], 0,
+        `This relative has no causal sense, so it amounts to a copulative.`,
+        `Nothing here is conditional, causal, or disjunctive; it joins two facts.`)
+    ]},
+    5:{ qs:[
+      Q(`What is the contradictory of “The door is locked and the window is shut”?`,
+        [`The door is not locked or the window is not shut`,`The door is not locked and the window is not shut`,`If the door is locked, the window is not shut`,`The door is locked or the window is shut`], 0,
+        `The contradictory of a copulative is a disjunctive of the contradictories of its parts.`,
+        `Denying both parts says more than the contradictory; the copulative is false if either part is false.`),
+      Q(`What is the contradictory of “Either he is ill or he is lazy,” taken broadly?`,
+        [`He is not ill and he is not lazy`,`He is not ill or he is not lazy`,`If he is ill, he is not lazy`,`He is ill and he is lazy`], 0,
+        `A broad disjunctive is false only when both parts are false.`,
+        `“Not ill or not lazy” is still compatible with the disjunctive being true.`),
+      Q(`What is the contradictory of “If the dam breaks, the town floods”?`,
+        [`The dam could break without the town flooding`,`If the dam breaks, the town will certainly not flood`,`The dam does not break and the town floods`,`If the town floods, the dam broke`], 0,
+        `The contradictory of a conditional denies the sequence, not its parts.`,
+        `“If it breaks, the town does not flood” is a contrary claim, and the others change the subject.`)
+    ]},
+    6:{ qs:[
+      Q(`Into what does “Only the dog barked” resolve?`,
+        [`The dog barked, and nothing else barked`,`The dog barked, and the dog is an animal`,`If anything barked, the dog barked`,`The dog barked or nothing barked`], 0,
+        `An exclusive proposition resolves into two propositions, the positive and the exclusion.`,
+        `The exclusion of everything else is what “only” adds.`),
+      Q(`Into how many propositions does an exceptive proposition resolve?`,
+        [`Three`,`Two`,`One`,`Four`], 0,
+        `“Every A except B is C” says that every A other than B is C, that B is an A, and that B is not C.`,
+        `An exclusive resolves into two; an exceptive adds that the excepted thing belongs to the subject.`),
+      Q(`Why is “Every fish except the whale lives in water” false?`,
+        [`The whale is not a fish`,`The whale does not live in water`,`Some fish live on land`,`An exceptive cannot be universal`], 0,
+        `An exceptive requires that the excepted thing belong to the subject, and the whale is a mammal.`,
+        `The fault is in the exception: the whale is not a fish at all.`)
+    ]},
+    7:{ qs:[
+      Q(`“The doctor, as doctor, aims at health.” Which feature does “as doctor” name?`,
+        [`The very nature by which the predicate belongs`,`A feature with no bearing on the predicate`,`The place where the doctor works`,`A figure of speech for the doctor`], 0,
+        `The doctor aims at health by the very art that makes him a doctor.`,
+        `“As doctor” gives the reason for the predicate; it is neither irrelevant nor a figure.`),
+      Q(`“Man, as animal, can be nourished.” What does “as animal” supply?`,
+        [`The feature by reason of which the predicate belongs`,`The whole definition of man`,`A restriction of the subject to some men only, not all`,`The cause of man’s rationality`], 0,
+        `In the strict reduplicative, “as” names the feature that is the reason for the predicate.`,
+        `Animal is not the whole definition, and it does not restrict the subject to some men.`),
+      Q(`Why must “The enemy, as enemy, is to be resisted” not be read as a simple proposition?`,
+        [`As men, enemies are still to be loved`,`Enemies are not to be resisted at all`,`It is a conditional in disguise`,`It has no subject`], 0,
+        `The reduplication limits the predicate to the enemy as enemy; read simply, it would say too much.`,
+        `The proposition is true as reduplicative; read simply, it would forget that the enemy is also a man.`)
+    ]}
+  };
   (function(){
-    [[ADV_PRED, ADV_PRED_EXTRA], [ADV_CAT, ADV_CAT_EXTRA], [ADV_DEFDIV, ADV_DEFDIV_EXTRA], [ADV_SUPP, ADV_SUPP_EXTRA]].forEach(([deck, extra])=>{
+    [[ADV_PRED, ADV_PRED_EXTRA], [ADV_CAT, ADV_CAT_EXTRA], [ADV_DEFDIV, ADV_DEFDIV_EXTRA], [ADV_SUPP, ADV_SUPP_EXTRA], [ADV_OPP, ADV_OPP_EXTRA], [ADV_MODP, ADV_MODP_EXTRA], [ADV_COMP, ADV_COMP_EXTRA]].forEach(([deck, extra])=>{
       for(const k in extra){
         const p = deck[k|0]; if(!p) continue;
         const qs = extra[k].qs.filter(Boolean);
@@ -3031,7 +3433,16 @@ if(typeof document!=='undefined'){
      desc:"How a definition is found: Aristotle’s four questions; division as the way to a definition, with Plato’s angler; dividing in order; gathering the signs of a difference; definition by likeness; what cannot strictly be defined; definition through the four causes; and how definition and demonstration meet."},
     {id:'adv-supp', num:'ADVANCED STUDIES', title:"Supposition", deck:ADV_SUPP, review:true,
      group:'v1', gate:[1, 2, 3, 4],
-     desc:"What a term stands for in a proposition: signification and supposition; material and formal, proper and improper; simple and personal; singular, determinate, distributive, merely confused, and collective; supposition and distribution; the copula and existence; and how a change of supposition breaks an argument."}
+     desc:"What a term stands for in a proposition: signification and supposition; material and formal, proper and improper; simple and personal; singular, determinate, distributive, merely confused, and collective; supposition and distribution; the copula and existence; and how a change of supposition breaks an argument."},
+    {id:'adv-opp', num:'ADVANCED STUDIES', title:"Opposition and Conversion in Depth", deck:ADV_OPP, review:true,
+     group:'v2', gate:[5, 6, 7],
+     desc:"Why contradiction is the strongest opposition; singular propositions; what necessary and contingent matter add to the square; future contingents; how conversion rests on supposition; Buridan’s limits on contraposition and obversion; why these operations are not inferences in the proper sense; the reciprocal and the inverse; and the modern reading of the universal."},
+    {id:'adv-modp', num:'ADVANCED STUDIES', title:"The Modal Proposition in Depth", deck:ADV_MODP, review:true,
+     group:'v2', gate:[5, 6, 7],
+     desc:"Modes of the copula; the quality and quantity of a modal; the square with a quantified dictum; the vowels that mark mode and dictum; de dicto and de re, with St. Thomas’s use of the distinction; the two senses of “possible”; and why the mode belongs to the proposition and not to the act of judging."},
+    {id:'adv-comp', num:'ADVANCED STUDIES', title:"Compound and Exponible Propositions", deck:ADV_COMP, review:true,
+     group:'v2', gate:[5, 6, 7],
+     desc:"Propositions made of propositions: the copulative, disjunctive, conjunctive, and conditional; causal, rational, relative, and adversative propositions; how each is contradicted; and the hidden compounds, exclusive, exceptive, and reduplicative."}
   ];
   /* ==================== END OF ADVANCED STUDIES DECKS ==================== */
 
