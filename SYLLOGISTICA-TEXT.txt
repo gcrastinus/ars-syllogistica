@@ -1527,7 +1527,7 @@ Why not the others: Truth belongs properly to the judgment of the intellect.
 
 **Existential import.** Does a proposition say that its subject exists? In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. “All unicorns are white” is false, because there are no unicorns. That is why “All S are P” yields “Some S are P” (the term of art is *existential import*).
 
-A negative proposition carries no such existence: “No unicorns are white” is true, and so is “Some unicorn is not white.” Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way: affirmatives carry existential import, and negatives do not.
+A negative proposition carries no such existence: “No unicorns are white” is true, and so is “Some unicorn is not white.” Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way: affirmatives carry existential import, and negatives do not. We do speak truly of fictional and merely thought things, as in “Sherlock Holmes lives on Baker Street,” but there the copula signifies being in a story or in the mind. In the exercises the copula signifies actual existence, unless the matter or the wording extends it, as in a proposition in necessary matter or one with “can,” “will,” or “was.”
 
 @question 6.1
 Question: On the classical account that this course follows, “All unicorns are white” is…
