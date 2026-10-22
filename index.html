@@ -216,6 +216,10 @@ h1{
   background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px 24px;
   cursor:pointer; transition:all .18s ease; box-shadow:var(--shadow); position:relative;
 }
+/* Exercise sets use the Review tab's fill. That rule is background:var(--panel),
+   border-left:1px solid var(--line), color:var(--gold). The card keeps its border.
+   Title and description keep their colors: gold on this fill is below WCAG AA in light mode. */
+.set-card.exercise-set{background:var(--panel)}
 .set-card:hover{transform:translateY(-3px); border-color:var(--gold-soft); box-shadow:0 6px 20px rgba(74,58,32,.16)}
 .set-num{font-family:'Cinzel', serif; color:var(--gold); font-size:15px; letter-spacing:.18em}
 .set-card h3{font-family:'Cinzel', serif; font-size:21px; font-weight:600; margin:4px 0 8px}
@@ -1436,7 +1440,7 @@ if(typeof document!=='undefined'){
   }
   SETS.forEach(s=>{
     const c = document.createElement('div');
-    c.className = 'set-card';
+    c.className = 'set-card exercise-set';
     c.id = 'set-card-'+s.id;
     c.innerHTML = `<div class="set-num">EXERCISE ${ROMAN[s.id]}</div><h3>${s.title}</h3>
                    <p>${s.desc}</p><span class="begin">BEGIN ⟶</span>
