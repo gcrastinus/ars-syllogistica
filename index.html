@@ -929,7 +929,7 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
       <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The <strong>Study</strong> section below (the Diagram Workshop and the Square of Opposition) teaches without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
       <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
-      <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays any immediate inference (converse, obverse, contrapositive, contradictory) drawn from whichever corner you choose.</p>
+      <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays the contradictory, the converse, the obverse, or the contrapositive drawn from whichever corner you choose.</p>
     </details>
 
     <details class="help" id="guided-help" style="max-width:700px; display:none; text-align:left">
@@ -1176,10 +1176,10 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
         <p><strong>A</strong> — universal affirmative, <em>All S are P</em>. &ensp; <strong>E</strong> — universal negative, <em>No S are P</em>. &ensp; <strong>I</strong> — particular affirmative, <em>Some S are P</em>. &ensp; <strong>O</strong> — particular negative, <em>Some S are not P</em>.</p>
         <p>The <strong>square</strong> sets these four at its corners (A and E along the top, I and O beneath), so that the logical relations between them may be seen at a glance. There are four such relations:</p>
         <p><strong>Contradictories</strong> (the diagonals, A–O and E–I) can never share a truth-value: of each pair, exactly one is true and one false. <strong>Contraries</strong> (A–E) cannot both be true, though both may be false. <strong>Subcontraries</strong> (I–O) cannot both be false, though both may be true. <strong>Subalterns</strong> (A above I, E above O): truth descends from the universal to its particular, and falsity ascends from the particular to its universal.</p>
-        <p><strong>Why it is used.</strong> Given the truth or falsity of any one corner, the square lets you read off at once what must follow for the other three. It is the oldest means of valid inference from a single premise, and the basis of the immediate inferences below, which you can try on any pair of terms in the square at the foot of this page.</p>
+        <p><strong>Why it is used.</strong> Given the truth or falsity of any one corner, the square lets you read off at once what must follow for the other three. It is the oldest means of valid inference from a single premise, and the basis of the contradictory, the converse, the obverse, and the contrapositive below, which you can try on any pair of terms in the square at the foot of this page.</p>
       </details>
       <details class="help">
-        <summary>The immediate inferences, briefly</summary>
+        <summary>The contradictory, the converse, the obverse, and the contrapositive, briefly</summary>
         <p><strong>Conversion</strong> exchanges subject and predicate. E and I convert <em>simply</em>, and the result is equivalent, so truth passes both ways: “No fish are birds” ⇄ “No birds are fish”; “Some singers are poets” ⇄ “Some poets are singers”.</p>
         <p>A converts only <em>per accidens</em>, that is, the quantity is reduced: “All foxes are animals” yields “<em>Some</em> animals are foxes”. Why is the quantity reduced? The A proposition places the foxes wholly <em>inside</em> the animals, but it says nothing about the whole of the animals, so “All animals are foxes” would claim far more than was given (the illicit conversion). Yet since there <em>are</em> foxes (every term is non-empty on the traditional account), that part of the animals which contains them must be foxes: hence “some animals are foxes”. Truth is preserved in one direction only: we cannot infer “All foxes are animals” back from “Some animals are foxes”.</p>
         <p>O has <strong>no converse</strong> at all: “Some animals are not foxes” is true, while “Some foxes are not animals” is false.</p>
@@ -1190,7 +1190,7 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
       </details>
       <div class="lab-terms" id="lab2-terms"></div>
       <div class="sq-wrap" id="sq-wrap"></div>
-      <div class="q-instr" id="lab2-instr">Select a corner of the square, then choose an immediate inference.</div>
+      <div class="q-instr" id="lab2-instr">Select a corner of the square, then choose the contradictory, the converse, the obverse, or the contrapositive.</div>
       <div class="answer-row" id="lab2-ops" style="display:none; gap:10px">
         <button class="submit-btn" data-op="converse">Converse</button>
         <button class="submit-btn" data-op="obverse">Obverse</button>
@@ -3519,7 +3519,7 @@ if(typeof document!=='undefined'){
         lab2.corner = c.dataset.t;
         lab2Render();
         $('lab2-ops').style.display = 'flex';
-        $('lab2-instr').textContent = `“${immPropText(lab2Prop(lab2.corner))}.” Now choose an immediate inference.`;
+        $('lab2-instr').textContent = `“${immPropText(lab2Prop(lab2.corner))}.” Now choose the contradictory, the converse, the obverse, or the contrapositive.`;
         $('lab2-read').style.display = 'none';
       };
     });
