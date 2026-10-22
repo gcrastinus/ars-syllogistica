@@ -926,7 +926,7 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
 
     <details class="help" style="max-width:700px">
       <summary>How to Proceed</summary>
-      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. <em>Seeing with Circles</em> (with the Second Act) and the <strong>Study</strong> section below (the Diagram Workshop and the Square of Opposition) teach without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
+      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The <strong>Study</strong> section below (the Diagram Workshop and the Square of Opposition) teaches without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
       <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
       <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays any immediate inference (converse, obverse, contrapositive, contradictory) drawn from whichever corner you choose.</p>
@@ -1829,7 +1829,7 @@ if(typeof document!=='undefined'){
     { h:`<p><strong>Opposition.</strong> Propositions with the same subject and predicate that differ in quality, in quantity, or in both are <em>opposed</em>, and their relations make up the square of opposition. <strong>Contradictories</strong> (A and O; E and I) differ in both quality and quantity, so one must be true and the other false. <strong>Contraries</strong> (A and E) cannot both be true, though both may be false. <strong>Subcontraries</strong> (I and O) cannot both be false, though both may be true. <strong>Subalterns</strong> (A and I; E and O) share their quality: if the universal is true, the particular is true, and if the particular is false, the universal is false.</p>`
       + `<p>Because the affirmatives carry existential import and the negatives do not, these relations hold even when the subject stands for nothing: then A and I are false, and E and O are true.</p>` },
     { h:`<p><strong>What follows in the Second Act.</strong> Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there. Exercise VI treats the square of opposition and <em>immediate inference</em>, which draws one proposition from a single other: conversion exchanges subject and predicate (“No S are P” converts to “No P are S”), obversion changes the quality and negates the predicate, and contraposition joins the two. Exercise VII treats the <em>modal</em> propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.</p>`
-      + `<p>The study <em>Seeing with Circles</em> explains the Venn diagrams more fully, and <em>The Square of Opposition</em> shows each relation for any pair of terms.</p>` }
+      + `<p>The diagrams are taught at the head of Exercise V, and <em>The Square of Opposition</em> shows each relation for any pair of terms.</p>` }
   ];
 
   const SECOND_ACT_EXTRA = {
@@ -2066,64 +2066,6 @@ if(typeof document!=='undefined'){
     ]}
   };
 
-  /* ==================== SEEING WITH CIRCLES ====================
-     The four Venn-diagram panels kept from the former orientation. */
-  const CIRCLES = [
-    { h:`<p><strong>Seeing with circles.</strong> Throughout these exercises the <em>Venn diagram</em> makes a proposition visible. Each circle stands for a term; where circles overlap lie the things that fall under both. Two marks are used. To <strong>shade</strong> a region is to say that it is <em>empty</em>, that nothing falls there; an <strong>×</strong> says that there is <em>at least one thing</em> there. With these we can see at a glance what a proposition includes, what it excludes, and whether a thing with a given property exists or not.</p>`,
-      q:{ prompt:`In a Venn diagram, to shade a region means…`,
-          options:['That region is empty, with nothing falling there','That region is full, with everything falling there','We are unsure about that region, which is left open','That region is the conclusion of the argument'],
-          correct:0,
-          explain:`Shading declares a region empty. An <strong>×</strong> does the opposite, declaring that at least one thing falls there. Whatever is left plain, the diagram leaves open.` } },
-    { h:`<p><strong>The four propositions in a picture.</strong> Let the left circle be the subject <em>S</em> and the right the predicate <em>P</em>. The four categorical forms, universal or particular, affirmative or negative, are drawn like this:</p>`
-      + `<div class="orient-venns">`
-      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><defs><mask id="vmA"><rect width="120" height="84" fill="#000"/><circle cx="44" cy="42" r="28" fill="#fff"/><circle cx="76" cy="42" r="28" fill="#000"/></mask></defs><rect width="120" height="84" fill="var(--venn-shade)" opacity=".4" mask="url(#vmA)"/><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>A</b> All S are P</div></div>`
-      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="vcE"><circle cx="44" cy="42" r="28"/></clipPath></defs><circle cx="76" cy="42" r="28" fill="var(--venn-shade)" opacity=".4" clip-path="url(#vcE)"/><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>E</b> No S are P</div></div>`
-      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="60" y="42" text-anchor="middle" dominant-baseline="central" font-size="20" fill="var(--venn-mark)">×</text><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>I</b> Some S are P</div></div>`
-      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="30" y="42" text-anchor="middle" dominant-baseline="central" font-size="20" fill="var(--venn-mark)">×</text><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>O</b> Some S are not P</div></div>`
-      + `</div>`
-      + `<p>The universals (A, E) <em>shade</em> a region empty, while the particulars (I, O) place an <em>×</em> to say that something is there.</p>`,
-      q:{ prompt:`An × placed in the overlap of S and P asserts…`,
-          options:['Some S are P','All S are P','No S are P','Some S are not P'],
-          correct:0,
-          explain:`An × in the lens where the circles overlap says that at least one thing is both S and P, that is, <em>Some S are P</em> (the form I). If that same lens is shaded empty instead, the diagram says <em>No S are P</em> (E).` } },
-    { h:`<p><strong>Two ways to shade, and why we shade the empty.</strong> These diagrams could be drawn in two ways. In the traditional way used here, to <strong>shade</strong> a region is to declare it <em>empty</em>, and only an <strong>×</strong> asserts that something is there. (One could instead shade the regions that are <em>occupied</em> and leave the empty ones blank, but that is not the convention here.)</p>`
-      + `<p>Beneath the choice of shading lies a deeper question. In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. That is why “All S are P” yields “Some S are P” (the term of art is <em>existential import</em>). A negative proposition carries no such existence. Modern set theory reads “All S are P” as true when there are no S, and so denies the step. This course follows the classical way. In the diagrams a universal is still drawn by shading what it denies, and the existence that an affirmative universal asserts is drawn with a <strong>⊗</strong> where an argument needs it.</p>`,
-      q:{ prompt:`On the classical account this course follows, an affirmative proposition whose subject stands for nothing, such as “All unicorns are white,” is…`,
-          options:['False, since an affirmative asserts that its subject exists','True, since nothing contradicts it','Neither true nor false, since it is about nothing','True, since a universal only declares a region empty'],
-          correct:0,
-          explain:`In the older logic an affirmative proposition asserts that its subject exists, so “All unicorns are white” is false, and that is why “All S are P” yields “Some S are P.” A negative proposition asserts no existence, so “No unicorns are white” is true. Modern set theory allows empty classes, reads “All S are P” as true when there are no S, and drops the inference.` } },
-    { h:`<p><strong>Only an instrument.</strong> Useful as they are, these diagrams prove nothing by themselves. They display what a proposition already says, so that the eye may help the mind keep track of what is included, what is excluded, and whether a thing exists. The diagram assists the reasoning but does not replace it. The first instrument of reason is not the circle but the <em>word</em>, and every exercise in this course is carried out in language.</p>` }
-  ];
-  const CIRCLES_EXTRA = {
-    0:{ w:`Shading declares a region empty. An × does the opposite, and what is left plain the diagram leaves open.`,
-      a:{ prompt:`What does an × in a region assert?`,
-          options:['That the region is empty','That at least one thing is there','That we are unsure','That the region is the conclusion'], correct:1,
-          explain:`The × is the mark that asserts existence. Shading asserts the opposite.`,
-          wrong:`Emptiness is what shading declares; the diagram never expresses uncertainty; and no region is a conclusion.`},
-      b:{ prompt:`A region is left plain, neither shaded nor marked. What does that mean?`,
-          options:['It is empty of members','It is occupied by something','The proposition says nothing about it','The diagram is unfinished there'], correct:2,
-          explain:`Leaving it plain makes no claim. A Venn diagram asserts only what is marked; everything else it leaves open.`,
-          wrong:`Empty would need shading and occupied would need an ×; and a diagram may be complete and still leave much unsaid.`} },
-    1:{ w:`Shading a region declares it empty, so an × in the lens is the only way to assert that something is both.`,
-      a:{ prompt:`How is “No S are P” drawn?`,
-          options:['An × in the overlap','The overlap shaded empty','The whole of S shaded','An × outside both circles'], correct:1,
-          explain:`If nothing is both, the lens where the circles meet must be declared empty, which is what shading does.`,
-          wrong:`An × in the lens asserts the contradictory; shading the whole of S would say there are no S at all; and nothing is drawn outside the circles.`},
-      b:{ prompt:`What pattern do the four forms share?`,
-          options:['Universals shade, particulars mark an ×','Universals mark an ×, particulars shade','All four shade','All four use an ×'], correct:0,
-          explain:`A and E shade a region empty; I and O place an × to say that something is there.`,
-          wrong:`The pattern runs the other way round, and neither mark serves all four.`} },
-    2:{ w:`On the classical account an affirmative proposition asserts that its subject exists, and a negative one does not.`,
-      a:{ prompt:`On the classical view, what else does “All S are P” give?`,
-          options:['Nothing further','“Some S are P”','“No S are P”','“All P are S”'], correct:1,
-          explain:`An affirmative proposition asserts that its subject exists, so the universal carries existence with it, and the particular follows.`,
-          wrong:`Modern set theory is what denies the step; and neither the contrary nor the converse follows.`},
-      b:{ prompt:`Where does modern set theory differ?`,
-          options:['It treats a class as possibly empty until something is shown to be in it','It denies that classes exist at all','It uses different diagrams from Venn’s','It has no universal statements of its own'], correct:0,
-          explain:`If the class may be empty, “All S are P” no longer guarantees that any S exists, and the step to “Some S are P” fails.`,
-          wrong:`Set theory is built on classes, uses the same diagrams, and has universal statements in plenty.`} }
-  };
-
   /* ==================== LEAD-INS FOR THE EXERCISE SETS ====================
      Every exercise set opens with one to three cards giving just the doctrine
      its questions and feedback assume (V, VIII, IX, X, XI and XIV from Phase 1;
@@ -2189,10 +2131,19 @@ if(typeof document!=='undefined'){
     ],
     5:[
       { src:SRC_LEAD,
-        h:`<p><strong>Finding the form.</strong> Each item gives one proposition to draw on two circles (from 50 points onward, two premises on three circles). The first step is to find its form. The four standard forms are A, “All S are P”; E, “No S are P”; I, “Some S are P”; and O, “Some S are not P.”</p>`
+        h:`<p><strong>The diagram.</strong> Venn diagrams are a modern aid, published by John Venn, an English logician, in 1880, and they are used to picture what the tradition teaches. They are not part of its doctrine. Each circle stands for a term, and where the circles overlap lie the things that fall under both. To <strong>shade</strong> a region is to declare it empty, so that nothing falls there; an <strong>×</strong> says that at least one thing is there; and a region left plain is left open, because the diagram asserts only what is marked. The diagrams could instead be drawn by shading the regions that are occupied and leaving the empty ones blank, but that is not the convention of this course.</p>`
+      + `<div class="orient-venns">`
+      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><defs><mask id="vmA"><rect width="120" height="84" fill="#000"/><circle cx="44" cy="42" r="28" fill="#fff"/><circle cx="76" cy="42" r="28" fill="#000"/></mask></defs><rect width="120" height="84" fill="var(--venn-shade)" opacity=".4" mask="url(#vmA)"/><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>A</b> All S are P</div></div>`
+      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="vcE"><circle cx="44" cy="42" r="28"/></clipPath></defs><circle cx="76" cy="42" r="28" fill="var(--venn-shade)" opacity=".4" clip-path="url(#vcE)"/><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>E</b> No S are P</div></div>`
+      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="60" y="42" text-anchor="middle" dominant-baseline="central" font-size="20" fill="var(--venn-mark)">×</text><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>I</b> Some S are P</div></div>`
+      + `<div class="orient-venn"><svg viewBox="0 0 120 84" xmlns="http://www.w3.org/2000/svg"><circle cx="44" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><circle cx="76" cy="42" r="28" fill="none" stroke="var(--venn-line)" stroke-width="1.5"/><text x="30" y="42" text-anchor="middle" dominant-baseline="central" font-size="20" fill="var(--venn-mark)">×</text><text x="28" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">S</text><text x="92" y="20" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)">P</text></svg><div class="cap"><b>O</b> Some S are not P</div></div>`
+      + `</div>`
+      + `<p>The universals (A and E) shade a region empty, and the particulars (I and O) place an × to say that something is there. A shades the part of S that lies outside P; E shades the overlap; I places an × in the overlap; and O places an × in the part of S that lies outside P.</p>`
+      + `<p>Useful as they are, these diagrams prove nothing by themselves. They display what a proposition already says, so that we can follow what is included, what is excluded, and whether a thing exists. The diagram assists the reasoning, but it does not replace it. The first instrument of reason is the word, and every exercise in this course is carried out in language.</p>` },
+      { h:`<p><strong>Existence and the ⊗.</strong> In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. “All unicorns are white” is false, because there are no unicorns. That is why “All S are P” yields “Some S are P,” and the term of art for this is <em>existential import</em>. A negative proposition carries no such existence, so “No unicorns are white” is true. Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way.</p>`
+        + `<p>Because an affirmative carries existential import, “All S are P” also asserts that some S exists. The course draws that existence with a <strong>⊗</strong> in the overlap, which is the open part of S. The ⊗ may be added to a diagram of A, but it is not required, except where an argument needs the existence that the affirmative asserts. A negative asserts no existence, so E and O never take a ⊗. A particular shows its existence with an ×, and not with a ⊗.</p>` },
+      { h:`<p><strong>Finding the form.</strong> Each item gives one proposition to draw on two circles (from 50 points onward, two premises on three circles). The first step is to find its form. The four standard forms are A, “All S are P”; E, “No S are P”; I, “Some S are P”; and O, “Some S are not P.”</p>`
         + `<p>Ordinary wording often hides the form. “Every S is P” and “Whatever is S is P” are A; “S are never P” and “There is no S that is P” are E; “There are S that are P” and “A few S are P” are I; “Not all S are P” and “Not every S is P” are O. “Only P are S” means “All S are P,” so its subject is S. The subject’s circle and the predicate’s circle must not be exchanged, because A and O do not convert: “All S are P” does not say “All P are S.”</p>` },
-      { h:`<p><strong>The marks.</strong> Shading declares a region empty; an × declares that at least one thing is there; a region left plain is left undetermined. Each proposition makes one mark: A shades the part of S outside P; E shades the overlap; I puts an × in the overlap; O puts an × in the part of S outside P.</p>`
-        + `<p>Because an affirmative carries existential import, “All S are P” also asserts that some S exists. The course draws that existence with a ⊗ in the open part of S, the overlap; it may be added to an A diagram, but it is not required. A negative asserts no existence, so E and O never take a ⊗; and a particular shows its existence with an ×, not a ⊗.</p>` },
       { h:`<p><strong>Two premises on three circles.</strong> From 50 points onward, two premises are drawn together on three circles. The third circle cuts each region of the two-circle diagram in two, so each universal premise shades two cells. The universal premises are shaded first; then each particular premise’s × goes in the one cell of its region that the shading leaves open. Only what the two premises say is drawn, so no ⊗ is added here.</p>` }
     ],
     8:[
@@ -2471,6 +2422,37 @@ if(typeof document!=='undefined'){
     },
     5:{
       0:{ qs:[
+        Q(`In a Venn diagram, to shade a region is to say that…`, [`The region is empty`,`The region is full`,`The region is left undecided`,`The region is the conclusion`], 0,
+          `Shading declares a region empty. An × declares that at least one thing is there, and a region left plain is left open.`,
+          `Fullness would need an ×; a plain region is left open on purpose; and no region is a conclusion.`),
+        Q(`An × placed in the overlap of S and P asserts…`, [`Some S are P`,`All S are P`,`No S are P`,`Some S are not P`], 0,
+          `An × in the overlap says that at least one thing is both S and P, which is the form I.`,
+          `All S are P is drawn by shading S outside P; No S are P shades the overlap; and Some S are not P places the × in S outside P.`),
+        Q(`A region is left plain, neither shaded nor marked. What does the diagram assert about it?`, [`Nothing is asserted there`,`The region is empty`,`The region is occupied`,`The diagram is unfinished there`], 0,
+          `A diagram asserts only what is marked. What is left plain is left open.`,
+          `Empty would need shading, and occupied would need an ×. A finished diagram may still leave a region plain.`),
+        Q(`Which of the four forms place an ×?`, [`The particulars, I and O`,`The universals, A and E`,`A and I, the affirmatives`,`E and O, the negatives`], 0,
+          `A and E shade a region empty. I and O place an × to say that something is there.`,
+          `The universals shade, and the division is by quantity, so it is not the affirmatives or the negatives as such.`)
+      ]},
+      1:{ qs:[
+        Q(`On the classical account this course follows, “All unicorns are white” is…`, [`False`,`True, since nothing contradicts it`,`Neither true nor false`,`True, because the universal only empties a region`], 0,
+          `An affirmative asserts that its subject exists, and there are no unicorns, so the proposition is false.`,
+          `Modern set theory is what reads the universal as true when the subject is empty.`),
+        Q(`On the classical view, what else does “All S are P” give?`, [`“Some S are P”`,`Nothing further`,`“No S are P”`,`“All P are S”`], 0,
+          `An affirmative asserts that its subject exists, so the particular follows.`,
+          `The contrary and the simple converse do not follow, and the classical account does not stop at the universal.`),
+        Q(`Where does modern set theory differ from this course?`, [`It allows a class to be empty`,`It denies that classes exist`,`It has no universal statements`,`It uses diagrams other than these`], 0,
+          `If the class may be empty, “All S are P” no longer guarantees that any S exists, and the step to “Some S are P” fails.`,
+          `Set theory is built on classes, has universal statements, and can use these same diagrams.`),
+        Q(`How is “No S are P” drawn?`, [`The overlap shaded empty`,`An × in the overlap`,`The whole of S shaded`,`An × outside both circles`], 0,
+          `If nothing is both S and P, the overlap is declared empty, which is what shading does.`,
+          `An × in the overlap asserts the contradictory. Shading the whole of S would say that there are no S.`),
+        Q(`May a ⊗ be added to the diagram of “No S are P”?`, [`No`,`Yes, in the overlap`,`Yes, and it is required`,`Yes, in place of the shading`], 0,
+          `E shades the overlap and nothing more, because a negative proposition asserts no existence.`,
+          `Only an A proposition may take a ⊗, and only in the overlap.`)
+      ]},
+      2:{ qs:[
         Q(`Which form is “Not all S are P”?`, [`O`,`A`,`E`,`I`], 0,
           `“Not all S are P” says that some S are not P, which is the O form.`,
           `It does not say that every S is P (A), or that none is (E), or that some are (I).`),
@@ -2478,15 +2460,7 @@ if(typeof document!=='undefined'){
           `If only P are S, then whatever is S is P; so the subject is S.`,
           `“Only P are S” does not say that every P is S; that would be the converse.`)
       ]},
-      1:{ qs:[
-        Q(`How is “Some S are not P” drawn?`, [`An × in the part of S outside P`,`An × in the overlap`,`The overlap shaded`,`The part of S outside P shaded`], 0,
-          `O places its × in S outside P, since it says that some S lie outside P.`,
-          `An × in the overlap would say “Some S are P,” and shading declares a region empty.`),
-        Q(`May a ⊗ be added to the diagram of “No S are P”?`, [`No, because a negative asserts no existence`,`Yes, in the overlap`,`Yes, an × in the part of S that lies outside P`,`Yes, it is required`], 0,
-          `E shades the overlap and nothing more, since a negative proposition asserts no existence.`,
-          `Only an A proposition may take a ⊗, in the overlap.`)
-      ]},
-      2:{ qs:[
+      3:{ qs:[
         Q(`With two premises on three circles, which is drawn first?`, [`The shading of the universal premises`,`The × of the particular premise`,`The conclusion`,`A ⊗ for each term`], 0,
           `Shading first narrows the region of the particular premise to one open cell, where its × then goes.`,
           `An × placed first may land in a cell that the shading later empties; the conclusion and ⊗ are not drawn here.`),
@@ -2853,12 +2827,11 @@ if(typeof document!=='undefined'){
     apply(FIRST_ACT,   FIRST_ACT_EXTRA);
     apply(SECOND_ACT,  SECOND_ACT_EXTRA);
     apply(THIRD_ACT,   THIRD_ACT_EXTRA);
-    apply(CIRCLES,     CIRCLES_EXTRA);
     for(const id in LEADINS) apply(LEADINS[id], LEADIN_EXTRA[id] || {});
   })();
 
   /* The four doctrine decks; each tile carries a Review strip (the pattern of
-     Ars Grammatica's deck tiles). Seeing with Circles is a plain study tile. */
+     Ars Grammatica's deck tiles). */
   /* Recitation outlines for the four Logic as an Art decks, taken unchanged
      from notes/recitations/. A deck without one does not appear in the tablet. */
   const RECITE_LOGIC = [
@@ -2939,7 +2912,7 @@ if(typeof document!=='undefined'){
     `<strong>Contraries</strong> (A and E) cannot both be true, though both may be false, and <strong>subcontraries</strong> (I and O) cannot both be false, though both may be true.`,
     `<strong>Subalterns</strong> (A and I; E and O) share their quality: if the universal is true, the particular is true, and if the particular is false, the universal is false.`,
     `Because the affirmatives carry existential import and the negatives do not, these relations hold even when the subject stands for nothing, for then A and I are false, and E and O are true.`,
-    `Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there; the study <em>Seeing with Circles</em> explains these diagrams more fully.`,
+    `Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there, and these diagrams are taught at the head of that exercise.`,
     `Exercise VI treats the square of opposition, which the study <em>The Square of Opposition</em> shows for any pair of terms, and <em>immediate inference</em>, which draws one proposition from a single other: conversion exchanges subject and predicate (“No S are P” converts to “No P are S”), obversion changes the quality and negates the predicate, and contraposition joins the two.`,
     `Exercise VII treats the <em>modal</em> propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.`
   ];
@@ -2978,9 +2951,6 @@ if(typeof document!=='undefined'){
      desc:'Moving from what is known to what is not yet known: the syllogism in the broad and narrow senses; its three terms and two premises; the middle term and the cause; valid, sound, and demonstrative arguments; induction; and what the exercises of the Third Act take up.',
      recitation: RECITE_ACT3}
   ];
-  const CIRCLES_STUDY = {id:'circles', num:'STUDY', title:'Seeing with Circles', deck:CIRCLES, review:false,
-     desc:'How a Venn diagram shows a proposition: shading for what is empty, an × for what exists, the four forms drawn on two circles, and the ⊗ for the existence that an affirmative asserts.'};
-
   /* The Advanced Studies decks are kept in ars-advanced.js, loaded before
      this script; the call builds them with the same Q and sources lines. */
   const ADVANCED_DECKS = window.arsAdvancedDecks(Q, {SRC_ART, SRC_MAR, SRC_JST, SRC_OES});
@@ -3008,15 +2978,13 @@ if(typeof document!=='undefined'){
     return c;
   }
   (function(){
-    /* What Logic Is heads the Introduction; each act's deck heads its act;
-       Seeing with Circles follows the Second Act's deck, just before
-       Exercise V (Diagramming Propositions). */
+    /* What Logic Is heads the Introduction; each act's deck heads its act.
+       The diagrams for Exercise V are taught in that exercise's opening cards. */
     const HOME = {logic:'sets-intro', act1:'sets-a1', act2:'sets-a2', act3:'sets-a3'};
     STUDY_DECKS.forEach(d=>{
       const box = $(HOME[d.id]), t = makeStudyTile(d);
       t.classList.add('deck-wide');
       box.insertBefore(t, box.firstChild);
-      if(d.id==='act2') box.insertBefore(makeStudyTile(CIRCLES_STUDY), t.nextSibling);
     });
   })();
   /* The Advanced Studies decks head their act's group, before its exercise

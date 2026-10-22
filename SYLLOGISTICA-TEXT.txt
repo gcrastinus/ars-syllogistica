@@ -1605,7 +1605,7 @@ Why not the others: The particular cannot be false when its universal is true.
 
 **What follows in the Second Act.** Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there. Exercise VI treats the square of opposition and *immediate inference*, which draws one proposition from a single other: conversion exchanges subject and predicate (“No S are P” converts to “No P are S”), obversion changes the quality and negates the predicate, and contraposition joins the two. Exercise VII treats the *modal* propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.
 
-The study *Seeing with Circles* explains the Venn diagrams more fully, and *The Square of Opposition* shows each relation for any pair of terms.
+The diagrams are taught at the head of Exercise V, and *The Square of Opposition* shows each relation for any pair of terms.
 
 @question 8.1
 Question: In a Venn diagram, what does shading a region mean?
@@ -1642,136 +1642,6 @@ Why not the others: A plain proposition says only that it belongs; meaning belon
 
 
 ########################################################################
-# Seeing with Circles
-########################################################################
-
-@deck circles
-Title: Seeing with Circles
-Small heading: STUDY
-
-How a Venn diagram shows a proposition: shading for what is empty, an × for what exists, the four forms drawn on two circles, and the ⊗ for the existence that an affirmative asserts.
-
-@card 1
-
-**Seeing with circles.** Throughout these exercises the *Venn diagram* makes a proposition visible. Each circle stands for a term; where circles overlap lie the things that fall under both. Two marks are used. To **shade** a region is to say that it is *empty*, that nothing falls there; an **×** says that there is *at least one thing* there. With these we can see at a glance what a proposition includes, what it excludes, and whether a thing with a given property exists or not.
-
-@question 1.1
-Question: In a Venn diagram, to shade a region means…
-Choices:
-- That region is empty, with nothing falling there
-- That region is full, with everything falling there
-- We are unsure about that region, which is left open
-- That region is the conclusion of the argument
-Answer: That region is empty, with nothing falling there
-Why: Shading declares a region empty. An **×** does the opposite, declaring that at least one thing falls there. Whatever is left plain, the diagram leaves open.
-Why not the others: Shading declares a region empty. An × does the opposite, and what is left plain the diagram leaves open.
-
-@question 1.2
-Question: What does an × in a region assert?
-Choices:
-- That the region is empty
-- That at least one thing is there
-- That we are unsure
-- That the region is the conclusion
-Answer: That at least one thing is there
-Why: The × is the mark that asserts existence. Shading asserts the opposite.
-Why not the others: Emptiness is what shading declares; the diagram never expresses uncertainty; and no region is a conclusion.
-
-@question 1.3
-Question: A region is left plain, neither shaded nor marked. What does that mean?
-Choices:
-- It is empty of members
-- It is occupied by something
-- The proposition says nothing about it
-- The diagram is unfinished there
-Answer: The proposition says nothing about it
-Why: Leaving it plain makes no claim. A Venn diagram asserts only what is marked; everything else it leaves open.
-Why not the others: Empty would need shading and occupied would need an ×; and a diagram may be complete and still leave much unsaid.
-
-@card 2
-
-**The four propositions in a picture.** Let the left circle be the subject *S* and the right the predicate *P*. The four categorical forms, universal or particular, affirmative or negative, are drawn like this:
-
-SP**A** All S are PSP**E** No S are P×SP**I** Some S are P×SP**O** Some S are not PThe universals (A, E) *shade* a region empty, while the particulars (I, O) place an *×* to say that something is there.
-
-@question 2.1
-Question: An × placed in the overlap of S and P asserts…
-Choices:
-- Some S are P
-- All S are P
-- No S are P
-- Some S are not P
-Answer: Some S are P
-Why: An × in the lens where the circles overlap says that at least one thing is both S and P, that is, *Some S are P* (the form I). If that same lens is shaded empty instead, the diagram says *No S are P* (E).
-Why not the others: Shading a region declares it empty, so an × in the lens is the only way to assert that something is both.
-
-@question 2.2
-Question: How is “No S are P” drawn?
-Choices:
-- An × in the overlap
-- The overlap shaded empty
-- The whole of S shaded
-- An × outside both circles
-Answer: The overlap shaded empty
-Why: If nothing is both, the lens where the circles meet must be declared empty, which is what shading does.
-Why not the others: An × in the lens asserts the contradictory; shading the whole of S would say there are no S at all; and nothing is drawn outside the circles.
-
-@question 2.3
-Question: What pattern do the four forms share?
-Choices:
-- Universals shade, particulars mark an ×
-- Universals mark an ×, particulars shade
-- All four shade
-- All four use an ×
-Answer: Universals shade, particulars mark an ×
-Why: A and E shade a region empty; I and O place an × to say that something is there.
-Why not the others: The pattern runs the other way round, and neither mark serves all four.
-
-@card 3
-
-**Two ways to shade, and why we shade the empty.** These diagrams could be drawn in two ways. In the traditional way used here, to **shade** a region is to declare it *empty*, and only an **×** asserts that something is there. (One could instead shade the regions that are *occupied* and leave the empty ones blank, but that is not the convention here.)
-
-Beneath the choice of shading lies a deeper question. In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. That is why “All S are P” yields “Some S are P” (the term of art is *existential import*). A negative proposition carries no such existence. Modern set theory reads “All S are P” as true when there are no S, and so denies the step. This course follows the classical way. In the diagrams a universal is still drawn by shading what it denies, and the existence that an affirmative universal asserts is drawn with a **⊗** where an argument needs it.
-
-@question 3.1
-Question: On the classical account this course follows, an affirmative proposition whose subject stands for nothing, such as “All unicorns are white,” is…
-Choices:
-- False, since an affirmative asserts that its subject exists
-- True, since nothing contradicts it
-- Neither true nor false, since it is about nothing
-- True, since a universal only declares a region empty
-Answer: False, since an affirmative asserts that its subject exists
-Why: In the older logic an affirmative proposition asserts that its subject exists, so “All unicorns are white” is false, and that is why “All S are P” yields “Some S are P.” A negative proposition asserts no existence, so “No unicorns are white” is true. Modern set theory allows empty classes, reads “All S are P” as true when there are no S, and drops the inference.
-Why not the others: On the classical account an affirmative proposition asserts that its subject exists, and a negative one does not.
-
-@question 3.2
-Question: On the classical view, what else does “All S are P” give?
-Choices:
-- Nothing further
-- “Some S are P”
-- “No S are P”
-- “All P are S”
-Answer: “Some S are P”
-Why: An affirmative proposition asserts that its subject exists, so the universal carries existence with it, and the particular follows.
-Why not the others: Modern set theory is what denies the step; and neither the contrary nor the converse follows.
-
-@question 3.3
-Question: Where does modern set theory differ?
-Choices:
-- It treats a class as possibly empty until something is shown to be in it
-- It denies that classes exist at all
-- It uses different diagrams from Venn’s
-- It has no universal statements of its own
-Answer: It treats a class as possibly empty until something is shown to be in it
-Why: If the class may be empty, “All S are P” no longer guarantees that any S exists, and the step to “Some S are P” fails.
-Why not the others: Set theory is built on classes, uses the same diagrams, and has universal statements in plenty.
-
-@card 4
-
-**Only an instrument.** Useful as they are, these diagrams prove nothing by themselves. They display what a proposition already says, so that the eye may help the mind keep track of what is included, what is excluded, and whether a thing exists. The diagram assists the reasoning but does not replace it. The first instrument of reason is not the circle but the *word*, and every exercise in this course is carried out in language.
-
-
-########################################################################
 # Before the Exercise · Diagramming Propositions
 ########################################################################
 
@@ -1782,11 +1652,124 @@ Small heading: BEFORE THE EXERCISE
 @card 1
 Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of Catholic Theology* (ect.org, 2025); Jacques Maritain, *Formal Logic*, trans. Imelda Choquette (Sheed & Ward, 1937); John of St. Thomas, *Outlines of Formal Logic*, trans. Francis C. Wade (Marquette University Press, 1955).
 
+**The diagram.** Venn diagrams are a modern aid, published by John Venn, an English logician, in 1880, and they are used to picture what the tradition teaches. They are not part of its doctrine. Each circle stands for a term, and where the circles overlap lie the things that fall under both. To **shade** a region is to declare it empty, so that nothing falls there; an **×** says that at least one thing is there; and a region left plain is left open, because the diagram asserts only what is marked. The diagrams could instead be drawn by shading the regions that are occupied and leaving the empty ones blank, but that is not the convention of this course.
+
+SP**A** All S are PSP**E** No S are P×SP**I** Some S are P×SP**O** Some S are not PThe universals (A and E) shade a region empty, and the particulars (I and O) place an × to say that something is there. A shades the part of S that lies outside P; E shades the overlap; I places an × in the overlap; and O places an × in the part of S that lies outside P.
+
+Useful as they are, these diagrams prove nothing by themselves. They display what a proposition already says, so that we can follow what is included, what is excluded, and whether a thing exists. The diagram assists the reasoning, but it does not replace it. The first instrument of reason is the word, and every exercise in this course is carried out in language.
+
+@question 1.1
+Question: In a Venn diagram, to shade a region is to say that…
+Choices:
+- The region is empty
+- The region is full
+- The region is left undecided
+- The region is the conclusion
+Answer: The region is empty
+Why: Shading declares a region empty. An × declares that at least one thing is there, and a region left plain is left open.
+Why not the others: Fullness would need an ×; a plain region is left open on purpose; and no region is a conclusion.
+
+@question 1.2
+Question: An × placed in the overlap of S and P asserts…
+Choices:
+- Some S are P
+- All S are P
+- No S are P
+- Some S are not P
+Answer: Some S are P
+Why: An × in the overlap says that at least one thing is both S and P, which is the form I.
+Why not the others: All S are P is drawn by shading S outside P; No S are P shades the overlap; and Some S are not P places the × in S outside P.
+
+@question 1.3
+Question: A region is left plain, neither shaded nor marked. What does the diagram assert about it?
+Choices:
+- Nothing is asserted there
+- The region is empty
+- The region is occupied
+- The diagram is unfinished there
+Answer: Nothing is asserted there
+Why: A diagram asserts only what is marked. What is left plain is left open.
+Why not the others: Empty would need shading, and occupied would need an ×. A finished diagram may still leave a region plain.
+
+@question 1.4
+Question: Which of the four forms place an ×?
+Choices:
+- The particulars, I and O
+- The universals, A and E
+- A and I, the affirmatives
+- E and O, the negatives
+Answer: The particulars, I and O
+Why: A and E shade a region empty. I and O place an × to say that something is there.
+Why not the others: The universals shade, and the division is by quantity, so it is not the affirmatives or the negatives as such.
+
+@card 2
+
+**Existence and the ⊗.** In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. “All unicorns are white” is false, because there are no unicorns. That is why “All S are P” yields “Some S are P,” and the term of art for this is *existential import*. A negative proposition carries no such existence, so “No unicorns are white” is true. Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way.
+
+Because an affirmative carries existential import, “All S are P” also asserts that some S exists. The course draws that existence with a **⊗** in the overlap, which is the open part of S. The ⊗ may be added to a diagram of A, but it is not required, except where an argument needs the existence that the affirmative asserts. A negative asserts no existence, so E and O never take a ⊗. A particular shows its existence with an ×, and not with a ⊗.
+
+@question 2.1
+Question: On the classical account this course follows, “All unicorns are white” is…
+Choices:
+- False
+- True, since nothing contradicts it
+- Neither true nor false
+- True, because the universal only empties a region
+Answer: False
+Why: An affirmative asserts that its subject exists, and there are no unicorns, so the proposition is false.
+Why not the others: Modern set theory is what reads the universal as true when the subject is empty.
+
+@question 2.2
+Question: On the classical view, what else does “All S are P” give?
+Choices:
+- “Some S are P”
+- Nothing further
+- “No S are P”
+- “All P are S”
+Answer: “Some S are P”
+Why: An affirmative asserts that its subject exists, so the particular follows.
+Why not the others: The contrary and the simple converse do not follow, and the classical account does not stop at the universal.
+
+@question 2.3
+Question: Where does modern set theory differ from this course?
+Choices:
+- It allows a class to be empty
+- It denies that classes exist
+- It has no universal statements
+- It uses diagrams other than these
+Answer: It allows a class to be empty
+Why: If the class may be empty, “All S are P” no longer guarantees that any S exists, and the step to “Some S are P” fails.
+Why not the others: Set theory is built on classes, has universal statements, and can use these same diagrams.
+
+@question 2.4
+Question: How is “No S are P” drawn?
+Choices:
+- The overlap shaded empty
+- An × in the overlap
+- The whole of S shaded
+- An × outside both circles
+Answer: The overlap shaded empty
+Why: If nothing is both S and P, the overlap is declared empty, which is what shading does.
+Why not the others: An × in the overlap asserts the contradictory. Shading the whole of S would say that there are no S.
+
+@question 2.5
+Question: May a ⊗ be added to the diagram of “No S are P”?
+Choices:
+- No
+- Yes, in the overlap
+- Yes, and it is required
+- Yes, in place of the shading
+Answer: No
+Why: E shades the overlap and nothing more, because a negative proposition asserts no existence.
+Why not the others: Only an A proposition may take a ⊗, and only in the overlap.
+
+@card 3
+
 **Finding the form.** Each item gives one proposition to draw on two circles (from 50 points onward, two premises on three circles). The first step is to find its form. The four standard forms are A, “All S are P”; E, “No S are P”; I, “Some S are P”; and O, “Some S are not P.”
 
 Ordinary wording often hides the form. “Every S is P” and “Whatever is S is P” are A; “S are never P” and “There is no S that is P” are E; “There are S that are P” and “A few S are P” are I; “Not all S are P” and “Not every S is P” are O. “Only P are S” means “All S are P,” so its subject is S. The subject’s circle and the predicate’s circle must not be exchanged, because A and O do not convert: “All S are P” does not say “All P are S.”
 
-@question 1.1
+@question 3.1
 Question: Which form is “Not all S are P”?
 Choices:
 - O
@@ -1797,7 +1780,7 @@ Answer: O
 Why: “Not all S are P” says that some S are not P, which is the O form.
 Why not the others: It does not say that every S is P (A), or that none is (E), or that some are (I).
 
-@question 1.2
+@question 3.2
 Question: Which proposition does “Only P are S” state?
 Choices:
 - All S are P
@@ -1808,39 +1791,11 @@ Answer: All S are P
 Why: If only P are S, then whatever is S is P; so the subject is S.
 Why not the others: “Only P are S” does not say that every P is S; that would be the converse.
 
-@card 2
-
-**The marks.** Shading declares a region empty; an × declares that at least one thing is there; a region left plain is left undetermined. Each proposition makes one mark: A shades the part of S outside P; E shades the overlap; I puts an × in the overlap; O puts an × in the part of S outside P.
-
-Because an affirmative carries existential import, “All S are P” also asserts that some S exists. The course draws that existence with a ⊗ in the open part of S, the overlap; it may be added to an A diagram, but it is not required. A negative asserts no existence, so E and O never take a ⊗; and a particular shows its existence with an ×, not a ⊗.
-
-@question 2.1
-Question: How is “Some S are not P” drawn?
-Choices:
-- An × in the part of S outside P
-- An × in the overlap
-- The overlap shaded
-- The part of S outside P shaded
-Answer: An × in the part of S outside P
-Why: O places its × in S outside P, since it says that some S lie outside P.
-Why not the others: An × in the overlap would say “Some S are P,” and shading declares a region empty.
-
-@question 2.2
-Question: May a ⊗ be added to the diagram of “No S are P”?
-Choices:
-- No, because a negative asserts no existence
-- Yes, in the overlap
-- Yes, an × in the part of S that lies outside P
-- Yes, it is required
-Answer: No, because a negative asserts no existence
-Why: E shades the overlap and nothing more, since a negative proposition asserts no existence.
-Why not the others: Only an A proposition may take a ⊗, in the overlap.
-
-@card 3
+@card 4
 
 **Two premises on three circles.** From 50 points onward, two premises are drawn together on three circles. The third circle cuts each region of the two-circle diagram in two, so each universal premise shades two cells. The universal premises are shaded first; then each particular premise’s × goes in the one cell of its region that the shading leaves open. Only what the two premises say is drawn, so no ⊗ is added here.
 
-@question 3.1
+@question 4.1
 Question: With two premises on three circles, which is drawn first?
 Choices:
 - The shading of the universal premises
@@ -1851,7 +1806,7 @@ Answer: The shading of the universal premises
 Why: Shading first narrows the region of the particular premise to one open cell, where its × then goes.
 Why not the others: An × placed first may land in a cell that the shading later empties; the conclusion and ⊗ are not drawn here.
 
-@question 3.2
+@question 4.2
 Question: How many cells does one universal premise shade on three circles?
 Choices:
 - Two

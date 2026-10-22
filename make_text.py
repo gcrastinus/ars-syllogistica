@@ -288,7 +288,7 @@ const ctx = {console, $: () => null, document: {getElementById: () => null}};
 ctx.window = ctx; vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(advPath, 'utf8'), ctx);
 const a = big.indexOf('const Q = '), b = big.indexOf('function makeStudyTile');
-vm.runInContext(big.slice(a, b) + ';this.__D = {STUDY_DECKS, CIRCLES_STUDY, ADVANCED_DECKS, LEADINS};', ctx);
+vm.runInContext(big.slice(a, b) + ';this.__D = {STUDY_DECKS, ADVANCED_DECKS, LEADINS};', ctx);
 const sm = big.match(/const SETS = (\[[\s\S]*?\n  \]);/);
 const SETS = vm.runInContext('(' + sm[1] + ')', ctx);
 const am = big.match(/const ACT_MEMBERS = (\{[\s\S]*?\});/);
@@ -305,7 +305,6 @@ out.push(deck(sd('logic')));
 const actDeck = {a1:'act1', a2:'act2', a3:'act3'};
 for (const k of ['a1','a2','a3','a4','a6','a5','a7']) {
   if (actDeck[k]) out.push(deck(sd(actDeck[k])));
-  if (k === 'a2') out.push(deck(D.CIRCLES_STUDY));
   for (const id of ACT_MEMBERS[k]) if (D.LEADINS[id]) out.push(lead(id));
 }
 for (const g of ['v1','v2','v3']) D.ADVANCED_DECKS.filter(d => d.group === g).forEach(d => out.push(deck(d)));

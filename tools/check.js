@@ -47,7 +47,7 @@ const big = inline.find(s => s.includes('const STUDY_DECKS')) || '';
 const a = big.indexOf('const Q = ');
 const b = big.indexOf('function makeStudyTile');
 const data = big.slice(a, b) + `
-;this.__out = {INTRO_LOGIC, FIRST_ACT, SECOND_ACT, THIRD_ACT, CIRCLES, LEADINS, STUDY_DECKS,
+;this.__out = {INTRO_LOGIC, FIRST_ACT, SECOND_ACT, THIRD_ACT, LEADINS, STUDY_DECKS,
   ADVANCED_DECKS: (typeof ADVANCED_DECKS!=='undefined') ? ADVANCED_DECKS : []};`;
 const ctx = {$: () => null, document: {getElementById: () => null}, console};
 ctx.window = ctx;
@@ -102,7 +102,7 @@ function checkDeck(name, deck, enforce, enforceLongest) {
   if ((enforce || enforceLongest) && ratio > 1 / 3) fail(msg + ', above one third'); else ok(msg);
 }
 [['What Logic Is', D.INTRO_LOGIC], ['First Act', D.FIRST_ACT], ['Second Act', D.SECOND_ACT],
- ['Third Act', D.THIRD_ACT], ['Seeing with Circles', D.CIRCLES]].forEach(([n, d]) => checkDeck(n, d, false, true));
+ ['Third Act', D.THIRD_ACT]].forEach(([n, d]) => checkDeck(n, d, false, true));
 Object.keys(D.LEADINS).forEach(id => checkDeck('Lead-in ' + id, D.LEADINS[id], false, true));
 D.STUDY_DECKS.forEach(d => { if (!d.review) fail(`deck ${d.id} has no Review`); });
 ok(`${D.STUDY_DECKS.length} doctrine decks have a Review`);
