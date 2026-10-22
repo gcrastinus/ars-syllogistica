@@ -41,7 +41,7 @@ Logic is the art of reasoning well. This study sets out what logic is and what i
 
 The first act of the mind, which comes before all judging or reasoning, is simply to grasp what a thing is. Here we learn the five **predicables** (the ways a universal is said of a subject) and the ten **categories** into which all that can be said of a thing falls; then we learn to **divide** a whole into its kinds and to **define** what a thing essentially is. These are the arts by which a concept is made clear and distinct, and everything that follows depends on them.
 
-The second act of the mind joins or separates concepts in order to affirm or deny, and what it forms is the **proposition**. We picture propositions on Venn diagrams, turn one into another by **immediate inference** across the square of opposition, and qualify them by the **modes** of necessity and possibility.
+The second act of the mind joins or separates concepts in order to affirm or deny, and what it forms is the **proposition**. We picture propositions on Venn diagrams, relate one proposition to another by **opposition**, **equipollence**, and **conversion**, and qualify them by the **modes** of necessity and possibility.
 
 The third act of the mind reasons from things already known to things unknown, and its form is the **syllogism**. An argument is **valid** when its conclusion must be true if its premises are, whatever they are about; it is **invalid** when the premises could be true and the conclusion still false. That single test is applied here to arguments of every kind (categorical, conjunctive and disjunctive, conditional, modal, and stated in ordinary speech), and in categorical and modal arguments the conclusion follows the weaker part in quantity and quality.
 
@@ -74,8 +74,8 @@ The parts
     We learn the rules of definition by using them. Each question shows one rule (exact fit, clarity, no circle, saying what a thing is rather than what it is not, and brevity) and asks which everyday definition breaks or keeps it. The four kinds (nominal, essential, descriptive, causal) are taught the same way.
 5. Diagramming Propositions
     We picture single propositions on a Venn diagram, shading what they declare empty and placing an × where they assert existence. From 50 points onward, two premises are diagrammed together on three circles.
-6. Immediate Inference
-    The square of opposition and the operations upon a single proposition: converse, obverse, contrapositive, and contradictory, and what truth or falsity each relation carries across.
+6. Opposition, Equipollence, and Conversion
+    John of St. Thomas treats opposition, equipollence, and conversion as properties of the proposition, and not as a separate kind of inference. We judge what truth or falsity the square carries from one proposition to another, and we give the equipollent, the converse, or the contrapositive in standard form. Obversion is practiced with them. Later logicians call these properties “immediate inferences.”
 7. The Modal Propositions
     John of St. Thomas counts four modes: necessary, impossible, possible, and contingent, where the contingent is what can be, and can also not be. We judge equipollences (whether two expressions have the same force and the same corner of the square, as when we ask whether “not possible that not” comes to “necessary”), the modal square, and the composite and divided senses (whether the seated man may walk).
 8. Diagramming Syllogisms
@@ -1603,7 +1603,7 @@ Why not the others: The particular cannot be false when its universal is true.
 
 @card 8
 
-**What follows in the Second Act.** Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there. Exercise VI treats the square of opposition and *immediate inference*, which draws one proposition from a single other: conversion exchanges subject and predicate (“No S are P” converts to “No P are S”), obversion changes the quality and negates the predicate, and contraposition joins the two. Exercise VII treats the *modal* propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.
+**What follows in the Second Act.** Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there. Exercise VI treats opposition, equipollence, and conversion as properties of the proposition. Later logicians call these properties “immediate inferences.” Exercise VII treats the *modal* propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.
 
 The diagrams are taught at the head of Exercise V, and *The Square of Opposition* shows each relation for any pair of terms.
 
@@ -1819,19 +1819,25 @@ Why not the others: Shading only one cell leaves half the region open.
 
 
 ########################################################################
-# Before the Exercise · Immediate Inference
+# Before the Exercise · Opposition, Equipollence, and Conversion
 ########################################################################
 
 @deck leadin-6
-Title: Before the Exercise · Immediate Inference
+Title: Before the Exercise · Opposition, Equipollence, and Conversion
 Small heading: BEFORE THE EXERCISE
 
 @card 1
-Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of Catholic Theology* (ect.org, 2025); Jacques Maritain, *Formal Logic*, trans. Imelda Choquette (Sheed & Ward, 1937).
+Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of Catholic Theology* (ect.org, 2025); John of St. Thomas, *Outlines of Formal Logic*, trans. Francis C. Wade (Marquette University Press, 1955); Jacques Maritain, *Formal Logic*, trans. Imelda Choquette (Sheed & Ward, 1937).
 
-**The square of opposition.** An immediate inference draws one proposition directly from another, with no middle term and no second premise. Some questions suppose that one proposition is true or false and ask whether a second, with the same terms, is true, false, or undetermined; the square of opposition answers them. **Contradictories** (A and O, E and I) differ in both quantity and quality, and they always take opposite truth values: if “All S are P” is true, “Some S are not P” is false, and if it is false, “Some S are not P” is true. **Contraries** (A and E) cannot both be true, but they can both be false; so if one is true the other is false, but if one is false the other is undetermined. **Subcontraries** (I and O) cannot both be false, but they can both be true; so if one is false the other is true, but if one is true the other is undetermined.
+**Properties of the proposition.** John of St. Thomas, a seventeenth-century Dominican commentator on St. Thomas, treats these in the *Summulae* (the first part of the *Ars Logica*) as properties of the whole proposition, and not as a separate kind of inference. In book II, chapter 9, he says that the properties that follow the whole proposition are three: opposition, conversion, and equipollence. They hold between propositions that have the same terms. Later logicians call these properties “immediate inferences.”
 
-In **subalternation** (A and I, E and O), truth descends from the universal to the particular, and falsity ascends from the particular to the universal. If “All S are P” is true, “Some S are P” is true, because an affirmative carries existential import and so supplies the existence that “some” requires; if “Some S are P” is false, “All S are P” is false. But a false universal leaves its particular undetermined, and a true particular leaves its universal undetermined. Wherever the square forbids nothing, the answer is “undetermined.” The Square of Opposition, in the Study section, sets out these relations for any pair of terms.
+**Opposition** is, as he defines it, “the affirmation and negation of the same thing concerning the same thing.” The species are contradictories, contraries, and subcontraries. Contradictories are never both true and never both false. Contraries are never both true, though both can be false when the matter is contingent. Subcontraries are never both false, though both can be true. Subalternation, between the universal and the particular of the same quality, is not properly opposition, except relatively, as he notes. The square of opposition nevertheless sets it out with the other three, and the exercise asks about it.
+
+Some questions suppose that one proposition is true or false and ask whether a second, with the same terms, is true, false, or undetermined. **Contradictories** (A and O, E and I) always take opposite truth values: if “All S are P” is true, “Some S are not P” is false, and if it is false, “Some S are not P” is true. **Contraries** (A and E) cannot both be true, but they can both be false; so if one is true the other is false, but if one is false the other is undetermined. **Subcontraries** (I and O) cannot both be false, but they can both be true; so if one is false the other is true, but if one is true the other is undetermined. In **subalternation** (A and I, E and O), truth descends from the universal to the particular, and falsity ascends from the particular to the universal. If “All S are P” is true, “Some S are P” is true, because an affirmative carries existential import and so supplies the existence that “some” requires; if “Some S are P” is false, “All S are P” is false. A false universal leaves its particular undetermined, and a true particular leaves its universal undetermined. Wherever the square forbids nothing, the answer is “undetermined.” The Square of Opposition, in the Study section, sets out these relations for any pair of terms.
+
+**Equipollence** is the equivalence of opposed propositions, that is, their having the same meaning, brought about by changing the place of a negative particle. A negative placed before one of two contradictories makes them equipollent, provided it negates and does not merely make a term indefinite. So “Not every man argues” has the same meaning as “Some man does not argue,” and “Not some man does not argue” has the same meaning as “Every man argues.” A negative placed after the subject and before the copula makes contraries equipollent, where the distribution is complete. So “Every man does not run” has the same meaning as “No man runs,” and “No man does not run” has the same meaning as “Every man runs.” A negative placed both before and after makes subalterns equipollent. So “Not every man does not argue” has the same meaning as “Some man argues.” The verse is *Prae Contradic, Post Contra, Prae postque Subalter.* Subcontraries have no equipollent by these placements. A negative before a particular makes a universal, which is the contradictory and not an equipollent of the other particular. A negative after a particular affirmative only makes that particular negative, and a second negative after the negative is a useless repetition.
+
+**Conversion** is “the change of the extremes of a proposition from the subject into the predicate and the predicate into the subject, while the quality and the truth remain the same.” There are three kinds: simple, or mutual; accidental, or nonmutual; and by contraposition. Simple conversion keeps the quantity, and it belongs to E and to I. “No man is a stone” therefore gives “No stone is a man,” and “Some man is white” gives “Some white thing is a man.” Accidental conversion changes the quantity. “Every man is an animal” does not give “Every animal is a man,” but “Some animal is a man.” E, which converts simply, can also convert accidentally. Conversion by contraposition exchanges the terms and changes them from determinate to indeterminate, and it belongs to A and to O. From “Every man is an animal” it follows that every non-animal is a non-man. John of St. Thomas notes that this is a conversion according to meaning, since the extremes do not remain the same. The verse is *FECI simpliciter convertitur, EVA per acci, ASTO per contra, sic fit conversio tota.*
 
 @question 1.1
 Question: If “All S are P” is true, what of “Some S are not P”?
@@ -1863,9 +1869,33 @@ Answer: Undetermined
 Why: In subalternation truth descends from the universal to the particular, but it does not ascend.
 Why not the others: A true particular leaves its universal open: some men are wise, but that does not show that all are, or that not all are.
 
+@question 1.4
+Question: Where is the negative placed when contradictories are made equipollent?
+Choices:
+- Before one of them
+- After the subject only
+- Both before the proposition and after the subject
+- It cannot be placed there
+Answer: Before one of them
+Why: A negative before one contradictory makes the two equipollent, as “Not every man argues” has the same meaning as “Some man does not argue.”
+Why not the others: A negative after the subject serves the contraries, and a negative both before and after serves the subalterns.
+
+@question 1.5
+Question: Which pair has no equipollent by these placements?
+Choices:
+- The subcontraries
+- The contradictories
+- The contraries
+- The subalterns
+Answer: The subcontraries
+Why: Subcontraries have no equipollent. A negative before a particular makes a universal, and a negative after a particular affirmative only makes that particular negative.
+Why not the others: Contradictories, contraries, and subalterns are the three pairs named in the verse.
+
 @card 2
 
-**Converse, obverse, contrapositive, contradictory.** Other questions give one proposition and ask for one of these, typed in standard form, or “none” when the operation cannot be performed. The **contradictory** changes both quantity and quality: the contradictory of A is O, of E is I, of I is E, and of O is A. **Conversion** exchanges subject and predicate. E and I convert simply, so “No S are P” gives “No P are S,” and “Some S are P” gives “Some P are S.” A converts only by limitation (per accidens), to I: “All S are P” gives only “Some P are S,” because the predicate of an affirmative is not distributed. O has no converse.
+**Converse, obverse, contrapositive, contradictory, equipollent.** Other questions give one proposition, or a proposition with the negative particle placed in it, and ask for the result, typed in standard form, or “none” when nothing follows. The **contradictory** changes both quantity and quality: the contradictory of A is O, of E is I, of I is E, and of O is A. **Conversion** exchanges subject and predicate. E and I convert simply, so “No S are P” gives “No P are S,” and “Some S are P” gives “Some P are S.” A converts only by limitation (per accidens), to I: “All S are P” gives only “Some P are S,” because the predicate of an affirmative is not distributed. O has no converse.
+
+The **equipollent** is typed as the standard-form proposition that has the same meaning. A negative before the proposition gives the contradictory: “Not every S is P” gives “Some S are not P,” and “Not some S is not P” gives “All S are P.” A negative after the subject of a universal, where the distribution is complete, gives the contrary: “Every S is not P” gives “No S are P,” and “No S is not P” gives “All S are P.” A negative both before and after gives the subaltern: “Not every S is not P” gives “Some S are P.” When the placement makes no equipollent, the answer is “none.”
 
 **Obversion** changes the quality and replaces the predicate by its complement, written with “non-”: “All S are P” gives “No S are non-P,” “No S are P” gives “All S are non-P,” “Some S are P” gives “Some S are not non-P,” and “Some S are not P” gives “Some S are non-P.” The complement must be the contradictory term (“non-just”), not the contrary (“unjust”), since a man may be neither just nor unjust. **Contraposition** obverts, then converts, then obverts again, so that both terms are replaced by their complements and exchange places. “All S are P” gives “All non-P are non-S,” and “Some S are not P” gives “Some non-P are not non-S.” E contraposes only by limitation, to “Some non-P are not non-S,” and I has no contrapositive, because its obverse is an O, and an O does not convert.
 

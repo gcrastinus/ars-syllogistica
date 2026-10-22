@@ -1139,11 +1139,11 @@ function mistakeNoteConclusion(q, parsed){
 }
 
 /* ================================================================
-   SET I — IMMEDIATE INFERENCE
-   Conversion, obversion, contraposition, contradictory (typed);
-   and truth-propagation on the traditional square of opposition
-   (contradictories, contraries, subcontraries, subalternation),
-   with existential import throughout.
+   SET VI — OPPOSITION, EQUIPOLLENCE, AND CONVERSION
+   Truth on the square (contradictories, contraries, subcontraries,
+   subalternation); equipollence by placing a negative particle;
+   conversion, with obversion and contraposition; and Buridan's
+   limit when the subject is empty. Existential import throughout.
    ================================================================ */
 function immProp(t, S, P, sNeg, pNeg){
   return {t, s:{term:S, neg:!!sNeg}, p:{term:P, neg:!!pNeg}};
@@ -1194,10 +1194,82 @@ function sqAnswer(rel, given){
 }
 const EMPTY_KINDS = ['unicorn','centaur','griffin','dragon','mermaid'];
 const BURIDAN_NOTE = 'Nothing falls under the subject, and the operation would end in an affirmative about it (“All S are non-P,” “Some S are non-P,” or, for contraposition, “Some non-P are S”). An affirmative whose subject stands for nothing is false, so nothing follows. John Buridan observed that obversion from the negative side to the affirmative, and contraposition, hold only when the terms stand for things that exist.';
+function plTxt(term){
+  if(term.kind==='L'||term.kind==='l') return term.l;
+  if(term.kind==='n') return term.name;
+  return plural(term.s);
+}
+function oneTxt(term){
+  if(term.kind==='L'||term.kind==='l') return term.l;
+  if(term.kind==='n') return term.name;
+  return term.s;
+}
+function predIs(term){
+  if(term.kind==='L'||term.kind==='l') return term.l;
+  if(term.kind==='n') return term.name;
+  return art(term.s)+' '+term.s;
+}
+/* The stem is the proposition with the negative particle placed.
+   The answer is the standard-form proposition it is equipollent with,
+   or null when that placement makes no equipollent. */
+function equipStem(place, t, S, P){
+  const s = oneTxt(S), p = predIs(P), sP = plTxt(S), pP = plTxt(P);
+  if(place==='prae' && t==='A') return `Not every ${s} is ${p}`;
+  if(place==='prae' && t==='E') return `It is not the case that no ${sP} are ${pP}`;
+  if(place==='prae' && t==='I') return `Not some ${s} is ${p}`;
+  if(place==='prae' && t==='O') return `Not some ${s} is not ${p}`;
+  if(place==='post' && t==='A') return `Every ${s} is not ${p}`;
+  if(place==='post' && t==='E') return `No ${s} is not ${p}`;
+  if(place==='both' && t==='A') return `Not every ${s} is not ${p}`;
+  if(place==='both' && t==='E') return `It is not the case that no ${sP} are not ${pP}`;
+  if(place==='none' && t==='I') return `Some ${s} is not ${p}`;
+  return `Some ${s} is not not ${p}`;
+}
+function genEquipQ(d, S, P){
+  const places = ['prae'];
+  if(d>=2) places.push('post');
+  if(d>=3) places.push('both');
+  if(d>=4) places.push('none');
+  const place = rand(places);
+  let t, expected = null, note, equipNone;
+  if(place==='prae'){
+    t = rand(TYPES);
+    expected = immProp({A:'O', E:'I', I:'E', O:'A'}[t], S, P);
+  } else if(place==='post'){
+    t = rand(['A','E']);
+    expected = immProp(t==='A' ? 'E' : 'A', S, P);
+  } else if(place==='both'){
+    t = rand(['A','E']);
+    expected = immProp(t==='A' ? 'I' : 'O', S, P);
+  } else {
+    t = rand(['I','O']);
+    equipNone = t==='I' ? 'postI' : 'postO';
+    note = t==='I'
+      ? 'The negative stands after the subject of a particular affirmative.'
+      : 'The negative is repeated after the negative.';
+  }
+  return {kind:'imm', sub:'op', op:'equipollent', pr:immProp(t, S, P),
+    expected, perAcc:false, S, P, stem:equipStem(place, t, S, P), note, equipNone};
+}
 function genImmediateQ(d, mode){
   const roles = makeTerms(mode, null);
   const S = roles.S, P = roles.P;
-  if(Math.random()<0.5){
+  /* Buridan keeps its former share, about one item in eight from Level IV.
+     Of what remains, the square, equipollence, and the typed operations
+     each take about a third. */
+  /* Buridan's limits (Decision Sheet §1; Klima and Noone): obversion from
+     the negative side to the affirmative, and contraposition of E and O,
+     hold only when the subject stands for something that exists. From
+     Level IV some questions say that nothing falls under the subject; then
+     those operations yield nothing, and the answer is "none." */
+  if(d>=4 && Math.random()<0.125){
+    const op = rand(['obverse','contrapositive']), t = rand(['E','O']);
+    const S2 = mode==='english' ? {kind:'g', s:rand(EMPTY_KINDS)} : S;
+    const note = mode==='english' ? `There are no ${plural(S2.s)}.` : `Suppose that nothing is ${S2.l}.`;
+    return {kind:'imm', sub:'op', op, pr:immProp(t, S2, P), expected:null, perAcc:false, S:S2, P, emptyS:true, note};
+  }
+  const bucket = Math.random();
+  if(bucket<0.343){
     const rels = ['contradictory','contrary'].concat(d>=2 ? ['subcontrary','subalternDown','subalternUp'] : []);
     const rel = rand(rels);
     const tp = rand(SQ_PAIR[rel]);
@@ -1205,17 +1277,7 @@ function genImmediateQ(d, mode){
     return {kind:'imm', sub:'truth', rel, given, S, P,
       p1: immProp(tp[0],S,P), p2: immProp(tp[1],S,P), answer: sqAnswer(rel, given)};
   }
-  /* Buridan's limits (Decision Sheet §1; Klima and Noone): obversion from
-     the negative side to the affirmative, and contraposition of E and O,
-     hold only when the subject stands for something that exists. From
-     Level IV some questions say that nothing falls under the subject; then
-     those operations yield nothing, and the answer is "none." */
-  if(d>=4 && Math.random()<0.25){
-    const op = rand(['obverse','contrapositive']), t = rand(['E','O']);
-    const S2 = mode==='english' ? {kind:'g', s:rand(EMPTY_KINDS)} : S;
-    const note = mode==='english' ? `There are no ${plural(S2.s)}.` : `Suppose that nothing is ${S2.l}.`;
-    return {kind:'imm', sub:'op', op, pr:immProp(t, S2, P), expected:null, perAcc:false, S:S2, P, emptyS:true, note};
-  }
+  if(bucket<0.663) return genEquipQ(d, S, P);
   const ops = ['contradictory','converse'].concat(d>=2?['obverse']:[]).concat(d>=3?['contrapositive']:[]);
   const op = rand(ops);
   let t;
@@ -1228,7 +1290,7 @@ function genImmediateQ(d, mode){
 }
 function parseImmAnswer(input){
   const raw = input.toLowerCase().trim().replace(/\s+/g,' ').replace(/[.!?]+$/,'');
-  if(/^(none|nothing|no (converse|obverse|contrapositive|contradictory)|it has (none|no \w+)|cannot be (converted|contraposed|obverted)|not possible|impossible|there is none)$/.test(raw))
+  if(/^(none|nothing|no (converse|obverse|contrapositive|contradictory|equipollent)|it has (none|no \w+)|cannot be (converted|contraposed|obverted)|not possible|impossible|there is none)$/.test(raw))
     return {none:true};
   const p = parseAnswer(input);
   if(!p) return null;
@@ -1270,6 +1332,16 @@ function immMarks(pr){
 }
 function immMistakeOp(q, parsed){
   if(q.emptyS) return BURIDAN_NOTE;
+  if(q.op==='equipollent'){
+    if(!q.expected){
+      return q.equipNone==='postO'
+        ? 'A second negative after the negative is only a repetition, and it makes no equipollent. Subcontraries have no equipollent, so the answer is “none.”'
+        : 'A negative after the subject of a particular affirmative makes the particular negative itself. It does not make an equipollent of the opposed proposition. Subcontraries have no equipollent, so the answer is “none.”';
+    }
+    if(parsed && parsed.none)
+      return 'This wording does have an equipollent in standard form. A negative before a proposition gives the contradictory; a negative after the subject of a universal gives the contrary; and a negative both before and after gives the subaltern.';
+    return 'Equipollence places a negative particle so that one proposition has the same meaning as an opposed proposition. The answer is that proposition in standard form.';
+  }
   if(!q.expected)
     return q.op==='converse'
       ? 'An O proposition has no converse. “Some S are not P” speaks of a part of S only, and nothing guarantees any P outside S; yet many students convert it out of the habit of converting E and I.'
@@ -4763,7 +4835,7 @@ function formatQuizItem(q){
   if(q.kind==='imm'){
     if(q.sub==='op'){
       out.instr = `Give the ${q.op} in standard form (or “none”).`;
-      out.stemHtml = `<div class="qprompt">${q.note ? q.note+' ' : ''}${immPropText(q.pr)}.</div>`;
+      out.stemHtml = `<div class="qprompt">${q.note ? q.note+' ' : ''}${q.stem || immPropText(q.pr)}.</div>`;
       out.workClass = 's1';
       out.answerText = q.expected ? immPropText(q.expected) : 'none';
       if(q.perAcc) out.explainHtml = 'Per accidens (quantity weakens).';
