@@ -2277,7 +2277,7 @@ Why not the others: Knowing why requires the cause as middle term; a sufficient 
 
 @card 7
 
-**What follows in the Third Act.** The exercises of the Third Act begin with the categorical syllogism: drawing it on three circles (Exercise VIII), judging its validity in letters and in English (IX and X), and drawing the conclusion from two premises (XI). They then take up syllogisms built on compound propositions: the conjunctive (“not both”) and the disjunctive (“either … or”) in XII, the conditional (“if … then”) (The Hypothetical Syllogism) in XIII, and all of them together (The Mixed Consequence) in XIV. Exercise XV finds the syllogism in ordinary speech, XVI treats the modal syllogism, and XVII the chain of syllogisms, in which the conclusion of one syllogism becomes a premise of the next.
+**What follows in the Third Act.** The exercises of the Third Act begin with the categorical syllogism: drawing it on three circles (Exercise VIII), judging its validity in letters and in English (IX and X), and drawing the conclusion from two premises (XI). They then take up syllogisms built on compound propositions: the conjunctive (“not both”) and the disjunctive (“either … or”) in XII, the conditional (“if … then,” The Hypothetical Syllogism) in XIII, and all of them together (The Mixed Consequence) in XIV. Exercise XV finds the syllogism in ordinary speech, XVI treats the modal syllogism, and XVII the chain of syllogisms, in which the conclusion of one syllogism becomes a premise of the next.
 
 The later sections apply the third act to its uses. *Ad Demonstrationem* (XVIII) weighs an argument in its form and its matter together; *Dialectica* (XX) treats reasoning from what is probable; *Rhetorica* (XIX) treats the enthymeme, an argument with one premise left unsaid; and *Sophistica* (XXI) treats the fallacies, arguments that seem sound and are not.
 
@@ -3621,7 +3621,7 @@ Why not the others: The tree stays within one category, substance, and it lists 
 
 **Highest, middle, and lowest.** In the tree some terms are only genera, some only species, and some both. The **supreme genus** (substance) has no genus above it, and so it is a genus and never a species. The **lowest species** (man) has no species below it, only individuals, and so it is a species and never a genus. Every term between them is a **subaltern** genus, that is, a species of the term above it and a genus of the term below it: animal is a species of living body and a genus of rational animal.
 
-The individual stands below the lowest species and is neither genus nor species, since it is not said of many. So Socrates is a man, but nothing is a Socrates. For the same reason the supreme genus cannot be defined by a genus and difference, because it has no genus, and the individual cannot be defined at all, because a definition states what is common, and the individual is known by the senses and named, not defined.
+The individual stands below the lowest species and is neither genus nor species, since it is not said of many. So Socrates is a man, but nothing is a Socrates. The supreme genus cannot be defined by a genus and a difference, because it has no higher genus to define it by. The individual cannot be defined at all, because a definition states what is common, and the individual is known by the senses and named, not defined.
 
 @question 3.1
 Question: In the line “quantity, continuous quantity, line,” what is “continuous quantity”?
@@ -3699,7 +3699,7 @@ Why not the others: No property belongs to the essence, and a property in the st
 
 **Two kinds of accident.** The word “accident” is used twice in logic, in two related senses. Among the categories, the nine accidents are the ways of being that exist *in* a substance and cannot exist on their own, such as quantity, quality, and relation; this is **predicamental** accident, the accident of the categories. Among the predicables, an accident is anything said of a subject that is no part of its essence and does not follow from it; this is **predicable** accident.
 
-The two do not always coincide. Rationality is a quality, and so a predicamental accident if we place it among the categories, but it is no predicable accident of man, since it belongs to his definition. And the predicable accident can be said of an accident as well as of a substance: in “This large area is white,” white is a predicable accident of the quantity, since the color has no necessary connection with the size. St. Thomas makes the same distinction when he notes that the soul’s powers are accidents in the first sense but not in the second (*Summa theologiae* I, q. 77, a. 1, ad 5).
+The two do not always coincide. The difference “rational” is taken from the substantial form, and so it is reduced to the category of substance. The power of reason, as a property flowing from that form, is a quality, and so a predicamental accident, but it is no predicable accident of man, since it follows from what he is. And the predicable accident can be said of an accident as well as of a substance: in “This large area is white,” white is a predicable accident of the quantity, since the color has no necessary connection with the size. St. Thomas makes the same distinction when he notes that the soul’s powers are accidents in the first sense but not in the second (*Summa theologiae* I, q. 77, a. 1, ad 5).
 
 @question 5.1
 Question: In “Snow is cold,” coldness is a quality. Is it a predicable accident of snow?
@@ -4708,7 +4708,7 @@ Why not the others: Not every key is needed, the keys are not taken together, an
 
 @card 6
 
-**Supposition and distribution.** The modern word “distributed” names what the medieval logicians called common, confused, and distributive supposition. In A, “Every S is P,” the subject is distributive and the predicate merely confused. In E, “No S is P,” both terms are distributive. In I, “Some S is P,” both terms are determinate. In O, “Some S is not P,” the subject is determinate and the predicate distributive. These are the rules of distribution that the exercises on the syllogism use.
+**Supposition and distribution.** The modern word “distributed” names confused and distributive supposition, which is one mode, not three kinds. Common supposition is determinate or confused, and confused supposition is distributive or merely confused. In A, “Every S is P,” the subject is distributive and the predicate merely confused. In E, “No S is P,” both terms are distributive. In I, “Some S is P,” both terms are determinate. In O, “Some S is not P,” the subject is determinate and the predicate distributive. These are the rules of distribution that the exercises on the syllogism use.
 
 The modes of supposition also explain conversion. E and I convert simply because their two terms have the same mode of supposition, so exchanging them changes nothing. A and O do not convert simply, because their terms have different modes, and a change in a term’s supposition is enough to spoil an inference. So the predicate of an affirmative is never taken universally, and the predicate of a negative is always taken universally.
 
@@ -4737,19 +4737,19 @@ Why not the others: O is negative and does not convert simply; what matters is t
 @question 6.3
 Question: What did the medieval logicians call what modern books call a distributed term?
 Choices:
-- Common, confused, and distributive supposition
-- Common and determinate supposition
+- Confused and distributive supposition
+- Common, confused, and distributive, as three kinds
 - Simple supposition
 - Material supposition
-Answer: Common, confused, and distributive supposition
-Why: The modern word “distributed” names common, confused, and distributive supposition.
-Why not the others: Determinate supposition is the undistributed subject of I and O, and simple and material are other kinds altogether.
+Answer: Confused and distributive supposition
+Why: “Distributed” names one mode, confused and distributive supposition. Common supposition is determinate or confused, and confused supposition is distributive or merely confused.
+Why not the others: The phrase with three names is one mode, not three kinds; determinate supposition is undistributed, and simple and material are other kinds.
 
 @card 7
 
 **The copula and existence.** Supposition also depends on the time and the manner of being signified by the copula. An affirmative proposition whose subject stands for nothing at the time signified is false: “Napoleon will be emperor” is false, said now, since there is no Napoleon in the future to stand for. A negative proposition can be true even when its subject stands for nothing: “Napoleon is not in Paris” is true. This is the ground of the classical rule that affirmatives carry existential import and negatives do not.
 
-Maritain distinguishes **natural** supposition, where the predicate belongs to the subject by its essence and the copula abstracts from time, from **accidental** supposition, where the predicate belongs only by accident and the copula signifies actual existence. “Every triangle has three sides” holds of triangles as possible; “Peter is running” is false if Peter does not now exist. Words such as “can,” “will,” and “was” **enlarge** a term to possible, future, or past things (ampliation), and qualifiers such as “the poor” or “of this town” **restrict** it (restriction).
+Maritain distinguishes **natural** supposition, where the predicate belongs to the subject by its essence and the copula abstracts from time, from **accidental** supposition, where the predicate belongs only by accident and the copula signifies actual existence. “Every triangle has three sides” is a proposition in necessary matter, so its subject is ampliated (enlarged) to the possible; the subject does not stand for nothing, and the proposition is true. “Peter is running” is false if Peter does not now exist, because then its subject stands for nothing. Words such as “can,” “will,” and “was” **enlarge** a term to possible, future, or past things (ampliation), and qualifiers such as “the poor” or “of this town” **restrict** it (restriction).
 
 @question 7.1
 Question: There are no dragons. Is “Some dragon is green” true or false?
@@ -5149,7 +5149,7 @@ Why not the others: The inverse is false here, while the original, its converse 
 
 @card 9
 
-**The modern reading of the universal.** Modern predicate logic, developed by Gottlob Frege, the German mathematician and logician, writes “All men are mortal” as “For anything whatever, if it is a man, it is mortal.” On this reading the universal is true when there are no men at all, since a conditional with a false antecedent is counted true; so the A proposition carries no existential import, the step from “All S are P” to “Some S are P” fails, and the square loses its subalternation and contrariety.
+**The modern reading of the universal.** Modern predicate logic, developed by Gottlob Frege, the German mathematician and logician, writes “All men are mortal” as “For anything whatever, if it is a man, it is mortal.” On this reading the universal is true when there are no men at all, since a conditional with a false antecedent is counted true; so the A proposition carries no existential import, the step from “All S are P” to “Some S are P” fails, and the square loses subalternation, contrariety, and subcontrariety as well, so that only contradiction remains.
 
 The tradition answers in two ways. First, the formula represents the universal without saying what it means: “All men are mortal” attributes mortality to man as such, and does not merely report that nothing in the universe is a man without being mortal. Second, as Gyula Klima, the Hungarian-American logician, and Timothy B. Noone, the American medievalist, point out, the medieval logicians did see the problem of empty terms, and placed existence in the affirmatives rather than at the bottom of the square. Contemporary Aristotelians, such as Klima and Terence Parsons, the American logician, have since shown that the older square can be stated formally without contradiction.
 
@@ -5167,13 +5167,13 @@ Why not the others: The modern reading gives the universal no existential import
 @question 9.2
 Question: Which relations of the square does the modern reading give up?
 Choices:
-- Subalternation and contrariety
+- Subalternation, contrariety, and subcontrariety
 - Contradiction only
 - Subcontrariety and contradiction
-- All four relations
-Answer: Subalternation and contrariety
-Why: Without existential import in the universals, “All S are P” no longer yields “Some S are P,” and contraries can both be true.
-Why not the others: The modern reading keeps contradiction; what it loses depends on the universals’ lack of import.
+- Every relation on the square, contradiction included
+Answer: Subalternation, contrariety, and subcontrariety
+Why: Without existential import, the universals A and E can both be true when the subject stands for nothing, and the particulars I and O can both be false, so subalternation, contrariety, and subcontrariety fail, and only contradiction remains.
+Why not the others: Contradiction remains. The other three relations fail when the subject can stand for nothing.
 
 @question 9.3
 Question: What is the tradition’s first answer to the modern reading?
@@ -5202,7 +5202,7 @@ Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of 
 
 **Modes of the copula.** A mode is a determination added to something. Some modes affect only the subject, as in “The prudent man is wise,” and some affect only the predicate, as in “Peter runs fast.” Neither makes a proposition modal. A proposition is modal only when the mode affects the copula itself, that is, the way in which the predicate belongs to the subject: “Peter is necessarily a man,” “Peter can be ill.”
 
-There are four such modes: necessity (it cannot not be), impossibility (it cannot be), possibility (it can be), and contingency (it can be and can also not be). Aristotle treats only two, the necessary and the contingent, because the impossible is the necessary with a negation (necessary that it not be), and the possible, in the sense he uses there, goes with the contingent. A proposition with no mode of the copula, such as “Man is rational,” is called simply attributive (Latin *de inesse*, “of being in”).
+There are four such modes: necessity (it cannot not be), impossibility (it cannot be), possibility (it can be), and contingency (it can be and can also not be). In the *Prior Analytics* Aristotle treats the syllogism only with necessity and possibility, while *On Interpretation* 12–13 treats all four modes. A proposition with no mode of the copula, such as “Man is rational,” is called simply attributive (Latin *de inesse*, “of being in”).
 
 @question 1.1
 Question: Which proposition is modal in the proper sense?
@@ -5216,15 +5216,15 @@ Why: “Necessarily” affects the copula, the way the predicate belongs to the 
 Why not the others: “Careful,” “swiftly,” and “slowly” affect the subject or the predicate, not the copula.
 
 @question 1.2
-Question: Why does Aristotle need only two of the four modes?
+Question: In the *Prior Analytics*, with which modes does Aristotle treat the syllogism?
 Choices:
-- Impossibility and possibility reduce to the other two
-- Possibility and impossibility are not modes of the copula
-- Necessity and contingency are the only modes found in nature
-- The other two modes belong to rhetoric, not to logic
-Answer: Impossibility and possibility reduce to the other two
-Why: “Impossible” is “necessary that it not be,” and the possible goes with the contingent, so two modes suffice.
-Why not the others: All four are modes of the copula; Aristotle reduces two of them to the others.
+- Necessity and possibility only
+- All four modes
+- Necessity alone
+- Impossibility and contingency only
+Answer: Necessity and possibility only
+Why: In the *Prior Analytics* he treats the syllogism only with necessity and possibility; *On Interpretation* 12–13 treats all four modes.
+Why not the others: All four modes are treated in *On Interpretation*, chapters 12 and 13; the account of the syllogism in the *Prior Analytics* treats only necessity and possibility.
 
 @question 1.3
 Question: What is a proposition with no mode of the copula called?
@@ -5436,7 +5436,7 @@ Why not the others: The necessary is true, possible, and not impossible; it is o
 
 **The mode belongs to the proposition.** Aristotle’s modes concern the way the predicate belongs to the subject: whether it belongs necessarily, contingently, or simply. Immanuel Kant, the eighteenth-century German philosopher, divided judgments instead by their modality as problematic, assertoric, and apodictic, and he meant by this the possibility or necessity of the act of judging, not of the relation judged. Maritain points out that Kant also counts the simple assertion as a mode, though in it nothing modifies the copula.
 
-The difference matters. For the tradition, “Man is necessarily an animal” states something about man and animal, not about the certainty of the one who judges; one can be certain of a contingent fact and uncertain of a necessary truth. A further sign that the mode belongs to the proposition is that conversion keeps it: “No man can think without images” converts to “No being that thinks without images is a man,” with the mode unchanged.
+The difference matters. For the tradition, “Man is necessarily an animal” states something about man and animal, not about the certainty of the one who judges; one can be certain of a contingent fact and uncertain of a necessary truth. A further sign that the mode belongs to the proposition is that conversion keeps it: “No man can think without images” converts to “No being that thinks without images can be a man,” with the mode unchanged.
 
 @question 7.1
 Question: What did Kant mean by the modality of a judgment?
@@ -5811,7 +5811,7 @@ Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of 
 
 **Figure and mood.** A syllogism has a double matter, its terms and its propositions, and so a double form. The **figure** is the arrangement of the terms, fixed by the place of the middle term: subject of the major and predicate of the minor in the first figure, predicate of both in the second, subject of both in the third. The **mood** is the arrangement of the propositions by quantity and quality, named by the letters A, E, I, and O for the major, the minor, and the conclusion in order.
 
-Each premise can be A, E, I, or O, so there are sixteen pairs of premises in each figure, and sixty-four combinations in the three figures together with the indirect arrangement. Most break one of the general rules. The scholastic account counts nineteen legitimate moods: four in the first figure, five indirect moods of the first figure, four in the second, and six in the third. The later textbook account counts the indirect moods as a fourth figure and adds the weakened moods, which conclude in particular what could be concluded universally.
+Each premise can be A, E, I, or O, so there are sixteen pairs of premises, and since the conclusion can be A, E, I, or O as well, there are sixty-four combinations. Most break one of the general rules. The scholastic account counts nineteen legitimate moods: four in the first figure, five indirect moods of the first figure, four in the second, and six in the third. The later textbook account counts the indirect moods as a fourth figure and adds the weakened moods, which conclude in particular what could be concluded universally.
 
 @question 1.1
 Question: What fixes the figure of a syllogism?
@@ -7548,7 +7548,7 @@ Why not the others: A wider middle is a remote cause, and an effect gives only t
 
 **Proper principles, not common ones.** A demonstration must proceed from the principles proper to its own science, not from principles common to many. Aristotle cites the attempt of Bryson, a Greek mathematician of Plato’s time, to square the circle: “In whatever genus there is something greater and something less than a given thing, there is something equal to it; there are squares greater and less than a given circle; so there is a square equal to it.” The principle is true of quantity in general, but it says nothing about the forms of the circle and the square.
 
-Such an argument may be persuasive, but it does not give the reason proper to geometry, and so it is not a demonstration. Conway notes that the squaring of the circle remains unsolved by such means. For the same reason a proof in geometry does not proceed from arithmetic, nor a proof in medicine from mere statistics: each science demonstrates from the principles that belong to its own subject.
+Such an argument may be persuasive, but it does not give the reason proper to geometry, and so it is not a demonstration. For the same reason a proof in geometry does not proceed from arithmetic, nor a proof in medicine from mere statistics: each science demonstrates from the principles that belong to its own subject. Squaring the circle is impossible, as Ferdinand von Lindemann, the German mathematician, proved in 1882.
 
 @question 6.1
 Question: Why is Bryson’s argument not a demonstration?

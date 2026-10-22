@@ -4,19 +4,19 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 
 | Study | Cards | Points | Words |
 |---|---|---|---|
-| The Predicables in Depth (`adv-pred`) | 8 | 29 | 1332 |
+| The Predicables in Depth (`adv-pred`) | 8 | 29 | 1362 |
 | The Categories in Depth (`adv-cat`) | 8 | 28 | 1295 |
 | Definition and Division in Depth (`adv-defdiv`) | 8 | 27 | 1259 |
-| Supposition (`adv-supp`) | 8 | 26 | 1145 |
-| Opposition and Conversion in Depth (`adv-opp`) | 9 | 30 | 1351 |
-| The Modal Proposition in Depth (`adv-modp`) | 7 | 23 | 993 |
+| Supposition (`adv-supp`) | 8 | 26 | 1190 |
+| Opposition and Conversion in Depth (`adv-opp`) | 9 | 30 | 1358 |
+| The Modal Proposition in Depth (`adv-modp`) | 7 | 23 | 998 |
 | Compound and Exponible Propositions (`adv-comp`) | 8 | 26 | 1148 |
-| Figures and Moods (`adv-fig`) | 8 | 26 | 1198 |
+| Figures and Moods (`adv-fig`) | 8 | 26 | 1200 |
 | Reduction (`adv-red`) | 7 | 20 | 889 |
 | The Modal Syllogism in Depth (`adv-mods`) | 7 | 21 | 915 |
 | Compound Arguments (`adv-carg`) | 8 | 25 | 1151 |
 | Induction and Example (`adv-ind`) | 8 | 23 | 1005 |
-| Demonstration (`adv-dem`) | 8 | 24 | 989 |
+| Demonstration (`adv-dem`) | 8 | 24 | 1005 |
 | The Fallacies in Depth (`adv-fal`) | 9 | 30 | 1355 |
 | **All fourteen studies** | **111** | **358** | **16025** |
 
@@ -33,13 +33,13 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 9. In the tree some terms are only genera, some only species, and some both: the **supreme genus** (substance) has no genus above it, and so it is a genus and never a species; the **lowest species** (man) has no species below it, only individuals, and so it is a species and never a genus.
 10. Every term between them is a **subaltern** genus, that is, a species of the term above it and a genus of the term below it, as animal is a species of living body and a genus of rational animal.
 11. The individual stands below the lowest species and is neither genus nor species, since it is not said of many; so Socrates is a man, but nothing is a Socrates.
-12. The supreme genus cannot be defined by a genus and difference, because it has no genus, and the individual cannot be defined at all, because a definition states what is common, and the individual is known by the senses and named, not defined.
+12. The supreme genus cannot be defined by a genus and a difference, because it has no higher genus to define it by, and the individual cannot be defined at all, because a definition states what is common, and the individual is known by the senses and named, not defined.
 13. Porphyry distinguishes four senses of “property”: in the first, a property belongs to one species only, but not to every member of it (being a physician belongs to man alone, but not to every man); in the second, it belongs to every member, but not to that species only (being two-footed belongs to every man and also to birds).
 14. In the third sense, a property belongs to every member and only to that species, but not always (turning gray in old age); in the fourth and strict sense, it belongs to every member, only to that species, and always, as the power to laugh belongs to man.
 15. Only a property in the fourth sense converts with its species (whatever can laugh is a man, and every man can laugh), and so the tradition calls it property in the proper sense; the exercise on the predicables uses this fourth sense, and the other three are properties only in a qualified way.
 16. The word “accident” is used in logic in two related senses; among the categories, the nine accidents are the ways of being that exist *in* a substance and cannot exist on their own, such as quantity, quality, and relation, and this is **predicamental** accident, the accident of the categories.
 17. Among the predicables, an accident is anything said of a subject that is no part of its essence and does not follow from it, and this is **predicable** accident.
-18. The two do not always coincide: rationality is a quality, and so a predicamental accident if we place it among the categories, but it is no predicable accident of man, since it belongs to his definition.
+18. The two do not always coincide: the difference “rational” is taken from the substantial form, and so it is reduced to the category of substance, while the power of reason, as a property flowing from that form, is a quality, and so a predicamental accident, but it is no predicable accident of man, since it follows from what he is.
 19. The predicable accident can be said of an accident as well as of a substance (in “This large area is white,” white is a predicable accident of the quantity), and St. Thomas makes the same distinction when he notes that the soul’s powers are accidents in the first sense but not in the second.
 20. A specific difference does two things at once: it **divides** the genus, separating the species that have it from those that lack it, as “rational” separates man from the brutes, and it **constitutes** the species, making it what it is, as “rational” joined to “animal” makes man.
 21. Cajetan, the sixteenth-century Dominican commentator on Porphyry and on St. Thomas, notes that the difference divides the genus not by cutting its essence in pieces, since the whole nature of animal is found in man and in the horse, but by dividing the species that fall under it.
@@ -131,13 +131,13 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 14. From the singulars we may also ascend, from “This man is running” to “Some man is running,” but not from “This man is mortal” to “Every man is mortal,” since one instance does not establish all of them.
 15. Some common terms allow neither descent: the predicate of “Every man is an animal” allows only “Every man is this animal or that animal or that other one,” with the “or” inside the predicate, and this is **merely confused** supposition, the supposition of the predicate of a universal affirmative.
 16. A term has **collective** supposition when it stands for many things taken together as one subject, as in “The apostles were twelve,” where we cannot descend to “Peter was twelve, and Paul was twelve”; so “All the soldiers are brave” is said of each soldier, while “All the soldiers surrounded the fort” is said of them together.
-17. The modern word “distributed” names what the medieval logicians called common, confused, and distributive supposition: in A, “Every S is P,” the subject is distributive and the predicate merely confused, and in E, “No S is P,” both terms are distributive.
+17. The modern word “distributed” names confused and distributive supposition, one mode and not three kinds: common supposition is determinate or confused, and confused supposition is distributive or merely confused; in A, “Every S is P,” the subject is distributive and the predicate merely confused, and in E, “No S is P,” both terms are distributive.
 18. In I, “Some S is P,” both terms are determinate, and in O, “Some S is not P,” the subject is determinate and the predicate distributive; these are the rules of distribution that the exercises on the syllogism use.
 19. The modes of supposition also explain conversion: E and I convert simply because their two terms have the same mode of supposition, so exchanging them changes nothing, but A and O do not, because their terms have different modes, and a change in a term’s supposition is enough to spoil an inference.
 20. So the predicate of an affirmative is never taken universally, and the predicate of a negative is always taken universally.
 21. Supposition also depends on the time and the manner of being signified by the copula: an affirmative proposition whose subject stands for nothing at the time signified is false (“Napoleon will be emperor,” said now), but a negative proposition can be true even when its subject stands for nothing (“Napoleon is not in Paris”).
 22. This is the ground of the classical rule that affirmatives carry existential import and negatives do not.
-23. Maritain distinguishes **natural** supposition, where the predicate belongs to the subject by its essence and the copula abstracts from time (“Every triangle has three sides” holds of triangles as possible), from **accidental** supposition, where the predicate belongs only by accident and the copula signifies actual existence (“Peter is running” is false if Peter does not now exist).
+23. Maritain distinguishes **natural** supposition, where the predicate belongs to the subject by its essence and the copula abstracts from time, from **accidental** supposition, where the predicate belongs only by accident and the copula signifies actual existence; and “Every triangle has three sides” is a proposition in necessary matter, so its subject is ampliated (enlarged) to the possible, the subject does not stand for nothing, and the proposition is true, while “Peter is running” is false if Peter does not now exist, because then its subject stands for nothing.
 24. Words such as “can,” “will,” and “was” **enlarge** a term to possible, future, or past things (ampliation), and qualifiers such as “the poor” or “of this town” **restrict** it (restriction).
 25. Since a valid inference needs each term to stand for the same things throughout, an argument fails when a term’s kind of supposition changes from one premise to another, as “The logical categories were set out by Aristotle; quantity is a logical category; so quantity was set out by Aristotle” fails, because quantity itself, as a way of being, was not invented by anyone.
 26. The same rule covers a change in the manner of existence: from premises that speak of the centaur only as imagined we may conclude that some creature of fable is half man, half horse, but not that such a creature really exists; and many errors that look like failures of form are failures of supposition, which the disputations remedied by distinguishing what each term stands for.
@@ -172,7 +172,7 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 26. The **reciprocal** of a universal affirmative exchanges its terms and keeps the universal quantity (the reciprocal of “Every square is a rectangle” is “Every rectangle is a square”), and since the predicate of an affirmative is taken particularly, the reciprocal says a different truth and must be proved on its own; sometimes it is true, and sometimes it is false.
 27. The **inverse** negates both the subject and the copula (the inverse of “Every man is an animal” is “Every non-man is not an animal”), and it says in negative form the same thing as the reciprocal; to pass from a universal affirmative to its reciprocal is a common error.
 28. Modern predicate logic, developed by Gottlob Frege, the German mathematician and logician, writes “All men are mortal” as “For anything whatever, if it is a man, it is mortal,” and on this reading the universal is true when there are no men at all, since a conditional with a false antecedent is counted true.
-29. So on the modern reading the A proposition carries no existential import, the step from “All S are P” to “Some S are P” fails, and the square loses its subalternation and contrariety.
+29. So on the modern reading the A proposition carries no existential import, the step from “All S are P” to “Some S are P” fails, and the square loses subalternation, contrariety, and subcontrariety as well, so that only contradiction remains.
 30. The tradition answers in two ways: first, the formula represents the universal without saying what it means, since “All men are mortal” attributes mortality to man as such; second, as Gyula Klima and Timothy B. Noone point out, the medieval logicians did see the problem of empty terms, and placed existence in the affirmatives, and contemporary Aristotelians such as Klima and Terence Parsons have shown that the older square can be stated formally without contradiction.
 
 ## The Modal Proposition in Depth (`adv-modp`)
@@ -180,7 +180,7 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 1. A mode is a determination added to something, and some modes affect only the subject (“The prudent man is wise”) and some only the predicate (“Peter runs fast”), but neither makes a proposition modal.
 2. A proposition is modal only when the mode affects the copula itself, that is, the way in which the predicate belongs to the subject, as in “Peter is necessarily a man.”
 3. There are four such modes: necessity (it cannot not be), impossibility (it cannot be), possibility (it can be), and contingency (it can be and can also not be).
-4. Aristotle treats only two, the necessary and the contingent, because the impossible is the necessary with a negation (necessary that it not be), and the possible, in the sense he uses there, goes with the contingent; and a proposition with no mode of the copula, such as “Man is rational,” is called simply attributive (Latin *de inesse*, “of being in”).
+4. In the *Prior Analytics* Aristotle treats the syllogism only with necessity and possibility, while *On Interpretation* 12–13 treats all four modes; and a proposition with no mode of the copula, such as “Man is rational,” is called simply attributive (Latin *de inesse*, “of being in”).
 5. A modal proposition has two qualities, that of the mode and that of the dictum, and it is affirmative when both are affirmative or both are negative, and negative when one is affirmative and the other negative.
 6. So “It is impossible that it not be,” with a negative mode and a negative dictum, is affirmative, and it comes to “It is necessary that it be”; counting “impossible” as “not possible” makes this rule work.
 7. The modes also have a kind of quantity: necessity and impossibility are like universals, since what must be or cannot be holds in every case, and possibility and contingency are like particulars, since what can be need hold only sometimes.
@@ -199,7 +199,7 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 20. Aristotle distinguishes two senses of “possible”: in one sense the possible is whatever is not impossible, and in this sense the necessary is also possible, since what must be certainly can be; in the other, stricter sense the possible is what can be and can also not be, which is the **contingent**, and in this sense the necessary is not possible.
 21. Much confusion comes from passing between the two senses, since from “It is necessary that fire is hot” it follows that it is possible in the first sense, but not that it is contingent; and the course takes “contingent” in the strict sense, what can be and can also not be.
 22. Aristotle’s modes concern the way the predicate belongs to the subject, but Immanuel Kant, the eighteenth-century German philosopher, divided judgments by their modality as problematic, assertoric, and apodictic, meaning the possibility or necessity of the act of judging, not of the relation judged; and Maritain points out that Kant also counts the simple assertion as a mode, though in it nothing modifies the copula.
-23. For the tradition, “Man is necessarily an animal” states something about man and animal, not about the certainty of the one who judges, since one can be certain of a contingent fact and uncertain of a necessary truth; and a further sign that the mode belongs to the proposition is that conversion keeps it.
+23. For the tradition, “Man is necessarily an animal” states something about man and animal, not about the certainty of the one who judges, since one can be certain of a contingent fact and uncertain of a necessary truth; and a further sign that the mode belongs to the proposition is that conversion keeps it, as when “No man can think without images” converts to “No being that thinks without images can be a man.”
 
 ## Compound and Exponible Propositions (`adv-comp`)
 
@@ -234,7 +234,7 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 
 1. A syllogism has a double matter, its terms and its propositions, and so a double form: the **figure** is the arrangement of the terms, fixed by the place of the middle term, which is subject of the major and predicate of the minor in the first figure, predicate of both in the second, and subject of both in the third.
 2. The **mood** is the arrangement of the propositions by quantity and quality, named by the letters A, E, I, and O for the major, the minor, and the conclusion in order.
-3. Each premise can be A, E, I, or O, so there are sixteen pairs of premises in each figure, and sixty-four combinations in the three figures together with the indirect arrangement, and most of them break one of the general rules.
+3. Each premise can be A, E, I, or O, so there are sixteen pairs of premises, and since the conclusion can be A, E, I, or O as well, there are sixty-four combinations, and most of them break one of the general rules.
 4. The scholastic account counts nineteen legitimate moods: four in the first figure, five indirect moods of the first figure, four in the second, and six in the third; the later textbook account counts the indirect moods as a fourth figure and adds the weakened moods, which conclude in particular what could be concluded universally.
 5. In the first figure the major premise must be universal and the minor affirmative, because if the major were particular, the middle term would be distributed in neither premise, and if the minor were negative, the conclusion would be negative and would distribute the major term, which the affirmative major leaves undistributed.
 6. So four moods remain in the first figure: AAA, EAE, AII, and EIO (Barbara, Celarent, Darii, Ferio).
@@ -380,7 +380,7 @@ Drafted 21 Oct 2026 from the final cards of the fourteen studies of Logic as a S
 16. A demonstration can also show only the fact when its middle term is a cause, but not the proper and proximate one, as in Aristotle’s example “Whatever is not an animal does not breathe; a wall is not an animal; so a wall does not breathe,” where not being an animal is not the reason a wall does not breathe, since many animals do not breathe in the way meant.
 17. The middle term there is too wide, because it lies outside the proper genus of the conclusion and does not convert with the major term; and the demonstration of the reasoned fact needs the proximate cause, the one that converts with the effect.
 18. A demonstration must proceed from the principles proper to its own science, not from principles common to many, and Aristotle cites the attempt of Bryson, a Greek mathematician of Plato’s time, to square the circle by a principle true of quantity in general that says nothing about the forms of the circle and the square.
-19. Such an argument may be persuasive, but it does not give the reason proper to geometry, and so it is not a demonstration; for the same reason a proof in geometry does not proceed from arithmetic, nor a proof in medicine from mere statistics, since each science demonstrates from the principles that belong to its own subject.
+19. Such an argument may be persuasive, but it does not give the reason proper to geometry, and so it is not a demonstration; for the same reason a proof in geometry does not proceed from arithmetic, nor a proof in medicine from mere statistics, since each science demonstrates from the principles that belong to its own subject; and squaring the circle is impossible, as Ferdinand von Lindemann, the German mathematician, proved in 1882.
 20. Aristotle holds that the first figure is the most scientific, because mathematics and the sciences that give the reasoned fact demonstrate in it, and only in it can a universal affirmative be concluded, which science seeks through its cause; a demonstration in the second or third figure can be completed only by being reduced to the first.
 21. A demonstration of the reasoned fact usually has the definition of the subject, or of the property, as its middle term (“Every rational animal is capable of laughter; every man is a rational animal; so every man is capable of laughter”), because the definition explains why the property belongs, and the conclusion states a property in the second way of being said per se.
 22. Sometimes one science knows the fact and another the reason, as the physician knows *that* round wounds heal more slowly, while the geometer knows *why*; in such cases the lower science is **subalternated** to the higher, taking its principles from it.
