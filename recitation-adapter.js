@@ -1,8 +1,8 @@
 'use strict';
 /* Recitation Tablet: the link between Ars Syllogistica and recitation.js (the Tablet code shared with
    Ars Grammatica and Ars Rhetorica). recitation.js expects a course structure, deck records, a store,
-   and a deck loader; this file supplies them from the four Logic as an Art decks and from the course
-   progress, and it holds the homepage callout that names a deck just finished.
+   and a deck loader; this file supplies them from the four Logic as an Art decks, the fourteen Logic as a
+   Science studies (ars-advanced.js), and the course progress, and it holds the homepage callout that names a deck just finished.
    Load it after the page script and before recitation.js.
 
    The record is kept in the course progress (localStorage key arsSyllogistica.progress.v1), under recite:
@@ -15,23 +15,29 @@
 window.ARS = window.ARS || {};
 
 const RECITE_IDS = ['logic', 'act1', 'act2', 'act3'];
+/* The Logic as a Science studies, in course order, as ars-advanced.js lists them. */
+const RECITE_SCIENCE_IDS = (window.__arsAdvancedDecks || []).map(d => d && d.id).filter(Boolean);
 const reciteDecks = {};
-(window.__arsStudyDecks || []).forEach(d => { if (d && d.id) reciteDecks[d.id] = d; });
+(window.__arsStudyDecks || []).concat(window.__arsAdvancedDecks || []).forEach(d => { if (d && d.id) reciteDecks[d.id] = d; });
 
 ARS.decks = {};
-RECITE_IDS.forEach(id => {
+RECITE_IDS.concat(RECITE_SCIENCE_IDS).forEach(id => {
   const d = reciteDecks[id];
   if (!d || !Array.isArray(d.recitation) || !d.recitation.length) return;
   d.id = id;
   ARS.decks[id] = d;
 });
-ARS.structure = [{
-  id: 'art',
-  name: 'Logic as an Art',
-  items: RECITE_IDS.filter(id => ARS.decks[id]).map(id => ({
-    id: id, kind: 'study', built: true, title: ARS.decks[id].title
+const recitePart = (id, name, ids) => ({
+  id: id,
+  name: name,
+  items: ids.filter(k => ARS.decks[k]).map(k => ({
+    id: k, kind: 'study', built: true, title: ARS.decks[k].title
   }))
-}];
+});
+ARS.structure = [
+  recitePart('art', 'Logic as an Art', RECITE_IDS),
+  recitePart('science', 'Logic as a Science', RECITE_SCIENCE_IDS)
+];
 /* No roman, so the menu heading is the part name. The whole-part line uses the shared wording. */
 ARS.reciteWords = { section: 'Part', prelim: 'Part' };
 
