@@ -1215,6 +1215,35 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 .daily-box, .daily-panel, .prog-row, .lp-lvl, .mistake-item{background:transparent}
 .lp-lvl.locked:hover{background:transparent}
 .help, .instructions{background:transparent}
+
+/* Oct 23: the Diagram Workshop and the Square of Opposition as small floating buttons under the Tablet. */
+.lab-tools{position:fixed; top:112px; left:33px; z-index:50; display:flex; flex-direction:column; gap:10px}
+.lab-open{
+  position:relative; width:54px; height:54px; padding:0; margin:0;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  background:var(--paper); color:var(--orn); border:1px solid var(--frame); border-radius:0;
+  box-shadow:none; transition:background-color .25s ease;
+}
+.lab-open:hover{background:var(--hover); border-color:var(--frame)}
+.lab-open:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.lab-icon{width:32px; height:32px; display:block; fill:none; stroke:var(--orn); stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round}
+.lab-open::after{
+  content:attr(data-tip); position:absolute; left:calc(100% + 10px); top:50%; transform:translateY(-50%);
+  white-space:nowrap; padding:5px 10px; font-family:var(--text); font-size:14px; color:var(--ink);
+  background:var(--card); border:1px solid var(--frame); pointer-events:none; opacity:0; transition:opacity .15s;
+}
+.lab-open:hover::after, .lab-open:focus-visible::after{opacity:1}
+body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
+@media print{ .lab-tools{display:none !important} }
+@media (max-width:640px){
+  .lab-tools{top:31px; left:116px; flex-direction:row; gap:8px}
+  .lab-open::after{left:50%; top:calc(100% + 8px); transform:translateX(-50%)}
+}
+@media (max-width:420px){
+  .lab-tools{top:29px; left:104px}
+  .lab-open{width:46px; height:46px}
+  .lab-icon{width:28px; height:28px}
+}
 </style>
 </head>
 <body>
@@ -1234,6 +1263,14 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 </div>
 </div>
 <button id="dark-toggle" title="Light / dark" aria-label="Toggle dark mode">☾ / ☀</button>
+</div>
+<div class="lab-tools" id="lab-tools">
+<button type="button" id="lab1-open" class="lab-open" title="The Diagram Workshop" aria-label="The Diagram Workshop" data-tip="The Diagram Workshop">
+  <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg>
+</button>
+<button type="button" id="lab2-open" class="lab-open" title="The Square of Opposition" aria-label="The Square of Opposition" data-tip="The Square of Opposition">
+  <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg>
+</button>
 </div>
 <button type="button" id="recite-open" class="recite-open" title="Recitation Tablet" aria-label="Recitation Tablet">
   <svg class="recite-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
@@ -1299,7 +1336,7 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 
     <details class="help" style="max-width:700px">
       <summary>How to Proceed</summary>
-      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The <strong>Study</strong> section below (the Diagram Workshop and the Square of Opposition) teaches without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
+      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The two small buttons under the Recitation Tablet, at the top left of the page, open the Diagram Workshop and the Square of Opposition, which teach without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
       <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
       <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays the contradictory, the converse, the obverse, or the contrapositive drawn from whichever corner you choose.</p>
@@ -1331,9 +1368,6 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 
     <div class="section-label">Feedback</div>
     <div class="mode-note">Every answer in the categorical sets is illustrated with a Venn diagram of the correct analysis: shading declares a region empty; an × declares that something is there; a ⊗ declares that something is there because an affirmative universal premise asserts that its subject exists, not because a particular premise says so.</div>
-
-    <div class="section-label">Study</div>
-    <div class="sets" id="labs"></div>
 
     <div class="act-block" id="actblk-a1">
       <div class="act-label">The First Act of the Mind · Simple Apprehension</div>
@@ -1847,13 +1881,10 @@ if(typeof document!=='undefined'){
     {id:'lab2', title:'The Square of Opposition',
      desc:'Two terms placed in the four traditional relations. Choose any corner and see its converse, obverse, contrapositive, or contradictory.'}
   ];
-  const labsDiv = $('labs');
+  /* The two labs open from the small floating buttons under the Recitation Tablet. */
   LABS.forEach(l=>{
-    const c = document.createElement('div');
-    c.className = 'set-card';
-    c.innerHTML = STAR+`<span class="tile-main"><div class="set-num">STUDY</div><h3>${l.title}</h3><p>${l.desc}</p><span class="begin">OPEN ⟶</span></span>`;
-    c.onclick = ()=>(l.id==='lab1' ? openLab1() : openLab2());
-    labsDiv.appendChild(c);
+    const b = $(l.id+'-open');
+    if (b) b.onclick = ()=>(l.id==='lab1' ? openLab1() : openLab2());
   });
 
   /* ==================== THE INTRODUCTION: FOUR STUDY DECKS ====================
