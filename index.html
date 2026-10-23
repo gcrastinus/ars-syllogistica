@@ -1244,6 +1244,36 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
   .lab-open{width:46px; height:46px}
   .lab-icon{width:28px; height:28px}
 }
+
+/* Oct 23: phones get one study-tools button with a short menu, and a smaller Tablet. */
+.lab-menu-btn, .lab-menu{display:none}
+.lab-menu-btn::after{content:none}
+@media (max-width:640px){
+  .lab-tools{top:23px; left:88px}
+  .lab-tools > #lab1-open, .lab-tools > #lab2-open{display:none}
+  .lab-menu-btn{display:flex; width:44px; height:44px}
+  .lab-menu-btn .lab-icon{width:28px; height:28px}
+  .lab-menu:not([hidden]){
+    display:flex; flex-direction:column; position:absolute; top:calc(100% + 6px); left:0;
+    width:max-content; max-width:calc(100vw - 100px); background:var(--card); border:1px solid var(--frame); border-radius:0; box-shadow:none;
+  }
+  .lab-menu-item{
+    display:flex; align-items:center; gap:12px; width:100%; margin:0; padding:12px 14px;
+    font-family:var(--text); font-size:17px; line-height:1.3; text-align:left; color:var(--ink); white-space:nowrap;
+    background:transparent; border:0; border-radius:0; cursor:pointer; transition:background-color .25s ease;
+  }
+  .lab-menu-item + .lab-menu-item{border-top:1px solid var(--frame)}
+  .lab-menu-item:hover, .lab-menu-item:focus-visible{background:var(--hover); outline:none}
+  .lab-menu-item .lab-icon{width:24px; height:24px; flex:none}
+  .recite-open{top:12px; left:12px; width:66px; height:66px}
+  .recite-icon{width:44px; height:44px}
+}
+@media (max-width:420px){
+  .lab-tools{top:20px; left:80px}
+  .lab-menu-btn{width:44px; height:44px}
+  .recite-open{top:12px; left:12px; width:60px; height:60px}
+  .recite-icon{width:40px; height:40px}
+}
 </style>
 </head>
 <body>
@@ -1271,6 +1301,13 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
 <button type="button" id="lab2-open" class="lab-open" title="The Square of Opposition" aria-label="The Square of Opposition" data-tip="The Square of Opposition">
   <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg>
 </button>
+<button type="button" id="lab-menu-btn" class="lab-open lab-menu-btn" title="Study tools" aria-label="Study tools" aria-haspopup="true" aria-expanded="false" aria-controls="lab-menu">
+  <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12.5" cy="12" r="6"/><circle cx="19.5" cy="12" r="6"/><rect x="11" y="21" width="10" height="7"/></svg>
+</button>
+<div class="lab-menu" id="lab-menu" role="menu" hidden>
+  <button type="button" role="menuitem" class="lab-menu-item" data-lab="lab1"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg>The Diagram Workshop</button>
+  <button type="button" role="menuitem" class="lab-menu-item" data-lab="lab2"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg>The Square of Opposition</button>
+</div>
 </div>
 <button type="button" id="recite-open" class="recite-open" title="Recitation Tablet" aria-label="Recitation Tablet">
   <svg class="recite-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
@@ -1886,6 +1923,18 @@ if(typeof document!=='undefined'){
     const b = $(l.id+'-open');
     if (b) b.onclick = ()=>(l.id==='lab1' ? openLab1() : openLab2());
   });
+  /* Phones: one button opens a short menu with the same two labs. */
+  (function(){
+    const btn = $('lab-menu-btn'), menu = $('lab-menu');
+    if (!btn || !menu) return;
+    const close = ()=>{ menu.hidden = true; btn.setAttribute('aria-expanded','false'); };
+    btn.onclick = (e)=>{ e.stopPropagation(); const open = menu.hidden; menu.hidden = !open; btn.setAttribute('aria-expanded', open?'true':'false'); if (open){ const f = menu.querySelector('button'); if (f) f.focus(); } };
+    menu.querySelectorAll('.lab-menu-item').forEach(it=>{
+      it.onclick = ()=>{ close(); $(it.dataset.lab+'-open').click(); };
+    });
+    document.addEventListener('click', e=>{ if (!menu.hidden && !menu.contains(e.target) && e.target!==btn) close(); });
+    document.addEventListener('keydown', e=>{ if (e.key==='Escape' && !menu.hidden){ close(); btn.focus(); } });
+  })();
 
   /* ==================== THE INTRODUCTION: FOUR STUDY DECKS ====================
      What logic is, then one deck for each act of the mind. Each card states one
