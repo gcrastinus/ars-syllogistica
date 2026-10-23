@@ -1111,7 +1111,7 @@ function mistakeNoteValidity(q, mode){
   }
   // student called a valid syllogism invalid
   if(isPart(q.mood[2]) && !isPart(q.mood[0]) && !isPart(q.mood[1]))
-    return 'Many students hesitate here. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply. But in the older logic an affirmative proposition asserts that its subject exists'+(q.mood[2]==='O' ? ', and a particular negative asserts no existence' : '')+', so the '+(SUBALTERN.has(q.fig+q.mood) ? 'weakened conclusion' : 'conclusion')+' follows.';
+    return 'Many students hesitate here. On the modern reading this fails, since “some” asserts an existence that universal premises do not supply. But in the older logic an affirmative proposition asserts that its subject exists'+(q.mood[2]==='O' ? ', and a particular negative asserts no existence' : '')+', so the '+(SUBALTERN.has(q.fig+q.mood) ? 'weakened conclusion' : 'conclusion')+' follows.'+(SUBALTERN.has(q.fig+q.mood) ? ' The weakened moods stand or fall with subalternation on the square.' : '');
   if(q.fig===4)
     return 'Fourth-figure syllogisms reverse the natural order of predication, so even valid ones seem wrong. But if we read the premises slowly and test the syllogism against the rules, we find that it breaks none of them.';
   if(mode!=='letters')
