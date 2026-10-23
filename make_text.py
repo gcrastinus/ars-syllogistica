@@ -352,7 +352,7 @@ def deck_text(d: dict) -> str:
 
 def build_text(index: str, engine_path: Path, data: dict | None = None) -> str:
     chunks = [INTRO, ""]
-    chunks.append("Ars Syllogistica")
+    chunks.append("Ars Logica")
     chunks.append("The second art of the trivium")
     chunks.append("")
     chunks.append(

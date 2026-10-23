@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ars Syllogistica — Quiz Maker</title>
+<title>Ars Logica — Quiz Maker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -194,7 +194,7 @@ header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; tex
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
 <div id="maker">
-  <a class="backlink" href="index.html">⟵ Return to Ars Syllogistica</a>
+  <a class="backlink" href="index.html">⟵ Return to Ars Logica</a>
   <header>
     <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
     <h1>Quiz Maker</h1>
@@ -379,7 +379,7 @@ function renderPaper(bundle){
   const covers = [...new Set(items.map(it => ROMAN[it.setId]+' · '+it.setTitle))];
   const levelLabel = (DIFF && DIFF[diff] && DIFF[diff].label) || ('Level '+ROMAN[diff]);
 
-  let head = `<div class="qhead"><div class="ttl"><h1>Ars Syllogistica · Quiz</h1>
+  let head = `<div class="qhead"><div class="ttl"><h1>Ars Logica · Quiz</h1>
     <div class="meta">${course ? course+' · ' : ''}${teacher ? teacher+' · ' : ''}${date}<br>${levelLabel}</div></div></div>
     <div class="namerow"><span>Name</span><span class="sm">Score</span></div>
     <div class="covers"><b>Covers:</b> ${covers.join('; ')}</div>

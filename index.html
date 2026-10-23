@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ars Syllogistica — Exercises in Scholastic Logic</title>
+<title>Ars Logica — Exercises in Scholastic Logic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -1243,7 +1243,7 @@ details.check{width:min(747px, 100%)}
   <div class="screen active" id="scr-home">
     <header>
       <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
-      <h1>Ars Syllogistica</h1>
+      <h1>Ars Logica</h1>
       <div class="subtitle">Exercises in Aristotelian–Scholastic Logic</div>
       <div class="rule"></div>
       <div class="mode-row path-row" id="path-row" role="group" aria-label="Choose your path">
@@ -5367,8 +5367,8 @@ if(typeof document!=='undefined'){
       var t = (document.getElementById('daily-time')||{}).value || '09:00';
       var p = t.split(':'); return { hh:parseInt(p[0],10)||9, mm:parseInt(p[1],10)||0 };
     }
-    var TITLE = 'Ars Syllogistica — daily logic practice';
-    var DETAILS = 'Time for today’s syllogism practice. Open Ars Syllogistica and keep your streak alight.';
+    var TITLE = 'Ars Logica — daily logic practice';
+    var DETAILS = 'Time for today’s syllogism practice. Open Ars Logica and keep your streak alight.';
     // Google Calendar recurring-event link
     var gcal = document.getElementById('daily-gcal');
     if(gcal){
@@ -6078,7 +6078,7 @@ if(typeof document!=='undefined'){
         note.textContent = 'Progress imported.'; note.style.display = 'block';
       }catch(err){
         renderProgress();
-        note.textContent = 'That file could not be read as Ars Syllogistica progress (schema v1 JSON expected).';
+        note.textContent = 'That file could not be read as Ars Logica progress (schema v1 JSON expected).';
         note.style.display = 'block';
       }
       e.target.value = '';

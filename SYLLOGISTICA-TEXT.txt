@@ -27,7 +27,7 @@ The line Answer: is what the app counts as right.
 Why: is the explanation shown after the answer.
 
 
-Ars Syllogistica
+Ars Logica
 The second art of the trivium
 
 **Logic is the art of reasoning well, and the science of second intentions.** It studies the relations things have only because they are known — genus, species, subject, predicate, statement, and conclusion — and trains the mind to move from what is known to what follows logically.

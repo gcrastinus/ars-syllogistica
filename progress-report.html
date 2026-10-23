@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ars Syllogistica — Progress Report &amp; Mastery Grade</title>
+<title>Ars Logica — Progress Report &amp; Mastery Grade</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -200,7 +200,7 @@ header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; tex
 <div class="wrap">
   <header>
     <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
-    <h1>Ars Syllogistica</h1>
+    <h1>Ars Logica</h1>
     <div class="subtitle">Progress Report &amp; Mastery Grade</div>
     <div class="rule"></div>
   </header>
@@ -353,7 +353,7 @@ function readFile(f){
     try{ o=JSON.parse(r.result); }
     catch(err){ loadNote.textContent='That file is not valid JSON.'; return; }
     if(!o || typeof o!=='object' || !o.sets || typeof o.sets!=='object'){
-      loadNote.textContent='This does not look like an Ars Syllogistica progress file (no “sets”).'; return; }
+      loadNote.textContent='This does not look like an Ars Logica progress file (no “sets”).'; return; }
     PROG = migrate(o);
     ANALYSIS = analyze(PROG);
     renderReport(ANALYSIS);
