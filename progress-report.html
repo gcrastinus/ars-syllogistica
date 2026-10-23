@@ -5,26 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ars Syllogistica — Progress Report &amp; Mastery Grade</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#f6f0e1; --paper2:#efe6cf; --card:#fffdf4; --ink:#2b2118; --ink-soft:#5a4a38;
-  --gold:#a67c2e; --gold-soft:#c9a45c; --line:#d9c9a3; --wine:#7b2d26; --sage:#48664c;
+  --line:#d9c9a3; --frame:#d3c29c; --wine:#7b2d26; --sage:#48664c;
+  --accent:#6b4a2b; --orn:#6b4a2b; --hover:#ede4cf;
   --panel:#f4ecd8; --panel2:#fbf6e8; --track:#e6dcc2;
-  --good:#48664c; --bad:#7b2d26; --sel-text:#f3e9cf;
-  --glow:#fbf7ea; --shadow:0 2px 14px rgba(74,58,32,.10);
+  --gold:var(--accent); --gold-soft:var(--frame);
+  --good:#48664c; --bad:#7b2d26; --sel-text:#f6f0e1;
+  --glow:#fbf7ea; --shadow:none;
+  --display:'Libre Caslon Display', Georgia, serif;
+  --text:'Libre Caslon Text', Georgia, serif;
 }
 body.dark{
   --paper:#1a1611; --paper2:#120f0c; --card:#241e17; --ink:#e9dfc8; --ink-soft:#b4a583;
-  --gold:#c9a45c; --gold-soft:#a67c2e; --line:#463b2b; --wine:#8a3a31; --sage:#4f7355;
+  --line:#463b2b; --frame:#574a37; --wine:#e08373; --sage:#8fbf95;
+  --accent:#c8b691; --orn:#efe3c6; --hover:#292219;
   --panel:#2e261c; --panel2:#292219; --track:#332b20;
+  --gold:var(--accent); --gold-soft:var(--frame);
   --good:#8fbf95; --bad:#e08373; --sel-text:#1a1611;
-  --glow:#231d15; --shadow:0 2px 14px rgba(0,0,0,.45);
+  --glow:#231d15; --shadow:none;
 }
 *{box-sizing:border-box; margin:0; padding:0}
 html{min-height:100%}
 body{
-  font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
+  font-family:var(--text);
   color:var(--ink); min-height:100vh; font-size:19px; line-height:1.5; transition:color .25s;
   background:var(--paper);
 }
@@ -38,20 +44,20 @@ body{
 
 header{text-align:center; margin-bottom:22px}
 .ornament{color:var(--gold); font-size:22px; letter-spacing:.4em; margin:6px 0}
-h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:.06em; color:var(--ink)}
+h1{font-family:var(--display); font-size:40px; font-weight:600; letter-spacing:.06em; color:var(--ink)}
 .subtitle{font-style:italic; color:var(--ink-soft); font-size:20px; margin-top:2px}
 .rule{display:flex; align-items:center; gap:14px; margin:20px auto; max-width:560px; color:var(--gold)}
 .rule::before,.rule::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold-soft))}
 .rule::after{background:linear-gradient(90deg,var(--gold-soft),transparent)}
 
-.section-label{font-family:'Cinzel', serif; font-size:15px; letter-spacing:.22em; color:var(--gold);
+.section-label{font-family:var(--display); font-size:15px; letter-spacing:.22em; color:var(--gold);
   text-transform:uppercase; text-align:center; margin:30px 0 14px}
 
 .part-divider{margin:64px auto 36px; max-width:820px; text-align:center}
 .part-ornament{display:flex; align-items:center; gap:16px; color:var(--gold); margin:0 0 18px}
 .part-rule{flex:1; height:1px; background:var(--gold); min-width:24px}
 .part-fleuron{flex:none; font-size:22px; line-height:1}
-.part-heading{font-family:'Cinzel', serif; font-weight:600; font-size:28px; letter-spacing:.12em;
+.part-heading{font-family:var(--display); font-weight:600; font-size:28px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ink); line-height:1.25}
 .part-sub{margin:10px auto 0; max-width:40em; font-style:italic; color:var(--ink-soft); font-size:18px; line-height:1.45; text-wrap:balance}
 .part-head{text-align:center; margin:28px auto 8px}
@@ -59,7 +65,7 @@ h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:
 
 /* loader */
 .load-row{text-align:center; margin:10px auto}
-.load-btn{font-family:'Cinzel',serif; font-size:16px; letter-spacing:.06em; padding:14px 30px;
+.load-btn{font-family:var(--display); font-size:16px; letter-spacing:.06em; padding:14px 30px;
   border-radius:30px; border:1px solid var(--gold); background:var(--gold); color:var(--sel-text);
   cursor:pointer; box-shadow:var(--shadow); transition:transform .15s, background .2s}
 .load-btn:hover{transform:translateY(-2px)}
@@ -70,24 +76,24 @@ h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:
 
 .card{background:var(--card); border:1px solid var(--line); border-radius:12px;
   padding:20px 22px; margin:14px auto; max-width:820px; box-shadow:var(--shadow)}
-.card h2{font-family:'Cinzel',serif; font-size:16px; letter-spacing:.05em; color:var(--gold);
+.card h2{font-family:var(--display); font-size:16px; letter-spacing:.05em; color:var(--gold);
   font-weight:600; margin-bottom:12px; text-transform:uppercase}
-.student-name{font-family:'Cinzel',serif; font-size:22px; color:var(--ink); text-align:center; margin-bottom:2px}
+.student-name{font-family:var(--display); font-size:22px; color:var(--ink); text-align:center; margin-bottom:2px}
 .student-sub{text-align:center; font-style:italic; color:var(--ink-soft); font-size:15px; margin-bottom:4px}
 
 .stat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
 .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; text-align:center}
-.stat .num{font-family:'Cinzel',serif; font-size:26px; color:var(--ink); line-height:1.1}
+.stat .num{font-family:var(--display); font-size:26px; color:var(--ink); line-height:1.1}
 .stat .lab{font-size:13.5px; color:var(--ink-soft); letter-spacing:.03em; margin-top:4px}
 
-.group-label{font-family:'Cinzel',serif; font-size:13.5px; letter-spacing:.14em; color:var(--gold);
+.group-label{font-family:var(--display); font-size:13.5px; letter-spacing:.14em; color:var(--gold);
   text-transform:uppercase; margin:16px 0 8px}
 .row{display:grid; grid-template-columns:44px 1fr auto; gap:10px; align-items:center;
   padding:9px 12px; border:1px solid var(--line); border-radius:9px; background:var(--panel2); margin:6px 0}
-.row .rn{font-family:'Cinzel',serif; color:var(--gold); font-size:15px; text-align:center}
+.row .rn{font-family:var(--display); color:var(--gold); font-size:15px; text-align:center}
 .row .ti{font-size:16.5px; color:var(--ink)}
 .row .ti .meta{display:block; font-size:13.5px; color:var(--ink-soft); font-style:italic; margin-top:2px}
-.chip{font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+.chip{font-family:var(--display); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
   padding:4px 9px; border-radius:20px; border:1px solid var(--line); white-space:nowrap}
 .chip.mastered{color:var(--good); border-color:var(--good)}
 .chip.lapsed{color:var(--bad); border-color:var(--bad)}
@@ -103,19 +109,19 @@ h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:
 .caution{max-width:820px; margin:26px auto 8px; background:var(--panel); border:1px solid var(--gold-soft);
   border-left:4px solid var(--wine); border-radius:10px; padding:16px 20px}
 .caution strong{color:var(--ink)}
-.grade-btn{display:block; margin:14px auto; font-family:'Cinzel',serif; font-size:16px; letter-spacing:.06em;
+.grade-btn{display:block; margin:14px auto; font-family:var(--display); font-size:16px; letter-spacing:.06em;
   padding:14px 30px; border-radius:30px; border:1px solid var(--gold); background:var(--gold); color:var(--sel-text);
   cursor:pointer; box-shadow:var(--shadow); transition:transform .15s, opacity .2s}
 .grade-btn:hover{transform:translateY(-2px)}
 .grade-btn:disabled{opacity:.45; cursor:not-allowed; transform:none}
 
 .grade-face{text-align:center; padding:8px 0 4px}
-.grade-num{font-family:'Cinzel',serif; font-size:64px; color:var(--ink); line-height:1}
-.grade-letter{font-family:'Cinzel',serif; font-size:26px; color:var(--gold); letter-spacing:.1em; margin-top:2px}
+.grade-num{font-family:var(--display); font-size:64px; color:var(--ink); line-height:1}
+.grade-letter{font-family:var(--display); font-size:26px; color:var(--gold); letter-spacing:.1em; margin-top:2px}
 .grade-face .of{font-size:15px; color:var(--ink-soft); font-style:italic}
 .bd{width:100%; border-collapse:collapse; margin-top:12px; font-size:16px}
 .bd th,.bd td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line)}
-.bd th{font-family:'Cinzel',serif; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold)}
+.bd th{font-family:var(--display); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold)}
 .bd td.pts{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
 .bd td.max{text-align:right; color:var(--ink-soft); font-variant-numeric:tabular-nums}
 .bar{height:7px; background:var(--track); border-radius:4px; overflow:hidden; margin-top:5px}
@@ -129,16 +135,74 @@ h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:
   .part-sub{font-size:17px}
   .part-ornament{gap:12px; margin-bottom:14px}
 }
+
+/* Oct 2026 mockup */
+body{font-size:17px; line-height:1.6; font-variant-numeric:oldstyle-nums}
+#maker, .wrap{background:transparent}
+.orn{width:14px; height:14px; color:var(--orn); flex:none}
+.ornament.mark, svg.mark{display:block; width:18px; height:18px; margin:0 auto 28px}
+#dark-toggle{
+  width:auto; height:auto; border-radius:0; padding:4px 10px;
+  border:1px solid var(--ink); background:none; color:var(--ink);
+  font:inherit; font-size:16px; line-height:1.4; box-shadow:none;
+}
+#dark-toggle:hover{transform:none; background:var(--hover)}
+header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; text-transform:none}
+.qhead h1{font:400 20px/1.25 var(--display); letter-spacing:0; font-weight:400; text-transform:none}
+.subtitle, .sub{font-size:19px; margin-top:14px}
+.rule{
+  display:block; width:96px; max-width:96px; height:0; margin:40px auto;
+  border:0; border-top:1px solid var(--ink); background:none; color:transparent; font-size:0;
+}
+.rule::before, .rule::after{content:none; display:none}
+.part{font:400 15px var(--text); font-variant:small-caps; letter-spacing:.08em; color:var(--accent); margin:64px 0 0; text-align:center}
+.part-heading, .part-head{
+  font:400 36px/1.15 var(--display); letter-spacing:0; text-transform:none; font-weight:400; color:var(--ink);
+}
+.part-sub{font-style:italic; color:var(--ink-soft)}
+.part-ornament{display:none}
+.section-label, .card h2, .group-label, .bd th, .chip, .setrow .id{
+  font-family:var(--text); font-weight:400; letter-spacing:.04em; text-transform:none;
+  font-variant:small-caps; color:var(--ink-soft);
+}
+.card, .stat, .row, .caution, details.help, .setlist, input[type=text], input[type=number], select,
+.status, .minibtns button, .mbtn, .toggle{
+  border-radius:0; box-shadow:none; border-color:var(--frame);
+}
+.load-btn, .grade-btn, .primary{
+  font-family:var(--text); letter-spacing:0; border-radius:0; box-shadow:none;
+  background:transparent; color:var(--ink); border:1px solid var(--ink); font-weight:400;
+}
+.load-btn:hover, .grade-btn:hover, .primary:hover{transform:none; filter:none; background:var(--hover)}
+.student-name, .stat .num, .grade-num{font-family:var(--display); font-weight:400; letter-spacing:0; color:var(--ink)}
+.grade-letter{font-family:var(--display); font-weight:400; letter-spacing:0; color:var(--accent)}
+.row .rn{font-family:var(--text); color:var(--accent); letter-spacing:0}
+.bar{border-radius:0; height:2px}
+.bar > i{background:var(--accent)}
+.chip{border-radius:0}
+.chip.passed, .chip.learning{color:var(--ink-soft); border-color:var(--frame)}
+.backlink{color:var(--accent)}
+.backlink:hover{color:var(--accent)}
+#maker{background:transparent}
+@media screen{
+  details.help, .card, .caution, .setlist{border:1px solid var(--frame); border-radius:0; box-shadow:none}
+}
+@media (max-width:600px){
+  h1{font-size:40px}
+  .part-heading{font-size:28px; letter-spacing:0}
+}
+
 </style>
 </head>
 <body>
-<button id="dark-toggle" title="Toggle light / dark" aria-label="Toggle light and dark">☾</button>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
+<button id="dark-toggle" title="Light / dark" aria-label="Toggle light and dark">☾ / ☀</button>
 <div class="wrap">
   <header>
-    <div class="ornament">❦</div>
+    <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
     <h1>Ars Syllogistica</h1>
     <div class="subtitle">Progress Report &amp; Mastery Grade</div>
-    <div class="rule">·</div>
+    <div class="rule"></div>
   </header>
 
   <div id="loader">
@@ -171,7 +235,7 @@ h1{font-family:'Cinzel', serif; font-size:40px; font-weight:600; letter-spacing:
 "use strict";
 /* ---------- theme ---------- */
 const dt = document.getElementById('dark-toggle');
-dt.onclick = ()=>{ document.body.classList.toggle('dark'); dt.textContent = document.body.classList.contains('dark') ? '☀' : '☾'; };
+dt.onclick = ()=>{ document.body.classList.toggle('dark'); dt.textContent = '☾ / ☀'; };
 
 /* ---------- static knowledge of the app ---------- */
 const SETS = [
@@ -466,7 +530,7 @@ function renderReport(A){
     </div></div>`;
 
   /* per-exercise ladder */
-  h += `<h2 class="part-heading part-head">Logic as an Art</h2>`;
+  h += `<p class="part">part one</p><h2 class="part-heading part-head">Logic as an Art</h2>`;
   h += `<div class="card"><h2>The Ladder of Exercises</h2>`;
   GROUPS.forEach(g=>{
     h += `<div class="group-label">${g[0]}</div>`;
@@ -494,7 +558,7 @@ function renderReport(A){
   /* the optional Advanced Studies exercises: listed, not graded */
   if(A.adv.some(p=>p.seen || p.passed || p.mastered)){
     h += `<div class="part-divider">
-        <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
+        <p class="part">part two</p>
         <h2 class="part-heading">Logic as a Science</h2>
         <p class="part-sub">Perfecting the art, once the elements are in hand</p>
       </div>

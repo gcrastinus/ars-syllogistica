@@ -5,31 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ars Syllogistica — Quiz Maker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#f6f0e1; --paper2:#efe6cf; --card:#fffdf4; --ink:#2b2118; --ink-soft:#5a4a38;
-  --gold:#a67c2e; --gold-soft:#c9a45c; --line:#d9c9a3; --sage:#48664c; --wine:#7b2d26;
-  --panel:#f4ecd8; --panel2:#fbf6e8; --sel-text:#f3e9cf; --shadow:0 2px 14px rgba(74,58,32,.10);
+  --line:#d9c9a3; --frame:#d3c29c; --sage:#48664c; --wine:#7b2d26;
+  --accent:#6b4a2b; --orn:#6b4a2b; --hover:#ede4cf;
+  --panel:#f4ecd8; --panel2:#fbf6e8; --track:#e6dcc2; --sel-text:#f6f0e1; --shadow:none;
+  --gold:var(--accent); --gold-soft:var(--frame);
+  --display:'Libre Caslon Display', Georgia, serif;
+  --text:'Libre Caslon Text', Georgia, serif;
 }
 *{box-sizing:border-box; margin:0; padding:0}
-body{font-family:'EB Garamond', Georgia, serif; color:var(--ink); min-height:100vh; font-size:18px; line-height:1.5;
+body{font-family:var(--text); color:var(--ink); min-height:100vh; font-size:18px; line-height:1.5;
   background:linear-gradient(180deg, var(--paper) 0%, var(--paper2) 100%)}
 #maker{max-width:880px; margin:0 auto; padding:28px 20px 100px}
 header{text-align:center; margin-bottom:18px}
 .ornament{color:var(--gold); font-size:20px; letter-spacing:.4em; margin:4px 0}
-h1{font-family:'Cinzel',serif; font-size:34px; font-weight:600; letter-spacing:.05em}
+h1{font-family:var(--display); font-size:34px; font-weight:600; letter-spacing:.05em}
 .sub{font-style:italic; color:var(--ink-soft); font-size:18px; margin-top:2px}
 .rule{display:flex; align-items:center; gap:12px; margin:16px auto; max-width:480px; color:var(--gold)}
 .rule::before,.rule::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold-soft))}
 .rule::after{background:linear-gradient(90deg,var(--gold-soft),transparent)}
 details.help{max-width:720px; margin:0 auto 18px; background:var(--card); border:1px solid var(--line);
   border-left:4px solid var(--gold-soft); border-radius:10px; padding:12px 16px; box-shadow:var(--shadow)}
-details.help summary{cursor:pointer; font-weight:600; color:var(--gold); font-family:'Cinzel',serif; font-size:14px; letter-spacing:.06em}
+details.help summary{cursor:pointer; font-weight:600; color:var(--gold); font-family:var(--display); font-size:14px; letter-spacing:.06em}
 details.help p{margin-top:10px; font-size:15.5px; color:var(--ink-soft)}
 .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;
   margin:14px 0; box-shadow:var(--shadow)}
-.card h2{font-family:'Cinzel',serif; font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px}
+.card h2{font-family:var(--display); font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px}
 .fields{display:flex; gap:14px; flex-wrap:wrap}
 .field{flex:1 1 180px}
 .field label{display:block; font-size:13px; color:var(--ink-soft); margin-bottom:4px}
@@ -42,12 +46,12 @@ input[type=text],input[type=number],select{font:inherit; width:100%; padding:8px
 .part-ornament{display:flex; align-items:center; gap:12px; color:var(--gold); margin:0 0 12px}
 .part-rule{flex:1; height:1px; background:var(--gold); min-width:16px}
 .part-fleuron{flex:none; font-size:20px; line-height:1}
-.part-heading{font-family:'Cinzel',serif; font-weight:600; font-size:18px; letter-spacing:.1em;
+.part-heading{font-family:var(--display); font-weight:600; font-size:18px; letter-spacing:.1em;
   text-transform:uppercase; color:var(--ink); line-height:1.25}
 .part-sub{margin:6px auto 0; font-style:italic; color:var(--ink-soft); font-size:15.5px; line-height:1.4; text-wrap:balance}
 .part-head{text-align:center; margin:8px 6px 12px}
 .setrow input{margin-top:4px; accent-color:var(--gold)}
-.setrow .id{font-family:'Cinzel',serif; color:var(--gold); min-width:28px; font-size:14px}
+.setrow .id{font-family:var(--display); color:var(--gold); min-width:28px; font-size:14px}
 .setrow .nm{font-size:16px}
 .setrow .nm .meta{display:block; font-size:13px; color:var(--ink-soft); font-style:italic}
 .minibtns{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 0}
@@ -58,9 +62,9 @@ input[type=text],input[type=number],select{font:inherit; width:100%; padding:8px
 .toggle{background:var(--panel2); border:1px solid var(--line); border-radius:18px; padding:6px 14px;
   color:var(--ink-soft); cursor:pointer; font:inherit; font-size:14.5px}
 .toggle.on{background:var(--ink); color:var(--sel-text); border-color:var(--ink)}
-.makebar{position:sticky; bottom:0; background:linear-gradient(0deg, var(--paper2) 55%, transparent);
+.makebar{position:sticky; bottom:0; background:var(--paper);
   padding:14px 0 18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:18px}
-.primary{font-family:'Cinzel',serif; letter-spacing:.06em; background:var(--gold); color:var(--sel-text);
+.primary{font-family:var(--display); letter-spacing:.06em; background:var(--gold); color:var(--sel-text);
   border:none; border-radius:24px; padding:12px 22px; cursor:pointer; font-size:15px}
 .primary:hover{filter:brightness(1.05)}
 .primary:disabled{opacity:.45; cursor:not-allowed}
@@ -78,13 +82,13 @@ input[type=text],input[type=number],select{font:inherit; width:100%; padding:8px
 .sheet{padding:32px 38px 40px}
 .sheet + .sheet{border-top:6px double #ccc}
 .qhead{border-bottom:2px solid #111; padding-bottom:8px; margin-bottom:12px}
-.qhead h1{font-family:'Cinzel',serif; font-size:20px; margin:0 0 3px; letter-spacing:.04em; font-weight:600}
+.qhead h1{font-family:var(--display); font-size:20px; margin:0 0 3px; letter-spacing:.04em; font-weight:600}
 .qhead .meta{font-size:12.5px; color:#444; font-family:Helvetica,Arial,sans-serif}
 .namerow{display:flex; gap:24px; font-size:13px; margin:0 0 12px; font-family:Helvetica,Arial,sans-serif}
 .namerow span{flex:1; border-bottom:1px solid #444; padding-bottom:2px}
 .namerow span.sm{flex:0 0 140px}
 .rubric{font-size:12.5px; color:#333; font-family:Helvetica,Arial,sans-serif; line-height:1.5;
-  border:1px solid #bbb; border-left:4px solid #a67c2e; border-radius:4px; padding:8px 11px; margin:0 0 14px; background:#faf7f0}
+  border:1px solid #bbb; border-left:4px solid #6b4a2b; border-radius:0; padding:8px 11px; margin:0 0 14px; background:#faf7f0}
 .covers{font-size:12.5px; color:#333; font-family:Helvetica,Arial,sans-serif; margin:0 0 14px; line-height:1.5}
 ol.qs{margin:0; padding:0; list-style:none; counter-reset:qn}
 li.qitem{counter-increment:qn; margin:0 0 16px; padding:0 0 0 30px; position:relative;
@@ -95,7 +99,7 @@ li.qitem::before{content:counter(qn) "."; position:absolute; left:0; top:0; font
 .qinstr{font-size:13px; font-style:italic; color:#444; margin-bottom:4px}
 .qprompt,.argblock{font-size:14.5px; line-height:1.55; margin-bottom:5px}
 .argblock{padding-left:12px; border-left:3px solid #bbb}
-.therefore{color:#a67c2e; margin-right:4px}
+.therefore{color:#6b4a2b; margin-right:4px}
 .qrule{font-size:12.5px; color:#555; font-family:Helvetica,Arial,sans-serif; margin-bottom:6px;
   padding:6px 10px; background:#f7f4ea; border-radius:4px}
 ol.ch{margin:4px 0 0; padding:0; list-style:none; counter-reset:cn}
@@ -127,16 +131,75 @@ ol.keys{margin:0; padding:0; list-style:none; counter-reset:qn}
   .sheet.key-sheet{page-break-before:always}
   a{text-decoration:none; color:inherit}
 }
+
+/* Oct 2026 mockup */
+@media screen{body{background:var(--paper)}}
+body{font-size:17px; line-height:1.6; font-variant-numeric:oldstyle-nums}
+#maker, .wrap{background:transparent}
+.orn{width:14px; height:14px; color:var(--orn); flex:none}
+.ornament.mark, svg.mark{display:block; width:18px; height:18px; margin:0 auto 28px}
+#dark-toggle{
+  width:auto; height:auto; border-radius:0; padding:4px 10px;
+  border:1px solid var(--ink); background:none; color:var(--ink);
+  font:inherit; font-size:16px; line-height:1.4; box-shadow:none;
+}
+#dark-toggle:hover{transform:none; background:var(--hover)}
+header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; text-transform:none}
+.qhead h1{font:400 20px/1.25 var(--display); letter-spacing:0; font-weight:400; text-transform:none}
+.subtitle, .sub{font-size:19px; margin-top:14px}
+.rule{
+  display:block; width:96px; max-width:96px; height:0; margin:40px auto;
+  border:0; border-top:1px solid var(--ink); background:none; color:transparent; font-size:0;
+}
+.rule::before, .rule::after{content:none; display:none}
+.part{font:400 15px var(--text); font-variant:small-caps; letter-spacing:.08em; color:var(--accent); margin:64px 0 0; text-align:center}
+.part-heading, .part-head{
+  font:400 36px/1.15 var(--display); letter-spacing:0; text-transform:none; font-weight:400; color:var(--ink);
+}
+.part-sub{font-style:italic; color:var(--ink-soft)}
+.part-ornament{display:none}
+.section-label, .card h2, .group-label, .bd th, .chip, .setrow .id{
+  font-family:var(--text); font-weight:400; letter-spacing:.04em; text-transform:none;
+  font-variant:small-caps; color:var(--ink-soft);
+}
+.card, .stat, .row, .caution, details.help, .setlist, input[type=text], input[type=number], select,
+.status, .minibtns button, .mbtn, .toggle{
+  border-radius:0; box-shadow:none; border-color:var(--frame);
+}
+.load-btn, .grade-btn, .primary{
+  font-family:var(--text); letter-spacing:0; border-radius:0; box-shadow:none;
+  background:transparent; color:var(--ink); border:1px solid var(--ink); font-weight:400;
+}
+.load-btn:hover, .grade-btn:hover, .primary:hover{transform:none; filter:none; background:var(--hover)}
+.student-name, .stat .num, .grade-num{font-family:var(--display); font-weight:400; letter-spacing:0; color:var(--ink)}
+.grade-letter{font-family:var(--display); font-weight:400; letter-spacing:0; color:var(--accent)}
+.row .rn{font-family:var(--text); color:var(--accent); letter-spacing:0}
+.bar{border-radius:0; height:2px}
+.bar > i{background:var(--accent)}
+.chip{border-radius:0}
+.chip.passed, .chip.learning{color:var(--ink-soft); border-color:var(--frame)}
+.backlink{color:var(--accent)}
+.backlink:hover{color:var(--accent)}
+#maker{background:transparent}
+@media screen{
+  details.help, .card, .caution, .setlist{border:1px solid var(--frame); border-radius:0; box-shadow:none}
+}
+@media (max-width:600px){
+  h1{font-size:40px}
+  .part-heading{font-size:28px; letter-spacing:0}
+}
+
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
 <div id="maker">
   <a class="backlink" href="index.html">⟵ Return to Ars Syllogistica</a>
   <header>
-    <div class="ornament">❦</div>
+    <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
     <h1>Quiz Maker</h1>
     <div class="sub">Printable quizzes with a complete answer key — for instructors</div>
-    <div class="rule">❧</div>
+    <div class="rule"></div>
   </header>
 
   <details class="help">
@@ -240,13 +303,13 @@ function todayStr(){
 
 function buildSetList(){
   const box = $('setList');
-  const head = `<div class="part-heading part-head">Logic as an Art</div>`;
+  const head = `<p class="part">part one</p><div class="part-heading part-head">Logic as an Art</div>`;
   box.innerHTML = head + QUIZ_SETS.map(s=>{
     const modeNote = (typeof QUIZ_MODE_SETS!=='undefined' && QUIZ_MODE_SETS.has(s.id))
       ? ' · letters/English' : '';
     const divider = s.id===22
       ? `<div class="part-divider">
-          <div class="part-ornament" aria-hidden="true"><span class="part-rule"></span><span class="part-fleuron">❦</span><span class="part-rule"></span></div>
+          <p class="part">part two</p>
           <div class="part-heading">Logic as a Science</div>
           <p class="part-sub">Perfecting the art, once the elements are in hand</p>
         </div>`

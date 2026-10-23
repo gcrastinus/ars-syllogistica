@@ -617,11 +617,11 @@ function svgVenn(layout, labels, shaded, xs, opts){
     return regs.map(r=>{
       const px = layout.cent[r][0], py = layout.cent[r][1];
       if(ambig){
-        return `<text x="${px}" y="${py+dy}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="Georgia,serif">`+
+        return `<text x="${px}" y="${py+dy}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="inherit">`+
           `<tspan font-size="${fs}">${base}</tspan>`+
           `<tspan font-size="${Math.round(fs*0.72)}" dx="1" dy="${-Math.round(fs*0.28)}">?</tspan></text>`;
       }
-      return `<text x="${px}" y="${py+dy}" font-size="${fs}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="Georgia,serif">${base}</text>`;
+      return `<text x="${px}" y="${py+dy}" font-size="${fs}" text-anchor="middle" fill="var(--venn-mark)" font-weight="bold" font-family="inherit">${base}</text>`;
     }).join('');
   }).join('');
   return `<svg viewBox="0 0 ${layout.W} ${layout.H}" class="venn ${opts.cls||''}" xmlns="http://www.w3.org/2000/svg"><defs>${defs}</defs>${fills}${strokes}${labEls}${xEls}</svg>`;
@@ -1970,10 +1970,10 @@ function modalSquareSvg(hl){
   const P = {Np:[115,50], Nn:[325,50], Pp:[115,190], Pn:[325,190]};
   const box = (k)=>{
     const on = hl.indexOf(k)>=0;
-    return `<rect x="${P[k][0]-62}" y="${P[k][1]-20}" width="124" height="40" rx="9"
-      fill="${on?'var(--gold)':'var(--card)'}" stroke="var(--line)"/>
+    return `<rect x="${P[k][0]-62}" y="${P[k][1]-20}" width="124" height="40" rx="0"
+      fill="${on?'var(--accent)':'var(--card)'}" stroke="var(--frame)"/>
       <text x="${P[k][0]}" y="${P[k][1]+6}" text-anchor="middle" font-size="15" font-style="italic"
-      fill="${on?'#fff':'var(--ink)'}" font-family="inherit">${CORNER_NAME[k]}</text>`;
+      fill="${on?'var(--paper)':'var(--ink)'}" font-family="inherit">${CORNER_NAME[k]}</text>`;
   };
   const line = (a,b)=>`<line x1="${P[a][0]}" y1="${P[a][1]}" x2="${P[b][0]}" y2="${P[b][1]}" stroke="var(--line)" stroke-width="1.4"/>`;
   const lbl = (x,y,t)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="12" font-style="italic" fill="var(--ink-soft)" font-family="inherit">${t}</text>`;
