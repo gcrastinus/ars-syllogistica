@@ -1296,6 +1296,12 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
 @media (max-width:640px){body.dark .pm-btn{background:var(--paper) !important; color:var(--orn) !important} body.dark .pm-btn:hover, body.dark .pm-btn[aria-expanded="true"]{background:var(--hover) !important}}
 @media print{.pm-btn, .pm-menu{display:none !important}}
 body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
+.intro-note{
+  text-align:left; font-style:normal; color:var(--ink); font-size:17px; line-height:1.6;
+  max-width:34em; margin:18px auto 22px; padding:0; border:0; background:none; hyphens:auto;
+}
+.intro-note::first-letter{float:left; font:400 4.1em/0.8 "Libre Caslon Display",serif; color:var(--accent,#6b4a2b); margin:6px 10px 0 0}
+.intro-note strong{font-weight:400; color:inherit}
 </style>
 </head>
 <body>
@@ -1362,6 +1368,12 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
       <h1>Ars Logica</h1>
       <div class="subtitle">Learning the Art of Logic</div>
       <div class="rule"></div>
+      <div class="intro-note">
+        <strong>Logic is the art that directs the act of reason itself, so that we may proceed in order, with ease, and without error.</strong>
+        Grammar asks whether what is said is well formed, and rhetoric asks whether the hearer is moved to see it. Logic asks whether what is said follows, and whether it is true.
+        The course follows the three acts of the mind: to grasp what a thing is, to judge that something is or is not so, and to reason from what we know to what we do not yet know.
+        It is Aristotelian in its doctrine and Thomistic in its order, and it ends with reason at work in demonstration, dialectic, rhetoric, and the fallacies.
+      </div>
       <div class="mode-row path-row" id="path-row" role="group" aria-label="Choose your path">
         <button class="mode-btn sel" type="button" id="path-free" aria-pressed="true">Free Practice</button>
         <button class="mode-btn" type="button" id="path-guided" aria-pressed="false">Guided Path</button>
