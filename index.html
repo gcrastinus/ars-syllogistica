@@ -21,14 +21,14 @@
   --text:'Libre Caslon Text', Georgia, serif;
 }
 body.dark{
-  --paper:#1a1611; --paper2:#120f0c; --card:#241e17; --ink:#e9dfc8; --ink-soft:#b4a583;
-  --line:#463b2b; --frame:#574a37; --wine:#e08373; --sage:#8fbf95;
-  --accent:#c8b691; --orn:#efe3c6; --hover:#292219;
-  --panel:#2e261c; --panel2:#292219; --track:#332b20;
+  --paper:#2a2219; --paper2:#211b14; --card:#332a20; --ink:#e9dfc8; --ink-soft:#c8b897;
+  --line:#5a4b38; --frame:#6b5a43; --wine:#e08373; --sage:#8fbf95;
+  --accent:#c8b691; --orn:#efe3c6; --hover:#3d3328;
+  --panel:#3a3026; --panel2:#352c22; --track:#40362a;
   --gold:var(--accent); --gold-soft:var(--frame);
   --good-text:#8fbf95; --bad-text:#e08373; --sel-text:#1a1611;
   --venn-line:#c8b691; --venn-shade:#c8b691; --venn-mark:#e08373;
-  --glow:#231d15;
+  --glow:#2f271d;
   --shadow:none;
 }
 *{box-sizing:border-box; margin:0; padding:0}
@@ -42,17 +42,17 @@ html{
   scrollbar-width:thin;
 }
 html:has(body.dark){
-  background:#1a1611;
+  background:#2a2219;
   color-scheme:dark;
-  scrollbar-color:#574a37 #231d15;
+  scrollbar-color:#6b5a43 #211b14;
 }
 /* WebKit/Chromium/Dropbox scrollbar — themed to match the parchment, not the default bright gray */
 ::-webkit-scrollbar{width:12px; height:12px}
 ::-webkit-scrollbar-track{background:#e6dcc2}
 ::-webkit-scrollbar-thumb{background:#d3c29c; border-radius:0; border:3px solid #e6dcc2}
 ::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
-html:has(body.dark)::-webkit-scrollbar-track{background:#231d15}
-html:has(body.dark)::-webkit-scrollbar-thumb{background:#574a37; border-color:#231d15}
+html:has(body.dark)::-webkit-scrollbar-track{background:#211b14}
+html:has(body.dark)::-webkit-scrollbar-thumb{background:#6b5a43; border-color:#211b14}
 html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
 body{
   font-family:var(--text);
