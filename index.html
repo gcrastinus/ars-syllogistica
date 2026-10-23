@@ -1216,7 +1216,7 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 .lp-lvl.locked:hover{background:transparent}
 .help, .instructions{background:transparent}
 
-/* Oct 23: the Diagram Workshop and the Square of Opposition as small floating buttons under the Tablet. */
+/* Oct 23: the Venn Diagram Workshop and the Square of Opposition as small floating buttons under the Tablet. */
 .lab-tools{position:fixed; top:112px; left:33px; z-index:50; display:flex; flex-direction:column; gap:10px}
 .lab-open{
   position:relative; width:54px; height:54px; padding:0; margin:0;
@@ -1245,35 +1245,57 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
   .lab-icon{width:28px; height:28px}
 }
 
-/* Oct 23: phones get one study-tools button with a short menu, and a smaller Tablet. */
-.lab-menu-btn, .lab-menu{display:none}
-.lab-menu-btn::after{content:none}
+
+/* Oct 23 (v2): phones keep only the Tablet at top left; everything else lives in one menu at top right. */
+.pm-btn, .pm-menu{display:none}
 @media (max-width:640px){
-  .lab-tools{top:23px; left:88px}
-  .lab-tools > #lab1-open, .lab-tools > #lab2-open{display:none}
-  .lab-menu-btn{display:flex; width:44px; height:44px}
-  .lab-menu-btn .lab-icon{width:28px; height:28px}
-  .lab-menu:not([hidden]){
-    display:flex; flex-direction:column; position:absolute; top:calc(100% + 6px); left:0;
-    width:max-content; max-width:calc(100vw - 100px); background:var(--card); border:1px solid var(--frame); border-radius:0; box-shadow:none;
+  .lab-tools{display:none !important}
+  .pm-btn{
+    display:flex; align-items:center; justify-content:center; position:fixed; top:12px; right:12px; z-index:60;
+    width:44px; height:44px; padding:0; background:var(--paper); color:var(--orn);
+    border:1px solid var(--frame); border-radius:0; cursor:pointer; transition:background-color .25s ease;
   }
-  .lab-menu-item{
+  .pm-btn:hover, .pm-btn[aria-expanded="true"]{background:var(--hover)}
+  .pm-btn svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.4}
+  .pm-menu:not([hidden]){
+    display:flex; flex-direction:column; position:fixed; top:62px; right:12px; z-index:61;
+    width:max-content; max-width:calc(100vw - 24px); background:var(--card);
+    border:1px solid var(--frame); border-radius:0; box-shadow:none;
+  }
+  .pm-item{
     display:flex; align-items:center; gap:12px; width:100%; margin:0; padding:12px 14px;
-    font-family:var(--text); font-size:17px; line-height:1.3; text-align:left; color:var(--ink); white-space:nowrap;
-    background:transparent; border:0; border-radius:0; cursor:pointer; transition:background-color .25s ease;
+    font-family:var(--text); font-size:17px; line-height:1.3; text-align:left; white-space:nowrap;
+    color:var(--ink); background:transparent; border:0; border-radius:0; cursor:pointer; transition:background-color .25s ease;
   }
-  .lab-menu-item + .lab-menu-item{border-top:1px solid var(--frame)}
-  .lab-menu-item:hover, .lab-menu-item:focus-visible{background:var(--hover); outline:none}
-  .lab-menu-item .lab-icon{width:24px; height:24px; flex:none}
+  .pm-menu > * + *{border-top:1px solid var(--frame)}
+  .pm-item:hover, .pm-item:focus-visible, .pm-rates button:hover, .pm-rates button:focus-visible{background:var(--hover); outline:none}
+  .pm-glyph{width:24px; text-align:center; color:var(--orn); flex:none}
+  .pm-item .lab-icon{width:24px; height:24px; flex:none; fill:none; stroke:var(--orn); stroke-width:1.3}
+  .pm-rates{display:flex; align-items:center; gap:4px; padding:6px 14px 8px 50px; font-family:var(--text); font-size:17px; color:var(--ink-soft)}
+  .pm-rates-label{margin-right:6px}
+  .pm-rates button{font-family:var(--text); font-size:17px; padding:4px 6px; color:var(--ink-soft); background:transparent; border:1px solid transparent; border-radius:0; cursor:pointer}
+  .pm-rates button[aria-pressed="true"]{border-color:var(--frame); color:var(--ink)}
+  .pm-item.pm-disabled{opacity:.45; cursor:not-allowed}
+  .pm-item.pm-disabled:hover{background:transparent}
+  .pm-note{padding:10px 14px; font-family:var(--text); font-size:17px; font-style:italic; color:var(--ink-soft)}
+  .pm-note[hidden]{display:none}
+  /* the play bar: only shown (below the menu button) once reading has been started */
+  #top-right-controls{top:64px; right:12px; display:none}
+  body.play-bar #top-right-controls{display:flex}
+  #top-right-controls #dark-toggle{display:none}
   .recite-open{top:12px; left:12px; width:66px; height:66px}
   .recite-icon{width:44px; height:44px}
+  .recite-callout{top:90px}
+  body.play-bar .recite-callout{top:116px}
 }
 @media (max-width:420px){
-  .lab-tools{top:20px; left:80px}
-  .lab-menu-btn{width:44px; height:44px}
-  .recite-open{top:12px; left:12px; width:60px; height:60px}
+  .recite-open{width:60px; height:60px}
   .recite-icon{width:40px; height:40px}
+  .recite-callout{top:84px}
 }
+@media (max-width:640px){body.dark .pm-btn{background:var(--paper) !important; color:var(--orn) !important} body.dark .pm-btn:hover, body.dark .pm-btn[aria-expanded="true"]{background:var(--hover) !important}}
+@media print{.pm-btn, .pm-menu{display:none !important}}
+body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 </style>
 </head>
 <body>
@@ -1295,19 +1317,21 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
 <button id="dark-toggle" title="Light / dark" aria-label="Toggle dark mode">☾ / ☀</button>
 </div>
 <div class="lab-tools" id="lab-tools">
-<button type="button" id="lab1-open" class="lab-open" title="The Diagram Workshop" aria-label="The Diagram Workshop" data-tip="The Diagram Workshop">
+<button type="button" id="lab1-open" class="lab-open" title="The Venn Diagram Workshop" aria-label="The Venn Diagram Workshop" data-tip="The Venn Diagram Workshop">
   <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg>
 </button>
 <button type="button" id="lab2-open" class="lab-open" title="The Square of Opposition" aria-label="The Square of Opposition" data-tip="The Square of Opposition">
   <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg>
 </button>
-<button type="button" id="lab-menu-btn" class="lab-open lab-menu-btn" title="Study tools" aria-label="Study tools" aria-haspopup="true" aria-expanded="false" aria-controls="lab-menu">
-  <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12.5" cy="12" r="6"/><circle cx="19.5" cy="12" r="6"/><rect x="11" y="21" width="10" height="7"/></svg>
-</button>
-<div class="lab-menu" id="lab-menu" role="menu" hidden>
-  <button type="button" role="menuitem" class="lab-menu-item" data-lab="lab1"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg>The Diagram Workshop</button>
-  <button type="button" role="menuitem" class="lab-menu-item" data-lab="lab2"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg>The Square of Opposition</button>
 </div>
+<button type="button" id="pm-btn" class="pm-btn" title="Menu" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="pm-menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h14M5 12h14M5 17h14"/></svg></button>
+<div class="pm-menu" id="pm-menu" role="menu" hidden>
+  <button type="button" role="menuitem" class="pm-item" id="pm-dark"><span class="pm-glyph" aria-hidden="true">☾</span><span class="pm-label">Dark mode</span></button>
+  <button type="button" role="menuitem" class="pm-item" id="pm-play"><span class="pm-glyph" aria-hidden="true">▶</span><span class="pm-label">Read aloud</span></button>
+  <div class="pm-rates" role="group" aria-label="Reading speed"><span class="pm-rates-label">Speed</span><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.5">1.5×</button><button type="button" data-rate="2">2×</button><button type="button" data-rate="2.5">2.5×</button><button type="button" data-rate="3">3×</button></div>
+  <button type="button" role="menuitem" class="pm-item pm-lab" data-lab="lab1"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg><span class="pm-label">The Venn Diagram Workshop</span></button>
+  <button type="button" role="menuitem" class="pm-item pm-lab" data-lab="lab2"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg><span class="pm-label">The Square of Opposition</span></button>
+  <div class="pm-note" id="pm-note" role="status" aria-live="polite" hidden>Go to Main Page for Access</div>
 </div>
 <button type="button" id="recite-open" class="recite-open" title="Recitation Tablet" aria-label="Recitation Tablet">
   <svg class="recite-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
@@ -1373,10 +1397,10 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
 
     <details class="help" style="max-width:700px">
       <summary>How to Proceed</summary>
-      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The two small buttons under the Recitation Tablet, at the top left of the page, open the Diagram Workshop and the Square of Opposition, which teach without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
+      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The two small buttons under the Recitation Tablet, at the top left of the page (on a phone, in the menu at the top right), open the Venn Diagram Workshop and the Square of Opposition, which teach without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
       <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
-      <p>Among the unscored options: <em>The Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays the contradictory, the converse, the obverse, or the contrapositive drawn from whichever corner you choose.</p>
+      <p>Among the unscored options: <em>The Venn Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays the contradictory, the converse, the obverse, or the contrapositive drawn from whichever corner you choose.</p>
     </details>
 
     <details class="help" id="guided-help" style="max-width:700px; display:none; text-align:left">
@@ -1549,7 +1573,7 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
   <div class="screen" id="scr-lab1">
     <div class="quiz-top">
       <button class="back-btn" id="lab1-back">⟵ Return</button>
-      <div class="quiz-title">The Diagram Workshop</div>
+      <div class="quiz-title">The Venn Diagram Workshop</div>
       <div class="badge">Study</div>
     </div>
     <div class="q-card">
@@ -1913,7 +1937,7 @@ if(typeof document!=='undefined'){
 
   /* ==================== STUDY LABS ==================== */
   const LABS = [
-    {id:'lab1', title:'The Diagram Workshop',
+    {id:'lab1', title:'The Venn Diagram Workshop',
      desc:'Mark a Venn diagram freely (shading regions and placing ×s) and read what your diagram asserts, whether for one proposition, two premises, or a whole syllogism.'},
     {id:'lab2', title:'The Square of Opposition',
      desc:'Two terms placed in the four traditional relations. Choose any corner and see its converse, obverse, contrapositive, or contradictory.'}
@@ -1923,18 +1947,61 @@ if(typeof document!=='undefined'){
     const b = $(l.id+'-open');
     if (b) b.onclick = ()=>(l.id==='lab1' ? openLab1() : openLab2());
   });
-  /* Phones: one button opens a short menu with the same two labs. */
-  (function(){
-    const btn = $('lab-menu-btn'), menu = $('lab-menu');
-    if (!btn || !menu) return;
-    const close = ()=>{ menu.hidden = true; btn.setAttribute('aria-expanded','false'); };
-    btn.onclick = (e)=>{ e.stopPropagation(); const open = menu.hidden; menu.hidden = !open; btn.setAttribute('aria-expanded', open?'true':'false'); if (open){ const f = menu.querySelector('button'); if (f) f.focus(); } };
-    menu.querySelectorAll('.lab-menu-item').forEach(it=>{
-      it.onclick = ()=>{ close(); $(it.dataset.lab+'-open').click(); };
+  /* Phones: one menu at top right for dark mode, reading aloud, and the two workshops. */
+  (function phoneMenu(){
+    const btn = $('pm-btn'), menu = $('pm-menu'), note = $('pm-note');
+    if(!btn || !menu) return;
+    const speakBtn = $('speak-toggle');
+    let noteTimer = null, barTimer = null;
+    function syncItems(){
+      const dark = document.body.classList.contains('dark');
+      $('pm-dark').querySelector('.pm-label').textContent = dark ? 'Light mode' : 'Dark mode';
+      $('pm-dark').querySelector('.pm-glyph').textContent = dark ? '☀' : '☾';
+      const speaking = speakBtn && speakBtn.classList.contains('speaking');
+      $('pm-play').querySelector('.pm-label').textContent = speaking ? 'Stop reading' : 'Read aloud';
+      $('pm-play').querySelector('.pm-glyph').textContent = speaking ? '❚❚' : '▶';
+      menu.querySelectorAll('.pm-rates [data-rate]').forEach(b=>b.setAttribute('aria-pressed', String(parseFloat(b.dataset.rate)===(state.speakRate||1))));
+      const off = document.body.classList.contains('off-home');
+      menu.querySelectorAll('.pm-lab').forEach(it=>{
+        it.classList.toggle('pm-disabled', off);
+        it.setAttribute('aria-disabled', off ? 'true' : 'false');
+        it.title = off ? 'Go to Main Page for Access' : '';
+      });
+    }
+    function close(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); if(note) note.hidden = true; }
+    function open(){ syncItems(); menu.hidden = false; btn.setAttribute('aria-expanded','true'); }
+    btn.onclick = e=>{ e.stopPropagation(); if(menu.hidden) open(); else close(); };
+    $('pm-dark').onclick = ()=>{ $('dark-toggle').click(); syncItems(); };
+    $('pm-play').onclick = ()=>{ close(); if(speakBtn) speakBtn.click(); };
+    menu.querySelectorAll('.pm-rates [data-rate]').forEach(b=>{
+      b.onclick = ()=>{
+        const li = document.querySelector('.speak-rate-menu [data-rate="'+b.dataset.rate+'"]');
+        if(li) li.click();
+        syncItems();
+      };
     });
-    document.addEventListener('click', e=>{ if (!menu.hidden && !menu.contains(e.target) && e.target!==btn) close(); });
-    document.addEventListener('keydown', e=>{ if (e.key==='Escape' && !menu.hidden){ close(); btn.focus(); } });
+    menu.querySelectorAll('.pm-lab').forEach(it=>{
+      it.onclick = ()=>{
+        if(it.classList.contains('pm-disabled')){
+          if(note){ note.hidden = false; clearTimeout(noteTimer); noteTimer = setTimeout(()=>{ note.hidden = true; }, 2500); }
+          return;
+        }
+        close(); $(it.dataset.lab+'-open').click();
+      };
+    });
+    document.addEventListener('click', e=>{ if(!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) close(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !menu.hidden){ close(); btn.focus(); } });
+    /* The play bar appears while reading, and stays about two minutes after it stops. */
+    if(speakBtn) new MutationObserver(()=>{
+      if(speakBtn.classList.contains('speaking')){ clearTimeout(barTimer); document.body.classList.add('play-bar'); }
+      else if(document.body.classList.contains('play-bar')){
+        clearTimeout(barTimer);
+        barTimer = setTimeout(()=>document.body.classList.remove('play-bar'), 120000);
+      }
+      if(!menu.hidden) syncItems();
+    }).observe(speakBtn, {attributes:true, attributeFilter:['class']});
   })();
+
 
   /* ==================== THE INTRODUCTION: FOUR STUDY DECKS ====================
      What logic is, then one deck for each act of the mind. Each card states one
@@ -3505,6 +3572,11 @@ if(typeof document!=='undefined'){
   /* Free Practice also remembers which lead-ins were finished or skipped. */
   const FP_LEAD_KEY = 'arsFreeLeadins';
   try{ studyMem.lead = JSON.parse(localStorage.getItem(FP_LEAD_KEY)) || {}; }catch(e){}
+  window.addEventListener('storage', e=>{
+    if(e.key!==FP_LEAD_KEY) return;
+    try{ const o = JSON.parse(e.newValue || 'null'); if(o && typeof o==='object') Object.keys(o).forEach(k=>{ if(o[k]) studyMem.lead[k] = o[k]; }); }catch(err){}
+    if(typeof refreshStudyTiles==='function') try{ refreshStudyTiles(); }catch(err){}
+  });
   function studyStore(){
     if(gpPath==='guided' && gpTracking()){
       gpProg.study = gpProg.study || {};
@@ -3519,7 +3591,11 @@ if(typeof document!=='undefined'){
     studyStore()[kind][id] = true;
     if(gpPath==='guided' && gpTracking()) gpSave();
     else if(kind==='lead' && gpPath!=='guided'){
-      try{ localStorage.setItem(FP_LEAD_KEY, JSON.stringify(studyMem.lead)); }catch(e){}
+      try{
+        const latest = JSON.parse(localStorage.getItem(FP_LEAD_KEY) || 'null');
+        if(latest && typeof latest==='object') Object.keys(latest).forEach(k=>{ if(latest[k]) studyMem.lead[k] = latest[k]; });
+        localStorage.setItem(FP_LEAD_KEY, JSON.stringify(studyMem.lead));
+      }catch(e){}
     }
   }
   function refreshStudyTiles(){
@@ -4935,6 +5011,10 @@ if(typeof document!=='undefined'){
     try{ localStorage.setItem('arsDark', on?'1':'0'); }catch(err){}
   }
   darkBtn.onclick = ()=>setDark(!document.body.classList.contains('dark'));
+  window.addEventListener('storage', e=>{
+    if(e.key==='arsDark' && e.newValue!==null) document.body.classList.toggle('dark', e.newValue==='1');
+    if(e.key==='arsSpeakRate'){ const r=parseFloat(e.newValue); if(r) state.speakRate=r; }
+  });
   try{ if(localStorage.getItem('arsDark')==='1') setDark(true);
   try{ const sr=parseFloat(localStorage.getItem('arsSpeakRate')); if(sr) state.speakRate=sr; }catch(e){} }catch(err){}
 
@@ -5696,6 +5776,71 @@ if(typeof document!=='undefined'){
     return o;
   }
   let gpProg = null;
+  /* Several tabs may be open at once. gpBase is the stored text this tab last read or wrote;
+     before each write the latest stored record is re-read and merged, so one tab never
+     overwrites what another has recorded since. */
+  let gpBase = null;
+  function gpHKey(h){ return h ? (h.date+'|'+(h.correct?1:0)+'|'+h.diff) : ''; }
+  function gpMergeSet(m, st, b){
+    if(!m) return st;
+    if(!st) return m;
+    if(JSON.stringify(m)===JSON.stringify(st)) return m;
+    const ref = ((b && b.history) || st.history || []), cnt = {};
+    ref.forEach(h=>{ const k=gpHKey(h); cnt[k]=(cnt[k]||0)+1; });
+    const added = [];
+    (m.history||[]).forEach(h=>{ const k=gpHKey(h); if(cnt[k]>0) cnt[k]--; else added.push(h); });
+    let hist = (st.history||[]).slice();
+    if(b){ hist = hist.concat(added); }
+    else {
+      const sc = {}; hist.forEach(h=>{ const k=gpHKey(h); sc[k]=(sc[k]||0)+1; });
+      (m.history||[]).forEach(h=>{ const k=gpHKey(h); if(sc[k]>0) sc[k]--; else hist.push(h); });
+    }
+    hist = hist.map((h,i)=>[h,i]).sort((x,y)=>(x[0].date<y[0].date?-1:x[0].date>y[0].date?1:x[1]-y[1])).map(x=>x[0]);
+    if(hist.length>GP.HISTORY_CAP) hist.splice(0, hist.length-GP.HISTORY_CAP);
+    const r = Object.assign({}, st, m);
+    r.history = hist;
+    if(b){
+      r.seen = (st.seen||0) + Math.max(0, (m.seen||0)-(b.seen||0));
+      r.correct = (st.correct||0) + Math.max(0, (m.correct||0)-(b.correct||0));
+    } else { r.seen = Math.max(m.seen||0, st.seen||0); r.correct = Math.max(m.correct||0, st.correct||0); }
+    if((st.box||0) > (m.box||0)){ r.box = st.box; r.nextDue = st.nextDue; }
+    if(st.masterLevel || m.masterLevel) r.masterLevel = Math.max(st.masterLevel||0, m.masterLevel||0);
+    const mo = [m.masteredOn, st.masteredOn].filter(Boolean).sort();
+    r.masteredOn = mo.length ? mo[0] : null;
+    return r;
+  }
+  function gpMergeStored(fromOther){
+    let raw = null, s = null;
+    try{ raw = gpGet(GP.STORAGE_KEY); s = JSON.parse(raw || 'null'); }catch(e){ return; }
+    if(!s || s.schemaVersion!==GP.SCHEMA || !s.sets || typeof s.sets!=='object') return;
+    s = gpMigrate(s);
+    let b = null; try{ b = gpBase ? JSON.parse(gpBase) : null; }catch(e){}
+    const ids = new Set(Object.keys(s.sets).concat(Object.keys(gpProg.sets||{})));
+    gpProg.sets = gpProg.sets || {};
+    ids.forEach(id=>{
+      gpProg.sets[id] = gpMergeSet(gpProg.sets[id], s.sets[id], b && b.sets && b.sets[id]);
+    });
+    if(s.study){
+      gpProg.study = gpProg.study || {};
+      ['lead','rev'].forEach(k=>{
+        const src = s.study[k]; if(!src) return;
+        gpProg.study[k] = gpProg.study[k] || {};
+        Object.keys(src).forEach(x=>{ if(src[x]) gpProg.study[k][x] = src[x]; });
+      });
+    }
+    if(s.recite && typeof s.recite==='object'){
+      const bag = gpProg.recite || window.__arsReciteBag;
+      if(bag && typeof bag==='object'){
+        bag.decks = bag.decks || {};
+        Object.keys(s.recite.decks||{}).forEach(k=>{ if(!(k in bag.decks)) bag.decks[k] = s.recite.decks[k]; });
+        Object.keys(s.recite).forEach(k=>{ if(k!=='decks' && !(k in bag)) bag[k] = s.recite[k]; });
+        gpProg.recite = bag;
+      } else gpProg.recite = s.recite;
+    }
+    if(fromOther && s.settings) gpProg.settings = s.settings;
+    ['renumbered1314','shiftedPredCat2','insertedChain17'].forEach(k=>{ if(s[k]) gpProg[k] = true; });
+    Object.keys(gpProg.sets).forEach(id=>{ try{ gpProg.sets[id].state = gpStateOf(Number(id)); }catch(e){} });
+  }
   (function(){
     const raw = gpGet(GP.STORAGE_KEY);
     if(!raw) return;
@@ -5704,7 +5849,8 @@ if(typeof document!=='undefined'){
       if(o && o.schemaVersion===GP.SCHEMA && o.sets && typeof o.sets==='object'){
         const needsWrite = !o.renumbered1314 || !o.shiftedPredCat2 || !o.insertedChain17;
         gpProg = gpMigrate(o);
-        if(needsWrite) gpSet(GP.STORAGE_KEY, JSON.stringify(gpProg));
+        gpBase = raw;
+        if(needsWrite){ gpBase = JSON.stringify(gpProg); gpSet(GP.STORAGE_KEY, gpBase); }
       }
     }catch(e){ /* unreadable — leave in place, start fresh in memory only */ }
   })();
@@ -5714,11 +5860,33 @@ if(typeof document!=='undefined'){
       {state:'learning', seen:0, correct:0, history:[], box:null, nextDue:null, masteredOn:null};
     return gpProg.sets[id];
   }
-  function gpSave(){
+  function gpSave(replace){
     if(!gpProg) return;
     if(window.__arsReciteBag) gpProg.recite = window.__arsReciteBag;
-    gpSet(GP.STORAGE_KEY, JSON.stringify(gpProg));
+    if(!replace) gpMergeStored(false);
+    gpBase = JSON.stringify(gpProg);
+    gpSet(GP.STORAGE_KEY, gpBase);
   }
+  /* Another tab wrote progress: take it in, keeping anything this tab has not yet written. */
+  window.addEventListener('storage', e=>{
+    if(e.key!==GP.STORAGE_KEY && e.key!==null) return;
+    const raw = gpGet(GP.STORAGE_KEY);
+    if(!raw){ gpProg = null; gpBase = null; if(typeof window.__arsReciteAdopt==='function') window.__arsReciteAdopt(null); }
+    else if(gpProg){ gpMergeStored(true); gpBase = raw; if(window.__arsReciteBag !== gpProg.recite && typeof window.__arsReciteAdopt==='function') window.__arsReciteAdopt(gpProg.recite); }
+    else {
+      try{
+        const o = JSON.parse(raw);
+        if(o && o.schemaVersion===GP.SCHEMA && o.sets && typeof o.sets==='object'){
+          gpProg = gpMigrate(o); gpBase = raw;
+          if(typeof window.__arsReciteAdopt==='function') window.__arsReciteAdopt(gpProg.recite);
+        }
+      }catch(err){}
+    }
+    try{
+      if($('scr-home').classList.contains('active')) refreshCards();
+      if($('scr-progress').classList.contains('active')) renderProgress();
+    }catch(err){}
+  });
   /* The Recitation Tablet keeps its record on this same progress object. */
   window.__arsReadProgress = function(){
     try{ return JSON.parse(gpGet(GP.STORAGE_KEY) || 'null'); }
@@ -6063,7 +6231,7 @@ if(typeof document!=='undefined'){
       $('prog-erase').onclick = ()=>{
         if(confirm('Erase all stored progress? This cannot be undone.')){
           if(typeof window.__arsReciteReset==='function') window.__arsReciteReset();
-          gpProg = null; gpRemove(GP.STORAGE_KEY); renderProgress(); refreshCards();
+          gpProg = null; gpBase = null; gpRemove(GP.STORAGE_KEY); renderProgress(); refreshCards();
         }
       };
     }
@@ -6172,7 +6340,7 @@ if(typeof document!=='undefined'){
           throw new Error('schema');
         gpProg = gpMigrate(o);
         if(typeof window.__arsReciteAdopt==='function') window.__arsReciteAdopt(gpProg.recite);
-        gpSave(); renderProgress(); refreshCards();
+        gpSave(true); renderProgress(); refreshCards();
         note.textContent = 'Progress imported.'; note.style.display = 'block';
       }catch(err){
         renderProgress();
