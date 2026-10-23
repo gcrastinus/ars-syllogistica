@@ -21,14 +21,14 @@
   --text:'Libre Caslon Text', Georgia, serif;
 }
 body.dark{
-  --paper:#0d141e; --paper2:#090e15; --card:#111b2a; --ink:#e9dfc8; --ink-soft:#b4a583;
-  --line:#1f3452; --frame:#34465f; --wine:#e08373; --sage:#8fbf95;
-  --accent:#c8b691; --orn:#efe3c6; --hover:#1a2638;
-  --panel:#142236; --panel2:#121f30; --track:#18273b;
+  --paper:#1a1611; --paper2:#120f0c; --card:#241e17; --ink:#e9dfc8; --ink-soft:#b4a583;
+  --line:#463b2b; --frame:#574a37; --wine:#e08373; --sage:#8fbf95;
+  --accent:#c8b691; --orn:#efe3c6; --hover:#292219;
+  --panel:#2e261c; --panel2:#292219; --track:#332b20;
   --gold:var(--accent); --gold-soft:var(--frame);
-  --good-text:#8fbf95; --bad-text:#e08373; --sel-text:#0d141e;
+  --good-text:#8fbf95; --bad-text:#e08373; --sel-text:#1a1611;
   --venn-line:#c8b691; --venn-shade:#c8b691; --venn-mark:#e08373;
-  --glow:#0f1a29;
+  --glow:#231d15;
   --shadow:none;
 }
 *{box-sizing:border-box; margin:0; padding:0}
@@ -42,18 +42,18 @@ html{
   scrollbar-width:thin;
 }
 html:has(body.dark){
-  background:#0d141e;
+  background:#1a1611;
   color-scheme:dark;
-  scrollbar-color:#34465f #0f1a29;
+  scrollbar-color:#574a37 #231d15;
 }
 /* WebKit/Chromium/Dropbox scrollbar — themed to match the parchment, not the default bright gray */
 ::-webkit-scrollbar{width:12px; height:12px}
 ::-webkit-scrollbar-track{background:#e6dcc2}
 ::-webkit-scrollbar-thumb{background:#d3c29c; border-radius:0; border:3px solid #e6dcc2}
 ::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
-html:has(body.dark)::-webkit-scrollbar-track{background:#0f1a29}
-html:has(body.dark)::-webkit-scrollbar-thumb{background:#34465f; border-color:#0f1a29}
-html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#5a6a84}
+html:has(body.dark)::-webkit-scrollbar-track{background:#231d15}
+html:has(body.dark)::-webkit-scrollbar-thumb{background:#574a37; border-color:#231d15}
+html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
 body{
   font-family:var(--text);
   color:var(--ink); min-height:100vh; font-size:19px; line-height:1.5;
