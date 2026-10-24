@@ -860,20 +860,22 @@ body{font-size:17px; line-height:1.6; font-variant-numeric:oldstyle-nums}
 .ornament.mark, svg.mark{display:block; width:18px; height:18px; margin:0 auto 28px; font-size:0}
 #dark-toggle{
   width:auto; height:auto; border-radius:0; padding:4px 10px;
-  border:1px solid var(--ink); background:none; color:var(--ink);
+  border:1px solid var(--ink); background:var(--paper); color:var(--ink);
   font:inherit; font-size:16px; line-height:1.4; box-shadow:none;
   transition:background-color .25s ease;
 }
 #dark-toggle:hover{transform:none; background:var(--hover)}
 .speak-unit{
-  height:auto; border-radius:0; border:1px solid var(--ink); background:none; box-shadow:none;
+  height:auto; border-radius:0; border:1px solid var(--ink); background:var(--paper); box-shadow:none;
 }
 #speak-toggle{
   width:auto; padding:4px 10px; border-radius:0; color:var(--ink); font-size:15px;
+  background:var(--paper);
 }
 #speak-toggle.speaking, #speak-toggle.speaking:hover{background:var(--ink); color:var(--paper)}
 .speak-rate-btn{
   border-radius:0; color:var(--ink); border-left-color:var(--ink); font-family:var(--text); letter-spacing:0;
+  background:var(--paper);
 }
 .speak-rate-menu{border-radius:0; border-color:var(--frame); box-shadow:none}
 .speak-rate-menu li{font-family:var(--text); letter-spacing:0; border-radius:0; color:var(--ink-soft)}
@@ -1144,7 +1146,7 @@ details.check[open] summary .chev{transform:rotate(90deg)}
 .lp-lvl:hover:not(.locked){transform:none; border-color:var(--frame); background:var(--hover)}
 .lp-lvl .lp-num{font-family:var(--text); color:var(--accent); letter-spacing:0}
 .recite-open{
-  border-radius:0; border:1px solid var(--ink); background:none; color:var(--orn);
+  border-radius:0; border:1px solid var(--ink); background:var(--paper); color:var(--orn);
   box-shadow:none; transition:background-color .25s ease;
 }
 .recite-open:hover{transform:none; border-color:var(--ink); background:var(--hover)}
