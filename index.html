@@ -933,13 +933,20 @@ h1{
   max-width:34em; margin:28px auto 8px; hyphens:auto;
 }
 #actblk-intro > .section-gloss::first-letter{
-  float:left; font:400 4.1em/0.8 var(--std-display); color:var(--accent); margin:6px 12px 2px 0;
+  float:left;
 }
-/* the drop cap keeps its standard face in every font, so script and swash capitals never run into the text */
-#actblk-intro > .section-gloss::first-letter, .intro-note::first-letter{
-  font-family:var(--std-display) !important; font-style:normal !important; font-size-adjust:none !important;
-  text-transform:none; letter-spacing:0;
-}
+/* opening drop caps: each font sets its own capital, tuned so its ink (slant, swash, tail) clears lines 1 to 3 */
+:is(#actblk-intro > .section-gloss, .intro-note)::first-letter{float:left; font-family:var(--display); font-weight:400; font-style:normal; font-size-adjust:none; text-transform:none; letter-spacing:0}
+:is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:4.1em; line-height:.8; margin:6px 10px 0 0; color:var(--accent)}
+html[data-font="garamond"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:4.1em; line-height:.8; margin:6px 12px 0 0; padding:0; color:var(--ink)}
+html[data-font="italic"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:3.6em; line-height:.86; margin:5px 22px 6px 0; padding:0 .04em 0 0; color:var(--ink)}
+html[data-font="copperplate"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:4.6em; line-height:.66; margin:16px 34px 6px 2px; padding:0; color:var(--ink)}
+/* Medieval Gothic: a rubricated initial, red Fraktur capital in a thin ochre frame with a faint tint and four corner dots */
+html[data-font="fraktur"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:3.25em; line-height:1; margin:5px 14px 2px 0; padding:.04em .14em .02em;
+  color:#b0301c; border:1px solid #a8822f;
+  background:radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) 2px 2px/6px 6px no-repeat, radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) right 2px top 2px/6px 6px no-repeat, radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) left 2px bottom 2px/6px 6px no-repeat, radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) right 2px bottom 2px/6px 6px no-repeat, rgba(176,48,28,.07)}
+html[data-font="fraktur"] body.dark :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{color:#e8836b; border-color:#c9a45a;
+  background:radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) 2px 2px/6px 6px no-repeat, radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) right 2px top 2px/6px 6px no-repeat, radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) left 2px bottom 2px/6px 6px no-repeat, radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) right 2px bottom 2px/6px 6px no-repeat, rgba(232,131,107,.10)}
 #scr-home .sets{
   display:flex; flex-direction:column; align-items:center; gap:12px;
   margin-top:28px; width:100%;
@@ -1321,7 +1328,6 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
   text-align:left; font-style:normal; color:var(--ink); font-size:17px; line-height:1.6;
   max-width:34em; margin:18px auto 22px; padding:0; border:0; background:none; hyphens:auto;
 }
-.intro-note::first-letter{float:left; font:400 4.1em/0.8 "Libre Caslon Display",serif; color:var(--accent,#6b4a2b); margin:6px 10px 0 0}
 .intro-note strong{font-weight:400; color:inherit}
 
 /* Oct 24: home title ornament as in Ars Grammatica, 2 of the same star side by side. */
