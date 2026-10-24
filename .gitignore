@@ -3,3 +3,7 @@
 # Teaching scripts kept in Dropbox only
 Direct Instruction Scripts/
 notes/sources/*.pptx
+
+# Full-text file and its generator live in Dropbox only
+SYLLOGISTICA-TEXT.txt
+make_text.py
