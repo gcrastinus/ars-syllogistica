@@ -1305,6 +1305,10 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 }
 .intro-note::first-letter{float:left; font:400 4.1em/0.8 "Libre Caslon Display",serif; color:var(--accent,#6b4a2b); margin:6px 10px 0 0}
 .intro-note strong{font-weight:400; color:inherit}
+
+/* Oct 24: home title ornament as in Ars Grammatica, 2 of the same star side by side. */
+#scr-home .mark-row{display:flex; justify-content:center; gap:10px; margin:0 auto 28px; font-size:0; line-height:0; color:var(--orn)}
+#scr-home .mark-row svg.mark{display:block; width:18px; height:18px; margin:0}
 </style>
 </head>
 <body>
@@ -1367,7 +1371,7 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
   <!-- ============ HOME ============ -->
   <div class="screen active" id="scr-home">
     <header>
-      <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
+      <div class="ornament mark-row"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
       <h1>Ars Logica</h1>
       <div class="subtitle">Learning the Art of Logic</div>
       <div class="rule"></div>
