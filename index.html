@@ -1352,8 +1352,6 @@ html[data-font="plain"]{--display:'Atkinson Hyperlegible Next', var(--std-displa
 html[data-font="plain"] body{font-size-adjust:.54}
 html[data-font="copperplate"]{--display:'Pinyon Script', var(--std-display); --text:'Pinyon Script', var(--std-text)}
 html[data-font="fraktur"] body, html[data-font="copperplate"] body{font-synthesis:none}
-/* Medieval Gothic reads small: themed text about 13% larger (x-height .53 -> .60); controls reset font-size-adjust below */
-html[data-font="fraktur"] body{font-size-adjust:.60}
 html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
 html[data-font="copperplate"] body{font-size-adjust:.53; color:#1c140d; -webkit-text-stroke:.35px currentColor}
 html[data-font="copperplate"] body.dark{color:#f3ead6}
@@ -1409,6 +1407,146 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
 :is(.set-menu,.pm-font) .set-fonts [data-font="copperplate"] span+span{font-family:'Pinyon Script', Georgia, serif; font-size:33px; font-weight:400; line-height:1.4; -webkit-text-stroke:.3px currentColor}
 @media (max-width:640px){ .set-wrap{display:none} .pm-item{font-size:18px} }
 @media print{ .set-wrap{display:none !important} }
+/* Medieval Gothic: themed text 25% larger by explicit font-size scaling (works in every browser; generated from the px sizes above, controls left out). */
+html[data-font="fraktur"]{--fk:1.25}
+html[data-font="fraktur"] body{font-size:calc(19px * var(--fk));}
+html[data-font="fraktur"] .ornament{font-size:calc(22px * var(--fk));}
+html[data-font="fraktur"] h1{font-size:calc(44px * var(--fk));}
+html[data-font="fraktur"] .subtitle{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] .section-label{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .section-gloss{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .part-fleuron{font-size:calc(22px * var(--fk));}
+html[data-font="fraktur"] .part-heading{font-size:calc(28px * var(--fk));}
+html[data-font="fraktur"] .part-sub{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .act-label{font-size:calc(21px * var(--fk));}
+html[data-font="fraktur"] .next-act-note{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .mode-note{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .set-num{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .set-card h3{font-size:calc(21px * var(--fk));}
+html[data-font="fraktur"] .set-card p{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] .begin{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .quiz-title{font-size:calc(19px * var(--fk));}
+html[data-font="fraktur"] #lp-instr{font-size:calc(17.5px * var(--fk));}
+html[data-font="fraktur"] .syllogism{font-size:calc(23px * var(--fk));}
+html[data-font="fraktur"] .chain-wrap{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] .prose-arg{font-size:calc(21.5px * var(--fk));}
+html[data-font="fraktur"] .orient-text{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .orient-q{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .orient-again{font-size:calc(12px * var(--fk));}
+html[data-font="fraktur"] .orient-wrong{font-size:calc(16.5px * var(--fk));}
+html[data-font="fraktur"] .orient-wrong em{font-size:calc(11.5px * var(--fk));}
+html[data-font="fraktur"] .orient-explain{font-size:calc(16.5px * var(--fk));}
+html[data-font="fraktur"] .orient-explain .verdict{font-size:calc(12.5px * var(--fk));}
+html[data-font="fraktur"] .orient-venn .cap{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .orient-venn .cap b{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] .orient-src{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .orient-src strong{font-size:calc(11.5px * var(--fk));}
+html[data-font="fraktur"] .rev-result{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] .set-card .ex-link{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] .teacher-note a{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .colophon{font-size:calc(12.5px * var(--fk));}
+html[data-font="fraktur"] .designer-credit{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .si-home{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] .gloss{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .gloss-head{font-size:calc(11.5px * var(--fk));}
+html[data-font="fraktur"] .rule-view{font-size:calc(17.5px * var(--fk));}
+html[data-font="fraktur"] .rule-tag{font-size:calc(12px * var(--fk));}
+html[data-font="fraktur"] .disp-block{font-size:calc(19px * var(--fk));}
+html[data-font="fraktur"] .disp-block .disp-label{font-size:calc(11.5px * var(--fk));}
+html[data-font="fraktur"] .mc-question{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] #quad-row .quad-prose{font-size:calc(16.5px * var(--fk));}
+html[data-font="fraktur"] .submit-btn{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .feedback{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .fb-verdict{font-size:calc(19px * var(--fk));}
+html[data-font="fraktur"] .fb-standard{font-size:calc(17.5px * var(--fk));}
+html[data-font="fraktur"] .venn-legend{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .venn-key{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .mistake-head{font-size:calc(12.5px * var(--fk));}
+html[data-font="fraktur"] .mistake-item summary{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .mistake-num{font-size:calc(12px * var(--fk));}
+html[data-font="fraktur"] .mistake-caret{font-size:calc(12px * var(--fk));}
+html[data-font="fraktur"] .mistake-body{font-size:calc(15.5px * var(--fk));}
+html[data-font="fraktur"] .mistake-opts{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .mistake-body .venn-cap{font-size:calc(13.5px * var(--fk));}
+html[data-font="fraktur"] .mistake-none{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .venn-cap{font-size:calc(15.5px * var(--fk));}
+html[data-font="fraktur"] .help{font-size:calc(16.5px * var(--fk));}
+html[data-font="fraktur"] .help summary{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .lab-terms{font-size:calc(17.5px * var(--fk));}
+html[data-font="fraktur"] .lab-read{font-size:calc(17.5px * var(--fk));}
+html[data-font="fraktur"] .lab-read .rhead{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .sq-corner{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] .sq-corner .tag{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] .sq-rel{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .sq-mid{font-size:calc(14px * var(--fk));}
+@media (max-width:560px){html[data-font="fraktur"] .sq-corner{font-size:calc(15px * var(--fk));}}
+html[data-font="fraktur"] .next-btn{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] .complete-orn{font-size:calc(44px * var(--fk));}
+html[data-font="fraktur"] .complete-card h2{font-size:calc(36px * var(--fk));}
+html[data-font="fraktur"] .complete-sub{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] .stat .num{font-size:calc(34px * var(--fk));}
+html[data-font="fraktur"] .stat .lbl{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .set-flag{font-size:calc(12.5px * var(--fk));}
+html[data-font="fraktur"] .prog-state{font-size:calc(12px * var(--fk));}
+html[data-font="fraktur"] .prog-detail{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .prog-agenda{font-size:calc(16.5px * var(--fk));}
+@media (max-width:560px){html[data-font="fraktur"] h1{font-size:calc(32px * var(--fk));}}
+@media (max-width:560px){html[data-font="fraktur"] .syllogism{font-size:calc(20px * var(--fk));}}
+@media (max-width:560px){html[data-font="fraktur"] .part-heading{font-size:calc(22px * var(--fk));}}
+@media (max-width:560px){html[data-font="fraktur"] .part-sub{font-size:calc(17px * var(--fk));}}
+@media (max-width:420px){html[data-font="fraktur"] #actblk-adv > .act-block > .act-label{font-size:calc(16px * var(--fk));}}
+html[data-font="fraktur"] .daily-flame{font-size:calc(30px * var(--fk));}
+html[data-font="fraktur"] .daily-num{font-size:calc(22px * var(--fk));}
+html[data-font="fraktur"] .daily-sub{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .recite-panel .btn{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .recite-callout{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] .recite-callout-x{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] .recite-top h2{font-size:clamp(calc(20px * var(--fk)), 2.2vw, calc(28px * var(--fk)));}
+html[data-font="fraktur"] .recite-desc summary{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .recite-desc summary::after{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .recite-desc p{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .recite-menu-btn{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .recite-menu-head{font-size:calc(12px * var(--fk));}
+html[data-font="fraktur"] .recite-opt{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .recite-opt-note{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] .recite-opt-section{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .recite-note{font-size:calc(15.5px * var(--fk));}
+html[data-font="fraktur"] .recite-text{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] .recite-full-h{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] .recite-deck-h{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .recite-point span{font-size:calc(17.5px * var(--fk));}
+html[data-font="fraktur"] body{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] h1{font-size:calc(64px * var(--fk));}
+html[data-font="fraktur"] .subtitle{font-size:calc(19px * var(--fk));}
+html[data-font="fraktur"] .part{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .part-heading, html[data-font="fraktur"] .part-head{font-size:calc(44px * var(--fk));}
+html[data-font="fraktur"] .part-sub{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] .section-label, html[data-font="fraktur"] .act-label{font-size:calc(34px * var(--fk));}
+html[data-font="fraktur"] .section-gloss{font-size:calc(16px * var(--fk));}
+html[data-font="fraktur"] #actblk-intro > .section-gloss{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] #scr-home .set-num{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] #scr-home .set-card h3{font-size:calc(21px * var(--fk));}
+html[data-font="fraktur"] #scr-home .set-card p{font-size:calc(14.5px * var(--fk));}
+html[data-font="fraktur"] #scr-home .set-flag{font-size:calc(13px * var(--fk));}
+html[data-font="fraktur"] .quiz-title{font-size:calc(40px * var(--fk));}
+html[data-font="fraktur"] .orient-text{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] .before{font-size:calc(22px * var(--fk));}
+html[data-font="fraktur"] details.check summary{font-size:calc(20px * var(--fk));}
+html[data-font="fraktur"] details.check summary .chev{font-size:calc(22px * var(--fk));}
+html[data-font="fraktur"] .orient-q{font-size:calc(17px * var(--fk));}
+html[data-font="fraktur"] .orient-explain, html[data-font="fraktur"] .feedback{font-size:calc(15.5px * var(--fk));}
+html[data-font="fraktur"] .orient-explain .verdict, html[data-font="fraktur"] .fb-verdict{font-size:calc(18px * var(--fk));}
+html[data-font="fraktur"] .complete-card h2{font-size:calc(34px * var(--fk));}
+html[data-font="fraktur"] .stat .num{font-size:calc(34px * var(--fk));}
+@media (max-width:600px){html[data-font="fraktur"] h1{font-size:calc(40px * var(--fk));}}
+@media (max-width:600px){html[data-font="fraktur"] .section-label, html[data-font="fraktur"] .act-label{font-size:calc(28px * var(--fk));}}
+@media (max-width:600px){html[data-font="fraktur"] .part-heading, html[data-font="fraktur"] .part-head{font-size:calc(32px * var(--fk));}}
+@media (max-width:600px){html[data-font="fraktur"] .quiz-title{font-size:calc(30px * var(--fk));}}
+@media (max-width:420px){html[data-font="fraktur"] #actblk-adv > .act-block > .act-label{font-size:calc(22px * var(--fk));}}
+@media (max-width:420px){html[data-font="fraktur"] .part-heading{font-size:calc(28px * var(--fk));}}
+html[data-font="fraktur"] .set-card .ex-link{font-size:calc(15px * var(--fk));}
+html[data-font="fraktur"] .lab-open::after{font-size:calc(14px * var(--fk));}
+html[data-font="fraktur"] .intro-note{font-size:calc(17px * var(--fk));}
 </style>
 </head>
 <body>
