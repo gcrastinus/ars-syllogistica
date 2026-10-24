@@ -1454,7 +1454,6 @@ html[data-font="fraktur"] .rule-tag{font-size:calc(12px * var(--fk));}
 html[data-font="fraktur"] .disp-block{font-size:calc(19px * var(--fk));}
 html[data-font="fraktur"] .disp-block .disp-label{font-size:calc(11.5px * var(--fk));}
 html[data-font="fraktur"] .mc-question{font-size:calc(20px * var(--fk));}
-html[data-font="fraktur"] #quad-row .quad-prose{font-size:calc(16.5px * var(--fk));}
 html[data-font="fraktur"] .submit-btn{font-size:calc(16px * var(--fk));}
 html[data-font="fraktur"] .feedback{font-size:calc(18px * var(--fk));}
 html[data-font="fraktur"] .fb-verdict{font-size:calc(19px * var(--fk));}
@@ -1547,6 +1546,26 @@ html[data-font="fraktur"] .stat .num{font-size:calc(34px * var(--fk));}
 html[data-font="fraktur"] .set-card .ex-link{font-size:calc(15px * var(--fk));}
 html[data-font="fraktur"] .lab-open::after{font-size:calc(14px * var(--fk));}
 html[data-font="fraktur"] .intro-note{font-size:calc(17px * var(--fk));}
+/* logic letters, formulas, diagrams and answers stay in the standard font at the standard size */
+html[data-font] :is(.syllogism, .chain-wrap, .concl, .therefore, .fb-standard, .venn-cap, .venn-legend, .venn-key, .orient-venn .cap,
+  .mc-question, .fb-points, .prog-num, .lab-read, .lab-terms){
+  --display:var(--std-display); --text:var(--std-text); --fk:1;
+  font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial;
+}
+html[data-font] :is(.syllogism, .chain-wrap, .concl, .therefore, .fb-standard, .venn-cap, .venn-legend, .venn-key, .orient-venn .cap,
+  .mc-question, .fb-points, .prog-num, .lab-read, .lab-terms) :is(*:not(svg *)){--display:var(--std-display); --text:var(--std-text)}
+html[data-font] :is(.syllogism, .chain-wrap, .fb-standard, .venn-cap, .venn-legend, .venn-key, .orient-venn .cap,
+  .mc-question, .fb-points, .lab-read, .lab-terms, .prog-num){font-family:var(--std-text)}
+html[data-font="copperplate"] :is(.syllogism, .chain-wrap, .fb-standard, .venn-cap, .venn-legend, .venn-key, .mc-question, .prog-num, .lab-read, .lab-terms){color:var(--ink)}
+html[data-font] button{--fk:1}
+/* a letter, mood code or mood name inside themed prose */
+html[data-font] .lt{font-family:var(--std-text); font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial; font-style:normal}
+html[data-font="fraktur"] :is(.lt, .fb-points){font-size:.8em}
+/* feedback in the scripts: more line spacing */
+html[data-font="copperplate"] :is(.fb-detail, .fb-why, .fb-verdict){line-height:1.75}
+html[data-font="copperplate"] .fb-why{font-size:1.12em}
+html[data-font="italic"] :is(.fb-detail, .fb-why, .fb-verdict){line-height:1.6}
+html[data-font="italic"] .fb-why{font-size:1.06em}
 </style>
 </head>
 <body>
@@ -6711,6 +6730,48 @@ if(typeof document!=='undefined'){
 <script src="recitation-adapter.js"></script>
 <script src="recitation.js"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
-<script src="tab-lock.js" data-app="Ars Logica" data-key="arsLogica.activeTab"></script>
+<script src="tab-lock.js" data-app="Ars Logica" data-key="arsLogica.activeTab">
+</script>
+<script>
+/* wrap letters, mood codes and mood names in themed prose in .lt, so they show in the standard font */
+(function(){
+  var MOODS='Barbara|Celarent|Darii|Ferio|Cesare|Camestres|Festino|Baroco|Darapti|Disamis|Datisi|Felapton|Bocardo|Ferison|Bramantip|Camenes|Dimaris|Fesapo|Fresison|Baralipton|Celantes|Dabitis|Fapesmo|Frisesomorum|Barbari|Celaront|Cesaro|Camestrop|Camenop|Barbari';
+  var RE=new RegExp("(^|[^A-Za-z\\u00C0-\\u024F'’])((?:"+MOODS+")\\b|[AEIO]{3}(?:-[1-4])?(?![A-Za-z])|[A-Z](?![A-Za-z'’])|[b-hj-z](?![A-Za-z'’]))","g");
+  var SKIP='button, input, select, textarea, option, svg, script, style, h1, h2, h3, title, .lt, .set-card, .part-heading, .section-label, .act-label, .syllogism, .chain-wrap, .venn-cap, .lab-read, .lab-terms, .prog-num, .speak-unit, .font-note, label, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .mc-question, .fb-points, .fb-standard, .venn-legend, .venn-key, .orient-venn .cap, .set-menu, .pm-menu, #top-right-controls';
+  function okA(t,i){ /* "A" or "I" followed by a lowercase word is an article or pronoun */
+    var m=/^\s+([A-Za-z]+)/.exec(t.slice(i)); return !m || /^(are|is|and|or|with|to|converts?|has|can|cannot|proposition|propositions|form|forms|along|beneath|must|becomes|gives|statement|premise|conclusion|from|by)$/.test(m[1]); }
+  function wrap(node){
+    var t=node.data; if(!/[A-Za-z]/.test(t)) return;
+    var out=[], last=0, m, any=false; RE.lastIndex=0;
+    while((m=RE.exec(t))){
+      var st=m.index+m[1].length, w=m[2], en=st+w.length;
+      if((w==='A'||w==='I') && !okA(t,en)) continue;
+      if(/Level\s+$|Set\s+$|Part\s+$|Book\s+$/.test(t.slice(0,st)) || /^[IVXLC]+$/.test(w) && /^\s*[·.:]/.test(t.slice(en))) continue;
+      if(w==='III') continue;
+      if(w.length===1 && /[a-z]/.test(w) && !/^[,.;:)\s]/.test(t.slice(en,en+1)||' ')) continue;
+      if(w.length===1 && /^\.[A-Za-z]/.test(t.slice(en,en+2))) continue;
+      out.push(t.slice(last,st)); out.push([w]); last=en; any=true;
+    }
+    if(!any) return;
+    out.push(t.slice(last));
+    var f=document.createDocumentFragment();
+    out.forEach(function(x){ if(typeof x==='string'){ if(x) f.appendChild(document.createTextNode(x)); } else { var s=document.createElement('span'); s.className='lt'; s.textContent=x[0]; f.appendChild(s);} });
+    node.parentNode.replaceChild(f,node);
+  }
+  function scan(root){
+    if(!document.documentElement.hasAttribute('data-font')) return;
+    if(root.nodeType===3){ var pe=root.parentElement; if(pe && !pe.closest(SKIP)) wrap(root); return; }
+    if(root.nodeType!==1 || root.closest(SKIP)) return;
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), n, list=[];
+    while((n=w.nextNode())){ var p=n.parentElement; if(p && !p.closest(SKIP)) list.push(n); }
+    list.forEach(wrap);
+  }
+  var busy=false;
+  var mo=new MutationObserver(function(ms){ if(busy) return; busy=true; try{ ms.forEach(function(m){ if(m.type==='characterData') scan(m.target); else m.addedNodes.forEach(scan); }); } finally { mo.takeRecords(); busy=false; } });
+  function start(){ scan(document.body); mo.observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+  new MutationObserver(function(){ scan(document.body); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-font']});
+})();
+</script>
 </body>
 </html>
