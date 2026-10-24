@@ -1338,21 +1338,24 @@ html[data-font="copperplate"]{--display:'Pinyon Script', var(--std-display); --t
 html[data-font="italic"] body{font-style:italic}
 html[data-font="italic"] body :is(em, i){font-style:normal}
 html[data-font="fraktur"] body, html[data-font="copperplate"] body{font-synthesis:none}
-html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
+html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
 html[data-font="copperplate"] body{font-size-adjust:.53; color:#1c140d; -webkit-text-stroke:.35px currentColor}
 html[data-font="copperplate"] body.dark{color:#f3ead6}
 /* the standard font is kept here */
 html[data-font] :is(button:not(.set-card), input, select, textarea, option, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
-  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog){
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note){
   --display:var(--std-display); --text:var(--std-text);
   font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial;
 }
 :where(html[data-font]) :where(label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
-  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog){font-family:var(--std-text); font-style:normal}
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note){font-family:var(--std-text); font-style:normal}
 :where(html[data-font="copperplate"]) :where(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
-  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog){color:var(--ink)}
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note){color:var(--ink)}
 html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .lab-terms .refresh, .preset-btn, .prog-mini-btn,
   .daily-remind-btn, .daily-time-lbl input, .recite-due-btn, #dark-toggle, .ans-btn, .opt){font-family:var(--std-text)}
+/* the note on the current font, above the credit line */
+.font-note{max-width:600px; margin:28px auto 10px; font-family:var(--std-text) !important; font-style:normal !important; font-size:16px; line-height:1.55; color:var(--ink-soft); text-align:center; -webkit-text-stroke:0; font-size-adjust:none}
+.font-note b{color:var(--ink); font-weight:700}
 /* the settings button and its menu */
 #set-btn{
   min-width:44px; padding:4px 10px; font-family:var(--std-text); font-size:16px; line-height:1.4; cursor:pointer;
@@ -1602,6 +1605,7 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
       <a href="progress-report.html" target="_blank" rel="noopener">For instructors — turn an exported progress file into a grade ⟶</a>
     </div>
 
+    <p class="font-note" id="font-note" aria-live="polite"></p>
     <p class="designer-credit">These courses of study were designed by Timothy Kearns, PhD, built and maintained with the assistance of AI tools, and are continuously revised for clarity and precision.</p>
     <div class="si-home"><a href="https://studiuminstitute.org">Studium Institute</a></div>
 
@@ -5145,9 +5149,11 @@ if(typeof document!=='undefined'){
 
   /* ---- display settings menu: dark mode and font choice (arsFont) ---- */
   (function settingsMenu(){
-    const FONTS = [['standard','Standard'],['fraktur','Fraktur'],['garamond','Garamond'],['italic','Renaissance Italic'],['copperplate','Copperplate']];
+    const FONTS = [['standard','Classic Modern'],['fraktur','Medieval Gothic'],['garamond','Renaissance Printed'],['italic','Renaissance Italic'],['copperplate','Cursive']];
     const btn = $('set-btn'), menu = $('set-menu');
     function cur(){ return document.documentElement.getAttribute('data-font') || 'standard'; }
+    const NOTES = {"standard": "<b>Font: Classic Modern</b>, set in Libre Caslon Text and Libre Caslon Display. These are revivals of the Caslon types that William Caslon first cut in London in the 18th century, drawn here after the hand-lettered Caslons of 1950s advertising. Designed by Pablo Impallari (Impallari Type); SIL Open Font License 1.1.", "fraktur": "<b>Font: Medieval Gothic</b>, set in UnifrakturMaguntia. It is a German blackletter (Fraktur) in the tradition that began with Gutenberg's types at Mainz, and it is based on Peter Wiegel's Berthold Mainzer Fraktur, which follows a 1901 typeface by Carl Albert Fahrenwaldt. Designed by j. 'mach' wust after Peter Wiegel; SIL Open Font License 1.1.", "garamond": "<b>Font: Renaissance Printed</b>, set in EB Garamond. It revives the roman types that Claude Garamont cut in Paris in the mid-16th century, as they appear in the Berner specimen printed at Frankfurt in 1592. Designed by Georg Duffner and Octavio Pardo; SIL Open Font License 1.1.", "italic": "<b>Font: Renaissance Italic</b>, set in EB Garamond Italic. It revives the italic of Robert Granjon, the 16th-century French punchcutter whose italics were printed beside Garamont's romans in the Berner specimen of 1592. Designed by Georg Duffner and Octavio Pardo; SIL Open Font License 1.1.", "copperplate": "<b>Font: Cursive</b>, set in Pinyon Script. It is a round hand script in the manner of 18th-century English copperplate, the writing that masters of penmanship engraved on copper plates for their copybooks. Designed by Nicole Fally; SIL Open Font License 1.1."};
+    function note(){ const n=$('font-note'); if(n) n.innerHTML = NOTES[cur()] || NOTES.standard; }
     function setFont(k){
       if(k==='standard') document.documentElement.removeAttribute('data-font');
       else { window.arsLoadFont && arsLoadFont(k); document.documentElement.setAttribute('data-font', k); }
@@ -5165,6 +5171,7 @@ if(typeof document!=='undefined'){
     });
     function sync(){
       const k = cur();
+      note();
       document.querySelectorAll('.set-fonts [data-font]').forEach(b=>b.setAttribute('aria-checked', String(b.dataset.font===k)));
       $('set-dark').setAttribute('aria-checked', String(document.body.classList.contains('dark')));
     }
