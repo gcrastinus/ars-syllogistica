@@ -1352,6 +1352,8 @@ html[data-font="plain"]{--display:'Atkinson Hyperlegible Next', var(--std-displa
 html[data-font="plain"] body{font-size-adjust:.54}
 html[data-font="copperplate"]{--display:'Pinyon Script', var(--std-display); --text:'Pinyon Script', var(--std-text)}
 html[data-font="fraktur"] body, html[data-font="copperplate"] body{font-synthesis:none}
+/* Medieval Gothic reads small: themed text about 13% larger (x-height .53 -> .60); controls reset font-size-adjust below */
+html[data-font="fraktur"] body{font-size-adjust:.60}
 html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
 html[data-font="copperplate"] body{font-size-adjust:.53; color:#1c140d; -webkit-text-stroke:.35px currentColor}
 html[data-font="copperplate"] body.dark{color:#f3ead6}
@@ -1397,6 +1399,14 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
 .set-menu [aria-checked="true"], .pm-font [aria-checked="true"]{background:var(--hover); font-weight:700}
 .set-menu [aria-checked="true"] .set-check::before, .pm-font [aria-checked="true"] .set-check::before{content:"✓"}
 .pm-font{display:flex; flex-direction:column; padding-bottom:4px}
+/* each font option is shown in its own face, large for legibility */
+.set-menu .set-fonts button, .pm-font .set-fonts button{font-size:22px; line-height:1.25; font-size-adjust:none}
+:is(.set-menu,.pm-font) .set-fonts [data-font="standard"] span+span{font-family:'Libre Caslon Text', Georgia, serif}
+:is(.set-menu,.pm-font) .set-fonts [data-font="plain"] span+span{font-family:'Atkinson Hyperlegible Next', sans-serif}
+:is(.set-menu,.pm-font) .set-fonts [data-font="garamond"] span+span{font-family:'EB Garamond', Georgia, serif; font-size:24px}
+:is(.set-menu,.pm-font) .set-fonts [data-font="italic"] span+span{font-family:'Felipa', Georgia, serif; font-size:27px; font-weight:400}
+:is(.set-menu,.pm-font) .set-fonts [data-font="fraktur"] span+span{font-family:'UnifrakturMaguntia', Georgia, serif; font-size:28px; font-weight:400}
+:is(.set-menu,.pm-font) .set-fonts [data-font="copperplate"] span+span{font-family:'Pinyon Script', Georgia, serif; font-size:33px; font-weight:400; line-height:1.4; -webkit-text-stroke:.3px currentColor}
 @media (max-width:640px){ .set-wrap{display:none} .pm-item{font-size:18px} }
 @media print{ .set-wrap{display:none !important} }
 </style>
@@ -5175,6 +5185,8 @@ if(typeof document!=='undefined'){
       try{ localStorage.setItem('arsFont', k); }catch(e){}
       sync();
     }
+    /* the menu shows each option in its own face, so all the fonts load */
+    if(window.arsLoadFont) FONTS.forEach(([k])=>arsLoadFont(k));
     document.querySelectorAll('.set-fonts').forEach(box=>{
       FONTS.forEach(([k,label])=>{
         const b = document.createElement('button');
