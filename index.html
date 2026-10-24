@@ -6,6 +6,19 @@
 <title>Ars Logica — Learning the Art of Logic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script>
+/* Font choice (arsFont): set before first paint; the web font loads only when chosen. */
+(function(){
+  var F={fraktur:'UnifrakturMaguntia',garamond:'EB+Garamond:ital,wght@0,400;0,600;1,400;1,600',italic:'EB+Garamond:ital,wght@0,400;0,600;1,400;1,600',copperplate:'Pinyon+Script'};
+  window.arsLoadFont=function(k){
+    if(!F[k]) return; var id='arsfont-'+(k==='italic'?'garamond':k);
+    if(document.getElementById(id)) return;
+    var l=document.createElement('link'); l.id=id; l.rel='stylesheet';
+    l.href='https://fonts.googleapis.com/css2?family='+F[k]+'&display=swap'; document.head.appendChild(l);
+  };
+  try{ var k=localStorage.getItem('arsFont'); if(F[k]){ document.documentElement.setAttribute('data-font',k); arsLoadFont(k); } }catch(e){}
+})();
+</script>
 <style>
 :root{
   --paper:#f6f0e1; --paper2:#efe6cf; --card:#fffdf4; --ink:#2b2118; --ink-soft:#5a4a38;
@@ -1315,11 +1328,73 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 :is(.mode-row,.mode-mini) .mode-btn{position:relative}
 :is(.mode-row,.mode-mini) .mode-btn:hover,:is(.mode-row,.mode-mini) .mode-btn:focus-visible{z-index:1}
 :is(.mode-row,.mode-mini) .mode-btn.sel{z-index:2}
+
+/* Oct 24: Font choice (settings menu). The chosen font sets --display and --text for titles and reading text;
+   buttons, menus, directions, form controls, answer choices and diagram labels keep the standard font. */
+:root{--std-display:'Libre Caslon Display', Georgia, serif; --std-text:'Libre Caslon Text', Georgia, serif}
+html[data-font="fraktur"]{--display:'UnifrakturMaguntia', var(--std-display); --text:'UnifrakturMaguntia', var(--std-text)}
+html[data-font="garamond"], html[data-font="italic"]{--display:'EB Garamond', var(--std-display); --text:'EB Garamond', var(--std-text)}
+html[data-font="copperplate"]{--display:'Pinyon Script', var(--std-display); --text:'Pinyon Script', var(--std-text)}
+html[data-font="italic"] body{font-style:italic}
+html[data-font="italic"] body :is(em, i){font-style:normal}
+html[data-font="fraktur"] body, html[data-font="copperplate"] body{font-synthesis:none}
+html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
+html[data-font="copperplate"] body{font-size-adjust:.53; color:#1c140d; -webkit-text-stroke:.35px currentColor}
+html[data-font="copperplate"] body.dark{color:#f3ead6}
+/* the standard font is kept here */
+html[data-font] :is(button:not(.set-card), input, select, textarea, option, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog){
+  --display:var(--std-display); --text:var(--std-text);
+  font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial;
+}
+:where(html[data-font]) :where(label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog){font-family:var(--std-text); font-style:normal}
+:where(html[data-font="copperplate"]) :where(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog){color:var(--ink)}
+html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .lab-terms .refresh, .preset-btn, .prog-mini-btn,
+  .daily-remind-btn, .daily-time-lbl input, .recite-due-btn, #dark-toggle, .ans-btn, .opt){font-family:var(--std-text)}
+/* the settings button and its menu */
+#set-btn{
+  min-width:44px; padding:4px 10px; font-family:var(--std-text); font-size:16px; line-height:1.4; cursor:pointer;
+  border:1px solid var(--frame); background:var(--paper); color:var(--ink); border-radius:0; transition:background-color .25s ease;
+}
+#set-btn:hover, #set-btn[aria-expanded="true"]{background:var(--hover)}
+#set-btn:focus-visible, .set-menu button:focus-visible, .pm-font button:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+.set-wrap{position:relative; display:flex}
+.set-menu{
+  position:absolute; top:calc(100% + 6px); right:0; z-index:70; min-width:260px; max-width:calc(100vw - 24px);
+  background:var(--card); border:1px solid var(--ink); padding:6px 0; color:var(--ink);
+  font-family:var(--std-text) !important; font-size:18px; line-height:1.35; text-align:left;
+}
+.set-menu[hidden]{display:none}
+.set-menu .set-head, .pm-font .set-head{padding:10px 16px 4px; font-size:16px; color:var(--ink-soft); font-variant:small-caps; letter-spacing:.05em}
+.set-menu button, .pm-font button{
+  display:flex; align-items:center; gap:12px; width:100%; margin:0; padding:10px 16px; text-align:left;
+  font-family:var(--std-text) !important; font-size:18px; line-height:1.3; color:var(--ink); background:transparent;
+  border:0; border-radius:0; cursor:pointer; white-space:nowrap;
+}
+.set-menu button:hover, .pm-font button:hover{background:var(--hover)}
+.set-menu .set-sep{border-top:1px solid var(--frame); margin:6px 0}
+.set-check{width:20px; flex:none; text-align:center; font-weight:700}
+.set-menu [aria-checked="true"], .pm-font [aria-checked="true"]{background:var(--hover); font-weight:700}
+.set-menu [aria-checked="true"] .set-check::before, .pm-font [aria-checked="true"] .set-check::before{content:"✓"}
+.pm-font{display:flex; flex-direction:column; padding-bottom:4px}
+@media (max-width:640px){ .set-wrap{display:none} .pm-item{font-size:18px} }
+@media print{ .set-wrap{display:none !important} }
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
 <div id="top-right-controls" class="top-right-controls">
+<div class="set-wrap" id="set-wrap">
+<button type="button" id="set-btn" title="Display settings" aria-label="Display settings" aria-haspopup="true" aria-expanded="false" aria-controls="set-menu">Aa</button>
+<div class="set-menu" id="set-menu" role="menu" aria-label="Display settings" hidden>
+  <button type="button" role="menuitemcheckbox" id="set-dark" aria-checked="false"><span class="set-check" aria-hidden="true"></span><span>Dark mode</span></button>
+  <div class="set-sep" role="separator"></div>
+  <div class="set-head" id="set-font-head">Font</div>
+  <div class="set-fonts" role="group" aria-labelledby="set-font-head"></div>
+</div>
+</div>
 <div id="speak-unit" class="speak-unit">
 <button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">▶</button>
 <div id="speak-rate" class="speak-rate">
@@ -1346,6 +1421,7 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 <button type="button" id="pm-btn" class="pm-btn" title="Menu" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="pm-menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h14M5 12h14M5 17h14"/></svg></button>
 <div class="pm-menu" id="pm-menu" role="menu" hidden>
   <button type="button" role="menuitem" class="pm-item" id="pm-dark"><span class="pm-glyph" aria-hidden="true">☾</span><span class="pm-label">Dark mode</span></button>
+  <div class="pm-font" role="group" aria-labelledby="pm-font-head"><div class="set-head" id="pm-font-head">Font</div><div class="set-fonts"></div></div>
   <button type="button" role="menuitem" class="pm-item" id="pm-play"><span class="pm-glyph" aria-hidden="true">▶</span><span class="pm-label">Read aloud</span></button>
   <div class="pm-rates" role="group" aria-label="Reading speed"><span class="pm-rates-label">Speed</span><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.5">1.5×</button><button type="button" data-rate="2">2×</button><button type="button" data-rate="2.5">2.5×</button><button type="button" data-rate="3">3×</button></div>
   <button type="button" role="menuitem" class="pm-item pm-lab" data-lab="lab1"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg><span class="pm-label">The Venn Diagram Workshop</span></button>
@@ -5066,6 +5142,54 @@ if(typeof document!=='undefined'){
   try{ if(localStorage.getItem('arsDark')==='1') setDark(true);
   try{ const sr=parseFloat(localStorage.getItem('arsSpeakRate')); if(sr) state.speakRate=sr; }catch(e){} }catch(err){}
 
+
+  /* ---- display settings menu: dark mode and font choice (arsFont) ---- */
+  (function settingsMenu(){
+    const FONTS = [['standard','Standard'],['fraktur','Fraktur'],['garamond','Garamond'],['italic','Renaissance Italic'],['copperplate','Copperplate']];
+    const btn = $('set-btn'), menu = $('set-menu');
+    function cur(){ return document.documentElement.getAttribute('data-font') || 'standard'; }
+    function setFont(k){
+      if(k==='standard') document.documentElement.removeAttribute('data-font');
+      else { window.arsLoadFont && arsLoadFont(k); document.documentElement.setAttribute('data-font', k); }
+      try{ localStorage.setItem('arsFont', k); }catch(e){}
+      sync();
+    }
+    document.querySelectorAll('.set-fonts').forEach(box=>{
+      FONTS.forEach(([k,label])=>{
+        const b = document.createElement('button');
+        b.type='button'; b.setAttribute('role','menuitemradio'); b.dataset.font=k;
+        b.innerHTML = '<span class="set-check" aria-hidden="true"></span><span>'+label+'</span>';
+        b.onclick = e=>{ e.stopPropagation(); setFont(k); };
+        box.appendChild(b);
+      });
+    });
+    function sync(){
+      const k = cur();
+      document.querySelectorAll('.set-fonts [data-font]').forEach(b=>b.setAttribute('aria-checked', String(b.dataset.font===k)));
+      $('set-dark').setAttribute('aria-checked', String(document.body.classList.contains('dark')));
+    }
+    function items(){ return [...menu.querySelectorAll('button')]; }
+    function close(focusBtn){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); if(focusBtn) btn.focus(); }
+    function open(){ sync(); menu.hidden = false; btn.setAttribute('aria-expanded','true'); (menu.querySelector('[aria-checked="true"][data-font]')||items()[0]).focus(); }
+    btn.onclick = e=>{ e.stopPropagation(); if(menu.hidden) open(); else close(); };
+    $('set-dark').onclick = e=>{ e.stopPropagation(); $('dark-toggle').click(); sync(); };
+    $('dark-toggle').addEventListener('click', ()=>setTimeout(sync));
+    menu.addEventListener('keydown', e=>{
+      const it = items(), i = it.indexOf(document.activeElement);
+      if(e.key==='ArrowDown'){ e.preventDefault(); it[(i+1)%it.length].focus(); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); it[(i-1+it.length)%it.length].focus(); }
+      else if(e.key==='Home'){ e.preventDefault(); it[0].focus(); }
+      else if(e.key==='End'){ e.preventDefault(); it[it.length-1].focus(); }
+      else if(e.key==='Tab'){ close(); }
+    });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !menu.hidden){ e.stopPropagation(); close(true); } }, true);
+    document.addEventListener('click', e=>{ if(!menu.hidden && !menu.contains(e.target) && e.target!==btn) close(); });
+    window.addEventListener('storage', e=>{
+      if(e.key==='arsFont' && e.newValue){ if(e.newValue==='standard') document.documentElement.removeAttribute('data-font'); else { arsLoadFont(e.newValue); document.documentElement.setAttribute('data-font', e.newValue); } sync(); }
+    });
+    const pb = $('pm-btn'); if(pb) pb.addEventListener('click', ()=>setTimeout(sync));
+    sync();
+  })();
   /* ---- text-to-speech (browser voice) ----
      Reads the study card / intro / current question — not chrome (back, level,
      points, badges). On the home screen, reads the full page of exercise info. */
