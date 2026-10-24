@@ -1884,7 +1884,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div class="badge">Study</div>
     </div>
     <div class="q-card">
-      <details class="help">
+      <details class="help" data-directions>
         <summary>What the circles mean</summary>
         <p>A general term is a <em>universal</em>: one word standing over a host of individuals. We may picture it as standing over them, with the term above and beneath it every single thing of which it can be truly said:</p>
         <svg viewBox="0 0 560 340" style="display:block; max-width:480px; width:100%; margin:6px auto" xmlns="http://www.w3.org/2000/svg" role="img">
@@ -1925,7 +1925,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
            “Some S are not P”: place an × in S outside P.</p>
         <p>With three circles, a universal proposition empties a <em>lens</em> of two cells, one inside the third circle and one outside it. A single × placed in one cell asserts several “some”-propositions at once, as the readout below will show. In syllogism mode the readout also states what your marks force about the two outer terms, that is, the conclusion, if one follows.</p>
       </details>
-      <details class="help">
+      <details class="help" data-directions>
         <summary>Venn Diagrams: Classical vs. Modern Interpretations</summary>
         <p>There are two ways to read these diagrams.</p>
         <p>Logic textbooks (Venn, Copi, Hurley, Gensler) treat shading as “this region is empty” and an × as “something is here.”</p>
@@ -1943,7 +1943,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div id="lab1-box"></div>
       <div class="venn-legend" data-directions>Click a region: once to shade it (declared empty) · twice for an × (something exists) · a third time to clear</div>
       <div class="lab-read" id="lab1-read"></div>
-      <details class="help" id="lab1-history">
+      <details class="help" id="lab1-history" data-directions>
         <summary>The History of These Diagrams</summary>
         <p>In the tradition a general term signifies a nature, and it stands for (supposits for) the individuals of which that nature can be truly said. So comprehension is prior to extension: we know what a dog is before we can say which things are dogs, and “All dogs are animals” attributes animality to the dog as such. A circle in these diagrams pictures only the extension of a term, that is, the things for which it stands; it does not picture what the term means, and it is not a set defined by its members.</p>
         <p>John Venn, the English logician, published these diagrams in 1880 as an aid to the algebra of George Boole, in which a term names a class, a class may be empty, every class has a complement, and all classes lie within a universe of discourse. Leonhard Euler, the Swiss mathematician, had used circles in the eighteenth century, drawing each proposition as one arrangement of circles; Venn instead drew every possible region and marked it. On the Boolean reading “All S are P” says only that no S lies outside P, and so it is true when there are no S.</p>
@@ -1963,7 +1963,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div class="badge">Study</div>
     </div>
     <div class="q-card">
-      <details class="help">
+      <details class="help" data-directions>
         <summary>The square of opposition, in itself</summary>
         <p>Every simple categorical proposition has a <strong>quantity</strong> (universal or particular) and a <strong>quality</strong> (affirmative or negative). When these two are combined, exactly four forms result, named by the vowels of <em>affirmo</em> (“I affirm”) and <em>nego</em> (“I deny”):</p>
         <p><strong>A</strong> — universal affirmative, <em>All S are P</em>. &ensp; <strong>E</strong> — universal negative, <em>No S are P</em>. &ensp; <strong>I</strong> — particular affirmative, <em>Some S are P</em>. &ensp; <strong>O</strong> — particular negative, <em>Some S are not P</em>.</p>
@@ -1971,7 +1971,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         <p><strong>Contradictories</strong> (the diagonals, A–O and E–I) can never share a truth-value: of each pair, exactly one is true and one false. <strong>Contraries</strong> (A–E) cannot both be true, though both may be false. <strong>Subcontraries</strong> (I–O) cannot both be false, though both may be true. <strong>Subalterns</strong> (A above I, E above O): truth descends from the universal to its particular, and falsity ascends from the particular to its universal.</p>
         <p><strong>Why it is used.</strong> Given the truth or falsity of any one corner, the square lets you read off at once what must follow for the other three. It is the oldest means of valid inference from a single premise, and the basis of the contradictory, the converse, the obverse, and the contrapositive below, which you can try on any pair of terms in the square at the foot of this page.</p>
       </details>
-      <details class="help">
+      <details class="help" data-directions>
         <summary>The contradictory, the converse, the obverse, and the contrapositive, briefly</summary>
         <p><strong>Conversion</strong> exchanges subject and predicate. E and I convert <em>simply</em>, and the result is equivalent, so truth passes both ways: “No fish are birds” ⇄ “No birds are fish”; “Some singers are poets” ⇄ “Some poets are singers”.</p>
         <p>A converts only <em>per accidens</em>, that is, the quantity is reduced: “All foxes are animals” yields “<em>Some</em> animals are foxes”. Why is the quantity reduced? The A proposition places the foxes wholly <em>inside</em> the animals, but it says nothing about the whole of the animals, so “All animals are foxes” would claim far more than was given (the illicit conversion). Yet since an affirmative asserts that its subject exists, there <em>are</em> foxes, and so that part of the animals which contains them must be foxes: hence “some animals are foxes”. Truth is preserved in one direction only: we cannot infer “All foxes are animals” back from “Some animals are foxes”.</p>
@@ -1981,7 +1981,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         <p>The <strong>contradictory</strong> is not a truth-preserving inference but a truth-<em>reversing</em> pairing: A with O, E with I, each always taking the opposite truth-value of the other.</p>
         <p>In sum: simple conversion (E, I), obversion (all), and contraposition (A, O) are equivalences, so truth passes both ways. Conversion of A and contraposition of E hold in one direction only, the universal weakening to a particular by existential import. And O cannot be converted, nor I contraposed, at all: “Some animals are not dogs” is true, yet its converse “Some dogs are not animals” is false, because the O gives no purchase on the predicate beyond the part it names.</p>
       </details>
-      <details class="help">
+      <details class="help" data-directions>
         <summary>The square in traditional and modern logic</summary>
         <p>The square sets the four forms A, E, I, and O at its corners so that their relations can be seen together. Its doctrine comes from Aristotle’s <em>On Interpretation</em>. In the older logic an affirmative proposition is true only if its subject stands for something that exists, and a negative carries no such existence. So when the subject stands for nothing, A and I are false and E and O are true, and every relation of the square still holds: contradictories, contraries, subcontraries, and subalterns.</p>
         <p>Modern logic, from Boole and from Gottlob Frege, the German mathematician and logician, reads “All S are P” as “For anything whatever, if it is S, it is P.” On this reading the universal is true when nothing is S. Then A and E can both be true, I and O can both be false, and A no longer yields I; of the four relations only contradiction remains. With subalternation go the conversion of A <em>per accidens</em>, the contraposition of E, the five weakened moods, and Darapti, Felapton, Bramantip, and Fesapo.</p>
