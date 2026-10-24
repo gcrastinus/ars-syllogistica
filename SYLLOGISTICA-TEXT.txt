@@ -75,7 +75,7 @@ The parts
 5. Diagramming Propositions
     We picture single propositions on a Venn diagram, shading what they declare empty and placing an × where they assert existence. From 50 points onward, two premises are diagrammed together on three circles.
 6. Opposition, Equipollence, and Conversion
-    John of St. Thomas treats opposition, equipollence, and conversion as properties of the proposition, and not as a separate kind of inference. We judge what truth or falsity the square carries from one proposition to another, and we give the equipollent, the converse, or the contrapositive in standard form. Obversion is practiced with them. Later logicians call these properties “immediate inferences.”
+    John of St. Thomas treats opposition, equipollence, and conversion as properties of the proposition, and not as a separate kind of inference. We judge what truth or falsity the square carries from one proposition to another, and we give the equipollent, the converse, or the contrapositive in standard form. Obversion is practiced with them. Later logicians call these properties “immediate inferences.” The truth values assigned here are those of the classical square; on the modern reading only the contradictory would be determined.
 7. The Modal Propositions
     John of St. Thomas counts four modes: necessary, impossible, possible, and contingent, where the contingent is what can be, and can also not be. We judge equipollences (whether two expressions have the same force and the same corner of the square, as when we ask whether “not possible that not” comes to “necessary”), the modal square, and the composite and divided senses (whether the seated man may walk).
 8. Diagramming Syllogisms
@@ -1527,7 +1527,7 @@ Why not the others: Truth belongs properly to the judgment of the intellect.
 
 **Existential import.** Does a proposition say that its subject exists? In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. “All unicorns are white” is false, because there are no unicorns. That is why “All S are P” yields “Some S are P” (the term of art is *existential import*).
 
-A negative proposition carries no such existence: “No unicorns are white” is true, and so is “Some unicorn is not white.” Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way: affirmatives carry existential import, and negatives do not. We do speak truly of fictional and merely thought things, as in “Sherlock Holmes lives on Baker Street,” but there the copula signifies being in a story or in the mind. In the exercises the copula signifies actual existence, unless the matter or the wording extends it, as in a proposition in necessary matter or one with “can,” “will,” or “was.” (We restrict signification to actual existence here because our goal in logic is guiding reasoning toward certain knowledge. This restriction keeps that goal clear and it also allows us to choose obvious example propositions that are false, like about the Phoenix or Sherlock Holmes; and if we did not restrict consideration to actual existence some of these propositions would be true or at least their truth might be in doubt.)
+A negative proposition carries no such existence: “No unicorns are white” is true, and so is “Some unicorn is not white.” Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way: affirmatives carry existential import, and negatives do not. We do speak truly of fictional and merely thought things, as in “Sherlock Holmes lives on Baker Street,” but there the copula signifies being in a story or in the mind. In the exercises the copula signifies actual existence, unless the matter or the wording extends it, as in a proposition in necessary matter or one with “can,” “will,” or “was.” (We restrict signification to actual existence here because our goal in logic is guiding reasoning toward certain knowledge. This restriction keeps that goal clear and it also allows us to choose obvious example propositions that are false, like about the Phoenix or Sherlock Holmes; and if we did not restrict consideration to actual existence some of these propositions would be true or at least their truth might be in doubt.) *The Square of Opposition* (workshop) sets the classical reading beside the modern one, on which only the contradictories survive.
 
 @question 6.1
 Question: On the classical account that this course follows, “All unicorns are white” is…
@@ -1566,7 +1566,7 @@ Why not the others: The negatives carry no import, and the affirmatives do.
 
 **Opposition.** Propositions with the same subject and predicate that differ in quality, in quantity, or in both are *opposed*, and their relations make up the square of opposition. **Contradictories** (A and O; E and I) differ in both quality and quantity, so one must be true and the other false. **Contraries** (A and E) cannot both be true, though both may be false. **Subcontraries** (I and O) cannot both be false, though both may be true. **Subalterns** (A and I; E and O) share their quality: if the universal is true, the particular is true, and if the particular is false, the universal is false.
 
-Because the affirmatives carry existential import and the negatives do not, these relations hold even when the subject stands for nothing: then A and I are false, and E and O are true.
+Because the affirmatives carry existential import and the negatives do not, these relations hold even when the subject stands for nothing: then A and I are false, and E and O are true. On the modern reading, which gives the universal no existential import, contrariety, subcontrariety, and subalternation fail; this is why the course states where import lies.
 
 @question 7.1
 Question: “All S are P” and “Some S are not P” are…
@@ -1605,7 +1605,7 @@ Why not the others: The particular cannot be false when its universal is true.
 
 **What follows in the Second Act.** Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there. Exercise VI treats opposition, equipollence, and conversion as properties of the proposition. Later logicians call these properties “immediate inferences.” Exercise VII treats the *modal* propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.
 
-The diagrams are taught at the head of Exercise V, and *The Square of Opposition* shows each relation for any pair of terms.
+The diagrams are taught at the head of Exercise V, and *The Square of Opposition* shows each relation for any pair of terms. The circles picture the extension of the terms, that is, what they stand for, and not their meaning; Venn devised them in 1880 for Boole’s algebra of classes.
 
 @question 8.1
 Question: In a Venn diagram, what does shading a region mean?
@@ -1652,9 +1652,9 @@ Small heading: BEFORE THE EXERCISE
 @card 1
 Sources: Timothy Kearns, “Logic (General and Historical),” *Encyclopedia of Catholic Theology* (ect.org, 2025); Jacques Maritain, *Formal Logic*, trans. Imelda Choquette (Sheed & Ward, 1937); John of St. Thomas, *Outlines of Formal Logic*, trans. Francis C. Wade (Marquette University Press, 1955).
 
-**The diagram.** Venn diagrams are a modern aid, published by John Venn, an English logician, in 1880, and they are used to picture what the tradition teaches. They are not part of its doctrine. Each circle stands for a term, and where the circles overlap lie the things that fall under both. To **shade** a region is to declare it empty, so that nothing falls there; an **×** says that at least one thing is there; and a region left plain is left open, because the diagram asserts only what is marked. The diagrams could instead be drawn by shading the regions that are occupied and leaving the empty ones blank, but that is not the convention of this course.
+**The diagram.** Venn diagrams are a modern aid, published by John Venn, an English logician, in 1880, and they are used to picture what the tradition teaches. They are not part of its doctrine. In Boole’s algebra, for which Venn drew them, a term names a class that may be empty; in this course a circle pictures what a term stands for. Each circle stands for a term, and where the circles overlap lie the things that fall under both. To **shade** a region is to declare it empty, so that nothing falls there; an **×** says that at least one thing is there; and a region left plain is left open, because the diagram asserts only what is marked. The diagrams could instead be drawn by shading the regions that are occupied and leaving the empty ones blank, but that is not the convention of this course.
 
-SP**A** All S are PSP**E** No S are P×SP**I** Some S are P×SP**O** Some S are not PThe universals (A and E) shade a region empty, and the particulars (I and O) place an × to say that something is there. A shades the part of S that lies outside P; E shades the overlap; I places an × in the overlap; and O places an × in the part of S that lies outside P.
+SP**A** All S are PSP**E** No S are P×SP**I** Some S are P×SP**O** Some S are not PThe universals (A and E) shade a region empty, and the particulars (I and O) place an × to say that something is there. A shades the part of S that lies outside P; E shades the overlap; I places an × in the overlap; and O places an × in the part of S that lies outside P. The × for O marks something there for the diagram, while O itself carries no existential import, so “Some unicorn is not white” is true.
 
 Useful as they are, these diagrams prove nothing by themselves. They display what a proposition already says, so that we can follow what is included, what is excluded, and whether a thing exists. The diagram assists the reasoning, but it does not replace it. The first instrument of reason is the word, and every exercise in this course is carried out in language.
 
@@ -1706,7 +1706,7 @@ Why not the others: The universals shade, and the division is by quantity, so it
 
 **Existence and the ⊗.** In the older logic an affirmative proposition is true only if its subject stands for something that exists, so an affirmative whose subject stands for nothing is false. “All unicorns are white” is false, because there are no unicorns. That is why “All S are P” yields “Some S are P,” and the term of art for this is *existential import*. A negative proposition carries no such existence, so “No unicorns are white” is true. Modern set theory reads “All S are P” as true when there are no S, and so it denies the step from “All S are P” to “Some S are P.” This course follows the classical way.
 
-Because an affirmative carries existential import, “All S are P” also asserts that some S exists. The course draws that existence with a **⊗** in the overlap, which is the open part of S. The ⊗ may be added to a diagram of A, but it is not required, except where an argument needs the existence that the affirmative asserts. A negative asserts no existence, so E and O never take a ⊗. A particular shows its existence with an ×, and not with a ⊗.
+Because an affirmative carries existential import, “All S are P” also asserts that some S exists. The course draws that existence with a **⊗** in the overlap, which is the open part of S. The ⊗ may be added to a diagram of A, but it is not required, except where an argument needs the existence that the affirmative asserts. A negative asserts no existence, so E and O never take a ⊗. A particular shows its existence with an ×, and not with a ⊗. On the modern reading the diagram of A is shading alone, and no ⊗ could ever be added; the ⊗ is the classical import drawn on a modern figure.
 
 @question 2.1
 Question: On the classical account this course follows, “All unicorns are white” is…
@@ -1733,13 +1733,13 @@ Why not the others: The contrary and the simple converse do not follow, and the 
 @question 2.3
 Question: Where does modern set theory differ from this course?
 Choices:
-- It allows a class to be empty
+- It counts “All S are P” true when there are no S
 - It denies that classes exist
 - It has no universal statements
 - It uses diagrams other than these
-Answer: It allows a class to be empty
-Why: If the class may be empty, “All S are P” no longer guarantees that any S exists, and the step to “Some S are P” fails.
-Why not the others: Set theory is built on classes, has universal statements, and can use these same diagrams.
+Answer: It counts “All S are P” true when there are no S
+Why: On the modern reading “All S are P” no longer guarantees that any S exists, and the step to “Some S are P” fails. The course also allows a term to stand for nothing (there are no unicorns); the difference is that it counts an affirmative with such a subject false.
+Why not the others: Set theory is built on classes, has universal statements, and can use these same diagrams. The real difference is the truth value of an affirmative whose subject stands for nothing.
 
 @question 2.4
 Question: How is “No S are P” drawn?
@@ -2382,7 +2382,7 @@ Why not the others: A ⊗ never replaces or doubles a particular premise’s ×.
 
 @card 3
 
-**Which moods take a ⊗.** Nine valid moods need the ⊗: the five weakened moods, which conclude in particular what could be concluded universally (Barbari, Celaront, Cesaro, Camestros, and Camenos), and Darapti, Felapton, Bramantip, and Fesapo. On the modern reading, which gives no universal proposition existential import, all nine are invalid. This course follows the medieval reading, on which all nine are valid. So the ⊗ appears in these nine moods, in the one open cell of the term concerned, and in no others.
+**Which moods take a ⊗.** Nine valid moods need the ⊗: the five weakened moods, which conclude in particular what could be concluded universally (Barbari, Celaront, Cesaro, Camestros, and Camenos), and Darapti, Felapton, Bramantip, and Fesapo. On the modern reading, which gives no universal proposition existential import, all nine are invalid. This course follows the medieval reading, on which all nine are valid. So the ⊗ appears in these nine moods, in the one open cell of the term concerned, and in no others. Venn’s own diagrams have no mark for import, which is why these nine moods fail in Boolean logic.
 
 @question 3.1
 Question: On the modern reading, is Darapti valid?
@@ -2474,7 +2474,7 @@ Why not the others: Its subject is taken only in part.
 
 **The general rules.** A syllogism is valid only if it keeps these rules. (1) The middle term must be distributed at least once; otherwise the fallacy is the *undistributed middle*. (2) A term distributed in the conclusion must be distributed in its premise; otherwise it is an *illicit major* or an *illicit minor*. (3) From two negative premises nothing follows. (4) A negative premise requires a negative conclusion. (5) A negative conclusion requires a negative premise. (6) From two particular premises nothing follows.
 
-A form that keeps all six rules is valid, and a form that breaks any one is invalid. From these it also follows that a particular premise allows only a particular conclusion. On the traditional reading, a weakened conclusion, such as “Some S are P” where “All S are P” could be drawn, is also valid, because affirmatives carry existential import; and a valid syllogism in the fourth figure breaks no rule, though it reverses the natural order of predication.
+A form that keeps all six rules is valid, and a form that breaks any one is invalid. From these it also follows that a particular premise allows only a particular conclusion. On the traditional reading, a weakened conclusion, such as “Some S are P” where “All S are P” could be drawn, is also valid, because affirmatives carry existential import; and a valid syllogism in the fourth figure breaks no rule, though it reverses the natural order of predication. The weakened moods stand or fall with subalternation on the square.
 
 @question 3.1
 Question: “All P are M; all S are M; so all S are P.” Which rule is broken?
