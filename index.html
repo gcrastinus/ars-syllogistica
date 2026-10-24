@@ -943,10 +943,13 @@ html[data-font="italic"] :is(#actblk-intro > .section-gloss, .intro-note)::first
 html[data-font="plain"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:3.7em; line-height:.8; margin:7px 12px 0 0; padding:0; color:var(--accent)}
 html[data-font="copperplate"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:4.6em; line-height:.66; margin:16px 34px 6px 2px; padding:0; color:var(--ink)}
 /* Medieval Gothic: a rubricated initial, red Fraktur capital in a thin ochre frame with a faint tint and four corner dots */
-html[data-font="fraktur"] :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{font-size:3.25em; line-height:1; margin:5px 14px 2px 0; padding:.04em .14em .02em;
+html[data-font="fraktur"] #actblk-adv > .section-gloss{text-align:left; font-style:normal}
+/* Medieval Gothic only: the same initial opens Part Two and the first card of each study */
+html[data-font="fraktur"] :is(#actblk-adv > .section-gloss, .orient-opening > p:first-of-type)::first-letter{float:left; font-family:var(--display); font-weight:400; font-style:normal; font-size-adjust:none; text-transform:none; letter-spacing:0}
+html[data-font="fraktur"] :is(#actblk-intro > .section-gloss, .intro-note, #actblk-adv > .section-gloss, .orient-opening > p:first-of-type)::first-letter{font-size:3.25em; line-height:1; margin:5px 14px 2px 0; padding:.04em .14em .02em;
   color:#b0301c; border:1px solid #a8822f;
   background:radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) 2px 2px/6px 6px no-repeat, radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) right 2px top 2px/6px 6px no-repeat, radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) left 2px bottom 2px/6px 6px no-repeat, radial-gradient(circle,#a8822f 1.6px,transparent 2.2px) right 2px bottom 2px/6px 6px no-repeat, rgba(176,48,28,.07)}
-html[data-font="fraktur"] body.dark :is(#actblk-intro > .section-gloss, .intro-note)::first-letter{color:#e8836b; border-color:#c9a45a;
+html[data-font="fraktur"] body.dark :is(#actblk-intro > .section-gloss, .intro-note, #actblk-adv > .section-gloss, .orient-opening > p:first-of-type)::first-letter{color:#e8836b; border-color:#c9a45a;
   background:radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) 2px 2px/6px 6px no-repeat, radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) right 2px top 2px/6px 6px no-repeat, radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) left 2px bottom 2px/6px 6px no-repeat, radial-gradient(circle,#c9a45a 1.6px,transparent 2.2px) right 2px bottom 2px/6px 6px no-repeat, rgba(232,131,107,.10)}
 #scr-home .sets{
   display:flex; flex-direction:column; align-items:center; gap:12px;
@@ -4055,7 +4058,7 @@ if(typeof document!=='undefined'){
     if(leadSkipFirst())
       h += `<div class="lead-skip-top"><button class="submit-btn" type="button" id="lead-skip-top">Skip to the Exercise ⟶</button></div>`;
     h += `<div class="orient-prog">Step ${orientIdx+1} of ${orientDeck.length}</div>`;
-    if(f.h) h += `<div class="orient-text">${f.h}</div>`;
+    if(f.h) h += `<div class="orient-text${orientStudyId && orientIdx===0 ? ' orient-opening' : ''}">${f.h}</div>`;
     if(f.src) h += `<div class="orient-src"><strong>Sources:</strong> ${f.src}</div>`;
     const q = f.q ? orientCurQ() : null;
     if(q){
