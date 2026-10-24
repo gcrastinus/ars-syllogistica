@@ -933,7 +933,12 @@ h1{
   max-width:34em; margin:28px auto 8px; hyphens:auto;
 }
 #actblk-intro > .section-gloss::first-letter{
-  float:left; font:400 4.1em/0.8 var(--display); color:var(--accent); margin:6px 10px 0 0;
+  float:left; font:400 4.1em/0.8 var(--std-display); color:var(--accent); margin:6px 12px 2px 0;
+}
+/* the drop cap keeps its standard face in every font, so script and swash capitals never run into the text */
+#actblk-intro > .section-gloss::first-letter, .intro-note::first-letter{
+  font-family:var(--std-display) !important; font-style:normal !important; font-size-adjust:none !important;
+  text-transform:none; letter-spacing:0;
 }
 #scr-home .sets{
   display:flex; flex-direction:column; align-items:center; gap:12px;
