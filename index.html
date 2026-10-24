@@ -9,9 +9,9 @@
 <script>
 /* Font choice (arsFont): set before first paint; the web font loads only when chosen. */
 (function(){
-  var F={fraktur:'UnifrakturMaguntia',garamond:'EB+Garamond:ital,wght@0,400;0,600;1,400;1,600',italic:'EB+Garamond:ital,wght@0,400;0,600;1,400;1,600',copperplate:'Pinyon+Script'};
+  var F={fraktur:'UnifrakturMaguntia',garamond:'EB+Garamond:ital,wght@0,400;0,600;1,400;1,600',italic:'Felipa',copperplate:'Pinyon+Script'};
   window.arsLoadFont=function(k){
-    if(!F[k]) return; var id='arsfont-'+(k==='italic'?'garamond':k);
+    if(!F[k]) return; var id='arsfont-'+k;
     if(document.getElementById(id)) return;
     var l=document.createElement('link'); l.id=id; l.rel='stylesheet';
     l.href='https://fonts.googleapis.com/css2?family='+F[k]+'&display=swap'; document.head.appendChild(l);
@@ -1333,10 +1333,10 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
    buttons, menus, directions, form controls, answer choices and diagram labels keep the standard font. */
 :root{--std-display:'Libre Caslon Display', Georgia, serif; --std-text:'Libre Caslon Text', Georgia, serif}
 html[data-font="fraktur"]{--display:'UnifrakturMaguntia', var(--std-display); --text:'UnifrakturMaguntia', var(--std-text)}
-html[data-font="garamond"], html[data-font="italic"]{--display:'EB Garamond', var(--std-display); --text:'EB Garamond', var(--std-text)}
+html[data-font="garamond"]{--display:'EB Garamond', var(--std-display); --text:'EB Garamond', var(--std-text)}
+html[data-font="italic"]{--display:'Felipa', var(--std-display); --text:'Felipa', var(--std-text)}
+html[data-font="italic"] body{font-synthesis:none; font-size-adjust:.59}
 html[data-font="copperplate"]{--display:'Pinyon Script', var(--std-display); --text:'Pinyon Script', var(--std-text)}
-html[data-font="italic"] body{font-style:italic}
-html[data-font="italic"] body :is(em, i){font-style:normal}
 html[data-font="fraktur"] body, html[data-font="copperplate"] body{font-synthesis:none}
 html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
 html[data-font="copperplate"] body{font-size-adjust:.53; color:#1c140d; -webkit-text-stroke:.35px currentColor}
@@ -1356,9 +1356,10 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
 /* the note on the current font, above the credit line */
 .font-note{max-width:600px; margin:28px auto 10px; font-family:var(--std-text) !important; font-style:normal !important; font-size:16px; line-height:1.55; color:var(--ink-soft); text-align:center; -webkit-text-stroke:0; font-size-adjust:none}
 .font-note b{color:var(--ink); font-weight:700}
-/* the settings button and its menu */
+/* the settings button and its menu (the + replaces the separate dark-mode button, which stays hidden for its logic) */
+#dark-toggle[hidden]{display:none !important}
 #set-btn{
-  min-width:44px; padding:4px 10px; font-family:var(--std-text); font-size:16px; line-height:1.4; cursor:pointer;
+  min-width:44px; padding:0 12px; font-family:var(--std-text); font-size:26px; line-height:1.2; font-weight:400; cursor:pointer;
   border:1px solid var(--frame); background:var(--paper); color:var(--ink); border-radius:0; transition:background-color .25s ease;
 }
 #set-btn:hover, #set-btn[aria-expanded="true"]{background:var(--hover)}
@@ -1389,15 +1390,6 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
 <div id="top-right-controls" class="top-right-controls">
-<div class="set-wrap" id="set-wrap">
-<button type="button" id="set-btn" title="Display settings" aria-label="Display settings" aria-haspopup="true" aria-expanded="false" aria-controls="set-menu">Aa</button>
-<div class="set-menu" id="set-menu" role="menu" aria-label="Display settings" hidden>
-  <button type="button" role="menuitemcheckbox" id="set-dark" aria-checked="false"><span class="set-check" aria-hidden="true"></span><span>Dark mode</span></button>
-  <div class="set-sep" role="separator"></div>
-  <div class="set-head" id="set-font-head">Font</div>
-  <div class="set-fonts" role="group" aria-labelledby="set-font-head"></div>
-</div>
-</div>
 <div id="speak-unit" class="speak-unit">
 <button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">▶</button>
 <div id="speak-rate" class="speak-rate">
@@ -1411,7 +1403,16 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
   </ul>
 </div>
 </div>
-<button id="dark-toggle" title="Light / dark" aria-label="Toggle dark mode">☾ / ☀</button>
+<button id="dark-toggle" title="Light / dark" aria-label="Toggle dark mode" hidden>☾ / ☀</button>
+<div class="set-wrap" id="set-wrap">
+<button type="button" id="set-btn" title="Dark mode and font" aria-label="Dark mode and font" aria-haspopup="true" aria-expanded="false" aria-controls="set-menu"><span aria-hidden="true">+</span></button>
+<div class="set-menu" id="set-menu" role="menu" aria-label="Display settings" hidden>
+  <button type="button" role="menuitemcheckbox" id="set-dark" aria-checked="false"><span class="set-check" aria-hidden="true"></span><span>Dark mode</span></button>
+  <div class="set-sep" role="separator"></div>
+  <div class="set-head" id="set-font-head">Font</div>
+  <div class="set-fonts" role="group" aria-labelledby="set-font-head"></div>
+</div>
+</div>
 </div>
 <div class="lab-tools" id="lab-tools">
 <button type="button" id="lab1-open" class="lab-open" title="The Venn Diagram Workshop" aria-label="The Venn Diagram Workshop" data-tip="The Venn Diagram Workshop">
@@ -5152,7 +5153,7 @@ if(typeof document!=='undefined'){
     const FONTS = [['standard','Classic Modern'],['fraktur','Medieval Gothic'],['garamond','Renaissance Printed'],['italic','Renaissance Italic'],['copperplate','Cursive']];
     const btn = $('set-btn'), menu = $('set-menu');
     function cur(){ return document.documentElement.getAttribute('data-font') || 'standard'; }
-    const NOTES = {"standard": "<b>Font: Classic Modern</b>, set in Libre Caslon Text and Libre Caslon Display. These are revivals of the Caslon types that William Caslon first cut in London in the 18th century, drawn here after the hand-lettered Caslons of 1950s advertising. Designed by Pablo Impallari (Impallari Type); SIL Open Font License 1.1.", "fraktur": "<b>Font: Medieval Gothic</b>, set in UnifrakturMaguntia. It is a German blackletter (Fraktur) in the tradition that began with Gutenberg's types at Mainz, and it is based on Peter Wiegel's Berthold Mainzer Fraktur, which follows a 1901 typeface by Carl Albert Fahrenwaldt. Designed by j. 'mach' wust after Peter Wiegel; SIL Open Font License 1.1.", "garamond": "<b>Font: Renaissance Printed</b>, set in EB Garamond. It revives the roman types that Claude Garamont cut in Paris in the mid-16th century, as they appear in the Berner specimen printed at Frankfurt in 1592. Designed by Georg Duffner and Octavio Pardo; SIL Open Font License 1.1.", "italic": "<b>Font: Renaissance Italic</b>, set in EB Garamond Italic. It revives the italic of Robert Granjon, the 16th-century French punchcutter whose italics were printed beside Garamont's romans in the Berner specimen of 1592. Designed by Georg Duffner and Octavio Pardo; SIL Open Font License 1.1.", "copperplate": "<b>Font: Cursive</b>, set in Pinyon Script. It is a round hand script in the manner of 18th-century English copperplate, the writing that masters of penmanship engraved on copper plates for their copybooks. Designed by Nicole Fally; SIL Open Font License 1.1."};
+    const NOTES = {"standard": "<b>Font: Classic Modern</b>, set in Libre Caslon Text and Libre Caslon Display. These are revivals of the Caslon types that William Caslon first cut in London in the 18th century, drawn here after the hand-lettered Caslons of 1950s advertising. Designed by Pablo Impallari (Impallari Type); SIL Open Font License 1.1.", "fraktur": "<b>Font: Medieval Gothic</b>, set in UnifrakturMaguntia. It is a German blackletter (Fraktur) in the tradition that began with Gutenberg's types at Mainz, and it is based on Peter Wiegel's Berthold Mainzer Fraktur, which follows a 1901 typeface by Carl Albert Fahrenwaldt. Designed by j. 'mach' wust after Peter Wiegel; SIL Open Font License 1.1.", "garamond": "<b>Font: Renaissance Printed</b>, set in EB Garamond. It revives the roman types that Claude Garamont cut in Paris in the mid-16th century, as they appear in the Berner specimen printed at Frankfurt in 1592. Designed by Georg Duffner and Octavio Pardo; SIL Open Font License 1.1.", "italic": "<b>Font: Renaissance Italic</b>, set in Felipa. It follows the Italian chancery cursive, the hand that Ludovico degli Arrighi taught in his writing books of the 1520s and that Aldus Manutius first brought into print as italic type at Venice in 1501, here redrawn with a contemporary feeling. Designed by Fontstage; SIL Open Font License 1.1.", "copperplate": "<b>Font: Cursive</b>, set in Pinyon Script. It is a round hand script in the manner of 18th-century English copperplate, the writing that masters of penmanship engraved on copper plates for their copybooks. Designed by Nicole Fally; SIL Open Font License 1.1."};
     function note(){ const n=$('font-note'); if(n) n.innerHTML = NOTES[cur()] || NOTES.standard; }
     function setFont(k){
       if(k==='standard') document.documentElement.removeAttribute('data-font');
