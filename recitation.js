@@ -344,6 +344,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     if (noteText){
       const n = document.createElement('span');
       n.className = 'recite-opt-note';
+      n.setAttribute('data-directions', '');
       n.textContent = noteText;
       b.appendChild(n);
     }
