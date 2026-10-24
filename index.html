@@ -1310,11 +1310,11 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 #scr-home .mark-row{display:flex; justify-content:center; gap:10px; margin:0 auto 28px; font-size:0; line-height:0; color:var(--orn)}
 #scr-home .mark-row svg.mark{display:block; width:18px; height:18px; margin:0}
 
-/* path toggle: the selected button's full border stays on top of the shared divider */
-.path-row .mode-btn:not(:first-child){border-left-style:solid; border-left-width:1px; margin-left:-1px}
-.path-row .mode-btn{position:relative}
-.path-row .mode-btn:hover,.path-row .mode-btn:focus-visible{z-index:1}
-.path-row .mode-btn.sel{z-index:2}
+/* segmented selectors: the selected button's full border stays on top of the shared divider */
+:is(.mode-row,.mode-mini) .mode-btn:not(:first-child){border-left-style:solid; border-left-width:1px; margin-left:-1px}
+:is(.mode-row,.mode-mini) .mode-btn{position:relative}
+:is(.mode-row,.mode-mini) .mode-btn:hover,:is(.mode-row,.mode-mini) .mode-btn:focus-visible{z-index:1}
+:is(.mode-row,.mode-mini) .mode-btn.sel{z-index:2}
 </style>
 </head>
 <body>
