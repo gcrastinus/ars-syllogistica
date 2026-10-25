@@ -1371,8 +1371,10 @@ html[data-font] :is(button:not(.set-card), input, select, textarea, option, labe
 html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .lab-terms .refresh, .preset-btn, .prog-mini-btn,
   .daily-remind-btn, .daily-time-lbl input, .recite-due-btn, #dark-toggle, .ans-btn, .opt){font-family:var(--std-text)}
 /* the note on the current font, above the credit line */
-.font-note{max-width:600px; margin:28px auto 10px; font-family:var(--std-text) !important; font-style:normal !important; font-size:16px; line-height:1.55; color:var(--ink-soft); text-align:center; -webkit-text-stroke:0; font-size-adjust:none}
-.font-note b{color:var(--ink); font-weight:700}
+/* Oct 24: font details note in very small, faint print, the last thing on the main page (AA 4.5:1+ against the page). */
+.font-note{max-width:36rem; margin:3.5rem auto 1.25rem; padding:0 1rem; font-family:var(--std-text) !important; font-style:normal !important; font-weight:400; font-size:.75rem !important; line-height:1.5 !important; color:#786a58 !important; text-align:center; overflow-wrap:break-word; -webkit-text-stroke:0; font-size-adjust:none}
+body.dark .font-note{color:#978a70 !important}
+.font-note b{color:inherit !important; font-weight:700}
 /* the settings button and its menu (the + replaces the separate dark-mode button, which stays hidden for its logic) */
 #dark-toggle[hidden]{display:none !important}
 #set-btn{
@@ -1807,9 +1809,9 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <a href="progress-report.html" target="_blank" rel="noopener">For instructors — turn an exported progress file into a grade ⟶</a>
     </div>
 
-    <p class="font-note" id="font-note" aria-live="polite"></p>
     <p class="designer-credit">These courses of study were designed by Timothy Kearns, PhD, built and maintained with the assistance of AI tools, and are continuously revised for clarity and precision.</p>
     <div class="si-home"><a href="https://studiuminstitute.org">Studium Institute</a></div>
+    <p class="font-note" id="font-note" aria-live="polite"></p>
 
   </div>
 
