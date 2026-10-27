@@ -702,7 +702,7 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   font-weight:600; letter-spacing:.04em;
 }
 .recite-desc{
-  margin:0 0 14px; background:var(--card); color:var(--ink);
+  position:relative; width:min(100%, 30em); margin:0 0 12px; background:var(--card); color:var(--ink);
   border:1px solid var(--line); border-left:3px solid var(--gold-soft);
   border-radius:10px; box-shadow:var(--shadow);
 }
@@ -717,8 +717,13 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   content:"▾"; color:var(--gold); font-size:14px; line-height:1; transition:transform .15s;
 }
 .recite-desc:not([open]) summary::after{transform:rotate(-90deg)}
-.recite-desc-body{max-height:min(42vh, 22em); overflow:auto; padding:0 16px 12px}
-.recite-desc p{font-size:18px; line-height:1.5; margin:0 0 10px}
+.recite-desc-body{
+  position:absolute; z-index:6; left:-3px; right:-1px; top:calc(100% + 4px);
+  max-height:min(36vh, 16em); overflow:auto; padding:12px 16px 8px;
+  background:var(--card); color:var(--ink); border:1px solid var(--line); border-left:3px solid var(--frame);
+  border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,.28);
+}
+.recite-desc p{font-size:16px; line-height:1.45; margin:0 0 8px}
 .recite-desc p:last-child{margin-bottom:0}
 .recite-tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
 .recite-picker{position:relative; flex:1; min-width:min(100%, 260px)}
@@ -2067,7 +2072,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <h2 id="recite-heading">Recitation Tablet</h2>
       <button type="button" class="btn" id="recite-close">Close</button>
     </div>
-    <details class="recite-desc" id="recite-desc" data-directions open>
+    <details class="recite-desc" id="recite-desc" data-directions>
       <summary>What is recitation?</summary>
       <div class="recite-desc-body">
         <p>One of the oldest and best-proven ways to study is to read a section of a book, or study a topic, in one sitting, then close your notes and write down everything you remember, in as much detail as you can. This is called "recitation," and this tablet lets you do it.</p>

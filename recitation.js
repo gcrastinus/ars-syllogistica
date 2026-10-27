@@ -204,6 +204,8 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
 
   const overlay = document.getElementById('recite-overlay');
   const desc = document.getElementById('recite-desc');
+  /* The instructions are a dropdown: a click anywhere else on the tablet closes it. */
+  document.addEventListener('pointerdown', function (e) { if (desc && desc.open && !desc.contains(e.target)) desc.open = false; }, true);
   const dueHost = document.getElementById('recite-due');
 
   renderReciteReminderImpl = function () {
@@ -397,7 +399,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     if (typeof dismissReciteNudge === 'function') dismissReciteNudge();
     const gen = ++openGen;
     overlay.hidden = false;
-    if (desc) desc.open = true;
+    if (desc) desc.open = false;
     document.body.classList.add('recite-lock');
     latchUnlocked();
     selectedKey = '';
