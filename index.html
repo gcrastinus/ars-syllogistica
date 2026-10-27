@@ -51,21 +51,21 @@ html{
   background:#f6f0e1;
   color-scheme:light;
   /* Firefox scrollbar */
-  scrollbar-color:#d3c29c #e6dcc2;
-  scrollbar-width:thin;
+  scrollbar-color:#8a6d3b #e6dcc2;
+  scrollbar-width:auto;
 }
 html:has(body.dark){
   background:#2a2219;
   color-scheme:dark;
-  scrollbar-color:#6b5a43 #211b14;
+  scrollbar-color:#a88f66 #211b14;
 }
 /* WebKit/Chromium/Dropbox scrollbar — themed to match the parchment, not the default bright gray */
-::-webkit-scrollbar{width:12px; height:12px}
-::-webkit-scrollbar-track{background:#e6dcc2}
-::-webkit-scrollbar-thumb{background:#d3c29c; border-radius:0; border:3px solid #e6dcc2}
+::-webkit-scrollbar{width:20px; height:20px}
+::-webkit-scrollbar-track{background:#e6dcc2; border-left:1px solid #b89f6d}
+::-webkit-scrollbar-thumb{background:#8a6d3b; border-radius:0; border:3px solid #e6dcc2}
 ::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
-html:has(body.dark)::-webkit-scrollbar-track{background:#211b14}
-html:has(body.dark)::-webkit-scrollbar-thumb{background:#6b5a43; border-color:#211b14}
+html:has(body.dark)::-webkit-scrollbar-track{background:#211b14; border-left-color:#6b5a43}
+html:has(body.dark)::-webkit-scrollbar-thumb{background:#a88f66; border-color:#211b14}
 html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
 body{
   font-family:var(--text);
