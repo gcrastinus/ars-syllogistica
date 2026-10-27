@@ -613,7 +613,7 @@ h1{
 .recite-panel .btn:disabled{opacity:.4; cursor:default}
 .recite-open{
   position:fixed; top:14px; left:16px; z-index:50;
-  width:88px; height:88px; padding:0;
+  width:66px; height:66px; padding:0;
   display:flex; align-items:center; justify-content:center;
   color:var(--gold); background:var(--card);
   border:1px solid var(--line); border-radius:16px;
@@ -621,7 +621,7 @@ h1{
   transition:transform .15s, border-color .15s;
 }
 .recite-open:hover{transform:scale(1.06); border-color:var(--gold-soft)}
-.recite-icon{width:58px; height:58px; display:block}
+.recite-icon{width:44px; height:44px; display:block}
 .recite-icon .tab-wood{fill:none; stroke:var(--gold-soft); stroke-width:1.3}
 .recite-icon .tab-rule{fill:none; stroke:var(--gold-soft); stroke-width:.6; opacity:.55}
 .recite-icon .tab-wax{fill:none}
@@ -633,8 +633,8 @@ h1{
 .recite-icon .tab-stylus-end{fill:var(--gold)}
 body.recite-lock .recite-open{visibility:hidden}
 @media (max-width:420px){
-  .recite-open{top:12px; left:12px; width:80px; height:80px; border-radius:14px}
-  .recite-icon{width:52px; height:52px}
+  .recite-open{top:12px; left:12px; width:60px; height:60px; border-radius:12px}
+  .recite-icon{width:39px; height:39px}
 }
 @keyframes recite-glow{
   0%, 100%{box-shadow:var(--shadow), 0 0 0 0 rgba(201,164,92,0)}
@@ -645,7 +645,7 @@ body.recite-lock .recite-open{visibility:hidden}
   .recite-open.is-glow{animation:none; box-shadow:var(--shadow), 0 0 16px 4px rgba(201,164,92,.4)}
 }
 .recite-callout{
-  position:fixed; top:22px; left:116px; z-index:50;
+  position:fixed; top:22px; left:94px; z-index:50;
   max-width:min(300px, calc(100vw - 148px));
   margin:0; padding:12px 14px; text-align:left; cursor:pointer;
   font-family:var(--text); font-size:17px; line-height:1.4;
@@ -664,11 +664,11 @@ body.recite-lock .recite-open{visibility:hidden}
   body.recite-nudge .wrap{padding-top:190px}
 }
 @media (max-width:640px){
-  .recite-callout{top:112px; left:16px; right:16px; max-width:none}
+  .recite-callout{top:92px; left:16px; right:16px; max-width:none}
   body.recite-nudge .wrap{padding-top:300px}
 }
 @media (max-width:420px){
-  .recite-callout{top:104px; left:12px; right:12px}
+  .recite-callout{top:84px; left:12px; right:12px}
 }
 .recite-due{
   text-align:center; font-style:italic; color:var(--ink-soft); font-size:16.5px;
@@ -1249,7 +1249,7 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 .help, .instructions{background:transparent}
 
 /* Oct 23: the Venn Diagram Workshop and the Square of Opposition as small floating buttons under the Tablet. */
-.lab-tools{position:fixed; top:112px; left:33px; z-index:50; display:flex; flex-direction:column; gap:10px}
+.lab-tools{position:fixed; top:90px; left:22px; z-index:50; display:flex; flex-direction:column; gap:10px}
 .lab-open{
   position:relative; width:54px; height:54px; padding:0; margin:0;
   display:flex; align-items:center; justify-content:center; cursor:pointer;
@@ -1268,11 +1268,11 @@ details.check[open] summary{border-bottom:1px solid var(--frame)}
 body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
 @media print{ .lab-tools{display:none !important} }
 @media (max-width:640px){
-  .lab-tools{top:31px; left:116px; flex-direction:row; gap:8px}
+  .lab-tools{top:18px; left:94px; flex-direction:row; gap:8px}
   .lab-open::after{left:50%; top:calc(100% + 8px); transform:translateX(-50%)}
 }
 @media (max-width:420px){
-  .lab-tools{top:29px; left:104px}
+  .lab-tools{top:19px; left:84px}
   .lab-open{width:46px; height:46px}
   .lab-icon{width:28px; height:28px}
 }
@@ -1315,15 +1315,15 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
   #top-right-controls{top:64px; right:12px; display:none}
   body.play-bar #top-right-controls{display:flex}
   #top-right-controls #dark-toggle{display:none}
-  .recite-open{top:12px; left:12px; width:66px; height:66px}
-  .recite-icon{width:44px; height:44px}
-  .recite-callout{top:90px}
-  body.play-bar .recite-callout{top:116px}
+  .recite-open{top:12px; left:12px; width:50px; height:50px}
+  .recite-icon{width:33px; height:33px}
+  .recite-callout{top:74px}
+  body.play-bar .recite-callout{top:100px}
 }
 @media (max-width:420px){
-  .recite-open{width:60px; height:60px}
-  .recite-icon{width:40px; height:40px}
-  .recite-callout{top:84px}
+  .recite-open{width:45px; height:45px}
+  .recite-icon{width:30px; height:30px}
+  .recite-callout{top:69px}
 }
 @media (max-width:640px){body.dark .pm-btn{background:var(--paper) !important; color:var(--orn) !important} body.dark .pm-btn:hover, body.dark .pm-btn[aria-expanded="true"]{background:var(--hover) !important}}
 @media print{.pm-btn, .pm-menu{display:none !important}}
