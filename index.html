@@ -800,6 +800,16 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   .recite-columns.is-split{grid-template-columns:1fr; grid-template-rows:minmax(180px, 1fr) minmax(180px, 1fr)}
   .recite-text{min-height:160px}
 }
+/* Short landscape screens (a phone turned sideways): the writing box shrinks to the space left inside the panel instead of running past it. */
+@media (max-height:560px){
+  .recite-overlay{padding:52px 2vw 8px}
+  .recite-panel{padding:10px 14px 10px; border-radius:12px}
+  .recite-top{margin-bottom:4px}
+  .recite-desc{margin-bottom:8px}
+  .recite-columns{margin-top:8px; grid-template-rows:minmax(0, 1fr)}
+  .recite-text{min-height:0}
+  .recite-full{min-height:0}
+}
 .recite-print{display:none}
 @media print{
   @page{margin:0.65in 0.7in}
