@@ -809,6 +809,14 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   .recite-columns{margin-top:8px; grid-template-rows:minmax(0, 1fr)}
   .recite-text{min-height:0}
   .recite-full{min-height:0}
+  .recite-panel{overflow-y:auto; overscroll-behavior:contain}
+}
+/* Short and narrow, with the full recitation open: the two boxes are stacked and cannot both fit, so they keep their
+   height and the panel scrolls (28 Oct 2026). */
+@media (max-height:560px) and (max-width:800px){
+  .recite-panel > *{flex-shrink:0}
+  .recite-columns.is-split{flex:none; grid-template-rows:none}
+  .recite-columns.is-split .recite-text, .recite-columns.is-split .recite-full{height:min(240px, calc(100vh - 150px)); min-height:150px}
 }
 .recite-print{display:none}
 @media print{
