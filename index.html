@@ -1797,11 +1797,9 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
     </div>
 
     <details class="help" data-directions style="max-width:700px">
-      <summary>How to Proceed</summary>
-      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The two small buttons under the Recitation Tablet, at the top left of the page (on a phone, in the menu at the top right), open the Venn Diagram Workshop and the Square of Opposition, which teach without keeping score. Free Practice lets you go straight into any exercise at the level you choose.</p>
-      <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
-      <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
-      <p>Among the unscored options: <em>The Venn Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays the contradictory, the converse, the obverse, or the contrapositive drawn from whichever corner you choose.</p>
+      <summary>Before You Begin</summary>
+      <p><strong>Where to begin.</strong> Begin with the <strong>Introduction</strong>: <em>What Logic Is</em>. A study of each of the three acts of the mind stands at the head of that act’s exercises, and each study has a <em>Review</em> beside it. After the last section, <strong>Logic as a Science</strong> carries each act further. The two small buttons under the Recitation Tablet, at the top left of the page (on a phone, in the menu at the top right), open the Venn Diagram Workshop and the Square of Opposition, which teach without keeping score.</p>
+      <p><strong>In an exercise.</strong> A set is complete at <strong>100 points</strong>. Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form, and when we finish a set in letters, the course invites us to attempt the same set in English.</p>
       <p>For a general introduction to the classical liberal arts and the trivium, see <a href="https://studiuminstitute.org/trivium/">Preface to the Trivium</a>.</p>
     </details>
 
@@ -5652,7 +5650,7 @@ if(typeof document!=='undefined'){
       if(!home) return null;
       return Array.from(home.querySelectorAll('details.help')).find(d=>{
         const s = d.querySelector('summary');
-        return s && /how to proceed/i.test(s.textContent||'') && d.id!=='guided-help';
+        return s && /before you begin/i.test(s.textContent||'') && d.id!=='guided-help';
       }) || null;
     }
     function guidedPathActive(){
@@ -5689,7 +5687,7 @@ if(typeof document!=='undefined'){
     function collectHomeText(){
       /* Home reading order (skips streak/skill, difficulty, instructor note, colophon):
          0) App title + subtitle
-         1) How to Proceed (always expanded)
+         1) Before You Begin (always expanded)
          1b) Using the Guided Path — only if Guided Path is selected
          2) Introduction section (title, gloss, What Logic Is)
          3) Study, then each act — section titles + card titles & descriptions */
@@ -5729,7 +5727,7 @@ if(typeof document!=='undefined'){
         if(sub) add(sub.textContent);
       }
 
-      /* 1. How to Proceed — expand and read fully */
+      /* 1. Before You Begin — expand and read fully */
       addDetailsText(homeHowToProceed(), add);
 
       /* 1b. Guided Path help — only when that path is active */
