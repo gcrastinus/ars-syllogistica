@@ -6856,9 +6856,15 @@ if(typeof document!=='undefined'){
   (function startChoices(){
     const roman = d => ROMAN[d];
     function levelName(d){ return DIFF[d].label.split(' — ')[0]; }
+    const LEVEL_WORDS = {
+      1:'the simplest material. Syllogisms come in only the most familiar pattern, and the invalid ones are easy to spot.',
+      2:'syllogisms in two patterns, and the invalid ones are still fairly easy to spot.',
+      3:'syllogisms in three patterns, now including the weakened forms (those whose conclusion is weaker than the premises allow, such as “some” where “all” would follow). The invalid ones look more like valid ones.',
+      4:'syllogisms in all four patterns, with the weakened forms, and invalid ones that closely resemble valid ones.',
+      5:'everything in play: all four patterns and the weakened forms, with invalid arguments that very nearly pass for valid ones.'
+    };
     function levelExpl(d){
-      const m = DIFF[d].label.match(/ — (.*) · /);
-      return 'Level ' + roman(d) + ', ' + levelName(d) + ': ' + (m ? m[1] : '') + '. A correct answer earns ' + DIFF[d].gain + ' points and an error takes away ' + DIFF[d].loss + '.';
+      return 'Level ' + roman(d) + ', ' + levelName(d) + ': ' + LEVEL_WORDS[d] + ' A correct answer earns ' + DIFF[d].gain + ' points and an error takes away ' + DIFF[d].loss + '.';
     }
     const PATH_EXPL = {
       practice: 'Free Practice opens any exercise at will, at the level chosen above, and keeps no record of those exercises.',
