@@ -1349,6 +1349,52 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 }
 .intro-note strong{font-weight:400; color:inherit}
 
+/* Oct 28: Level and Path as explained rows with menus, as in Ars Grammatica. The text at the left describes the choice made. */
+.choice-rule{border:0; border-top:1px solid var(--line); max-width:32em; margin:26px auto 0}
+.choice-rows{max-width:32em; margin:0 auto; font-size:17px; text-align:left}
+.choice-row{display:flex; align-items:center; gap:14px 22px; padding:16px 0; border-top:1px solid var(--line)}
+.choice-row:first-child{border-top:0}
+.choice-text{flex:1; min-width:0; text-align:left}
+.choice-label{font-family:var(--display); font-size:21px; line-height:1.2; color:var(--wine); margin:0 0 4px}
+.choice-expl{font-size:17px; line-height:1.4; color:var(--ink-soft); margin:0}
+.choice-menu{position:relative; flex:none; width:11.5em; font-size:18px}
+.choice-btn{
+  display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; min-height:44px;
+  padding:6px 12px; font-family:var(--text); font-size:18px; line-height:1.2; text-align:left;
+  color:var(--ink); background:transparent; border:2px solid var(--frame); border-radius:0; cursor:pointer
+}
+.choice-btn:hover{border-color:var(--ink-soft)}
+.choice-btn:focus-visible, .choice-btn:focus{outline:3px solid var(--ink); outline-offset:3px}
+.choice-btn:disabled{cursor:default; color:var(--ink-soft); border-color:var(--line)}
+.choice-btn:disabled:hover{border-color:var(--line)}
+.choice-btn-text{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.choice-caret{flex:none; font-size:18px; line-height:1; color:var(--ink)}
+.choice-btn:disabled .choice-caret{visibility:hidden}
+.choice-btn[aria-expanded="true"] .choice-caret{transform:rotate(180deg)}
+.choice-list{
+  position:absolute; z-index:40; top:calc(100% + 4px); right:0; min-width:100%; width:max-content; max-width:min(18em, 92vw);
+  max-height:min(60vh, 22em); overflow:auto; margin:0; padding:4px 0; list-style:none;
+  background:var(--card); color:var(--ink); border:1px solid var(--frame); border-radius:0;
+  box-shadow:0 6px 18px rgba(43,33,24,.14)
+}
+body.dark .choice-list{box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.choice-list[hidden]{display:none}
+.choice-list:focus{outline:none}
+.choice-list [role="option"]{
+  display:flex; align-items:center; gap:10px; min-height:44px; padding:6px 14px 6px 10px;
+  font-family:var(--text); font-size:18px; line-height:1.25; cursor:pointer; user-select:none
+}
+.choice-list [role="option"].is-on{background:color-mix(in srgb, var(--ink) 7%, var(--card))}
+.choice-list [role="option"].is-active{outline:3px solid var(--ink); outline-offset:-3px}
+.choice-mark{flex:none; width:1.1em; text-align:center; color:var(--ink)}
+#diff-section, #path-row{display:none !important}
+@media (max-width:560px){
+  .choice-row{flex-direction:column; align-items:stretch}
+  .choice-menu{width:100%}
+  .choice-list{left:0; right:0; width:auto; max-width:none}
+}
+@media print{.choice-rows, .choice-rule{display:none}}
+
 /* Oct 24: home title ornament as in Ars Grammatica, 2 of the same star side by side. */
 #scr-home .mark-row{display:flex; justify-content:center; gap:10px; margin:0 auto 28px; font-size:0; line-height:0; color:var(--orn)}
 #scr-home .mark-row svg.mark{display:block; width:18px; height:18px; margin:0}
@@ -1700,9 +1746,26 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         Grammar asks whether what is said is well formed, and rhetoric asks whether the hearer is moved to see the truth that has been expressed. Logic asks whether what is said follows, and whether it is true.
         The course follows the three acts of the mind: to grasp what a thing is, to judge that something is or is not so, and to reason from what we know to what we do not yet know.
       </div>
-      <div class="mode-row path-row" id="path-row" role="group" aria-label="Choose your path">
-        <button class="mode-btn sel" type="button" id="path-free" aria-pressed="true">Free Practice</button>
-        <button class="mode-btn" type="button" id="path-guided" aria-pressed="false">Guided Path</button>
+      <hr class="choice-rule">
+      <div class="choice-rows">
+        <div class="choice-row">
+          <div class="choice-text">
+            <div class="choice-label" id="level-label">Level</div>
+            <p class="choice-expl" id="level-expl" data-directions aria-live="polite">The level is the difficulty of the exercises in Free Practice, from Level I to Level V.</p>
+          </div>
+          <div class="choice-menu" id="level-menu"></div>
+        </div>
+        <div class="choice-row">
+          <div class="choice-text">
+            <div class="choice-label" id="path-label">Path</div>
+            <p class="choice-expl" id="path-expl" data-directions aria-live="polite">Free Practice opens any exercise at will and keeps no record of those exercises.</p>
+          </div>
+          <div class="choice-menu" id="path-menu"></div>
+        </div>
+      </div>
+      <div class="mode-row path-row" id="path-row" role="group" aria-label="Choose your path" hidden>
+        <button class="mode-btn sel" type="button" id="path-free" aria-pressed="true" tabindex="-1">Free Practice</button>
+        <button class="mode-btn" type="button" id="path-guided" aria-pressed="false" tabindex="-1">Guided Path</button>
       </div>
       <div class="guided-nav" id="guided-nav" style="display:none">
         <button class="back-btn" type="button" id="btn-progress">Progress &amp; Review ⟶</button>
@@ -1735,7 +1798,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 
     <details class="help" data-directions style="max-width:700px">
       <summary>How to Proceed</summary>
-      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The two small buttons under the Recitation Tablet, at the top left of the page (on a phone, in the menu at the top right), open the Venn Diagram Workshop and the Square of Opposition, which teach without keeping score. It is also possible to go straight into the exercises by choosing a difficulty and then an exercise.</p>
+      <p><strong>Where to begin.</strong> The course begins with the <strong>Introduction</strong>: <em>What Logic Is</em>, and a study of each of the three acts of the mind stands at the head of that act’s exercises. Each study has a <em>Review</em> beside it, a short set of questions drawn from its cards. After the last section, <strong>Logic as a Science</strong> carries each act further, with a study and an exercise for each topic. The two small buttons under the Recitation Tablet, at the top left of the page (on a phone, in the menu at the top right), open the Venn Diagram Workshop and the Square of Opposition, which teach without keeping score. Free Practice lets you go straight into any exercise at the level you choose.</p>
       <p><strong>What to do in an exercise:</strong> each correct answer earns points and each error takes away points; a set is complete at <strong>100 points</strong>. All the moods of the later textbook account are possible here, including the weakened moods and the fourth figure, which St. Thomas and John of St. Thomas do not count separately but treat as the indirect moods of the first.</p>
       <p>Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form. When we finish a set in letters, the course invites us to attempt the same set in English.</p>
       <p>Among the unscored options: <em>The Venn Diagram Workshop</em> lets you mark Venn diagrams freely (shading regions and placing ×s) and shows what your marks assert. <em>The Square of Opposition</em> sets two terms in the four traditional relations and displays the contradictory, the converse, the obverse, or the contrapositive drawn from whichever corner you choose.</p>
@@ -1743,8 +1806,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
     </details>
 
     <details class="help" id="guided-help" data-directions style="max-width:700px; display:none; text-align:left">
-      <summary style="text-align:left">How the Guided Path Works</summary>
-      <p><strong>Two paths.</strong> <em>Free Practice</em> opens any exercise at will and keeps no record of those exercises. The <em>Guided Path</em> opens the exercises act by act, judges when each is mastered, and brings them back for spaced review. The Guided Path stores that record only in this browser.</p>
+      <summary style="text-align:left">Using the Guided Path</summary>
       <p><strong>First, enable tracking.</strong> Open <strong>Progress &amp; Review</strong> and turn tracking on. No exercise record is kept until tracking is on. Your record never leaves this browser; use <em>Export</em> there to keep a copy.</p>
       <p><strong>Opening the acts.</strong> The path unfolds by the <strong>acts of the mind</strong>. All four exercises of the <strong>First Act</strong> (the Predicables, the Categories, Division, and Definition) are open from the start; work them in any order. Only <strong>Division and Definition</strong> must be passed to open the <strong>Second Act</strong>; when those two are passed, the Second Act appears. (The Predicables and the Categories are not required to open the path, so they can be studied at leisure and deepened along the way.) When all of the Second Act is passed, the <strong>Third Act</strong> (the syllogism) appears; and when all of its exercises are passed, the final sections, <em>Ad Demonstrationem</em>, <em>Dialectica</em>, <em>Rhetorica</em>, and <em>Sophistica</em>, open together. In <strong>Logic as a Science</strong>, the studies of each act open when that act’s exercises are passed: the First Act’s with all four of its exercises, the Second Act’s with all three, and the Third Act’s with its reasoning (VIII–XVII); the Demonstration exercise and study open with <em>Ad Demonstrationem</em>, and the study of the fallacies with <em>Sophistica</em>. To <em>pass</em> a set is to show real competence: <strong>9 of your last 10 answers at Level III or above</strong> correct, across <strong>two different days</strong>. The <strong>Progress &amp; Review</strong> page names the next exercise to learn and any reviews due, with a button that opens them.</p>
       <p><strong>Earning true mastery.</strong> Passing a set opens the next part of the path; mastery is the highest standing, and it is earned only at <strong>Level V</strong>. A set is <strong>mastered ★</strong> once at least <strong>8 of your last 10 Level V answers</strong> are correct across two different days. Lower levels build your skill and score and can bring you to a pass, but mastery is earned only at the top level. Mastering a set earns the ★ and enrolls it in spaced review.</p>
@@ -2247,6 +2309,7 @@ if(typeof document!=='undefined'){
   function syncDiffRow(){
     diffRow.querySelectorAll('.diff-btn').forEach((x,i)=>x.classList.toggle('sel', i===state.diff-1));
     $('diff-desc').textContent = DIFF[state.diff].label;
+    if(window.renderStartChoices) window.renderStartChoices();
   }
 
   /* per-exercise term toggle */
@@ -5630,7 +5693,7 @@ if(typeof document!=='undefined'){
       /* Home reading order (skips streak/skill, difficulty, instructor note, colophon):
          0) App title + subtitle
          1) How to Proceed (always expanded)
-         1b) How the Guided Path Works — only if Guided Path is selected
+         1b) Using the Guided Path — only if Guided Path is selected
          2) Introduction section (title, gloss, What Logic Is)
          3) Feedback, Study, then each act — section titles + card titles & descriptions */
       const home = $('scr-home');
@@ -6357,6 +6420,7 @@ if(typeof document!=='undefined'){
        so the global difficulty row is hidden there; it governs Free Practice only. */
     $('diff-section').style.display = p==='guided' ? 'none' : '';
     if(p!=='guided') syncDiffRow();
+    if(window.renderStartChoices) window.renderStartChoices();
     gpNotice();
     refreshCards();
   }
@@ -6790,7 +6854,129 @@ if(typeof document!=='undefined'){
   $('prog-back').onclick = ()=>show('scr-home');
   window.__arsStudyDecks = STUDY_DECKS;
   window.__arsAdvancedDecks = ADVANCED_DECKS;
+
+  /* ---------------- Level and Path menus (Oct 28): explained rows, as in Ars Grammatica ----------------
+     The text at the left of each menu describes the choice made. The old difficulty row and the two path buttons stay in the
+     page, hidden, as the working state; these menus set them. */
+  (function startChoices(){
+    const roman = d => ROMAN[d];
+    function levelName(d){ return DIFF[d].label.split(' — ')[0]; }
+    function levelExpl(d){
+      const m = DIFF[d].label.match(/ — (.*) · /);
+      return 'Level ' + roman(d) + ', ' + levelName(d) + ': ' + (m ? m[1] : '') + '. A correct answer earns ' + DIFF[d].gain + ' points and an error takes away ' + DIFF[d].loss + '.';
+    }
+    const PATH_EXPL = {
+      practice: 'Free Practice opens any exercise at will, at the level chosen above, and keeps no record of those exercises.',
+      guided: 'The Guided Path opens the exercises act by act, judges when each is passed and mastered, and brings them back for spaced review. Its record is kept only in this browser.'
+    };
+    const GUIDED_LEVEL = 'The Guided Path sets the level for each exercise, and reviews run at Level V, so the level applies to Free Practice only.';
+    const menus = {};
+    let open = null;
+    function close(focusBtn){
+      const m = open; if(!m) return;
+      open = null; m.list.hidden = true; m.btn.setAttribute('aria-expanded','false'); m.list.removeAttribute('aria-activedescendant');
+      if(focusBtn) m.btn.focus();
+    }
+    function active(m, i){
+      const o = [...m.list.children]; if(!o.length) return;
+      m.active = Math.max(0, Math.min(o.length-1, i));
+      o.forEach((x,k)=>x.classList.toggle('is-active', k===m.active));
+      m.list.setAttribute('aria-activedescendant', o[m.active].id);
+      o[m.active].scrollIntoView({block:'nearest'});
+    }
+    function show(m, at){
+      if(m.btn.disabled) return;
+      if(open && open!==m) close(false);
+      open = m; m.list.hidden = false; m.btn.setAttribute('aria-expanded','true');
+      const sel = m.cfg.options().findIndex(o=>m.cfg.isOn(o.value));
+      active(m, at==='last' ? m.cfg.options().length-1 : at==='first' ? 0 : Math.max(0, sel));
+      m.list.focus();
+    }
+    function pick(m, i){ const o = m.cfg.options()[i]; if(!o) return; close(true); m.cfg.pick(o.value); }
+    function jump(m, ch){
+      const opts = m.cfg.options(), now = Date.now();
+      m.typed = (now-(m.typedAt||0) < 700 ? (m.typed||'') : '') + ch.toLowerCase(); m.typedAt = now;
+      const from = m.typed.length>1 ? m.active : m.active+1;
+      for(let k=0;k<opts.length;k++){ const i=(from+k)%opts.length; if(opts[i].label.toLowerCase().indexOf(m.typed)===0 || String(opts[i].value).toLowerCase()===m.typed) return i; }
+      return -1;
+    }
+    function make(key, cfg){
+      const host = $(key+'-menu'); if(!host) return;
+      const btn = document.createElement('button');
+      btn.type='button'; btn.id=key+'-btn'; btn.className='choice-btn';
+      btn.setAttribute('aria-haspopup','listbox'); btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-labelledby', key+'-label '+key+'-btn'); btn.setAttribute('aria-describedby', key+'-expl');
+      btn.innerHTML = '<span class="choice-btn-text"></span><span class="choice-caret" aria-hidden="true">▾</span>';
+      const list = document.createElement('ul');
+      list.id=key+'-list'; list.className='choice-list'; list.setAttribute('role','listbox'); list.setAttribute('aria-labelledby', key+'-label');
+      list.setAttribute('data-directions',''); list.tabIndex=-1; list.hidden=true;
+      host.replaceChildren(btn, list);
+      const m = menus[key] = {key, cfg, btn, list, active:0};
+      btn.addEventListener('click', ()=>{ if(open===m) close(true); else show(m); });
+      btn.addEventListener('keydown', e=>{
+        if(['ArrowDown','ArrowUp','Enter',' '].includes(e.key)){ e.preventDefault(); show(m); }
+        else if(e.key==='Home'){ e.preventDefault(); show(m,'first'); }
+        else if(e.key==='End'){ e.preventDefault(); show(m,'last'); }
+      });
+      list.addEventListener('keydown', e=>{
+        const n = cfg.options().length;
+        if(e.key==='ArrowDown'){ e.preventDefault(); active(m, m.active+1); }
+        else if(e.key==='ArrowUp'){ e.preventDefault(); active(m, m.active-1); }
+        else if(e.key==='Home'){ e.preventDefault(); active(m, 0); }
+        else if(e.key==='End'){ e.preventDefault(); active(m, n-1); }
+        else if(e.key==='Enter' || e.key===' '){ e.preventDefault(); pick(m, m.active); }
+        else if(e.key==='Escape'){ e.preventDefault(); e.stopPropagation(); close(true); }
+        else if(e.key==='Tab'){ close(false); }
+        else if(e.key.length===1 && /\S/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); const i = jump(m, e.key); if(i>=0) active(m, i); }
+      });
+      list.addEventListener('click', e=>{ const li = e.target.closest('[role="option"]'); if(li) pick(m, [...list.children].indexOf(li)); });
+      list.addEventListener('mousemove', e=>{ const li = e.target.closest('[role="option"]'); if(li){ const i=[...list.children].indexOf(li); if(i!==m.active) active(m,i); } });
+    }
+    document.addEventListener('pointerdown', e=>{ if(open && !open.btn.parentNode.contains(e.target)) close(false); });
+    function draw(m){
+      const opts = m.cfg.options();
+      m.btn.querySelector('.choice-btn-text').textContent = m.cfg.text();
+      m.btn.disabled = !!(m.cfg.disabled && m.cfg.disabled());
+      if(m.btn.disabled && open===m) close(false);
+      if(!m.list.children.length){
+        m.list.replaceChildren(...opts.map(o=>{
+          const li = document.createElement('li');
+          li.id = m.key+'-opt-'+o.value; li.setAttribute('role','option'); li.dataset.value = o.value;
+          li.innerHTML = '<span class="choice-mark" aria-hidden="true"></span><span class="choice-name"></span>';
+          li.querySelector('.choice-name').textContent = o.label;
+          return li;
+        }));
+      }
+      [...m.list.children].forEach((li,i)=>{
+        const on = m.cfg.isOn(opts[i].value);
+        li.setAttribute('aria-selected', on?'true':'false'); li.classList.toggle('is-on', on);
+        li.querySelector('.choice-mark').textContent = on ? '✓' : '';
+      });
+    }
+    make('level', {
+      options: ()=>[1,2,3,4,5].map(d=>({value:d, label:roman(d)+' · '+levelName(d)})),
+      isOn: v=>v===state.diff,
+      text: ()=> gpPath==='guided' ? 'By exercise' : roman(state.diff)+' · '+levelName(state.diff),
+      disabled: ()=> gpPath==='guided',
+      pick: v=>{ state.diff = v; syncDiffRow(); }
+    });
+    make('path', {
+      options: ()=>[{value:'practice', label:'Free Practice'},{value:'guided', label:'Guided Path'}],
+      isOn: v=>v===gpPath,
+      text: ()=> gpPath==='guided' ? 'Guided Path' : 'Free Practice',
+      pick: v=>{ if(v!==gpPath) setPath(v); }
+    });
+    function renderStartChoices(){
+      Object.values(menus).forEach(draw);
+      const set = (id,t)=>{ const e=$(id); if(e && e.textContent!==t) e.textContent=t; };
+      set('level-expl', gpPath==='guided' ? GUIDED_LEVEL : levelExpl(state.diff));
+      set('path-expl', PATH_EXPL[gpPath==='guided' ? 'guided' : 'practice']);
+    }
+    window.renderStartChoices = renderStartChoices;
+    renderStartChoices();
+  })();
   setPath(gpPath, false);   /* reflect stored choice; write nothing for new visitors */
+  window.renderStartChoices && window.renderStartChoices();
 
 })();
 }
