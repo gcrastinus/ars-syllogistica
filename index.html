@@ -1417,6 +1417,22 @@ body.dark .font-note{color:#978a70 !important}
 .set-menu [aria-checked="true"], .pm-font [aria-checked="true"]{background:var(--hover); font-weight:700}
 .set-menu [aria-checked="true"] .set-check::before, .pm-font [aria-checked="true"] .set-check::before{content:"✓"}
 .pm-font{display:flex; flex-direction:column; padding-bottom:4px}
+/* Studium Institute row at the bottom of the + menu: the name goes home, the arrow lists the three apps. */
+.si-nav{border-top:1px solid var(--frame); margin-top:6px}
+.si-row{display:flex; align-items:stretch}
+.si-nav a, .si-nav .si-tog{font-family:var(--std-text) !important; font-size:18px; line-height:1.3; color:var(--ink); background:transparent; border:0; border-radius:0; text-decoration:none; cursor:pointer; text-transform:none; letter-spacing:0; font-variant:normal; font-weight:400}
+.si-nav .si-name{flex:1; display:block; padding:10px 16px; white-space:nowrap}
+.si-nav .si-tog, .set-menu .si-nav .si-tog{width:auto; flex:none; display:flex; align-items:center; justify-content:center; margin:0; padding:10px 16px}
+.si-tog span{display:inline-block; transition:transform .15s}
+.si-tog[aria-expanded="true"] span{transform:rotate(180deg)}
+.si-nav .si-list{padding:0 0 4px}
+.si-nav .si-list a{display:block; padding:8px 16px 8px 36px; font-size:17px; white-space:nowrap}
+.si-nav a:hover, .si-nav .si-tog:hover{background:var(--hover)}
+.si-nav a:focus-visible, .si-nav .si-tog:focus-visible{outline:3px solid var(--ink); outline-offset:-3px}
+.si-nav .si-list a[aria-current]{font-weight:700}
+.set-menu{max-height:calc(100vh - 80px); max-height:calc(100dvh - 80px); overflow-y:auto}
+.pm-menu{max-height:calc(100vh - 74px); max-height:calc(100dvh - 74px); overflow-y:auto}
+
 /* each font option is shown in its own face, large for legibility */
 .set-menu .set-fonts button, .pm-font .set-fonts button{font-size:22px; line-height:1.25; font-size-adjust:none}
 :is(.set-menu,.pm-font) .set-fonts [data-font="standard"] span+span{font-family:'Libre Caslon Text', Georgia, serif}
@@ -5368,6 +5384,19 @@ if(typeof document!=='undefined'){
 
   /* ---- display settings menu: dark mode and font choice (arsFont) ---- */
   (function settingsMenu(){
+  /* Studium Institute row: the name links home; the arrow expands the list of the three apps. */
+  function siNav(idp){
+    const APPS = [['grammatica','Ars Grammatica'],['logica','Ars Logica'],['rhetorica','Ars Rhetorica']];
+    const here = (location.hostname.split('.')[0] || '').replace('syllogistica','logica');
+    const d = document.createElement('div'); d.className = 'si-nav';
+    d.innerHTML = '<div class="si-row"><a class="si-name" role="menuitem" href="https://studiuminstitute.org">Studium Institute</a>'
+      + '<button type="button" class="si-tog" id="'+idp+'-tog" aria-expanded="false" aria-controls="'+idp+'-list" aria-label="Show the three apps"><span aria-hidden="true">▾</span></button></div>'
+      + '<div class="si-list" id="'+idp+'-list" role="group" aria-label="The three apps" hidden>'
+      + APPS.map(a=>'<a role="menuitem" href="https://'+a[0]+'.studiuminstitute.org"'+(a[0]===here?' aria-current="page"':'')+'>'+a[1]+'</a>').join('') + '</div>';
+    const tog = d.querySelector('.si-tog'), list = d.querySelector('.si-list');
+    tog.onclick = e=>{ e.stopPropagation(); const o = list.hidden; list.hidden = !o; tog.setAttribute('aria-expanded', String(o)); tog.setAttribute('aria-label', o ? 'Hide the three apps' : 'Show the three apps'); };
+    return d;
+  }
     const FONTS = [['standard','Classic Modern'],['plain','Plain Modern'],['garamond','Renaissance Printed'],['italic','Renaissance Italic'],['fraktur','Medieval Gothic'],['copperplate','Cursive']];
     const btn = $('set-btn'), menu = $('set-menu');
     function cur(){ return document.documentElement.getAttribute('data-font') || 'standard'; }
@@ -5396,7 +5425,7 @@ if(typeof document!=='undefined'){
       document.querySelectorAll('.set-fonts [data-font]').forEach(b=>b.setAttribute('aria-checked', String(b.dataset.font===k)));
       $('set-dark').setAttribute('aria-checked', String(document.body.classList.contains('dark')));
     }
-    function items(){ return [...menu.querySelectorAll('button')]; }
+    function items(){ return [...menu.querySelectorAll('button, a[href]')].filter(e=>!e.closest('[hidden]')); }
     function close(focusBtn){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); if(focusBtn) btn.focus(); }
     function open(){ sync(); menu.hidden = false; btn.setAttribute('aria-expanded','true'); (menu.querySelector('[aria-checked="true"][data-font]')||items()[0]).focus(); }
     btn.onclick = e=>{ e.stopPropagation(); if(menu.hidden) open(); else close(); };
@@ -5415,6 +5444,8 @@ if(typeof document!=='undefined'){
     window.addEventListener('storage', e=>{
       if(e.key==='arsFont' && e.newValue){ if(e.newValue==='standard') document.documentElement.removeAttribute('data-font'); else { arsLoadFont(e.newValue); document.documentElement.setAttribute('data-font', e.newValue); } sync(); }
     });
+    menu.appendChild(siNav('si'));
+    const pmm = $('pm-menu'), pmn = $('pm-note'); if(pmm){ const x = siNav('pm-si'); pmm.insertBefore(x, pmn); }
     const pb = $('pm-btn'); if(pb) pb.addEventListener('click', ()=>setTimeout(sync));
     sync();
   })();
