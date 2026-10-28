@@ -30,7 +30,8 @@
       ' background:color-mix(in srgb, var(--paper, #f6f0e1) 88%, transparent)}' +
       '.tab-lock-card{max-width:440px; width:100%; padding:28px 26px; text-align:center; background:var(--card, #fffdf4); color:var(--ink, #2b2118);' +
       ' border:1px solid var(--frame, #d3c29c); border-radius:0; box-shadow:none; font-family:var(--text, Georgia, serif)}' +
-      '.tab-lock-msg{font-size:19px; line-height:1.45; margin:0 0 18px}' +
+      '.tab-lock-msg{font-size:19px; line-height:1.45; margin:0 0 12px}' +
+      '.tab-lock-note{font-size:17px; line-height:1.5; margin:0 0 20px; text-align:left; color:var(--ink-soft, #5a4a38)}' +
       '.tab-lock-btn{font-family:var(--text, Georgia, serif); font-size:17px; padding:10px 22px; cursor:pointer; border-radius:0;' +
       ' background:transparent; color:var(--ink, #2b2118); border:1px solid var(--frame, #d3c29c); transition:background-color .25s ease}' +
       '.tab-lock-btn:hover, .tab-lock-btn:focus-visible{background:var(--hover, #ede4cf); outline:none}' +
@@ -44,9 +45,11 @@
       box = document.createElement('div');
       box.className = 'tab-lock'; box.setAttribute('role', 'alertdialog'); box.setAttribute('aria-modal', 'true');
       box.setAttribute('aria-labelledby', 'tab-lock-msg');
-      box.innerHTML = '<div class="tab-lock-card"><p class="tab-lock-msg" id="tab-lock-msg"></p>' +
+      box.innerHTML = '<div class="tab-lock-card"><p class="tab-lock-msg" id="tab-lock-msg"></p><p class="tab-lock-note"></p>' +
         '<button type="button" class="tab-lock-btn">Use it here</button></div>';
       box.querySelector('.tab-lock-msg').textContent = APP + ' is open in another tab.';
+      box.querySelector('.tab-lock-note').textContent = 'If you use it here, the other tab will stop, and this one will reload with your saved progress. ' +
+        'Your saved progress carries over, but an exercise you are in the middle of will start over, and its unfinished answers are lost.';
       box.querySelector('.tab-lock-btn').onclick = function(){ claim(); location.reload(); };
     }
     if (!box.parentNode) document.body.appendChild(box);
