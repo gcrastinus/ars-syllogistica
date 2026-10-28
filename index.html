@@ -1828,9 +1828,6 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div class="diff-desc" id="diff-desc" data-directions></div>
     </div>
 
-    <div class="section-label">Feedback</div>
-    <div class="mode-note" data-directions>Every answer in the categorical sets is illustrated with a Venn diagram of the correct analysis: shading declares a region empty; an × declares that something is there; a ⊗ declares that something is there because an affirmative universal premise asserts that its subject exists, not because a particular premise says so.</div>
-
     <div class="act-block" id="actblk-a1">
       <div class="act-label">The First Act of the Mind · Simple Apprehension</div>
       <div class="section-gloss">The first act of the mind, which comes before all judging or reasoning, is simply to grasp what a thing is. Here we learn the five <strong>predicables</strong> (the ways a universal is said of a subject) and the ten <strong>categories</strong> into which all that can be said of a thing falls; then we learn to <strong>divide</strong> a whole into its kinds and to <strong>define</strong> what a thing essentially is. These are the arts by which a concept is made clear and distinct, and everything that follows depends on them.</div>
@@ -2229,7 +2226,7 @@ if(typeof document!=='undefined'){
      desc:'John of St. Thomas counts four modes: necessary, impossible, possible, and contingent, where the contingent is what can be, and can also not be. We judge equipollences (whether two expressions have the same force and the same corner of the square, as when we ask whether “not possible that not” comes to “necessary”), the modal square, and the composite and divided senses (whether the seated man may walk).',
      instr:'The modes of propositions.'},
     {id:8, title:'Diagramming Syllogisms',
-     desc:'Diagram a whole valid syllogism on three circles: shade the universal premises, place the ×s, and, where the conclusion needs the existence of a term, the import mark ⊗.',
+     desc:'Diagram a whole valid syllogism on three circles: shade the universal premises, place the ×s, and, where the conclusion needs the existence of a term, the import mark ⊗. We use Venn diagrams because they let us see what the premises assert and whether the conclusion is already contained in them, and in the categorical exercises every answer is illustrated with a diagram of the correct analysis. Shading declares a region empty; an × declares that something is there; a ⊗ declares that something is there because an affirmative universal premise asserts that its subject exists, not because a particular premise says so.',
      instr:'Diagram the full syllogism, then submit.'},
     {id:9, title:'Syllogistic Form in the Abstract',
      desc:'Judge whether a syllogism in schematic letters is valid, considering its form alone. Capital letters are general terms; lower-case letters are singular.',
@@ -5695,7 +5692,7 @@ if(typeof document!=='undefined'){
          1) How to Proceed (always expanded)
          1b) Using the Guided Path — only if Guided Path is selected
          2) Introduction section (title, gloss, What Logic Is)
-         3) Feedback, Study, then each act — section titles + card titles & descriptions */
+         3) Study, then each act — section titles + card titles & descriptions */
       const home = $('scr-home');
       if(!home) return '';
       const parts = [];
@@ -5749,7 +5746,7 @@ if(typeof document!=='undefined'){
       if(partArt) add(partArt.textContent);
       addSectionBlock($('actblk-intro'));
 
-      /* 3. Feedback (no cards — the short note) */
+      /* 3. (The Feedback note now lives in Exercise VIII's description.) */
       const fbLabel = Array.from(home.querySelectorAll(':scope > .section-label'))
         .find(el=>/feedback/i.test(el.textContent||''));
       if(fbLabel){
