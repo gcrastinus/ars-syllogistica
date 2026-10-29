@@ -1788,10 +1788,9 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 
     <div class="daily-box" id="daily-box" style="display:none">
       <div class="daily-streak">
-        <span class="daily-flame" id="daily-flame"><svg class="orn" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></span>
         <div>
           <div class="daily-num"><span id="daily-count">0</span> <span id="daily-count-word">days</span></div>
-          <div class="daily-sub" id="daily-sub">Practice today to begin your streak</div>
+          <div class="daily-sub" id="daily-sub">Practice today to begin a streak</div>
         </div>
       </div>
       <button class="daily-remind-btn" id="daily-remind-btn" type="button" aria-expanded="false">Remind me daily</button>
@@ -5974,15 +5973,13 @@ if(typeof document!=='undefined'){
       var c = document.getElementById('daily-count');
       var w = document.getElementById('daily-count-word');
       var sub = document.getElementById('daily-sub');
-      var flame = document.getElementById('daily-flame');
       if(!c) return;
       c.textContent = streak;
       w.textContent = streak===1 ? 'day' : 'days';
       var best = parseInt(lsGet('arsBestDayStreak')||'0',10);
-      if(streak<=0){ sub.textContent = 'Practice today to begin your streak'; flame.classList.remove('lit'); }
+      if(streak<=0){ sub.textContent = 'Practice today to begin a streak'; }
       else {
-        flame.classList.add('lit');
-        sub.textContent = (streak>=2 ? 'day streak; keep it alight' : 'day streak begun')
+        sub.textContent = 'Current streak'
           + (best>streak ? ' · best '+best : '');
       }
     }
@@ -6034,7 +6031,7 @@ if(typeof document!=='undefined'){
       var p = t.split(':'); return { hh:parseInt(p[0],10)||9, mm:parseInt(p[1],10)||0 };
     }
     var TITLE = 'Ars Logica — daily logic practice';
-    var DETAILS = 'Time for today’s syllogism practice. Open Ars Logica and keep your streak alight.';
+    var DETAILS = 'Practice today to keep your streak.';
     // Google Calendar recurring-event link
     var gcal = document.getElementById('daily-gcal');
     if(gcal){
@@ -6464,7 +6461,7 @@ if(typeof document!=='undefined'){
       const b = document.createElement('button');
       b.className = 'lp-lvl' + (locked ? ' locked' : '');
       b.innerHTML = `<span class="lp-num">Level ${ROMAN[d]}</span><span class="lp-name">${name}</span>`
-        + (locked ? '<span class="lp-lock">🔒 opens after a Level III pass</span>' : '');
+        + (locked ? '<span class="lp-lock">Locked: opens after a Level III pass</span>' : '');
       if(!locked) b.onclick = ()=>{ state.diff = d; startSet(s); };
       box.appendChild(b);
     }
