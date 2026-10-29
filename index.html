@@ -1807,12 +1807,6 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div class="daily-hint">Adds a repeating daily event to your own calendar to call you back to practice; no account or sign-in is needed. Works on any phone or computer.</div>
     </div>
 
-    <details class="help" data-directions style="max-width:700px">
-      <summary>Before You Begin</summary>
-      <p><strong>Where to begin.</strong> Begin with the <strong>Introduction</strong>: <em>What Logic Is</em>. A study of each of the three acts of the mind stands at the head of that act’s exercises, and each study has a <em>Review</em> beside it. After the last section, <strong>Logic as a Science</strong> carries each act further. The two small buttons under the Recitation Tablet, at the top left of the page (on a phone, in the menu at the top right), open the Venn Diagram Workshop and the Square of Opposition, which teach without keeping score.</p>
-      <p><strong>In an exercise.</strong> A set is complete at <strong>100 points</strong>. Where schematic terms are possible, a small switch on the exercise page chooses <strong>letter</strong> or <strong>English</strong> terms. Capital letters stand for general terms, and lower-case letters and proper names for singular terms. Letters are the easier form, and when we finish a set in letters, the course invites us to attempt the same set in English.</p>
-    </details>
-
     <details class="help" id="guided-help" data-directions style="max-width:700px; display:none; text-align:left">
       <summary style="text-align:left">Using the Guided Path</summary>
       <p><strong>First, enable tracking.</strong> Open <strong>Progress &amp; Review</strong> and turn tracking on. No exercise record is kept until tracking is on. Your record never leaves this browser; use <em>Export</em> there to keep a copy.</p>
@@ -5655,14 +5649,6 @@ if(typeof document!=='undefined'){
       return parts;
     }
 
-    function homeHowToProceed(){
-      const home = $('scr-home');
-      if(!home) return null;
-      return Array.from(home.querySelectorAll('details.help')).find(d=>{
-        const s = d.querySelector('summary');
-        return s && /before you begin/i.test(s.textContent||'') && d.id!=='guided-help';
-      }) || null;
-    }
     function guidedPathActive(){
       const btn = $('path-guided');
       if(btn && btn.classList.contains('sel')) return true;
@@ -5682,8 +5668,6 @@ if(typeof document!=='undefined'){
     function openSpeakCollapsibles(scr){
       if(!scr) return;
       if(scr.id==='scr-home'){
-        const how = homeHowToProceed();
-        if(how) how.open = true;
         const gh = $('guided-help');
         if(gh && guidedPathActive()){
           gh.style.display = 'block';
@@ -5697,7 +5681,7 @@ if(typeof document!=='undefined'){
     function collectHomeText(){
       /* Home reading order (skips streak/skill, difficulty, instructor note, colophon):
          0) App title + subtitle
-         1) Before You Begin (always expanded)
+         1) The opening paragraph (intro note)
          1b) Using the Guided Path — only if Guided Path is selected
          2) Introduction section (title, gloss, What Logic Is)
          3) Study, then each act — section titles + card titles & descriptions */
@@ -5737,8 +5721,13 @@ if(typeof document!=='undefined'){
         if(sub) add(sub.textContent);
       }
 
-      /* 1. Before You Begin — expand and read fully */
-      addDetailsText(homeHowToProceed(), add);
+      /* 1. The opening paragraph under the subtitle */
+      const introNote = home.querySelector('.intro-note');
+      if(introNote){
+        const clone = introNote.cloneNode(true);
+        clone.querySelectorAll('.intro-preface').forEach(e=>e.remove());
+        add(clone.textContent);
+      }
 
       /* 1b. Guided Path help — only when that path is active */
       if(guidedPathActive()){
