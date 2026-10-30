@@ -3291,7 +3291,7 @@ const ENTH_POOL = [
   {tier:3, txt:'The soul is immortal, for it is ever in motion.',
    correct:'Whatever is ever in motion is immortal',
    traps:['Whatever is immortal is ever in motion','The soul moves the body','Some moving things are immortal'],
-   why:'This is Plato’s proof in the Phaedrus (245c). The whole dispute lies in the suppressed premise; as often happens, the visible part of the argument is the least contestable.'},
+   why:'This argument is after Plato’s proof (Phaedrus 245c), where Plato states this premise himself and argues for the minor. Once the premise is supplied, the argument is valid, and the dispute lies in whether that premise is true.'},
   {tier:3, txt:'Pleasure is not the good, for even fools attain it.',
    correct:'What even fools attain is not the good',
    traps:['Fools attain nothing good','The good is hard to attain','Some pleasures are foolish'],
