@@ -4433,14 +4433,14 @@ if(typeof document!=='undefined'){
     const R = lab1.roles, out = $('lab1-read');
     const line = (t,cls)=>`<div class="rline${cls?' '+cls:''}">${t}</div>`;
     let html = '';
-    if(lab1.notice) html += line('⚠ '+cap(lab1.notice)+'.', 'dim');
+    if(lab1.notice) html += line('⚠︎ '+cap(lab1.notice)+'.', 'dim');
     if(lab1.mode===1){
       const r = readout2(lab1.m2, termLabel(R.S), termLabel(R.P));
       if(r.props.length){
         html += `<div class="rhead">Your diagram asserts</div>`;
         html += r.props.map(p=>line(p+'.')).join('');
       } else html += line('Nothing is asserted yet. Once the diagram is marked, the readout will say what it asserts.', 'dim');
-      html += r.warns.map(w=>line('⚠ '+cap(w)+'.', 'dim')).join('');
+      html += r.warns.map(w=>line('⚠︎ '+cap(w)+'.', 'dim')).join('');
     } else {
       const labs = {S:termLabel(R.S), M:termLabel(R.M), P:termLabel(R.P)};
       const r = readout3(lab1.mode===2?lab1.m3:lab1.m3, labs);
@@ -4456,7 +4456,7 @@ if(typeof document!=='undefined'){
           html += r.xreads.map(p=>line(p+'.')).join('');
         }
       } else html += line('Nothing is asserted yet. Once the diagram is marked, the readout will say what it asserts.', 'dim');
-      html += r.warns.map(w=>line('⚠ '+cap(w)+'.', 'dim')).join('');
+      html += r.warns.map(w=>line('⚠︎ '+cap(w)+'.', 'dim')).join('');
       if(lab1.mode===3){
         const sp = spConsequences(lab1.m3, labs);
         html += `<div class="rhead">Concerning ${labs.S} and ${labs.P} (the conclusion)</div>`;
