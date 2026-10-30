@@ -676,19 +676,24 @@ function vennMistake(q, user){
   const regs=['A','AB','B'], mirror={A:'B',AB:'AB',B:'A'};
   for(const r of regs){
     if(q.correct[r]==='x' && user[r]==='imp')
-      return 'The region is right, but the mark should be an ×, not a ⊗. A particular proposition itself asserts that something exists in this region, and that is shown by the ×. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
+      return q.type==='O'
+        ? 'The region is right, but the mark should be an ×, not a ⊗. For “Some S are not P” the × is only the diagram’s way of marking this region; the O proposition asserts no existence. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.'
+        : 'The region is right, but the mark should be an ×, not a ⊗. “Some S are P” itself asserts that something exists in this region, and that is shown by the ×. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
     if(q.correct[r]!=='none' && user[r]!=='none' && user[r]!==q.correct[r])
       return q.correct[r]==='shade'
         ? (q.type==='A'
           ? 'The region is right but the mark is wrong. The diagram shows a universal by what it denies, so the region it empties is shaded. “All S are P” does also assert that some S exists, and that existence may be shown by a ⊗ in the part of S that is left open (the overlap), but the part of S outside P must be shaded.'
           : 'The region is right but the mark is wrong. The diagram shows a universal by what it denies, so the region it empties is shaded. A negative proposition asserts no existence, so “No S are P” makes no × and no ⊗.')
-        : 'The region is right but the mark is wrong. “Some” asserts that something <em>exists</em>, and that is shown by the ×. Shading would declare the region empty, the very opposite of what is said. Shading here usually comes from treating every proposition as a claim about a whole region.';
+        : (q.type==='O'
+          ? 'The region is right but the mark is wrong. A particular is drawn with an ×; for “Some S are not P” the × is only the diagram’s way of marking this region, since the O proposition asserts no existence. Shading would declare the region empty, the very opposite of what the diagram should show. Shading here usually comes from treating every proposition as a claim about a whole region.'
+          : 'The region is right but the mark is wrong. “Some S are P” asserts that something <em>exists</em>, and that is shown by the ×. Shading would declare the region empty, the very opposite of what is said. Shading here usually comes from treating every proposition as a claim about a whole region.');
   }
   const impAt = regs.filter(r=>user[r]==='imp' && r!==q.optImp);
   if(impAt.length){
     if(q.type==='E') return 'A negative proposition asserts no existence, so the diagram of “No S are P” has no ⊗. The overlap is shaded, and nothing more is drawn.';
     if(q.type==='A') return 'The ⊗ is in the wrong region. “All S are P” asserts that some S exists, and since every S is P, that S can only be in the overlap. The ⊗ may go there (it is not required), and the part of S outside P is shaded.';
-    return 'A particular proposition shows its existence with an ×, because the proposition itself says that something is there. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
+    if(q.type==='O') return 'A particular proposition is drawn with an ×, not a ⊗. For “Some S are not P” the × is only the diagram’s way of marking the region; the O proposition asserts no existence. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
+    return 'An I proposition shows its existence with an ×, because the proposition itself says that something is there. The ⊗ is kept for the existence that a universal affirmative asserts of its subject.';
   }
   if(regs.some(r=>user[r]!=='none') && regs.every(r=>user[r]===q.correct[mirror[r]]))
     return 'This diagram shows the converse, in which subject and predicate have changed places. “All S are P” empties the part of S <em>outside</em> P (not the part of P outside S), and “Some S are not P” marks S outside P. A and O propositions do not convert, so the direction matters; this is the most common slip.';
@@ -740,13 +745,18 @@ function vennMistake3(q, user){
   const imp = q.diag.xs.find(x=>x.kind==='import');
   const impName = imp ? termLabel(q.roles[imp.term]) : '';
   const impSrc = imp ? importPremise(q.fig, q.mood ? q.mood[0] : q.t1, q.mood ? q.mood[1] : q.t2, imp.term) : -1;
+  const partO = [q.mood ? q.mood[0] : q.t1, q.mood ? q.mood[1] : q.t2].includes('O');
   for(const r of REGIONS3){
     if(q.expect[r]==='x' && user[r]==='imp')
-      return 'The cell is right, but the mark should be an ×, not a ⊗. The particular premise itself says that something is here, and that is shown by an ×. The ⊗ is kept for existence that comes from an affirmative universal premise.';
+      return partO
+        ? 'The cell is right, but the mark should be an ×, not a ⊗. The particular premise is drawn with an ×; for an O premise the × is only the diagram’s way of marking the cell, since the O premise asserts no existence. The ⊗ is kept for existence that comes from an affirmative universal premise.'
+        : 'The cell is right, but the mark should be an ×, not a ⊗. The particular premise itself says that something is here, and that is shown by an ×. The ⊗ is kept for existence that comes from an affirmative universal premise.';
     if((q.expect[r]==='shade' || q.expect[r]==='x') && user[r]!=='none' && user[r]!==q.expect[r])
       return q.expect[r]==='shade'
         ? 'The region is right but the mark is wrong: a universal proposition <em>empties</em> its region, and so the region is shaded. What an affirmative universal asserts about existence is drawn with a ⊗, and only where the conclusion needs it.'
-        : 'The region is right but the mark is wrong: “some” asserts existence, and so calls for an ×. Shading would declare that very region empty, the opposite of what is said.';
+        : (partO
+          ? 'The region is right but the mark is wrong: a particular premise calls for an ×, which for an O premise only marks the region and asserts no existence. Shading would declare that very region empty, the opposite of what the diagram should show.'
+          : 'The region is right but the mark is wrong: “some” asserts existence, and so calls for an ×. Shading would declare that very region empty, the opposite of what is said.');
   }
   const strayImp = REGIONS3.filter(r=>user[r]==='imp' && q.expect[r]!=='imp');
   if(strayImp.length && !imp)
