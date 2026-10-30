@@ -5787,6 +5787,16 @@ if(typeof document!=='undefined'){
         if(!parts.length) pushText(parts, textFrom(body, {skipButtons:true}));
       }
       visibleAnswerRows().forEach(t=>parts.push(t));
+      /* After an answer: the verdict and the explanation, read as shown
+         (diagram drawings, the diagram key, and the points tally are skipped) */
+      const fb = $('feedback');
+      if(fb && fb.classList.contains('show')){
+        const c = fb.cloneNode(true);
+        c.querySelectorAll('svg, .venn-key, .fb-points, [aria-hidden="true"]').forEach(e=>e.remove());
+        c.querySelectorAll('br').forEach(b=>b.replaceWith(' '));
+        c.querySelectorAll('div').forEach(d=>d.prepend(' '));
+        pushText(parts, c.textContent);
+      }
       return parts.join('. ').replace(/\.\s*\./g, '.').replace(/\s+/g, ' ').trim();
     }
 
