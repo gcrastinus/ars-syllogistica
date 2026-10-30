@@ -3303,7 +3303,7 @@ const ENTH_POOL = [
   {tier:1, txt:'The mushroom is safe to eat; the squirrels eat it.',
    correct:'Whatever the squirrels eat is safe for a man to eat',
    traps:['Whatever is safe for a man, the squirrels will eat','Squirrels know which mushrooms are poisonous','Some things the squirrels eat are safe for a man'],
-   why:'The argument is valid only through the universal, and the universal is deadly: squirrels can eat amanitas that would kill a grown man. What is safe for one animal is not safe for another, and the tacit premise ignores the difference; it stays tacit for good reason.'},
+   why:'The argument is valid only through the universal, and the universal is deadly: an animal may eat without harm a mushroom that would sicken or kill a man. What is safe for one animal is not safe for another, and the tacit premise ignores the difference; it stays tacit for good reason.'},
   {tier:1, txt:'She must love the sea; she grew up on the coast.',
    correct:'Whoever grows up on the coast loves the sea',
    traps:['Whoever loves the sea grew up on the coast','She has lived within sight of the water all her life','Some who grow up on the coast love the sea'],
