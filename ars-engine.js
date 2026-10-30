@@ -92,7 +92,8 @@ const PLURAL_EX = {
   'thing that has sensitive powers':'things that have sensitive powers',
   'thing that can fly':'things that can fly',
   'thing that has fins':'things that have fins',
-  'thing made by man':'things made by man'
+  'thing made by man':'things made by man',
+  'fish':'fish'
 };
 const PLURAL_EX_REV = {};
 for(const k in PLURAL_EX) PLURAL_EX_REV[PLURAL_EX[k]] = k;
