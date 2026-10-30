@@ -4835,7 +4835,9 @@ function formatQuizItem(q){
 
   if(q.kind==='imm'){
     if(q.sub==='op'){
-      out.instr = `Give the ${q.op} in standard form (or “none”).`;
+      out.instr = q.equipNone
+        ? 'Does this placing of the negative make an equipollent of an opposed proposition? If it does, give it in standard form; if not, write “none.”'
+        : `Give the ${q.op} in standard form (or “none”).`;
       out.stemHtml = `<div class="qprompt">${q.note ? q.note+' ' : ''}${q.stem || immPropText(q.pr)}.</div>`;
       out.workClass = 's1';
       out.answerText = q.expected ? immPropText(q.expected) : 'none';

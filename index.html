@@ -4692,7 +4692,7 @@ if(typeof document!=='undefined'){
     } else if(q.kind==='imm'){
       if(q.sub==='op'){
         const shown = q.stem || immPropText(q.pr);
-        body.innerHTML = (q.note ? `<div class="gloss">${q.note}</div>` : '') + `<div class="q-instr" style="margin-bottom:6px">Give the <strong>${q.op}</strong> of:</div>
+        body.innerHTML = (q.note ? `<div class="gloss">${q.note}</div>` : '') + `<div class="q-instr" style="margin-bottom:6px">${q.equipNone ? 'Does this placing of the negative make an equipollent of an opposed proposition? If it does, give it in standard form; if not, write “none.”' : `Give the <strong>${q.op}</strong> of:`}</div>
           <div class="syllogism" style="width:auto; text-align:center">${shown}.</div>`;
       } else {
         body.innerHTML = `<div class="syllogism" style="width:auto; text-align:center">
