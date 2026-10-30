@@ -3496,7 +3496,7 @@ const FAL_KINDS = {
     def:'It is not the conclusion that was in dispute. A real refutation must contradict the very thing said, in the same respect, at the same time.',
     ans:'By restating the original claim in the same words, and asking whether it has been touched.',
     doc:'MISSING THE POINT (the schools call it ignorance of the refutation) proves something, but not the thing that was denied.'},
-  petitio:{side:'extra', mod:'begging the question, or circular reasoning, that is, arguing in a circle', name:'Begging the question — assuming what you set out to prove',
+  petitio:{side:'extra', mod:'begging the question, or circular reasoning, that is, arguing in a circle', name:'Begging the question — assuming what was to be proved',
     app:'The premise is granted and the conclusion follows from it perfectly well.',
     def:'Nobody who doubted the conclusion could have granted that premise. The argument has assumed the point at issue.',
     ans:'By asking whether someone who doubted the conclusion could accept the premise.',
@@ -3867,19 +3867,19 @@ const DIAL_TOPICS = [
 /* Given a thesis, which place will supply an argument? This is what the schools
    called the science of FINDING (inventio), and it is what the Topics is for. */
 const INVENT_ITEMS = [
-  {tier:1, k:'opp',  t:'You must show that laziness is to be blamed, and everyone already grants that hard work is to be praised.'},
-  {tier:1, k:'gen',  t:'You must show that this oak will one day die, and everyone grants that every living thing dies.'},
-  {tier:1, k:'def',  t:'You must show that this shape is not a square, and you have its definition in hand.'},
-  {tier:1, k:'cause',t:'You must show that this tool is a bad one, and everyone agrees what the tool is for.'},
-  {tier:2, k:'conj', t:'You must show that acting bravely is worth doing, and your opponent has already granted that bravery is worth having.'},
-  {tier:2, k:'more', t:'You must show that a rich man should give to the poor, and the audience already grants that a poor man should.'},
-  {tier:2, k:'like', t:'You must show that a state needs one person at its head, and the audience knows that a ship needs one pilot.'},
-  {tier:2, k:'whole',t:'You must show that this chapter is worth reading, and everyone grants that the book is worth reading.'},
-  {tier:3, k:'prop', t:'You must show that this creature is a man, and you have marks that belong to men alone and always.'},
-  {tier:3, k:'auth', t:'You must show that the fever should be let run, and you are no physician, but every physician of standing says so.'},
-  {tier:3, k:'spec', t:'You must show that some virtue can be taught, and it is granted that justice can be taught.'},
-  {tier:5, k:'nom',  t:'You must show that what he calls a democracy is nothing of the sort, and the word itself says rule by the people.'},
-  {tier:5, k:'opp',  t:'You must show that peace would mend our troubles, and it is agreed that the war caused them.'},
+  {tier:1, k:'opp',  t:'We must show that laziness is to be blamed, and everyone already grants that hard work is to be praised.'},
+  {tier:1, k:'gen',  t:'We must show that this oak will one day die, and everyone grants that every living thing dies.'},
+  {tier:1, k:'def',  t:'We must show that this shape is not a square, and we have its definition in hand.'},
+  {tier:1, k:'cause',t:'We must show that this tool is a bad one, and everyone agrees what the tool is for.'},
+  {tier:2, k:'conj', t:'We must show that acting bravely is worth doing, and our opponent has already granted that bravery is worth having.'},
+  {tier:2, k:'more', t:'We must show that a rich man should give to the poor, and the audience already grants that a poor man should.'},
+  {tier:2, k:'like', t:'We must show that a state needs one person at its head, and the audience knows that a ship needs one pilot.'},
+  {tier:2, k:'whole',t:'We must show that this chapter is worth reading, and everyone grants that the book is worth reading.'},
+  {tier:3, k:'prop', t:'We must show that this creature is a man, and we have marks that belong to men alone and always.'},
+  {tier:3, k:'auth', t:'We must show that the fever should be let run, and we are no physicians, but every physician of standing says so.'},
+  {tier:3, k:'spec', t:'We must show that some virtue can be taught, and it is granted that justice can be taught.'},
+  {tier:5, k:'nom',  t:'We must show that what he calls a democracy is nothing of the sort, and the word itself says rule by the people.'},
+  {tier:5, k:'opp',  t:'We must show that peace would mend our troubles, and it is agreed that the war caused them.'},
   {tier:5, k:'cause',t:'We must show that this medicine will do harm, and it is known to contain a poison.'}
 ];
 function genDialInventQ(d){
