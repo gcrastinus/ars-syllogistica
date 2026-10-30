@@ -4599,7 +4599,7 @@ const DEMO_ITEMS = [
   {tier:3, k:'none', t:'Most mothers love their children; Anna is a mother; so Anna loves her children.', why:'The major holds only for the most part, so the argument is probable, not a demonstration.'},
   {tier:4, k:'none', t:'What the experts agree on is true; the experts agree that the bridge is safe; so the bridge is safe.', why:'Agreement of the experts gives a probable premise, which belongs to dialectic.'},
   {tier:4, k:'pq', t:'Whatever is rational can laugh; every man is rational; so every man can laugh.', why:'Rationality is the proper cause of the power to laugh.'},
-  {tier:4, k:'eff', t:'Whatever has a fever has an infection; this patient has a fever; so he has an infection.', why:'The fever is taken as a sign and effect, so at best this shows the fact.'},
+  {tier:4, k:'none', t:'Whatever has a fever has an infection; this patient has a fever; so he has an infection.', why:'Fever has many causes, so the major holds only for the most part.'},
   {tier:5, k:'none', t:'Every politician seeks power; this man is a politician; so he seeks power.', why:'The major is a common opinion, true for the most part at best, so the argument is probable.'}
 ];
 const PERSE_LABEL = {p1:'Per se in the first way: part of the definition', p2:'Per se in the second way: the subject defines it', p4:'Per se in the fourth way: the subject causes it', pa:'Per accidens: neither defines the other'};
@@ -4623,7 +4623,7 @@ const DEMO_FAULTS = [
   {k:'notcause', t:'Whatever does not twinkle is near; the planets do not twinkle; so the planets are near.'},
   {k:'notcause', t:'Whatever is not an animal does not breathe; a wall is not an animal; so a wall does not breathe.'},
   {k:'alien', t:'In any kind where there is something greater and something less, there is something equal; there are squares greater and less than a circle; so there is a square equal to it.'},
-  {k:'alien', t:'Every whole is greater than its part; the diameter of a circle is a part of the circle; so the circumference is longer than the diameter.'}
+  {k:'alien', t:'Every whole is greater than its part; the diameter is a part of the whole circle; so the circle is greater than its diameter.'}
 ];
 const DEMO_FAULT_WHY = {false:'A demonstration must proceed from true premises.', probable:'The premises of a demonstration must be necessary, not true only for the most part.',
   notcause:'The middle term is true but is not the proper cause of the conclusion, so this shows only the fact.',
