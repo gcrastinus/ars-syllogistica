@@ -3331,7 +3331,7 @@ const ENTH_POOL = [
   {tier:2, txt:'There was a frost overnight; the birdbath is iced over.',
    correct:'Whenever the birdbath is iced over, there has been a frost',
    traps:['Whenever there is a frost, the birdbath ices over','Ice is nothing but frozen water','Some frosts leave the birdbath iced over'],
-   why:'This is a necessary sign, like Aristotle’s example of milk. Water turns to ice only in freezing air, so the tacit premise holds of necessity, and the enthymeme concludes as firmly as any syllogism. The converse, true as it is, would conclude nothing, since validity depends on the direction of the premise, not merely on its truth.'},
+   why:'This is a necessary sign, like Aristotle’s example of milk. Standing water out of doors does not freeze over unless the night is cold enough for frost, so the tacit premise holds of necessity, and the enthymeme concludes as firmly as any syllogism. The converse, true as it is, would conclude nothing, since validity depends on the direction of the premise, not merely on its truth.'},
   {tier:2, txt:'The harvest will fail; the bees are vanishing from the orchard.',
    correct:'Where the bees fail, the harvest fails',
    traps:['Where the harvest fails, the bees have failed','The bees serve the blossom, and the blossom the fruit','Some harvests fail when the bees vanish'],
