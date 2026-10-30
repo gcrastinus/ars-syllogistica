@@ -6,8 +6,7 @@ Usage:
       default input: /workspace/deck-split-logica/quick-all.json
       format: {deckId: {"quick": [{"html", "from", "verbatim", "card"}, ...], "leftOut": [...]}}
 
-Whole sections: entries keyed "section:art" / "section:science" are accepted, and so are the forms
-"art", "science", "section-art", "section_art", "Logic as an Art" and "Logic as a Science". A file without them is fine.
+Whole-section entries (any key starting "section") are skipped: whole sections have only their Full recitation.
 
 Decks already in recitation-quick.js are kept unless the input supplies them again.
 Each line is written as {html, card, from}: html is shown in the tablet; card and from (the source Full lines) are notes for editors.
@@ -30,25 +29,17 @@ def current():
 
 def known_ids():
     ids = list(ORDER)
-    ids_tail = ['section:art', 'section:science']
     adv = open(os.path.join(ROOT, 'ars-advanced.js'), encoding='utf8').read()
     ids += [i for i in re.findall(r"\bid:\s*'(adv-[a-z0-9-]+)'", adv) if i not in ids]
-    return ids + ids_tail
+    return ids
 
-SECTION_ALIASES = {'art': 'section:art', 'science': 'section:science',
-                   'logic as an art': 'section:art', 'logic as a science': 'section:science'}
-
-def norm_id(k):
-    k0 = k.strip()
-    low = k0.lower()
-    for pre in ('section:', 'section-', 'section_'):
-        if low.startswith(pre): low = low[len(pre):]; break
-    return SECTION_ALIASES.get(low, k0)
+def is_section(k):
+    return k.strip().lower().startswith('section')
 
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else '/workspace/deck-split-logica/quick-all.json'
-    data = {norm_id(k): v for k, v in json.load(open(src, encoding='utf8')).items()}
-    only = [norm_id(x) for x in sys.argv[2:]]   # optional deck or section ids: integrate only these
+    data = {k.strip(): v for k, v in json.load(open(src, encoding='utf8')).items() if not is_section(k)}
+    only = [x.strip() for x in sys.argv[2:]]   # optional deck ids: integrate only these
     if only: data = {k: v for k, v in data.items() if k in only}
     out = current()
     ids = known_ids()

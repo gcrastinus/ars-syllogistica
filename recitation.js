@@ -36,10 +36,9 @@
   advances it the same way, so the deck is listed once in "Time to recite again", due from its latest recitation.
   Saved progress from before Quick: once (recitations.quickMigrated), every deck item already present is a Full
   recitation, and it is marked Quick done too (quickDoneAt from revealedAt, or lastRecitedAt, or the time of migration).
-  The two whole-section recitations work the same way when recitation-quick.js has lines for "section:art" or
-  "section:science" (ARS.sectionQuick): Quick is keyed 'quick:section:<id>', kept in items['section:<id>'].quick,
-  and shares that item's schedule. Old section items are migrated as above. "Done" opens Full in the menu only;
-  the tablet stays on the revealed Quick recitation. Quick needs the same minimum of writing as Full (80 words).
+  The whole-section recitations have no Quick: they are Full only, as before.
+  "Done" opens Full in the menu only; the tablet stays on the revealed Quick recitation.
+  Quick needs the same minimum of writing as Full (80 words).
 
   A later print view sets record.text beside record.groups. Each point's text is the outline line,
    and checked is the box as the student left it. The line is copied when the outline is opened,
@@ -128,7 +127,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
       /* Before Quick existed, every deck item was a Full recitation: count it as Quick done as well. */
       Object.keys(r.items).forEach(k => {
         const it = r.items[k];
-        if (k.indexOf('quick:') === 0 || !it || typeof it !== 'object' || it.quickDoneAt) return;
+        if (k.indexOf(':') >= 0 || !it || typeof it !== 'object' || it.quickDoneAt) return;
         it.quickDoneAt = it.revealedAt || (it.record && it.record.revealedAt) || it.lastRecitedAt || Date.now();
         if (it.lastRecitedAt){ it.fullDoneAt = it.fullDoneAt || it.lastRecitedAt; it.lastKind = it.lastKind || 'full'; }
       });
@@ -170,15 +169,8 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
 
   function isQuickKey(key){ return typeof key === 'string' && key.indexOf('quick:') === 0; }
   function baseId(key){ return isQuickKey(key) ? key.slice(6) : key; }
-  function isSectionKey(key){ return typeof key === 'string' && key.indexOf('section:') === 0; }
-  function sectionOf(key){ return (ARS.structure || []).find(s => s.id === key.slice(8)) || { items:[] }; }
-  function quickLines(id){
-    if (isSectionKey(id)){ const q = ARS.sectionQuick && ARS.sectionQuick[id]; return Array.isArray(q) && q.length ? q : null; }
-    const d = ARS.decks && ARS.decks[id];
-    return d && Array.isArray(d.quick) && d.quick.length ? d.quick : null;
-  }
   function hasQuick(id){
-    if (isSectionKey(id)) return !!quickLines(id);
+    if (typeof id === 'string' && id.indexOf('section:') === 0) return false;   /* whole sections: Full only */
     const d = ARS.decks && ARS.decks[id];
     return !!(d && Array.isArray(d.quick) && d.quick.length);
   }
@@ -190,11 +182,8 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   /* Whether a menu key can be opened now. */
   function keyOpen(key){
     if (!key) return false;
+    if (key.indexOf('section:') === 0) return sectionReady((ARS.structure || []).find(s => s.id === key.slice(8)) || { items:[] });
     const id = baseId(key);
-    if (isSectionKey(id)){
-      if (!sectionReady(sectionOf(id))) return false;
-      return isQuickKey(key) ? hasQuick(id) : quickDone(id);
-    }
     if (!isUnlocked(id)) return false;
     if (isQuickKey(key)) return hasQuick(id);
     return hasOutline(id) && quickDone(id);
@@ -261,14 +250,10 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
 
   function liveGroups(key){
     if (!key) return null;
-    if (isQuickKey(key) && isSectionKey(baseId(key))){
-      if (!keyOpen(key)) return null;
-      return [{ deck: baseId(key), title: sectionOf(baseId(key)).name, points: quickLines(baseId(key)) }];
-    }
     if (key.indexOf('section:') === 0){
       const id = key.slice(8);
       const sec = (ARS.structure || []).find(s => s.id === id);
-      if (!sec || !sectionReady(sec) || !keyOpen(key)) return null;
+      if (!sec || !sectionReady(sec)) return null;
       const parts = sectionRecitation(id);
       return parts.length ? parts : null;
     }
@@ -346,7 +331,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   /* The menu and the tablet name the two recitations of a deck that has a Quick one. */
   function menuName(key){
     const id = baseId(key);
-    if (hasQuick(id)) return (isQuickKey(key) ? 'Quick: ' : 'Full: ') + labelHTML(id);
+    if (key.indexOf('section:') !== 0 && hasQuick(id)) return (isQuickKey(key) ? 'Quick: ' : 'Full: ') + labelHTML(id);
     return labelHTML(key);
   }
 
@@ -434,7 +419,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   function optButton(key, html, noteText, on){
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'recite-opt' + (isSectionKey(baseId(key)) ? ' recite-opt-section' : '');
+    b.className = 'recite-opt' + (key.indexOf('section:') === 0 ? ' recite-opt-section' : '');
     b.dataset.key = key;
     b.setAttribute('role', 'option');
     if (!on) b.disabled = true;
@@ -484,13 +469,6 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
       else if (!loaded) sNote = '';
       else if (sectionReady(sec)) sOn = true;
       else sNote = 'Outline not yet written.';
-      const sKey = 'section:' + sec.id;
-      if (sOn && hasQuick(sKey)){
-        menuList.appendChild(optButton('quick:' + sKey, menuName('quick:' + sKey), '', true));
-        const open = quickDone(sKey);
-        menuList.appendChild(optButton(sKey, menuName(sKey), open ? '' : 'Press "Done" on Quick to open Full.', open));
-        return;
-      }
       menuList.appendChild(optButton('section:' + sec.id, sectionWholeLabel(sec), sNote, sOn));
     });
     menuList.dataset.ready = loaded ? '1' : '0';
@@ -527,7 +505,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
       renderMenu(true);
       let pick = want;
       /* A deck with a Quick recitation opens on the kind last recited, or on Quick if neither has been. */
-      if (pick && !isQuickKey(pick) && hasQuick(pick)){
+      if (pick && !isQuickKey(pick) && pick.indexOf('section:') !== 0 && hasQuick(pick)){
         const host = bag().items[pick];
         if (!host || !host.lastRecitedAt || host.lastKind === 'quick') pick = 'quick:' + pick;
       }
