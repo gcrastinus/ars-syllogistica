@@ -4286,7 +4286,7 @@ const COMP_TRUE = {
 };
 const COMP_RESOLVE = {
   excl:  'Two: that the subject has it, and that nothing else does',
-  exc:   'Three: that the rest have it, that the excepted belongs, and that it lacks it',
+  exc:   'Three: that the rest have it, that the one excepted is one of them, and that it lacks it',
   redup: 'Two: that the subject has the feature, and that the feature is the reason',
   simp:  'One: it is a simple categorical proposition'
 };
