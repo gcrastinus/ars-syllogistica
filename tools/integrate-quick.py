@@ -6,6 +6,9 @@ Usage:
       default input: /workspace/deck-split-logica/quick-all.json
       format: {deckId: {"quick": [{"html", "from", "verbatim", "card"}, ...], "leftOut": [...]}}
 
+Whole sections: entries keyed "section:art" / "section:science" are accepted, and so are the forms
+"art", "science", "section-art", "section_art", "Logic as an Art" and "Logic as a Science". A file without them is fine.
+
 Decks already in recitation-quick.js are kept unless the input supplies them again.
 Each line is written as {html, card, from}: html is shown in the tablet; card and from (the source Full lines) are notes for editors.
 To add one deck by hand instead, add an entry to recitation-quick.js:  "act2": [ {"html": "...", "card": "1: ...", "from": "line 3"}, ... ]
@@ -27,19 +30,32 @@ def current():
 
 def known_ids():
     ids = list(ORDER)
+    ids_tail = ['section:art', 'section:science']
     adv = open(os.path.join(ROOT, 'ars-advanced.js'), encoding='utf8').read()
     ids += [i for i in re.findall(r"\bid:\s*'(adv-[a-z0-9-]+)'", adv) if i not in ids]
-    return ids
+    return ids + ids_tail
+
+SECTION_ALIASES = {'art': 'section:art', 'science': 'section:science',
+                   'logic as an art': 'section:art', 'logic as a science': 'section:science'}
+
+def norm_id(k):
+    k0 = k.strip()
+    low = k0.lower()
+    for pre in ('section:', 'section-', 'section_'):
+        if low.startswith(pre): low = low[len(pre):]; break
+    return SECTION_ALIASES.get(low, k0)
 
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else '/workspace/deck-split-logica/quick-all.json'
-    data = json.load(open(src, encoding='utf8'))
-    only = sys.argv[2:]   # optional deck ids: integrate only these
+    data = {norm_id(k): v for k, v in json.load(open(src, encoding='utf8')).items()}
+    only = [norm_id(x) for x in sys.argv[2:]]   # optional deck or section ids: integrate only these
     if only: data = {k: v for k, v in data.items() if k in only}
     out = current()
     ids = known_ids()
     for deck, rec in data.items():
-        lines = [{k: q[k] for k in ('html', 'card', 'from') if k in q} for q in (rec.get('quick') or []) if q.get('html', '').strip()]
+        raw = rec if isinstance(rec, list) else (rec or {}).get('quick') or []
+        raw = [{'html': q} if isinstance(q, str) else q for q in raw]
+        lines = [{k: q[k] for k in ('html', 'card', 'from') if k in q} for q in raw if (q.get('html') or '').strip()]
         if not lines:
             print('skip ' + deck + ': no lines'); continue
         if deck not in ids:

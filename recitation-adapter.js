@@ -44,6 +44,14 @@ ARS.structure = [
 ];
 /* No roman, so the menu heading is the part name. The whole-part line uses the shared wording. */
 ARS.reciteWords = { section: 'Part', prelim: 'Part' };
+/* Quick recitations for the whole sections: keys "section:art" and "section:science" in recitation-quick.js.
+   No lines: the section has only its Full recitation, as before. */
+ARS.sectionQuick = {};
+ARS.structure.forEach(sec => {
+  const q = (window.__arsQuickRecitations || {})['section:' + sec.id];
+  const lines = Array.isArray(q) ? q.map(x => (typeof x === 'string' ? x : x && x.html)).filter(Boolean) : [];
+  if (lines.length) ARS.sectionQuick['section:' + sec.id] = lines;
+});
 
 const RECITE_PROGRESS_KEY = 'arsSyllogistica.progress.v1';
 const recite$ = id => document.getElementById(id);
