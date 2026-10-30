@@ -1,23 +1,24 @@
 /* One active tab at a time. Progress lives in localStorage, and two tabs writing it at once
    would overwrite each other, so only one tab is active. A second tab shows a notice with
    "Use it here"; choosing it makes that tab active (reloading it with the latest progress)
-   and the other tab stops reading aloud and shows the notice in turn. The active tab renews
-   its claim every 2 seconds; a claim older than about 5 seconds (a tab closed or crashed)
-   is released, so a new tab simply takes over. */
+   and the other tab stops reading aloud and shows the notice in turn.
+   The lock is a Web Lock (navigator.locks), held by the active tab for as long as the page
+   lives. The browser releases it the moment that tab is closed, reloaded, crashes or is
+   discarded, so there is no heartbeat and no stale claim; a waiting tab takes over at once.
+   Where Web Locks are unavailable (old browsers, file://), nothing is blocked. */
 (function(){
   'use strict';
   var me = document.currentScript;
   var APP = (me && me.getAttribute('data-app')) || 'This course';
   var KEY = (me && me.getAttribute('data-key')) || 'arsActiveTab';
-  var BEAT = 2000, STALE = 5000;
-  var store; try { store = window.localStorage; store.getItem(KEY); } catch (e) { return; }
-  var id;
-  try { id = sessionStorage.getItem(KEY + '.id'); } catch (e) {}
-  if (!id) { id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); try { sessionStorage.setItem(KEY + '.id', id); } catch (e) {} }
-  var active = false, timer = null, box = null;
+  var NAME = 'ars-tab-lock:' + KEY;
+  var locks = null;
+  try { if (location.protocol !== 'file:' && window.isSecureContext && navigator.locks && typeof navigator.locks.request === 'function') locks = navigator.locks; } catch (e) {}
+  if (!locks) return;   /* fallback: never block */
+  try { localStorage.removeItem(KEY); } catch (e) {}   /* old heartbeat claim, no longer used */
 
-  function read(){ try { return JSON.parse(store.getItem(KEY) || 'null'); } catch (e) { return null; } }
-  function claim(){ try { store.setItem(KEY, JSON.stringify({ id: id, t: Date.now() })); } catch (e) {} }
+  var active = false, box = null, holding = false, waiting = false, gen = 0;
+
   function stopSpeech(){
     try { if (typeof window.__arsStopSpeak === 'function') window.__arsStopSpeak(); } catch (e) {}
     try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
@@ -50,18 +51,60 @@
       box.querySelector('.tab-lock-msg').textContent = APP + ' is open in another tab.';
       box.querySelector('.tab-lock-note').textContent = 'If you use it here, the other tab will stop, and this one will reload with your saved progress. ' +
         'Your saved progress carries over, but an exercise you are in the middle of will start over, and its unfinished answers are lost.';
-      box.querySelector('.tab-lock-btn').onclick = function(){ claim(); location.reload(); };
+      box.querySelector('.tab-lock-btn').onclick = steal;
     }
     if (!box.parentNode) document.body.appendChild(box);
     document.body.classList.add('tab-locked');
     try { box.querySelector('.tab-lock-btn').focus(); } catch (e) {}
   }
   function hide(){ if (box && box.parentNode) box.parentNode.removeChild(box); document.body.classList.remove('tab-locked'); }
-  function activate(){
-    active = true; claim(); hide();
-    clearInterval(timer); timer = setInterval(function(){ var o = read(); if (o && o.id !== id) deactivate(); else claim(); }, BEAT);
+  function deactivate(){ active = false; stopSpeech(); show(); }
+
+  /* Hold the lock until the page goes away (or another tab steals it). */
+  function hold(lock, onGranted){
+    if (!lock) return null;
+    holding = true; active = true; hide();
+    if (onGranted) onGranted();
+    return new Promise(function(){});
   }
-  function deactivate(){ active = false; clearInterval(timer); timer = null; stopSpeech(); show(); }
+  function lost(){ holding = false; if (active) deactivate(); wait(); }
+
+  /* Queue behind the holder: granted when it closes, then this tab takes over with fresh progress. */
+  function wait(){
+    if (waiting || holding) return;
+    waiting = true; var g = gen;
+    locks.request(NAME, function(lock){
+      waiting = false;
+      if (g !== gen || !lock) return;
+      /* Granted only because a tab that just chose "Use it here" is reloading: let it have the lock back. */
+      if (recentSteal()) return new Promise(function(r){ setTimeout(r, 1500); }).then(function(){ setTimeout(wait, 0); });
+      var wasBlocked = !!(box && box.parentNode);
+      return hold(lock, function(){ if (wasBlocked) location.reload(); });
+    }).catch(function(){ waiting = false; if (!holding) setTimeout(wait, 0); });
+  }
+  function recentSteal(){ try { return Date.now() - (+localStorage.getItem(KEY + '.steal') || 0) < 10000; } catch (e) { return false; } }
+  /* Take the lock now (the other tab stops at once), then reload with the latest saved progress;
+     after the reload this tab takes the lock again. */
+  function steal(){
+    gen++;   /* drop any queued wait */
+    try { localStorage.setItem(KEY + '.steal', String(Date.now())); sessionStorage.setItem(KEY + '.steal', '1'); } catch (e) {}
+    locks.request(NAME, { steal: true }, function(lock){
+      return hold(lock, function(){ location.reload(); });
+    }).catch(function(){ lost(); });
+  }
+  function start(){
+    if (holding) return;
+    var answered = false, reclaim = false;
+    try { reclaim = sessionStorage.getItem(KEY + '.steal') === '1'; sessionStorage.removeItem(KEY + '.steal'); } catch (e) {}
+    if (reclaim && !recentSteal()) reclaim = false;
+    if (!reclaim) { try { localStorage.removeItem(KEY + '.steal'); } catch (e) {} }
+    locks.request(NAME, reclaim ? { steal: true } : { ifAvailable: true }, function(lock){
+      answered = true;
+      if (reclaim) { try { localStorage.removeItem(KEY + '.steal'); } catch (e) {} }
+      if (!lock) { deactivate(); wait(); return; }
+      return hold(lock);
+    }).catch(function(e){ if (answered) lost(); else { deactivate(); wait(); } });
+  }
 
   /* While the notice is up, nothing else in the page takes keys. */
   ['keydown', 'keypress', 'keyup'].forEach(function(t){
@@ -71,22 +114,18 @@
       e.stopImmediatePropagation(); e.preventDefault();
     }, true);
   });
-  window.addEventListener('storage', function(e){
-    if (e.key !== KEY && e.key !== null) return;
-    var o = read();
-    if (active && o && o.id !== id) deactivate();
+  /* Back/forward cache: a restored page may have lost its lock. */
+  window.addEventListener('pageshow', function(e){
+    if (!e.persisted) return;
+    locks.query().then(function(st){
+      var mine = holding && (st.held || []).some(function(l){ return l.name === NAME; });
+      if (!mine) { holding = false; waiting = false; gen++; start(); }
+    }).catch(function(){});
   });
-  window.addEventListener('pagehide', function(){
-    if (!active) return;
-    var o = read();
-    if (o && o.id === id) { try { store.removeItem(KEY); } catch (e) {} }
-  });
-  window.addEventListener('pageshow', function(e){ if (e.persisted) start(); });
 
-  function start(){
-    var o = read();
-    if (!o || o.id === id || Date.now() - (o.t || 0) > STALE) activate();
-    else deactivate();
+  function go(){
+    if (document.prerendering) document.addEventListener('prerenderingchange', start, { once: true });
+    else start();
   }
-  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
+  if (document.body) go(); else document.addEventListener('DOMContentLoaded', go);
 })();
