@@ -25,6 +25,10 @@ RECITE_IDS.concat(RECITE_SCIENCE_IDS).forEach(id => {
   const d = reciteDecks[id];
   if (!d || !Array.isArray(d.recitation) || !d.recitation.length) return;
   d.id = id;
+  /* Quick recitation (recitation-quick.js): offered first; the Full recitation opens after "Done" on Quick. */
+  const quick = (window.__arsQuickRecitations || {})[id];
+  const lines = Array.isArray(quick) ? quick.map(q => (typeof q === 'string' ? q : q && q.html)).filter(Boolean) : [];
+  if (lines.length) d.quick = lines;   /* no lines: the deck has only its Full recitation */
   ARS.decks[id] = d;
 });
 const recitePart = (id, name, ids) => ({

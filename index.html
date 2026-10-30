@@ -1216,6 +1216,16 @@ details.check[open] summary .chev{transform:rotate(90deg)}
   letter-spacing:0; font-weight:400; text-transform:none; color:var(--ink);
 }
 .recite-point input{accent-color:var(--accent)}
+/* Oct 30: the tablet keeps the standard face (Libre Caslon) whatever font is chosen in the menu. */
+html[data-font] :is(#recite-overlay, #recite-sheet), html[data-font] :is(#recite-overlay, #recite-sheet) *{
+  --display:var(--std-display); --text:var(--std-text);
+  font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial;
+}
+#recite-overlay, #recite-sheet{font-family:var(--std-text)} :is(#recite-overlay,#recite-sheet) input{font-family:inherit}
+html[data-font="copperplate"] :is(#recite-overlay, #recite-sheet){color:var(--ink)}
+.recite-tools .btn{min-height:44px}
+.recite-opt{min-height:44px}
+.recite-done{font-weight:600; border-color:var(--ink)}
 .syllogism .therefore, .chain-wrap .chain-line.concl .therefore{color:var(--ink)}
 a{color:var(--accent)}
 @media (max-width:1100px){
@@ -2176,6 +2186,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <button type="button" class="btn" id="recite-see" disabled>See full recitation</button>
       <button type="button" class="btn" id="recite-print" hidden>Print</button>
       <button type="button" class="btn" id="recite-new" hidden>Start a new recitation</button>
+      <button type="button" class="btn recite-done" id="recite-done" hidden aria-label="Done with the Quick recitation; opens the Full recitation">Done</button>
     </div>
     <p class="recite-note" id="recite-note" data-directions hidden>Write a fuller recitation to see the full one.</p>
     <div class="recite-columns" id="recite-columns">
@@ -6987,6 +6998,7 @@ if(typeof document!=='undefined'){
 })();
 }
 </script>
+<script src="recitation-quick.js"></script>
 <script src="recitation-adapter.js"></script>
 <script src="recitation.js"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
