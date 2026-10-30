@@ -3529,7 +3529,7 @@ const FAL_ITEMS = [
   {tier:5, k:'amphi',   t:'She saw the man with the telescope. So she was holding a telescope.'},
   {tier:1, k:'accent',  t:'I never said he stole the money, so I have shown he did not steal it.'},
   {tier:2, k:'accent',  t:'The paper is invalid. An invalid is a sick person. So the paper is unwell.'},
-  {tier:3, k:'accent',  t:'A desert is a dry waste. He got his just desert. So he was given a dry waste.'},
+  {tier:3, k:'accent',  t:'A desert is a dry waste. He got his just deserts. So he was given dry wastes.'},
   {tier:5, k:'accent',  t:'They will present the present at present. Three of the same word, so three of the same thing.'},
   {tier:1, k:'comp',    t:'The man who is silent can speak. So the man can speak and be silent at the same time.'},
   {tier:2, k:'comp',    t:'He who can carry one stone can carry this one, and that one, and the next. So he who can carry one stone can carry many.',
