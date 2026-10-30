@@ -513,7 +513,7 @@ function importExplain(fig, t1, t2, T, roles){
     const tp = premiseTerms(fig, j, roles);
     return `The affirmative premise “${propText('A', tp[0], tp[1])}” asserts that something falls under “${name}”, and the ⊗ marks that existence.`;
   }
-  return `No premise asserts that something falls under “${name}”, since it appears only in a negative premise. The diagram writes the particular negative conclusion with an ×, so it must suppose such a thing, and the ⊗ marks that supposition. On the medieval reading the mood is valid without it, because a particular negative asserts no existence and is true even if nothing falls under “${name}”.`;
+  return `No premise asserts that something falls under “${name}”, since it appears only in a negative premise. The diagram writes the particular negative conclusion with an ×, so it must suppose such a thing, and the ⊗ marks that supposition. On the traditional reading the mood is valid without it, because a particular negative asserts no existence and is true even if nothing falls under “${name}”.`;
 }
 const V2 = {
   circles:{A:{x:170,y:150,r:90}, B:{x:270,y:150,r:90}}, W:440, H:290,
@@ -757,7 +757,7 @@ function vennMistake3(q, user){
   if(imp && user[imp.regions[0]]!=='imp')
     return impSrc>=0
       ? `The conclusion asserts an existence that the premises, as drawn, do not yet show. The affirmative premise “${q.lines[impSrc]}” asserts that something falls under “${impName}”, so a ⊗ goes in the only unshaded region of “${impName}”. Missing this is the commonest slip here. On the modern reading, which gives no universal proposition existential import, these moods (the five weakened ones and Darapti, Felapton, Bramantip, and Fesapo) fail for exactly this reason.`
-      : `The conclusion is drawn as an ×, so the diagram must suppose that something falls under “${impName}”, and a ⊗ goes in the only unshaded region of “${impName}”. No premise asserts this, since “${impName}” appears only in a negative premise. On the medieval reading the mood is valid anyway, because a particular negative asserts no existence and is true even if nothing falls under “${impName}”; the ⊗ only lets the diagram show the conclusion.`;
+      : `The conclusion is drawn as an ×, so the diagram must suppose that something falls under “${impName}”, and a ⊗ goes in the only unshaded region of “${impName}”. No premise asserts this, since “${impName}” appears only in a negative premise. On the traditional reading the mood is valid anyway, because a particular negative asserts no existence and is true even if nothing falls under “${impName}”; the ⊗ only lets the diagram show the conclusion.`;
   if(strayImp.length)
     return `The ⊗ is in the wrong cell. It belongs in the only region of “${impName}” that the shading leaves open, and nowhere else.`;
   const expX = REGIONS3.filter(r=>q.expect[r]==='x'), usrX = REGIONS3.filter(r=>user[r]==='x');
@@ -2829,7 +2829,7 @@ function genPredIdentifyQ(d, forcedTarget){
    The rule is not shown (it would give the answer). */
 const PRED_PRINCIPLES = [
   {tier:1, q:'What turns a genus into one of the species under it?',
-   correct:'A difference (differentia) added to the genus',
+   correct:'By a difference (differentia) added to the genus',
    ds:['By an accident that belongs to it alone','By a property that follows from what it is','By listing the individuals under it'],
    why:'A species is the genus narrowed by the difference that constitutes it, as rational added to animal gives man.'},
   {tier:1, q:'What sets a PROPERTY (proprium) apart from an accident?',
