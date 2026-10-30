@@ -3543,7 +3543,7 @@ const FAL_ITEMS = [
   {tier:1, k:'figura',  t:'Nothing is better than lifelong happiness. A dry crust is better than nothing. So a dry crust is better than lifelong happiness.', w:'The word “nothing” has one meaning, but it has the form of a name, so it seems to name something.'},
   {tier:2, k:'figura',  t:'Nothing is lighter than a feather. This box is lighter than a feather. So this box is nothing.', w:'The word “nothing” has one meaning, but it has the form of a name, so it seems to name something.'},
   {tier:3, k:'figura',  t:'He is a false friend. So he is a friend, of the false sort.'},
-  {tier:5, k:'figura',  t:'A large mouse is a large animal, since a mouse is an animal and this one is large.'},
+  {tier:5, k:'secquid', t:'A large mouse is a large animal, since a mouse is an animal and this one is large.', w:'The mouse is large only in respect of mice; that relative greatness is taken as greatness without qualification.'},
   {tier:1, k:'secquid', t:'Cutting people with knives is a crime. Surgeons cut people with knives. So surgeons are criminals.', w:'A rule that holds generally is applied to a special case that the rule does not cover.'},
   {tier:2, k:'accid',   t:'You know your brother. That man in the mask is your brother. So you know that man in the mask.'},
   {tier:3, k:'accid',   t:'I know the man who is coming. Coriscus is the man who is coming. So I know Coriscus.'},
