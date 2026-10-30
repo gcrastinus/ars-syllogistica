@@ -2494,7 +2494,7 @@ const DIV_STOCK = {
     {tier:2, g:'card', t:'Playing cards into the hearts, the diamonds, and the clubs', w:'the spades are left out'},
     {tier:2, g:'metal', t:'Metals into gold, silver, and iron', w:'copper, tin, and lead are metals too, and they are left out of every member'},
     {tier:2, g:'living thing', t:'Living things into trees and animals', w:'herbs, grasses, and shrubs are left out'},
-    {tier:2, g:'bird', t:'Birds into those that swim and those that fly', w:'the ostrich neither swims nor flies, and so is left out of both members'},
+    {tier:2, g:'bird', t:'Birds into the songbirds and the birds of prey', w:'the ducks and the geese are left out of both members'},
     {tier:2, g:'ship', t:'Ships into those driven by oar and those driven by sail', w:'steamships are driven by neither, and so are left out; and the members also overlap, since the galleys were driven by both'},
     {tier:3, g:'colour', t:'Colors into the white and the black', w:'all the colors in between (red, green, and the rest) are left out'},
     {tier:5, g:'time', t:'Time into the past and the future', w:'the present is left out'},
