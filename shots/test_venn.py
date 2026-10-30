@@ -1,7 +1,7 @@
 # Playwright check of Exercise V feedback for I and O (wrong mark, wrong region / stray ⊗)
 import sys
 from playwright.sync_api import sync_playwright
-URL='http://localhost:8973/index.html'
+URL='http://localhost:8977/index.html'
 CASES=[ # name, type, region, clicks, expected snippet
  ('I_wrong_mark_imp','I','AB',3,'“Some S are P” itself asserts that something exists in this region'),
  ('O_wrong_mark_imp','O','X',3,'the × is only the diagram’s way of marking this region; the O proposition asserts no existence'),

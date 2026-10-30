@@ -91,7 +91,7 @@ Drafted 21 Oct 2026 from the final cards of the four study decks that open Logic
 14. **Contraries** (A and E) cannot both be true, though both may be false, and **subcontraries** (I and O) cannot both be false, though both may be true.
 15. **Subalterns** (A and I; E and O) share their quality: if the universal is true, the particular is true, and if the particular is false, the universal is false.
 16. Because the affirmatives carry existential import and the negatives do not, these relations hold even when the subject stands for nothing, for then A and I are false, and E and O are true.
-17. Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × declares that something is there, and these diagrams are taught at the head of that exercise.
+17. Exercise V draws single propositions on Venn diagrams, in which shading a region declares it empty and an × marks a region (for I, that something is there), and these diagrams are taught at the head of that exercise.
 18. Exercise VI treats opposition, equipollence, and conversion as properties of the proposition, and the study *The Square of Opposition* shows each relation for any pair of terms. Later logicians call these properties “immediate inferences.”
 19. Exercise VII treats the *modal* propositions, which say how the predicate belongs to the subject: necessarily, impossibly, or possibly.
 

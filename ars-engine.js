@@ -496,8 +496,8 @@ function genOrdinaryQ(d){
    universal premise (traditional existential import), not from a
    particular premise. Student states: none / shade / x / imp.
    ================================================================ */
-const VENN_KEY = 'Shading: the region is empty. ×: something is here. ⊗: something is here because an affirmative universal premise asserts that its subject exists, not because a particular premise says so.';
-const VENN_KEY1 = 'Shading: the region is empty. ×: something is here. ⊗: something is here because a universal affirmative proposition asserts that its subject exists, not because a particular proposition says so.';
+const VENN_KEY = 'Shading: the region is empty. ×: the region is marked (for I, something is here). ⊗: something is here because an affirmative universal premise asserts that its subject exists, not because of a particular premise.';
+const VENN_KEY1 = 'Shading: the region is empty. ×: the region is marked (for I, something is here). ⊗: something is here because a universal affirmative proposition asserts that its subject exists, not because of a particular proposition.';
 function vennKeyHtml(one){ return `<div class="venn-key">${one ? VENN_KEY1 : VENN_KEY}</div>`; }
 /* Which premise supplies the existence that a ⊗ on term T marks: the A
    premise whose subject is T, or -1 (Camestros, Camenos), where T is the
@@ -704,7 +704,7 @@ function vennMistake(q, user){
   if(q.type==='I' && user.AB==='none')
     return 'The × for “Some S are P” belongs in the <em>overlap</em>, since the proposition asserts a common member. It is tempting to mark the subject’s own crescent because the sentence begins with S, but the claim concerns what S and P share.';
   if(q.type==='O' && user.AB!=='none')
-    return '“Some S are not P” locates its witness in S <em>outside</em> P. Students often mark the overlap because both terms are mentioned, but the proposition places some S outside P, not inside it.';
+    return '“Some S are not P” places its × in S <em>outside</em> P. Students often mark the overlap because both terms are mentioned, but the proposition places some S outside P, not inside it.';
   return 'The first question is whether the proposition <em>empties</em> a region (shading it) or <em>populates</em> one (placing an ×). The second is which region it concerns: the subject’s crescent, or the overlap.';
 }
 
@@ -773,7 +773,7 @@ function vennMistake3(q, user){
     return `The ⊗ is in the wrong cell. It belongs in the only region of “${impName}” that the shading leaves open, and nowhere else.`;
   const expX = REGIONS3.filter(r=>q.expect[r]==='x'), usrX = REGIONS3.filter(r=>user[r]==='x');
   if(expX.length && usrX.join()!==expX.join())
-    return 'The placing of the × matters. The universal premises are shaded first, and the shading then decides which cell of the “some”-zone can still hold a witness. An × in a shaded cell asserts what was declared empty; an × on the wrong side of a circle asserts a membership never claimed.';
+    return 'The placing of the × matters. The universal premises are shaded first, and the shading then decides which cell of the “some”-zone can still hold the ×. An × in a shaded cell asserts what was declared empty; an × on the wrong side of a circle asserts a membership never claimed.';
   const expS = REGIONS3.filter(r=>q.expect[r]==='shade').length, usrS = REGIONS3.filter(r=>user[r]==='shade').length;
   if(usrS>expS)
     return 'There is too much shading. Only what the universal premises declare empty should be shaded, which is a lens of two cells for each. Students often shade the conclusion as well, but its content should appear of itself once the premises are pictured.';
@@ -4885,7 +4885,7 @@ function formatQuizItem(q){
   }
 
   if(q.kind==='venn'){
-    out.instr = 'Diagram what the proposition asserts (shade empty regions; mark × where something exists).';
+    out.instr = 'Diagram what the proposition asserts (shade empty regions; place an × in the region a particular proposition marks).';
     out.stemHtml = `<div class="qprompt">${q.sentence}.</div>` + _blankVenn2();
     out.workClass = '';
     const cm = vennStateToMarks(q.correct);

@@ -60,3 +60,44 @@ Reference texts read first: the Exercise V intro card (index.html 3090: "The × 
 - node tools/check.js: all enforced checks pass.
 - shots/test_venn.py (Playwright, chromium --no-sandbox, port 8973): Exercise V forced to I and to O; wrong mark (⊗), wrong mark (shading), and stray ⊗ in the wrong region all show the new text; no console errors. Screenshots in shots/.
 - Node check of vennMistake3 with I and O premises: both branches return the expected text.
+
+# Second pass: clear wording for the × (Timothy's decision: keep the × for O, no circle mark, no ○ selector)
+
+Line numbers are those after this commit.
+
+## 1. Legends and click directions
+- ars-engine.js 499 VENN_KEY. BEFORE: Shading: the region is empty. ×: something is here. ⊗: something is here because an affirmative universal premise asserts that its subject exists, not because a particular premise says so. AFTER: Shading: the region is empty. ×: the region is marked (for I, something is here). ⊗: something is here because an affirmative universal premise asserts that its subject exists, not because of a particular premise.
+- ars-engine.js 500 VENN_KEY1. Same change ("proposition" in place of "premise").
+- index.html 2036, 4677, 4688 (twice). BEFORE: twice for an × (something exists). AFTER: twice for an × (region marked; for I, something exists).
+- index.html 2042. BEFORE: Shading declares a region empty, an × declares that something is there, and a ⊗ … AFTER: Shading declares a region empty, an × marks a region (for I, that something is there), and a ⊗ …
+- index.html 2229 (Exercise VIII description). BEFORE: Shading declares a region empty; an × declares that something is there; a ⊗ declares … not because a particular premise says so. AFTER: Shading declares a region empty; an × marks a region (for I, that something is there); a ⊗ declares … not because of a particular premise.
+- index.html 2776, 3870 (recitation array), notes/recitations/recitation-act2.js 21, notes/recitations/LOGIC-AS-AN-ART-RECITATIONS.md 94 (kept in sync). BEFORE: shading a region declares it empty and an × declares that something is there. AFTER: shading a region declares it empty and an × marks a region (for I, that something is there).
+- index.html 2882 (Study Check feedback). BEFORE: Shading declares a region empty; an × declares that something is there. AFTER: Shading declares a region empty; an × marks a region (for I, that something is there).
+- index.html 3390 (Study Check feedback). BEFORE: A and E shade a region empty. I and O place an × to say that something is there. AFTER: A and E shade a region empty. I and O place an ×: for I it says that something is there, and for O it only marks the region.
+- teacher-quiz.html 388. BEFORE: place × where something exists. AFTER: place × in the region a particular proposition marks.
+
+## 2. Intro card (index.html 3090)
+- BEFORE: … and the particulars (I and O) place an × to say that something is there. … The × for O marks something there for the diagram, while O itself carries no existential import, so “Some unicorn is not white” is true.
+- AFTER: … and the particulars (I and O) place an ×: for I it says that something is there, and for O it only marks the region. … O itself carries no existential import, so “Some unicorn is not white” is true.
+
+## 3. Instruction (ars-engine.js 4888)
+- BEFORE: Diagram what the proposition asserts (shade empty regions; mark × where something exists).
+- AFTER: Diagram what the proposition asserts (shade empty regions; place an × in the region a particular proposition marks).
+
+## 4. "Witness"
+- ars-engine.js 707 (O only). BEFORE: “Some S are not P” locates its witness in S <em>outside</em> P. AFTER: “Some S are not P” places its × in S <em>outside</em> P.
+- ars-engine.js 776 (serves both I and O premises; about where the × goes). BEFORE: which cell of the “some”-zone can still hold a witness. AFTER: which cell of the “some”-zone can still hold the ×.
+- index.html 4999 (caption for "×?" cells; serves I and O). BEFORE: since one of those cells holds the witness, but the premises do not say which. AFTER: since the × belongs in one of those cells, but the premises do not say which.
+
+## Left unchanged
+- index.html 2023: reports the textbooks' convention (Venn, Copi, Hurley, Gensler) in quotation marks; it is an accurate report, and the course's own reading follows at 2042.
+- index.html 3389 ("occupied would need an ×"): answers a general question about what a diagram can mark; not a claim that O asserts existence.
+- ars-engine.js 776 second sentence ("An × in a shaded cell asserts what was declared empty"): about contradiction between marks, kept.
+- ars-engine.js 1391, index.html 4559, 4820 ("existential import supplying the witness"): about subalternation and conversion per accidens of universals; correct doctrine.
+- Doctrine cards on existential import of A and of affirmatives: unchanged.
+- teacher-quiz.html 388 keeps its existing dash ("mark the blank circles — shade …"); outside the scope of this change.
+
+## Verification (second pass)
+- node tools/check.js: all enforced checks pass.
+- shots/test_legends.py (Playwright, chromium --no-sandbox, port 8977) at 1280 and 390 wide, light and dark: home card (Exercise VIII), Exercise V lead-in cards, Venn lab click directions, Exercise V one-proposition question (directions plus VENN_KEY1), Exercise V two-premise question, Exercise VIII question (directions plus VENN_KEY). The new text is present, there is no horizontal overflow, and there are no console errors. Screenshots in shots/.
+- shots/test_venn.py rerun: all six I and O feedback cases pass.
