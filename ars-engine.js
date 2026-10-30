@@ -3848,8 +3848,8 @@ const DIAL_TOPICS = [
   {tier:2, k:'spec',t:'A robin can fly. So some bird can fly.'},
   {tier:2, k:'auth',t:'Every physician of standing holds that the fever must be let run. So it should be let run.'},
   {tier:2, k:'def',  t:'A definition must fit exactly what it defines. This one fits more. So it is no definition.'},
-  {tier:3, k:'more', t:'If even the innocent are punished under this law, how much more the guilty who are merely suspected.'},
-  {tier:3, k:'opp',  t:'If health is to be sought, sickness is to be avoided, since they are contraries, and the one follows from the other.'},
+  {tier:3, k:'more', t:'If even the innocent are punished under this law, how much more those who are suspected and not cleared.'},
+  {tier:3, k:'opp',  t:'If health is to be sought, sickness is to be avoided, since they are contraries.'},
   {tier:3, k:'like', t:'A ship needs one pilot, not a committee of them. So too, they argued, does a state.'},
   {tier:3, k:'whole',t:'The whole wall is white because it is plastered white. So this patch of it is white.'},
   {tier:5, k:'prop',t:'Whatever laughs is a man, and only man laughs. He laughs. So he is a man.'},
@@ -3877,10 +3877,10 @@ const INVENT_ITEMS = [
   {tier:2, k:'whole',t:'You must show that this chapter is worth reading, and everyone grants that the book is worth reading.'},
   {tier:3, k:'prop', t:'You must show that this creature is a man, and you have marks that belong to men alone and always.'},
   {tier:3, k:'auth', t:'You must show that the fever should be let run, and you are no physician, but every physician of standing says so.'},
-  {tier:3, k:'spec', t:'You must show that this particular act was unjust, and it has already been granted that acts of that kind are unjust.'},
+  {tier:3, k:'spec', t:'You must show that some virtue can be taught, and it is granted that justice can be taught.'},
   {tier:5, k:'nom',  t:'You must show that what he calls a democracy is nothing of the sort, and the word itself says rule by the people.'},
   {tier:5, k:'opp',  t:'You must show that peace would mend our troubles, and it is agreed that the war caused them.'},
-  {tier:5, k:'cause',t:'You must show that this argument is worthless, and you can show what produced it was a wish to win, not a wish for truth.'}
+  {tier:5, k:'cause',t:'We must show that this medicine will do harm, and it is known to contain a poison.'}
 ];
 function genDialInventQ(d){
   const tiers = defTiers(d);
@@ -3992,7 +3992,7 @@ const RESP_ITEMS = [
   {tier:2, th:'The heavier body always falls faster.', ob:'Two stones of different weight, dropped together, strike the ground together.',
    k:'full', w:'The observation is true, and the thesis as stated is false, so the respondent grants the objection and restates the thesis.'},
   {tier:2, th:'Every part of the wall is white, so the wall is white.', ob:'Every brick is light, yet the wall is not light.',
-   k:'conc', w:'Every premise of the thesis may be granted, but the consequence is denied: what holds of each part need not hold of the whole, as the bricks show.'},
+   k:'dist', w:'“What holds of each part holds of the whole” is true of what belongs to the whole through its parts, as color does, and false of what belongs to the parts only, as being light to lift does. Once that is distinguished, the thesis stands.'},
   {tier:3, th:'Knowledge is always of what cannot be otherwise.', ob:'But I know that you are sitting down, and you might stand up.',
    k:'dist', w:'“Knowledge” is said strictly, of what is demonstrated and cannot be otherwise, and loosely, of what we are sure of at the time. Once the senses are distinguished, the thesis holds in the strict sense.'},
   {tier:3, th:'A law binds everyone in the realm.', ob:'But the law was never published in this province, and nobody there has heard it.',
