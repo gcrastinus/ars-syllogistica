@@ -2597,7 +2597,7 @@ const DIVKIND_EG = {
   pot:['the soul into its power to know and its power to desire','the appetite into the sensitive appetite and the will'],
   acc:['apples into the red and the green','cloaks into the new and the old']
 };
-function divKindEgHtml(k){ return `<div class="rule-eg"><em>e.g.</em> ${DIVKIND_EG[k][0]}; &ensp; ${DIVKIND_EG[k][1]}.</div>`; }
+function divKindEgHtml(k){ return `<div class="rule-eg">e.g. ${DIVKIND_EG[k][0]}; &ensp; ${DIVKIND_EG[k][1]}.</div>`; }
 /* short adjectival form for the “X is …” gloss, and full label for the prompt */
 const DIVKIND_IS = {ess:'a logical division', int:'integral', pot:'a division by powers', acc:'accidental'};
 const DIVKIND_LABEL = {ess:'a LOGICAL division', int:'an INTEGRAL division', pot:'a DIVISION BY POWERS', acc:'an ACCIDENTAL division'};
@@ -3481,7 +3481,7 @@ const FAL_KINDS = {
     def:'The likeness is only in the form; the things named are of different sorts.',
     ans:'By asking what each word is actually naming; if the grammar runs parallel and the things do not, the argument rests on the grammar alone.',
     doc:'FIGURE OF SPEECH (De fallaciis, the treatise attributed to St. Thomas, calls it the likeness of a word) is when two expressions of the same form are treated as of the same sort.'},
-  accid:{side:'extra', modNote:'Modern books have no exact name for this fallacy. What they call the fallacy of accident is applying a general rule to a special case, which the schools place under <em>in a certain respect, taken flatly</em>.', name:'Accident — taking a passing feature for the thing itself',
+  accid:{side:'extra', modNote:'Modern books have no exact name for this fallacy. What they call the fallacy of accident is applying a general rule to a special case, which the schools place under “in a certain respect, taken flatly.”', name:'Accident — taking a passing feature for the thing itself',
     app:'The passing feature and the thing really do go together here.',
     def:'The passing feature and the thing are nevertheless not the same.',
     ans:'By asking whether the thing is taken as what it is, or under some feature it happens to have.',
@@ -3578,7 +3578,7 @@ const FAL_ITEMS = [
    levels, so the student must first settle "in the words, or outside them?" */
 /* The schools' name and the modern one, always together: a student should be
    able to read either book afterwards. */
-function falDoc(K){ return `${K.doc} <em>${K.modNote || `Modern books call this ${K.mod}.`}</em>`; }
+function falDoc(K){ return `${K.doc} ${K.modNote || `Modern books call this ${K.mod}.`}`; }
 /* an item's own explanation, where it needs one beyond the kind's doctrine */
 const falNote = it => it.w ? it.w+' ' : '';
 function falDistractors(k, d, n){
