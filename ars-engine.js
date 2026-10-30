@@ -4026,7 +4026,7 @@ const DIAL_DOCTRINE = [
   {tier:1, q:'Dialectic reasons from premises of what sort?',
    correct:'Probable ones, that is, what seems so to everyone, or to most, or to the wise',
    ds:['Ones that have been demonstrated and cannot be otherwise','Ones that are known to be false','Ones invented for the sake of the argument'],
-   why:'This is the definition Aristotle gives (<em>Topics</em> I.1), and St. Thomas repeats it (commentary on the <em>Posterior Analytics</em>, bk. I, lect. 31). The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
+   why:'This is the definition Aristotle gives (<em>Topics</em> I.1), and St. Thomas follows it (commentary on the <em>Posterior Analytics</em>, bk. I, lect. 8). The probable is not a guess about odds; it is what a reasonable person may be asked to grant.'},
   {tier:1, q:'What does dialectic reach, at its best?',
    correct:'A reasoned opinion, well supported but not proved',
    ds:['Certain knowledge of the cause','A persuasive speech','A story that makes sense of the facts'],
