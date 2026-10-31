@@ -192,11 +192,15 @@ header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; tex
   .part-heading{font-size:28px; letter-spacing:0}
 }
 
+
+/* Oct 31: control icons are drawn SVGs (no emoji on iOS) */
+.ctl-ico{display:block; flex:none; pointer-events:none}
+#dark-toggle .ctl-ico{margin:0 auto}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
-<button id="dark-toggle" title="Light / dark" aria-label="Toggle light and dark">☾ / ☀</button>
+<button id="dark-toggle" title="Light / dark" aria-label="Toggle light and dark"><svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
 <div class="wrap">
   <header>
     <div class="ornament mark"><svg class="orn mark" viewBox="0 0 16 16" aria-hidden="true"><use href="#star"/></svg></div>
@@ -235,7 +239,7 @@ header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; tex
 "use strict";
 /* ---------- theme ---------- */
 const dt = document.getElementById('dark-toggle');
-dt.onclick = ()=>{ document.body.classList.toggle('dark'); dt.textContent = '☾ / ☀'; };
+dt.onclick = ()=>{ document.body.classList.toggle('dark'); dt.innerHTML = '<svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>'; };
 
 /* ---------- static knowledge of the app ---------- */
 const SETS = [
