@@ -1685,13 +1685,17 @@ html[data-font="copperplate"] :is(.fb-detail, .fb-why, .fb-verdict){line-height:
 html[data-font="copperplate"] .fb-why{font-size:1.12em}
 html[data-font="italic"] :is(.fb-detail, .fb-why, .fb-verdict){line-height:1.6}
 html[data-font="italic"] .fb-why{font-size:1.06em}
+
+/* Oct 31: control icons are drawn SVGs (no emoji on iOS) */
+.ctl-ico{display:block; flex:none; pointer-events:none}
+#dark-toggle .ctl-ico, .pm-glyph .ctl-ico{margin:0 auto}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
 <div id="top-right-controls" class="top-right-controls">
 <div id="speak-unit" class="speak-unit">
-<button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud">▶</button>
+<button id="speak-toggle" type="button" title="Read this screen aloud" aria-label="Read this screen aloud"><svg class="ctl-ico ctl-play" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button>
 <div id="speak-rate" class="speak-rate">
   <button type="button" class="speak-rate-btn" aria-haspopup="listbox" aria-expanded="false" title="Reading speed" aria-label="Reading speed">▾</button>
   <ul class="speak-rate-menu" role="listbox" hidden>
@@ -1703,7 +1707,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
   </ul>
 </div>
 </div>
-<button id="dark-toggle" title="Light / dark" aria-label="Toggle dark mode" hidden>☾ / ☀</button>
+<button id="dark-toggle" title="Light / dark" aria-label="Toggle dark mode" hidden><svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
 <div class="set-wrap" id="set-wrap">
 <button type="button" id="set-btn" title="Dark mode and font" aria-label="Dark mode and font" aria-haspopup="true" aria-expanded="false" aria-controls="set-menu"><span aria-hidden="true">+</span></button>
 <div class="set-menu" id="set-menu" role="menu" aria-label="Display settings" hidden>
@@ -1724,9 +1728,9 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 </div>
 <button type="button" id="pm-btn" class="pm-btn" title="Menu" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="pm-menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h14M5 12h14M5 17h14"/></svg></button>
 <div class="pm-menu" id="pm-menu" role="menu" hidden>
-  <button type="button" role="menuitem" class="pm-item" id="pm-dark"><span class="pm-glyph" aria-hidden="true">☾</span><span class="pm-label">Dark mode</span></button>
+  <button type="button" role="menuitem" class="pm-item" id="pm-dark"><span class="pm-glyph" aria-hidden="true"><svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></span><span class="pm-label">Dark mode</span></button>
   <div class="pm-font" role="group" aria-labelledby="pm-font-head"><div class="set-head" id="pm-font-head">Font</div><div class="set-fonts"></div></div>
-  <button type="button" role="menuitem" class="pm-item" id="pm-play"><span class="pm-glyph" aria-hidden="true">▶</span><span class="pm-label">Read aloud</span></button>
+  <button type="button" role="menuitem" class="pm-item" id="pm-play"><span class="pm-glyph" aria-hidden="true"><svg class="ctl-ico ctl-play" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="pm-label">Read aloud</span></button>
   <div class="pm-rates" role="group" aria-label="Reading speed"><span class="pm-rates-label">Speed</span><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.5">1.5×</button><button type="button" data-rate="2">2×</button><button type="button" data-rate="2.5">2.5×</button><button type="button" data-rate="3">3×</button></div>
   <button type="button" role="menuitem" class="pm-item pm-lab" data-lab="lab1"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg><span class="pm-label">The Venn Diagram Workshop</span></button>
   <button type="button" role="menuitem" class="pm-item pm-lab" data-lab="lab2"><svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg><span class="pm-label">The Square of Opposition</span></button>
@@ -2391,10 +2395,10 @@ if(typeof document!=='undefined'){
     function syncItems(){
       const dark = document.body.classList.contains('dark');
       $('pm-dark').querySelector('.pm-label').textContent = dark ? 'Light mode' : 'Dark mode';
-      $('pm-dark').querySelector('.pm-glyph').textContent = dark ? '☀' : '☾';
+      $('pm-dark').querySelector('.pm-glyph').innerHTML = '<svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>';
       const speaking = speakBtn && speakBtn.classList.contains('speaking');
       $('pm-play').querySelector('.pm-label').textContent = speaking ? 'Stop reading' : 'Read aloud';
-      $('pm-play').querySelector('.pm-glyph').textContent = speaking ? '❚❚' : '▶';
+      $('pm-play').querySelector('.pm-glyph').innerHTML = speaking ? '<svg class="ctl-ico ctl-pause" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>' : '<svg class="ctl-ico ctl-play" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
       menu.querySelectorAll('.pm-rates [data-rate]').forEach(b=>b.setAttribute('aria-pressed', String(parseFloat(b.dataset.rate)===(state.speakRate||1))));
       const off = document.body.classList.contains('off-home');
       menu.querySelectorAll('.pm-lab').forEach(it=>{
@@ -5442,7 +5446,7 @@ if(typeof document!=='undefined'){
   const darkBtn = $('dark-toggle');
   function setDark(on){
     document.body.classList.toggle('dark', on);
-    darkBtn.textContent = '☾ / ☀';
+    darkBtn.innerHTML = '<svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>';
     try{ localStorage.setItem('arsDark', on?'1':'0'); }catch(err){}
   }
   darkBtn.onclick = ()=>setDark(!document.body.classList.contains('dark'));
@@ -5542,7 +5546,7 @@ if(typeof document!=='undefined'){
     function setSpeakingUI(on){
       speaking = on;
       btn.classList.toggle('speaking', on);
-      btn.textContent = on ? '❚❚' : '▶';
+      btn.innerHTML = on ? '<svg class="ctl-ico ctl-pause" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>' : '<svg class="ctl-ico ctl-play" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
       btn.title = on ? 'Stop reading' : 'Read this screen aloud';
       btn.setAttribute('aria-label', btn.title);
     }
@@ -7003,7 +7007,7 @@ if(typeof document!=='undefined'){
 <script src="recitation-adapter.js"></script>
 <script src="recitation.js"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
-<script src="tab-lock.js?v=20261030a" data-app="Ars Logica" data-key="arsLogica.activeTab">
+<script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>
 <script>
 /* wrap letters, mood codes and mood names in themed prose in .lt, so they show in the standard font */
