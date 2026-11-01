@@ -6470,7 +6470,8 @@ if(typeof document!=='undefined'){
     return gpUnlocked(id) ? 'learning' : 'locked';
   }
   function guidedLocked(id){ return gpPath==='guided' && typeof id==='number' && gpStateOf(id)==='locked'; }
-  function gpIsDue(id){ const r = gpProg && gpProg.sets && gpProg.sets[id];
+  function gpIsDue(id){ if(gpProg && gpTracking() && gpProg.spreadDay!==gpToday() && gpSpreadSets(gpProg, gpToday())) gpSave();
+    const r = gpProg && gpProg.sets && gpProg.sets[id];
     return !!(r && r.masteredOn && r.nextDue && r.nextDue<=gpToday()); }
 
   /* ---- per-exercise level gate: in the Guided Path, Levels IV & V open only
@@ -6565,7 +6566,32 @@ if(typeof document!=='undefined'){
 
   /* ---------------- Leitner review session (the Today queue) ---------------- */
   const gpReview = {active:false, queue:[], idx:0, per:{}, total:0, results:[], learnAfter:null};
-  function gpDueSets(){ return SETS.filter(s=>gpIsDue(s.id)); }
+  /* No pile-up (1 Nov 2026): at most GP_DAILY_SETS mastered exercises fall due on one day. Once a day the due
+     dates are walked from today: the most overdue (then the given order) keep their day up to the cap, and the
+     rest move to the next day. Only nextDue moves; box, pass, and mastery are kept. Practice is never limited. */
+  const GP_DAILY_SETS = 3;
+  function gpDayAfter(ds){ const p = ds.split('-').map(Number), d = new Date(p[0], p[1]-1, p[2]); d.setDate(d.getDate()+1); return gpDateStr(d); }
+  function gpSpreadSets(p, day){
+    if(!p || !p.sets || p.spreadDay===day) return false;
+    const order = id => SETS.findIndex(s=>String(s.id)===String(id));
+    const ids = Object.keys(p.sets).filter(id=>p.sets[id] && p.sets[id].masteredOn && p.sets[id].nextDue)
+      .sort((a,b)=>(p.sets[a].nextDue<p.sets[b].nextDue ? -1 : p.sets[a].nextDue>p.sets[b].nextDue ? 1 : order(a)-order(b)));
+    let carry = [], i = 0, d = day;
+    while(i<ids.length || carry.length){
+      const list = carry;
+      while(i<ids.length && p.sets[ids[i]].nextDue<=d) list.push(ids[i++]);
+      carry = list.slice(GP_DAILY_SETS);
+      d = gpDayAfter(d);
+      carry.forEach(id=>{ p.sets[id].nextDue = d; });
+    }
+    p.spreadDay = day;
+    return true;
+  }
+  function gpDueSets(){
+    if(gpTracking() && gpSpreadSets(gpProg, gpToday())) gpSave();
+    return SETS.filter(s=>gpIsDue(s.id));
+  }
+  window.__arsDueSets = ()=>gpDueSets().map(s=>s.id);
   /* The recommended next exercise, in the app's given order:
      1) the first unlocked exercise not yet PASSED at Level III;
      2) if every unlocked exercise is passed, the first unlocked exercise not
