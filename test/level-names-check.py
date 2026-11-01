@@ -49,5 +49,22 @@ with sync_playwright() as p:
     check('teacher quiz: Level II and III use the new names', 'II — Junior Student' in t and 'III — Student' in t, t)
     tq.select_option('#diffSel', '2'); tq.wait_for_timeout(200)
     check('teacher quiz: level hint reads Junior Student', tq.inner_text('#diffHint').startswith('Junior Student'), tq.inner_text('#diffHint'))
+    ROM = ['I', 'II', 'III', 'IV', 'V']
+    check('teacher quiz: menu labels equal the app ladder', t == [f'{r} — {n}' for r, n in zip(ROM, names)], t)
+    check('teacher quiz: Beginner and Adept are gone', not re.search(r'Beginner|Adept', tq.content()))
+    tq.click('#selNone'); tq.locator('#setList input[type=checkbox]').first.check()
+    for d in range(1, 6):
+        tq.select_option('#diffSel', str(d)); tq.click('#genBtn'); tq.wait_for_timeout(500)
+        meta = tq.inner_text('#paper .qhead .meta')
+        check(f'teacher quiz: printed heading at Level {ROM[d-1]} reads "{names[d-1]} — …"', (names[d-1] + ' — ') in meta and not OLD.search(meta), meta)
+    for z, tag in [(1, 'quiz-phone-dark'), (2, 'quiz-phone-200-dark')]:
+        q = b.new_page(viewport={'width': int(375 / z), 'height': int(800 / z)}, device_scale_factor=z)
+        q.add_init_script("try{localStorage.setItem('arsDark','1')}catch(e){}")
+        q.goto(BASE + 'teacher-quiz.html?cb=' + str(os.getpid())); q.wait_for_timeout(800)
+        q.evaluate("() => document.body.classList.add('dark')")
+        q.select_option('#diffSel', '2'); q.locator('#diffSel').scroll_into_view_if_needed(); q.wait_for_timeout(200)
+        fit = q.evaluate("() => { const e = document.getElementById('diffSel'), h = document.getElementById('diffHint'), vw = document.documentElement.clientWidth; return [e, h].every(x => x.getBoundingClientRect().right <= vw + 1 && x.getBoundingClientRect().left >= -1); }")
+        check(f'{tag}: quiz level menu and hint stay inside the screen', fit)
+        q.screenshot(path=f'{OUT}/logica-{tag}.png')
     b.close()
 print(f'\n{len(res)} checks, {res.count(False)} failed.')
