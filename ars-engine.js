@@ -141,8 +141,8 @@ function premiseTerms(fig, idx, roles){
 /* ---------------- difficulty ---------------- */
 const DIFF = {
   1:{gain:16, loss:8,  figs:[1],        sub:false, near:0.25, label:'Novice — first figure only · +16 / −8'},
-  2:{gain:14, loss:11, figs:[1,2],      sub:false, near:0.4,  label:'Apprentice — figures I–II · +14 / −11'},
-  3:{gain:12, loss:14, figs:[1,2,3],    sub:true,  near:0.55, label:'Journeyman — figures I–III, weakened moods · +12 / −14'},
+  2:{gain:14, loss:11, figs:[1,2],      sub:false, near:0.4,  label:'Junior Student — figures I–II · +14 / −11'},
+  3:{gain:12, loss:14, figs:[1,2,3],    sub:true,  near:0.55, label:'Student — figures I–III, weakened moods · +12 / −14'},
   4:{gain:10, loss:17, figs:[1,2,3,4],  sub:true,  near:0.65, label:'Scholar — all four figures · +10 / −17'},
   5:{gain:8,  loss:20, figs:[1,2,3,4],  sub:true,  near:0.75, label:'Master — everything in play, tilted to the subtle · +8 / −20'}
 };
