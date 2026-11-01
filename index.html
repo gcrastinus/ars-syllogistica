@@ -1358,7 +1358,9 @@ body.off-home .lab-tools, body.recite-lock .lab-tools{display:none}
   .recite-icon{width:30px; height:30px}
   .recite-callout{top:69px}
 }
-@media (max-width:640px){body.dark .pm-btn{background:var(--paper) !important; color:var(--orn) !important} body.dark .pm-btn:hover, body.dark .pm-btn[aria-expanded="true"]{background:var(--hover) !important}}
+/* Nov 1: phones use the same + as desktop (was three lines) */
+@media (max-width:640px){ .pm-btn{min-width:44px; min-height:44px; font-family:var(--std-text); font-size:26px; line-height:1.2; font-weight:400; color:var(--ink)} .pm-btn:focus-visible{outline:3px solid var(--ink); outline-offset:2px} }
+@media (max-width:640px){body.dark .pm-btn{background:var(--paper) !important; color:var(--ink) !important} body.dark .pm-btn:hover, body.dark .pm-btn[aria-expanded="true"]{background:var(--hover) !important}}
 @media print{.pm-btn, .pm-menu{display:none !important}}
 body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 .intro-note{
@@ -1729,8 +1731,8 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
   <svg class="lab-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18"/><path d="M7 7L25 25M25 7L7 25"/></svg>
 </button>
 </div>
-<button type="button" id="pm-btn" class="pm-btn" title="Menu" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="pm-menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h14M5 12h14M5 17h14"/></svg></button>
-<div class="pm-menu" id="pm-menu" role="menu" hidden>
+<button type="button" id="pm-btn" class="pm-btn" title="Settings menu" aria-label="Settings menu" aria-haspopup="true" aria-expanded="false" aria-controls="pm-menu"><span aria-hidden="true">+</span></button>
+<div class="pm-menu" id="pm-menu" role="menu" aria-label="Display settings" hidden>
   <button type="button" role="menuitem" class="pm-item" id="pm-dark"><span class="pm-glyph" aria-hidden="true"><svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></span><span class="pm-label">Dark mode</span></button>
   <div class="pm-font" role="group" aria-labelledby="pm-font-head"><div class="set-head" id="pm-font-head">Font</div><div class="set-fonts"></div></div>
   <button type="button" role="menuitem" class="pm-item" id="pm-play"><span class="pm-glyph" aria-hidden="true"><svg class="ctl-ico ctl-play" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="pm-label">Read aloud</span></button>
@@ -2389,7 +2391,7 @@ if(typeof document!=='undefined'){
     const b = $(l.id+'-open');
     if (b) b.onclick = ()=>(l.id==='lab1' ? openLab1() : openLab2());
   });
-  /* Phones: one menu at top right for dark mode, reading aloud, and the two workshops. */
+  /* Phones: one + menu at top right for dark mode, font, reading aloud, and the two workshops. */
   (function phoneMenu(){
     const btn = $('pm-btn'), menu = $('pm-menu'), note = $('pm-note');
     if(!btn || !menu) return;
