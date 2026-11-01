@@ -1373,6 +1373,9 @@ body.recite-lock .pm-btn, body.recite-lock .pm-menu{display:none !important}
 
 /* Oct 28: Level and Path as explained rows with menus, as in Ars Grammatica. The text at the left describes the choice made. */
 .choice-rule{border:0; border-top:1px solid var(--line); max-width:32em; margin:26px auto 0}
+.course-settings-title{font-family:var(--display); font-style:italic; font-weight:400; font-size:24px; line-height:1.3; letter-spacing:.02em; text-align:center; color:var(--ink); margin:40px auto 0; padding:0 16px; max-width:32em; overflow-wrap:break-word}
+.course-settings-title + .choice-rule, .course-settings-title + .rule{margin-top:14px}
+@media print{.course-settings-title{display:none}}
 .choice-rows{max-width:32em; margin:0 auto; font-size:17px; text-align:left}
 .choice-row{display:flex; align-items:center; gap:14px 22px; padding:16px 0; border-top:1px solid var(--line)}
 .choice-row:first-child{border-top:0}
@@ -1776,6 +1779,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         This course follows the three acts of the mind: to grasp what a thing is, to judge that something is or is not true, and to reason from what we know to what we do not yet know.
       <div class="intro-preface"><a href="https://studiuminstitute.org/trivium/">Preface to the Trivium</a></div>
       </div>
+      <h2 class="course-settings-title">Course settings</h2>
       <hr class="choice-rule">
       <div class="choice-rows">
         <div class="choice-row">
