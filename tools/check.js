@@ -101,7 +101,7 @@ function checkDeck(name, deck, enforce, enforceLongest) {
   const msg = `${name}: ${deck.length} cards, ${qn} questions (${tf} true/false); correct option longest in ${longest}/${mcq} (${Math.round(100 * ratio)}%)`;
   if ((enforce || enforceLongest) && ratio > 1 / 3) fail(msg + ', above one third'); else ok(msg);
 }
-[['What Logic Is', D.INTRO_LOGIC], ['First Act', D.FIRST_ACT], ['Second Act', D.SECOND_ACT],
+[['What is Logic?', D.INTRO_LOGIC], ['First Act', D.FIRST_ACT], ['Second Act', D.SECOND_ACT],
  ['Third Act', D.THIRD_ACT]].forEach(([n, d]) => checkDeck(n, d, false, true));
 Object.keys(D.LEADINS).forEach(id => checkDeck('Lead-in ' + id, D.LEADINS[id], false, true));
 D.STUDY_DECKS.forEach(d => { if (!d.review) fail(`deck ${d.id} has no Review`); });
