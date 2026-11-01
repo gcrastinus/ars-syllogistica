@@ -34,6 +34,28 @@ with sync_playwright() as p:
     pg.reload(); pg.wait_for_timeout(1200); pg.evaluate("() => window.__arsDueSets()")
     o2 = pg.evaluate(f"() => JSON.parse(localStorage.getItem('{KEY}'))")
     check('l7 opening again the same day moves nothing', all(o2['sets'][i]['nextDue'] == o['sets'][i]['nextDue'] for i in ids))
+    # maximums only: fewer due shows fewer; later-due sets are never pulled forward
+    def case(offs):
+        pg.evaluate("""([ids, key, offs]) => {
+          const d = n => { const x = new Date(); x.setDate(x.getDate() + n); return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0'); };
+          const sets = {};
+          offs.forEach((o, i) => { sets[ids[i]] = { state:'mastered', seen:20, correct:18, history:[], box:2, nextDue:d(o), passedOn:d(-60), masteredOn:d(-50), masterLevel:5 }; });
+          localStorage.setItem(key, JSON.stringify({ schemaVersion:1, settings:{ trackingEnabled:true }, sets, renumbered1314:true, shiftedPredCat2:true, insertedChain17:true })); }""", [ids, KEY, offs])
+        pg.reload(); pg.wait_for_timeout(1200)
+        due = pg.evaluate("() => window.__arsDueSets()")
+        o = pg.evaluate(f"() => JSON.parse(localStorage.getItem('{KEY}'))")
+        return len(due), o
+    n, o = case([-2, -1])
+    check('m1 2 due shows 2', n == 2, n)
+    n, o = case([])
+    check('m2 0 due shows 0', n == 0, n)
+    n, o = case([-3, -2, -1, 0, 0] + [4] * 6)
+    check('m3 5 due with 6 later-due shows 3', n == 3, n)
+    later = [o['sets'][str(i)]['nextDue'] for i in ids[5:11]]
+    d4 = pg.evaluate("() => { const x = new Date(); x.setDate(x.getDate() + 4); return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0'); }")
+    check('m4 later-due sets never pulled forward (3 keep their day, 3 move later)', min(later) == d4 and later.count(d4) == 3, later)
+    n, o = case([1, 2, 3])
+    check('m5 nothing due today: future sets not pulled to today', n == 0, n)
     check('l9 no page errors', not errs, errs)
     br.close()
 print(f"\n{len(res)} checks, {res.count(False)} failed.")
