@@ -7155,12 +7155,24 @@ if(typeof document!=='undefined'){
     try{ sessionStorage.setItem(NAV_SS+'reached', JSON.stringify(o)); }catch(e){}
   }
   function navOrientKey(){ return orientStudyId ? 's:'+orientStudyId : (orientLead ? 'l:'+orientLead.id : ''); }
-  function orientCardOpen(){ const k = navOrientKey(); return !!k && orientIdx < (navReached()[k] || 0); }
+  function orientCardOpen(){
+    const k = navOrientKey();
+    return (!!k && orientIdx < (navReached()[k] || 0)) || studyDeckFinished(orientStudyId);
+  }
+  /* A study deck finished before (its last card reached: the Recitation Tablet's record, recite.decks[id].done) opens
+     freely: Continue on every card, the Study Check still there to answer. Erase all progress clears the record. */
+  function studyDeckFinished(id){
+    if(!id || rev) return false;
+    try{
+      const d = (typeof courseStore==='function') ? courseStore().decks : null;
+      return !!(d && d[id] && d[id].done);
+    }catch(e){ return false; }
+  }
   function navStudyDeck(id){ return STUDY_DECKS.concat(ADVANCED_DECKS || []).find(d=>d.id===id) || null; }
   function navSet(id){ return SETS.find(x=>String(x.id)===String(id)) || null; }
   function navHub(){ orientLead = null; rev = null; cancelReview(); show('scr-home'); }
   function navOrientAt(card, open){
-    const reached = navReached()[navOrientKey()] || 0;
+    const reached = studyDeckFinished(orientStudyId) ? orientDeck.length-1 : (navReached()[navOrientKey()] || 0);
     const i = Math.max(0, Math.min(orientDeck.length-1, Math.min(card || 0, reached)));
     if(open || orientIdx!==i){ orientIdx = i; orientTry = 0; orientResetOrder(); }
     show('scr-orient'); renderOrient();
