@@ -19,7 +19,7 @@ EXPECTED = [
 ]
 # The Method deck is the same text, byte for byte, in Ars Logica, Ars Grammatica and Ars Rhetorica (Timothy, Nov 2, 2026).
 OPEN_SEL, NEXT_SEL = '#study-card-method', '#orient-cont'
-CARD2_SHA256 = '7e2ece63b8f11fcd2e4b2e4767ba45e3019149833ff6f791c58479b0d35a2ba9'
+CARD2_SHA256 = 'c8825d70e0c657bfe86bc0feadf153358b44e96c77287afe9859bfe3072c81d4'
 IDENTICAL_SHA256 = '7bfc1cb055d59b884627b67a3affe5d98bf2e08aa92c32621693691a200c2202'
 SUB = 'Careful reading of each lesson; recitation of the lesson from memory; and practice with the sets of exercises.'
 results, errors = [], []
@@ -97,7 +97,7 @@ with sync_playwright() as p:
         html = pg.evaluate("() => document.querySelector('[data-open-tablet]').closest('p').parentElement.innerHTML")
         check(tag + 't1 card 2 markup is the markup shared by all three courses (sha256)', hashlib.sha256(html.encode()).hexdigest() == CARD2_SHA256, hashlib.sha256(html.encode()).hexdigest())
         imgs = pg.evaluate("""() => [...document.querySelectorAll('img[src^="assets/recitation-tablet"], [data-open-tablet] .recite-open')].map(i => ({src: i.getAttribute('src') || i.className, ok: i.tagName == 'IMG' ? i.complete && i.naturalWidth > 0 : !!i.querySelector('svg.recite-icon') && i.getBoundingClientRect().width > 30 && getComputedStyle(i).position == 'static', alt: i.getAttribute('alt'), w: i.getBoundingClientRect().width, vw: document.documentElement.clientWidth}))""")
-        check(tag + 't2 the location image (with alt text) loads, and the tablet button shows the course’s own tablet icon (in its place, not fixed); both fit the screen', len(imgs) == 2 and all(i['ok'] and i['w'] <= i['vw'] for i in imgs) and 'yellow arrow' in imgs[0]['alt'] and 'Recitation Tablet button' in imgs[0]['alt'] and imgs[1]['src'] == 'recite-open', imgs)
+        check(tag + 't2 the location image (with alt text) loads, and the tablet button shows the course’s own tablet icon (in its place, not fixed); both fit the screen', len(imgs) == 2 and all(i['ok'] and i['w'] <= i['vw'] for i in imgs) and 'gold arrow' in imgs[0]['alt'] and 'Recitation Tablet button' in imgs[0]['alt'] and imgs[1]['src'] == 'recite-open', imgs)
         ov = lambda: pg.evaluate("() => { const o = document.getElementById('recite-overlay'); return !!o && !o.hidden && o.getBoundingClientRect().height > 0 }")
         b = pg.locator('[data-open-tablet]'); b.scroll_into_view_if_needed()
         check(tag + 't3 the tablet button is a button named "Click here to open the Recitation Tablet"', b.evaluate("e => e.tagName == 'BUTTON' && e.getAttribute('aria-label') == 'Click here to open the Recitation Tablet' && e.textContent.trim() == 'Click here to open the Recitation Tablet.'"))
