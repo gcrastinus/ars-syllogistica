@@ -1699,6 +1699,14 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 /* Oct 31: control icons are drawn SVGs (no emoji on iOS) */
 .ctl-ico{display:block; flex:none; pointer-events:none}
 #dark-toggle .ctl-ico, .pm-glyph .ctl-ico{margin:0 auto}
+
+/* Title line: "What is recitation?" sits on the same line as the Recitation Tablet title, spaced after it (Timothy, 2 Nov 2026). */
+.recite-top{flex-wrap:wrap; justify-content:flex-start; row-gap:8px}
+.recite-top .recite-desc{flex:0 1 22em; width:auto; min-width:0; margin:0 0 0 2em}
+.recite-top #recite-close{margin-left:auto}
+@media (max-width:800px){
+  .recite-top .recite-desc{order:3; flex:1 1 100%; margin:0}
+}
 </style>
 </head>
 <body>
@@ -2183,16 +2191,16 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
   <div class="recite-panel" role="dialog" aria-modal="true" aria-labelledby="recite-heading">
     <div class="recite-top">
       <h2 id="recite-heading">Recitation Tablet</h2>
+      <details class="recite-desc" id="recite-desc" data-directions>
+        <summary>What is recitation?</summary>
+        <div class="recite-desc-body">
+          <p>One of the oldest and best-proven ways to study is to read a section of a book, or study a topic, in one sitting, then close your notes and write down everything you remember, in as much detail as you can. This is called "recitation," and this tablet lets you do it.</p>
+          <p>After you finish studying a part of the course, close it and open the Recitation Tablet. Choose the part you just finished from the menu, then write down, in order, everything you can remember about it. This is not easy. But the difficulty is what produces results, especially the moment when you feel you remember nothing more and then keep searching.</p>
+          <p>When you have finished, click "See Full Recitation." You will see a complete outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
+        </div>
+      </details>
       <button type="button" class="btn" id="recite-close">Close</button>
     </div>
-    <details class="recite-desc" id="recite-desc" data-directions>
-      <summary>What is recitation?</summary>
-      <div class="recite-desc-body">
-        <p>One of the oldest and best-proven ways to study is to read a section of a book, or study a topic, in one sitting, then close your notes and write down everything you remember, in as much detail as you can. This is called "recitation," and this tablet lets you do it.</p>
-        <p>After you finish studying a part of the course, close it and open the Recitation Tablet. Choose the part you just finished from the menu, then write down, in order, everything you can remember about it. This is not easy. But the difficulty is what produces results, especially the moment when you feel you remember nothing more and then keep searching.</p>
-        <p>When you have finished, click "See Full Recitation." You will see a complete outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
-      </div>
-    </details>
     <div class="recite-tools">
       <div class="recite-picker" id="recite-picker">
         <button type="button" class="recite-menu-btn" id="recite-menu-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="recite-menu-list">
