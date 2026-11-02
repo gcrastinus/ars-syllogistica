@@ -29,7 +29,7 @@ def card_text(pg): return pg.evaluate("""() => [...document.querySelectorAll('#o
     const c = p.cloneNode(true); c.querySelectorAll('br').forEach(b => b.replaceWith('\\n')); return c.textContent; }).join('\\n\\n')""")
 def home_text(pg, drop):
     return pg.evaluate("""d => { const h = document.getElementById('scr-home').cloneNode(true);
-      if (d) { const m = h.querySelector('#sets-method'); if (m) m.remove(); }
+      if (d) { const m = h.querySelector('#sets-method'); if (m) m.remove(); const mt = h.querySelector('#method-title'); if (mt) mt.remove(); }
       return h.textContent.replace(/\\s+/g, ' ').trim(); }""", drop)
 def nav(pg, how): pg.evaluate("h => setTimeout(() => history[h](), 0)", how); settle(pg, 500)
 
@@ -41,12 +41,19 @@ with sync_playwright() as p:
         pg.on('console', lambda m: errors.append('console: ' + m.text) if m.type == 'error' else None)
         pg.goto(BASE); settle(pg, 1200)
         place = pg.evaluate("""() => { const t = document.getElementById('study-card-method'); if (!t) return null;
-          const box = t.parentElement, part = document.querySelector('#scr-home .part');
-          return { box: box.id, afterHeader: box.previousElementSibling && box.previousElementSibling.tagName,
-                   settingsInHeader: !!box.previousElementSibling.querySelector('.course-settings-title'),
-                   beforePart: !!(box.compareDocumentPosition(part) & Node.DOCUMENT_POSITION_FOLLOWING), tiles: box.children.length,
+          const box = t.parentElement, pre = box.previousElementSibling.id === 'method-title' ? box.previousElementSibling.previousElementSibling : box.previousElementSibling, part = document.querySelector('#scr-home .part');
+          return { box: box.id, afterHeader: pre && pre.tagName,
+                   settingsInHeader: !!pre.querySelector('.course-settings-title'),
+                   beforePart: !!(box.compareDocumentPosition(part) & Node.DOCUMENT_POSITION_FOLLOWING), tiles: box.querySelectorAll(':scope > .set-card, :scope > .study-tile, :scope > [data-id], :scope > [data-deck], :scope > *:not(.sec-rule)').length,
                    title: t.querySelector('h3').textContent, review: !!t.querySelector('.ex-link'), text: t.textContent.trim() }; }""")
         check(tag + 'p1 the tile sits right below Course settings, before part one', place and place['box'] == 'sets-method' and place['afterHeader'] == 'HEADER' and place['settingsInHeader'] and place['beforePart'] and place['tiles'] == 1, place)
+        sec = pg.evaluate("""() => { const h = document.getElementById('method-title'); if (!h) return null; const box = h.nextElementSibling;
+          const kids = [...box.children], r = kids[kids.length - 1], first = document.querySelector('.part-heading:not(#method-title)');
+          const fs = e => getComputedStyle(e).fontSize, ff = e => getComputedStyle(e).fontFamily;
+          return { tag: h.tagName, text: h.textContent, box: box.id, tiles: kids.filter(k => !k.classList.contains('sec-rule')).length,
+                   rule: r.className, ruleHidden: r.getAttribute('aria-hidden'), labelled: box.getAttribute('aria-labelledby'),
+                   sameType: fs(h) == fs(first) && ff(h) == ff(first), firstAfter: !!(box.compareDocumentPosition(first) & Node.DOCUMENT_POSITION_FOLLOWING) }; }""")
+        check(tag + 's1 Method is its own section: an h2 "Method" in the type of the section titles, the tile, then the section rule, then the first section', sec and sec['tag'] == 'H2' and sec['text'] == 'Method' and sec['box'] == 'sets-method' and sec['tiles'] == 1 and sec['rule'] == 'sec-rule sec-rule-main' and sec['ruleHidden'] == 'true' and sec['labelled'] == 'method-title' and sec['sameType'] and sec['firstAfter'], sec)
         check(tag + 'p2 the tile: its title and STUDY, its subtitle, no Review button', place and place['title'] == 'Method: Reading, Recitation, Exercises' and SUB in place['text'] and not place['review'] and place['text'].endswith('STUDY ⟶'), place)
         s0 = pg.evaluate("k => localStorage.getItem(k)", KEY)
         pg.click('#study-card-method'); settle(pg, 400)

@@ -937,6 +937,8 @@ h1{
   font-weight:400; color:var(--ink); text-align:center; margin:6px 0 4px;
 }
 .part + .part-heading, .part + h2.part-heading{margin-top:6px}
+/* The Method section title (Nov 2, 2026): the part-heading type, without the small "part" line above it. */
+#method-title{margin-top:64px}
 .part-divider{margin:0; padding:0; border:0}
 #actblk-adv > .part-divider{margin-bottom:0; padding-bottom:0}
 .part-sub{font-style:italic; color:var(--ink-soft); font-size:16px; margin:10px auto 0}
@@ -1807,7 +1809,8 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div class="mode-note" id="storage-notice" data-directions style="display:none"></div>
     </header>
 
-    <div class="sets" id="sets-method"></div>
+    <h2 class="part-heading part-head" id="method-title">Method</h2>
+    <div class="sets" id="sets-method" role="group" aria-labelledby="method-title"></div>
 
     <div id="recite-due" class="recite-due" hidden></div>
 
@@ -3981,6 +3984,7 @@ if(typeof document!=='undefined'){
     const t = makeStudyTile(METHOD_DECK);
     t.classList.add('deck-wide');
     $('sets-method').appendChild(t);
+    const r = document.createElement('div'); r.className = 'sec-rule sec-rule-main'; r.setAttribute('aria-hidden','true'); $('sets-method').appendChild(r);
   })();
   (function(){
     /* What Logic Is heads the Introduction; each act's deck heads its act.
