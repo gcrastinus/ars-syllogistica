@@ -1807,6 +1807,8 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <div class="mode-note" id="storage-notice" data-directions style="display:none"></div>
     </header>
 
+    <div class="sets" id="sets-method"></div>
+
     <div id="recite-due" class="recite-due" hidden></div>
 
     <div class="daily-box" id="daily-box" style="display:none">
@@ -3948,7 +3950,7 @@ if(typeof document!=='undefined'){
     const c = document.createElement('div');
     c.className = 'set-card study-tile';
     c.id = 'study-card-'+d.id;
-    c.innerHTML = STAR+`<span class="tile-main"><div class="set-num">${d.num}</div><h3>${d.title}</h3><p>${d.desc}</p><span class="begin">STUDY ⟶</span></span>`;
+    c.innerHTML = STAR+`<span class="tile-main">${d.num ? `<div class="set-num">${d.num}</div>` : ''}<h3>${d.title}</h3>${d.desc ? `<p>${d.desc}</p>` : ''}<span class="begin">STUDY ⟶</span></span>`;
     c.tabIndex = 0; c.setAttribute('role', 'button');
     const open = ()=>openStudy(d);
     c.onclick = open;
@@ -3966,6 +3968,20 @@ if(typeof document!=='undefined'){
     }
     return c;
   }
+  /* Method: Reading, Recitation, Exercises. A short study deck below Course settings, before part one:
+     no Study Checks, so Continue is open on every card. It is not in the Recitation Tablet, the reviews,
+     the counts, or the course record: finishing it records nothing. Back and Forward and a reload step
+     through its cards like any study deck. */
+  const METHOD_DECK = { id:'method', num:'', title:'Method: Reading, Recitation, Exercises', desc:'', deck:[
+      { h:`<p>This course provides the best way for a student to master logic in depth.</p><p>1. Study and read carefully.<br>2. Recite everything you can remember from the lessons.<br>3. Practice and refine your skills with the exercises.</p><p>First, read and study in detail the content sections of the course.</p><p>But what do we mean by "read"? Do you read these sections the way you read a textbook or a novel you are reading for a course? No. You read these texts the way you would a text that you want to understand slowly and deeply, with great care: this is fundamental reading. There is nothing casual about fundamental reading. It is reading with a purpose. Even if you are reading a great book for a course, you might still read it without being so intent on everything and every detail. But the study materials in this course are meant for mastery.</p>` },
+      { h:`<p>Second, after you have read the study sections, the very best thing you can do to master the material is also one of the oldest study methods on record: after you have read and studied the content of the lesson, you recite the lesson from memory, as much as you can recall.</p><p>To do this here in Ars Logica, you click on the tablet in the top left of the main course page, the Recitation Tablet; you select the lesson you have just studied and then you write everything you can remember about it into the text box. And this is key: at first you will write down a few things and then you will stop--but that is the precise point where you must go on; you must force yourself to keep remembering; that is where the true learning takes place, right then, as you try and struggle to remember. Write down everything you can. And then when you are done you view the course's own version of the Quick recitation; you compare what you wrote with an outline of the contents of the lessons; in the interactive course, you can mark off the things that you did remember and include in your recitation and you can also see the things that you did not remember. After that, at a later point, you should review the lessons again and ideally return later to perform a second recitation. For later recitations, you can choose to aim for a Quick recitation or a Full recitation. The Full recitation is a complete account in summary form of everything point made throughout the lesson.</p>` },
+      { h:`<p>Third, practice with the exercises. Logic is primarily an art, and an art must be practiced. These sets of exercises are diverse, wide-ranging, and intensive. Use them over and over to perfect your skills in the application of the science of logic to example after example.</p><p>So, when you turn to study a lesson, it is important not just to skim it or read through the way one does when one is in a hurry or when one is looking for something.</p><p>The core practices of this course perfect the mind, the whole mind, by study, memory, understanding, and exercise.</p>` }
+  ]};
+  (function(){
+    const t = makeStudyTile(METHOD_DECK);
+    t.classList.add('deck-wide');
+    $('sets-method').appendChild(t);
+  })();
   (function(){
     /* What Logic Is heads the Introduction; each act's deck heads its act.
        The diagrams for Exercise V are taught in that exercise's opening cards. */
@@ -4262,7 +4278,7 @@ if(typeof document!=='undefined'){
       else {
         const finished = orientStudyId;
         orientStudyId = null;
-        if(finished && typeof reciteDeckFinished==='function') reciteDeckFinished(finished);
+        if(finished && finished!=='method' && typeof reciteDeckFinished==='function') reciteDeckFinished(finished);
         show('scr-home');
       }
       return;
@@ -7168,7 +7184,7 @@ if(typeof document!=='undefined'){
       return !!(d && d[id] && d[id].done);
     }catch(e){ return false; }
   }
-  function navStudyDeck(id){ return STUDY_DECKS.concat(ADVANCED_DECKS || []).find(d=>d.id===id) || null; }
+  function navStudyDeck(id){ return [METHOD_DECK].concat(STUDY_DECKS, ADVANCED_DECKS || []).find(d=>d.id===id) || null; }
   function navSet(id){ return SETS.find(x=>String(x.id)===String(id)) || null; }
   function navHub(){ orientLead = null; rev = null; cancelReview(); show('scr-home'); }
   function navOrientAt(card, open){
