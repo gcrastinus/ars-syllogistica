@@ -31,6 +31,17 @@ details.help{max-width:720px; margin:0 auto 18px; background:var(--card); border
   border-left:4px solid var(--gold-soft); border-radius:10px; padding:12px 16px; box-shadow:var(--shadow)}
 details.help summary{cursor:pointer; font-weight:600; color:var(--gold); font-family:var(--display); font-size:14px; letter-spacing:.06em}
 details.help p{margin-top:10px; font-size:15.5px; color:var(--ink-soft)}
+details.primer{max-width:720px; margin:0 auto 18px; background:var(--card); border:1px solid var(--line);
+  border-left:4px solid var(--gold-soft); border-radius:10px; padding:0 16px}
+details.primer summary{cursor:pointer; font-family:var(--display); font-weight:600; font-size:19px; letter-spacing:.04em;
+  color:var(--ink); min-height:52px; padding:12px 0; display:flex; align-items:center; gap:10px; list-style:none}
+details.primer summary::-webkit-details-marker{display:none}
+details.primer summary::before{content:"\25B8"; color:var(--gold); font-size:18px; flex:none; transition:transform .15s}
+details.primer[open] summary::before{transform:rotate(90deg)}
+details.primer summary:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
+details.primer p{font-size:18px; line-height:1.55; color:var(--ink); margin:2px 0 12px; overflow-wrap:anywhere}
+details.primer .primer-link{display:inline-block; font-size:18px; font-weight:600; color:var(--wine); text-underline-offset:3px;
+  padding:10px 0; min-height:48px; margin-bottom:6px; overflow-wrap:anywhere}
 .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;
   margin:14px 0; box-shadow:var(--shadow)}
 .card h2{font-family:var(--display); font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px}
@@ -182,7 +193,7 @@ header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; tex
 .backlink:hover{color:var(--accent)}
 #maker{background:transparent}
 @media screen{
-  details.help, .card, .caution, .setlist{border:1px solid var(--frame); border-radius:0; box-shadow:none}
+  details.help, details.primer, .card, .caution, .setlist{border:1px solid var(--frame); border-radius:0; box-shadow:none}
 }
 @media (max-width:600px){
   h1{font-size:40px}
@@ -201,6 +212,12 @@ header h1{font:400 64px/1 var(--display); letter-spacing:0; font-weight:400; tex
     <div class="sub">Printable quizzes with a complete answer key — for instructors</div>
     <div class="rule"></div>
   </header>
+
+  <details class="primer" id="primer">
+    <summary>Primer for Ars Logica</summary>
+    <p>This PDF gathers a short primer for each of the sets of exercises, setting out the doctrine that each set assumes. It is meant for instructors who use the exercises in this Quiz Maker without the content study decks of the app; the primers supply what those decks would otherwise teach.</p>
+    <a class="primer-link" id="primerLink" href="primers/EXERCISE-PRIMERS-ALL-2026-11-01.pdf" target="_blank" rel="noopener">Primers for all the exercises (PDF, 43 pages)</a>
+  </details>
 
   <details class="help">
     <summary>How to use</summary>
