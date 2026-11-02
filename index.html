@@ -2211,6 +2211,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 </div>
 <div id="recite-sheet" class="recite-print" aria-hidden="true"></div>
 
+<script src="nav.js?v=20261102nb"></script>
 <script src="ars-engine.js?v=20261101ls"></script>
 <script src="ars-advanced.js"></script>
 <script>
@@ -2372,8 +2373,15 @@ if(typeof document!=='undefined'){
   });
   $('lp-back').onclick = ()=>show('scr-home');
 
+  /* Back and Forward (nav.js): see navRender, near the end */
+  const NAV = window.Nav || null;
+  const NAV_SS = 'arsLogica.nav.';
+  let navDrawing = 0, navStarting = false, navRun = 0, navDoneRun = 0;
   function show(id){
     if(typeof window.__arsStopSpeak==='function') window.__arsStopSpeak();
+    /* Back and Forward (nav.js): home reached by a tap goes back to the home entry already in this tab's history */
+    const rewound = id==='scr-home' && navHomeTap();
+    if(id==='scr-quiz' && !(document.getElementById('scr-quiz').classList.contains('active'))) navRun = Date.now();
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     $(id).classList.add('active');
     if(id==='scr-home') refreshCards();
@@ -2381,6 +2389,7 @@ if(typeof document!=='undefined'){
        page leaves an intro screen opening in the middle of its list */
     window.scrollTo(0, 0);
     if(typeof reciteScreenChanged==='function') reciteScreenChanged(id);
+    if(!rewound) navRecord(id);
   }
 
   /* ==================== STUDY LABS ==================== */
@@ -4207,8 +4216,13 @@ if(typeof document!=='undefined'){
     orientCheckOpen = false;
     body.innerHTML = h;
     if($('lead-skip-top')) $('lead-skip-top').onclick = leadStart;
-    if(q){
+    if(q && !orientCardOpen()){
       setOrientNav(orientContBtn(false)+orientHint(true));
+      orientBindOpts(answerOrient);
+    } else if(q){
+      /* a card already passed in this tab, reached again by Back: Continue stays open, and the question can still be answered */
+      setOrientNav(orientContBtn(true));
+      $('orient-cont').onclick = advanceOrient;
       orientBindOpts(answerOrient);
     } else {
       setOrientNav(orientContBtn(true));
@@ -4253,7 +4267,9 @@ if(typeof document!=='undefined'){
       }
       return;
     }
+    navSetReached(navOrientKey(), orientIdx+1);
     orientIdx++; renderOrient();
+    navRecord('scr-orient');
     const top = $('scr-orient'); if(top && top.scrollIntoView) top.scrollIntoView({behavior:'smooth', block:'start'});
   }
   $('orient-back').onclick = ()=>{ orientLead = null; rev = null; show('scr-home'); };
@@ -7083,6 +7099,147 @@ if(typeof document!=='undefined'){
     window.renderStartChoices = renderStartChoices;
     renderStartChoices();
   })();
+  /* ---------- Back and Forward (nav.js) ----------
+     Every screen is one entry of the browser's history: home, each card of a study deck or lead-in, a Review,
+     the level choice, an exercise sitting, its results, Today's Review, the Progress page and the two workshops.
+     The phone's Back gesture and the browser's Back button step through them; at the first screen Back leaves
+     the app. A sitting is one entry; Back during it asks first. Cards already passed in this tab stay open
+     (kept in sessionStorage), so a reload goes on where it was. */
+  function navHomeTap(){
+    if(!NAV || navDrawing) return false;
+    const c = NAV.state();
+    if(!c || c.r==='home') return false;
+    NAV.unguard();
+    return NAV.rewind(a=>a.r==='home');
+  }
+  function navCtx(id){
+    switch(id){
+      case 'scr-orient':
+        if(rev) return [{r:'review', id:rev.d.id, run:rev.navRun}, 'review/'+rev.d.id];
+        if(orientStudyId) return [{r:'study', id:orientStudyId, card:orientIdx}, 'study/'+orientStudyId];
+        if(orientLead) return [{r:'lead', id:orientLead.id, card:orientIdx}, 'ex/'+orientLead.id];
+        return null;
+      case 'scr-levelpick': return lpSet ? [{r:'pick', id:lpSet.id}, 'ex/'+lpSet.id] : null;
+      case 'scr-quiz':
+        if(gpReview.active) return [{r:'today', run:navRun}, 'today'];
+        return state.set ? [{r:'set', id:state.set.id, run:navRun}, 'ex/'+state.set.id] : null;
+      case 'scr-done': navDoneRun = navRun; return state.set ? [{r:'done', id:state.set.id, run:navRun}, 'ex/'+state.set.id] : null;
+      case 'scr-progress': return [{r:'prog'}, 'progress'];
+      case 'scr-lab1': return [{r:'lab1'}, 'lab1'];
+      case 'scr-lab2': return [{r:'lab2'}, 'lab2'];
+      default: return [{r:'home', hub:true}, ''];
+    }
+  }
+  function navRecord(id){
+    if(!NAV) return;
+    if(id==='scr-orient' && rev && rev.navRun===undefined) rev.navRun = Date.now();
+    const c = navCtx(id);
+    if(!c) return;
+    NAV.go(c[0], c[1] ? '#'+c[1] : location.pathname + location.search);
+    if(id==='scr-quiz') NAV.guard({ask: navAskLeave});
+    else NAV.unguard();
+  }
+  function navAskLeave(){
+    NAV.confirm({message:'Leave this set?', note:'Your answers are kept.', stay:'Stay', leave:'Leave'}).then(a=>{
+      if(a!=='leave') return;
+      cancelReview();
+      NAV.leave(a=>true);
+    });
+  }
+  function navReached(){ try{ return JSON.parse(sessionStorage.getItem(NAV_SS+'reached') || '{}') || {}; }catch(e){ return {}; } }
+  function navSetReached(k, i){
+    if(!k) return;
+    const o = navReached();
+    if(o[k] >= i) return;
+    o[k] = i;
+    try{ sessionStorage.setItem(NAV_SS+'reached', JSON.stringify(o)); }catch(e){}
+  }
+  function navOrientKey(){ return orientStudyId ? 's:'+orientStudyId : (orientLead ? 'l:'+orientLead.id : ''); }
+  function orientCardOpen(){ const k = navOrientKey(); return !!k && orientIdx < (navReached()[k] || 0); }
+  function navStudyDeck(id){ return STUDY_DECKS.concat(ADVANCED_DECKS || []).find(d=>d.id===id) || null; }
+  function navSet(id){ return SETS.find(x=>String(x.id)===String(id)) || null; }
+  function navHub(){ orientLead = null; rev = null; cancelReview(); show('scr-home'); }
+  function navOrientAt(card, open){
+    const reached = navReached()[navOrientKey()] || 0;
+    const i = Math.max(0, Math.min(orientDeck.length-1, Math.min(card || 0, reached)));
+    if(open || orientIdx!==i){ orientIdx = i; orientTry = 0; orientResetOrder(); }
+    show('scr-orient'); renderOrient();
+  }
+  /* Draws an entry reached by Back or Forward, or by a reload. Nothing here is recorded as new. */
+  function navRender(st){
+    navDrawing++;
+    try{
+      switch(st.r){
+        case 'study': {
+          const d = navStudyDeck(st.id);
+          if(!d){ navHub(); break; }
+          if(orientStudyId===d.id && orientDeck===d.deck && !rev){ navOrientAt(st.card, false); break; }
+          openStudy(d); navOrientAt(st.card, true); break;
+        }
+        case 'lead': {
+          const s = navSet(st.id);
+          if(!s || !LEADINS[s.id]){ navHub(); break; }
+          if(orientLead && orientLead.id===s.id && !rev){ navOrientAt(st.card, false); break; }
+          openLeadIn(s); navOrientAt(st.card, true); break;
+        }
+        case 'review': {
+          const d = navStudyDeck(st.id);
+          if(rev && rev.d.id===st.id && rev.navRun===st.run){ show('scr-orient'); renderReview(); break; }
+          if(navStarting && d) openReview(d); else navHub();
+          break;
+        }
+        case 'pick': { const s = navSet(st.id); if(s) pickLevel(s); else navHub(); break; }
+        case 'set': {
+          const s = navSet(st.id);
+          if(s && state.set && state.set.id===s.id && st.run===navRun && navDoneRun!==navRun && !gpReview.active){
+            document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+            $('scr-quiz').classList.add('active');
+            if(typeof reciteScreenChanged==='function') reciteScreenChanged('scr-quiz');
+            NAV.go(st, null, 'replace'); NAV.guard({ask: navAskLeave});
+            break;
+          }
+          if(navStarting && s && !(gpPath==='guided' && guidedLocked(s.id))){ proceedToStart(s); break; }
+          navHub(); break;
+        }
+        case 'done':
+          if(state.set && st.run===navDoneRun){ show('scr-done'); break; }
+          navHub(); break;
+        case 'today':
+          if(gpReview.active && st.run===navRun){
+            document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+            $('scr-quiz').classList.add('active');
+            NAV.go(st, null, 'replace'); NAV.guard({ask: navAskLeave});
+            break;
+          }
+          if(navStarting) startTodaySession(); else navHub();
+          break;
+        case 'prog': renderProgress(); show('scr-progress'); break;
+        case 'lab1': openLab1(); break;
+        case 'lab2': openLab2(); break;
+        default:
+          /* home, already drawn by the tap that went back to it: only the entry is brought up to date */
+          if($('scr-home').classList.contains('active')){
+            orientLead = null; rev = null; cancelReview();
+            NAV.go({r:'home', hub:true}, location.pathname + location.search, 'replace');
+          } else navHub();
+      }
+    } finally { navDrawing--; }
+  }
+  function navFromHash(h){
+    const m = String(h || '').match(/^#(study|ex)\/(.+)$/);
+    if(h==='#progress') return {r:'prog'};
+    if(h==='#lab1' || h==='#lab2') return {r:h.slice(1)};
+    if(!m) return {r:'home', hub:true};
+    const id = decodeURIComponent(m[2]);
+    if(m[1]==='study') return navStudyDeck(id) ? {r:'study', id:id, card:0} : {r:'home', hub:true};
+    return navSet(id) ? {r:'set', id:navSet(id).id} : {r:'home', hub:true};
+  }
+  if(NAV){
+    NAV.init({render: navRender, fromHash: navFromHash});
+    const go = ()=>{ navStarting = true; try{ NAV.start(); } finally { navStarting = false; } };
+    if(document.readyState==='loading') window.addEventListener('DOMContentLoaded', go); else setTimeout(go, 0);
+  }
+
   setPath(gpPath, false);   /* reflect stored choice; write nothing for new visitors */
   window.renderStartChoices && window.renderStartChoices();
 
@@ -7091,7 +7248,7 @@ if(typeof document!=='undefined'){
 </script>
 <script src="recitation-quick.js"></script>
 <script src="recitation-adapter.js"></script>
-<script src="recitation.js"></script>
+<script src="recitation.js?v=20261102nb"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 <script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>

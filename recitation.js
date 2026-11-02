@@ -488,7 +488,9 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   function openOverlay(prefer){
     if (typeof dismissReciteNudge === 'function') dismissReciteNudge();
     const gen = ++openGen;
+    const was = !overlay.hidden;
     overlay.hidden = false;
+    if (!was && window.Nav) Nav.openLayer('recite', closeOverlay);
     if (desc) desc.open = false;
     document.body.classList.add('recite-lock');
     latchUnlocked();
@@ -522,6 +524,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   }
 
   function closeOverlay(){
+    const was = !overlay.hidden;
     commitText();
     clearTimeout(saveTimer);
     save();
@@ -532,6 +535,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     renderReciteReminder();
     const opener = document.getElementById('recite-open');
     if (opener) opener.focus();
+    if (was && window.Nav) Nav.layerClosed('recite');
   }
 
   document.getElementById('recite-open').addEventListener('click', () => openOverlay());
