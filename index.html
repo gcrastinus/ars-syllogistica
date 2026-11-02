@@ -4016,7 +4016,7 @@ if(typeof document!=='undefined'){
      In the Guided Path with tracking on, these are kept in the progress object
      (and so travel with Export); Free Practice keeps the lead-ins in
      localStorage; otherwise they last for this visit only. */
-  const studyMem = {lead:{}, rev:{}};
+  const studyMem = {lead:{}, rev:{}, revSeen:{}};
   /* Free Practice also remembers which lead-ins were finished or skipped. */
   const FP_LEAD_KEY = 'arsFreeLeadins';
   try{ studyMem.lead = JSON.parse(localStorage.getItem(FP_LEAD_KEY)) || {}; }catch(e){}
@@ -4259,32 +4259,79 @@ if(typeof document!=='undefined'){
   $('orient-back').onclick = ()=>{ orientLead = null; rev = null; show('scr-home'); };
 
   /* ---- Review: a short scored check on one study deck ----
-     Ten questions drawn from the deck's cards, one form per card in deck
-     order (a second form from some cards when the deck has fewer than ten).
-     Each is answered once; the count is shown at the end. Nothing is
-     recorded but the fact that the review was finished. */
-  const REVIEW_ITEMS = 10;
-  let rev = null;
-  function buildReview(deck){
-    const cards = deck.map((f,i)=>i).filter(i=>orientAllQs(deck[i]).length);
-    const pickFrom = arr=>arr.splice(Math.floor(Math.random()*arr.length), 1)[0];
-    const pool = {};                                   /* unused forms, per card */
-    cards.forEach(i=>{ pool[i] = orientAllQs(deck[i]).map((_,k)=>k); });
-    let chosen = cards.slice();
-    while(chosen.length > REVIEW_ITEMS) pickFrom(chosen);
-    const items = chosen.map(i=>({card:i, form:pickFrom(pool[i])}));
-    while(items.length < REVIEW_ITEMS){
-      const left = cards.filter(i=>pool[i].length);
-      if(!left.length) break;
-      const i = left[Math.floor(Math.random()*left.length)];
-      items.push({card:i, form:pickFrom(pool[i])});
+     A few questions drawn from the deck's cards: four to six, two fewer
+     than the deck has cards. Each review prefers cards not asked last
+     time and wordings not yet asked; no card is asked in the same
+     wording again until the deck's other wordings have been used. The
+     record of wordings asked is kept per deck with the study flags.
+     Each is answered once; the count is shown at the end. */
+  function reviewCount(nCards){ return Math.max(4, Math.min(6, nCards-2)); }
+  /* forms: number of wordings for each usable card (index = card number,
+     0 = no questions). rec: {u:[keys used this round], l:[keys asked last
+     time]}, keys "card.form". Returns the chosen keys and the new record. */
+  function reviewPick(forms, rec, rnd){
+    rnd = rnd || Math.random;
+    const cards = forms.map((n,i)=>i).filter(i=>forms[i]>0);
+    const all = [];
+    cards.forEach(i=>{ for(let k=0;k<forms[i];k++) all.push(i+'.'+k); });
+    const okRec = rec && typeof rec==='object';
+    const last = new Set(okRec && Array.isArray(rec.l) ? rec.l : []);
+    let used = new Set((okRec && Array.isArray(rec.u) ? rec.u : []).filter(k=>all.includes(k)));
+    const n = Math.min(reviewCount(cards.length), all.length);
+    let first = [];
+    if(all.filter(k=>!used.has(k)).length < n){
+      /* the round ends: the wordings not yet asked come first, then a new round */
+      first = all.filter(k=>!used.has(k));
+      used = new Set();
     }
-    items.sort((a,b)=>a.card-b.card);
-    return items.map(it=>orientShuffleOpts(orientAllQs(deck[it.card])[it.form]));
+    return finish(first);
+    function finish(first){
+      const out = first.slice();
+      const taken = new Set(out.map(k=>+k.split('.')[0]));
+      const freeIn = i=>{ let c=0; for(let k=0;k<forms[i];k++) if(!used.has(i+'.'+k) && !out.includes(i+'.'+k)) c++; return c; };
+      const wasLast = i=>{ for(let k=0;k<forms[i];k++) if(last.has(i+'.'+k)) return 1; return 0; };
+      const order = cards.map(i=>({i, a:wasLast(i), b:-freeIn(i), r:rnd()}))
+        .sort((x,y)=>x.a-y.a || x.b-y.b || x.r-y.r).map(o=>o.i);
+      const pickForm = i=>{
+        const ks = []; for(let k=0;k<forms[i];k++) ks.push(i+'.'+k);
+        const tiers = [ks.filter(k=>!used.has(k) && !last.has(k) && !out.includes(k)),
+                       ks.filter(k=>!last.has(k) && !out.includes(k)),
+                       ks.filter(k=>!out.includes(k))];
+        const t = tiers.find(a=>a.length); return t ? t[Math.floor(rnd()*t.length)] : null;
+      };
+      for(const pass of [0,1,2,3,4]){            /* one card each first; second wordings only if needed */
+        for(const i of order){
+          if(out.length>=n) break;
+          if(pass===0 && taken.has(i)) continue;
+          const k = pickForm(i); if(k===null) continue;
+          if(pass===0) taken.add(i);
+          out.push(k);
+        }
+        if(out.length>=n) break;
+      }
+      const u = Array.from(used).concat(out.filter(k=>!first.includes(k)));
+      return {keys:out, rec:{u, l:out.slice()}};
+    }
+  }
+  window.__arsReviewPick = reviewPick;
+  window.__arsReviewDecks = ()=>STUDY_DECKS.concat(ADVANCED_DECKS).map(d=>({id:d.id, forms:d.deck.map(f=>orientAllQs(f).length)}));
+  let rev = null;
+  function reviewRecord(id, val){
+    const s = studyStore();
+    if(val===undefined) return (s.revSeen && s.revSeen[id]) || null;
+    s.revSeen = s.revSeen || {};
+    s.revSeen[id] = val;
+  }
+  function buildReview(deck, id){
+    const forms = deck.map(f=>orientAllQs(f).length);
+    const res = reviewPick(forms, reviewRecord(id));
+    reviewRecord(id, res.rec);
+    const items = res.keys.map(k=>k.split('.').map(Number)).sort((a,b)=>a[0]-b[0]);
+    return items.map(([c,f])=>orientShuffleOpts(orientAllQs(deck[c])[f]));
   }
   function openReview(d){
     orientLead = null; orientDeck = null;
-    rev = {d, items:buildReview(d.deck), i:0, score:0};
+    rev = {d, items:buildReview(d.deck, d.id), i:0, score:0};
     $('orient-title').textContent = 'Review · '+d.title;
     $('orient-badge').textContent = 'Review';
     show('scr-orient'); renderReview();
@@ -6346,6 +6393,10 @@ if(typeof document!=='undefined'){
         gpProg.study[k] = gpProg.study[k] || {};
         Object.keys(src).forEach(x=>{ if(src[x]) gpProg.study[k][x] = src[x]; });
       });
+      if(s.study.revSeen && typeof s.study.revSeen==='object'){
+        gpProg.study.revSeen = gpProg.study.revSeen || {};
+        Object.keys(s.study.revSeen).forEach(x=>{ if(s.study.revSeen[x] && !gpProg.study.revSeen[x]) gpProg.study.revSeen[x] = s.study.revSeen[x]; });
+      }
     }
     if(s.recite && typeof s.recite==='object'){
       const bag = gpProg.recite || window.__arsReciteBag;
