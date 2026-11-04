@@ -66,7 +66,13 @@ html:has(body.dark){
 ::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
 html:has(body.dark)::-webkit-scrollbar-track{background:#211b14; border-left-color:#6b5a43}
 html:has(body.dark)::-webkit-scrollbar-thumb{background:#a88f66; border-color:#211b14}
-html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
+html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#c9b48a}
+/* Dark mode via html.dark (set by script): works without :has() and reaches inner scroll areas (menus, textareas, lists) in WebKit too. */
+html.dark{color-scheme:dark; scrollbar-color:#a88f66 #211b14}
+html.dark::-webkit-scrollbar-track, html.dark ::-webkit-scrollbar-track{background:#211b14; border-left-color:#6b5a43}
+html.dark::-webkit-scrollbar-thumb, html.dark ::-webkit-scrollbar-thumb{background:#a88f66; border-color:#211b14}
+html.dark::-webkit-scrollbar-thumb:hover, html.dark ::-webkit-scrollbar-thumb:hover{background:#c9b48a}
+html.dark ::-webkit-scrollbar-corner, html.dark::-webkit-scrollbar-corner{background:#211b14}
 body{
   font-family:var(--text);
   color:var(--ink); min-height:100vh; font-size:19px; line-height:1.5;
@@ -1471,6 +1477,7 @@ body.dark .font-note{color:#978a70 !important}
 }
 #set-btn:hover, #set-btn[aria-expanded="true"]{background:var(--hover)}
 #set-btn:focus-visible, .set-menu button:focus-visible, .pm-font button:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+.set-menu.by-pointer :is(button, a):focus-visible{outline:none}
 .set-wrap{position:relative; display:flex}
 .set-menu{
   position:absolute; top:calc(100% + 6px); right:0; z-index:70; min-width:260px; max-width:calc(100vw - 24px);
@@ -5604,10 +5611,15 @@ if(typeof document!=='undefined'){
     function items(){ return [...menu.querySelectorAll('button, a[href]')].filter(e=>!e.closest('[hidden]')); }
     function close(focusBtn){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); if(focusBtn) btn.focus(); }
     function open(){ sync(); menu.hidden = false; btn.setAttribute('aria-expanded','true'); (menu.querySelector('[aria-checked="true"][data-font]')||items()[0]).focus(); }
-    btn.onclick = e=>{ e.stopPropagation(); if(menu.hidden) open(); else close(); };
+    /* Opened with the mouse or a tap: the selected font shows only its checkmark, no focus ring; the ring returns on the first key press. */
+    btn.onclick = e=>{ e.stopPropagation(); menu.classList.toggle('by-pointer', e.detail > 0); if(menu.hidden) open(); else close(); };
+    /* Mirror dark mode onto <html> so the page and inner scrollbars and native controls follow it in every browser
+       (older Safari has no :has() and does not repaint ::-webkit-scrollbar until layout changes). */
+    (function(){ const h = document.documentElement; function m(){ const d = document.body.classList.contains('dark'); if(h.classList.contains('dark') === d) return; h.classList.toggle('dark', d); const o = h.style.overflow; h.style.overflow = 'hidden'; void h.offsetHeight; h.style.overflow = o; } m(); new MutationObserver(m).observe(document.body, {attributes:true, attributeFilter:['class']}); })();
     $('set-dark').onclick = e=>{ e.stopPropagation(); $('dark-toggle').click(); sync(); };
     $('dark-toggle').addEventListener('click', ()=>setTimeout(sync));
     menu.addEventListener('keydown', e=>{
+      menu.classList.remove('by-pointer');
       const it = items(), i = it.indexOf(document.activeElement);
       if(e.key==='ArrowDown'){ e.preventDefault(); it[(i+1)%it.length].focus(); }
       else if(e.key==='ArrowUp'){ e.preventDefault(); it[(i-1+it.length)%it.length].focus(); }
