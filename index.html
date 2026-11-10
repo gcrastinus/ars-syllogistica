@@ -1449,19 +1449,19 @@ html[data-font="plain"]{--display:'Atkinson Hyperlegible Next', var(--std-displa
 html[data-font="plain"] body{font-size-adjust:.54}
 html[data-font="copperplate"]{--display:'Pinyon Script', var(--std-display); --text:'Pinyon Script', var(--std-text)}
 html[data-font="fraktur"] body, html[data-font="copperplate"] body{font-synthesis:none}
-html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, [data-directions]), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, [data-directions]) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
+html:is([data-font="fraktur"],[data-font="copperplate"]) body *:not(:is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, .lic-note, [data-directions]), :is(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, .lic-note, [data-directions]) *){text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
 html[data-font="copperplate"] body{font-size-adjust:.53; color:#1c140d; -webkit-text-stroke:.35px currentColor}
 html[data-font="copperplate"] body.dark{color:#f3ead6}
 /* the standard font is kept here */
 html[data-font] :is(button:not(.set-card), input, select, textarea, option, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
-  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, [data-directions]){
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, .lic-note, [data-directions]){
   --display:var(--std-display); --text:var(--std-text);
   font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial;
 }
 :where(html[data-font]) :where(label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
-  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, [data-directions]){font-family:var(--std-text); font-style:normal}
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, .lic-note, [data-directions]){font-family:var(--std-text); font-style:normal}
 :where(html[data-font="copperplate"]) :where(button:not(.set-card), input, select, textarea, label, svg, .q-instr, .instructions, .input-hint, .kbd-hint,
-  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, [data-directions]){color:var(--ink)}
+  .orient-hint, .daily-hint, .progress-label, .speak-rate-menu, .pm-menu, .set-menu, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .font-note, .lic-note, [data-directions]){color:var(--ink)}
 html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .lab-terms .refresh, .preset-btn, .prog-mini-btn,
   .daily-remind-btn, .daily-time-lbl input, .recite-due-btn, #dark-toggle, .ans-btn, .opt){font-family:var(--std-text)}
 /* the note on the current font, above the credit line */
@@ -1469,6 +1469,10 @@ html[data-font] :is(.mode-btn, .back-btn, .orient-opt, .lp-lvl, .type-input, .la
 .font-note{max-width:36rem; margin:3.5rem auto 1.25rem; padding:0 1rem; font-family:var(--std-text) !important; font-style:normal !important; font-weight:400; font-size:.75rem !important; line-height:1.5 !important; color:#786a58 !important; text-align:center; overflow-wrap:break-word; -webkit-text-stroke:0; font-size-adjust:none}
 body.dark .font-note{color:#978a70 !important}
 .font-note b{color:inherit !important; font-weight:700}
+/* Quiet license line at the bottom of the home page. Same small print as the font note, in both modes. */
+.lic-note{max-width:40rem; margin:.35rem auto 0; padding:0 12px; font-family:var(--std-text) !important; font-style:italic !important; font-weight:400; font-size:13px !important; line-height:1.45 !important; letter-spacing:0 !important; text-transform:none !important; font-variant:normal !important; color:var(--ink-soft); text-align:center; overflow-wrap:break-word; -webkit-text-stroke:0; font-size-adjust:none}
+.lic-note a{color:var(--wine); font-style:italic; font-size:inherit; letter-spacing:0; text-transform:none; text-decoration:underline; text-underline-offset:2px}
+.lic-note a:hover{color:var(--accent)}
 /* the settings button and its menu (the + replaces the separate dark-mode button, which stays hidden for its logic) */
 #dark-toggle[hidden]{display:none !important}
 #set-btn{
@@ -1684,11 +1688,11 @@ html[data-font="copperplate"] :is(.syllogism, .chain-wrap, .fb-standard, .venn-c
 html[data-font] button{--fk:1}
 /* Oct 24: directions and instructions are always set in Classic Modern (Libre Caslon) at the standard size,
    whatever font is chosen. Mark direction text with data-directions (in markup and in JS-built HTML). */
-html[data-font] :is([data-directions], .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .font-note){
+html[data-font] :is([data-directions], .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .font-note, .lic-note){
   --display:var(--std-display); --text:var(--std-text); --fk:1;
   font-family:var(--std-text); font-size-adjust:none; -webkit-text-stroke:0; font-synthesis:initial;
 }
-html[data-font] :is([data-directions], .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .font-note) *:not(svg *){
+html[data-font] :is([data-directions], .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .font-note, .lic-note) *:not(svg *){
   --display:var(--std-display); --text:var(--std-text); font-size-adjust:none; -webkit-text-stroke:0;
 }
 html[data-font] button [data-directions]{font-family:inherit}
@@ -1945,6 +1949,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
     <p class="designer-credit">Designed and directed by Timothy Kearns, Ph.D. AI tools were used for drafting some of the study sections and for building the interactive exercises and answer keys.</p>
     <div class="si-home"><a href="https://studiuminstitute.org">Studium Institute</a></div>
     <p class="font-note" id="font-note" aria-live="polite"></p>
+    <p class="lic-note">© 2026 Timothy Kearns · Studium Institute. Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> (non-commercial use); all commercial rights reserved.</p>
 
   </div>
 
@@ -7309,7 +7314,7 @@ if(typeof document!=='undefined'){
 (function(){
   var MOODS='Barbara|Celarent|Darii|Ferio|Cesare|Camestres|Festino|Baroco|Darapti|Disamis|Datisi|Felapton|Bocardo|Ferison|Bramantip|Camenes|Dimaris|Fesapo|Fresison|Baralipton|Celantes|Dabitis|Fapesmo|Frisesomorum|Barbari|Celaront|Cesaro|Camestrop|Camenop|Barbari';
   var RE=new RegExp("(^|[^A-Za-z\\u00C0-\\u024F'’])((?:"+MOODS+")\\b|[AEIO]{3}(?:-[1-4])?(?![A-Za-z])|[A-Z](?![A-Za-z'’])|[b-hj-z](?![A-Za-z'’]))","g");
-  var SKIP='button, input, select, textarea, option, svg, script, style, h1, h2, h3, title, .lt, .set-card, .part-heading, .section-label, .act-label, .syllogism, .chain-wrap, .venn-cap, .lab-read, .lab-terms, .prog-num, .speak-unit, .font-note, label, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .mc-question, .fb-points, .fb-standard, .venn-legend, .venn-key, .orient-venn .cap, .set-menu, .pm-menu, #top-right-controls, [data-directions]';
+  var SKIP='button, input, select, textarea, option, svg, script, style, h1, h2, h3, title, .lt, .set-card, .part-heading, .section-label, .act-label, .syllogism, .chain-wrap, .venn-cap, .lab-read, .lab-terms, .prog-num, .speak-unit, .font-note, .lic-note, label, .q-instr, .instructions, .input-hint, .kbd-hint, .orient-hint, .daily-hint, .progress-label, .orient-opts, .answer-row, .lp-levels, .badge, .orient-prog, .mc-question, .fb-points, .fb-standard, .venn-legend, .venn-key, .orient-venn .cap, .set-menu, .pm-menu, #top-right-controls, [data-directions]';
   function okA(t,i){ /* "A" or "I" followed by a lowercase word is an article or pronoun */
     var m=/^\s+([A-Za-z]+)/.exec(t.slice(i)); return !m || /^(are|is|and|or|with|to|converts?|has|can|cannot|proposition|propositions|form|forms|along|beneath|must|becomes|gives|statement|premise|conclusion|from|by)$/.test(m[1]); }
   function wrap(node){
