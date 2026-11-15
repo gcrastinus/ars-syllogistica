@@ -1520,6 +1520,26 @@ body.dark .font-note{color:#978a70 !important}
 .pm-menu .si-nav{border-bottom:0; margin-bottom:0}
 .pm-menu{max-height:calc(100vh - 74px); max-height:calc(100dvh - 74px); overflow-y:auto}
 
+/* Studium Institute sign-in (studium-account.js loads the shared studium-sync.js): "Sign in" in the + menu under Dark mode,
+   and its window in the site's colors, always in the standard face whatever font is chosen. */
+body{--studium-paper:var(--paper); --studium-ink:var(--ink); --studium-card:var(--card); --studium-line:var(--frame); --studium-font:400 18px/1.45 var(--std-text); --studium-backdrop:rgba(43,33,24,.46)}
+body.dark{--studium-backdrop:rgba(0,0,0,.62); --studium-err:#f0b4b4}
+.studium-bg, .studium-bg *{font-family:var(--std-text) !important; font-size-adjust:none !important; -webkit-text-stroke:0 !important; text-transform:none !important; letter-spacing:0 !important; font-variant:normal !important}
+.set-menu .set-account:empty{display:none}
+.set-menu .set-account .studium-line{display:block}
+.set-menu .set-account button.studium-link{display:flex; align-items:center; width:100%; min-height:44px; margin:0; padding:10px 16px 10px 48px; font-family:var(--std-text) !important; font-size:18px; line-height:1.3; font-weight:400; color:var(--ink); background:transparent; text-align:left; text-decoration:none; border:0; border-radius:0; opacity:1; white-space:nowrap}
+.set-menu .set-account button.studium-link:hover{background:var(--hover)}
+.set-menu .set-account .studium-who{display:block; max-width:300px; padding:8px 16px 0 48px; font-family:var(--std-text) !important; font-size:15px; color:var(--ink-soft); opacity:1; white-space:normal; overflow-wrap:anywhere}
+.set-menu .set-account .studium-sep{display:none}
+@media print{ .studium-bg{display:none !important} }
+.pm-menu .pm-account:empty{display:none}
+.pm-menu .pm-account button.studium-link{display:flex; align-items:center; width:100%; min-height:44px; margin:0; padding:12px 14px 12px 50px; font-family:var(--text) !important; font-size:18px; line-height:1.3; font-weight:400; color:var(--ink); background:transparent; text-align:left; text-decoration:none; border:0; border-radius:0; opacity:1; white-space:nowrap}
+.pm-menu .pm-account button.studium-link:hover{background:var(--hover)}
+.pm-menu .pm-account .studium-line{display:block}
+.pm-menu .pm-account .studium-sep{display:none}
+.pm-menu .pm-account button.studium-link:focus-visible{background:var(--hover); outline:none}
+.pm-menu .pm-account .studium-who{display:block; max-width:300px; padding:10px 14px 0 50px; font-size:15px; color:var(--ink-soft); opacity:1; white-space:normal; overflow-wrap:anywhere}
+
 /* each font option is shown in its own face, large for legibility */
 .set-menu .set-fonts button, .pm-font .set-fonts button{font-size:22px; line-height:1.25; font-size-adjust:none}
 :is(.set-menu,.pm-font) .set-fonts [data-font="standard"] span+span{font-family:'Libre Caslon Text', Georgia, serif}
@@ -1719,6 +1739,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
   .recite-top .recite-desc{order:3; flex:1 1 100%; margin:0}
 }
 </style>
+<script src="studium-account.js?v=20261115si"></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
@@ -1741,6 +1762,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 <button type="button" id="set-btn" title="Dark mode and font" aria-label="Dark mode and font" aria-haspopup="true" aria-expanded="false" aria-controls="set-menu"><span aria-hidden="true">+</span></button>
 <div class="set-menu" id="set-menu" role="menu" aria-label="Display settings" hidden>
   <button type="button" role="menuitemcheckbox" id="set-dark" aria-checked="false"><span class="set-check" aria-hidden="true"></span><span>Dark mode</span></button>
+  <div class="set-account" data-studium-account></div>
   <div class="set-sep" role="separator"></div>
   <div class="set-head" id="set-font-head">Font</div>
   <div class="set-fonts" role="group" aria-labelledby="set-font-head"></div>
@@ -1758,6 +1780,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 <button type="button" id="pm-btn" class="pm-btn" title="Settings menu" aria-label="Settings menu" aria-haspopup="true" aria-expanded="false" aria-controls="pm-menu"><span aria-hidden="true">+</span></button>
 <div class="pm-menu" id="pm-menu" role="menu" aria-label="Display settings" hidden>
   <button type="button" role="menuitem" class="pm-item" id="pm-dark"><span class="pm-glyph" aria-hidden="true"><svg class="ctl-ico ctl-contrast" viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></span><span class="pm-label">Dark mode</span></button>
+  <div class="set-account pm-account" data-studium-account></div>
   <div class="pm-font" role="group" aria-labelledby="pm-font-head"><div class="set-head" id="pm-font-head">Font</div><div class="set-fonts"></div></div>
   <button type="button" role="menuitem" class="pm-item" id="pm-play"><span class="pm-glyph" aria-hidden="true"><svg class="ctl-ico ctl-play" viewBox="0 0 24 24" width="1.25em" height="1.25em" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="pm-label">Read aloud</span></button>
   <div class="pm-rates" role="group" aria-label="Reading speed"><span class="pm-rates-label">Speed</span><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.5">1.5×</button><button type="button" data-rate="2">2×</button><button type="button" data-rate="2.5">2.5×</button><button type="button" data-rate="3">3×</button></div>
@@ -2454,6 +2477,14 @@ if(typeof document!=='undefined'){
     function open(){ syncItems(); menu.hidden = false; btn.setAttribute('aria-expanded','true'); }
     btn.onclick = e=>{ e.stopPropagation(); if(menu.hidden) open(); else close(); };
     $('pm-dark').onclick = ()=>{ $('dark-toggle').click(); syncItems(); };
+    /* Sign in, Sign out, Delete (studium-account.js): close the menu so the sign-in window has the keyboard to itself;
+       when that window closes, the keyboard goes back to the + button */
+    menu.querySelector('.pm-account').addEventListener('click', e=>{
+      const b = e.target.closest('button'); if(!b) return;
+      close();
+      const bg = document.querySelector('.studium-bg');
+      if(bg && !bg.hidden){ const mo = new MutationObserver(()=>{ if(bg.hidden){ mo.disconnect(); if(!document.activeElement || document.activeElement === document.body) btn.focus(); } }); mo.observe(bg, {attributes:true, attributeFilter:['hidden']}); }
+    });
     $('pm-play').onclick = ()=>{ close(); if(speakBtn) speakBtn.click(); };
     menu.querySelectorAll('.pm-rates [data-rate]').forEach(b=>{
       b.onclick = ()=>{
@@ -5622,6 +5653,14 @@ if(typeof document!=='undefined'){
        (older Safari has no :has() and does not repaint ::-webkit-scrollbar until layout changes). */
     (function(){ const h = document.documentElement; function m(){ const d = document.body.classList.contains('dark'); if(h.classList.contains('dark') === d) return; h.classList.toggle('dark', d); const o = h.style.overflow; h.style.overflow = 'hidden'; void h.offsetHeight; h.style.overflow = o; } m(); new MutationObserver(m).observe(document.body, {attributes:true, attributeFilter:['class']}); })();
     $('set-dark').onclick = e=>{ e.stopPropagation(); $('dark-toggle').click(); sync(); };
+    /* Sign in, Sign out, Delete (studium-account.js): close the menu so the sign-in window has the keyboard to itself;
+       when that window closes, the keyboard goes back to the + button */
+    menu.querySelector('.set-account').addEventListener('click', e=>{
+      const b = e.target.closest('button'); if(!b) return;
+      close(b.dataset.act === 'out');
+      const bg = document.querySelector('.studium-bg');
+      if(bg && !bg.hidden){ const mo = new MutationObserver(()=>{ if(bg.hidden){ mo.disconnect(); if(!document.activeElement || document.activeElement === document.body) btn.focus(); } }); mo.observe(bg, {attributes:true, attributeFilter:['hidden']}); }
+    });
     $('dark-toggle').addEventListener('click', ()=>setTimeout(sync));
     menu.addEventListener('keydown', e=>{
       menu.classList.remove('by-pointer');
