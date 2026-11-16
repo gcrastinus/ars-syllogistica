@@ -312,7 +312,9 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   const full = document.getElementById('recite-full');
   const columns = document.getElementById('recite-columns');
   const doneBtn = document.getElementById('recite-done');
-  const SEE_FULL = seeBtn.textContent, NOTE_FULL = note.textContent;
+  const SEE_FULL = seeBtn.textContent;
+  const NOTE_QUICK_FIRST = 'Write a quick recitation first and later do the full one.';
+  let fullAsked = false;   // set when Full is clicked before Quick is done
   let selectedKey = '';
   let justOpened = '';
   const doneMsg = document.getElementById('recite-done-msg');
@@ -356,14 +358,14 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const enough = !!(live && reciteDistinctCount(text.value) >= minimumFor(selectedKey, live));
     const quick = isQuickKey(selectedKey);
     seeBtn.textContent = quick ? 'See quick recitation' : SEE_FULL;
-    note.textContent = quick ? 'Write a fuller recitation to see the quick one.' : NOTE_FULL;
+    note.textContent = NOTE_QUICK_FIRST;
     if (doneBtn) doneBtn.hidden = !(quick && item && item.locked && !quickDone(baseId(selectedKey)));
     if (doneMsg) doneMsg.hidden = !(quick && item && item.locked && justOpened === selectedKey);
     seeBtn.hidden = !!(item && item.locked);
     seeBtn.disabled = !enough;
     if (printBtn) printBtn.hidden = !(item && item.locked && item.groups && item.groups.length);
     newBtn.hidden = !(item && item.locked);
-    note.hidden = !(item && !item.locked && live && !enough);
+    note.hidden = !fullAsked;
   }
 
   function renderOutline(item){
@@ -458,7 +460,14 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
         if (on && hasQuick(it.id)){
           menuList.appendChild(optButton('quick:' + it.id, menuName('quick:' + it.id), '', true));
           const open = quickDone(it.id);
-          menuList.appendChild(optButton(it.id, menuName(it.id), open ? '' : 'Press "Done" on Quick to open Full.', open));
+          const fb = optButton(it.id, menuName(it.id), '', open);
+          if (!open){
+            fb.disabled = false;
+            fb.classList.add('recite-opt-wait');
+            fb.style.opacity = '.48';
+            fb.addEventListener('click', () => { closeMenu(); fullAsked = true; note.textContent = NOTE_QUICK_FIRST; note.hidden = false; });
+          }
+          menuList.appendChild(fb);
           return;
         }
         menuList.appendChild(optButton(it.id, it.title, noteText, on));
@@ -475,6 +484,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   }
 
   function choose(key){
+    fullAsked = false;
     commitText();
     selectedKey = key;
     bag().lastKey = key;
