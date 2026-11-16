@@ -540,6 +540,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
 
   function closeOverlay(){
     const was = !overlay.hidden;
+    closeConfirm(false);   /* Back or Close while the confirm window is up: it counts as Cancel */
     commitText();
     clearTimeout(saveTimer);
     save();
@@ -734,17 +735,73 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     menuBtn.focus();
   });
 
+  /* "Start a new recitation" asks in the tablet's own window, in the colors and faces of the page, not in the browser's
+     system dialog (Timothy, 16 Nov 2026). Escape or a click outside cancels, Enter confirms, and the keyboard starts on Cancel. */
+  let confirmBox = null, confirmThen = null, confirmFrom = null;
+  function closeConfirm(ok){
+    if (!confirmBox || confirmBox.hidden) return;
+    confirmBox.hidden = true;
+    const then = confirmThen, from = confirmFrom;
+    confirmThen = null; confirmFrom = null;
+    if (!ok && from && !overlay.hidden && document.contains(from)) from.focus();
+    if (then) then(ok);
+  }
+  function askConfirm(question, detail, okLabel, then){
+    if (!confirmBox){
+      confirmBox = document.createElement('div');
+      confirmBox.className = 'recite-confirm';
+      confirmBox.hidden = true;
+      confirmBox.innerHTML = '<div class="recite-confirm-box" role="alertdialog" aria-modal="true"'
+        + ' aria-labelledby="recite-confirm-q" aria-describedby="recite-confirm-d">'
+        + '<p class="recite-confirm-q" id="recite-confirm-q"></p>'
+        + '<p class="recite-confirm-d" id="recite-confirm-d"></p>'
+        + '<div class="recite-confirm-btns">'
+        + '<button type="button" class="btn" data-act="cancel">Cancel</button>'
+        + '<button type="button" class="btn primary" data-act="ok"></button>'
+        + '</div></div>';
+      /* Inside the tablet's panel, so its buttons take the tablet's own button style. */
+      (overlay.querySelector('.recite-panel') || overlay).appendChild(confirmBox);
+      confirmBox.addEventListener('click', e => {
+        if (e.target === confirmBox){ closeConfirm(false); return; }
+        const b = e.target.closest && e.target.closest('button[data-act]');
+        if (b) closeConfirm(b.dataset.act === 'ok');
+      });
+      /* Capture, so the tablet's own Escape (which closes the tablet) does not also run. */
+      document.addEventListener('keydown', e => {
+        if (!confirmBox || confirmBox.hidden) return;
+        if (e.key === 'Escape'){ e.preventDefault(); e.stopPropagation(); closeConfirm(false); return; }
+        if (e.key === 'Enter'){ e.preventDefault(); e.stopPropagation(); if (!e.repeat) closeConfirm(true); return; }
+        if (e.key === 'Tab'){
+          const bs = confirmBox.querySelectorAll('button');
+          const first = bs[0], last = bs[bs.length - 1];
+          if (!confirmBox.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
+          else if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }, true);
+    }
+    confirmBox.querySelector('.recite-confirm-q').textContent = question;
+    confirmBox.querySelector('.recite-confirm-d').textContent = detail;
+    confirmBox.querySelector('[data-act="ok"]').textContent = okLabel;
+    confirmThen = then;
+    confirmFrom = document.activeElement;
+    confirmBox.hidden = false;
+    confirmBox.querySelector('[data-act="cancel"]').focus();
+  }
+
   newBtn.addEventListener('click', () => {
     const item = currentItem();
     if (!item || !item.locked) return;
-    if (!window.confirm('Start a new recitation? The writing will be cleared.')) return;
-    item.text = '';
-    item.locked = false;
-    item.revealedAt = null;
-    item.groups = null;
-    save();
-    paint();
-    text.focus();
+    askConfirm('Start a new recitation?', 'The writing will be cleared.', 'Start a new recitation', ok => {
+      if (!ok) return;
+      item.text = '';
+      item.locked = false;
+      item.revealedAt = null;
+      item.groups = null;
+      save();
+      paint();
+      text.focus();
+    });
   });
 
   full.addEventListener('change', e => {

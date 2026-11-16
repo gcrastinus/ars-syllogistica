@@ -51,24 +51,31 @@ html{
   background:#f6f0e1;
   color-scheme:light;
   /* Firefox scrollbar */
-  scrollbar-color:#8a6d3b #e6dcc2;
   scrollbar-width:auto;
 }
 html:has(body.dark){
   background:#2a2219;
   color-scheme:dark;
-  scrollbar-color:#a88f66 #211b14;
 }
 /* WebKit/Chromium/Dropbox scrollbar — themed to match the parchment, not the default bright gray */
+/* Scroll bars (16 Nov 2026). Chrome (121 on) and Safari (26.2 on) ignore every ::-webkit-scrollbar rule on an element
+   whose scrollbar-color is not auto, and scrollbar-color is inherited, so the one set on <html> for Firefox turned off the
+   styled bars below in every scroll area and left the system bar, merely tinted. Firefox, which has no ::-webkit-scrollbar,
+   now gets scrollbar-color by itself; Chrome and Safari draw the bars below everywhere, the same in every scroll area. */
+@supports not selector(::-webkit-scrollbar){
+  html{scrollbar-color:#8a6d3b #e6dcc2}
+  html:has(body.dark), html.dark{scrollbar-color:#a88f66 #211b14}
+}
 ::-webkit-scrollbar{width:20px; height:20px}
 ::-webkit-scrollbar-track{background:#e6dcc2; border-left:1px solid #b89f6d}
 ::-webkit-scrollbar-thumb{background:#8a6d3b; border-radius:0; border:3px solid #e6dcc2}
 ::-webkit-scrollbar-thumb:hover{background:#6b4a2b}
-html:has(body.dark)::-webkit-scrollbar-track{background:#211b14; border-left-color:#6b5a43}
-html:has(body.dark)::-webkit-scrollbar-thumb{background:#a88f66; border-color:#211b14}
-html:has(body.dark)::-webkit-scrollbar-thumb:hover{background:#c9b48a}
+::-webkit-scrollbar-corner{background:#e6dcc2}
+html:has(body.dark)::-webkit-scrollbar-track, html:has(body.dark) ::-webkit-scrollbar-track{background:#211b14; border-left-color:#6b5a43}
+html:has(body.dark)::-webkit-scrollbar-thumb, html:has(body.dark) ::-webkit-scrollbar-thumb{background:#a88f66; border-color:#211b14}
+html:has(body.dark)::-webkit-scrollbar-thumb:hover, html:has(body.dark) ::-webkit-scrollbar-thumb:hover{background:#c9b48a}
 /* Dark mode via html.dark (set by script): works without :has() and reaches inner scroll areas (menus, textareas, lists) in WebKit too. */
-html.dark{color-scheme:dark; scrollbar-color:#a88f66 #211b14}
+html.dark{color-scheme:dark}
 html.dark::-webkit-scrollbar-track, html.dark ::-webkit-scrollbar-track{background:#211b14; border-left-color:#6b5a43}
 html.dark::-webkit-scrollbar-thumb, html.dark ::-webkit-scrollbar-thumb{background:#a88f66; border-color:#211b14}
 html.dark::-webkit-scrollbar-thumb:hover, html.dark ::-webkit-scrollbar-thumb:hover{background:#c9b48a}
@@ -797,6 +804,28 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
 .recite-point{display:flex; gap:10px; align-items:flex-start; margin:0 0 10px; cursor:pointer}
 .recite-point input{margin-top:6px; width:16px; height:16px; flex:none; accent-color:var(--gold)}
 .recite-point span{font-size:17.5px; line-height:1.45}
+
+/* The tablet's own confirm window for "Start a new recitation", in place of the browser's system dialog (16 Nov 2026). */
+.recite-confirm{
+  position:fixed; inset:0; z-index:60;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  background:rgba(43, 33, 24, .38);
+}
+body.dark .recite-confirm{background:rgba(0, 0, 0, .5)}
+.recite-confirm[hidden]{display:none}
+.recite-confirm-box{
+  width:min(100%, 30em); background:var(--paper); color:var(--ink);
+  border:1px solid var(--frame); border-left:3px solid var(--frame); border-radius:0;
+  box-shadow:0 12px 36px rgba(0, 0, 0, .28); padding:20px 22px 18px;
+}
+.recite-confirm-q{
+  font-family:var(--display); font-size:clamp(20px, 2vw, 24px); font-weight:400; letter-spacing:0;
+  line-height:1.25; margin:0 0 8px; color:var(--ink);
+}
+.recite-confirm-d{font-family:var(--text); font-size:17px; line-height:1.45; margin:0 0 18px; color:var(--ink-soft)}
+.recite-confirm-btns{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px}
+.recite-confirm .btn{text-transform:none}
+.recite-confirm .btn:focus-visible{outline:2px solid var(--wine); outline-offset:2px}
 .recite-open:focus-visible, .recite-menu-btn:focus-visible, .recite-opt:focus-visible, .recite-desc summary:focus-visible{
   outline:2px solid var(--gold); outline-offset:2px;
 }
@@ -7344,7 +7373,7 @@ if(typeof document!=='undefined'){
 </script>
 <script src="recitation-quick.js"></script>
 <script src="recitation-adapter.js"></script>
-<script src="recitation.js?v=20261116w15"></script>
+<script src="recitation.js?v=20261116cf"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 <script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>
