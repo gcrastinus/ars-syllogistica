@@ -38,7 +38,7 @@
   recitation, and it is marked Quick done too (quickDoneAt from revealedAt, or lastRecitedAt, or the time of migration).
   The whole-section recitations have no Quick: they are Full only, as before.
   "Done" opens Full in the menu only; the tablet stays on the revealed Quick recitation.
-  Quick needs the same minimum of writing as Full (80 words).
+  Quick needs the same minimum of writing as Full (15 words, every word counted).
 
   A later print view sets record.text beside record.groups. Each point's text is the outline line,
    and checked is the box as the student left it. The line is copied when the outline is opened,
@@ -82,23 +82,27 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     return set.size;
   }
 
+  /* The writing minimum: every word counts (anything between spaces with a letter in it). Nov 16, 2026: 15 words (Timothy). */
+  const RECITE_MIN_WORDS = 15;
+  function reciteWordCount(text){
+    const plain = String(text == null ? '' : text).replace(/<[^>]*>/g, ' ');
+    return plain.split(/\s+/).filter(w => /[A-Za-z\u00C0-\u024F\u0370-\u03FF\u1F00-\u1FFF]/.test(w)).length;
+  }
+
   function pointStrings(groups){
     const out = [];
     (groups || []).forEach(g => (g.points || []).forEach(p => out.push(typeof p === 'string' ? p : p.text)));
     return out;
   }
 
-  /* About a quarter of the outline, counted the same way as the student's writing, and never under 80. */
+  /* Every recitation needs the same minimum of writing (RECITE_MIN_WORDS). */
   function reciteMinimum(groups){
-    const n = reciteDistinctCount(pointStrings(groups).join(' '));
-    return Math.max(80, Math.ceil(n / 4));
+    return RECITE_MIN_WORDS;
   }
 
-  /* Quick outlines are short (about a third of Full), so their floor is lower; Full keeps 80. */
-  const QUICK_FLOOR = 80;
+  /* Quick needs the same minimum of writing as Full. */
   function quickMinimum(groups){
-    const n = reciteDistinctCount(pointStrings(groups).join(' '));
-    return Math.max(QUICK_FLOOR, Math.ceil(n / 4));
+    return RECITE_MIN_WORDS;
   }
 
   function reciteIsDue(item, now){
@@ -112,6 +116,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   ARS.recitable = recitable;
   ARS.RECITE_AFTER_DAYS = RECITE_AFTER_DAYS;
   ARS.reciteDistinctCount = reciteDistinctCount;
+  ARS.reciteWordCount = reciteWordCount;
   ARS.reciteMinimum = reciteMinimum;
   ARS.reciteIsDue = reciteIsDue;
 
@@ -355,7 +360,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   function updateGate(){
     const item = currentItem();
     const live = item && !item.locked ? liveGroups(selectedKey) : null;
-    const enough = !!(live && reciteDistinctCount(text.value) >= minimumFor(selectedKey, live));
+    const enough = !!(live && reciteWordCount(text.value) >= minimumFor(selectedKey, live));
     const quick = isQuickKey(selectedKey);
     seeBtn.textContent = quick ? 'See quick recitation' : SEE_FULL;
     note.textContent = NOTE_QUICK_FIRST;
@@ -680,7 +685,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const item = currentItem();
     const live = liveGroups(selectedKey);
     if (!item || item.locked || !live) return;
-    if (reciteDistinctCount(text.value) < minimumFor(selectedKey, live)) return;
+    if (reciteWordCount(text.value) < minimumFor(selectedKey, live)) return;
     item.text = text.value;
     item.groups = live.map(g => ({
       deck: g.deck,
