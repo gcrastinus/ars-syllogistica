@@ -739,6 +739,24 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
 .recite-desc p{font-size:16px; line-height:1.45; margin:0 0 8px}
 .recite-desc p:last-child{margin-bottom:0}
 .recite-tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+
+/* Initial Study / Study for Mastery chooser (18 Nov 2026). One row in the topic list; the two kinds sit inside the tablet. */
+.recite-kind{display:flex; flex-wrap:wrap; align-items:center; gap:8px; flex:1 1 100%}
+.recite-kind[hidden]{display:none}
+.recite-kind-btn{
+  font-family:var(--display); font-size:15px; letter-spacing:.03em;
+  min-height:44px; padding:10px 14px;
+}
+.recite-kind-btn[aria-pressed="true"]{
+  background:var(--panel);
+  border-color:var(--gold-soft);
+}
+.recite-kind-btn:disabled{opacity:.48; cursor:default}
+.recite-kind-note{
+  flex:1 1 100%; margin:0;
+  font-style:italic; font-size:14.5px; color:var(--ink-soft);
+}
+.recite-kind-note[hidden]{display:none}
 .recite-picker{position:relative; flex:1; min-width:min(100%, 260px)}
 .recite-menu-btn{
   width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
@@ -826,7 +844,7 @@ body.dark .recite-confirm{background:rgba(0, 0, 0, .5)}
 .recite-confirm-btns{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px}
 .recite-confirm .btn{text-transform:none}
 .recite-confirm .btn:focus-visible{outline:2px solid var(--wine); outline-offset:2px}
-.recite-open:focus-visible, .recite-menu-btn:focus-visible, .recite-opt:focus-visible, .recite-desc summary:focus-visible{
+.recite-open:focus-visible, .recite-menu-btn:focus-visible, .recite-opt:focus-visible, .recite-kind-btn:focus-visible, .recite-desc summary:focus-visible{
   outline:2px solid var(--gold); outline-offset:2px;
 }
 @media (max-width:800px){
@@ -1836,7 +1854,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
     <path class="tab-stylus-end" d="M61.24 36.47 L55.59 40.35 L54.81 38.85 Z"/>
   </svg>
 </button>
-<button type="button" id="recite-callout" class="recite-callout" hidden><span class="recite-callout-x" aria-hidden="true">×</span>You have finished <span id="recite-callout-name"></span>. The best way to continue toward mastery is to set out the whole subject yourself, then check your account against the full recitation.</button>
+<button type="button" id="recite-callout" class="recite-callout" hidden><span class="recite-callout-x" aria-hidden="true">×</span>You have finished <span id="recite-callout-name"></span>. The best way to continue toward mastery is to set out the whole subject yourself, then check your account against the Study for Mastery.</button>
 <div class="wrap">
 
   <!-- ============ HOME ============ -->
@@ -2260,7 +2278,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         <div class="recite-desc-body">
           <p>One of the oldest and best-proven ways to study is to read a section of a book, or study a topic, in one sitting, then close your notes and write down everything you remember, in as much detail as you can. This is called "recitation," and this tablet lets you do it.</p>
           <p>After you finish studying a part of the course, close it and open the Recitation Tablet. Choose the part you just finished from the menu, then write down, in order, everything you can remember about it. This is not easy. But the difficulty is what produces results, especially the moment when you feel you remember nothing more and then keep searching.</p>
-          <p>When you have finished, click "See Full Recitation." You will see a complete outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
+          <p>When you have finished, click "See the Initial Study" or, once it is open, "See Study for Mastery." You will see an outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
         </div>
       </details>
       <button type="button" class="btn" id="recite-close">Close</button>
@@ -2273,13 +2291,18 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         </button>
         <div class="recite-menu-list" id="recite-menu-list" role="listbox" hidden></div>
       </div>
-      <button type="button" class="btn" id="recite-see" disabled>See full recitation</button>
+      <div class="recite-kind" id="recite-kind" hidden role="group" aria-label="Kind of recitation">
+        <button type="button" class="btn recite-kind-btn" id="recite-kind-initial" aria-pressed="true">Initial Study</button>
+        <button type="button" class="btn recite-kind-btn" id="recite-kind-mastery" aria-pressed="false" disabled>Study for Mastery</button>
+        <p class="recite-kind-note" id="recite-kind-note" hidden>Opens after you finish the Initial Study</p>
+      </div>
+      <button type="button" class="btn" id="recite-see" disabled>See the Initial Study</button>
       <button type="button" class="btn" id="recite-print" hidden>Print</button>
       <button type="button" class="btn" id="recite-new" hidden>Start a new recitation</button>
       <button type="button" class="btn recite-done" id="recite-done" hidden>Done</button>
-      <p class="recite-note" id="recite-done-msg" role="status" hidden>Full is now open in the menu.</p>
+      <p class="recite-note" id="recite-done-msg" role="status" hidden>Study for Mastery is now available.</p>
     </div>
-    <p class="recite-note" id="recite-note" data-directions hidden>Write a quick recitation first and later do the full one.</p>
+    <p class="recite-note" id="recite-note" data-directions hidden>Write the Initial Study first and later do the Study for Mastery.</p>
     <div class="recite-columns" id="recite-columns">
       <textarea id="recite-text" class="recite-text" aria-label="Recitation" spellcheck="true" disabled></textarea>
       <div id="recite-full" class="recite-full" hidden></div>
@@ -7373,7 +7396,7 @@ if(typeof document!=='undefined'){
 </script>
 <script src="recitation-quick.js"></script>
 <script src="recitation-adapter.js"></script>
-<script src="recitation.js?v=20261117op"></script>
+<script src="recitation.js?v=20261118is"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 <script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>

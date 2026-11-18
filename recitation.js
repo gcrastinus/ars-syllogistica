@@ -37,7 +37,8 @@
   Saved progress from before Quick: once (recitations.quickMigrated), every deck item already present is a Full
   recitation, and it is marked Quick done too (quickDoneAt from revealedAt, or lastRecitedAt, or the time of migration).
   The whole-section recitations have no Quick: they are Full only, as before.
-  "Done" opens Full in the menu only; the tablet stays on the revealed Quick recitation.
+  The topic list shows one row per deck (plain title). Initial Study and Study for Mastery are chosen inside the tablet.
+  "Done" on Initial Study unlocks Study for Mastery in the chooser only; the tablet stays on the revealed Initial Study.
   Quick needs the same minimum of writing as Full (15 words, every word counted).
 
   A later print view sets record.text beside record.groups. Each point's text is the outline line,
@@ -317,9 +318,16 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   const full = document.getElementById('recite-full');
   const columns = document.getElementById('recite-columns');
   const doneBtn = document.getElementById('recite-done');
-  const SEE_FULL = seeBtn.textContent;
-  const NOTE_QUICK_FIRST = 'Write a quick recitation first and later do the full one.';
-  let fullAsked = false;   // set when Full is clicked before Quick is done
+  const SEE_INITIAL = 'See the Initial Study';
+  const SEE_MASTERY = 'See Study for Mastery';
+  const NOTE_INITIAL_FIRST = 'Write the Initial Study first and later do the Study for Mastery.';
+  const NOTE_MASTERY_LOCKED = 'Opens after you finish the Initial Study';
+  const DONE_OPEN_MSG = 'Study for Mastery is now available.';
+  const kindBox = document.getElementById('recite-kind');
+  const kindInitial = document.getElementById('recite-kind-initial');
+  const kindMastery = document.getElementById('recite-kind-mastery');
+  const kindNote = document.getElementById('recite-kind-note');
+  let fullAsked = false;   // kept so older notes stay hidden; the chooser carries the lock note
   let selectedKey = '';
   let justOpened = '';
   const doneMsg = document.getElementById('recite-done-msg');
@@ -337,9 +345,19 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   function minimumFor(key, groups){ return isQuickKey(key) ? quickMinimum(groups) : reciteMinimum(groups); }
   /* The menu and the tablet name the two recitations of a deck that has a Quick one. */
   function menuName(key){
-    const id = baseId(key);
-    if (key.indexOf('section:') !== 0 && hasQuick(id)) return (isQuickKey(key) ? 'Quick: ' : 'Full: ') + labelHTML(id);
     return labelHTML(key);
+  }
+  function kindLabel(key){
+    return isQuickKey(key) ? 'Initial Study' : 'Study for Mastery';
+  }
+  /* A menu row is the deck or section id. Open the kind last chosen (or last recited), else Initial Study. */
+  function resolveMenuKey(key){
+    if (!key || isQuickKey(key) || key.indexOf('section:') === 0 || !hasQuick(key)) return key;
+    const last = bag().lastKey || '';
+    if (baseId(last) === key && keyOpen(last)) return last;
+    const host = bag().items[key];
+    if (quickDone(key) && host && host.lastKind === 'full') return key;
+    return 'quick:' + key;
   }
 
   function commitText(){
@@ -362,15 +380,15 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const live = item && !item.locked ? liveGroups(selectedKey) : null;
     const enough = !!(live && reciteWordCount(text.value) >= minimumFor(selectedKey, live));
     const quick = isQuickKey(selectedKey);
-    seeBtn.textContent = quick ? 'See quick recitation' : SEE_FULL;
-    note.textContent = NOTE_QUICK_FIRST;
+    seeBtn.textContent = quick ? SEE_INITIAL : SEE_MASTERY;
+    note.textContent = NOTE_INITIAL_FIRST;
     if (doneBtn) doneBtn.hidden = !(quick && item && item.locked && !quickDone(baseId(selectedKey)));
     if (doneMsg) doneMsg.hidden = !(quick && item && item.locked && justOpened === selectedKey);
-    seeBtn.hidden = !!(item && item.locked);
+    seeBtn.hidden = !item || item.locked;
     seeBtn.disabled = !enough;
     if (printBtn) printBtn.hidden = !(item && item.locked && item.groups && item.groups.length);
     newBtn.hidden = !(item && item.locked);
-    note.hidden = !fullAsked;
+    note.hidden = true;
   }
 
   function renderOutline(item){
@@ -384,7 +402,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     columns.classList.add('is-split');
     const h = document.createElement('div');
     h.className = 'recite-full-h';
-    h.textContent = isQuickKey(selectedKey) ? 'Quick recitation' : 'Full recitation';
+    h.textContent = kindLabel(selectedKey);
     full.appendChild(h);
     item.groups.forEach((g, gi) => {
       if (item.groups.length > 1){
@@ -412,15 +430,37 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
 
   function paint(){
     const item = currentItem();
-    menuLabel.innerHTML = selectedKey ? menuName(selectedKey) : 'Choose a deck';
+    menuLabel.innerHTML = selectedKey ? labelHTML(selectedKey) : 'Choose a deck';
     text.value = item ? item.text : '';
     text.readOnly = !!(item && item.locked);
     text.disabled = !item;
     updateGate();
     renderOutline(item);
+    renderKind();
+    const onKey = selectedKey && selectedKey.indexOf('section:') === 0 ? selectedKey : baseId(selectedKey);
     menuList.querySelectorAll('.recite-opt').forEach(el => {
-      el.classList.toggle('is-on', el.dataset.key === selectedKey);
+      el.classList.toggle('is-on', el.dataset.key === onKey);
     });
+  }
+
+  function renderKind(){
+    if (!kindBox) return;
+    const show = !!(selectedKey && selectedKey.indexOf('section:') !== 0 && hasQuick(baseId(selectedKey)));
+    kindBox.hidden = !show;
+    if (!show) return;
+    const id = baseId(selectedKey);
+    const open = quickDone(id);
+    const onInitial = isQuickKey(selectedKey);
+    if (kindInitial) kindInitial.setAttribute('aria-pressed', onInitial ? 'true' : 'false');
+    if (kindMastery){
+      kindMastery.setAttribute('aria-pressed', onInitial ? 'false' : 'true');
+      kindMastery.disabled = !open;
+    }
+    if (kindNote){
+      kindNote.textContent = NOTE_MASTERY_LOCKED;
+      kindNote.hidden = open;
+    }
+    if (doneMsg) doneMsg.textContent = DONE_OPEN_MSG;
   }
 
   function optButton(key, html, noteText, on){
@@ -462,19 +502,6 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
         else if (!ARS.decks || !ARS.decks[it.id]) noteText = 'Could not load this deck.';
         else if (!hasOutline(it.id)) noteText = 'Outline not yet written.';
         else on = true;
-        if (on && hasQuick(it.id)){
-          menuList.appendChild(optButton('quick:' + it.id, menuName('quick:' + it.id), '', true));
-          const open = quickDone(it.id);
-          const fb = optButton(it.id, menuName(it.id), '', open);
-          if (!open){
-            fb.disabled = false;
-            fb.classList.add('recite-opt-wait');
-            fb.style.opacity = '.48';
-            fb.addEventListener('click', () => { closeMenu(); fullAsked = true; note.textContent = NOTE_QUICK_FIRST; note.hidden = false; });
-          }
-          menuList.appendChild(fb);
-          return;
-        }
         menuList.appendChild(optButton(it.id, it.title, noteText, on));
       });
       let sNote = '';
@@ -488,12 +515,12 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     menuList.dataset.ready = loaded ? '1' : '0';
   }
 
-  function choose(key){
+  function choose(key, exact){
     fullAsked = false;
     commitText();
-    selectedKey = key;
-    bag().lastKey = key;
-    ensureItem(key);
+    selectedKey = exact ? key : resolveMenuKey(key);
+    bag().lastKey = selectedKey;
+    ensureItem(selectedKey);
     save();
     closeMenu();
     paint();
@@ -635,7 +662,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const right = document.createElement('section');
     right.className = 'recite-print-col';
     const rh = document.createElement('h2');
-    rh.textContent = isQuickKey(selectedKey) ? 'Quick recitation' : 'Full recitation';
+    rh.textContent = kindLabel(selectedKey);
     right.appendChild(rh);
     item.groups.forEach(g => {
       if (item.groups.length > 1){
@@ -728,11 +755,23 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     if (!host.quickDoneAt) host.quickDoneAt = Date.now();
     clearTimeout(saveTimer);
     save();
-    /* Done opens Full in the menu; the tablet stays on the revealed Quick recitation. */
+    /* Done unlocks Study for Mastery in the chooser; the tablet stays on the revealed Initial Study. */
     justOpened = selectedKey;
     renderMenu(true);
     paint();
-    menuBtn.focus();
+    if (kindMastery && !kindMastery.disabled) kindMastery.focus();
+    else menuBtn.focus();
+  });
+
+  if (kindInitial) kindInitial.addEventListener('click', () => {
+    const id = selectedKey ? baseId(selectedKey) : '';
+    if (!id || isQuickKey(selectedKey)) return;
+    choose('quick:' + id, true);
+  });
+  if (kindMastery) kindMastery.addEventListener('click', () => {
+    const id = selectedKey ? baseId(selectedKey) : '';
+    if (!id || !quickDone(id) || (!isQuickKey(selectedKey) && selectedKey === id)) return;
+    choose(id, true);
   });
 
   /* "Start a new recitation" asks in the tablet's own window, in the colors and faces of the page, not in the browser's
