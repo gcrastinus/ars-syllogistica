@@ -447,7 +447,14 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     if (!kindBox) return;
     const show = !!(selectedKey && selectedKey.indexOf('section:') !== 0 && hasQuick(baseId(selectedKey)));
     kindBox.hidden = !show;
-    if (!show) return;
+    if (!show){
+      if (kindNote) kindNote.hidden = true;
+      if (kindMastery){
+        kindMastery.removeAttribute('title');
+        kindMastery.removeAttribute('aria-describedby');
+      }
+      return;
+    }
     const id = baseId(selectedKey);
     const open = quickDone(id);
     const onInitial = isQuickKey(selectedKey);
@@ -455,6 +462,13 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     if (kindMastery){
       kindMastery.setAttribute('aria-pressed', onInitial ? 'false' : 'true');
       kindMastery.disabled = !open;
+      if (open){
+        kindMastery.removeAttribute('title');
+        kindMastery.removeAttribute('aria-describedby');
+      } else {
+        kindMastery.setAttribute('title', NOTE_MASTERY_LOCKED);
+        if (kindNote) kindMastery.setAttribute('aria-describedby', 'recite-kind-note');
+      }
     }
     if (kindNote){
       kindNote.textContent = NOTE_MASTERY_LOCKED;

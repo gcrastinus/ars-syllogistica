@@ -740,33 +740,65 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
 .recite-desc p:last-child{margin-bottom:0}
 .recite-tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
 
-/* Initial Study / Study for Mastery chooser (18 Nov 2026). One row in the topic list; the two kinds sit inside the tablet. */
-.recite-kind{display:flex; flex-wrap:wrap; align-items:center; gap:8px; flex:1 1 100%}
+/* Initial Study / Study for Mastery: on a wide tablet the two buttons sit to the right of the topic selector;
+   the selector shrinks and a long title wraps to two lines. Whole-section rows have no chooser and keep a full-width selector. */
+.recite-pick-row{
+  display:flex; flex-wrap:wrap; align-items:stretch; gap:6px 10px;
+  flex:1 1 100%; min-width:0;
+  position:relative;
+  container-type:inline-size; container-name:recite-pick;
+}
+.recite-picker{position:static; flex:1 1 12em; min-width:min(100%, 10em)}
+.recite-pick-row:not(:has(#recite-kind:not([hidden]))) .recite-picker{flex-basis:100%; min-width:100%}
+.recite-kind{display:flex; flex-wrap:nowrap; align-items:stretch; gap:8px; flex:0 1 auto; min-width:0}
 .recite-kind[hidden]{display:none}
 .recite-kind-btn{
   font-family:var(--display); font-size:15px; letter-spacing:.03em;
-  min-height:44px; padding:10px 14px;
+  min-height:44px; padding:10px 14px; white-space:nowrap;
 }
 .recite-kind-btn[aria-pressed="true"]{
   background:var(--panel);
   border-color:var(--gold-soft);
 }
 .recite-kind-btn:disabled{opacity:.48; cursor:default}
+.recite-kind-short{display:none}
 .recite-kind-note{
   flex:1 1 100%; margin:0;
-  font-style:italic; font-size:14.5px; color:var(--ink-soft);
+  font-style:italic; font-size:13.5px; line-height:1.35; color:var(--ink-soft);
 }
 .recite-kind-note[hidden]{display:none}
-.recite-picker{position:relative; flex:1; min-width:min(100%, 260px)}
 .recite-menu-btn{
   width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
   text-align:left; font-family:var(--display); font-size:16px; letter-spacing:.03em;
   color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:9px;
   padding:10px 14px; cursor:pointer; box-shadow:var(--shadow);
+  min-height:44px;
 }
 .recite-menu-btn:hover{border-color:var(--gold-soft)}
-#recite-menu-label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+#recite-menu-label{
+  flex:1; min-width:0;
+  white-space:normal; overflow:hidden;
+  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2;
+  line-height:1.3; overflow-wrap:break-word;
+}
 .recite-caret{color:var(--gold); flex:none}
+/* Narrow tablet or zoomed text: short labels, tighter buttons. They stay on the selector's row when they fit, else a compact row beneath. */
+@container recite-pick (max-width: 36em){
+  .recite-kind-full{display:none}
+  .recite-kind-short{display:inline}
+  .recite-kind{gap:0}
+  .recite-kind-btn{min-height:36px; padding:6px 10px; font-size:14px}
+  .recite-kind-btn + .recite-kind-btn{margin-left:-1px}
+  #recite-kind-initial{border-top-right-radius:0; border-bottom-right-radius:0}
+  #recite-kind-mastery{border-top-left-radius:0; border-bottom-left-radius:0}
+}
+/* Phones and very narrow tablets: keep the selector full width so a long title can use two lines,
+   and put the compact Initial / Mastery control on a short row beneath. */
+@container recite-pick (max-width: 26em){
+  .recite-picker{flex-basis:100%; min-width:100%}
+  .recite-kind{flex:1 1 100%}
+  .recite-kind-btn{flex:1 1 0}
+}
 .recite-menu-list{
   position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:5;
   max-height:min(52vh, 440px); overflow:auto;
@@ -2284,16 +2316,24 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <button type="button" class="btn" id="recite-close">Close</button>
     </div>
     <div class="recite-tools">
-      <div class="recite-picker" id="recite-picker">
-        <button type="button" class="recite-menu-btn" id="recite-menu-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="recite-menu-list">
-          <span id="recite-menu-label">Choose a deck</span>
-          <span class="recite-caret" aria-hidden="true">▾</span>
-        </button>
-        <div class="recite-menu-list" id="recite-menu-list" role="listbox" hidden></div>
-      </div>
-      <div class="recite-kind" id="recite-kind" hidden role="group" aria-label="Kind of recitation">
-        <button type="button" class="btn recite-kind-btn" id="recite-kind-initial" aria-pressed="true">Initial Study</button>
-        <button type="button" class="btn recite-kind-btn" id="recite-kind-mastery" aria-pressed="false" disabled>Study for Mastery</button>
+      <div class="recite-pick-row" id="recite-pick-row">
+        <div class="recite-picker" id="recite-picker">
+          <button type="button" class="recite-menu-btn" id="recite-menu-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="recite-menu-list">
+            <span id="recite-menu-label">Choose a deck</span>
+            <span class="recite-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="recite-menu-list" id="recite-menu-list" role="listbox" hidden></div>
+        </div>
+        <div class="recite-kind" id="recite-kind" hidden role="group" aria-label="Kind of recitation">
+          <button type="button" class="btn recite-kind-btn" id="recite-kind-initial" aria-pressed="true" aria-label="Initial Study">
+            <span class="recite-kind-full">Initial Study</span>
+            <span class="recite-kind-short" aria-hidden="true">Initial</span>
+          </button>
+          <button type="button" class="btn recite-kind-btn" id="recite-kind-mastery" aria-pressed="false" disabled aria-label="Study for Mastery">
+            <span class="recite-kind-full">Study for Mastery</span>
+            <span class="recite-kind-short" aria-hidden="true">Mastery</span>
+          </button>
+        </div>
         <p class="recite-kind-note" id="recite-kind-note" hidden>Opens after you finish the Initial Study</p>
       </div>
       <button type="button" class="btn" id="recite-see" disabled>See the Initial Study</button>
@@ -7396,7 +7436,7 @@ if(typeof document!=='undefined'){
 </script>
 <script src="recitation-quick.js"></script>
 <script src="recitation-adapter.js"></script>
-<script src="recitation.js?v=20261118is"></script>
+<script src="recitation.js?v=20261118is2"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 <script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>
