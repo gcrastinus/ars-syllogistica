@@ -737,7 +737,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const have = reciteWordCount(text.value);
     if (have < need){
       if (showMsg){
-        showMsg.textContent = 'Write at least ' + need + ' words first. You have ' + have + '.';
+        showMsg.textContent = "Please type your own recitation before seeing the course's version.";
         showMsg.hidden = false;
       }
       text.focus();
