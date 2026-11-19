@@ -203,7 +203,7 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   /* Ars Rhetorica names its parts Divisions; ARS.reciteWords may set the words used here. */
   function sectionWholeLabel(sec){
     const w = ARS.reciteWords || {};
-    const label = sec.roman ? (w.section || 'Section') + ' ' + sec.roman + ': ' + sec.name + ', whole section' : (w.prelim || 'The Preliminary section') + ': ' + sec.name + ', whole section';
+    const label = sec.roman ? (w.section || 'Section') + ' ' + sec.roman + ': ' + sec.name : (w.prelim || 'The Preliminary section') + ': ' + sec.name;
     return label.indexOf('Optional: ') === 0 ? label : 'Optional: ' + label;
   }
 
