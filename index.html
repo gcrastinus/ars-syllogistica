@@ -1563,6 +1563,21 @@ body.dark .font-note{color:#978a70 !important}
 .lic-note{max-width:40rem; margin:.35rem auto 0; padding:0 12px; font-family:var(--std-text) !important; font-style:italic !important; font-weight:400; font-size:13px !important; line-height:1.45 !important; letter-spacing:0 !important; text-transform:none !important; font-variant:normal !important; color:var(--ink-soft); text-align:center; overflow-wrap:break-word; -webkit-text-stroke:0; font-size-adjust:none}
 .lic-note a{color:var(--wine); font-style:italic; font-size:inherit; letter-spacing:0; text-transform:none; text-decoration:underline; text-underline-offset:2px}
 .lic-note a:hover{color:var(--accent)}
+
+/* "Translations used" screen (19 Nov 2026) */
+.teacher-note.credits-note{margin-top:10px; border-top:0; padding-top:0}
+#scr-credits .credits-list{max-width:40em; margin:22px auto 0; padding:0 16px 40px}
+#scr-credits .credits-list p{text-align:left; margin:0 0 10px; padding-left:2em; text-indent:-2em; line-height:1.45; font-size:16px; color:var(--ink)}
+#scr-credits .credits-list .adapted{display:block; margin-top:4px; padding-left:0; text-indent:0; font-size:14.5px; font-style:italic; color:var(--ink-soft)}
+#scr-credits .credits-head{max-width:40em; margin:30px auto 8px; padding:14px 16px 0; font-size:15px; font-weight:normal; font-style:italic; letter-spacing:.03em; color:var(--ink-soft); text-align:left; border-top:1px solid var(--line)}
+#scr-credits .deck-title{text-align:center; margin-top:8px}
+#scr-credits .deck-sub{max-width:40em; margin:10px auto 0; padding:0 16px; text-align:left; line-height:1.5; color:var(--ink-soft)}
+@media (max-width:600px){
+  #scr-credits .credits-list p{font-size:15px; padding-left:1.4em; text-indent:-1.4em}
+  #scr-credits .credits-list .adapted{font-size:14px}
+}
+#scr-credits .credits-list i{font-weight:normal; font-style:italic}
+
 /* the settings button and its menu (the + replaces the separate dark-mode button, which stays hidden for its logic) */
 #dark-toggle[hidden]{display:none !important}
 #set-btn{
@@ -1829,7 +1844,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
   .recite-top .recite-desc{order:3; flex:1 1 100%; margin:0}
 }
 </style>
-<script src="studium-account.js?v=20261115si"></script>
+<script src="studium-account.js?v=20261119tu"></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="star" viewBox="0 0 16 16"><path d="M8 0 C8.6 5 11 7.4 16 8 C11 8.6 8.6 11 8 16 C7.4 11 5 8.6 0 8 C5 7.4 7.4 5 8 0Z" fill="currentColor"/></symbol></defs></svg>
@@ -2058,12 +2073,39 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
       <a href="teacher-quiz.html" target="_blank" rel="noopener">For instructors: build a printable quiz with answer key ⟶</a><br>
       <a href="progress-report.html" target="_blank" rel="noopener">For instructors: turn an exported progress file into a grade ⟶</a>
     </div>
+    <p class="teacher-note credits-note"><a href="#translations" id="credits-link">Translations used in this course</a></p>
 
     <p class="designer-credit">Designed and directed by Timothy Kearns, Ph.D. AI tools were used for drafting some of the study sections and for building the interactive exercises and answer keys.</p>
     <div class="si-home"><a href="https://studiuminstitute.org">Studium Institute</a></div>
     <p class="font-note" id="font-note" aria-live="polite"></p>
     <p class="lic-note">© 2026 Timothy Kearns · Studium Institute. Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> (non-commercial use); all commercial rights reserved.</p>
 
+  </div>
+
+
+  <!-- ============ TRANSLATIONS USED ============ -->
+  <div class="screen" id="scr-credits">
+    <div class="quiz-top">
+      <button class="back-btn" id="credits-home" type="button">⟵ Return</button>
+      <div class="quiz-title">Translations Used</div>
+      <div class="badge">Credits</div>
+    </div>
+    <div class="deck-sub" data-directions>Quotations from works not written in English are taken from these published translations, unless a card says the translation is the course’s own. Where the course has adapted a translation’s wording, the entry says so.</div>
+    <div class="credits-list">
+      <p>Aquinas, Thomas. <i>The “Summa Theologica” of St. Thomas Aquinas</i>. Translated by the Fathers of the English Dominican Province. 2nd ed. London: Burns Oates and Washbourne, 1920–25.
+        <span class="adapted">Adapted: “Thinking, properly speaking, is the movement of the mind as it deliberates, while it has not yet arrived at the full vision of the truth in question” (<i>Summa theologiae</i> II-II, q. 2, a. 1). The Dominican wording is “thought is, properly speaking, the movement of the mind while yet deliberating, and not yet perfected by the clear sight of truth.”</span></p>
+      <p>Aristotle. <i>Metaphysics</i>. Translated by W. D. Ross. In <i>The Works of Aristotle</i>, vol. 8, edited by W. D. Ross. Oxford: Clarendon Press, 1908.</p>
+      <p>Bible. <i>The Holy Bible</i>. Douay-Rheims Version. Challoner revision.</p>
+      <p>John of St. Thomas. <i>Outlines of Formal Logic</i>. Translated from the Latin, with an introduction, by Francis C. Wade, S.J. Milwaukee: Marquette University Press, 1955.</p>
+      <p>Maritain, Jacques. <i>Formal Logic</i>. Translated by Imelda Choquette. New York: Sheed &amp; Ward, 1937.
+        <span class="adapted">Adapted: the definition of a retort keeps the course’s “from its own premises” (Choquette: “from one of its own premisses”). The definition of a proposition quotes Choquette’s “complete discourse signifying the true or the false.” Examples marked “(after Maritain)” follow his examples without claiming his exact wording in every case; “The brave gave their lives, and the cowards fled” adapts his “the cowards made money.”</span></p>
+    </div>
+    <h2 class="credits-head">Consulted for paraphrase</h2>
+    <div class="credits-list">
+      <p>Conway, Pierre. <i>Aristotelian Formal and Material Logic</i>. Lanham, MD: University Press of America, 1995.</p>
+      <p>Houser, R. E. <i>Logic as a Liberal Art: An Introduction to Rhetoric &amp; Reasoning</i>. Washington, DC: Catholic University of America Press, 2020.</p>
+      <p>Oesterle, John A. <i>Logic: The Art of Defining and Reasoning</i>. 2nd ed. Englewood Cliffs, NJ: Prentice-Hall, 1963.</p>
+    </div>
   </div>
 
   <!-- ============ LEVEL PICKER (Guided Path) ============ -->
@@ -2365,9 +2407,9 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
 </div>
 <div id="recite-sheet" class="recite-print" aria-hidden="true"></div>
 
-<script src="nav.js?v=20261102nb"></script>
-<script src="ars-engine.js?v=20261101ls"></script>
-<script src="ars-advanced.js"></script>
+<script src="nav.js?v=20261119tu"></script>
+<script src="ars-engine.js?v=20261119tu"></script>
+<script src="ars-advanced.js?v=20261119tu"></script>
 <script>
 /* ================================================================
    USER INTERFACE
@@ -2956,7 +2998,7 @@ if(typeof document!=='undefined'){
     { src:`${SRC_ECT}; St. Thomas Aquinas, commentary on the <i>Posterior Analytics</i>, proem; ${SRC_JST}; Aristotle, <i>De interpretatione</i> and <i>Metaphysics</i> IV.7; ${SRC_MAR}.`,
       h:`<p><strong>Composing and dividing.</strong> The second act of the mind affirms or denies one thing of another. The tradition calls this act <em>composing and dividing</em>: to affirm is to compose, joining a predicate to a subject (“snow is white”), and to deny is to divide, holding them apart (“no stone is alive”). St. Thomas says that in this act of the intellect the true and the false are present for the first time, and he assigns its study to Aristotle’s <em>De interpretatione</em>.</p>`
       + `<p>The act of the mind is the <strong>judgment</strong>; its expression in words is the <strong>proposition</strong>.</p>` },
-    { h:`<p><strong>The proposition.</strong> A proposition is a sentence that is true or false; more fully, it is a complete discourse signifying the true or the false. Not every sentence is a proposition. A command (“Shut the door”), a question (“Is it raining?”), or a wish (“May you be well”) is neither true nor false, so none of these is a proposition.</p>`
+    { h:`<p><strong>The proposition.</strong> A proposition is a sentence that is true or false; more fully, it is “a complete discourse signifying the true or the false” (Jacques Maritain, <i>Formal Logic</i>). Not every sentence is a proposition. A command (“Shut the door”), a question (“Is it raining?”), or a wish (“May you be well”) is neither true nor false, so none of these is a proposition.</p>`
       + `<p>Every simple proposition has three parts: the <strong>subject</strong>, of which something is said; the <strong>predicate</strong>, which is said of it; and the <strong>copula</strong> “is” (or “is not”), which joins or separates them. In “Every man is mortal,” the subject is “man,” the predicate is “mortal,” and the copula is “is.”</p>` },
     { h:`<p><strong>Quality and quantity.</strong> Each simple categorical proposition has a quality and a quantity. Its <strong>quality</strong> is affirmative or negative, according as it affirms or denies the predicate of the subject. Its <strong>quantity</strong> is universal or particular, according as it speaks of every member of the subject (“all,” “no”) or only of some (“some”).</p>`
       + `<p>A singular proposition, such as “Socrates is wise,” has a single individual as its subject. Because it speaks of the whole of its subject, it is treated in the syllogism as universal.</p>` },
@@ -4049,7 +4091,7 @@ if(typeof document!=='undefined'){
   const RECITE_ACT2 = [
     `The second act of the mind affirms or denies one thing of another, and the tradition calls this act <em>composing and dividing</em>: to affirm is to compose, joining a predicate to a subject (“snow is white”), and to deny is to divide, holding them apart (“no stone is alive”).`,
     `St. Thomas says that in this act of the intellect the true and the false are present for the first time, and he assigns its study to Aristotle’s <em>De interpretatione</em>; the act of the mind is the <strong>judgment</strong>, and its expression in words is the <strong>proposition</strong>.`,
-    `A proposition is a sentence that is true or false, or more fully, a complete discourse signifying the true or the false; so not every sentence is a proposition, because a command, a question, or a wish is neither true nor false.`,
+    `A proposition is a sentence that is true or false, or more fully, “a complete discourse signifying the true or the false” (Jacques Maritain, Formal Logic); so not every sentence is a proposition, because a command, a question, or a wish is neither true nor false.`,
     `Every simple proposition has three parts: the <strong>subject</strong>, of which something is said; the <strong>predicate</strong>, which is said of it; and the <strong>copula</strong> “is” (or “is not”), which joins or separates them (in “Every man is mortal,” the subject is “man,” the predicate “mortal,” and the copula “is”).`,
     `Each simple categorical proposition has a <strong>quality</strong>, affirmative or negative, according as it affirms or denies the predicate of the subject, and a <strong>quantity</strong>, universal or particular, according as it speaks of every member of the subject (“all,” “no”) or only of some (“some”).`,
     `A singular proposition, such as “Socrates is wise,” has a single individual as its subject, and because it speaks of the whole of its subject, it is treated in the syllogism as universal.`,
@@ -7289,6 +7331,15 @@ if(typeof document!=='undefined'){
     window.renderStartChoices = renderStartChoices;
     renderStartChoices();
   })();
+
+  /* Translations Used screen (footer link) */
+  (function wireCredits(){
+    const link = document.getElementById('credits-link');
+    if (link) link.onclick = e => { e.preventDefault(); show('scr-credits'); window.scrollTo(0,0); };
+    const back = document.getElementById('credits-home');
+    if (back) back.onclick = () => show('scr-home');
+  })();
+
   /* ---------- Back and Forward (nav.js) ----------
      Every screen is one entry of the browser's history: home, each card of a study deck or lead-in, a Review,
      the level choice, an exercise sitting, its results, Today's Review, the Progress page and the two workshops.
@@ -7317,6 +7368,7 @@ if(typeof document!=='undefined'){
       case 'scr-progress': return [{r:'prog'}, 'progress'];
       case 'scr-lab1': return [{r:'lab1'}, 'lab1'];
       case 'scr-lab2': return [{r:'lab2'}, 'lab2'];
+      case 'scr-credits': return [{r:'credits'}, 'translations'];
       default: return [{r:'home', hub:true}, ''];
     }
   }
@@ -7418,6 +7470,7 @@ if(typeof document!=='undefined'){
         case 'prog': renderProgress(); show('scr-progress'); break;
         case 'lab1': openLab1(); break;
         case 'lab2': openLab2(); break;
+        case 'credits': show('scr-credits'); window.scrollTo(0,0); break;
         default:
           /* home, already drawn by the tap that went back to it: only the entry is brought up to date */
           if($('scr-home').classList.contains('active')){
@@ -7430,6 +7483,7 @@ if(typeof document!=='undefined'){
   function navFromHash(h){
     const m = String(h || '').match(/^#(study|ex)\/(.+)$/);
     if(h==='#progress') return {r:'prog'};
+    if(h==='#translations') return {r:'credits'};
     if(h==='#lab1' || h==='#lab2') return {r:h.slice(1)};
     if(!m) return {r:'home', hub:true};
     const id = decodeURIComponent(m[2]);
@@ -7448,9 +7502,9 @@ if(typeof document!=='undefined'){
 })();
 }
 </script>
-<script src="recitation-quick.js"></script>
-<script src="recitation-adapter.js"></script>
-<script src="recitation.js?v=20261118ws"></script>
+<script src="recitation-quick.js?v=20261119tu"></script>
+<script src="recitation-adapter.js?v=20261119tu"></script>
+<script src="recitation.js?v=20261119tu"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 <script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>
