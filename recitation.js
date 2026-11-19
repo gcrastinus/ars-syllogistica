@@ -318,8 +318,10 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
   const full = document.getElementById('recite-full');
   const columns = document.getElementById('recite-columns');
   const doneBtn = document.getElementById('recite-done');
-  const SEE_INITIAL = 'See the Initial Study';
-  const SEE_MASTERY = 'See Study for Mastery';
+  const SEE_INITIAL = 'Show the Initial Study';
+  const SEE_MASTERY = 'Show the Study for Mastery';
+  const kindBar = document.getElementById('recite-kind-bar');
+  const showMsg = document.getElementById('recite-show-msg');
   const NOTE_INITIAL_FIRST = 'Write the Initial Study first and later do the Study for Mastery.';
   const NOTE_MASTERY_LOCKED = 'Opens after you finish the Initial Study';
   const DONE_OPEN_MSG = 'Study for Mastery is now available.';
@@ -380,12 +382,15 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const live = item && !item.locked ? liveGroups(selectedKey) : null;
     const enough = !!(live && reciteWordCount(text.value) >= minimumFor(selectedKey, live));
     const quick = isQuickKey(selectedKey);
-    seeBtn.textContent = quick ? SEE_INITIAL : SEE_MASTERY;
+    seeBtn.setAttribute('aria-label', quick ? SEE_INITIAL : SEE_MASTERY);
     note.textContent = NOTE_INITIAL_FIRST;
     if (doneBtn) doneBtn.hidden = !(quick && item && item.locked && !quickDone(baseId(selectedKey)));
     if (doneMsg) doneMsg.hidden = !(quick && item && item.locked && justOpened === selectedKey);
     seeBtn.hidden = !item || item.locked;
-    seeBtn.disabled = !enough;
+    seeBtn.disabled = false;
+    seeBtn.classList.toggle('is-ready', enough);
+    if (showMsg && (enough || seeBtn.hidden)) showMsg.hidden = true;
+    if (kindBar) kindBar.hidden = seeBtn.hidden && (!kindBox || kindBox.hidden);
     if (printBtn) printBtn.hidden = !(item && item.locked && item.groups && item.groups.length);
     newBtn.hidden = !(item && item.locked);
     note.hidden = true;
@@ -434,9 +439,10 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     text.value = item ? item.text : '';
     text.readOnly = !!(item && item.locked);
     text.disabled = !item;
+    if (showMsg) showMsg.hidden = true;
+    renderKind();
     updateGate();
     renderOutline(item);
-    renderKind();
     const onKey = selectedKey && selectedKey.indexOf('section:') === 0 ? selectedKey : baseId(selectedKey);
     menuList.querySelectorAll('.recite-opt').forEach(el => {
       el.classList.toggle('is-on', el.dataset.key === onKey);
@@ -727,7 +733,17 @@ function renderReciteReminder(){ renderReciteReminderImpl(); }
     const item = currentItem();
     const live = liveGroups(selectedKey);
     if (!item || item.locked || !live) return;
-    if (reciteWordCount(text.value) < minimumFor(selectedKey, live)) return;
+    const need = minimumFor(selectedKey, live);
+    const have = reciteWordCount(text.value);
+    if (have < need){
+      if (showMsg){
+        showMsg.textContent = 'Write at least ' + need + ' words first. You have ' + have + '.';
+        showMsg.hidden = false;
+      }
+      text.focus();
+      return;
+    }
+    if (showMsg) showMsg.hidden = true;
     item.text = text.value;
     item.groups = live.map(g => ({
       deck: g.deck,

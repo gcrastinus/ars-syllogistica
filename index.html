@@ -749,13 +749,17 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   container-type:inline-size; container-name:recite-pick;
 }
 .recite-picker{position:static; flex:1 1 12em; min-width:min(100%, 10em)}
-.recite-pick-row:not(:has(#recite-kind:not([hidden]))) .recite-picker{flex-basis:100%; min-width:100%}
+.recite-kind-bar{display:flex; flex-wrap:nowrap; align-items:stretch; gap:8px; flex:0 1 auto; min-width:0}
+.recite-kind-bar[hidden]{display:none}
 .recite-kind{display:flex; flex-wrap:nowrap; align-items:stretch; gap:8px; flex:0 1 auto; min-width:0}
 .recite-kind[hidden]{display:none}
-.recite-kind-btn{
-  font-family:var(--display); font-size:15px; letter-spacing:.03em;
-  min-height:44px; padding:10px 14px; white-space:nowrap;
+.recite-kind-btn, .recite-show-btn{
+  font-family:var(--display); font-size:14px; letter-spacing:.03em;
+  min-height:38px; padding:6px 12px; white-space:nowrap;
 }
+.recite-show-btn{font-weight:600; border-color:var(--ink)}
+.recite-show-btn[hidden]{display:none}
+.recite-show-btn span{font-size:1.2em; line-height:1}
 .recite-kind-btn[aria-pressed="true"]{
   background:var(--panel);
   border-color:var(--gold-soft);
@@ -767,6 +771,11 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   font-style:italic; font-size:13.5px; line-height:1.35; color:var(--ink-soft);
 }
 .recite-kind-note[hidden]{display:none}
+.recite-show-msg{
+  flex:1 1 100%; margin:0;
+  font-style:italic; font-size:13.5px; line-height:1.35; color:var(--wine);
+}
+.recite-show-msg[hidden]{display:none}
 .recite-menu-btn{
   width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
   text-align:left; font-family:var(--display); font-size:16px; letter-spacing:.03em;
@@ -787,7 +796,7 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
   .recite-kind-full{display:none}
   .recite-kind-short{display:inline}
   .recite-kind{gap:0}
-  .recite-kind-btn{min-height:36px; padding:6px 10px; font-size:14px}
+  .recite-kind-btn, .recite-show-btn{min-height:36px; padding:6px 10px; font-size:14px}
   .recite-kind-btn + .recite-kind-btn{margin-left:-1px}
   #recite-kind-initial{border-top-right-radius:0; border-bottom-right-radius:0}
   #recite-kind-mastery{border-top-left-radius:0; border-bottom-left-radius:0}
@@ -796,8 +805,10 @@ body.dark .recite-overlay{background:rgba(0, 0, 0, .62)}
    and put the compact Initial / Mastery control on a short row beneath. */
 @container recite-pick (max-width: 26em){
   .recite-picker{flex-basis:100%; min-width:100%}
-  .recite-kind{flex:1 1 100%}
+  .recite-kind-bar{flex:1 1 100%}
+  .recite-kind{flex:1 1 auto}
   .recite-kind-btn{flex:1 1 0}
+  .recite-show-btn{flex:0 0 auto}
 }
 .recite-menu-list{
   position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:5;
@@ -876,7 +887,7 @@ body.dark .recite-confirm{background:rgba(0, 0, 0, .5)}
 .recite-confirm-btns{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px}
 .recite-confirm .btn{text-transform:none}
 .recite-confirm .btn:focus-visible{outline:2px solid var(--wine); outline-offset:2px}
-.recite-open:focus-visible, .recite-menu-btn:focus-visible, .recite-opt:focus-visible, .recite-kind-btn:focus-visible, .recite-desc summary:focus-visible{
+.recite-open:focus-visible, .recite-menu-btn:focus-visible, .recite-opt:focus-visible, .recite-kind-btn:focus-visible, .recite-show-btn:focus-visible, .recite-desc summary:focus-visible{
   outline:2px solid var(--gold); outline-offset:2px;
 }
 @media (max-width:800px){
@@ -2310,7 +2321,7 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
         <div class="recite-desc-body">
           <p>One of the oldest and best-proven ways to study is to read a section of a book, or study a topic, in one sitting, then close your notes and write down everything you remember, in as much detail as you can. This is called "recitation," and this tablet lets you do it.</p>
           <p>After you finish studying a part of the course, close it and open the Recitation Tablet. Choose the part you just finished from the menu, then write down, in order, everything you can remember about it. This is not easy. But the difficulty is what produces results, especially the moment when you feel you remember nothing more and then keep searching.</p>
-          <p>When you have finished, click "See the Initial Study" or, once it is open, "See Study for Mastery." You will see an outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
+          <p>When you have finished, click the "Show ›" button. You will see an outline of the material with every point stated simply. The outline is a checklist: go through it carefully and mark exactly what you included correctly and what you missed. The course will remind you to recite the same material again after a few days, since each new recall fixes it more firmly.</p>
         </div>
       </details>
       <button type="button" class="btn" id="recite-close">Close</button>
@@ -2324,19 +2335,22 @@ html[data-font="italic"] .fb-why{font-size:1.06em}
           </button>
           <div class="recite-menu-list" id="recite-menu-list" role="listbox" hidden></div>
         </div>
-        <div class="recite-kind" id="recite-kind" hidden role="group" aria-label="Kind of recitation">
-          <button type="button" class="btn recite-kind-btn" id="recite-kind-initial" aria-pressed="true" aria-label="Initial Study">
-            <span class="recite-kind-full">Initial Study</span>
-            <span class="recite-kind-short" aria-hidden="true">Initial</span>
-          </button>
-          <button type="button" class="btn recite-kind-btn" id="recite-kind-mastery" aria-pressed="false" disabled aria-label="Study for Mastery">
-            <span class="recite-kind-full">Study for Mastery</span>
-            <span class="recite-kind-short" aria-hidden="true">Mastery</span>
-          </button>
+        <div class="recite-kind-bar" id="recite-kind-bar">
+          <div class="recite-kind" id="recite-kind" hidden role="group" aria-label="Kind of recitation">
+            <button type="button" class="btn recite-kind-btn" id="recite-kind-initial" aria-pressed="true" aria-label="Initial Study">
+              <span class="recite-kind-full">Initial Study</span>
+              <span class="recite-kind-short" aria-hidden="true">Initial</span>
+            </button>
+            <button type="button" class="btn recite-kind-btn" id="recite-kind-mastery" aria-pressed="false" disabled aria-label="Study for Mastery">
+              <span class="recite-kind-full">Study for Mastery</span>
+              <span class="recite-kind-short" aria-hidden="true">Mastery</span>
+            </button>
+          </div>
+          <button type="button" class="btn recite-show-btn" id="recite-see" aria-label="Show the Initial Study">Show <span aria-hidden="true">›</span></button>
         </div>
         <p class="recite-kind-note" id="recite-kind-note" hidden>Opens after you finish the Initial Study</p>
+        <p class="recite-show-msg" id="recite-show-msg" role="status" hidden></p>
       </div>
-      <button type="button" class="btn" id="recite-see" disabled>See the Initial Study</button>
       <button type="button" class="btn" id="recite-print" hidden>Print</button>
       <button type="button" class="btn" id="recite-new" hidden>Start a new recitation</button>
       <button type="button" class="btn recite-done" id="recite-done" hidden>Done</button>
@@ -7436,7 +7450,7 @@ if(typeof document!=='undefined'){
 </script>
 <script src="recitation-quick.js"></script>
 <script src="recitation-adapter.js"></script>
-<script src="recitation.js?v=20261118is2"></script>
+<script src="recitation.js?v=20261118is3"></script>
 <script>reciteScreenChanged(document.querySelector('.screen.active').id);</script>
 <script src="tab-lock.js?v=20261031a" data-app="Ars Logica" data-key="arsLogica.activeTab">
 </script>
